@@ -1,13 +1,13 @@
-import express from 'express';
+import express, { json } from 'express';
 import 'dotenv/config';
+import { router } from './router';
 
 const port = process.env.PORT;
 
 const app = express();
 
-app.get('/', (_req, res) => {
-	res.json({ message: 'ok' });
-});
+app.use(json());
+app.use(router);
 
 const main = async () => {
 	try {
