@@ -1,0 +1,6 @@
+model Priotiry {
+  id   String @id @default(uuid())
+  name String @unique
+
+  @@map("priority")
+}

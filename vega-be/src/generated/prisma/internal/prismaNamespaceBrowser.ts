@@ -51,6 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Priotiry: 'Priotiry',
+  Roles: 'Roles',
+  TaskStatuses: 'TaskStatuses',
   User: 'User'
 } as const
 
@@ -68,6 +71,30 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const PriotiryScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type PriotiryScalarFieldEnum = (typeof PriotiryScalarFieldEnum)[keyof typeof PriotiryScalarFieldEnum]
+
+
+export const RolesScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
+
+
+export const TaskStatusesScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type TaskStatusesScalarFieldEnum = (typeof TaskStatusesScalarFieldEnum)[keyof typeof TaskStatusesScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
