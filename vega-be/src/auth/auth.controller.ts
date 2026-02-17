@@ -4,7 +4,7 @@ import { generateToken } from './auth.service';
 import { DAY_IN_SECONDS, RESPONSE_STATUSES } from '../lib/constants';
 import { AppError } from '../errors/errors';
 
-export const createUser = async (req: Request, res: Response, next: NextFunction) => {
+export const signupUser = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const userData = req.body;
 		const newUser = await prismaAppClient.user.create({ data: userData });
@@ -17,5 +17,29 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 			.json({ success: true });
 	} catch (e) {
 		next(new AppError('Iternal error', RESPONSE_STATUSES.iternalError));
+	}
+};
+
+export const signInUser = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { email, password } = req.body;
+		const user = await prismaAppClient.user.findUniqueOrThrow({
+			where: { email },
+		});
+
+		if (user?.password !== password) {
+			next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
+			return;
+		}
+
+		const token = generateToken(user.id);
+		res.status(RESPONSE_STATUSES.authorised)
+			.cookie('token', token, {
+				httpOnly: true,
+				maxAge: DAY_IN_SECONDS,
+			})
+			.json({ success: true });
+	} catch (e) {
+		next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
 	}
 };
