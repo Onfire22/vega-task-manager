@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import EyeOpened from '../../assets/icons/eye-opened.svg?react';
+import EyeClosed from '../../assets/icons/eye-closed.svg?react';
 import './styles.less';
 
 interface IProps {
@@ -7,7 +9,6 @@ interface IProps {
 	value: string;
 	label?: string;
 	error?: string;
-	icon?: string;
 	placeholder?: string;
 	id: string;
 	onchange: () => void;
@@ -20,7 +21,6 @@ const CustomInputField: React.FC<IProps> = ({
 	onchange,
 	error,
 	id,
-	icon,
 	placeholder,
 }) => {
 	const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -55,7 +55,11 @@ const CustomInputField: React.FC<IProps> = ({
 						type="button"
 						onClick={handleButtonClick}
 					>
-						{icon}
+						{passwordStatus === 'text' ? (
+							<EyeOpened width={22} height={22} />
+						) : (
+							<EyeClosed width={22} height={22} />
+						)}
 					</button>
 				)}
 			</div>
