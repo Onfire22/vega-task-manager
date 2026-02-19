@@ -3,6 +3,7 @@ import { useState } from 'react';
 import EyeOpened from '../../assets/icons/eye-opened.svg?react';
 import EyeClosed from '../../assets/icons/eye-closed.svg?react';
 import './styles.less';
+import { CustomTooltip } from '../tooltip';
 
 interface IProps {
 	type: 'text' | 'password' | 'search' | 'email';
@@ -12,6 +13,7 @@ interface IProps {
 	placeholder?: string;
 	id: string;
 	onchange: () => void;
+	tooltip?: React.ReactNode;
 }
 
 const CustomInputField: React.FC<IProps> = ({
@@ -22,6 +24,7 @@ const CustomInputField: React.FC<IProps> = ({
 	error,
 	id,
 	placeholder,
+	tooltip,
 }) => {
 	const [isPasswordShown, setIsPasswordShown] = useState(false);
 
@@ -35,7 +38,8 @@ const CustomInputField: React.FC<IProps> = ({
 		<div className="custom-input">
 			{label && (
 				<label className="custom-input__label" htmlFor={id}>
-					{label}
+					<span>{label}</span>
+					{tooltip && <CustomTooltip children={tooltip} />}
 				</label>
 			)}
 			<div

@@ -1,6 +1,7 @@
 import { CustomInputField } from '../../../../../ui/custom-input-field';
 import Arrow from '../../../../../assets/icons/arrow.svg?react';
 import './styles.less';
+import { Popup } from '../../popup';
 
 const SignUpFormView = () => {
 	return (
@@ -21,6 +22,7 @@ const SignUpFormView = () => {
 					label="Пароль"
 					value="asd"
 					onchange={() => {}}
+					tooltip={<Popup />}
 				/>
 				<CustomInputField
 					id="password-repeat"
