@@ -1,20 +1,15 @@
-import { SignUpFormView } from './sign-up-form-view';
 import { useFormik } from 'formik';
-import { SIGNUP_DEFAULT_VALUES } from '../../constants.ts';
-import { SignUpValidationSchema } from '../../validation.ts';
 import React from 'react';
-import { useAppDispatch } from '../../../../store/hooks.ts';
-import { setActiveForm } from '../../slice.ts';
+import { SignInFormView } from './sing-in-form-view';
+import { SIGN_IN_DEFAULT_VALUES } from '../constants.ts';
+import { SignUpValidationSchema } from '../validation.ts';
 
 const SignUpForm = () => {
-	const dispatch = useAppDispatch();
-
 	const formik = useFormik({
-		initialValues: SIGNUP_DEFAULT_VALUES,
+		initialValues: SIGN_IN_DEFAULT_VALUES,
 		validationSchema: SignUpValidationSchema,
 		validateOnChange: false,
 		onSubmit: (values) => {
-			dispatch(setActiveForm('info'));
 			console.log(values);
 		},
 	});
@@ -26,7 +21,7 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<SignUpFormView
+		<SignInFormView
 			formValues={formik.values}
 			formErrors={formik.errors}
 			onFieldChange={handleFieldChange}

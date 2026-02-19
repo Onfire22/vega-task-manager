@@ -11,8 +11,9 @@ interface IProps {
 	label?: string;
 	error?: string;
 	placeholder?: string;
+	name?: string;
 	id: string;
-	onchange: () => void;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	tooltip?: React.ReactNode;
 }
 
@@ -20,11 +21,12 @@ const CustomInputField: React.FC<IProps> = ({
 	type,
 	value,
 	label,
-	onchange,
+	onChange,
 	error,
 	id,
 	placeholder,
 	tooltip,
+	name,
 }) => {
 	const [isPasswordShown, setIsPasswordShown] = useState(false);
 
@@ -49,17 +51,19 @@ const CustomInputField: React.FC<IProps> = ({
 					className="custom-input__input"
 					type={type === 'password' ? passwordStatus : type}
 					value={value}
-					onChange={onchange}
+					onChange={onChange}
 					id={id}
 					placeholder={placeholder}
+					name={name}
 				/>
 				{type === 'password' && (
 					<button
 						className="custom-input__button"
 						type="button"
+						disabled={!value}
 						onClick={handleButtonClick}
 					>
-						{passwordStatus === 'text' ? (
+						{passwordStatus === 'text' && value ? (
 							<EyeOpened width={22} height={22} />
 						) : (
 							<EyeClosed width={22} height={22} />

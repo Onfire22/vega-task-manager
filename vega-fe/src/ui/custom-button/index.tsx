@@ -3,7 +3,7 @@ import './styles.less';
 
 interface IProps {
 	type: 'submit' | 'button';
-	onClick: () => void;
+	onClick?: () => void;
 	children?: string;
 	className?: string;
 }
