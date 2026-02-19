@@ -1,21 +1,25 @@
-import { CustomInputField } from '../../../../../ui/custom-input-field';
-import Arrow from '../../../../../assets/icons/arrow.svg?react';
-import './styles.less';
-import { Popup } from '../../popup';
-import { CustomForm } from '../../../../../ui/custom-form';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Popup } from '../../popup';
+import { CustomInputField } from '../../../../../ui/custom-input-field';
+import { CustomForm } from '../../../../../ui/custom-form';
+import { CustomButton } from '../../../../../ui/custom-button';
+import './styles.less';
 
 interface IProps {
 	formValues: {
 		email: string;
 		password: string;
 		passwordRepeat: string;
+		name: string;
+		surname: string;
 	};
 	formErrors: {
 		email?: string;
 		password?: string;
 		passwordRepeat?: string;
+		name?: string;
+		surname?: string;
 	};
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
@@ -61,19 +65,33 @@ const SignUpFormView: React.FC<IProps> = ({
 					error={formErrors.passwordRepeat}
 					onChange={onFieldChange}
 				/>
+				<CustomInputField
+					id="name"
+					type="text"
+					label="Имя"
+					name="name"
+					placeholder="Иван"
+					value={formValues.name}
+					error={formErrors.name}
+					onChange={onFieldChange}
+				/>
+				<CustomInputField
+					id="surname"
+					type="text"
+					label="Фамилия"
+					name="surname"
+					placeholder="Иванов"
+					value={formValues.surname}
+					error={formErrors.surname}
+					onChange={onFieldChange}
+				/>
 				<div className="signin-form__text">
 					<span>Уже есть аккаунт? </span>
 					<Link className="signin-form__link" to="/sign-in">
 						Войти
 					</Link>
 				</div>
-				<button className="signup-form__button" type="submit">
-					<Arrow
-						width={40}
-						height={40}
-						className="signup-form__icon"
-					/>
-				</button>
+				<CustomButton type="submit">Зарегистрироваться</CustomButton>
 			</CustomForm>
 		</div>
 	);

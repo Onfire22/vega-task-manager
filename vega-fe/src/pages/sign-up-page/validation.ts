@@ -17,14 +17,12 @@ export const SignUpValidationSchema = yup.object().shape({
 		.string()
 		.oneOf([yup.ref('password'), undefined], 'Пароли должны совпадать')
 		.required('Это обязательное поле'),
-});
-
-export const InfoFormValidationSchema = yup.object().shape({
 	name: yup
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы')
 		.required('Это обязательное поле'),
 	surname: yup
 		.string()
-		.matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы'),
+		.matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы')
+		.required('Это обязательное поле'),
 });
