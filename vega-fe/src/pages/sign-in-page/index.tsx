@@ -1,5 +1,12 @@
+import { PageContentWrapper } from '../../components/page-content-wrapper.tsx';
+import { SignUpForm } from './sign-in-form';
+
 const SignInPage = () => {
-	return <div>SignIn</div>;
+	return (
+		<PageContentWrapper>
+			<SignUpForm />
+		</PageContentWrapper>
+	);
 };
 
 export { SignInPage };
