@@ -29,8 +29,8 @@ export * from "./enums.js"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Priotiries
- * const priotiries = await prisma.priotiry.findMany()
+ * // Fetch zero or more Comments
+ * const comments = await prisma.comment.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,15 +40,35 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Priotiry
+ * Model Comment
  * 
  */
-export type Priotiry = Prisma.PriotiryModel
+export type Comment = Prisma.CommentModel
+/**
+ * Model Membership
+ * 
+ */
+export type Membership = Prisma.MembershipModel
+/**
+ * Model TaskPriotiry
+ * 
+ */
+export type TaskPriotiry = Prisma.TaskPriotiryModel
+/**
+ * Model Projects
+ * 
+ */
+export type Projects = Prisma.ProjectsModel
 /**
  * Model Roles
  * 
  */
 export type Roles = Prisma.RolesModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel
 /**
  * Model TaskStatuses
  * 

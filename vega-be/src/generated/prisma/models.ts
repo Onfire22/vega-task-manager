@@ -8,8 +8,12 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Priotiry.js'
+export type * from './models/Comment.js'
+export type * from './models/Membership.js'
+export type * from './models/TaskPriotiry.js'
+export type * from './models/Projects.js'
 export type * from './models/Roles.js'
+export type * from './models/Task.js'
 export type * from './models/TaskStatuses.js'
 export type * from './models/User.js'
 export type * from './commonInputTypes.js'

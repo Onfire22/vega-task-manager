@@ -158,11 +158,13 @@ export type TaskStatusesWhereInput = {
   NOT?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
   id?: Prisma.StringFilter<"TaskStatuses"> | string
   name?: Prisma.StringFilter<"TaskStatuses"> | string
+  tasks?: Prisma.TaskListRelationFilter
 }
 
 export type TaskStatusesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type TaskStatusesWhereUniqueInput = Prisma.AtLeast<{
@@ -171,6 +173,7 @@ export type TaskStatusesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
   OR?: Prisma.TaskStatusesWhereInput[]
   NOT?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
+  tasks?: Prisma.TaskListRelationFilter
 }, "id" | "name">
 
 export type TaskStatusesOrderByWithAggregationInput = {
@@ -192,21 +195,25 @@ export type TaskStatusesScalarWhereWithAggregatesInput = {
 export type TaskStatusesCreateInput = {
   id?: string
   name: string
+  tasks?: Prisma.TaskCreateNestedManyWithoutStatusInput
 }
 
 export type TaskStatusesUncheckedCreateInput = {
   id?: string
   name: string
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStatusInput
 }
 
 export type TaskStatusesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  tasks?: Prisma.TaskUpdateManyWithoutStatusNestedInput
 }
 
 export type TaskStatusesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutStatusNestedInput
 }
 
 export type TaskStatusesCreateManyInput = {
@@ -224,6 +231,11 @@ export type TaskStatusesUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
+export type TaskStatusesScalarRelationFilter = {
+  is?: Prisma.TaskStatusesWhereInput
+  isNot?: Prisma.TaskStatusesWhereInput
+}
+
 export type TaskStatusesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -239,11 +251,92 @@ export type TaskStatusesMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
 }
 
+export type TaskStatusesCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.TaskStatusesCreateWithoutTasksInput, Prisma.TaskStatusesUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.TaskStatusesCreateOrConnectWithoutTasksInput
+  connect?: Prisma.TaskStatusesWhereUniqueInput
+}
+
+export type TaskStatusesUpdateOneRequiredWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskStatusesCreateWithoutTasksInput, Prisma.TaskStatusesUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.TaskStatusesCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.TaskStatusesUpsertWithoutTasksInput
+  connect?: Prisma.TaskStatusesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskStatusesUpdateToOneWithWhereWithoutTasksInput, Prisma.TaskStatusesUpdateWithoutTasksInput>, Prisma.TaskStatusesUncheckedUpdateWithoutTasksInput>
+}
+
+export type TaskStatusesCreateWithoutTasksInput = {
+  id?: string
+  name: string
+}
+
+export type TaskStatusesUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name: string
+}
+
+export type TaskStatusesCreateOrConnectWithoutTasksInput = {
+  where: Prisma.TaskStatusesWhereUniqueInput
+  create: Prisma.XOR<Prisma.TaskStatusesCreateWithoutTasksInput, Prisma.TaskStatusesUncheckedCreateWithoutTasksInput>
+}
+
+export type TaskStatusesUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.TaskStatusesUpdateWithoutTasksInput, Prisma.TaskStatusesUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.TaskStatusesCreateWithoutTasksInput, Prisma.TaskStatusesUncheckedCreateWithoutTasksInput>
+  where?: Prisma.TaskStatusesWhereInput
+}
+
+export type TaskStatusesUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.TaskStatusesWhereInput
+  data: Prisma.XOR<Prisma.TaskStatusesUpdateWithoutTasksInput, Prisma.TaskStatusesUncheckedUpdateWithoutTasksInput>
+}
+
+export type TaskStatusesUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type TaskStatusesUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+
+/**
+ * Count Type TaskStatusesCountOutputType
+ */
+
+export type TaskStatusesCountOutputType = {
+  tasks: number
+}
+
+export type TaskStatusesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tasks?: boolean | TaskStatusesCountOutputTypeCountTasksArgs
+}
+
+/**
+ * TaskStatusesCountOutputType without action
+ */
+export type TaskStatusesCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaskStatusesCountOutputType
+   */
+  select?: Prisma.TaskStatusesCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TaskStatusesCountOutputType without action
+ */
+export type TaskStatusesCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
 
 
 export type TaskStatusesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  tasks?: boolean | Prisma.TaskStatuses$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.TaskStatusesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskStatuses"]>
 
 export type TaskStatusesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -262,10 +355,18 @@ export type TaskStatusesSelectScalar = {
 }
 
 export type TaskStatusesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["taskStatuses"]>
+export type TaskStatusesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tasks?: boolean | Prisma.TaskStatuses$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.TaskStatusesCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type TaskStatusesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type TaskStatusesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $TaskStatusesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TaskStatuses"
-  objects: {}
+  objects: {
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
@@ -663,6 +764,7 @@ readonly fields: TaskStatusesFieldRefs;
  */
 export interface Prisma__TaskStatusesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tasks<T extends Prisma.TaskStatuses$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskStatuses$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -711,6 +813,10 @@ export type TaskStatusesFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * Filter, which TaskStatuses to fetch.
    */
   where: Prisma.TaskStatusesWhereUniqueInput
@@ -729,6 +835,10 @@ export type TaskStatusesFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * Filter, which TaskStatuses to fetch.
    */
   where: Prisma.TaskStatusesWhereUniqueInput
@@ -746,6 +856,10 @@ export type TaskStatusesFindFirstArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the TaskStatuses
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
   /**
    * Filter, which TaskStatuses to fetch.
    */
@@ -795,6 +909,10 @@ export type TaskStatusesFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * Filter, which TaskStatuses to fetch.
    */
   where?: Prisma.TaskStatusesWhereInput
@@ -843,6 +961,10 @@ export type TaskStatusesFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * Filter, which TaskStatuses to fetch.
    */
   where?: Prisma.TaskStatusesWhereInput
@@ -885,6 +1007,10 @@ export type TaskStatusesCreateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the TaskStatuses
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
   /**
    * The data needed to create a TaskStatuses.
    */
@@ -933,6 +1059,10 @@ export type TaskStatusesUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the TaskStatuses
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
   /**
    * The data needed to update a TaskStatuses.
    */
@@ -1000,6 +1130,10 @@ export type TaskStatusesUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * The filter to search for the TaskStatuses to update in case it exists.
    */
   where: Prisma.TaskStatusesWhereUniqueInput
@@ -1026,6 +1160,10 @@ export type TaskStatusesDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
+  /**
    * Filter which TaskStatuses to delete.
    */
   where: Prisma.TaskStatusesWhereUniqueInput
@@ -1046,6 +1184,30 @@ export type TaskStatusesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * TaskStatuses.tasks
+ */
+export type TaskStatuses$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
  * TaskStatuses without action
  */
 export type TaskStatusesDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1057,4 +1219,8 @@ export type TaskStatusesDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the TaskStatuses
    */
   omit?: Prisma.TaskStatusesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskStatusesInclude<ExtArgs> | null
 }

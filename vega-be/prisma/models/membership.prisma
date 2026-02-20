@@ -1,0 +1,15 @@
+model Membership {
+  id String @id @default(uuid())
+
+  userUuid    String   @unique
+  user        User     @relation(fields: [userUuid], references: [id])
+  projectUuid String   @map("prject_uuid")
+  project     Projects @relation(fields: [projectUuid], references: [id])
+  roleUuid    String   @map("role_uuid")
+  role        Roles    @relation(fields: [roleUuid], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("memberships")
+}
