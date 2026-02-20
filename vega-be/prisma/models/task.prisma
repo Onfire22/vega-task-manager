@@ -1,0 +1,25 @@
+model Task {
+  id String @id @default(uuid())
+
+  code          String?      @unique
+  title         String
+  description   String
+  estimatedTime Int          @map("estimate_time")
+  loggedTime    Int          @map("logged_time")
+  assigneeUuid  String       @map("assignee_uuid")
+  assignee      User         @relation("AssignedTasks", fields: [assigneeUuid], references: [id])
+  reporterUuid  String       @map("reporter_uuid")
+  reporter      User         @relation("ReportedTasks", fields: [reporterUuid], references: [id])
+  projectUuid   String       @map("project_uuid")
+  project       Projects     @relation(fields: [projectUuid], references: [id])
+  priorityUuid  String       @map("priority_uuid")
+  priority      Priotiry     @relation(fields: [priorityUuid], references: [id])
+  sratusUuid    String       @map("sratus_uuid")
+  status        TaskStatuses @relation(fields: [sratusUuid], references: [id])
+  comments      Comment[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tasks")
+}

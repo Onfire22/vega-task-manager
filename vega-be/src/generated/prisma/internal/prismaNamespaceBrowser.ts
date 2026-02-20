@@ -51,8 +51,12 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Comment: 'Comment',
+  Membership: 'Membership',
   Priotiry: 'Priotiry',
+  Projects: 'Projects',
   Roles: 'Roles',
+  Task: 'Task',
   TaskStatuses: 'TaskStatuses',
   User: 'User'
 } as const
@@ -73,6 +77,30 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CommentScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  taskUuid: 'taskUuid',
+  authorUuid: 'authorUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+export const MembershipScalarFieldEnum = {
+  id: 'id',
+  userUuid: 'userUuid',
+  projectUuid: 'projectUuid',
+  roleUuid: 'roleUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
+
+
 export const PriotiryScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -81,12 +109,42 @@ export const PriotiryScalarFieldEnum = {
 export type PriotiryScalarFieldEnum = (typeof PriotiryScalarFieldEnum)[keyof typeof PriotiryScalarFieldEnum]
 
 
+export const ProjectsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
+
+
 export const RolesScalarFieldEnum = {
   id: 'id',
   name: 'name'
 } as const
 
 export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  title: 'title',
+  description: 'description',
+  estimatedTime: 'estimatedTime',
+  loggedTime: 'loggedTime',
+  assigneeUuid: 'assigneeUuid',
+  reporterUuid: 'reporterUuid',
+  projectUuid: 'projectUuid',
+  priorityUuid: 'priorityUuid',
+  sratusUuid: 'sratusUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
 export const TaskStatusesScalarFieldEnum = {
@@ -124,4 +182,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

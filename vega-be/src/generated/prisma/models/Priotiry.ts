@@ -158,11 +158,13 @@ export type PriotiryWhereInput = {
   NOT?: Prisma.PriotiryWhereInput | Prisma.PriotiryWhereInput[]
   id?: Prisma.StringFilter<"Priotiry"> | string
   name?: Prisma.StringFilter<"Priotiry"> | string
+  tasks?: Prisma.TaskListRelationFilter
 }
 
 export type PriotiryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type PriotiryWhereUniqueInput = Prisma.AtLeast<{
@@ -171,6 +173,7 @@ export type PriotiryWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PriotiryWhereInput | Prisma.PriotiryWhereInput[]
   OR?: Prisma.PriotiryWhereInput[]
   NOT?: Prisma.PriotiryWhereInput | Prisma.PriotiryWhereInput[]
+  tasks?: Prisma.TaskListRelationFilter
 }, "id" | "name">
 
 export type PriotiryOrderByWithAggregationInput = {
@@ -192,21 +195,25 @@ export type PriotiryScalarWhereWithAggregatesInput = {
 export type PriotiryCreateInput = {
   id?: string
   name: string
+  tasks?: Prisma.TaskCreateNestedManyWithoutPriorityInput
 }
 
 export type PriotiryUncheckedCreateInput = {
   id?: string
   name: string
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutPriorityInput
 }
 
 export type PriotiryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  tasks?: Prisma.TaskUpdateManyWithoutPriorityNestedInput
 }
 
 export type PriotiryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutPriorityNestedInput
 }
 
 export type PriotiryCreateManyInput = {
@@ -239,15 +246,97 @@ export type PriotiryMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type PriotiryScalarRelationFilter = {
+  is?: Prisma.PriotiryWhereInput
+  isNot?: Prisma.PriotiryWhereInput
 }
 
+export type PriotiryCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.PriotiryCreateWithoutTasksInput, Prisma.PriotiryUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.PriotiryCreateOrConnectWithoutTasksInput
+  connect?: Prisma.PriotiryWhereUniqueInput
+}
+
+export type PriotiryUpdateOneRequiredWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.PriotiryCreateWithoutTasksInput, Prisma.PriotiryUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.PriotiryCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.PriotiryUpsertWithoutTasksInput
+  connect?: Prisma.PriotiryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PriotiryUpdateToOneWithWhereWithoutTasksInput, Prisma.PriotiryUpdateWithoutTasksInput>, Prisma.PriotiryUncheckedUpdateWithoutTasksInput>
+}
+
+export type PriotiryCreateWithoutTasksInput = {
+  id?: string
+  name: string
+}
+
+export type PriotiryUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name: string
+}
+
+export type PriotiryCreateOrConnectWithoutTasksInput = {
+  where: Prisma.PriotiryWhereUniqueInput
+  create: Prisma.XOR<Prisma.PriotiryCreateWithoutTasksInput, Prisma.PriotiryUncheckedCreateWithoutTasksInput>
+}
+
+export type PriotiryUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.PriotiryUpdateWithoutTasksInput, Prisma.PriotiryUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.PriotiryCreateWithoutTasksInput, Prisma.PriotiryUncheckedCreateWithoutTasksInput>
+  where?: Prisma.PriotiryWhereInput
+}
+
+export type PriotiryUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.PriotiryWhereInput
+  data: Prisma.XOR<Prisma.PriotiryUpdateWithoutTasksInput, Prisma.PriotiryUncheckedUpdateWithoutTasksInput>
+}
+
+export type PriotiryUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type PriotiryUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+
+/**
+ * Count Type PriotiryCountOutputType
+ */
+
+export type PriotiryCountOutputType = {
+  tasks: number
+}
+
+export type PriotiryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tasks?: boolean | PriotiryCountOutputTypeCountTasksArgs
+}
+
+/**
+ * PriotiryCountOutputType without action
+ */
+export type PriotiryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PriotiryCountOutputType
+   */
+  select?: Prisma.PriotiryCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PriotiryCountOutputType without action
+ */
+export type PriotiryCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
 
 
 export type PriotirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  tasks?: boolean | Prisma.Priotiry$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.PriotiryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["priotiry"]>
 
 export type PriotirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -266,10 +355,18 @@ export type PriotirySelectScalar = {
 }
 
 export type PriotiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["priotiry"]>
+export type PriotiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tasks?: boolean | Prisma.Priotiry$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.PriotiryCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type PriotiryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PriotiryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $PriotiryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Priotiry"
-  objects: {}
+  objects: {
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
@@ -667,6 +764,7 @@ readonly fields: PriotiryFieldRefs;
  */
 export interface Prisma__PriotiryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tasks<T extends Prisma.Priotiry$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Priotiry$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -715,6 +813,10 @@ export type PriotiryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * Filter, which Priotiry to fetch.
    */
   where: Prisma.PriotiryWhereUniqueInput
@@ -733,6 +835,10 @@ export type PriotiryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * Filter, which Priotiry to fetch.
    */
   where: Prisma.PriotiryWhereUniqueInput
@@ -750,6 +856,10 @@ export type PriotiryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Priotiry
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
   /**
    * Filter, which Priotiry to fetch.
    */
@@ -799,6 +909,10 @@ export type PriotiryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * Filter, which Priotiry to fetch.
    */
   where?: Prisma.PriotiryWhereInput
@@ -847,6 +961,10 @@ export type PriotiryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * Filter, which Priotiries to fetch.
    */
   where?: Prisma.PriotiryWhereInput
@@ -889,6 +1007,10 @@ export type PriotiryCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Priotiry
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
   /**
    * The data needed to create a Priotiry.
    */
@@ -937,6 +1059,10 @@ export type PriotiryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Priotiry
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
   /**
    * The data needed to update a Priotiry.
    */
@@ -1004,6 +1130,10 @@ export type PriotiryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * The filter to search for the Priotiry to update in case it exists.
    */
   where: Prisma.PriotiryWhereUniqueInput
@@ -1030,6 +1160,10 @@ export type PriotiryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
+  /**
    * Filter which Priotiry to delete.
    */
   where: Prisma.PriotiryWhereUniqueInput
@@ -1050,6 +1184,30 @@ export type PriotiryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Priotiry.tasks
+ */
+export type Priotiry$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
  * Priotiry without action
  */
 export type PriotiryDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1061,4 +1219,8 @@ export type PriotiryDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Priotiry
    */
   omit?: Prisma.PriotiryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PriotiryInclude<ExtArgs> | null
 }
