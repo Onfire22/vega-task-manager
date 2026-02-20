@@ -53,7 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Comment: 'Comment',
   Membership: 'Membership',
-  Priotiry: 'Priotiry',
+  TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
   Roles: 'Roles',
   Task: 'Task',
@@ -101,12 +101,12 @@ export const MembershipScalarFieldEnum = {
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
 
 
-export const PriotiryScalarFieldEnum = {
+export const TaskPriotiryScalarFieldEnum = {
   id: 'id',
   name: 'name'
 } as const
 
-export type PriotiryScalarFieldEnum = (typeof PriotiryScalarFieldEnum)[keyof typeof PriotiryScalarFieldEnum]
+export type TaskPriotiryScalarFieldEnum = (typeof TaskPriotiryScalarFieldEnum)[keyof typeof TaskPriotiryScalarFieldEnum]
 
 
 export const ProjectsScalarFieldEnum = {

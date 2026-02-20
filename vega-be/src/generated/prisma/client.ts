@@ -50,10 +50,10 @@ export type Comment = Prisma.CommentModel
  */
 export type Membership = Prisma.MembershipModel
 /**
- * Model Priotiry
+ * Model TaskPriotiry
  * 
  */
-export type Priotiry = Prisma.PriotiryModel
+export type TaskPriotiry = Prisma.TaskPriotiryModel
 /**
  * Model Projects
  * 

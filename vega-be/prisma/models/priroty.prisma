@@ -1,8 +1,8 @@
-model Priotiry {
+model TaskPriotiry {
   id String @id @default(uuid())
 
   name  String @unique
   tasks Task[]
 
-  @@map("priority")
+  @@map("task_priorities")
 }

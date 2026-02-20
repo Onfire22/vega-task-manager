@@ -13,7 +13,7 @@ model Task {
   projectUuid   String       @map("project_uuid")
   project       Projects     @relation(fields: [projectUuid], references: [id])
   priorityUuid  String       @map("priority_uuid")
-  priority      Priotiry     @relation(fields: [priorityUuid], references: [id])
+  priority      TaskPriotiry @relation(fields: [priorityUuid], references: [id])
   sratusUuid    String       @map("sratus_uuid")
   status        TaskStatuses @relation(fields: [sratusUuid], references: [id])
   comments      Comment[]

@@ -10,7 +10,7 @@
  */
 export type * from './models/Comment.js'
 export type * from './models/Membership.js'
-export type * from './models/Priotiry.js'
+export type * from './models/TaskPriotiry.js'
 export type * from './models/Projects.js'
 export type * from './models/Roles.js'
 export type * from './models/Task.js'
