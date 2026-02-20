@@ -12,14 +12,14 @@ interface IProps {
 		password: string;
 		passwordRepeat: string;
 		name: string;
-		surname: string;
+		secondName: string;
 	};
 	formErrors: {
 		email?: string;
 		password?: string;
 		passwordRepeat?: string;
 		name?: string;
-		surname?: string;
+		secondName?: string;
 	};
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
@@ -76,13 +76,13 @@ const SignUpFormView: React.FC<IProps> = ({
 					onChange={onFieldChange}
 				/>
 				<CustomInputField
-					id="surname"
+					id="secondName"
 					type="text"
 					label="Фамилия"
-					name="surname"
+					name="secondName"
 					placeholder="Иванов"
-					value={formValues.surname}
-					error={formErrors.surname}
+					value={formValues.secondName}
+					error={formErrors.secondName}
 					onChange={onFieldChange}
 				/>
 				<div className="signin-form__text">

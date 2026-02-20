@@ -3,5 +3,5 @@ export const SIGNUP_DEFAULT_VALUES = {
 	password: '',
 	passwordRepeat: '',
 	name: '',
-	surname: '',
+	secondName: '',
 };
