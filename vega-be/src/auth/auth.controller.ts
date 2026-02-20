@@ -44,8 +44,6 @@ export const signInUser = async (
 			where: { email },
 		});
 
-		console.log({ password, userPassword: user.password });
-
 		const isPasswordMatch = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordMatch) {
