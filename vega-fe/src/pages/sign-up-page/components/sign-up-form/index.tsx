@@ -3,18 +3,22 @@ import { useFormik } from 'formik';
 import { SIGNUP_DEFAULT_VALUES } from '../../constants.ts';
 import { SignUpValidationSchema } from '../../validation.ts';
 import React from 'react';
-import { useAppDispatch } from '../../../../store/hooks.ts';
-import { setActiveForm } from '../../slice.ts';
+import { useSignUpUserMutation } from '../../api.ts';
 
 const SignUpForm = () => {
-	const dispatch = useAppDispatch();
+	const [signUpUser, data] = useSignUpUserMutation();
 
 	const formik = useFormik({
 		initialValues: SIGNUP_DEFAULT_VALUES,
 		validationSchema: SignUpValidationSchema,
 		validateOnChange: false,
-		onSubmit: (values) => {
-			dispatch(setActiveForm('info'));
+		onSubmit: async (values) => {
+			try {
+				const response = await signUpUser(values);
+				console.log(response);
+			} catch (e) {
+				console.log(e);
+			}
 			console.log(values);
 		},
 	});

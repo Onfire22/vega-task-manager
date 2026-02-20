@@ -21,7 +21,7 @@ export const SignUpValidationSchema = yup.object().shape({
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы')
 		.required('Это обязательное поле'),
-	surname: yup
+	secondName: yup
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы')
 		.required('Это обязательное поле'),
