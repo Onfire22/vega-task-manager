@@ -1,13 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import { pagesList } from './pages-list.ts';
+import { TasksPage } from '../pages/tasks-page';
+import { SignInPage } from '../pages/sign-in-page';
+import { SignUpPage } from '../pages/sign-up-page';
+import { NotFoundPage } from '../pages/not-found-page';
 
 const Router = () => {
 	return (
 		<Routes>
-			{(Object.keys(pagesList) as Array<keyof typeof pagesList>).map((key) => {
-				const Component = pagesList[key].component;
-				return <Route key={pagesList[key].id} path={pagesList[key].path} element={<Component />} />;
-			})}
+			<Route index element={<TasksPage />} />
+			<Route path="/sign-in" element={<SignInPage />} />
+			<Route path="/sign-up" element={<SignUpPage />} />
+			<Route path="*" element={<NotFoundPage />} />
 		</Routes>
 	);
 };

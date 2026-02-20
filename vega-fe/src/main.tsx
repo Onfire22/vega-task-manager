@@ -1,7 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
-import App from './App.tsx';
+import '@mantine/core/styles.css';
 import './index.less';
+import App from './App.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/reducer';
 

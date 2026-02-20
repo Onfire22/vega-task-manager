@@ -6,7 +6,7 @@ import React from 'react';
 import { useSignUpUserMutation } from '../../api.ts';
 
 const SignUpForm = () => {
-	const [signUpUser, data] = useSignUpUserMutation();
+	const [signUpUser] = useSignUpUserMutation();
 
 	const formik = useFormik({
 		initialValues: SIGNUP_DEFAULT_VALUES,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Popup } from '../../popup';
-import { CustomInputField } from '../../../../../ui/custom-input-field';
 import { CustomForm } from '../../../../../ui/custom-form';
-import { CustomButton } from '../../../../../ui/custom-button';
+import { Button, PasswordInput, TextInput } from '@mantine/core';
+import Lock from '../../../../../assets/icons/lock.svg?react';
+import At from '../../../../../assets/icons/at.svg?react';
 import './styles.less';
 
 interface IProps {
@@ -34,64 +34,85 @@ const SignUpFormView: React.FC<IProps> = ({
 	return (
 		<div className="signup-form">
 			<CustomForm title="Регистрация" onSubmit={onFormSubmit}>
-				<CustomInputField
-					id="email"
-					type="email"
-					label="Электронная почта"
-					name="email"
-					placeholder="username@address.com"
-					value={formValues.email}
-					error={formErrors.email}
-					onChange={onFieldChange}
-				/>
-				<CustomInputField
-					id="password"
-					type="password"
-					label="Пароль"
-					name="password"
-					placeholder="********"
-					value={formValues.password}
-					error={formErrors.password}
-					onChange={onFieldChange}
-					tooltip={<Popup />}
-				/>
-				<CustomInputField
-					id="password-repeat"
-					type="password"
-					label="Повторите пароль"
-					name="passwordRepeat"
-					placeholder="********"
-					value={formValues.passwordRepeat}
-					error={formErrors.passwordRepeat}
-					onChange={onFieldChange}
-				/>
-				<CustomInputField
-					id="name"
-					type="text"
-					label="Имя"
-					name="name"
-					placeholder="Иван"
-					value={formValues.name}
-					error={formErrors.name}
-					onChange={onFieldChange}
-				/>
-				<CustomInputField
-					id="secondName"
-					type="text"
-					label="Фамилия"
-					name="secondName"
-					placeholder="Иванов"
-					value={formValues.secondName}
-					error={formErrors.secondName}
-					onChange={onFieldChange}
-				/>
-				<div className="signin-form__text">
+				<div className="signup-form__input">
+					<TextInput
+						id="email"
+						type="email"
+						label="Электронная почта"
+						name="email"
+						placeholder="username@address.com"
+						value={formValues.email}
+						error={formErrors.email}
+						onChange={onFieldChange}
+						withAsterisk
+						leftSection={<At />}
+					/>
+				</div>
+				<div className="signup-form__input">
+					<PasswordInput
+						id="password"
+						type="password"
+						label="Пароль"
+						name="password"
+						placeholder="********"
+						value={formValues.password}
+						error={formErrors.password}
+						onChange={onFieldChange}
+						withAsterisk
+						leftSection={<Lock />}
+					/>
+				</div>
+				<div className="signup-form__input">
+					<PasswordInput
+						id="password-repeat"
+						type="password"
+						label="Повторите пароль"
+						name="passwordRepeat"
+						placeholder="********"
+						value={formValues.passwordRepeat}
+						error={formErrors.passwordRepeat}
+						onChange={onFieldChange}
+						withAsterisk
+						leftSection={<Lock />}
+					/>
+				</div>
+				<div className="signup-form__group">
+					<div className="signup-form__input">
+						<TextInput
+							id="name"
+							type="text"
+							label="Имя"
+							name="name"
+							placeholder="Иван"
+							value={formValues.name}
+							error={formErrors.name}
+							onChange={onFieldChange}
+							withAsterisk
+						/>
+					</div>
+					<div className="signup-form__input">
+						<TextInput
+							id="secondName"
+							type="text"
+							label="Фамилия"
+							name="secondName"
+							placeholder="Иванов"
+							value={formValues.secondName}
+							error={formErrors.secondName}
+							onChange={onFieldChange}
+							withAsterisk
+						/>
+					</div>
+				</div>
+				<div className="signup-form__text">
 					<span>Уже есть аккаунт? </span>
-					<Link className="signin-form__link" to="/sign-in">
+					<Link className="signup-form__link" to="/sign-in">
 						Войти
 					</Link>
 				</div>
-				<CustomButton type="submit">Зарегистрироваться</CustomButton>
+				<Button className="button" type="submit">
+					Зарегистрироваться
+				</Button>
 			</CustomForm>
 		</div>
 	);

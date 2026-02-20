@@ -5,32 +5,28 @@
 	align-items: center;
 	justify-content: center;
 
-	&__button {
-		border: 1px solid #3184ff;
-		padding: 5px;
-		display: flex;
-		align-items: center;
-		border-radius: 50vw;
-		margin-top: 20px;
+	&__input {
+		position: relative;
+		width: 100%;
+		min-height: 66px;
 
-		&:hover {
-			border-color: #0369ff;
-			transition: 0.3s ease-in;
-
-			.signup-form__icon {
-				color: #0369ff;
-				transition: 0.3s ease-in;
-			}
+		p {
+			position: absolute;
+			bottom: -10px;
+			left: 0;
 		}
 	}
 
-	&__icon {
-		color: #3184ff;
-		transition: 0.3s ease-in;
+	&__group {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 10px;
 	}
 
 	&__text {
 		font-size: 14px;
+		margin: 10px 0 10px;
 	}
 
 	&__link {

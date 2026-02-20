@@ -1,9 +1,10 @@
 import React from 'react';
 import './styles.less';
-import { CustomInputField } from '../../../../ui/custom-input-field';
 import { CustomForm } from '../../../../ui/custom-form';
-import { CustomButton } from '../../../../ui/custom-button';
 import { Link } from 'react-router-dom';
+import { Button, TextInput } from '@mantine/core';
+import Lock from '../../../../assets/icons/lock.svg?react';
+import At from '../../../../assets/icons/at.svg?react';
 
 interface IProps {
 	formValues: {
@@ -27,33 +28,41 @@ const SignInFormView: React.FC<IProps> = ({
 	return (
 		<div className="signin-form">
 			<CustomForm title="Вход" onSubmit={onFormSubmit}>
-				<CustomInputField
-					id="email"
-					type="email"
-					label="Электронная почта"
-					name="email"
-					placeholder="username@address.com"
-					value={formValues.email}
-					error={formErrors.email}
-					onChange={onFieldChange}
-				/>
-				<CustomInputField
-					id="password"
-					type="password"
-					label="Пароль"
-					name="password"
-					placeholder="********"
-					value={formValues.password}
-					error={formErrors.password}
-					onChange={onFieldChange}
-				/>
+				<div className="signin-form__input">
+					<TextInput
+						id="email"
+						type="email"
+						label="Электронная почта"
+						name="email"
+						placeholder="username@address.com"
+						value={formValues.email}
+						error={formErrors.email}
+						onChange={onFieldChange}
+						withAsterisk
+						leftSection={<At />}
+					/>
+				</div>
+				<div className="signin-form__input">
+					<TextInput
+						id="password"
+						type="password"
+						label="Пароль"
+						name="password"
+						placeholder="********"
+						value={formValues.password}
+						error={formErrors.password}
+						onChange={onFieldChange}
+						withAsterisk
+						leftSection={<Lock />}
+					/>
+				</div>
 				<div className="signin-form__text">
 					<span>Нет аккаунта? </span>
 					<Link className="signin-form__link" to="/sign-up">
 						Зарегистрироваться
 					</Link>
 				</div>
-				<CustomButton type="submit">Войти</CustomButton>
+				<Button type="submit">Войти</Button>
 			</CustomForm>
 		</div>
 	);
