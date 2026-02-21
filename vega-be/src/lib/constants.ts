@@ -1,6 +1,6 @@
-export const DAY = '1d';
+export const HOUR = '1h';
 
-export const DAY_IN_SECONDS = 216000;
+export const HOUR_IN_MS = 1000 * 60 * 60;
 
 export const RESPONSE_STATUSES = {
 	success: 200,

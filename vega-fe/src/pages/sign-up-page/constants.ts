@@ -27,4 +27,6 @@ export const TEAL_COLOR = '#12b886';
 
 export const YELLOW_COLOR = '#fab005';
 
+export const BLUE_COLOR = '#0369ff';
+
 export const MINIMAL_PASSWORD_LENGTH = 7;

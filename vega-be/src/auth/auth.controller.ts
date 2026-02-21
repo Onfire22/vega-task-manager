@@ -1,15 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { prismaAppClient } from '../lib/prisma';
 import { generateToken } from './auth.service';
-import { DAY_IN_SECONDS, RESPONSE_STATUSES } from '../lib/constants';
+import { HOUR_IN_MS, RESPONSE_STATUSES } from '../lib/constants';
 import { AppError } from '../errors/errors';
 import bcrypt from 'bcryptjs';
 
-export const signupUser = async (
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) => {
+export const signupUser = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const userData = req.body;
 
@@ -24,19 +20,18 @@ export const signupUser = async (
 		res.status(RESPONSE_STATUSES.authorised)
 			.cookie('token', token, {
 				httpOnly: true,
-				maxAge: DAY_IN_SECONDS,
+				maxAge: HOUR_IN_MS,
 			})
-			.json({ success: true });
+			.json({
+				success: true,
+				payload: { email: newUser.email, id: newUser.id, name: newUser.name, secondName: newUser.secondName },
+			});
 	} catch (e) {
 		next(new AppError('Iternal error', RESPONSE_STATUSES.iternalError));
 	}
 };
 
-export const signInUser = async (
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) => {
+export const signInUser = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { email, password } = req.body;
 
@@ -47,9 +42,7 @@ export const signInUser = async (
 		const isPasswordMatch = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordMatch) {
-			next(
-				new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised),
-			);
+			next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
 			return;
 		}
 
@@ -58,9 +51,12 @@ export const signInUser = async (
 		res.status(RESPONSE_STATUSES.authorised)
 			.cookie('token', token, {
 				httpOnly: true,
-				maxAge: DAY_IN_SECONDS,
+				maxAge: HOUR_IN_MS,
 			})
-			.json({ success: true });
+			.json({
+				success: true,
+				payload: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
+			});
 	} catch (e) {
 		console.log(e);
 		next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));

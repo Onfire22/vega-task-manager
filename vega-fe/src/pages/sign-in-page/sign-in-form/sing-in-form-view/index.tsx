@@ -27,7 +27,7 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 				<div className="signin-form__input">
 					<TextInput
 						id="email"
-						type="email"
+						type="text"
 						label="Электронная почта"
 						name="email"
 						placeholder="username@host.com"

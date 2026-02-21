@@ -4,10 +4,19 @@ import 'dotenv/config';
 import { router } from './router';
 import { authRouter } from './auth/auth.router';
 import { authMiddleware } from './auth/auth.middleware';
+import cors from 'cors';
 
 const port = process.env.PORT;
 
 const app = express();
+
+app.disable('x-powered-by');
+
+app.use(
+	cors({
+		origin: 'http://localhost:5173',
+	}),
+);
 
 app.use(json());
 app.use(cookieParser());

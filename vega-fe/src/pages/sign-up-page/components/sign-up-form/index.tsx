@@ -5,8 +5,12 @@ import { SignUpValidationSchema } from '../../validation.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSignUpUserMutation } from '../../../../api/auth/api.ts';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
+import { useNavigate } from 'react-router-dom';
+import { FRONT_ROUTES } from '../../../../constants.ts';
 
 const SignUpForm = () => {
+	const navigate = useNavigate();
+
 	const passwordRef = useRef<HTMLInputElement>(null);
 
 	const emailRef = useRef<HTMLInputElement>(null);
@@ -26,13 +30,10 @@ const SignUpForm = () => {
 		validationSchema: SignUpValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			try {
-				const response = await signUpUser(values);
-				console.log(response);
-			} catch (e) {
-				console.log(e);
+			const response = await signUpUser(values);
+			if (response?.data?.success) {
+				navigate(FRONT_ROUTES.root);
 			}
-			console.log(values);
 		},
 	});
 

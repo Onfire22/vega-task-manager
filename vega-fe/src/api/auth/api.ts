@@ -1,14 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL, METHODS, ROUTES } from '../constants.ts';
-import type { IUserData } from '../../pages/sign-up-page/types.ts';
+import type { ISignInUserData, IUserData } from '../types.ts';
 
 export const authApi = createApi({
 	reducerPath: '@@api/auth',
 	baseQuery: fetchBaseQuery({
 		baseUrl: BASE_URL,
 	}),
+	tagTypes: ['CurrentUser'],
 	endpoints: (builder) => ({
-		signUpUser: builder.mutation<object, IUserData>({
+		signUpUser: builder.mutation<{ success: boolean }, IUserData>({
 			query: ({ email, name, password, secondName }) => {
 				const fieldsForRequest = {
 					email,
@@ -23,8 +24,24 @@ export const authApi = createApi({
 					body: fieldsForRequest,
 				};
 			},
+			invalidatesTags: ['CurrentUser'],
+		}),
+		signInUser: builder.mutation<{ success: boolean }, ISignInUserData>({
+			query: (userData) => ({
+				url: ROUTES.signIn,
+				method: METHODS.post,
+				body: userData,
+			}),
+			invalidatesTags: ['CurrentUser'],
+		}),
+		getCurrentUser: builder.query<IUserData, void>({
+			query: () => ({
+				url: ROUTES.currentUser,
+				method: METHODS.get,
+			}),
+			providesTags: ['CurrentUser'],
 		}),
 	}),
 });
 
-export const { useSignUpUserMutation } = authApi;
+export const { useSignUpUserMutation, useSignInUserMutation, useGetCurrentUserQuery } = authApi;
