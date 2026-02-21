@@ -62,3 +62,9 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 		next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
 	}
 };
+
+export const logOutUser = async (req: Request, res: Response, next: NextFunction) => {
+	res.clearCookie('token', {
+		httpOnly: true,
+	}).json({ success: true });
+};
