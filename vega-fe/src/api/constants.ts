@@ -11,3 +11,8 @@ export const METHODS = {
 export const DEFAULT_HEADERS = {
 	'Content-Type': 'application/json',
 };
+
+export const ROUTES = {
+	signUp: '/sign-up',
+	signIn: '/sign-in',
+};

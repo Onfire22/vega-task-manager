@@ -15,16 +15,12 @@ interface IProps {
 		email?: string;
 		password?: string;
 	};
+	loginRef: React.RefObject<HTMLInputElement | null>;
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 }
 
-const SignInFormView: React.FC<IProps> = ({
-	formValues,
-	formErrors,
-	onFieldChange,
-	onFormSubmit,
-}) => {
+const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, onFieldChange, onFormSubmit }) => {
 	return (
 		<div className="signin-form">
 			<CustomForm title="Вход" onSubmit={onFormSubmit}>
@@ -34,12 +30,13 @@ const SignInFormView: React.FC<IProps> = ({
 						type="email"
 						label="Электронная почта"
 						name="email"
-						placeholder="username@address.com"
+						placeholder="username@host.com"
 						value={formValues.email}
 						error={formErrors.email}
 						onChange={onFieldChange}
 						withAsterisk
 						leftSection={<At />}
+						ref={loginRef}
 					/>
 				</div>
 				<div className="signin-form__input">

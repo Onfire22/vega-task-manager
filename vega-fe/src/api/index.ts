@@ -12,10 +12,8 @@ export const makeRequest = async ({
 	headers: object;
 }) => {
 	try {
-		const response = await fetch(`${BASE_URL}/${path}`, {
-			...(method === METHODS.get
-				? {}
-				: { body: JSON.stringify(bodyData) }),
+		const response = await fetch(`${BASE_URL}${path}`, {
+			...(method === METHODS.get ? {} : { body: JSON.stringify(bodyData) }),
 			headers: {
 				...DEFAULT_HEADERS,
 				...headers,

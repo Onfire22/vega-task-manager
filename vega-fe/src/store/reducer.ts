@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../store/index';
-import { signUpApi } from '../pages/sign-up-page/api.ts';
+import { authApi } from '../api/auth/api.ts';
 
 export const store = configureStore({
 	reducer: rootReducer,
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(signUpApi.middleware),
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

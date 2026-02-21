@@ -1,10 +1,18 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SignInFormView } from './sing-in-form-view';
 import { SIGN_IN_DEFAULT_VALUES } from '../constants.ts';
 import { SignUpValidationSchema } from '../validation.ts';
 
 const SignUpForm = () => {
+	const loginRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (loginRef?.current) {
+			loginRef.current.focus();
+		}
+	}, []);
+
 	const formik = useFormik({
 		initialValues: SIGN_IN_DEFAULT_VALUES,
 		validationSchema: SignUpValidationSchema,
@@ -24,6 +32,7 @@ const SignUpForm = () => {
 		<SignInFormView
 			formValues={formik.values}
 			formErrors={formik.errors}
+			loginRef={loginRef}
 			onFieldChange={handleFieldChange}
 			onFormSubmit={formik.handleSubmit}
 		/>

@@ -10,3 +10,10 @@ export interface IUserData {
 	name: string;
 	secondName: string;
 }
+
+export interface IRequirement {
+	regex: RegExp;
+	label: string;
+}
+
+export type DictionaryKey = 'lowerCaseLetters' | 'upperCaseLetters' | 'symbols' | 'numbers';
