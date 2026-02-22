@@ -1171,8 +1171,8 @@ export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof Ro
 export const StackScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  fullName: 'fullName',
+  color: 'color'
 } as const
 
 export type StackScalarFieldEnum = (typeof StackScalarFieldEnum)[keyof typeof StackScalarFieldEnum]

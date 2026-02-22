@@ -27,22 +27,22 @@ export type AggregateStack = {
 export type StackMinAggregateOutputType = {
   id: string | null
   name: string | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  fullName: string | null
+  color: string | null
 }
 
 export type StackMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  fullName: string | null
+  color: string | null
 }
 
 export type StackCountAggregateOutputType = {
   id: number
   name: number
-  createdAt: number
-  updatedAt: number
+  fullName: number
+  color: number
   _all: number
 }
 
@@ -50,22 +50,22 @@ export type StackCountAggregateOutputType = {
 export type StackMinAggregateInputType = {
   id?: true
   name?: true
-  createdAt?: true
-  updatedAt?: true
+  fullName?: true
+  color?: true
 }
 
 export type StackMaxAggregateInputType = {
   id?: true
   name?: true
-  createdAt?: true
-  updatedAt?: true
+  fullName?: true
+  color?: true
 }
 
 export type StackCountAggregateInputType = {
   id?: true
   name?: true
-  createdAt?: true
-  updatedAt?: true
+  fullName?: true
+  color?: true
   _all?: true
 }
 
@@ -144,8 +144,8 @@ export type StackGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type StackGroupByOutputType = {
   id: string
   name: string
-  createdAt: Date
-  updatedAt: Date
+  fullName: string
+  color: string
   _count: StackCountAggregateOutputType | null
   _min: StackMinAggregateOutputType | null
   _max: StackMaxAggregateOutputType | null
@@ -172,8 +172,8 @@ export type StackWhereInput = {
   NOT?: Prisma.StackWhereInput | Prisma.StackWhereInput[]
   id?: Prisma.StringFilter<"Stack"> | string
   name?: Prisma.StringFilter<"Stack"> | string
-  createdAt?: Prisma.DateTimeFilter<"Stack"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Stack"> | Date | string
+  fullName?: Prisma.StringFilter<"Stack"> | string
+  color?: Prisma.StringFilter<"Stack"> | string
   users?: Prisma.UserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
 }
@@ -181,8 +181,8 @@ export type StackWhereInput = {
 export type StackOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  color?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
@@ -190,20 +190,20 @@ export type StackOrderByWithRelationInput = {
 export type StackWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   name?: string
+  fullName?: string
+  color?: string
   AND?: Prisma.StackWhereInput | Prisma.StackWhereInput[]
   OR?: Prisma.StackWhereInput[]
   NOT?: Prisma.StackWhereInput | Prisma.StackWhereInput[]
-  createdAt?: Prisma.DateTimeFilter<"Stack"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Stack"> | Date | string
   users?: Prisma.UserListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
-}, "id" | "name">
+}, "id" | "name" | "fullName" | "color">
 
 export type StackOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  color?: Prisma.SortOrder
   _count?: Prisma.StackCountOrderByAggregateInput
   _max?: Prisma.StackMaxOrderByAggregateInput
   _min?: Prisma.StackMinOrderByAggregateInput
@@ -215,15 +215,15 @@ export type StackScalarWhereWithAggregatesInput = {
   NOT?: Prisma.StackScalarWhereWithAggregatesInput | Prisma.StackScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Stack"> | string
   name?: Prisma.StringWithAggregatesFilter<"Stack"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Stack"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Stack"> | Date | string
+  fullName?: Prisma.StringWithAggregatesFilter<"Stack"> | string
+  color?: Prisma.StringWithAggregatesFilter<"Stack"> | string
 }
 
 export type StackCreateInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   users?: Prisma.UserCreateNestedManyWithoutStackInput
   tasks?: Prisma.TaskCreateNestedManyWithoutStackInput
 }
@@ -231,8 +231,8 @@ export type StackCreateInput = {
 export type StackUncheckedCreateInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStackInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStackInput
 }
@@ -240,8 +240,8 @@ export type StackUncheckedCreateInput = {
 export type StackUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserUpdateManyWithoutStackNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutStackNestedInput
 }
@@ -249,8 +249,8 @@ export type StackUpdateInput = {
 export type StackUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStackNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutStackNestedInput
 }
@@ -258,43 +258,43 @@ export type StackUncheckedUpdateInput = {
 export type StackCreateManyInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
 }
 
 export type StackUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type StackUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type StackCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type StackMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type StackMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type StackScalarRelationFilter = {
@@ -340,16 +340,16 @@ export type StackUpdateOneWithoutUsersNestedInput = {
 export type StackCreateWithoutTasksInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   users?: Prisma.UserCreateNestedManyWithoutStackInput
 }
 
 export type StackUncheckedCreateWithoutTasksInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStackInput
 }
 
@@ -372,32 +372,32 @@ export type StackUpdateToOneWithWhereWithoutTasksInput = {
 export type StackUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserUpdateManyWithoutStackNestedInput
 }
 
 export type StackUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStackNestedInput
 }
 
 export type StackCreateWithoutUsersInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   tasks?: Prisma.TaskCreateNestedManyWithoutStackInput
 }
 
 export type StackUncheckedCreateWithoutUsersInput = {
   id?: string
   name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  fullName: string
+  color: string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStackInput
 }
 
@@ -420,16 +420,16 @@ export type StackUpdateToOneWithWhereWithoutUsersInput = {
 export type StackUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   tasks?: Prisma.TaskUpdateManyWithoutStackNestedInput
 }
 
 export type StackUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutStackNestedInput
 }
 
@@ -476,8 +476,8 @@ export type StackCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Ext
 export type StackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  fullName?: boolean
+  color?: boolean
   users?: boolean | Prisma.Stack$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Stack$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.StackCountOutputTypeDefaultArgs<ExtArgs>
@@ -486,25 +486,25 @@ export type StackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type StackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  fullName?: boolean
+  color?: boolean
 }, ExtArgs["result"]["stack"]>
 
 export type StackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  fullName?: boolean
+  color?: boolean
 }, ExtArgs["result"]["stack"]>
 
 export type StackSelectScalar = {
   id?: boolean
   name?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  fullName?: boolean
+  color?: boolean
 }
 
-export type StackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["stack"]>
+export type StackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "fullName" | "color", ExtArgs["result"]["stack"]>
 export type StackInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Stack$usersArgs<ExtArgs>
   tasks?: boolean | Prisma.Stack$tasksArgs<ExtArgs>
@@ -522,8 +522,8 @@ export type $StackPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    createdAt: Date
-    updatedAt: Date
+    fullName: string
+    color: string
   }, ExtArgs["result"]["stack"]>
   composites: {}
 }
@@ -951,8 +951,8 @@ export interface Prisma__StackClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface StackFieldRefs {
   readonly id: Prisma.FieldRef<"Stack", 'String'>
   readonly name: Prisma.FieldRef<"Stack", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Stack", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Stack", 'DateTime'>
+  readonly fullName: Prisma.FieldRef<"Stack", 'String'>
+  readonly color: Prisma.FieldRef<"Stack", 'String'>
 }
     
 

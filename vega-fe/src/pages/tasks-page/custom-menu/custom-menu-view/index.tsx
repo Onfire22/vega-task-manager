@@ -13,10 +13,17 @@ interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
 	onLogOutClick: () => void;
+	onModalOpen: () => void;
 	searchValue: string;
 }
 
-const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfileCLick, onLogOutClick }) => {
+const CustomMenuView: React.FC<IProps> = ({
+	searchValue,
+	onSearchChange,
+	onProfileCLick,
+	onLogOutClick,
+	onModalOpen,
+}) => {
 	return (
 		<div className="custom-menu">
 			<div className="custom-menu__info">
@@ -39,7 +46,7 @@ const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfi
 				/>
 			</div>
 			<div className="custom-menu__controls">
-				<Button variant="light" rightSection={<Plus width={14} height={14} />}>
+				<Button variant="light" onClick={onModalOpen} rightSection={<Plus width={14} height={14} />}>
 					Создать
 				</Button>
 				<Menu shadow="md" width={200}>

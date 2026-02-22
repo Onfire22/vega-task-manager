@@ -1,12 +1,11 @@
 model Stack {
-  id   String @id @default(uuid())
-  name String @unique
+  id       String @id @default(uuid())
+  name     String @unique
+  fullName String @unique @map("full_name")
+  color    String @unique
 
   users User[]
   tasks Task[]
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("stacks")
 }

@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import tasksReducer from '../pages/tasks-page/slice';
 import signUpReducer from '../pages/sign-up-page/slice';
-import { authApi } from '../api/auth/api.ts';
+import { baseApi } from '../api';
 
 export default combineReducers({
 	tasksReducer,
 	signUpReducer,
-	[authApi.reducerPath]: authApi.reducer,
+	[baseApi.reducerPath]: baseApi.reducer,
 });

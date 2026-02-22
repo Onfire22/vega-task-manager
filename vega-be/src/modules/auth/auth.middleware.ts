@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { AppError } from '../errors/errors';
+import { AppError } from '../../errors/errors';
 import jwt from 'jsonwebtoken';
-import { RESPONSE_STATUSES } from '../lib/constants';
+import { RESPONSE_STATUSES } from '../../constants';
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	const token = req.cookies.token;

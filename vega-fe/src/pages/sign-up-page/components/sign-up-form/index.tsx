@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { PASSWORD_REQUIREMENTS, RED_COLOR, SIGNUP_DEFAULT_VALUES, TEAL_COLOR, YELLOW_COLOR } from '../../constants.ts';
 import { SignUpValidationSchema } from '../../validation.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSignUpUserMutation } from '../../../../api/auth/api.ts';
+import { useSignUpUserMutation } from '../../../../api/queries/auth.api.ts';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';

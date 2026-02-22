@@ -7,7 +7,7 @@ import { ProtectedRoute } from './protected-route.tsx';
 import { PublicRoute } from './public-route.tsx';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
-import { useGetCurrentUserQuery } from '../api/auth/api.ts';
+import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
 import { FRONT_ROUTES } from '../constants.ts';
 
 const Router = () => {

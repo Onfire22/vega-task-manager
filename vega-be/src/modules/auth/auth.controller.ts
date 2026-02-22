@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { prismaAppClient } from '../lib/prisma';
+import { prismaAppClient } from '../../lib/prisma';
 import { generateToken } from './auth.service';
-import { HOUR_IN_MS, RESPONSE_STATUSES } from '../lib/constants';
-import { AppError } from '../errors/errors';
+import { HOUR_IN_MS, RESPONSE_STATUSES } from '../../constants';
+import { AppError } from '../../errors/errors';
 import bcrypt from 'bcryptjs';
 
 export const signupUser = async (req: Request, res: Response, next: NextFunction) => {

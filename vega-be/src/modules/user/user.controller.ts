@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { prismaAppClient } from '../lib/prisma';
-import { AppError } from '../errors/errors';
-import { RESPONSE_STATUSES } from '../lib/constants';
+import { prismaAppClient } from '../../lib/prisma';
+import { AppError } from '../../errors/errors';
+import { RESPONSE_STATUSES } from '../../constants';
 
 export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
 	const id = res.locals?.user?.id;

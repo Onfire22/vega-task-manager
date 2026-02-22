@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { HOUR } from '../lib/constants';
+import { HOUR } from '../../constants';
 
 export const generateToken = (id: string = ''): string => {
 	if (!id) return '';

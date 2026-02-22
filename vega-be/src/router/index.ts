@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { userRouter } from '../user/user.router';
+import { userRouter } from '../modules/user/user.router';
+import { stackRouter } from '../modules/stack/stack.router';
+import { prioritiesRouter } from '../modules/task-priorities/priorities.router';
 
-const router = Router();
+const protectedRouter = Router();
 
-router.use('/users', userRouter);
+protectedRouter.use('/users', userRouter);
+protectedRouter.use('/priorities', prioritiesRouter);
+protectedRouter.use('/stack', stackRouter);
 
-export { router };
+export { protectedRouter };

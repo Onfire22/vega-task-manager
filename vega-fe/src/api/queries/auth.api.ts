@@ -1,13 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL, METHODS, ROUTES } from '../constants.ts';
+import { METHODS, ROUTES } from '../constants.ts';
 import type { ISignInUserData, IUserData } from '../types.ts';
+import { baseApi } from '../index.ts';
 
-export const authApi = createApi({
-	reducerPath: '@@api/auth',
-	baseQuery: fetchBaseQuery({
-		baseUrl: BASE_URL,
-	}),
-	tagTypes: ['CurrentUser'],
+const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		signUpUser: builder.mutation<{ success: boolean }, IUserData>({
 			query: ({ email, name, password, secondName }) => {

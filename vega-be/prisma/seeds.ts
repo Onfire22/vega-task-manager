@@ -12,21 +12,22 @@ const makeSeed = async () => {
 	});
 
 	await prisma.taskPriotiry.createMany({
-		data: [
-			{ name: 'low' },
-			{ name: 'medium' },
-			{ name: 'high' },
-			{ name: 'highest' },
-		],
+		data: [{ name: 'low' }, { name: 'medium' }, { name: 'high' }, { name: 'highest' }],
 		skipDuplicates: true,
 	});
 
 	await prisma.taskStatuses.createMany({
+		data: [{ name: 'todo' }, { name: 'in_progress' }, { name: 'done' }, { name: 'stopped' }],
+		skipDuplicates: true,
+	});
+
+	await prisma.stack.createMany({
 		data: [
-			{ name: 'todo' },
-			{ name: 'in_progress' },
-			{ name: 'done' },
-			{ name: 'stopped' },
+			{ name: 'FE', fullName: 'frontend', color: '#91F5FF' },
+			{ name: 'BE', fullName: 'backend', color: '#ADFFD6' },
+			{ name: 'FS', fullName: 'fullStack', color: '#D4B1FA' },
+			{ name: 'QA', fullName: 'qualityAssurance', color: '#FDFFB5' },
+			{ name: 'AN', fullName: 'analytics', color: '#FFBCB0' },
 		],
 		skipDuplicates: true,
 	});

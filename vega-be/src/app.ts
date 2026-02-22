@@ -1,9 +1,9 @@
 import express, { json } from 'express';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
-import { router } from './router';
-import { authRouter } from './auth/auth.router';
-import { authMiddleware } from './auth/auth.middleware';
+import { protectedRouter } from './router';
+import { authRouter } from './modules/auth/auth.router';
+import { authMiddleware } from './modules/auth/auth.middleware';
 import cors from 'cors';
 import { errorMiddleware } from './errors/middleware';
 
@@ -26,7 +26,7 @@ app.use(authRouter);
 
 app.use(authMiddleware);
 
-app.use(router);
+app.use(protectedRouter);
 
 app.use(errorMiddleware);
 
