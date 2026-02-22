@@ -7,10 +7,12 @@ import { useSignInUserMutation } from '../../../api/queries/auth.api.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../constants.ts';
 import { LoadingOverlay } from '@mantine/core';
+import { useAppDispatch } from '../../../store/hooks.ts';
+import { setNotification } from '../../../components/notifications/slice.ts';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
-
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const [signInUser, { isLoading }] = useSignInUserMutation();
@@ -29,6 +31,10 @@ const SignUpForm = () => {
 			const response = await signInUser(values);
 			if (response?.data?.success) {
 				navigate(FRONT_ROUTES.root);
+			} else {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-expect-error
+				dispatch(setNotification({ type: 'error', text: response.error?.data.message }));
 			}
 		},
 	});

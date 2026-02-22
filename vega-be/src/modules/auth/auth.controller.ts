@@ -27,7 +27,7 @@ export const signupUser = async (req: Request, res: Response, next: NextFunction
 				payload: { email: newUser.email, id: newUser.id, name: newUser.name, secondName: newUser.secondName },
 			});
 	} catch (e) {
-		next(new AppError('Iternal error', RESPONSE_STATUSES.iternalError));
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };
 
@@ -35,14 +35,19 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 	try {
 		const { email, password } = req.body;
 
-		const user = await prismaAppClient.user.findUniqueOrThrow({
+		const user = await prismaAppClient.user.findUnique({
 			where: { email },
 		});
+
+		if (!user) {
+			next(new AppError('Email не найден', RESPONSE_STATUSES.notAuthorised));
+			return;
+		}
 
 		const isPasswordMatch = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordMatch) {
-			next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
+			next(new AppError('Неправильный пароль', RESPONSE_STATUSES.notAuthorised));
 			return;
 		}
 
@@ -59,7 +64,7 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 			});
 	} catch (e) {
 		console.log(e);
-		next(new AppError('Iternal error', RESPONSE_STATUSES.notAuthorised));
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}
 };
 

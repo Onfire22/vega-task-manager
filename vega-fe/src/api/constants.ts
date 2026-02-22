@@ -8,13 +8,11 @@ export const METHODS = {
 	put: 'PUT',
 };
 
-export const DEFAULT_HEADERS = {
-	'Content-Type': 'application/json',
-};
-
 export const ROUTES = {
-	signUp: '/sign-up',
-	signIn: '/sign-in',
-	logout: '/logout',
-	currentUser: '/users/current',
+	signUp: '/api/sign-up',
+	signIn: '/api/sign-in',
+	logout: '/api/logout',
+	currentUser: '/api/users/current',
+	priorities: '/api/priorities',
+	stack: '/api/stack',
 };

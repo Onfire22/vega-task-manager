@@ -8,17 +8,15 @@ const TasksPage = () => {
 	const { data: taskPrioritiesData } = useGetTaskPrioritiesQuery();
 	const { data: stackListData } = useGetStackListQuery();
 
-	const dictionaries = {
-		stackList: stackListData?.payload.map((item) => ({ label: item.fullName, value: item.id })),
-		taskPriorities: taskPrioritiesData?.payload.map((item) => ({ label: item.name, value: item.id })),
-	};
-
 	return (
 		<>
 			<Header menu={<CustomMenu />} />
 			<PageContentWrapper offset={56}>
 				<div>table</div>
-				<CreateTaskWindow dictionaries={dictionaries} />
+				<CreateTaskWindow
+					taskPrioritiesData={taskPrioritiesData?.payload}
+					stackListData={stackListData?.payload}
+				/>
 			</PageContentWrapper>
 		</>
 	);

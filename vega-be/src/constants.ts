@@ -9,3 +9,12 @@ export const RESPONSE_STATUSES = {
 	notFound: 404,
 	iternalError: 500,
 };
+
+export const ROUTES = {
+	signIn: '/api/sign-in',
+	signUp: '/api/sign-up',
+	logout: '/api/logout',
+	users: '/api/users',
+	stack: '/api/stack',
+	priorities: '/api/priorities',
+};
