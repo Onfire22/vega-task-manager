@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.less';
 import { CustomForm } from '../../../../ui/custom-form';
 import { Link } from 'react-router-dom';
-import { Button, TextInput } from '@mantine/core';
+import { Button, PasswordInput, TextInput } from '@mantine/core';
 import Lock from '../../../../assets/icons/lock.svg?react';
 import At from '../../../../assets/icons/at.svg?react';
 
@@ -40,7 +40,7 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 					/>
 				</div>
 				<div className="signin-form__input">
-					<TextInput
+					<PasswordInput
 						id="password"
 						type="password"
 						label="Пароль"

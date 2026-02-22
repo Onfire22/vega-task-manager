@@ -7,6 +7,7 @@ import { useSignUpUserMutation } from '../../../../api/auth/api.ts';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';
+import { LoadingOverlay } from '@mantine/core';
 
 const SignUpForm = () => {
 	const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SignUpForm = () => {
 
 	const [isPopoverOpened, setPopoverOpened] = useState(false);
 
-	const [signUpUser] = useSignUpUserMutation();
+	const [signUpUser, { isLoading }] = useSignUpUserMutation();
 
 	useEffect(() => {
 		if (emailRef?.current) {
@@ -71,18 +72,21 @@ const SignUpForm = () => {
 	}, [formik.values.password]);
 
 	return (
-		<SignUpFormView
-			formValues={formik.values}
-			formErrors={formik.errors}
-			isPopoverOpened={isPopoverOpened}
-			popoverData={popoverData}
-			passwordRef={passwordRef}
-			emailRef={emailRef}
-			onFieldChange={handleFieldChange}
-			onFormSubmit={formik.handleSubmit}
-			onPopoverOpened={handlePopoverOpened}
-			onGeneratePasswordClick={handleGeneratePasswordClick}
-		/>
+		<>
+			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+			<SignUpFormView
+				formValues={formik.values}
+				formErrors={formik.errors}
+				isPopoverOpened={isPopoverOpened}
+				popoverData={popoverData}
+				passwordRef={passwordRef}
+				emailRef={emailRef}
+				onFieldChange={handleFieldChange}
+				onFormSubmit={formik.handleSubmit}
+				onPopoverOpened={handlePopoverOpened}
+				onGeneratePasswordClick={handleGeneratePasswordClick}
+			/>
+		</>
 	);
 };
 

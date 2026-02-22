@@ -6,13 +6,14 @@ import { SignUpValidationSchema } from '../validation.ts';
 import { useSignInUserMutation } from '../../../api/auth/api.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../constants.ts';
+import { LoadingOverlay } from '@mantine/core';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
 
 	const navigate = useNavigate();
 
-	const [signInUser] = useSignInUserMutation();
+	const [signInUser, { isLoading }] = useSignInUserMutation();
 
 	useEffect(() => {
 		if (loginRef?.current) {
@@ -39,13 +40,16 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<SignInFormView
-			formValues={formik.values}
-			formErrors={formik.errors}
-			loginRef={loginRef}
-			onFieldChange={handleFieldChange}
-			onFormSubmit={formik.handleSubmit}
-		/>
+		<>
+			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+			<SignInFormView
+				formValues={formik.values}
+				formErrors={formik.errors}
+				loginRef={loginRef}
+				onFieldChange={handleFieldChange}
+				onFormSubmit={formik.handleSubmit}
+			/>
+		</>
 	);
 };
 

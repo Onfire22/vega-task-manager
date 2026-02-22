@@ -41,7 +41,14 @@ export const authApi = createApi({
 			}),
 			providesTags: ['CurrentUser'],
 		}),
+		logOutUser: builder.mutation<{ success: boolean }, void>({
+			query: () => ({
+				url: ROUTES.logout,
+				method: METHODS.post,
+			}),
+			invalidatesTags: ['CurrentUser'],
+		}),
 	}),
 });
 
-export const { useSignUpUserMutation, useSignInUserMutation, useGetCurrentUserQuery } = authApi;
+export const { useSignUpUserMutation, useSignInUserMutation, useLogOutUserMutation, useGetCurrentUserQuery } = authApi;

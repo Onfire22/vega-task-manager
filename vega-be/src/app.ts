@@ -5,6 +5,7 @@ import { router } from './router';
 import { authRouter } from './auth/auth.router';
 import { authMiddleware } from './auth/auth.middleware';
 import cors from 'cors';
+import { errorMiddleware } from './errors/middleware';
 
 const port = process.env.PORT;
 
@@ -26,6 +27,8 @@ app.use(authRouter);
 app.use(authMiddleware);
 
 app.use(router);
+
+app.use(errorMiddleware);
 
 const main = async () => {
 	try {

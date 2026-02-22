@@ -15,5 +15,6 @@ export const DEFAULT_HEADERS = {
 export const ROUTES = {
 	signUp: '/sign-up',
 	signIn: '/sign-in',
+	logout: '/logout',
 	currentUser: '/users/current',
 };
