@@ -389,6 +389,7 @@ export const ModelName = {
   TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
   Roles: 'Roles',
+  Stack: 'Stack',
   Task: 'Task',
   TaskStatuses: 'TaskStatuses',
   User: 'User'
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "membership" | "taskPriotiry" | "projects" | "roles" | "task" | "taskStatuses" | "user"
+    modelProps: "comment" | "membership" | "taskPriotiry" | "projects" | "roles" | "stack" | "task" | "taskStatuses" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -781,6 +782,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Stack: {
+      payload: Prisma.$StackPayload<ExtArgs>
+      fields: Prisma.StackFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StackFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StackFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        findFirst: {
+          args: Prisma.StackFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StackFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        findMany: {
+          args: Prisma.StackFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
+        }
+        create: {
+          args: Prisma.StackCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        createMany: {
+          args: Prisma.StackCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StackCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
+        }
+        delete: {
+          args: Prisma.StackDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        update: {
+          args: Prisma.StackUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        deleteMany: {
+          args: Prisma.StackDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StackUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StackUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
+        }
+        upsert: {
+          args: Prisma.StackUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
+        }
+        aggregate: {
+          args: Prisma.StackAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStack>
+        }
+        groupBy: {
+          args: Prisma.StackGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StackGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StackCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StackCountAggregateOutputType> | number
+        }
+      }
+    }
     Task: {
       payload: Prisma.$TaskPayload<ExtArgs>
       fields: Prisma.TaskFieldRefs
@@ -1093,6 +1168,16 @@ export const RolesScalarFieldEnum = {
 export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
 
 
+export const StackScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StackScalarFieldEnum = (typeof StackScalarFieldEnum)[keyof typeof StackScalarFieldEnum]
+
+
 export const TaskScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -1105,6 +1190,7 @@ export const TaskScalarFieldEnum = {
   projectUuid: 'projectUuid',
   priorityUuid: 'priorityUuid',
   sratusUuid: 'sratusUuid',
+  stackUuid: 'stackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1126,6 +1212,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
+  stackUuid: 'stackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1318,6 +1405,7 @@ export type GlobalOmitConfig = {
   taskPriotiry?: Prisma.TaskPriotiryOmit
   projects?: Prisma.ProjectsOmit
   roles?: Prisma.RolesOmit
+  stack?: Prisma.StackOmit
   task?: Prisma.TaskOmit
   taskStatuses?: Prisma.TaskStatusesOmit
   user?: Prisma.UserOmit

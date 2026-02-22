@@ -56,6 +56,7 @@ export const ModelName = {
   TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
   Roles: 'Roles',
+  Stack: 'Stack',
   Task: 'Task',
   TaskStatuses: 'TaskStatuses',
   User: 'User'
@@ -128,6 +129,16 @@ export const RolesScalarFieldEnum = {
 export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
 
 
+export const StackScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StackScalarFieldEnum = (typeof StackScalarFieldEnum)[keyof typeof StackScalarFieldEnum]
+
+
 export const TaskScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -140,6 +151,7 @@ export const TaskScalarFieldEnum = {
   projectUuid: 'projectUuid',
   priorityUuid: 'priorityUuid',
   sratusUuid: 'sratusUuid',
+  stackUuid: 'stackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -161,6 +173,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
+  stackUuid: 'stackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

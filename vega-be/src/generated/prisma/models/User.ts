@@ -30,6 +30,7 @@ export type UserMinAggregateOutputType = {
   secondName: string | null
   email: string | null
   password: string | null
+  stackUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +41,7 @@ export type UserMaxAggregateOutputType = {
   secondName: string | null
   email: string | null
   password: string | null
+  stackUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +52,7 @@ export type UserCountAggregateOutputType = {
   secondName: number
   email: number
   password: number
+  stackUuid: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -62,6 +65,7 @@ export type UserMinAggregateInputType = {
   secondName?: true
   email?: true
   password?: true
+  stackUuid?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -72,6 +76,7 @@ export type UserMaxAggregateInputType = {
   secondName?: true
   email?: true
   password?: true
+  stackUuid?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +87,7 @@ export type UserCountAggregateInputType = {
   secondName?: true
   email?: true
   password?: true
+  stackUuid?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +171,7 @@ export type UserGroupByOutputType = {
   secondName: string | null
   email: string
   password: string
+  stackUuid: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -196,8 +203,10 @@ export type UserWhereInput = {
   secondName?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  stackUuid?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  stack?: Prisma.XOR<Prisma.StackNullableScalarRelationFilter, Prisma.StackWhereInput> | null
   assignedTasks?: Prisma.TaskListRelationFilter
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
@@ -210,8 +219,10 @@ export type UserOrderByWithRelationInput = {
   secondName?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  stackUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  stack?: Prisma.StackOrderByWithRelationInput
   assignedTasks?: Prisma.TaskOrderByRelationAggregateInput
   reportedTasks?: Prisma.TaskOrderByRelationAggregateInput
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
@@ -227,8 +238,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   secondName?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
+  stackUuid?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  stack?: Prisma.XOR<Prisma.StackNullableScalarRelationFilter, Prisma.StackWhereInput> | null
   assignedTasks?: Prisma.TaskListRelationFilter
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
@@ -241,6 +254,7 @@ export type UserOrderByWithAggregationInput = {
   secondName?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  stackUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -257,6 +271,7 @@ export type UserScalarWhereWithAggregatesInput = {
   secondName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  stackUuid?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -269,6 +284,7 @@ export type UserCreateInput = {
   password: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stack?: Prisma.StackCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -281,6 +297,7 @@ export type UserUncheckedCreateInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -297,6 +314,7 @@ export type UserUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stack?: Prisma.StackUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -309,6 +327,7 @@ export type UserUncheckedUpdateInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -323,6 +342,7 @@ export type UserCreateManyInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -343,6 +363,7 @@ export type UserUncheckedUpdateManyInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -352,12 +373,23 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   secondName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  stackUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -368,6 +400,7 @@ export type UserMaxOrderByAggregateInput = {
   secondName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  stackUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -378,6 +411,7 @@ export type UserMinOrderByAggregateInput = {
   secondName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  stackUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -408,6 +442,48 @@ export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutMembershipsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMembershipsInput, Prisma.UserUpdateWithoutMembershipsInput>, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
+}
+
+export type UserCreateNestedManyWithoutStackInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput> | Prisma.UserCreateWithoutStackInput[] | Prisma.UserUncheckedCreateWithoutStackInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStackInput | Prisma.UserCreateOrConnectWithoutStackInput[]
+  createMany?: Prisma.UserCreateManyStackInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutStackInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput> | Prisma.UserCreateWithoutStackInput[] | Prisma.UserUncheckedCreateWithoutStackInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStackInput | Prisma.UserCreateOrConnectWithoutStackInput[]
+  createMany?: Prisma.UserCreateManyStackInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutStackNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput> | Prisma.UserCreateWithoutStackInput[] | Prisma.UserUncheckedCreateWithoutStackInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStackInput | Prisma.UserCreateOrConnectWithoutStackInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutStackInput | Prisma.UserUpsertWithWhereUniqueWithoutStackInput[]
+  createMany?: Prisma.UserCreateManyStackInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutStackInput | Prisma.UserUpdateWithWhereUniqueWithoutStackInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutStackInput | Prisma.UserUpdateManyWithWhereWithoutStackInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutStackNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput> | Prisma.UserCreateWithoutStackInput[] | Prisma.UserUncheckedCreateWithoutStackInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStackInput | Prisma.UserCreateOrConnectWithoutStackInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutStackInput | Prisma.UserUpsertWithWhereUniqueWithoutStackInput[]
+  createMany?: Prisma.UserCreateManyStackInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutStackInput | Prisma.UserUpdateWithWhereUniqueWithoutStackInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutStackInput | Prisma.UserUpdateManyWithWhereWithoutStackInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutAssignedTasksInput = {
@@ -446,6 +522,7 @@ export type UserCreateWithoutCommentsInput = {
   password: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stack?: Prisma.StackCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -457,6 +534,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -488,6 +566,7 @@ export type UserUpdateWithoutCommentsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stack?: Prisma.StackUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -499,6 +578,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
@@ -514,6 +594,7 @@ export type UserCreateWithoutMembershipsInput = {
   password: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stack?: Prisma.StackCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -525,6 +606,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -556,6 +638,7 @@ export type UserUpdateWithoutMembershipsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stack?: Prisma.StackUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -567,11 +650,80 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutStackInput = {
+  id?: string
+  name: string
+  secondName?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutStackInput = {
+  id?: string
+  name: string
+  secondName?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutStackInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput>
+}
+
+export type UserCreateManyStackInputEnvelope = {
+  data: Prisma.UserCreateManyStackInput | Prisma.UserCreateManyStackInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutStackInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStackInput, Prisma.UserUncheckedUpdateWithoutStackInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStackInput, Prisma.UserUncheckedCreateWithoutStackInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutStackInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStackInput, Prisma.UserUncheckedUpdateWithoutStackInput>
+}
+
+export type UserUpdateManyWithWhereWithoutStackInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutStackInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringFilter<"User"> | string
+  secondName?: Prisma.StringNullableFilter<"User"> | string | null
+  email?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
+  stackUuid?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -582,6 +734,7 @@ export type UserCreateWithoutAssignedTasksInput = {
   password: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stack?: Prisma.StackCreateNestedOneWithoutUsersInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -593,6 +746,7 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
@@ -613,6 +767,7 @@ export type UserCreateWithoutReportedTasksInput = {
   password: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stack?: Prisma.StackCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -624,6 +779,7 @@ export type UserUncheckedCreateWithoutReportedTasksInput = {
   secondName?: string | null
   email: string
   password: string
+  stackUuid?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
@@ -655,6 +811,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stack?: Prisma.StackUpdateOneWithoutUsersNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -666,6 +823,7 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
@@ -692,6 +850,7 @@ export type UserUpdateWithoutReportedTasksInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stack?: Prisma.StackUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -703,11 +862,60 @@ export type UserUncheckedUpdateWithoutReportedTasksInput = {
   secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  stackUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateManyStackInput = {
+  id?: string
+  name: string
+  secondName?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutStackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutStackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -774,8 +982,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   secondName?: boolean
   email?: boolean
   password?: boolean
+  stackUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
@@ -789,8 +999,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   secondName?: boolean
   email?: boolean
   password?: boolean
+  stackUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -799,8 +1011,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   secondName?: boolean
   email?: boolean
   password?: boolean
+  stackUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -809,24 +1023,31 @@ export type UserSelectScalar = {
   secondName?: boolean
   email?: boolean
   password?: boolean
+  stackUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "secondName" | "email" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "secondName" | "email" | "password" | "stackUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stack?: boolean | Prisma.User$stackArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    stack: Prisma.$StackPayload<ExtArgs> | null
     assignedTasks: Prisma.$TaskPayload<ExtArgs>[]
     reportedTasks: Prisma.$TaskPayload<ExtArgs>[]
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
@@ -838,6 +1059,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     secondName: string | null
     email: string
     password: string
+    stackUuid: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1234,6 +1456,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  stack<T extends Prisma.User$stackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stackArgs<ExtArgs>>): Prisma.Prisma__StackClient<runtime.Types.Result.GetResult<Prisma.$StackPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportedTasks<T extends Prisma.User$reportedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1272,6 +1495,7 @@ export interface UserFieldRefs {
   readonly secondName: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly stackUuid: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1523,6 +1747,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1593,6 +1821,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1659,6 +1891,25 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.stack
+ */
+export type User$stackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Stack
+   */
+  select?: Prisma.StackSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Stack
+   */
+  omit?: Prisma.StackOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StackInclude<ExtArgs> | null
+  where?: Prisma.StackWhereInput
 }
 
 /**

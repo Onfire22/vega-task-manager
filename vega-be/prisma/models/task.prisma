@@ -16,6 +16,8 @@ model Task {
   priority      TaskPriotiry @relation(fields: [priorityUuid], references: [id])
   sratusUuid    String       @map("sratus_uuid")
   status        TaskStatuses @relation(fields: [sratusUuid], references: [id])
+  stackUuid     String       @map("satck_uuid")
+  satck         Stack        @relation(fields: [stackUuid], references: [id])
   comments      Comment[]
 
   createdAt DateTime @default(now()) @map("created_at")
