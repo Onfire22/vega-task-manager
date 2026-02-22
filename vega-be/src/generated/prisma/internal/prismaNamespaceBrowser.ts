@@ -150,7 +150,7 @@ export const TaskScalarFieldEnum = {
   reporterUuid: 'reporterUuid',
   projectUuid: 'projectUuid',
   priorityUuid: 'priorityUuid',
-  sratusUuid: 'sratusUuid',
+  statusUuid: 'statusUuid',
   stackUuid: 'stackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

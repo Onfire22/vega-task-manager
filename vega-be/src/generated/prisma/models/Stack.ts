@@ -225,7 +225,7 @@ export type StackCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutStackInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutSatckInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutStackInput
 }
 
 export type StackUncheckedCreateInput = {
@@ -234,7 +234,7 @@ export type StackUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutStackInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutSatckInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStackInput
 }
 
 export type StackUpdateInput = {
@@ -243,7 +243,7 @@ export type StackUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutStackNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutSatckNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutStackNestedInput
 }
 
 export type StackUncheckedUpdateInput = {
@@ -252,7 +252,7 @@ export type StackUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutStackNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutSatckNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutStackNestedInput
 }
 
 export type StackCreateManyInput = {
@@ -390,7 +390,7 @@ export type StackCreateWithoutUsersInput = {
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  tasks?: Prisma.TaskCreateNestedManyWithoutSatckInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutStackInput
 }
 
 export type StackUncheckedCreateWithoutUsersInput = {
@@ -398,7 +398,7 @@ export type StackUncheckedCreateWithoutUsersInput = {
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutSatckInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStackInput
 }
 
 export type StackCreateOrConnectWithoutUsersInput = {
@@ -422,7 +422,7 @@ export type StackUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tasks?: Prisma.TaskUpdateManyWithoutSatckNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutStackNestedInput
 }
 
 export type StackUncheckedUpdateWithoutUsersInput = {
@@ -430,7 +430,7 @@ export type StackUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutSatckNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutStackNestedInput
 }
 
 

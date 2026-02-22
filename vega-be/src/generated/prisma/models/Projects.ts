@@ -324,6 +324,11 @@ export type ProjectsMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type ProjectsNullableScalarRelationFilter = {
+  is?: Prisma.ProjectsWhereInput | null
+  isNot?: Prisma.ProjectsWhereInput | null
+}
+
 export type ProjectsCreateNestedOneWithoutMembershipsInput = {
   create?: Prisma.XOR<Prisma.ProjectsCreateWithoutMembershipsInput, Prisma.ProjectsUncheckedCreateWithoutMembershipsInput>
   connectOrCreate?: Prisma.ProjectsCreateOrConnectWithoutMembershipsInput
@@ -344,10 +349,12 @@ export type ProjectsCreateNestedOneWithoutTasksInput = {
   connect?: Prisma.ProjectsWhereUniqueInput
 }
 
-export type ProjectsUpdateOneRequiredWithoutTasksNestedInput = {
+export type ProjectsUpdateOneWithoutTasksNestedInput = {
   create?: Prisma.XOR<Prisma.ProjectsCreateWithoutTasksInput, Prisma.ProjectsUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.ProjectsCreateOrConnectWithoutTasksInput
   upsert?: Prisma.ProjectsUpsertWithoutTasksInput
+  disconnect?: Prisma.ProjectsWhereInput | boolean
+  delete?: Prisma.ProjectsWhereInput | boolean
   connect?: Prisma.ProjectsWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectsUpdateToOneWithWhereWithoutTasksInput, Prisma.ProjectsUpdateWithoutTasksInput>, Prisma.ProjectsUncheckedUpdateWithoutTasksInput>
 }
