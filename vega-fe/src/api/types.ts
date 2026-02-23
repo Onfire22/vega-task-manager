@@ -29,3 +29,25 @@ export interface IServerResponse<T> {
 	success: boolean;
 	payload: T[];
 }
+
+export interface ICreateTask {
+	title: string;
+	description: string;
+	priorityUuid: string;
+	stackUuid: string;
+}
+
+export interface ICreateTaskResponse extends ICreateTask {
+	id: string;
+	code: string | null;
+	estimatedTime: string | null;
+	loggedTime: string | null;
+	assigneeUuid: string | null;
+	reporterUuid: string;
+	projectUuid: string | null;
+	priorityUuid: string;
+	statusUuid: string;
+	stackUuid: string;
+	createdAt: Date;
+	updatedAt: Date;
+}

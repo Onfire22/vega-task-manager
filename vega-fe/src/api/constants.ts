@@ -15,4 +15,5 @@ export const ROUTES = {
 	currentUser: '/api/users/current',
 	priorities: '/api/priorities',
 	stack: '/api/stack',
+	createTask: '/api/tasks/create',
 };
