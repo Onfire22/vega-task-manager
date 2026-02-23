@@ -2,7 +2,7 @@ import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
 import type { IBaseDictionary, IDictionaryItem, IServerResponse, IStack } from '../types.ts';
 
-const dictionariesApi = baseApi.injectEndpoints({
+export const dictionariesApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getTaskPriorities: builder.query<{ success: boolean; payload: IDictionaryItem[] }, void>({
 			query: () => ({
@@ -18,6 +18,7 @@ const dictionariesApi = baseApi.injectEndpoints({
 					})),
 				};
 			},
+			keepUnusedDataFor: Infinity,
 		}),
 		getStackList: builder.query<{ success: boolean; payload: IDictionaryItem[] }, void>({
 			query: () => ({
@@ -34,8 +35,16 @@ const dictionariesApi = baseApi.injectEndpoints({
 					})),
 				};
 			},
+			keepUnusedDataFor: Infinity,
+		}),
+		getTaskStatuses: builder.query<{ success: boolean; payload: IDictionaryItem[] }, void>({
+			query: () => ({
+				url: ROUTES.taskStatuses,
+				method: METHODS.get,
+			}),
+			keepUnusedDataFor: Infinity,
 		}),
 	}),
 });
 
-export const { useGetStackListQuery, useGetTaskPrioritiesQuery } = dictionariesApi;
+export const { useGetStackListQuery, useGetTaskPrioritiesQuery, useGetTaskStatusesQuery } = dictionariesApi;

@@ -14,6 +14,7 @@ export const ROUTES = {
 	logout: '/api/logout',
 	currentUser: '/api/users/current',
 	priorities: '/api/priorities',
+	taskStatuses: '/api/statuses',
 	stack: '/api/stack',
 	createTask: '/api/tasks/create',
 	getTasks: '/api/tasks/userTasks',

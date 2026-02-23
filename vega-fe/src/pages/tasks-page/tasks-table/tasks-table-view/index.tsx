@@ -1,16 +1,46 @@
 import './styles.less';
 import { TableControls } from '../../table-controls';
-import type { TActiveTab } from '../../types.ts';
+import type { ITask, TActiveTab } from '../../types.ts';
 import React from 'react';
+import { Table } from '@mantine/core';
+import { CustomTableHeaderCell } from '../../custom-table-header-cell/';
+import { TABLE_HEADER } from '../../table-header.ts';
 
 interface IProps {
 	activeTab: TActiveTab;
+	tableData: ITask[];
 }
 
-const TasksTableView: React.FC<IProps> = ({ activeTab }) => {
+const TasksTableView: React.FC<IProps> = ({ activeTab, tableData }) => {
 	return (
 		<div className="tasks-table">
 			<TableControls activeTab={activeTab} />
+			<Table highlightOnHover withTableBorder withColumnBorders>
+				<Table.Thead>
+					<Table.Tr>
+						{TABLE_HEADER.map((item) => {
+							return (
+								<Table.Th key={item.id}>
+									<CustomTableHeaderCell column={item} />
+								</Table.Th>
+							);
+						})}
+					</Table.Tr>
+				</Table.Thead>
+				{!tableData.length && <Table.Caption>Задач нет</Table.Caption>}
+				<Table.Tbody>
+					{tableData.map((task) => {
+						return (
+							<Table.Tr key={task.id}>
+								{TABLE_HEADER.map((item) => {
+									const key = item.id as keyof ITask;
+									return <Table.Td key={item.id}>{task[key]}</Table.Td>;
+								})}
+							</Table.Tr>
+						);
+					})}
+				</Table.Tbody>
+			</Table>
 		</div>
 	);
 };

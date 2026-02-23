@@ -12,3 +12,5 @@ export const TEAL_COLOR = '#12b886';
 export const YELLOW_COLOR = '#fab005';
 
 export const BLUE_COLOR = '#0369ff';
+
+export const DATE_FORMAT = 'dd.MM.yyyy';

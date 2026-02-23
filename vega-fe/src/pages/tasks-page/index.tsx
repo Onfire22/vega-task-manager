@@ -3,11 +3,19 @@ import { PageContentWrapper } from '../../components/page-content-wrapper/page-c
 import { CustomMenu } from './custom-menu';
 import { CreateTaskModal } from './create-task-modal';
 import { TasksTable } from './tasks-table';
-import { useGetStackListQuery, useGetTaskPrioritiesQuery } from '../../api/queries/dictionaries.api.ts';
+import { useAppSelector } from '../../store/hooks.ts';
+import { getPrioritiesResultSelector, getStackListResultSelector } from './selectors.ts';
+import { useGetDictionariesHook } from '../../api/hooks.ts';
 
 const TasksPage = () => {
-	const { data: taskPrioritiesData } = useGetTaskPrioritiesQuery();
-	const { data: stackListData } = useGetStackListQuery();
+	useGetDictionariesHook({
+		refetchOnMountOrArgChange: false,
+		refetchOnFocus: false,
+		refetchOnReconnect: false,
+	});
+
+	const stackListData = useAppSelector(getStackListResultSelector());
+	const taskPrioritiesData = useAppSelector(getPrioritiesResultSelector());
 
 	return (
 		<>
@@ -15,8 +23,8 @@ const TasksPage = () => {
 			<PageContentWrapper offset={56}>
 				<TasksTable />
 				<CreateTaskModal
-					taskPrioritiesData={taskPrioritiesData?.payload}
-					stackListData={stackListData?.payload}
+					taskPrioritiesData={taskPrioritiesData?.data?.payload}
+					stackListData={stackListData?.data?.payload}
 				/>
 			</PageContentWrapper>
 		</>

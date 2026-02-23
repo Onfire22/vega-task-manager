@@ -13,11 +13,11 @@ export interface ISignInUserData {
 export interface IBaseDictionary {
 	id: string;
 	name: string;
+	color: string;
 }
 
 export interface IStack extends IBaseDictionary {
 	fullName: string;
-	color: string;
 }
 
 export interface IDictionaryItem {
@@ -46,6 +46,12 @@ export interface ITask extends ICreateTask {
 	reporterUuid: string;
 	projectUuid: string | null;
 	statusUuid: string;
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface IRequestOptions {
+	refetchOnMountOrArgChange: boolean;
+	refetchOnFocus: boolean;
+	refetchOnReconnect: boolean;
 }
