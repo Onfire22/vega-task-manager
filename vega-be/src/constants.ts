@@ -19,4 +19,5 @@ export const ROUTES = {
 	priorities: '/api/priorities',
 	tasks: '/api/tasks',
 	createTask: '/create',
+	getTasks: '/userTasks',
 };

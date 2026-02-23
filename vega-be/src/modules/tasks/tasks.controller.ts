@@ -30,3 +30,21 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };
+
+export const getUserTasks = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const userId = res.locals.user.id;
+		const filters = req.body;
+
+		const taskFilter = filters.withAssignee ? 'assigneeUuid' : 'reporterUuid';
+		console.log(taskFilter);
+
+		const tasks = await prismaAppClient.task.findMany({
+			where: { [taskFilter]: userId },
+		});
+
+		res.status(200).json({ success: true, payload: tasks });
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+	}
+};
