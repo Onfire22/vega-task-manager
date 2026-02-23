@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type Comment = Prisma.CommentModel
 /**
+ * Model Dictionaries
+ * 
+ */
+export type Dictionaries = Prisma.DictionariesModel
+/**
  * Model Membership
  * 
  */

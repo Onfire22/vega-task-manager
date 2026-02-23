@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Comment: 'Comment',
+  Dictionaries: 'Dictionaries',
   Membership: 'Membership',
   TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
@@ -88,6 +89,19 @@ export const CommentScalarFieldEnum = {
 } as const
 
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+export const DictionariesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  fullName: 'fullName',
+  color: 'color',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DictionariesScalarFieldEnum = (typeof DictionariesScalarFieldEnum)[keyof typeof DictionariesScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {

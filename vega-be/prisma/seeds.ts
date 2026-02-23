@@ -6,38 +6,24 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 const makeSeed = async () => {
-	await prisma.roles.createMany({
-		data: [{ name: 'viewer' }, { name: 'member' }, { name: 'owner' }],
-		skipDuplicates: true,
-	});
-
-	await prisma.taskPriotiry.createMany({
+	await prisma.dictionaries.createMany({
 		data: [
-			{ name: 'low', color: '#33FF8D' },
-			{ name: 'medium', color: '#FFD333' },
-			{ name: 'high', color: '#FF5C33' },
-			{ name: 'highest', color: '#FF1212' },
-		],
-		skipDuplicates: true,
-	});
-
-	await prisma.taskStatuses.createMany({
-		data: [
-			{ name: 'todo', color: '#437FFA' },
-			{ name: 'in_progress', color: '#FAAB43' },
-			{ name: 'done', color: '#43FA80' },
-			{ name: 'stopped', color: '#FA4343' },
-		],
-		skipDuplicates: true,
-	});
-
-	await prisma.stack.createMany({
-		data: [
-			{ name: 'FE', fullName: 'frontend', color: '#91F5FF' },
-			{ name: 'BE', fullName: 'backend', color: '#ADFFD6' },
-			{ name: 'FS', fullName: 'fullStack', color: '#D4B1FA' },
-			{ name: 'QA', fullName: 'qualityAssurance', color: '#FDFFB5' },
-			{ name: 'AN', fullName: 'analytics', color: '#FFBCB0' },
+			{ type: 'ROLE_TYPE', name: 'viewer' },
+			{ type: 'ROLE_TYPE', name: 'member' },
+			{ type: 'ROLE_TYPE', name: 'owner' },
+			{ type: 'TASK_PRIORITY', name: 'low', color: '#33FF8D' },
+			{ type: 'TASK_PRIORITY', name: 'medium', color: '#FFD333' },
+			{ type: 'TASK_PRIORITY', name: 'high', color: '#FF5C33' },
+			{ type: 'TASK_PRIORITY', name: 'highest', color: '#FF1212' },
+			{ type: 'TASK_STATUS', name: 'todo', color: '#437FFA' },
+			{ type: 'TASK_STATUS', name: 'in_progress', color: '#FAAB43' },
+			{ type: 'TASK_STATUS', name: 'done', color: '#43FA80' },
+			{ type: 'TASK_STATUS', name: 'stopped', color: '#FA4343' },
+			{ type: 'STACK_TYPE', name: 'FE', fullName: 'Frontend', color: '#91F5FF' },
+			{ type: 'STACK_TYPE', name: 'BE', fullName: 'Backend', color: '#ADFFD6' },
+			{ type: 'STACK_TYPE', name: 'FS', fullName: 'FullStack', color: '#D4B1FA' },
+			{ type: 'STACK_TYPE', name: 'QA', fullName: 'QualityAssurance', color: '#FDFFB5' },
+			{ type: 'STACK_TYPE', name: 'AN', fullName: 'Analytics', color: '#FFBCB0' },
 		],
 		skipDuplicates: true,
 	});

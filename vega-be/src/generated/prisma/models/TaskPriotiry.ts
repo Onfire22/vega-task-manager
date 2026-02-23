@@ -273,10 +273,6 @@ export type TaskPriotiryScalarRelationFilter = {
   isNot?: Prisma.TaskPriotiryWhereInput
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type TaskPriotiryCreateNestedOneWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.TaskPriotiryCreateWithoutTasksInput, Prisma.TaskPriotiryUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.TaskPriotiryCreateOrConnectWithoutTasksInput

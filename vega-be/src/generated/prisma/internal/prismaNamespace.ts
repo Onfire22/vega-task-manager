@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Comment: 'Comment',
+  Dictionaries: 'Dictionaries',
   Membership: 'Membership',
   TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "membership" | "taskPriotiry" | "projects" | "roles" | "stack" | "task" | "taskStatuses" | "user"
+    modelProps: "comment" | "dictionaries" | "membership" | "taskPriotiry" | "projects" | "roles" | "stack" | "task" | "taskStatuses" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -483,6 +484,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CommentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CommentCountAggregateOutputType> | number
+        }
+      }
+    }
+    Dictionaries: {
+      payload: Prisma.$DictionariesPayload<ExtArgs>
+      fields: Prisma.DictionariesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DictionariesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DictionariesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        findFirst: {
+          args: Prisma.DictionariesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DictionariesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        findMany: {
+          args: Prisma.DictionariesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+        }
+        create: {
+          args: Prisma.DictionariesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        createMany: {
+          args: Prisma.DictionariesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DictionariesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+        }
+        delete: {
+          args: Prisma.DictionariesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        update: {
+          args: Prisma.DictionariesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        deleteMany: {
+          args: Prisma.DictionariesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DictionariesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DictionariesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+        }
+        upsert: {
+          args: Prisma.DictionariesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+        }
+        aggregate: {
+          args: Prisma.DictionariesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDictionaries>
+        }
+        groupBy: {
+          args: Prisma.DictionariesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DictionariesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DictionariesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DictionariesCountAggregateOutputType> | number
         }
       }
     }
@@ -1129,6 +1204,19 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
+export const DictionariesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  fullName: 'fullName',
+  color: 'color',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DictionariesScalarFieldEnum = (typeof DictionariesScalarFieldEnum)[keyof typeof DictionariesScalarFieldEnum]
+
+
 export const MembershipScalarFieldEnum = {
   id: 'id',
   userUuid: 'userUuid',
@@ -1281,6 +1369,20 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'Type'
+ */
+export type EnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type'>
+    
+
+
+/**
+ * Reference to a field of type 'Type[]'
+ */
+export type ListEnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1403,6 +1505,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   comment?: Prisma.CommentOmit
+  dictionaries?: Prisma.DictionariesOmit
   membership?: Prisma.MembershipOmit
   taskPriotiry?: Prisma.TaskPriotiryOmit
   projects?: Prisma.ProjectsOmit
