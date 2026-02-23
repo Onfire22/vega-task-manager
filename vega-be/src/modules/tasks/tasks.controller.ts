@@ -8,9 +8,15 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 		const task = req.body;
 		const userId = res.locals.user.id;
 
+		const baseTaskStatusUuid = await prismaAppClient.taskStatuses.findUniqueOrThrow({
+			where: { name: 'todo' },
+			select: { id: true },
+		});
+
 		const data = {
 			...task,
 			reporterUuid: userId,
+			statusUuid: baseTaskStatusUuid.id,
 		};
 
 		const newTask = await prismaAppClient.task.create({ data });
