@@ -1,6 +1,7 @@
 model TaskStatuses {
-  id   String @id @default(uuid())
-  name String @unique
+  id    String  @id @default(uuid())
+  name  String  @unique
+  color String? @unique
 
   tasks Task[]
 

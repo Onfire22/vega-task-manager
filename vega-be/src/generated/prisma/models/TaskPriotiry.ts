@@ -27,16 +27,19 @@ export type AggregateTaskPriotiry = {
 export type TaskPriotiryMinAggregateOutputType = {
   id: string | null
   name: string | null
+  color: string | null
 }
 
 export type TaskPriotiryMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  color: string | null
 }
 
 export type TaskPriotiryCountAggregateOutputType = {
   id: number
   name: number
+  color: number
   _all: number
 }
 
@@ -44,16 +47,19 @@ export type TaskPriotiryCountAggregateOutputType = {
 export type TaskPriotiryMinAggregateInputType = {
   id?: true
   name?: true
+  color?: true
 }
 
 export type TaskPriotiryMaxAggregateInputType = {
   id?: true
   name?: true
+  color?: true
 }
 
 export type TaskPriotiryCountAggregateInputType = {
   id?: true
   name?: true
+  color?: true
   _all?: true
 }
 
@@ -132,6 +138,7 @@ export type TaskPriotiryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type TaskPriotiryGroupByOutputType = {
   id: string
   name: string
+  color: string | null
   _count: TaskPriotiryCountAggregateOutputType | null
   _min: TaskPriotiryMinAggregateOutputType | null
   _max: TaskPriotiryMaxAggregateOutputType | null
@@ -158,27 +165,31 @@ export type TaskPriotiryWhereInput = {
   NOT?: Prisma.TaskPriotiryWhereInput | Prisma.TaskPriotiryWhereInput[]
   id?: Prisma.StringFilter<"TaskPriotiry"> | string
   name?: Prisma.StringFilter<"TaskPriotiry"> | string
+  color?: Prisma.StringNullableFilter<"TaskPriotiry"> | string | null
   tasks?: Prisma.TaskListRelationFilter
 }
 
 export type TaskPriotiryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
   tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type TaskPriotiryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   name?: string
+  color?: string
   AND?: Prisma.TaskPriotiryWhereInput | Prisma.TaskPriotiryWhereInput[]
   OR?: Prisma.TaskPriotiryWhereInput[]
   NOT?: Prisma.TaskPriotiryWhereInput | Prisma.TaskPriotiryWhereInput[]
   tasks?: Prisma.TaskListRelationFilter
-}, "id" | "name">
+}, "id" | "name" | "color">
 
 export type TaskPriotiryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TaskPriotiryCountOrderByAggregateInput
   _max?: Prisma.TaskPriotiryMaxOrderByAggregateInput
   _min?: Prisma.TaskPriotiryMinOrderByAggregateInput
@@ -190,65 +201,80 @@ export type TaskPriotiryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TaskPriotiryScalarWhereWithAggregatesInput | Prisma.TaskPriotiryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TaskPriotiry"> | string
   name?: Prisma.StringWithAggregatesFilter<"TaskPriotiry"> | string
+  color?: Prisma.StringNullableWithAggregatesFilter<"TaskPriotiry"> | string | null
 }
 
 export type TaskPriotiryCreateInput = {
   id?: string
   name: string
+  color?: string | null
   tasks?: Prisma.TaskCreateNestedManyWithoutPriorityInput
 }
 
 export type TaskPriotiryUncheckedCreateInput = {
   id?: string
   name: string
+  color?: string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutPriorityInput
 }
 
 export type TaskPriotiryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tasks?: Prisma.TaskUpdateManyWithoutPriorityNestedInput
 }
 
 export type TaskPriotiryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutPriorityNestedInput
 }
 
 export type TaskPriotiryCreateManyInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskPriotiryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskPriotiryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskPriotiryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskPriotiryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskPriotiryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskPriotiryScalarRelationFilter = {
   is?: Prisma.TaskPriotiryWhereInput
   isNot?: Prisma.TaskPriotiryWhereInput
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type TaskPriotiryCreateNestedOneWithoutTasksInput = {
@@ -268,11 +294,13 @@ export type TaskPriotiryUpdateOneRequiredWithoutTasksNestedInput = {
 export type TaskPriotiryCreateWithoutTasksInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskPriotiryUncheckedCreateWithoutTasksInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskPriotiryCreateOrConnectWithoutTasksInput = {
@@ -294,11 +322,13 @@ export type TaskPriotiryUpdateToOneWithWhereWithoutTasksInput = {
 export type TaskPriotiryUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskPriotiryUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -335,6 +365,7 @@ export type TaskPriotiryCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Ty
 export type TaskPriotirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
   tasks?: boolean | Prisma.TaskPriotiry$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.TaskPriotiryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskPriotiry"]>
@@ -342,19 +373,22 @@ export type TaskPriotirySelect<ExtArgs extends runtime.Types.Extensions.Internal
 export type TaskPriotirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
 }, ExtArgs["result"]["taskPriotiry"]>
 
 export type TaskPriotirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
 }, ExtArgs["result"]["taskPriotiry"]>
 
 export type TaskPriotirySelectScalar = {
   id?: boolean
   name?: boolean
+  color?: boolean
 }
 
-export type TaskPriotiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["taskPriotiry"]>
+export type TaskPriotiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "color", ExtArgs["result"]["taskPriotiry"]>
 export type TaskPriotiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | Prisma.TaskPriotiry$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.TaskPriotiryCountOutputTypeDefaultArgs<ExtArgs>
@@ -370,6 +404,7 @@ export type $TaskPriotiryPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    color: string | null
   }, ExtArgs["result"]["taskPriotiry"]>
   composites: {}
 }
@@ -796,6 +831,7 @@ export interface Prisma__TaskPriotiryClient<T, Null = never, ExtArgs extends run
 export interface TaskPriotiryFieldRefs {
   readonly id: Prisma.FieldRef<"TaskPriotiry", 'String'>
   readonly name: Prisma.FieldRef<"TaskPriotiry", 'String'>
+  readonly color: Prisma.FieldRef<"TaskPriotiry", 'String'>
 }
     
 

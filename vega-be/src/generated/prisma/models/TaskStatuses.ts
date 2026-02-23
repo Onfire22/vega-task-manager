@@ -27,16 +27,19 @@ export type AggregateTaskStatuses = {
 export type TaskStatusesMinAggregateOutputType = {
   id: string | null
   name: string | null
+  color: string | null
 }
 
 export type TaskStatusesMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  color: string | null
 }
 
 export type TaskStatusesCountAggregateOutputType = {
   id: number
   name: number
+  color: number
   _all: number
 }
 
@@ -44,16 +47,19 @@ export type TaskStatusesCountAggregateOutputType = {
 export type TaskStatusesMinAggregateInputType = {
   id?: true
   name?: true
+  color?: true
 }
 
 export type TaskStatusesMaxAggregateInputType = {
   id?: true
   name?: true
+  color?: true
 }
 
 export type TaskStatusesCountAggregateInputType = {
   id?: true
   name?: true
+  color?: true
   _all?: true
 }
 
@@ -132,6 +138,7 @@ export type TaskStatusesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type TaskStatusesGroupByOutputType = {
   id: string
   name: string
+  color: string | null
   _count: TaskStatusesCountAggregateOutputType | null
   _min: TaskStatusesMinAggregateOutputType | null
   _max: TaskStatusesMaxAggregateOutputType | null
@@ -158,27 +165,31 @@ export type TaskStatusesWhereInput = {
   NOT?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
   id?: Prisma.StringFilter<"TaskStatuses"> | string
   name?: Prisma.StringFilter<"TaskStatuses"> | string
+  color?: Prisma.StringNullableFilter<"TaskStatuses"> | string | null
   tasks?: Prisma.TaskListRelationFilter
 }
 
 export type TaskStatusesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
   tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type TaskStatusesWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   name?: string
+  color?: string
   AND?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
   OR?: Prisma.TaskStatusesWhereInput[]
   NOT?: Prisma.TaskStatusesWhereInput | Prisma.TaskStatusesWhereInput[]
   tasks?: Prisma.TaskListRelationFilter
-}, "id" | "name">
+}, "id" | "name" | "color">
 
 export type TaskStatusesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TaskStatusesCountOrderByAggregateInput
   _max?: Prisma.TaskStatusesMaxOrderByAggregateInput
   _min?: Prisma.TaskStatusesMinOrderByAggregateInput
@@ -190,45 +201,53 @@ export type TaskStatusesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TaskStatusesScalarWhereWithAggregatesInput | Prisma.TaskStatusesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TaskStatuses"> | string
   name?: Prisma.StringWithAggregatesFilter<"TaskStatuses"> | string
+  color?: Prisma.StringNullableWithAggregatesFilter<"TaskStatuses"> | string | null
 }
 
 export type TaskStatusesCreateInput = {
   id?: string
   name: string
+  color?: string | null
   tasks?: Prisma.TaskCreateNestedManyWithoutStatusInput
 }
 
 export type TaskStatusesUncheckedCreateInput = {
   id?: string
   name: string
+  color?: string | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutStatusInput
 }
 
 export type TaskStatusesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tasks?: Prisma.TaskUpdateManyWithoutStatusNestedInput
 }
 
 export type TaskStatusesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutStatusNestedInput
 }
 
 export type TaskStatusesCreateManyInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskStatusesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskStatusesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskStatusesScalarRelationFilter = {
@@ -239,16 +258,19 @@ export type TaskStatusesScalarRelationFilter = {
 export type TaskStatusesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskStatusesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskStatusesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
 }
 
 export type TaskStatusesCreateNestedOneWithoutTasksInput = {
@@ -268,11 +290,13 @@ export type TaskStatusesUpdateOneRequiredWithoutTasksNestedInput = {
 export type TaskStatusesCreateWithoutTasksInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskStatusesUncheckedCreateWithoutTasksInput = {
   id?: string
   name: string
+  color?: string | null
 }
 
 export type TaskStatusesCreateOrConnectWithoutTasksInput = {
@@ -294,11 +318,13 @@ export type TaskStatusesUpdateToOneWithWhereWithoutTasksInput = {
 export type TaskStatusesUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TaskStatusesUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -335,6 +361,7 @@ export type TaskStatusesCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Ty
 export type TaskStatusesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
   tasks?: boolean | Prisma.TaskStatuses$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.TaskStatusesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskStatuses"]>
@@ -342,19 +369,22 @@ export type TaskStatusesSelect<ExtArgs extends runtime.Types.Extensions.Internal
 export type TaskStatusesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
 }, ExtArgs["result"]["taskStatuses"]>
 
 export type TaskStatusesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
 }, ExtArgs["result"]["taskStatuses"]>
 
 export type TaskStatusesSelectScalar = {
   id?: boolean
   name?: boolean
+  color?: boolean
 }
 
-export type TaskStatusesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["taskStatuses"]>
+export type TaskStatusesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "color", ExtArgs["result"]["taskStatuses"]>
 export type TaskStatusesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | Prisma.TaskStatuses$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.TaskStatusesCountOutputTypeDefaultArgs<ExtArgs>
@@ -370,6 +400,7 @@ export type $TaskStatusesPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    color: string | null
   }, ExtArgs["result"]["taskStatuses"]>
   composites: {}
 }
@@ -796,6 +827,7 @@ export interface Prisma__TaskStatusesClient<T, Null = never, ExtArgs extends run
 export interface TaskStatusesFieldRefs {
   readonly id: Prisma.FieldRef<"TaskStatuses", 'String'>
   readonly name: Prisma.FieldRef<"TaskStatuses", 'String'>
+  readonly color: Prisma.FieldRef<"TaskStatuses", 'String'>
 }
     
 

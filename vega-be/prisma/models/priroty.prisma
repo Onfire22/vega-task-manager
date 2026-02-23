@@ -1,7 +1,8 @@
 model TaskPriotiry {
-  id String @id @default(uuid())
+  id    String  @id @default(uuid())
+  name  String  @unique
+  color String? @unique
 
-  name  String @unique
   tasks Task[]
 
   @@map("task_priorities")

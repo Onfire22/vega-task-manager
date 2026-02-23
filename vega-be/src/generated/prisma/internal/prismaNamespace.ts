@@ -1143,7 +1143,8 @@ export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof
 
 export const TaskPriotiryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  color: 'color'
 } as const
 
 export type TaskPriotiryScalarFieldEnum = (typeof TaskPriotiryScalarFieldEnum)[keyof typeof TaskPriotiryScalarFieldEnum]
@@ -1200,7 +1201,8 @@ export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof Task
 
 export const TaskStatusesScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  color: 'color'
 } as const
 
 export type TaskStatusesScalarFieldEnum = (typeof TaskStatusesScalarFieldEnum)[keyof typeof TaskStatusesScalarFieldEnum]
