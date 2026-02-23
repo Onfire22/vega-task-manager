@@ -5,6 +5,6 @@ import { createTask, getUserTasks } from './tasks.controller';
 const tasksRouter = Router();
 
 tasksRouter.post(ROUTES.createTask, createTask);
-tasksRouter.post(ROUTES.getTasks, getUserTasks);
+tasksRouter.get(ROUTES.getTasks, getUserTasks);
 
 export { tasksRouter };

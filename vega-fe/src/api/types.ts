@@ -37,7 +37,7 @@ export interface ICreateTask {
 	stackUuid: string;
 }
 
-export interface ICreateTaskResponse extends ICreateTask {
+export interface ITask extends ICreateTask {
 	id: string;
 	code: string | null;
 	estimatedTime: string | null;
@@ -45,9 +45,7 @@ export interface ICreateTaskResponse extends ICreateTask {
 	assigneeUuid: string | null;
 	reporterUuid: string;
 	projectUuid: string | null;
-	priorityUuid: string;
 	statusUuid: string;
-	stackUuid: string;
 	createdAt: Date;
 	updatedAt: Date;
 }

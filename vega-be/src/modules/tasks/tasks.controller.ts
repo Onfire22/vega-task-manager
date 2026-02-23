@@ -34,13 +34,12 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 export const getUserTasks = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const userId = res.locals.user.id;
-		const filters = req.body;
-
-		const taskFilter = filters.withAssignee ? 'assigneeUuid' : 'reporterUuid';
-		console.log(taskFilter);
+		const withAssignee = req.query.withAssignee === 'true';
 
 		const tasks = await prismaAppClient.task.findMany({
-			where: { [taskFilter]: userId },
+			where: {
+				...(withAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
+			},
 		});
 
 		res.status(200).json({ success: true, payload: tasks });
