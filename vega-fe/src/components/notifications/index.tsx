@@ -42,6 +42,7 @@ const Notifications: React.FC<IProps> = ({ children }) => {
 						position: 'absolute',
 						top: '10px',
 						right: 0,
+						zIndex: 9999,
 					}}
 				>
 					{notification.message || null}

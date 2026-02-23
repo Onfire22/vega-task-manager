@@ -27,11 +27,10 @@ const CreateTaskModal: React.FC<IProps> = ({ taskPrioritiesData, stackListData }
 		validationSchema: CreateTaskValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			console.log(values);
 			const response = await createTask(values);
-			console.log(response);
 			if (response?.data?.success) {
 				dispatch(setNotification({ type: 'success', text: 'Задача успешно создана' }));
+				dispatch(setIsModalShown(false));
 			}
 		},
 	});
