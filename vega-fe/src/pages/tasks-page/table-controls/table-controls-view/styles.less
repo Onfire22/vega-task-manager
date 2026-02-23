@@ -1,0 +1,50 @@
+.table-controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 1px;
+		background-color: #ced4da;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+	}
+
+	&__tabs {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__tab {
+		font-size: 16px;
+		border: none;
+		background-color: transparent;
+		cursor: pointer;
+		position: relative;
+		border-bottom: 1px solid transparent;
+		z-index: 2;
+
+		&_active {
+			border-bottom: 1px solid #0369ff;
+		}
+	}
+
+	&__switch {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__toggler {
+		.mantine-Switch-thumb::before {
+			background: var(--before-color) !important;
+		}
+	}
+}

@@ -1,8 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { IInitialState } from './types.ts';
+import type { IInitialState, TActiveTab } from './types.ts';
 
 export const initialState: IInitialState = {
 	isModalShown: false,
+	activeTab: 'table',
 };
 
 const tasksSlice = createSlice({
@@ -12,9 +13,12 @@ const tasksSlice = createSlice({
 		setIsModalShown: (state, action: PayloadAction<boolean>) => {
 			state.isModalShown = action.payload;
 		},
+		setActiveTab: (state, action: PayloadAction<TActiveTab>) => {
+			state.activeTab = action.payload;
+		},
 	},
 });
 
-export const { setIsModalShown } = tasksSlice.actions;
+export const { setIsModalShown, setActiveTab } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

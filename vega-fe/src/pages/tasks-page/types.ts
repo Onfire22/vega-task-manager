@@ -1,10 +1,6 @@
 export interface IInitialState {
 	isModalShown: boolean;
-}
-
-export interface IDictionary {
-	value: string;
-	label: string;
+	activeTab: TActiveTab;
 }
 
 export interface IFormValues {
@@ -15,3 +11,5 @@ export interface IFormValues {
 }
 
 export type IFormErrors = Partial<IFormValues>;
+
+export type TActiveTab = 'table' | 'kanban';
