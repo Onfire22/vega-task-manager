@@ -4,28 +4,25 @@ import { CustomMenu } from './custom-menu';
 import { CreateTaskModal } from './create-task-modal';
 import { TasksTable } from './tasks-table';
 import { useAppSelector } from '../../store/hooks.ts';
-import { getPrioritiesResultSelector, getStackListResultSelector } from './selectors.ts';
-import { useGetDictionariesHook } from '../../api/hooks.ts';
+import { useGetDictionariesQuery } from '../../api/queries/dictionaries.api.ts';
+import { BASE_DICTIONARIES_META } from './constants.ts';
+import { getSelectorsValuesSelector } from './selectors.ts';
 
 const TasksPage = () => {
-	useGetDictionariesHook({
+	useGetDictionariesQuery(BASE_DICTIONARIES_META, {
 		refetchOnMountOrArgChange: false,
 		refetchOnFocus: false,
 		refetchOnReconnect: false,
 	});
 
-	const stackListData = useAppSelector(getStackListResultSelector());
-	const taskPrioritiesData = useAppSelector(getPrioritiesResultSelector());
+	const { priorities, stackTypes } = useAppSelector(getSelectorsValuesSelector());
 
 	return (
 		<>
 			<Header menu={<CustomMenu />} />
 			<PageContentWrapper offset={56}>
 				<TasksTable />
-				<CreateTaskModal
-					taskPrioritiesData={taskPrioritiesData?.data?.payload}
-					stackListData={stackListData?.data?.payload}
-				/>
+				<CreateTaskModal taskPrioritiesData={priorities} stackListData={stackTypes} />
 			</PageContentWrapper>
 		</>
 	);

@@ -16,7 +16,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 		const data = {
 			...task,
 			reporterUuid: userId,
-			statusUuid: baseTaskStatusUuid?.id,
+			taskStatusUuid: baseTaskStatusUuid?.id,
 		};
 
 		const newTask = await prismaAppClient.task.create({ data });

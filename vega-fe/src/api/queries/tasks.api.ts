@@ -10,6 +10,7 @@ export const tasksApi = baseApi.injectEndpoints({
 				method: METHODS.post,
 				body: taskData,
 			}),
+			invalidatesTags: ['Tasks'],
 		}),
 		getTasks: builder.query<{ success: boolean; payload: ITask[] }, { filters: { withAssignee: boolean } }>({
 			query: ({ filters }) => ({
@@ -19,6 +20,7 @@ export const tasksApi = baseApi.injectEndpoints({
 					...filters,
 				},
 			}),
+			providesTags: ['Tasks'],
 		}),
 	}),
 });

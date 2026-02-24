@@ -10,31 +10,16 @@ export interface ISignInUserData {
 	password: string;
 }
 
-export interface IBaseDictionary {
-	id: string;
-	name: string;
-	color: string;
-}
-
-export interface IStack extends IBaseDictionary {
-	fullName: string;
-}
-
 export interface IDictionaryItem {
 	label: string;
 	value: string;
 }
 
-export interface IServerResponse<T> {
-	success: boolean;
-	payload: T[];
-}
-
 export interface ICreateTask {
 	title: string;
 	description: string;
-	priorityUuid: string;
-	stackUuid: string;
+	taskPriorirtyUuid: string;
+	taskStackUuid: string;
 }
 
 export interface ITask extends ICreateTask {
@@ -43,15 +28,25 @@ export interface ITask extends ICreateTask {
 	estimatedTime: string | null;
 	loggedTime: string | null;
 	assigneeUuid: string | null;
-	reporterUuid: string;
+	taskReporterUuid: string;
 	projectUuid: string | null;
-	statusUuid: string;
+	taskStatusUuid: string;
 	createdAt: string;
 	updatedAt: string;
 }
 
-export interface IRequestOptions {
-	refetchOnMountOrArgChange: boolean;
-	refetchOnFocus: boolean;
-	refetchOnReconnect: boolean;
+export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
+
+export interface IDictionary {
+	id: string;
+	name: string;
+	color: string | null;
+	fullName: string | null;
+}
+
+export type TPayload = Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
+
+export interface IDictionariesResponse {
+	success: boolean;
+	payload: TPayload;
 }

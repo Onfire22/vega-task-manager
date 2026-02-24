@@ -59,32 +59,32 @@ const CreateTaskModalView: React.FC<IProps> = ({
 					<Select
 						label="Стек технологий"
 						placeholder="Выберите значение"
-						name="stackUuid"
+						name="taskStackUuid"
 						description="Для какой команды задача"
 						data={stackListData}
-						value={formValues.stackUuid}
+						value={formValues.taskStackUuid}
 						onChange={(value) => {
 							if (value) {
-								onSelectFieldChange('stackUuid', value);
+								onSelectFieldChange('taskStackUuid', value);
 							}
 						}}
-						error={formErrors?.stackUuid}
+						error={formErrors?.taskStackUuid}
 					/>
 				</div>
 				<div className="create-task-modal__field">
 					<Select
 						label="Приоритет задачи"
 						placeholder="Выберите значение"
-						name="priorityUuid"
+						name="taskPriorityUuid"
 						description="Критичность задачи"
 						data={taskPrioritiesData}
-						value={formValues.priorityUuid}
+						value={formValues.taskPriorityUuid}
 						onChange={(value) => {
 							if (value) {
-								onSelectFieldChange('priorityUuid', value);
+								onSelectFieldChange('taskPriorityUuid', value);
 							}
 						}}
-						error={formErrors?.priorityUuid}
+						error={formErrors?.taskPriorityUuid}
 					/>
 				</div>
 				<Button variant="filled" type="submit">

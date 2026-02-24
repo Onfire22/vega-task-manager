@@ -6,8 +6,8 @@ export interface IInitialState {
 export interface IFormValues {
 	title: string;
 	description: string;
-	stackUuid: string;
-	priorityUuid: string;
+	taskStackUuid: string;
+	taskPriorityUuid: string;
 }
 
 export type IFormErrors = Partial<IFormValues>;
@@ -29,4 +29,11 @@ export interface ITask {
 	statusUuid: string;
 	title: string;
 	updatedAt: string;
+}
+
+export interface IDictionary {
+	id: string;
+	name: string;
+	color: string | null;
+	fullName: string | null;
 }
