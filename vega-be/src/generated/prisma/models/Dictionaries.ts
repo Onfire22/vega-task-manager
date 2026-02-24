@@ -198,6 +198,11 @@ export type DictionariesWhereInput = {
   type?: Prisma.EnumTypeFilter<"Dictionaries"> | $Enums.Type
   createdAt?: Prisma.DateTimeFilter<"Dictionaries"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Dictionaries"> | Date | string
+  users?: Prisma.UserListRelationFilter
+  memberships?: Prisma.MembershipListRelationFilter
+  taskPriorities?: Prisma.TaskListRelationFilter
+  taskStatuses?: Prisma.TaskListRelationFilter
+  taskStacks?: Prisma.TaskListRelationFilter
 }
 
 export type DictionariesOrderByWithRelationInput = {
@@ -208,6 +213,11 @@ export type DictionariesOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  users?: Prisma.UserOrderByRelationAggregateInput
+  memberships?: Prisma.MembershipOrderByRelationAggregateInput
+  taskPriorities?: Prisma.TaskOrderByRelationAggregateInput
+  taskStatuses?: Prisma.TaskOrderByRelationAggregateInput
+  taskStacks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type DictionariesWhereUniqueInput = Prisma.AtLeast<{
@@ -221,6 +231,11 @@ export type DictionariesWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumTypeFilter<"Dictionaries"> | $Enums.Type
   createdAt?: Prisma.DateTimeFilter<"Dictionaries"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Dictionaries"> | Date | string
+  users?: Prisma.UserListRelationFilter
+  memberships?: Prisma.MembershipListRelationFilter
+  taskPriorities?: Prisma.TaskListRelationFilter
+  taskStatuses?: Prisma.TaskListRelationFilter
+  taskStacks?: Prisma.TaskListRelationFilter
 }, "id">
 
 export type DictionariesOrderByWithAggregationInput = {
@@ -257,6 +272,11 @@ export type DictionariesCreateInput = {
   type: $Enums.Type
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
 }
 
 export type DictionariesUncheckedCreateInput = {
@@ -267,6 +287,11 @@ export type DictionariesUncheckedCreateInput = {
   type: $Enums.Type
   createdAt?: Date | string
   updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
 }
 
 export type DictionariesUpdateInput = {
@@ -277,6 +302,11 @@ export type DictionariesUpdateInput = {
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
 }
 
 export type DictionariesUncheckedUpdateInput = {
@@ -287,6 +317,11 @@ export type DictionariesUncheckedUpdateInput = {
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
 }
 
 export type DictionariesCreateManyInput = {
@@ -349,6 +384,16 @@ export type DictionariesMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type DictionariesScalarRelationFilter = {
+  is?: Prisma.DictionariesWhereInput
+  isNot?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesNullableScalarRelationFilter = {
+  is?: Prisma.DictionariesWhereInput | null
+  isNot?: Prisma.DictionariesWhereInput | null
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
@@ -357,6 +402,503 @@ export type EnumTypeFieldUpdateOperationsInput = {
   set?: $Enums.Type
 }
 
+export type DictionariesCreateNestedOneWithoutMembershipsInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutMembershipsInput, Prisma.DictionariesUncheckedCreateWithoutMembershipsInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutMembershipsInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+}
+
+export type DictionariesUpdateOneRequiredWithoutMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutMembershipsInput, Prisma.DictionariesUncheckedCreateWithoutMembershipsInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutMembershipsInput
+  upsert?: Prisma.DictionariesUpsertWithoutMembershipsInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionariesUpdateToOneWithWhereWithoutMembershipsInput, Prisma.DictionariesUpdateWithoutMembershipsInput>, Prisma.DictionariesUncheckedUpdateWithoutMembershipsInput>
+}
+
+export type DictionariesCreateNestedOneWithoutTaskPrioritiesInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedCreateWithoutTaskPrioritiesInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskPrioritiesInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+}
+
+export type DictionariesCreateNestedOneWithoutTaskStatusesInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedCreateWithoutTaskStatusesInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskStatusesInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+}
+
+export type DictionariesCreateNestedOneWithoutTaskStacksInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStacksInput, Prisma.DictionariesUncheckedCreateWithoutTaskStacksInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskStacksInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+}
+
+export type DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedCreateWithoutTaskPrioritiesInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskPrioritiesInput
+  upsert?: Prisma.DictionariesUpsertWithoutTaskPrioritiesInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionariesUpdateToOneWithWhereWithoutTaskPrioritiesInput, Prisma.DictionariesUpdateWithoutTaskPrioritiesInput>, Prisma.DictionariesUncheckedUpdateWithoutTaskPrioritiesInput>
+}
+
+export type DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedCreateWithoutTaskStatusesInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskStatusesInput
+  upsert?: Prisma.DictionariesUpsertWithoutTaskStatusesInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionariesUpdateToOneWithWhereWithoutTaskStatusesInput, Prisma.DictionariesUpdateWithoutTaskStatusesInput>, Prisma.DictionariesUncheckedUpdateWithoutTaskStatusesInput>
+}
+
+export type DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStacksInput, Prisma.DictionariesUncheckedCreateWithoutTaskStacksInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutTaskStacksInput
+  upsert?: Prisma.DictionariesUpsertWithoutTaskStacksInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionariesUpdateToOneWithWhereWithoutTaskStacksInput, Prisma.DictionariesUpdateWithoutTaskStacksInput>, Prisma.DictionariesUncheckedUpdateWithoutTaskStacksInput>
+}
+
+export type DictionariesCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutUsersInput, Prisma.DictionariesUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutUsersInput
+  connect?: Prisma.DictionariesWhereUniqueInput
+}
+
+export type DictionariesUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionariesCreateWithoutUsersInput, Prisma.DictionariesUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.DictionariesCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.DictionariesUpsertWithoutUsersInput
+  disconnect?: Prisma.DictionariesWhereInput | boolean
+  delete?: Prisma.DictionariesWhereInput | boolean
+  connect?: Prisma.DictionariesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionariesUpdateToOneWithWhereWithoutUsersInput, Prisma.DictionariesUpdateWithoutUsersInput>, Prisma.DictionariesUncheckedUpdateWithoutUsersInput>
+}
+
+export type DictionariesCreateWithoutMembershipsInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesUncheckedCreateWithoutMembershipsInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesCreateOrConnectWithoutMembershipsInput = {
+  where: Prisma.DictionariesWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutMembershipsInput, Prisma.DictionariesUncheckedCreateWithoutMembershipsInput>
+}
+
+export type DictionariesUpsertWithoutMembershipsInput = {
+  update: Prisma.XOR<Prisma.DictionariesUpdateWithoutMembershipsInput, Prisma.DictionariesUncheckedUpdateWithoutMembershipsInput>
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutMembershipsInput, Prisma.DictionariesUncheckedCreateWithoutMembershipsInput>
+  where?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesUpdateToOneWithWhereWithoutMembershipsInput = {
+  where?: Prisma.DictionariesWhereInput
+  data: Prisma.XOR<Prisma.DictionariesUpdateWithoutMembershipsInput, Prisma.DictionariesUncheckedUpdateWithoutMembershipsInput>
+}
+
+export type DictionariesUpdateWithoutMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUncheckedUpdateWithoutMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesCreateWithoutTaskPrioritiesInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesUncheckedCreateWithoutTaskPrioritiesInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesCreateOrConnectWithoutTaskPrioritiesInput = {
+  where: Prisma.DictionariesWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedCreateWithoutTaskPrioritiesInput>
+}
+
+export type DictionariesCreateWithoutTaskStatusesInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesUncheckedCreateWithoutTaskStatusesInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesCreateOrConnectWithoutTaskStatusesInput = {
+  where: Prisma.DictionariesWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedCreateWithoutTaskStatusesInput>
+}
+
+export type DictionariesCreateWithoutTaskStacksInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+}
+
+export type DictionariesUncheckedCreateWithoutTaskStacksInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+}
+
+export type DictionariesCreateOrConnectWithoutTaskStacksInput = {
+  where: Prisma.DictionariesWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStacksInput, Prisma.DictionariesUncheckedCreateWithoutTaskStacksInput>
+}
+
+export type DictionariesUpsertWithoutTaskPrioritiesInput = {
+  update: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedUpdateWithoutTaskPrioritiesInput>
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedCreateWithoutTaskPrioritiesInput>
+  where?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesUpdateToOneWithWhereWithoutTaskPrioritiesInput = {
+  where?: Prisma.DictionariesWhereInput
+  data: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskPrioritiesInput, Prisma.DictionariesUncheckedUpdateWithoutTaskPrioritiesInput>
+}
+
+export type DictionariesUpdateWithoutTaskPrioritiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUncheckedUpdateWithoutTaskPrioritiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUpsertWithoutTaskStatusesInput = {
+  update: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedUpdateWithoutTaskStatusesInput>
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedCreateWithoutTaskStatusesInput>
+  where?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesUpdateToOneWithWhereWithoutTaskStatusesInput = {
+  where?: Prisma.DictionariesWhereInput
+  data: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskStatusesInput, Prisma.DictionariesUncheckedUpdateWithoutTaskStatusesInput>
+}
+
+export type DictionariesUpdateWithoutTaskStatusesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUncheckedUpdateWithoutTaskStatusesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUpsertWithoutTaskStacksInput = {
+  update: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskStacksInput, Prisma.DictionariesUncheckedUpdateWithoutTaskStacksInput>
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutTaskStacksInput, Prisma.DictionariesUncheckedCreateWithoutTaskStacksInput>
+  where?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesUpdateToOneWithWhereWithoutTaskStacksInput = {
+  where?: Prisma.DictionariesWhereInput
+  data: Prisma.XOR<Prisma.DictionariesUpdateWithoutTaskStacksInput, Prisma.DictionariesUncheckedUpdateWithoutTaskStacksInput>
+}
+
+export type DictionariesUpdateWithoutTaskStacksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+}
+
+export type DictionariesUncheckedUpdateWithoutTaskStacksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+}
+
+export type DictionariesCreateWithoutUsersInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesUncheckedCreateWithoutUsersInput = {
+  id?: string
+  name: string
+  fullName?: string | null
+  color?: string | null
+  type: $Enums.Type
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionariesCreateOrConnectWithoutUsersInput = {
+  where: Prisma.DictionariesWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutUsersInput, Prisma.DictionariesUncheckedCreateWithoutUsersInput>
+}
+
+export type DictionariesUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.DictionariesUpdateWithoutUsersInput, Prisma.DictionariesUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.DictionariesCreateWithoutUsersInput, Prisma.DictionariesUncheckedCreateWithoutUsersInput>
+  where?: Prisma.DictionariesWhereInput
+}
+
+export type DictionariesUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.DictionariesWhereInput
+  data: Prisma.XOR<Prisma.DictionariesUpdateWithoutUsersInput, Prisma.DictionariesUncheckedUpdateWithoutUsersInput>
+}
+
+export type DictionariesUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+}
+
+export type DictionariesUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+}
+
+
+/**
+ * Count Type DictionariesCountOutputType
+ */
+
+export type DictionariesCountOutputType = {
+  users: number
+  memberships: number
+  taskPriorities: number
+  taskStatuses: number
+  taskStacks: number
+}
+
+export type DictionariesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  users?: boolean | DictionariesCountOutputTypeCountUsersArgs
+  memberships?: boolean | DictionariesCountOutputTypeCountMembershipsArgs
+  taskPriorities?: boolean | DictionariesCountOutputTypeCountTaskPrioritiesArgs
+  taskStatuses?: boolean | DictionariesCountOutputTypeCountTaskStatusesArgs
+  taskStacks?: boolean | DictionariesCountOutputTypeCountTaskStacksArgs
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DictionariesCountOutputType
+   */
+  select?: Prisma.DictionariesCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeCountMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MembershipWhereInput
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeCountTaskPrioritiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeCountTaskStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * DictionariesCountOutputType without action
+ */
+export type DictionariesCountOutputTypeCountTaskStacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
 
 
 export type DictionariesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -367,6 +909,12 @@ export type DictionariesSelect<ExtArgs extends runtime.Types.Extensions.Internal
   type?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  users?: boolean | Prisma.Dictionaries$usersArgs<ExtArgs>
+  memberships?: boolean | Prisma.Dictionaries$membershipsArgs<ExtArgs>
+  taskPriorities?: boolean | Prisma.Dictionaries$taskPrioritiesArgs<ExtArgs>
+  taskStatuses?: boolean | Prisma.Dictionaries$taskStatusesArgs<ExtArgs>
+  taskStacks?: boolean | Prisma.Dictionaries$taskStacksArgs<ExtArgs>
+  _count?: boolean | Prisma.DictionariesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dictionaries"]>
 
 export type DictionariesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -400,10 +948,26 @@ export type DictionariesSelectScalar = {
 }
 
 export type DictionariesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "fullName" | "color" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionaries"]>
+export type DictionariesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  users?: boolean | Prisma.Dictionaries$usersArgs<ExtArgs>
+  memberships?: boolean | Prisma.Dictionaries$membershipsArgs<ExtArgs>
+  taskPriorities?: boolean | Prisma.Dictionaries$taskPrioritiesArgs<ExtArgs>
+  taskStatuses?: boolean | Prisma.Dictionaries$taskStatusesArgs<ExtArgs>
+  taskStacks?: boolean | Prisma.Dictionaries$taskStacksArgs<ExtArgs>
+  _count?: boolean | Prisma.DictionariesCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type DictionariesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DictionariesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $DictionariesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Dictionaries"
-  objects: {}
+  objects: {
+    users: Prisma.$UserPayload<ExtArgs>[]
+    memberships: Prisma.$MembershipPayload<ExtArgs>[]
+    taskPriorities: Prisma.$TaskPayload<ExtArgs>[]
+    taskStatuses: Prisma.$TaskPayload<ExtArgs>[]
+    taskStacks: Prisma.$TaskPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
@@ -806,6 +1370,11 @@ readonly fields: DictionariesFieldRefs;
  */
 export interface Prisma__DictionariesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  users<T extends Prisma.Dictionaries$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionaries$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  memberships<T extends Prisma.Dictionaries$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionaries$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taskPriorities<T extends Prisma.Dictionaries$taskPrioritiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionaries$taskPrioritiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taskStatuses<T extends Prisma.Dictionaries$taskStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionaries$taskStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taskStacks<T extends Prisma.Dictionaries$taskStacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionaries$taskStacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -859,6 +1428,10 @@ export type DictionariesFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * Filter, which Dictionaries to fetch.
    */
   where: Prisma.DictionariesWhereUniqueInput
@@ -877,6 +1450,10 @@ export type DictionariesFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * Filter, which Dictionaries to fetch.
    */
   where: Prisma.DictionariesWhereUniqueInput
@@ -894,6 +1471,10 @@ export type DictionariesFindFirstArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the Dictionaries
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
   /**
    * Filter, which Dictionaries to fetch.
    */
@@ -943,6 +1524,10 @@ export type DictionariesFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * Filter, which Dictionaries to fetch.
    */
   where?: Prisma.DictionariesWhereInput
@@ -991,6 +1576,10 @@ export type DictionariesFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * Filter, which Dictionaries to fetch.
    */
   where?: Prisma.DictionariesWhereInput
@@ -1033,6 +1622,10 @@ export type DictionariesCreateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Dictionaries
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
   /**
    * The data needed to create a Dictionaries.
    */
@@ -1081,6 +1674,10 @@ export type DictionariesUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Dictionaries
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
   /**
    * The data needed to update a Dictionaries.
    */
@@ -1148,6 +1745,10 @@ export type DictionariesUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * The filter to search for the Dictionaries to update in case it exists.
    */
   where: Prisma.DictionariesWhereUniqueInput
@@ -1174,6 +1775,10 @@ export type DictionariesDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
+  /**
    * Filter which Dictionaries to delete.
    */
   where: Prisma.DictionariesWhereUniqueInput
@@ -1194,6 +1799,126 @@ export type DictionariesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * Dictionaries.users
+ */
+export type Dictionaries$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * Dictionaries.memberships
+ */
+export type Dictionaries$membershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Membership
+   */
+  select?: Prisma.MembershipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Membership
+   */
+  omit?: Prisma.MembershipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembershipInclude<ExtArgs> | null
+  where?: Prisma.MembershipWhereInput
+  orderBy?: Prisma.MembershipOrderByWithRelationInput | Prisma.MembershipOrderByWithRelationInput[]
+  cursor?: Prisma.MembershipWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MembershipScalarFieldEnum | Prisma.MembershipScalarFieldEnum[]
+}
+
+/**
+ * Dictionaries.taskPriorities
+ */
+export type Dictionaries$taskPrioritiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Dictionaries.taskStatuses
+ */
+export type Dictionaries$taskStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Dictionaries.taskStacks
+ */
+export type Dictionaries$taskStacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
  * Dictionaries without action
  */
 export type DictionariesDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1205,4 +1930,8 @@ export type DictionariesDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Dictionaries
    */
   omit?: Prisma.DictionariesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionariesInclude<ExtArgs> | null
 }

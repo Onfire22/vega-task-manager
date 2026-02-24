@@ -55,35 +55,15 @@ export type Dictionaries = Prisma.DictionariesModel
  */
 export type Membership = Prisma.MembershipModel
 /**
- * Model TaskPriotiry
- * 
- */
-export type TaskPriotiry = Prisma.TaskPriotiryModel
-/**
  * Model Projects
  * 
  */
 export type Projects = Prisma.ProjectsModel
 /**
- * Model Roles
- * 
- */
-export type Roles = Prisma.RolesModel
-/**
- * Model Stack
- * 
- */
-export type Stack = Prisma.StackModel
-/**
  * Model Task
  * 
  */
 export type Task = Prisma.TaskModel
-/**
- * Model TaskStatuses
- * 
- */
-export type TaskStatuses = Prisma.TaskStatusesModel
 /**
  * Model User
  * 

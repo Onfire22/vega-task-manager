@@ -13,6 +13,12 @@ model Dictionaries {
   color    String?
   type     Type
 
+  users          User[]
+  memberships    Membership[]
+  taskPriorities Task[]       @relation("TaskPriority")
+  taskStatuses   Task[]       @relation("TaskStatus")
+  taskStacks     Task[]       @relation("TaskStack")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

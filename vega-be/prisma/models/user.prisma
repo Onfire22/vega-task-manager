@@ -6,10 +6,10 @@ model User {
   email      String  @unique
   password   String
 
-  stackUuid     String?      @map("stack_uuid")
-  stack         Stack?       @relation(fields: [stackUuid], references: [id])
-  assignedTasks Task[]       @relation("AssignedTasks")
-  reportedTasks Task[]       @relation("ReportedTasks")
+  userStackUUid String?       @map("user_stack_uuid")
+  userStack     Dictionaries? @relation(fields: [userStackUUid], references: [id])
+  assignedTasks Task[]        @relation("AssignedTasks")
+  reportedTasks Task[]        @relation("ReportedTasks")
   memberships   Membership[]
   comments      Comment[]
 

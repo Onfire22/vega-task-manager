@@ -387,12 +387,8 @@ export const ModelName = {
   Comment: 'Comment',
   Dictionaries: 'Dictionaries',
   Membership: 'Membership',
-  TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
-  Roles: 'Roles',
-  Stack: 'Stack',
   Task: 'Task',
-  TaskStatuses: 'TaskStatuses',
   User: 'User'
 } as const
 
@@ -409,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "dictionaries" | "membership" | "taskPriotiry" | "projects" | "roles" | "stack" | "task" | "taskStatuses" | "user"
+    modelProps: "comment" | "dictionaries" | "membership" | "projects" | "task" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -635,80 +631,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    TaskPriotiry: {
-      payload: Prisma.$TaskPriotiryPayload<ExtArgs>
-      fields: Prisma.TaskPriotiryFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TaskPriotiryFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TaskPriotiryFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        findFirst: {
-          args: Prisma.TaskPriotiryFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TaskPriotiryFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        findMany: {
-          args: Prisma.TaskPriotiryFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>[]
-        }
-        create: {
-          args: Prisma.TaskPriotiryCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        createMany: {
-          args: Prisma.TaskPriotiryCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TaskPriotiryCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>[]
-        }
-        delete: {
-          args: Prisma.TaskPriotiryDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        update: {
-          args: Prisma.TaskPriotiryUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        deleteMany: {
-          args: Prisma.TaskPriotiryDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TaskPriotiryUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TaskPriotiryUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>[]
-        }
-        upsert: {
-          args: Prisma.TaskPriotiryUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskPriotiryPayload>
-        }
-        aggregate: {
-          args: Prisma.TaskPriotiryAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTaskPriotiry>
-        }
-        groupBy: {
-          args: Prisma.TaskPriotiryGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskPriotiryGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TaskPriotiryCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskPriotiryCountAggregateOutputType> | number
-        }
-      }
-    }
     Projects: {
       payload: Prisma.$ProjectsPayload<ExtArgs>
       fields: Prisma.ProjectsFieldRefs
@@ -783,154 +705,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Roles: {
-      payload: Prisma.$RolesPayload<ExtArgs>
-      fields: Prisma.RolesFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.RolesFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.RolesFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        findFirst: {
-          args: Prisma.RolesFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.RolesFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        findMany: {
-          args: Prisma.RolesFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>[]
-        }
-        create: {
-          args: Prisma.RolesCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        createMany: {
-          args: Prisma.RolesCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.RolesCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>[]
-        }
-        delete: {
-          args: Prisma.RolesDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        update: {
-          args: Prisma.RolesUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        deleteMany: {
-          args: Prisma.RolesDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.RolesUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.RolesUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>[]
-        }
-        upsert: {
-          args: Prisma.RolesUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RolesPayload>
-        }
-        aggregate: {
-          args: Prisma.RolesAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateRoles>
-        }
-        groupBy: {
-          args: Prisma.RolesGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RolesGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.RolesCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RolesCountAggregateOutputType> | number
-        }
-      }
-    }
-    Stack: {
-      payload: Prisma.$StackPayload<ExtArgs>
-      fields: Prisma.StackFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.StackFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.StackFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        findFirst: {
-          args: Prisma.StackFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.StackFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        findMany: {
-          args: Prisma.StackFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
-        }
-        create: {
-          args: Prisma.StackCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        createMany: {
-          args: Prisma.StackCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.StackCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
-        }
-        delete: {
-          args: Prisma.StackDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        update: {
-          args: Prisma.StackUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        deleteMany: {
-          args: Prisma.StackDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.StackUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.StackUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>[]
-        }
-        upsert: {
-          args: Prisma.StackUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StackPayload>
-        }
-        aggregate: {
-          args: Prisma.StackAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStack>
-        }
-        groupBy: {
-          args: Prisma.StackGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StackGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.StackCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StackCountAggregateOutputType> | number
-        }
-      }
-    }
     Task: {
       payload: Prisma.$TaskPayload<ExtArgs>
       fields: Prisma.TaskFieldRefs
@@ -1002,80 +776,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TaskCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TaskCountAggregateOutputType> | number
-        }
-      }
-    }
-    TaskStatuses: {
-      payload: Prisma.$TaskStatusesPayload<ExtArgs>
-      fields: Prisma.TaskStatusesFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TaskStatusesFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TaskStatusesFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        findFirst: {
-          args: Prisma.TaskStatusesFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TaskStatusesFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        findMany: {
-          args: Prisma.TaskStatusesFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>[]
-        }
-        create: {
-          args: Prisma.TaskStatusesCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        createMany: {
-          args: Prisma.TaskStatusesCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TaskStatusesCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>[]
-        }
-        delete: {
-          args: Prisma.TaskStatusesDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        update: {
-          args: Prisma.TaskStatusesUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        deleteMany: {
-          args: Prisma.TaskStatusesDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TaskStatusesUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TaskStatusesUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>[]
-        }
-        upsert: {
-          args: Prisma.TaskStatusesUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TaskStatusesPayload>
-        }
-        aggregate: {
-          args: Prisma.TaskStatusesAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTaskStatuses>
-        }
-        groupBy: {
-          args: Prisma.TaskStatusesGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskStatusesGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TaskStatusesCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TaskStatusesCountAggregateOutputType> | number
         }
       }
     }
@@ -1221,21 +921,12 @@ export const MembershipScalarFieldEnum = {
   id: 'id',
   userUuid: 'userUuid',
   projectUuid: 'projectUuid',
-  roleUuid: 'roleUuid',
+  userRoleUuid: 'userRoleUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
-
-
-export const TaskPriotiryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
-} as const
-
-export type TaskPriotiryScalarFieldEnum = (typeof TaskPriotiryScalarFieldEnum)[keyof typeof TaskPriotiryScalarFieldEnum]
 
 
 export const ProjectsScalarFieldEnum = {
@@ -1249,24 +940,6 @@ export const ProjectsScalarFieldEnum = {
 export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
 
 
-export const RolesScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-} as const
-
-export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
-
-
-export const StackScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  fullName: 'fullName',
-  color: 'color'
-} as const
-
-export type StackScalarFieldEnum = (typeof StackScalarFieldEnum)[keyof typeof StackScalarFieldEnum]
-
-
 export const TaskScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -1277,23 +950,14 @@ export const TaskScalarFieldEnum = {
   assigneeUuid: 'assigneeUuid',
   reporterUuid: 'reporterUuid',
   projectUuid: 'projectUuid',
-  priorityUuid: 'priorityUuid',
-  statusUuid: 'statusUuid',
-  stackUuid: 'stackUuid',
+  taskPriorirtyUuid: 'taskPriorirtyUuid',
+  taskStatusUuid: 'taskStatusUuid',
+  taskStackUuid: 'taskStackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
-
-
-export const TaskStatusesScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
-} as const
-
-export type TaskStatusesScalarFieldEnum = (typeof TaskStatusesScalarFieldEnum)[keyof typeof TaskStatusesScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -1302,7 +966,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
-  stackUuid: 'stackUuid',
+  userStackUUid: 'userStackUUid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1507,12 +1171,8 @@ export type GlobalOmitConfig = {
   comment?: Prisma.CommentOmit
   dictionaries?: Prisma.DictionariesOmit
   membership?: Prisma.MembershipOmit
-  taskPriotiry?: Prisma.TaskPriotiryOmit
   projects?: Prisma.ProjectsOmit
-  roles?: Prisma.RolesOmit
-  stack?: Prisma.StackOmit
   task?: Prisma.TaskOmit
-  taskStatuses?: Prisma.TaskStatusesOmit
   user?: Prisma.UserOmit
 }
 

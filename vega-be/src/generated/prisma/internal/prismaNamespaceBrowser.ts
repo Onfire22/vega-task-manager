@@ -54,12 +54,8 @@ export const ModelName = {
   Comment: 'Comment',
   Dictionaries: 'Dictionaries',
   Membership: 'Membership',
-  TaskPriotiry: 'TaskPriotiry',
   Projects: 'Projects',
-  Roles: 'Roles',
-  Stack: 'Stack',
   Task: 'Task',
-  TaskStatuses: 'TaskStatuses',
   User: 'User'
 } as const
 
@@ -108,21 +104,12 @@ export const MembershipScalarFieldEnum = {
   id: 'id',
   userUuid: 'userUuid',
   projectUuid: 'projectUuid',
-  roleUuid: 'roleUuid',
+  userRoleUuid: 'userRoleUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
-
-
-export const TaskPriotiryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
-} as const
-
-export type TaskPriotiryScalarFieldEnum = (typeof TaskPriotiryScalarFieldEnum)[keyof typeof TaskPriotiryScalarFieldEnum]
 
 
 export const ProjectsScalarFieldEnum = {
@@ -136,24 +123,6 @@ export const ProjectsScalarFieldEnum = {
 export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
 
 
-export const RolesScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-} as const
-
-export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
-
-
-export const StackScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  fullName: 'fullName',
-  color: 'color'
-} as const
-
-export type StackScalarFieldEnum = (typeof StackScalarFieldEnum)[keyof typeof StackScalarFieldEnum]
-
-
 export const TaskScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -164,23 +133,14 @@ export const TaskScalarFieldEnum = {
   assigneeUuid: 'assigneeUuid',
   reporterUuid: 'reporterUuid',
   projectUuid: 'projectUuid',
-  priorityUuid: 'priorityUuid',
-  statusUuid: 'statusUuid',
-  stackUuid: 'stackUuid',
+  taskPriorirtyUuid: 'taskPriorirtyUuid',
+  taskStatusUuid: 'taskStatusUuid',
+  taskStackUuid: 'taskStackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
-
-
-export const TaskStatusesScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color'
-} as const
-
-export type TaskStatusesScalarFieldEnum = (typeof TaskStatusesScalarFieldEnum)[keyof typeof TaskStatusesScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -189,7 +149,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
-  stackUuid: 'stackUuid',
+  userStackUUid: 'userStackUUid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

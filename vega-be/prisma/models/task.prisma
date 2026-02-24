@@ -1,24 +1,25 @@
 model Task {
   id String @id @default(uuid())
 
-  code          String?      @unique
-  title         String
-  description   String
-  estimatedTime Int?         @map("estimate_time")
-  loggedTime    Int?         @map("logged_time")
-  assigneeUuid  String?      @map("assignee_uuid")
-  assignee      User?        @relation("AssignedTasks", fields: [assigneeUuid], references: [id])
-  reporterUuid  String       @map("reporter_uuid")
-  reporter      User         @relation("ReportedTasks", fields: [reporterUuid], references: [id])
-  projectUuid   String?      @map("project_uuid")
-  project       Projects?    @relation(fields: [projectUuid], references: [id])
-  priorityUuid  String       @map("priority_uuid")
-  priority      TaskPriotiry @relation(fields: [priorityUuid], references: [id])
-  statusUuid    String       @map("status_uuid")
-  status        TaskStatuses @relation(fields: [statusUuid], references: [id])
-  stackUuid     String       @map("stack_uuid")
-  stack         Stack        @relation(fields: [stackUuid], references: [id])
-  comments      Comment[]
+  code              String?      @unique
+  title             String
+  description       String
+  estimatedTime     Int?         @map("estimate_time")
+  loggedTime        Int?         @map("logged_time")
+  assigneeUuid      String?      @map("assignee_uuid")
+  assignee          User?        @relation("AssignedTasks", fields: [assigneeUuid], references: [id])
+  reporterUuid      String       @map("reporter_uuid")
+  reporter          User         @relation("ReportedTasks", fields: [reporterUuid], references: [id])
+  projectUuid       String?      @map("project_uuid")
+  project           Projects?    @relation(fields: [projectUuid], references: [id])
+  taskPriorirtyUuid String       @map("task_priority_uuid")
+  taskPriority      Dictionaries @relation("TaskPriority", fields: [taskPriorirtyUuid], references: [id])
+  taskStatusUuid    String       @map("task_status_uuid")
+  taskStatus        Dictionaries @relation("TaskStatus", fields: [taskStatusUuid], references: [id])
+  taskStackUuid     String       @map("task_stack_uuid")
+  taskStack         Dictionaries @relation("TaskStack", fields: [taskStackUuid], references: [id])
+
+  comments Comment[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

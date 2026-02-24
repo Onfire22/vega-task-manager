@@ -28,7 +28,7 @@ export type MembershipMinAggregateOutputType = {
   id: string | null
   userUuid: string | null
   projectUuid: string | null
-  roleUuid: string | null
+  userRoleUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -37,7 +37,7 @@ export type MembershipMaxAggregateOutputType = {
   id: string | null
   userUuid: string | null
   projectUuid: string | null
-  roleUuid: string | null
+  userRoleUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,7 +46,7 @@ export type MembershipCountAggregateOutputType = {
   id: number
   userUuid: number
   projectUuid: number
-  roleUuid: number
+  userRoleUuid: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -57,7 +57,7 @@ export type MembershipMinAggregateInputType = {
   id?: true
   userUuid?: true
   projectUuid?: true
-  roleUuid?: true
+  userRoleUuid?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -66,7 +66,7 @@ export type MembershipMaxAggregateInputType = {
   id?: true
   userUuid?: true
   projectUuid?: true
-  roleUuid?: true
+  userRoleUuid?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -75,7 +75,7 @@ export type MembershipCountAggregateInputType = {
   id?: true
   userUuid?: true
   projectUuid?: true
-  roleUuid?: true
+  userRoleUuid?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -157,7 +157,7 @@ export type MembershipGroupByOutputType = {
   id: string
   userUuid: string
   projectUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt: Date
   updatedAt: Date
   _count: MembershipCountAggregateOutputType | null
@@ -187,24 +187,24 @@ export type MembershipWhereInput = {
   id?: Prisma.StringFilter<"Membership"> | string
   userUuid?: Prisma.StringFilter<"Membership"> | string
   projectUuid?: Prisma.StringFilter<"Membership"> | string
-  roleUuid?: Prisma.StringFilter<"Membership"> | string
+  userRoleUuid?: Prisma.StringFilter<"Membership"> | string
   createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectsScalarRelationFilter, Prisma.ProjectsWhereInput>
-  role?: Prisma.XOR<Prisma.RolesScalarRelationFilter, Prisma.RolesWhereInput>
+  userRole?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
 }
 
 export type MembershipOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
-  roleUuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   project?: Prisma.ProjectsOrderByWithRelationInput
-  role?: Prisma.RolesOrderByWithRelationInput
+  userRole?: Prisma.DictionariesOrderByWithRelationInput
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -214,19 +214,19 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MembershipWhereInput[]
   NOT?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
   projectUuid?: Prisma.StringFilter<"Membership"> | string
-  roleUuid?: Prisma.StringFilter<"Membership"> | string
+  userRoleUuid?: Prisma.StringFilter<"Membership"> | string
   createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectsScalarRelationFilter, Prisma.ProjectsWhereInput>
-  role?: Prisma.XOR<Prisma.RolesScalarRelationFilter, Prisma.RolesWhereInput>
+  userRole?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
 }, "id" | "userUuid">
 
 export type MembershipOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
-  roleUuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MembershipCountOrderByAggregateInput
@@ -241,7 +241,7 @@ export type MembershipScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   userUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   projectUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
-  roleUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
+  userRoleUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Membership"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Membership"> | Date | string
 }
@@ -252,14 +252,14 @@ export type MembershipCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
   project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
-  role: Prisma.RolesCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateInput = {
   id?: string
   userUuid: string
   projectUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -270,14 +270,14 @@ export type MembershipUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
   project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
-  role?: Prisma.RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -286,7 +286,7 @@ export type MembershipCreateManyInput = {
   id?: string
   userUuid: string
   projectUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -301,36 +301,9 @@ export type MembershipUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type MembershipCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  projectUuid?: Prisma.SortOrder
-  roleUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MembershipMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  projectUuid?: Prisma.SortOrder
-  roleUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MembershipMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  projectUuid?: Prisma.SortOrder
-  roleUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MembershipListRelationFilter = {
@@ -341,6 +314,75 @@ export type MembershipListRelationFilter = {
 
 export type MembershipOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type MembershipCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  projectUuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MembershipMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  projectUuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MembershipMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  projectUuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MembershipCreateNestedManyWithoutUserRoleInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput> | Prisma.MembershipCreateWithoutUserRoleInput[] | Prisma.MembershipUncheckedCreateWithoutUserRoleInput[]
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutUserRoleInput | Prisma.MembershipCreateOrConnectWithoutUserRoleInput[]
+  createMany?: Prisma.MembershipCreateManyUserRoleInputEnvelope
+  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+}
+
+export type MembershipUncheckedCreateNestedManyWithoutUserRoleInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput> | Prisma.MembershipCreateWithoutUserRoleInput[] | Prisma.MembershipUncheckedCreateWithoutUserRoleInput[]
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutUserRoleInput | Prisma.MembershipCreateOrConnectWithoutUserRoleInput[]
+  createMany?: Prisma.MembershipCreateManyUserRoleInputEnvelope
+  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+}
+
+export type MembershipUpdateManyWithoutUserRoleNestedInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput> | Prisma.MembershipCreateWithoutUserRoleInput[] | Prisma.MembershipUncheckedCreateWithoutUserRoleInput[]
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutUserRoleInput | Prisma.MembershipCreateOrConnectWithoutUserRoleInput[]
+  upsert?: Prisma.MembershipUpsertWithWhereUniqueWithoutUserRoleInput | Prisma.MembershipUpsertWithWhereUniqueWithoutUserRoleInput[]
+  createMany?: Prisma.MembershipCreateManyUserRoleInputEnvelope
+  set?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  disconnect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  delete?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  update?: Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput | Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput[]
+  updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput | Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput[]
+  deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
+}
+
+export type MembershipUncheckedUpdateManyWithoutUserRoleNestedInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput> | Prisma.MembershipCreateWithoutUserRoleInput[] | Prisma.MembershipUncheckedCreateWithoutUserRoleInput[]
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutUserRoleInput | Prisma.MembershipCreateOrConnectWithoutUserRoleInput[]
+  upsert?: Prisma.MembershipUpsertWithWhereUniqueWithoutUserRoleInput | Prisma.MembershipUpsertWithWhereUniqueWithoutUserRoleInput[]
+  createMany?: Prisma.MembershipCreateManyUserRoleInputEnvelope
+  set?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  disconnect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  delete?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
+  update?: Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput | Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput[]
+  updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput | Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput[]
+  deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
 }
 
 export type MembershipCreateNestedManyWithoutProjectInput = {
@@ -382,48 +424,6 @@ export type MembershipUncheckedUpdateManyWithoutProjectNestedInput = {
   connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
   update?: Prisma.MembershipUpdateWithWhereUniqueWithoutProjectInput | Prisma.MembershipUpdateWithWhereUniqueWithoutProjectInput[]
   updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutProjectInput | Prisma.MembershipUpdateManyWithWhereWithoutProjectInput[]
-  deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
-}
-
-export type MembershipCreateNestedManyWithoutRoleInput = {
-  create?: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput> | Prisma.MembershipCreateWithoutRoleInput[] | Prisma.MembershipUncheckedCreateWithoutRoleInput[]
-  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutRoleInput | Prisma.MembershipCreateOrConnectWithoutRoleInput[]
-  createMany?: Prisma.MembershipCreateManyRoleInputEnvelope
-  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-}
-
-export type MembershipUncheckedCreateNestedManyWithoutRoleInput = {
-  create?: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput> | Prisma.MembershipCreateWithoutRoleInput[] | Prisma.MembershipUncheckedCreateWithoutRoleInput[]
-  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutRoleInput | Prisma.MembershipCreateOrConnectWithoutRoleInput[]
-  createMany?: Prisma.MembershipCreateManyRoleInputEnvelope
-  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-}
-
-export type MembershipUpdateManyWithoutRoleNestedInput = {
-  create?: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput> | Prisma.MembershipCreateWithoutRoleInput[] | Prisma.MembershipUncheckedCreateWithoutRoleInput[]
-  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutRoleInput | Prisma.MembershipCreateOrConnectWithoutRoleInput[]
-  upsert?: Prisma.MembershipUpsertWithWhereUniqueWithoutRoleInput | Prisma.MembershipUpsertWithWhereUniqueWithoutRoleInput[]
-  createMany?: Prisma.MembershipCreateManyRoleInputEnvelope
-  set?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  disconnect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  delete?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  update?: Prisma.MembershipUpdateWithWhereUniqueWithoutRoleInput | Prisma.MembershipUpdateWithWhereUniqueWithoutRoleInput[]
-  updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutRoleInput | Prisma.MembershipUpdateManyWithWhereWithoutRoleInput[]
-  deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
-}
-
-export type MembershipUncheckedUpdateManyWithoutRoleNestedInput = {
-  create?: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput> | Prisma.MembershipCreateWithoutRoleInput[] | Prisma.MembershipUncheckedCreateWithoutRoleInput[]
-  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutRoleInput | Prisma.MembershipCreateOrConnectWithoutRoleInput[]
-  upsert?: Prisma.MembershipUpsertWithWhereUniqueWithoutRoleInput | Prisma.MembershipUpsertWithWhereUniqueWithoutRoleInput[]
-  createMany?: Prisma.MembershipCreateManyRoleInputEnvelope
-  set?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  disconnect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  delete?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  connect?: Prisma.MembershipWhereUniqueInput | Prisma.MembershipWhereUniqueInput[]
-  update?: Prisma.MembershipUpdateWithWhereUniqueWithoutRoleInput | Prisma.MembershipUpdateWithWhereUniqueWithoutRoleInput[]
-  updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutRoleInput | Prisma.MembershipUpdateManyWithWhereWithoutRoleInput[]
   deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
 }
 
@@ -469,18 +469,72 @@ export type MembershipUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
 }
 
+export type MembershipCreateWithoutUserRoleInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
+  project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
+}
+
+export type MembershipUncheckedCreateWithoutUserRoleInput = {
+  id?: string
+  userUuid: string
+  projectUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MembershipCreateOrConnectWithoutUserRoleInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput>
+}
+
+export type MembershipCreateManyUserRoleInputEnvelope = {
+  data: Prisma.MembershipCreateManyUserRoleInput | Prisma.MembershipCreateManyUserRoleInput[]
+  skipDuplicates?: boolean
+}
+
+export type MembershipUpsertWithWhereUniqueWithoutUserRoleInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  update: Prisma.XOR<Prisma.MembershipUpdateWithoutUserRoleInput, Prisma.MembershipUncheckedUpdateWithoutUserRoleInput>
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput>
+}
+
+export type MembershipUpdateWithWhereUniqueWithoutUserRoleInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  data: Prisma.XOR<Prisma.MembershipUpdateWithoutUserRoleInput, Prisma.MembershipUncheckedUpdateWithoutUserRoleInput>
+}
+
+export type MembershipUpdateManyWithWhereWithoutUserRoleInput = {
+  where: Prisma.MembershipScalarWhereInput
+  data: Prisma.XOR<Prisma.MembershipUpdateManyMutationInput, Prisma.MembershipUncheckedUpdateManyWithoutUserRoleInput>
+}
+
+export type MembershipScalarWhereInput = {
+  AND?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
+  OR?: Prisma.MembershipScalarWhereInput[]
+  NOT?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
+  id?: Prisma.StringFilter<"Membership"> | string
+  userUuid?: Prisma.StringFilter<"Membership"> | string
+  projectUuid?: Prisma.StringFilter<"Membership"> | string
+  userRoleUuid?: Prisma.StringFilter<"Membership"> | string
+  createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
+}
+
 export type MembershipCreateWithoutProjectInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
-  role: Prisma.RolesCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutProjectInput = {
   id?: string
   userUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -511,72 +565,18 @@ export type MembershipUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.MembershipUpdateManyMutationInput, Prisma.MembershipUncheckedUpdateManyWithoutProjectInput>
 }
 
-export type MembershipScalarWhereInput = {
-  AND?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
-  OR?: Prisma.MembershipScalarWhereInput[]
-  NOT?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
-  id?: Prisma.StringFilter<"Membership"> | string
-  userUuid?: Prisma.StringFilter<"Membership"> | string
-  projectUuid?: Prisma.StringFilter<"Membership"> | string
-  roleUuid?: Prisma.StringFilter<"Membership"> | string
-  createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
-}
-
-export type MembershipCreateWithoutRoleInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
-  project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
-}
-
-export type MembershipUncheckedCreateWithoutRoleInput = {
-  id?: string
-  userUuid: string
-  projectUuid: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type MembershipCreateOrConnectWithoutRoleInput = {
-  where: Prisma.MembershipWhereUniqueInput
-  create: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput>
-}
-
-export type MembershipCreateManyRoleInputEnvelope = {
-  data: Prisma.MembershipCreateManyRoleInput | Prisma.MembershipCreateManyRoleInput[]
-  skipDuplicates?: boolean
-}
-
-export type MembershipUpsertWithWhereUniqueWithoutRoleInput = {
-  where: Prisma.MembershipWhereUniqueInput
-  update: Prisma.XOR<Prisma.MembershipUpdateWithoutRoleInput, Prisma.MembershipUncheckedUpdateWithoutRoleInput>
-  create: Prisma.XOR<Prisma.MembershipCreateWithoutRoleInput, Prisma.MembershipUncheckedCreateWithoutRoleInput>
-}
-
-export type MembershipUpdateWithWhereUniqueWithoutRoleInput = {
-  where: Prisma.MembershipWhereUniqueInput
-  data: Prisma.XOR<Prisma.MembershipUpdateWithoutRoleInput, Prisma.MembershipUncheckedUpdateWithoutRoleInput>
-}
-
-export type MembershipUpdateManyWithWhereWithoutRoleInput = {
-  where: Prisma.MembershipScalarWhereInput
-  data: Prisma.XOR<Prisma.MembershipUpdateManyMutationInput, Prisma.MembershipUncheckedUpdateManyWithoutRoleInput>
-}
-
 export type MembershipCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
-  role: Prisma.RolesCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutUserInput = {
   id?: string
   projectUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -607,10 +607,42 @@ export type MembershipUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.MembershipUpdateManyMutationInput, Prisma.MembershipUncheckedUpdateManyWithoutUserInput>
 }
 
+export type MembershipCreateManyUserRoleInput = {
+  id?: string
+  userUuid: string
+  projectUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MembershipUpdateWithoutUserRoleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
+  project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
+}
+
+export type MembershipUncheckedUpdateWithoutUserRoleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MembershipUncheckedUpdateManyWithoutUserRoleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type MembershipCreateManyProjectInput = {
   id?: string
   userUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -620,13 +652,13 @@ export type MembershipUpdateWithoutProjectInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
-  role?: Prisma.RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -634,39 +666,7 @@ export type MembershipUncheckedUpdateWithoutProjectInput = {
 export type MembershipUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type MembershipCreateManyRoleInput = {
-  id?: string
-  userUuid: string
-  projectUuid: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type MembershipUpdateWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
-  project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
-}
-
-export type MembershipUncheckedUpdateWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type MembershipUncheckedUpdateManyWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -674,7 +674,7 @@ export type MembershipUncheckedUpdateManyWithoutRoleInput = {
 export type MembershipCreateManyUserInput = {
   id?: string
   projectUuid: string
-  roleUuid: string
+  userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -684,13 +684,13 @@ export type MembershipUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
-  role?: Prisma.RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -698,7 +698,7 @@ export type MembershipUncheckedUpdateWithoutUserInput = {
 export type MembershipUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
-  roleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -709,62 +709,62 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   userUuid?: boolean
   projectUuid?: boolean
-  roleUuid?: boolean
+  userRoleUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userUuid?: boolean
   projectUuid?: boolean
-  roleUuid?: boolean
+  userRoleUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userUuid?: boolean
   projectUuid?: boolean
-  roleUuid?: boolean
+  userRoleUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectScalar = {
   id?: boolean
   userUuid?: boolean
   projectUuid?: boolean
-  roleUuid?: boolean
+  userRoleUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userUuid" | "projectUuid" | "roleUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
+export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userUuid" | "projectUuid" | "userRoleUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
 export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  role?: boolean | Prisma.RolesDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
 }
 
 export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -772,13 +772,13 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     project: Prisma.$ProjectsPayload<ExtArgs>
-    role: Prisma.$RolesPayload<ExtArgs>
+    userRole: Prisma.$DictionariesPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userUuid: string
     projectUuid: string
-    roleUuid: string
+    userRoleUuid: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["membership"]>
@@ -1177,7 +1177,7 @@ export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectsClient<runtime.Types.Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  role<T extends Prisma.RolesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RolesDefaultArgs<ExtArgs>>): Prisma.Prisma__RolesClient<runtime.Types.Result.GetResult<Prisma.$RolesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  userRole<T extends Prisma.DictionariesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionariesDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionariesClient<runtime.Types.Result.GetResult<Prisma.$DictionariesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1210,7 +1210,7 @@ export interface MembershipFieldRefs {
   readonly id: Prisma.FieldRef<"Membership", 'String'>
   readonly userUuid: Prisma.FieldRef<"Membership", 'String'>
   readonly projectUuid: Prisma.FieldRef<"Membership", 'String'>
-  readonly roleUuid: Prisma.FieldRef<"Membership", 'String'>
+  readonly userRoleUuid: Prisma.FieldRef<"Membership", 'String'>
   readonly createdAt: Prisma.FieldRef<"Membership", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Membership", 'DateTime'>
 }

@@ -1,8 +1,0 @@
-model Roles {
-  id   String @id @default(uuid())
-  name String @unique
-
-  memberships Membership[]
-
-  @@map("roles")
-}

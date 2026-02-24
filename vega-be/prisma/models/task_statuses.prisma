@@ -1,9 +1,0 @@
-model TaskStatuses {
-  id    String  @id @default(uuid())
-  name  String  @unique
-  color String? @unique
-
-  tasks Task[]
-
-  @@map("task_statuses")
-}

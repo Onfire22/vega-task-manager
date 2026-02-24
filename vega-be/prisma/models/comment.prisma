@@ -1,8 +1,7 @@
 model Comment {
   id String @id @default(uuid())
 
-  text String
-
+  text       String
   taskUuid   String @map("task_uuid")
   task       Task   @relation(fields: [taskUuid], references: [id])
   authorUuid String @map("author_uuid")
