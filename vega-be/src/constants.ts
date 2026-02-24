@@ -11,14 +11,13 @@ export const RESPONSE_STATUSES = {
 };
 
 export const ROUTES = {
+	root: '/',
 	signIn: '/api/sign-in',
 	signUp: '/api/sign-up',
 	logout: '/api/logout',
 	users: '/api/users',
-	stack: '/api/stack',
-	priorities: '/api/priorities',
-	statuses: '/api/statuses',
+	currentUser: '/api/users/current',
+	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
-	createTask: '/create',
-	getTasks: '/userTasks',
+	createTask: '/api/tasks/create',
 };
