@@ -4,6 +4,7 @@ import type { IInitialState, TActiveTab } from './types.ts';
 export const initialState: IInitialState = {
 	isModalShown: false,
 	activeTab: 'table',
+	isAssignee: false,
 };
 
 const tasksSlice = createSlice({
@@ -16,9 +17,12 @@ const tasksSlice = createSlice({
 		setActiveTab: (state, action: PayloadAction<TActiveTab>) => {
 			state.activeTab = action.payload;
 		},
+		setIsAssignee: (state, action: PayloadAction<boolean>) => {
+			state.isAssignee = action.payload;
+		},
 	},
 });
 
-export const { setIsModalShown, setActiveTab } = tasksSlice.actions;
+export const { setIsModalShown, setActiveTab, setIsAssignee } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

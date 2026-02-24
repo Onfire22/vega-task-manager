@@ -3,22 +3,19 @@ import { CreateTaskModalView } from './create-task-modal-view';
 import { setIsModalShown } from '../slice.ts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { getIsModalShownSelector } from '../selectors.ts';
-import type { IDictionaryItem } from '../../../api/types.ts';
 import { useFormik } from 'formik';
 import { CreateTaskValidationSchema } from '../validation.ts';
 import { INITIAL_VALUES } from '../constants.ts';
 import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
 import { setNotification } from '../../../components/notifications/slice.ts';
+import { useDictionaries } from '../hooks.ts';
 
-interface IProps {
-	stackListData?: IDictionaryItem[];
-	taskPrioritiesData?: IDictionaryItem[];
-}
-
-const CreateTaskModal: React.FC<IProps> = ({ taskPrioritiesData, stackListData }) => {
+const CreateTaskModal = () => {
 	const dispatch = useAppDispatch();
 
 	const [createTask] = useCreateTaskMutation();
+
+	const { selectorsData } = useDictionaries();
 
 	const isModalShown = useAppSelector(getIsModalShownSelector());
 
@@ -56,8 +53,8 @@ const CreateTaskModal: React.FC<IProps> = ({ taskPrioritiesData, stackListData }
 	return (
 		<CreateTaskModalView
 			isModalShown={isModalShown}
-			taskPrioritiesData={taskPrioritiesData}
-			stackListData={stackListData}
+			taskPrioritiesData={selectorsData?.priorities}
+			stackListData={selectorsData?.stackTypes}
 			formValues={formik.values}
 			formErrors={formik.errors}
 			onModalClose={handleModalClose}

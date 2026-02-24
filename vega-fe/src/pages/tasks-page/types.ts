@@ -1,6 +1,7 @@
 export interface IInitialState {
 	isModalShown: boolean;
 	activeTab: TActiveTab;
+	isAssignee: boolean;
 }
 
 export interface IFormValues {
@@ -22,11 +23,11 @@ export interface ITask {
 	estimatedTime: string | null;
 	id: string;
 	loggedTime: string | null;
-	priorityUuid: string | null;
+	taskPriorityUuid: string | null;
 	projectUuid: string | null;
-	reporterUuid: string;
-	stackUuid: string;
-	statusUuid: string;
+	taskReporterUuid: string;
+	taskStackUuid: string;
+	taskStatusUuid: string;
 	title: string;
 	updatedAt: string;
 }
@@ -36,4 +37,27 @@ export interface IDictionary {
 	name: string;
 	color: string | null;
 	fullName: string | null;
+}
+
+export interface ITaskTableData {
+	assigneeUuid: string | null;
+	code: string | null;
+	createdAt: string;
+	description: string;
+	estimatedTime: string | null;
+	id: string;
+	loggedTime: string | null;
+	taskPriorityUuid: string | null;
+	projectUuid: string | null;
+	taskReporterUuid: string;
+	title: string;
+	updatedAt: string;
+	taskStatusUuid: {
+		name: string;
+		color: string;
+	};
+	taskStackUuid: {
+		name: string;
+		color: string;
+	};
 }

@@ -1,15 +1,16 @@
 import { TableControlsView } from './table-controls-view';
 import type { TActiveTab } from '../types.ts';
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../../store/hooks.ts';
-import { setActiveTab } from '../slice.ts';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
+import { setActiveTab, setIsAssignee } from '../slice.ts';
+import { getIsAssigneeSelector } from '../selectors.ts';
 
 interface IProps {
 	activeTab: TActiveTab;
 }
 
 const TableControls: React.FC<IProps> = ({ activeTab }) => {
-	const [switchStatus, setSwitchStatus] = useState(false);
+	const isAssignee = useAppSelector(getIsAssigneeSelector());
 
 	const dispatch = useAppDispatch();
 
@@ -18,13 +19,13 @@ const TableControls: React.FC<IProps> = ({ activeTab }) => {
 	};
 
 	const handleSwitchClick = () => {
-		setSwitchStatus((prev) => !prev);
+		dispatch(setIsAssignee(!isAssignee));
 	};
 
 	return (
 		<TableControlsView
 			activeTab={activeTab}
-			switchStatus={switchStatus}
+			isAssignee={isAssignee}
 			onTabClick={handleTabClick}
 			onSwitchClick={handleSwitchClick}
 		/>

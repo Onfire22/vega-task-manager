@@ -1,12 +1,10 @@
 import { TasksTableView } from './tasks-table-view';
 import { useAppSelector } from '../../../store/hooks.ts';
-import { getActiveTabSelector, getTableDataSelector } from '../selectors.ts';
-import { useGetTasksQuery } from '../../../api/queries/tasks.api.ts';
+import { getActiveTabSelector } from '../selectors.ts';
+import { useTableData } from '../hooks.ts';
 
 const TasksTable = () => {
-	useGetTasksQuery({ filters: { withAssignee: false } });
-
-	const tableData = useAppSelector(getTableDataSelector());
+	const tableData = useTableData();
 
 	const activeTab = useAppSelector(getActiveTabSelector());
 

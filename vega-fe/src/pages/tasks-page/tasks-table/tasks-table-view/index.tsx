@@ -1,14 +1,16 @@
 import './styles.less';
 import { TableControls } from '../../table-controls';
-import type { ITask, TActiveTab } from '../../types.ts';
+import type { ITask, ITaskTableData, TActiveTab } from '../../types.ts';
 import React from 'react';
 import { Table } from '@mantine/core';
 import { CustomTableHeaderCell } from '../../custom-table-header-cell/';
 import { TABLE_HEADER } from '../../table-header.ts';
+import { CELLS_WITH_BADGES } from '../../constants.ts';
+import { CustomBadge } from '../../custom-badge';
 
 interface IProps {
 	activeTab: TActiveTab;
-	tableData: ITask[];
+	tableData: ITaskTableData[];
 }
 
 const TasksTableView: React.FC<IProps> = ({ activeTab, tableData }) => {
@@ -34,7 +36,15 @@ const TasksTableView: React.FC<IProps> = ({ activeTab, tableData }) => {
 							<Table.Tr key={task.id}>
 								{TABLE_HEADER.map((item) => {
 									const key = item.id as keyof ITask;
-									return <Table.Td key={item.id}>{task[key]}</Table.Td>;
+									if (CELLS_WITH_BADGES.includes(key)) {
+										const badgeValue = task[key] as { name: string; color: string };
+										return (
+											<Table.Td key={item.id}>
+												<CustomBadge text={badgeValue?.name} color={badgeValue?.color} />
+											</Table.Td>
+										);
+									}
+									return <Table.Td key={item.id}>{task[key] as string}</Table.Td>;
 								})}
 							</Table.Tr>
 						);

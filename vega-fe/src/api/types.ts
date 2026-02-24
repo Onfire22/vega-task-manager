@@ -18,7 +18,7 @@ export interface IDictionaryItem {
 export interface ICreateTask {
 	title: string;
 	description: string;
-	taskPriorirtyUuid: string;
+	taskPriorityUuid: string;
 	taskStackUuid: string;
 }
 

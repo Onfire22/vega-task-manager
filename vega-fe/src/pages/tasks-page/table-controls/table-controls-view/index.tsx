@@ -8,10 +8,10 @@ interface IProps {
 	onTabClick: (tab: TActiveTab) => void;
 	onSwitchClick: () => void;
 	activeTab: TActiveTab;
-	switchStatus: boolean;
+	isAssignee: boolean;
 }
 
-const TableControlsView: React.FC<IProps> = ({ activeTab, onTabClick, switchStatus, onSwitchClick }) => {
+const TableControlsView: React.FC<IProps> = ({ activeTab, onTabClick, onSwitchClick, isAssignee }) => {
 	return (
 		<section className="table-controls">
 			<div className="table-controls__tabs">
@@ -29,19 +29,23 @@ const TableControlsView: React.FC<IProps> = ({ activeTab, onTabClick, switchStat
 				</button>
 			</div>
 			<div className="table-controls__switch">
-				<span>Я исполнитель</span>
+				<span className={`table-controls__text${!isAssignee ? ' table-controls__text_active' : ''}`}>
+					Я исполнитель
+				</span>
 				<Switch
 					className="table-controls__toggler"
-					checked={switchStatus}
+					checked={isAssignee}
 					onChange={onSwitchClick}
 					styles={{
 						track: {
-							backgroundColor: switchStatus ? BLUE_COLOR : TEAL_COLOR,
+							backgroundColor: isAssignee ? BLUE_COLOR : TEAL_COLOR,
 						},
 					}}
-					style={{ '--before-color': switchStatus ? BLUE_COLOR : TEAL_COLOR }}
+					style={{ '--before-color': isAssignee ? BLUE_COLOR : TEAL_COLOR }}
 				/>
-				<span>Мои задачи</span>
+				<span className={`table-controls__text${isAssignee ? ' table-controls__text_active' : ''}`}>
+					Мои задачи
+				</span>
 			</div>
 		</section>
 	);
