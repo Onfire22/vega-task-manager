@@ -5,6 +5,7 @@ import { SignUpPage } from '../pages/sign-up-page';
 import { NotFoundPage } from '../pages/not-found-page';
 import { ProtectedRoute } from './protected-route.tsx';
 import { PublicRoute } from './public-route.tsx';
+import { TaskPage } from '../pages/task-page';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
@@ -23,6 +24,7 @@ const Router = () => {
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route index element={<TasksPage />} />
+				<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />
 		</Routes>

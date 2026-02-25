@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
 import { getIsModalShownSelector } from './selectors.ts';
 import { Notification } from '@mantine/core';
 import { COLOR_BY_TYPE } from './constants.ts';
 import { setNotification } from './slice.ts';
 
-interface IProps {
-	children: React.ReactNode;
-}
-
-const Notifications: React.FC<IProps> = ({ children }) => {
+const Notifications = () => {
 	const dispatch = useAppDispatch();
 
 	const notification = useAppSelector(getIsModalShownSelector());
@@ -31,25 +27,22 @@ const Notifications: React.FC<IProps> = ({ children }) => {
 	};
 
 	return (
-		<>
-			{notification && (
-				<Notification
-					color={COLOR_BY_TYPE[notification.type]}
-					title={notification.text}
-					onClose={handleCloseNotification}
-					style={{
-						width: '30%',
-						position: 'absolute',
-						top: '10px',
-						right: 0,
-						zIndex: 9999,
-					}}
-				>
-					{notification.message || null}
-				</Notification>
-			)}
-			{children}
-		</>
+		notification && (
+			<Notification
+				color={COLOR_BY_TYPE[notification.type]}
+				title={notification.text}
+				onClose={handleCloseNotification}
+				style={{
+					width: '30%',
+					position: 'absolute',
+					top: '10px',
+					right: 0,
+					zIndex: 9999,
+				}}
+			>
+				{notification.message || null}
+			</Notification>
+		)
 	);
 };
 

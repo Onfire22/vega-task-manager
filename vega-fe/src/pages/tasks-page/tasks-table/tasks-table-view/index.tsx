@@ -11,9 +11,10 @@ import { CustomBadge } from '../../custom-badge';
 interface IProps {
 	activeTab: TActiveTab;
 	tableData: ITaskTableData[];
+	onRowDoubleClick: (uuid: string) => void;
 }
 
-const TasksTableView: React.FC<IProps> = ({ activeTab, tableData }) => {
+const TasksTableView: React.FC<IProps> = ({ activeTab, tableData, onRowDoubleClick }) => {
 	return (
 		<div className="tasks-table">
 			<TableControls activeTab={activeTab} />
@@ -33,7 +34,7 @@ const TasksTableView: React.FC<IProps> = ({ activeTab, tableData }) => {
 				<Table.Tbody>
 					{tableData.map((task) => {
 						return (
-							<Table.Tr key={task.id}>
+							<Table.Tr key={task.id} onDoubleClick={() => onRowDoubleClick(task.id)}>
 								{TABLE_HEADER.map((item) => {
 									const key = item.id as keyof ITask;
 									if (CELLS_WITH_BADGES.includes(key)) {

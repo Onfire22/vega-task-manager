@@ -1,29 +1,21 @@
-import Logo from '../../../../assets/images/logo.png';
-import Plus from '../../../../assets/icons/plus.svg?react';
-import LogOut from '../../../../assets/icons/logout.svg?react';
-import Settings from '../../../../assets/icons/settings.svg?react';
-import Profile from '../../../../assets/icons/profile.svg?react';
-import { Link } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../constants.ts';
-import { Button, CloseButton, Input, Menu } from '@mantine/core';
-import './styles.less';
 import React from 'react';
+import Logo from '../../../../../assets/images/logo.png';
+import LogOut from '../../../../../assets/icons/logout.svg?react';
+import Settings from '../../../../../assets/icons/settings.svg?react';
+import Profile from '../../../../../assets/icons/profile.svg?react';
+import { Link } from 'react-router-dom';
+import { CloseButton, Input, Menu } from '@mantine/core';
+import { FRONT_ROUTES } from '../../../../../constants.ts';
+import './styles.less';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
 	onLogOutClick: () => void;
-	onModalOpen: () => void;
 	searchValue: string;
 }
 
-const CustomMenuView: React.FC<IProps> = ({
-	searchValue,
-	onSearchChange,
-	onProfileCLick,
-	onLogOutClick,
-	onModalOpen,
-}) => {
+const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfileCLick, onLogOutClick }) => {
 	return (
 		<div className="custom-menu">
 			<div className="custom-menu__info">
@@ -46,9 +38,6 @@ const CustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
-				<Button variant="light" onClick={onModalOpen} rightSection={<Plus width={14} height={14} />}>
-					Создать
-				</Button>
 				<Menu shadow="md" width={200}>
 					<Menu.Target>
 						<div className="custom-menu__profile">

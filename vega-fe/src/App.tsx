@@ -5,9 +5,8 @@ import { Notifications } from './components/notifications';
 const App = () => {
 	return (
 		<MantineProvider defaultColorScheme="light">
-			<Notifications>
-				<Router />
-			</Notifications>
+			<Notifications />
+			<Router />
 		</MantineProvider>
 	);
 };
