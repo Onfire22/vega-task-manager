@@ -56,7 +56,7 @@ export const getTaskByUuid = async (req: Request, res: Response, next: NextFunct
 			return;
 		}
 
-		const task = prismaAppClient.task.findUnique({
+		const task = await prismaAppClient.task.findUnique({
 			where: { id: uuid },
 		});
 

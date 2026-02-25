@@ -1,7 +1,13 @@
 import './styles.less';
 import { Button, Progress } from '@mantine/core';
+import type { ITask } from '../../../../api/types.ts';
+import React from 'react';
 
-const TaskView = () => {
+interface IProps {
+	task: ITask;
+}
+
+const TaskView: React.FC<IProps> = ({ task }) => {
 	return (
 		<div className="task">
 			<div className="task__header">
@@ -13,7 +19,7 @@ const TaskView = () => {
 						<div className="task__project">Project / Task_CODE</div>
 					</div>
 					<div className="task__subtitle">
-						<p className="task__name">Task Name</p>
+						<p className="task__name">{task.title}</p>
 					</div>
 				</div>
 			</div>
@@ -29,27 +35,17 @@ const TaskView = () => {
 						<div className="task__description">
 							<div className="task__row">
 								<span className="task__key">Тип</span>
-								<span className="task__value">FE</span>
+								<span className="task__value">{task.taskStackUuid}</span>
 							</div>
 							<div className="task__row">
 								<span className="task__key">Приоритет:</span>
-								<span className="task__value">Medium</span>
+								<span className="task__value">{task.taskPriorityUuid}</span>
 							</div>
 						</div>
 					</div>
 					<div className="task__description">
 						<div className="task__heading">Описание задачи:</div>
-						<div className="task__text">
-							Текст задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Текст
-							задачиassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-						</div>
+						<div className="task__text">{task.description}</div>
 					</div>
 				</div>
 				<aside className="task__sidebar">
@@ -68,11 +64,11 @@ const TaskView = () => {
 						<div className="task__heading">Даты</div>
 						<div className="task__row">
 							<span className="task__key">Создано:</span>
-							<span className="task__value">01.01.2026</span>
+							<span className="task__value">{task.createdAt}</span>
 						</div>
 						<div className="task__row">
 							<span className="task__key">Обновлено:</span>
-							<span className="task__value">01.01.2026</span>
+							<span className="task__value">{task.updatedAt}</span>
 						</div>
 					</div>
 					<div className="task__details">

@@ -16,5 +16,5 @@ export const ROUTES = {
 	createTask: '/api/tasks/create',
 	getTasks: '/api/tasks',
 	dictionaries: '/api/dictionaries',
-	getTask: '/api/task/^uuid',
+	getTask: '/api/task/',
 };
