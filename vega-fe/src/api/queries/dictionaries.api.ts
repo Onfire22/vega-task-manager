@@ -2,7 +2,7 @@ import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
 import type { IDictionariesResponse, TDictionariesTypes } from '../types.ts';
 
-export const dictionariesApi = baseApi.injectEndpoints({
+const dictionariesApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getDictionaries: builder.query<IDictionariesResponse, TDictionariesTypes[]>({
 			query: (filters) => ({
