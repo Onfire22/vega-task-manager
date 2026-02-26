@@ -4,8 +4,7 @@ import { CustomForm } from '../../../../../ui/custom-form';
 import { Button, PasswordInput, Popover, Progress, TextInput } from '@mantine/core';
 import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
-import Lock from '../../../../../assets/icons/lock.svg?react';
-import At from '../../../../../assets/icons/at.svg?react';
+import { IconAt, IconLock } from '@tabler/icons-react';
 import './styles.less';
 
 interface IProps {
@@ -59,7 +58,7 @@ const SignUpFormView: React.FC<IProps> = ({
 						error={formErrors.email}
 						onChange={onFieldChange}
 						withAsterisk
-						leftSection={<At />}
+						leftSection={<IconAt color="#D5D8DB" size={23} />}
 						ref={emailRef}
 					/>
 				</div>
@@ -89,7 +88,7 @@ const SignUpFormView: React.FC<IProps> = ({
 									error={formErrors.password}
 									onChange={onFieldChange}
 									withAsterisk
-									leftSection={<Lock />}
+									leftSection={<IconLock color="#D5D8DB" size={23} />}
 									ref={passwordRef}
 								/>
 							</div>
@@ -123,7 +122,7 @@ const SignUpFormView: React.FC<IProps> = ({
 						error={formErrors.passwordRepeat}
 						onChange={onFieldChange}
 						withAsterisk
-						leftSection={<Lock />}
+						leftSection={<IconLock color="#D5D8DB" size={23} />}
 					/>
 				</div>
 				<div className="signup-form__group">

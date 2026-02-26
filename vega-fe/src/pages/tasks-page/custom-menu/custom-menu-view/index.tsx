@@ -1,8 +1,5 @@
 import Logo from '../../../../assets/images/logo.png';
-import Plus from '../../../../assets/icons/plus.svg?react';
-import LogOut from '../../../../assets/icons/logout.svg?react';
-import Settings from '../../../../assets/icons/settings.svg?react';
-import Profile from '../../../../assets/icons/profile.svg?react';
+import { IconLogout2, IconPlus, IconSettings, IconUserCircle } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
@@ -48,21 +45,21 @@ const CustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
-				<Button variant="light" onClick={onModalOpen} rightSection={<Plus width={14} height={14} />}>
+				<Button variant="light" onClick={onModalOpen} rightSection={<IconPlus size={17} />}>
 					Создать
 				</Button>
 				<Menu shadow="md" width={200}>
 					<Menu.Target>
 						<div className="custom-menu__profile">
-							<Profile width={32} height={32} />
+							<IconUserCircle size={32} color="#3378B5" />
 						</div>
 					</Menu.Target>
 					<Menu.Dropdown>
 						<Menu.Label>{`${userData.name} ${userData.secondName}`}</Menu.Label>
-						<Menu.Item leftSection={<Settings width={20} height={20} />} onClick={onProfileCLick}>
+						<Menu.Item leftSection={<IconSettings size={20} />} onClick={onProfileCLick}>
 							Профиль
 						</Menu.Item>
-						<Menu.Item leftSection={<LogOut width={20} height={20} />} onClick={onLogOutClick}>
+						<Menu.Item leftSection={<IconLogout2 size={20} />} onClick={onLogOutClick}>
 							Выход
 						</Menu.Item>
 					</Menu.Dropdown>

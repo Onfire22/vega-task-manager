@@ -3,8 +3,7 @@ import './styles.less';
 import { CustomForm } from '../../../../ui/custom-form';
 import { Link } from 'react-router-dom';
 import { Button, PasswordInput, TextInput } from '@mantine/core';
-import Lock from '../../../../assets/icons/lock.svg?react';
-import At from '../../../../assets/icons/at.svg?react';
+import { IconAt, IconLock } from '@tabler/icons-react';
 
 interface IProps {
 	formValues: {
@@ -35,7 +34,7 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 						error={formErrors.email}
 						onChange={onFieldChange}
 						withAsterisk
-						leftSection={<At />}
+						leftSection={<IconAt color="#D5D8DB" size={23} />}
 						ref={loginRef}
 					/>
 				</div>
@@ -50,7 +49,7 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 						error={formErrors.password}
 						onChange={onFieldChange}
 						withAsterisk
-						leftSection={<Lock />}
+						leftSection={<IconLock color="#D5D8DB" size={23} />}
 					/>
 				</div>
 				<div className="signin-form__text">
