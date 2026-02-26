@@ -38,7 +38,7 @@ export const getDictionaries = async (
 			return acc;
 		}, {} as TPayload);
 
-		res.status(RESPONSE_STATUSES.success).json({ success: true, payload });
+		res.status(RESPONSE_STATUSES.success).json({ dictionaries: payload });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}

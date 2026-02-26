@@ -5,14 +5,18 @@ export interface IUserData {
 	secondName: string;
 }
 
+export interface IAuthUserResponse {
+	user: {
+		email: string;
+		id: string;
+		name: string;
+		secondName: string;
+	};
+}
+
 export interface ISignInUserData {
 	email: string;
 	password: string;
-}
-
-export interface IDictionaryItem {
-	label: string;
-	value: string;
 }
 
 export interface ICreateTask {
@@ -35,6 +39,10 @@ export interface ITask extends ICreateTask {
 	updatedAt: string;
 }
 
+export interface ITaskResponse {
+	tasks: ITask[];
+}
+
 export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
 
 export interface IDictionary {
@@ -44,9 +52,6 @@ export interface IDictionary {
 	fullName: string | null;
 }
 
-export type TPayload = Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
-
-export interface IDictionariesResponse {
-	success: boolean;
-	payload: TPayload;
-}
+export type IDictionariesResponse = {
+	dictionaries: Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
+};

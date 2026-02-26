@@ -13,9 +13,10 @@ interface IProps {
 	onProfileCLick: () => void;
 	onLogOutClick: () => void;
 	searchValue: string;
+	userData: { name?: string; secondName?: string };
 }
 
-const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfileCLick, onLogOutClick }) => {
+const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfileCLick, onLogOutClick, userData }) => {
 	return (
 		<div className="custom-menu">
 			<div className="custom-menu__info">
@@ -45,6 +46,7 @@ const CustomMenuView: React.FC<IProps> = ({ searchValue, onSearchChange, onProfi
 						</div>
 					</Menu.Target>
 					<Menu.Dropdown>
+						<Menu.Label>{`${userData.name} ${userData.secondName}`}</Menu.Label>
 						<Menu.Item leftSection={<Settings width={20} height={20} />} onClick={onProfileCLick}>
 							Профиль
 						</Menu.Item>

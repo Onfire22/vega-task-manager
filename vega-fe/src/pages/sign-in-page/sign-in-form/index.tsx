@@ -29,7 +29,8 @@ const SignUpForm = () => {
 		validateOnChange: false,
 		onSubmit: async (values) => {
 			const response = await signInUser(values);
-			if (response?.data?.success) {
+			console.log(response);
+			if (response?.data?.user) {
 				navigate(FRONT_ROUTES.root);
 			} else {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment

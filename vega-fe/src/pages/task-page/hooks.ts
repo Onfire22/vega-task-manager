@@ -4,18 +4,14 @@ import { useGetTaskQuery } from '../../api/queries/task.api.ts';
 import { format } from 'date-fns';
 
 export const useDictionaries = () => {
-	const {
-		data: dictionaries,
-		isLoading,
-		isSuccess,
-	} = useGetDictionariesQuery(BASE_DICTIONARIES_META, {
+	const { data, isLoading, isSuccess } = useGetDictionariesQuery(BASE_DICTIONARIES_META, {
 		refetchOnMountOrArgChange: false,
 		refetchOnFocus: false,
 		refetchOnReconnect: false,
 	});
 
 	if (isSuccess) {
-		return { dictionaries: dictionaries.payload, isDictionariesLoading: isLoading };
+		return { dictionaries: data.dictionaries, isDictionariesLoading: isLoading };
 	}
 
 	return { dictionaries: null, selectorsData: null };

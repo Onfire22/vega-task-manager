@@ -2,7 +2,7 @@ import { CustomMenuView } from './custom-menu-view';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../constants.ts';
-import { useLogOutUserMutation } from '../../../api/queries/auth.api.ts';
+import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../api/queries/auth.api.ts';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';
 
@@ -11,6 +11,8 @@ const CustomMenu = () => {
 	const dispatch = useAppDispatch();
 
 	const [logOutUser] = useLogOutUserMutation();
+
+	const { data } = useGetCurrentUserQuery();
 
 	const [searchValue, setSearchValue] = useState('');
 
@@ -33,6 +35,7 @@ const CustomMenu = () => {
 	return (
 		<CustomMenuView
 			searchValue={searchValue}
+			userData={{ name: data?.name, secondName: data?.secondName }}
 			onSearchChange={handleSearchChange}
 			onProfileCLick={handleProfileCLick}
 			onLogOutClick={handleLogOutClick}

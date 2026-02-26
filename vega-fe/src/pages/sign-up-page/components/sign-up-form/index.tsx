@@ -32,7 +32,7 @@ const SignUpForm = () => {
 		validateOnChange: false,
 		onSubmit: async (values) => {
 			const response = await signUpUser(values);
-			if (response?.data?.success) {
+			if (response?.data?.user) {
 				navigate(FRONT_ROUTES.root);
 			}
 		},

@@ -1,7 +1,6 @@
-import type { IDictionary, ITask } from './types.ts';
+import type { IDict, IDictionary, ITask } from './types.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
-import type { TPayload } from '../../api/types.ts';
 
 export const transformDictionaries = (dictionary: Array<IDictionary>) => {
 	return dictionary.map((item) => {
@@ -9,7 +8,7 @@ export const transformDictionaries = (dictionary: Array<IDictionary>) => {
 	});
 };
 
-export const transformTasksDataToTable = (tasks: Array<ITask>, dictionaries: TPayload) => {
+export const transformTasksDataToTable = (tasks: Array<ITask>, dictionaries: IDict) => {
 	if (!tasks.length || !dictionaries) return [];
 
 	return tasks.map((task) => {

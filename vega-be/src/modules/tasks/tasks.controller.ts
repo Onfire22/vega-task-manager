@@ -25,7 +25,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 			next(new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError));
 		}
 
-		res.status(RESPONSE_STATUSES.success).json({ success: true, payload: newTask });
+		res.status(RESPONSE_STATUSES.success).json({ newTask });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -42,7 +42,7 @@ export const getUserTasks = async (req: Request, res: Response, next: NextFuncti
 			},
 		});
 
-		res.status(200).json({ success: true, payload: tasks });
+		res.status(200).json({ tasks });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}

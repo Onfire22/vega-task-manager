@@ -32,12 +32,16 @@ export interface ITask {
 	updatedAt: string;
 }
 
+export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
+
 export interface IDictionary {
 	id: string;
 	name: string;
 	color: string | null;
 	fullName: string | null;
 }
+
+export type IDict = Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
 
 export interface ITaskTableData {
 	assigneeUuid: string | null;

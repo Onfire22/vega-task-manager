@@ -25,7 +25,7 @@ const CreateTaskModal = () => {
 		validateOnChange: false,
 		onSubmit: async (values) => {
 			const response = await createTask(values);
-			if (response?.data?.success) {
+			if (response?.data?.newTask) {
 				dispatch(setNotification({ type: 'success', text: 'Задача успешно создана' }));
 				dispatch(setIsModalShown(false));
 			}

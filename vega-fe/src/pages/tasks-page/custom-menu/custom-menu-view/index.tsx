@@ -15,6 +15,7 @@ interface IProps {
 	onLogOutClick: () => void;
 	onModalOpen: () => void;
 	searchValue: string;
+	userData: { name?: string; secondName?: string };
 }
 
 const CustomMenuView: React.FC<IProps> = ({
@@ -23,6 +24,7 @@ const CustomMenuView: React.FC<IProps> = ({
 	onProfileCLick,
 	onLogOutClick,
 	onModalOpen,
+	userData,
 }) => {
 	return (
 		<div className="custom-menu">
@@ -56,6 +58,7 @@ const CustomMenuView: React.FC<IProps> = ({
 						</div>
 					</Menu.Target>
 					<Menu.Dropdown>
+						<Menu.Label>{`${userData.name} ${userData.secondName}`}</Menu.Label>
 						<Menu.Item leftSection={<Settings width={20} height={20} />} onClick={onProfileCLick}>
 							Профиль
 						</Menu.Item>

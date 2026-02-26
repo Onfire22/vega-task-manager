@@ -13,7 +13,15 @@ export const signupUser = async (req: Request, res: Response, next: NextFunction
 
 		userData.password = await bcrypt.hash(userData.password, salt);
 
-		const newUser = await prismaAppClient.user.create({ data: userData });
+		const newUser = await prismaAppClient.user.create({
+			data: userData,
+			select: {
+				email: true,
+				id: true,
+				name: true,
+				secondName: true,
+			},
+		});
 
 		const token = generateToken(newUser.id);
 
@@ -22,10 +30,7 @@ export const signupUser = async (req: Request, res: Response, next: NextFunction
 				httpOnly: true,
 				maxAge: HOUR_IN_MS,
 			})
-			.json({
-				success: true,
-				payload: { email: newUser.email, id: newUser.id, name: newUser.name, secondName: newUser.secondName },
-			});
+			.json({ user: newUser });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -37,6 +42,13 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 
 		const user = await prismaAppClient.user.findUnique({
 			where: { email },
+			select: {
+				email: true,
+				id: true,
+				name: true,
+				secondName: true,
+				password: true,
+			},
 		});
 
 		if (!user) {
@@ -59,8 +71,7 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 				maxAge: HOUR_IN_MS,
 			})
 			.json({
-				success: true,
-				payload: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
+				user: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
 			});
 	} catch (e) {
 		console.log(e);
