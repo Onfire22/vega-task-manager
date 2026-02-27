@@ -65,3 +65,16 @@ export const getTaskByUuid = async (req: Request, res: Response, next: NextFunct
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };
+
+export const updateTask = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const userTask = req.body;
+		const task = await prismaAppClient.task.update({
+			where: { id: userTask.id },
+			data: userTask,
+		});
+		res.status(200).json({ task });
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+	}
+};

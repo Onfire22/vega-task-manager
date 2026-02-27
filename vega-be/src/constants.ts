@@ -19,6 +19,7 @@ export const ROUTES = {
 	currentUser: '/api/users/current',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
-	createTask: '/api/tasks/create',
 	task: '/api/task',
+	createTask: '/api/tasks/create',
+	updateTask: '/api/tasks/update',
 };

@@ -27,3 +27,19 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
 		next(e);
 	}
 };
+
+export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const userList = await prismaAppClient.user.findMany({
+			select: {
+				id: true,
+				name: true,
+				secondName: true,
+			},
+		});
+
+		res.status(200).json({ userList });
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+	}
+};
