@@ -1,4 +1,4 @@
-import { teal, violet } from './src/constants';
+import { teal, violet } from './constants.ts';
 import { createTheme } from '@mantine/core';
 
 export const THEME = createTheme({

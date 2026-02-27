@@ -2,6 +2,10 @@ export interface IInitialState {
 	isModalShown: boolean;
 	activeTab: TActiveTab;
 	isAssignee: boolean;
+	sorting: {
+		column: string;
+		direction: 'asc' | 'desc';
+	};
 }
 
 export interface IFormValues {

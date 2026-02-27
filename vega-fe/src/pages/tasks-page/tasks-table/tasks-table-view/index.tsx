@@ -23,7 +23,12 @@ const TasksTableView: React.FC<IProps> = ({ activeTab, tableData, onRowDoubleCli
 					<Table.Tr>
 						{TABLE_HEADER.map((item) => {
 							return (
-								<Table.Th key={item.id}>
+								<Table.Th
+									style={{
+										width: item.width || '',
+									}}
+									key={item.id}
+								>
 									<CustomTableHeaderCell column={item} />
 								</Table.Th>
 							);

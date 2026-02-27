@@ -5,6 +5,10 @@ export const initialState: IInitialState = {
 	isModalShown: false,
 	activeTab: 'table',
 	isAssignee: false,
+	sorting: {
+		column: 'taskPriorityUuid',
+		direction: 'asc',
+	},
 };
 
 const tasksSlice = createSlice({
@@ -20,9 +24,12 @@ const tasksSlice = createSlice({
 		setIsAssignee: (state, action: PayloadAction<boolean>) => {
 			state.isAssignee = action.payload;
 		},
+		setSorting: (state, action: PayloadAction<{ column: string; direction: 'asc' | 'desc' }>) => {
+			state.sorting = action.payload;
+		},
 	},
 });
 
-export const { setIsModalShown, setActiveTab, setIsAssignee } = tasksSlice.actions;
+export const { setIsModalShown, setActiveTab, setIsAssignee, setSorting } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

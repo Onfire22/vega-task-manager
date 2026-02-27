@@ -1,11 +1,10 @@
 export const TABLE_HEADER = [
-	{ id: 'code', name: 'Код' },
-	{ id: 'title', name: 'Название' },
-	{ id: 'taskPriorityUuid', name: 'Приоритет' },
-	{ id: 'taskStatusUuid', name: 'Статус' },
-	{ id: 'taskStackUuid', name: 'Тэг' },
+	{ id: 'code', name: 'Код', width: '130px' },
+	{ id: 'title', name: 'Название', width: '500px', sorting: 'title' },
+	{ id: 'taskPriorityUuid', name: 'Приоритет', width: '100px', sorting: 'taskPriorityUuid' },
+	{ id: 'taskStatusUuid', name: 'Статус', width: '70px', sorting: 'taskStatusUuid' },
+	{ id: 'taskStackUuid', name: 'Тэг', width: '70px' },
 	{ id: 'estimatedTime', name: 'Оценка' },
 	{ id: 'loggedTime', name: 'Затрачено' },
-	{ id: 'reporterUuid', name: 'Заказчик' },
 	{ id: 'createdAt', name: 'Дата создания' },
 ];
