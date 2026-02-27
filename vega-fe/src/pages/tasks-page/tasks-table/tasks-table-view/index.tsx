@@ -34,7 +34,7 @@ const TasksTableView: React.FC<IProps> = ({ activeTab, tableData, onRowDoubleCli
 				<Table.Tbody>
 					{tableData.map((task) => {
 						return (
-							<Table.Tr key={task.id} onDoubleClick={() => onRowDoubleClick(task.id)}>
+							<Table.Tr ta="center" key={task.id} onDoubleClick={() => onRowDoubleClick(task.id)}>
 								{TABLE_HEADER.map((item) => {
 									const key = item.id as keyof ITask;
 									if (CELLS_WITH_BADGES.includes(key)) {

@@ -45,13 +45,13 @@ const CustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
-				<Button variant="light" onClick={onModalOpen} rightSection={<IconPlus size={17} />}>
+				<Button onClick={onModalOpen} rightSection={<IconPlus size={17} />}>
 					Создать
 				</Button>
 				<Menu shadow="md" width={200}>
 					<Menu.Target>
 						<div className="custom-menu__profile">
-							<IconUserCircle size={32} color="#3378B5" />
+							<IconUserCircle size={32} color="#2BABA4" />
 						</div>
 					</Menu.Target>
 					<Menu.Dropdown>

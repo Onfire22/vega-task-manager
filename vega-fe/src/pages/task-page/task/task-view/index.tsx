@@ -26,9 +26,8 @@ const TaskView: React.FC<IProps> = ({ task }) => {
 			<div className="task__container">
 				<div className="task__content">
 					<div className="task__controlls">
-						<Button>Редактировать</Button>
-						<Button>Лог</Button>
-						<Button>Статус</Button>
+						<Button className="task__button">Редактировать</Button>
+						<Button className="task__button">Статус</Button>
 					</div>
 					<div className="task__details">
 						<div className="task__heading">Детали задачи</div>
