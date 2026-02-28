@@ -4,7 +4,6 @@ import { Notifications } from './components/notifications';
 import { THEME } from './shared/utils.ts';
 
 const App = () => {
-	console.log('test');
 	return (
 		<MantineProvider theme={THEME} defaultColorScheme="dark">
 			<Notifications />
