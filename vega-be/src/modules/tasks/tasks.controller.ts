@@ -33,12 +33,16 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
 export const getUserTasks = async (req: Request, res: Response, next: NextFunction) => {
 	try {
+		const { isAssignee, sorting } = req.body;
+
 		const userId = res.locals.user.id;
-		const withAssignee = req.query.withAssignee === 'true';
 
 		const tasks = await prismaAppClient.task.findMany({
 			where: {
-				...(withAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
+				...(isAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
+			},
+			orderBy: {
+				[sorting.column]: sorting.direction,
 			},
 		});
 

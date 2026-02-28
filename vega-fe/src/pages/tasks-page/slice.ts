@@ -7,7 +7,7 @@ export const initialState: IInitialState = {
 	isAssignee: false,
 	sorting: {
 		column: 'taskPriorityUuid',
-		direction: 'asc',
+		direction: 'desc',
 	},
 };
 

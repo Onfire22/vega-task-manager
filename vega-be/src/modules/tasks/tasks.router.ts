@@ -6,7 +6,7 @@ const tasksRouter = Router();
 
 tasksRouter.post(ROUTES.createTask, createTask);
 tasksRouter.post(ROUTES.updateTask, updateTask);
-tasksRouter.get(ROUTES.tasks, getUserTasks);
+tasksRouter.post(ROUTES.tasks, getUserTasks);
 tasksRouter.get(ROUTES.task, getTaskByUuid);
 
 export { tasksRouter };

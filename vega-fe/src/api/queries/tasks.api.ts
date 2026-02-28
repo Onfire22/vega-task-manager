@@ -12,13 +12,14 @@ const tasksApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Tasks'],
 		}),
-		getTasks: builder.query<ITaskResponse, { filters: { withAssignee: boolean } }>({
+		getTasks: builder.query<
+			ITaskResponse,
+			{ filters: { isAssignee: boolean; sorting: { column: string; direction: 'asc' | 'desc' } } }
+		>({
 			query: ({ filters }) => ({
 				url: ROUTES.getTasks,
-				method: METHODS.get,
-				params: {
-					...filters,
-				},
+				method: METHODS.post,
+				body: filters,
 			}),
 			providesTags: ['Tasks'],
 		}),

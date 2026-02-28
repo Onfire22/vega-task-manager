@@ -2,7 +2,7 @@ import { useGetDictionariesQuery } from '../../api/queries/dictionaries.api.ts';
 import { BASE_DICTIONARIES_META } from './constants.ts';
 import { useGetTasksQuery } from '../../api/queries/tasks.api.ts';
 import { transformDictionaries, transformTasksDataToTable } from './utils.ts';
-import { getFiltersSelector, getIsAssigneeSelector } from './selectors.ts';
+import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '../../store/hooks.ts';
 
 export const useDictionaries = () => {
@@ -27,13 +27,11 @@ export const useDictionaries = () => {
 };
 
 export const useTableData = () => {
-	const isAssignee = useAppSelector(getIsAssigneeSelector());
 	const { dictionaries } = useDictionaries();
 	const filters = useAppSelector(getFiltersSelector());
-	console.log(filters);
 
 	const { tableData } = useGetTasksQuery(
-		{ filters: { withAssignee: isAssignee } },
+		{ filters },
 		{
 			selectFromResult: (result) => {
 				if (!result?.isSuccess || !dictionaries) return { tableData: [], isTableDataLoading: false };
