@@ -8,14 +8,14 @@ import { CreateTaskValidationSchema } from '../validation.ts';
 import { INITIAL_VALUES } from '../constants.ts';
 import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
 import { setNotification } from '../../../components/notifications/slice.ts';
-import { useDictionaries } from '../hooks.ts';
+import { useDictionaries } from '../../../shared/hooks.ts';
 
 const CreateTaskModal = () => {
 	const dispatch = useAppDispatch();
 
 	const [createTask] = useCreateTaskMutation();
 
-	const { selectorsData } = useDictionaries();
+	const { selectorsData } = useDictionaries(true);
 
 	const isModalShown = useAppSelector(getIsModalShownSelector());
 

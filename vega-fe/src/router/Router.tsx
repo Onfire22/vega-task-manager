@@ -9,7 +9,7 @@ import { TaskPage } from '../pages/task-page';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
-import { FRONT_ROUTES } from '../constants.ts';
+import { FRONT_ROUTES } from '../shared/constants.ts';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();

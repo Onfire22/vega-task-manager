@@ -1,22 +1,8 @@
-import { useGetDictionariesQuery } from '../../api/queries/dictionaries.api.ts';
-import { BASE_DICTIONARIES_META, DATE_FORMAT } from '../tasks-page/constants.ts';
-import { useGetTaskQuery } from '../../api/queries/task.api.ts';
 import { format } from 'date-fns';
+import { useGetTaskQuery } from '../../api/queries/task.api.ts';
 import { useGetUsersQuery } from '../../api/queries/users.api.ts';
-
-export const useDictionaries = () => {
-	const { data, isLoading, isSuccess } = useGetDictionariesQuery(BASE_DICTIONARIES_META, {
-		refetchOnMountOrArgChange: false,
-		refetchOnFocus: false,
-		refetchOnReconnect: false,
-	});
-
-	if (isSuccess) {
-		return { dictionaries: data.dictionaries, isDictionariesLoading: isLoading };
-	}
-
-	return { dictionaries: null, isDictionariesLoading: false };
-};
+import { useDictionaries } from '../../shared/hooks.ts';
+import { DATE_FORMAT } from '../tasks-page/constants.ts';
 
 export const useTask = (uuid?: string) => {
 	const { dictionaries } = useDictionaries();

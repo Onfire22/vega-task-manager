@@ -1,7 +1,7 @@
 import Logo from '../../../../assets/images/logo.png';
 import { IconLogout2, IconPlus, IconSettings, IconUserCircle } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../constants.ts';
+import { FRONT_ROUTES } from '../../../../shared/constants.ts';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';

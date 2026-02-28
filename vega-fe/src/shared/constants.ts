@@ -34,3 +34,9 @@ export const violet: MantineColorsTuple = [
 	'#3B1F6B',
 	'#2A1450',
 ];
+
+export const CACHING_SETTINGS = {
+	refetchOnMountOrArgChange: false,
+	refetchOnFocus: false,
+	refetchOnReconnect: false,
+};
