@@ -22,4 +22,5 @@ export const ROUTES = {
 	task: '/api/task',
 	createTask: '/api/tasks/create',
 	updateTask: '/api/tasks/update',
+	updateTaskStatus: '/api/tasks/status-update',
 };

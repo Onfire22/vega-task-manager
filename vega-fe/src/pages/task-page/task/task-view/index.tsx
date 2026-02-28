@@ -8,9 +8,10 @@ interface IProps {
 	task: ITask;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
+	onTaskStatusUpdate: (uuid: string, status: string) => void;
 }
 
-const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses }) => {
+const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses, onTaskStatusUpdate }) => {
 	return (
 		<div className="task">
 			<div className="task__header">
@@ -43,7 +44,11 @@ const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses }) =>
 											return (
 												<Timeline.Item
 													bullet={
-														<button className="task__dropdown-button">
+														<button
+															className="task__dropdown-button"
+															type="button"
+															onClick={() => onTaskStatusUpdate(task.id, status.id)}
+														>
 															<Icon size={20} />
 														</button>
 													}

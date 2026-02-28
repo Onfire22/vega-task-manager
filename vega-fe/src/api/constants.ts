@@ -18,4 +18,5 @@ export const ROUTES = {
 	dictionaries: '/api/dictionaries',
 	getTask: '/api/task/',
 	getUsers: '/api/users',
+	updateTaskStatus: '/api/tasks/status-update',
 };

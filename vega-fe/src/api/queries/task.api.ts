@@ -12,8 +12,17 @@ const taskApi = baseApi.injectEndpoints({
 					params: { uuid },
 				};
 			},
+			providesTags: ['Task'],
+		}),
+		updateTaskStatus: builder.mutation<{ task: ITask }, { uuid: string; status: string }>({
+			query: ({ uuid, status }) => ({
+				url: ROUTES.updateTaskStatus,
+				method: METHODS.patch,
+				body: { uuid, status },
+			}),
+			invalidatesTags: ['Task'],
 		}),
 	}),
 });
 
-export const { useGetTaskQuery } = taskApi;
+export const { useGetTaskQuery, useUpdateTaskStatusMutation } = taskApi;
