@@ -1,5 +1,12 @@
 import Logo from '../../../../assets/images/logo.png';
-import { IconLogout2, IconPlus, IconSettings, IconUserCircle } from '@tabler/icons-react';
+import {
+	IconClipboardCopy,
+	IconLogout2,
+	IconPlus,
+	IconSettings,
+	IconSitemap,
+	IconUserCircle,
+} from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../shared/constants.ts';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
@@ -10,7 +17,7 @@ interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
 	onLogOutClick: () => void;
-	onModalOpen: () => void;
+	onModalOpen: (modal: 'task' | 'project') => void;
 	searchValue: string;
 	userData: { name?: string; secondName?: string };
 }
@@ -45,9 +52,20 @@ const CustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
-				<Button onClick={onModalOpen} rightSection={<IconPlus size={17} />}>
-					Создать
-				</Button>
+				<Menu shadow="md" width={180}>
+					<Menu.Target>
+						<Button rightSection={<IconPlus size={17} />}>Создать</Button>
+					</Menu.Target>
+					<Menu.Dropdown>
+						<Menu.Label>Задачу / проект</Menu.Label>
+						<Menu.Item leftSection={<IconSitemap size={20} />} onClick={() => onModalOpen('project')}>
+							Проект
+						</Menu.Item>
+						<Menu.Item leftSection={<IconClipboardCopy size={20} />} onClick={() => onModalOpen('task')}>
+							Задачу
+						</Menu.Item>
+					</Menu.Dropdown>
+				</Menu>
 				<Menu shadow="md" width={200}>
 					<Menu.Target>
 						<div className="custom-menu__profile">

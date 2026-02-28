@@ -6,6 +6,7 @@ export interface IInitialState {
 		column: string;
 		direction: 'asc' | 'desc';
 	};
+	activeModal: 'project' | 'task' | null;
 }
 
 export interface IFormValues {
@@ -74,3 +75,10 @@ export interface ISelectType {
 	value: string;
 	label: string;
 }
+
+export interface IProjectFormValues {
+	title: string;
+	description: string;
+}
+
+export type IProjectErrors = Partial<IProjectFormValues>;

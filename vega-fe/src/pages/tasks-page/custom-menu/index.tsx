@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../shared/constants.ts';
 import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../api/queries/auth.api.ts';
 import { useAppDispatch } from '../../../store/hooks.ts';
-import { setIsModalShown } from '../slice.ts';
+import { setActiveModal } from '../slice.ts';
 
 const CustomMenu = () => {
 	const navigate = useNavigate();
@@ -28,8 +28,8 @@ const CustomMenu = () => {
 		await logOutUser();
 	};
 
-	const handleModalOpen = () => {
-		dispatch(setIsModalShown(true));
+	const handleModalOpen = (modal: 'task' | 'project') => {
+		dispatch(setActiveModal(modal));
 	};
 
 	return (

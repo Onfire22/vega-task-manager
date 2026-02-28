@@ -1,10 +1,9 @@
 import { Button, Modal, Select, Textarea, TextInput } from '@mantine/core';
 import './styles.less';
 import React from 'react';
-import type { IFormErrors, IFormValues, ISelectType } from '../../types.ts';
+import type { IFormErrors, IFormValues, ISelectType } from '../../../types.ts';
 
 interface IProps {
-	isModalShown: boolean;
 	onModalClose: () => void;
 	onFieldChange: {
 		(e: React.ChangeEvent<HTMLInputElement>, fieldName?: string): void;
@@ -16,23 +15,24 @@ interface IProps {
 	taskPrioritiesData?: ISelectType[];
 	formValues: IFormValues;
 	formErrors: IFormErrors;
+	activeModal: 'project' | 'task' | null;
 }
 
-const CreateTaskModalView: React.FC<IProps> = ({
+const TaskModalView: React.FC<IProps> = ({
 	onModalClose,
 	onFieldChange,
 	onSelectFieldChange,
 	onFormSubmit,
-	isModalShown,
+	activeModal,
 	stackListData,
 	taskPrioritiesData,
 	formValues,
 	formErrors,
 }) => {
 	return (
-		<Modal opened={isModalShown} onClose={onModalClose} size="100%" title="Создать задачу">
-			<form className="create-task-modal__form" onSubmit={onFormSubmit}>
-				<div className="create-task-modal__field">
+		<Modal opened={activeModal === 'task'} onClose={onModalClose} size="100%" title="Создать задачу">
+			<form className="task-modal__form" onSubmit={onFormSubmit}>
+				<div className="task-modal__field">
 					<TextInput
 						label="Название"
 						placeholder="Исправить ошибку на странице..."
@@ -41,9 +41,10 @@ const CreateTaskModalView: React.FC<IProps> = ({
 						value={formValues.title}
 						onChange={onFieldChange}
 						error={formErrors?.title}
+						withAsterisk
 					/>
 				</div>
-				<div className="create-task-modal__field">
+				<div className="task-modal__field">
 					<Textarea
 						label="Описание"
 						resize="vertical"
@@ -52,9 +53,10 @@ const CreateTaskModalView: React.FC<IProps> = ({
 						value={formValues.description}
 						onChange={onFieldChange}
 						error={formErrors?.description}
+						withAsterisk
 					/>
 				</div>
-				<div className="create-task-modal__field">
+				<div className="task-modal__field">
 					<Select
 						label="Стек технологий"
 						placeholder="Выберите значение"
@@ -68,9 +70,10 @@ const CreateTaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskStackUuid}
+						withAsterisk
 					/>
 				</div>
-				<div className="create-task-modal__field">
+				<div className="task-modal__field">
 					<Select
 						label="Приоритет задачи"
 						placeholder="Выберите значение"
@@ -84,6 +87,7 @@ const CreateTaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskPriorityUuid}
+						withAsterisk
 					/>
 				</div>
 				<Button variant="filled" type="submit">
@@ -94,4 +98,4 @@ const CreateTaskModalView: React.FC<IProps> = ({
 	);
 };
 
-export { CreateTaskModalView };
+export { TaskModalView };

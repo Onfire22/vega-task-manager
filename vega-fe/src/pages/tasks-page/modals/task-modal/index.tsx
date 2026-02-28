@@ -1,23 +1,23 @@
 import React from 'react';
-import { CreateTaskModalView } from './create-task-modal-view';
-import { setIsModalShown } from '../slice.ts';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
-import { getIsModalShownSelector } from '../selectors.ts';
+import { TaskModalView } from './task-modal-view';
+import { setActiveModal } from '../../slice.ts';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
+import { getActiveModalSelector } from '../../selectors.ts';
 import { useFormik } from 'formik';
-import { CreateTaskValidationSchema } from '../validation.ts';
-import { INITIAL_VALUES } from '../constants.ts';
-import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
-import { setNotification } from '../../../components/notifications/slice.ts';
-import { useDictionaries } from '../../../shared/hooks.ts';
+import { CreateTaskValidationSchema } from '../../validation.ts';
+import { INITIAL_VALUES } from '../../constants.ts';
+import { useCreateTaskMutation } from '../../../../api/queries/tasks.api.ts';
+import { setNotification } from '../../../../components/notifications/slice.ts';
+import { useDictionaries } from '../../../../shared/hooks.ts';
 
-const CreateTaskModal = () => {
+const TaskModal = () => {
 	const dispatch = useAppDispatch();
 
 	const [createTask] = useCreateTaskMutation();
 
 	const { selectorsData } = useDictionaries(true);
 
-	const isModalShown = useAppSelector(getIsModalShownSelector());
+	const activeModal = useAppSelector(getActiveModalSelector());
 
 	const formik = useFormik({
 		initialValues: INITIAL_VALUES,
@@ -27,13 +27,13 @@ const CreateTaskModal = () => {
 			const response = await createTask(values);
 			if (response?.data?.newTask) {
 				dispatch(setNotification({ type: 'success', text: 'Задача успешно создана' }));
-				dispatch(setIsModalShown(false));
+				dispatch(setActiveModal(null));
 			}
 		},
 	});
 
 	const handleModalClose = () => {
-		dispatch(setIsModalShown(false));
+		dispatch(setActiveModal(null));
 	};
 
 	const handleFieldChange: {
@@ -51,12 +51,12 @@ const CreateTaskModal = () => {
 	};
 
 	return (
-		<CreateTaskModalView
-			isModalShown={isModalShown}
+		<TaskModalView
 			taskPrioritiesData={selectorsData?.priorities}
 			stackListData={selectorsData?.stackTypes}
 			formValues={formik.values}
 			formErrors={formik.errors}
+			activeModal={activeModal}
 			onModalClose={handleModalClose}
 			onFieldChange={handleFieldChange}
 			onSelectFieldChange={handleSelectFieldChange}
@@ -65,4 +65,4 @@ const CreateTaskModal = () => {
 	);
 };
 
-export { CreateTaskModal };
+export { TaskModal };

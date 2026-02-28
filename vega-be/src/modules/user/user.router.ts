@@ -5,6 +5,6 @@ import { ROUTES } from '../../constants';
 const userRouter = Router();
 
 userRouter.get(ROUTES.currentUser, getCurrentUser);
-userRouter.get(ROUTES.users, getUserList);
+userRouter.post(ROUTES.users, getUserList);
 
 export { userRouter };

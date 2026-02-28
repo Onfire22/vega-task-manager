@@ -20,3 +20,8 @@ export const DATE_FORMAT = 'dd.MM.yyyy';
 export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_TYPE', 'TASK_STATUS'];
 
 export const CELLS_WITH_BADGES = ['taskStatusUuid', 'taskStackUuid'];
+
+export const PROJECT_INITIAL_VALUES = {
+	title: '',
+	description: '',
+};

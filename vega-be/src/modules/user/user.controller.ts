@@ -29,8 +29,18 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
 };
 
 export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
+	const filters = req.body?.filters;
+
+	const filterData = {
+		memberships: {
+			...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
+			...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
+		},
+	};
+
 	try {
 		const usersList = await prismaAppClient.user.findMany({
+			...(filters ? { where: filterData } : {}),
 			select: {
 				id: true,
 				name: true,

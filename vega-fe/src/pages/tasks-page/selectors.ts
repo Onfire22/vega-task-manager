@@ -12,6 +12,9 @@ export const getIsAssigneeSelector = () => (state: RootState) =>
 
 export const getSortingSelector = () => (state: RootState) => state.tasksReducer?.sorting || initialState.sorting;
 
+export const getActiveModalSelector = () => (state: RootState) =>
+	state.tasksReducer?.activeModal || initialState.activeModal;
+
 export const getFiltersSelector = () =>
 	createSelector(getSortingSelector(), getIsAssigneeSelector(), (sorting, isAssignee) => {
 		return {

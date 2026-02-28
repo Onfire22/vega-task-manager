@@ -7,7 +7,7 @@ const usersApi = baseApi.injectEndpoints({
 		getUsers: builder.query<IUsers, void>({
 			query: () => ({
 				url: ROUTES.getUsers,
-				method: METHODS.get,
+				method: METHODS.post,
 			}),
 		}),
 	}),

@@ -1,4 +1,5 @@
 import { useGetTasksQuery } from '../../api/queries/tasks.api.ts';
+import { useGetUsersQuery } from '../../api/queries/users.api.ts';
 import { transformTasksDataToTable } from './utils.ts';
 import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '../../store/hooks.ts';
@@ -23,4 +24,16 @@ export const useTableData = () => {
 	);
 
 	return tableData;
+};
+
+export const useUsersData = () => {
+	const { data, isLoading } = useGetUsersQuery();
+
+	const userList =
+		data?.usersList.map((item) => ({ value: item.id, label: `${item.name} ${item.secondName}` })) ?? [];
+
+	return {
+		userList,
+		isLoading,
+	};
 };
