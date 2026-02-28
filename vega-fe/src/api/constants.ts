@@ -17,4 +17,5 @@ export const ROUTES = {
 	getTasks: '/api/tasks',
 	dictionaries: '/api/dictionaries',
 	getTask: '/api/task/',
+	getUsers: '/api/users',
 };

@@ -52,11 +52,11 @@ const TaskView: React.FC<IProps> = ({ task }) => {
 						<div className="task__heading">Сотрудники</div>
 						<div className="task__row">
 							<span className="task__key">Автор:</span>
-							<span className="task__value">Иванов Иван</span>
+							<span className="task__value">{task.reporterUuid}</span>
 						</div>
 						<div className="task__row">
 							<span className="task__key">Испольнитель:</span>
-							<span className="task__value">Иванов Иван</span>
+							<span className="task__value">{task.assigneeUuid}</span>
 						</div>
 					</div>
 					<div className="task__details">

@@ -1,12 +1,12 @@
 import { TaskView } from './task-view';
 import { useParams } from 'react-router-dom';
 import { Loader } from '@mantine/core';
-import { useTasks } from '../hooks.ts';
+import { useTask } from '../hooks.ts';
 
 const Task = () => {
 	const params = useParams();
 
-	const { isTasksLoading, task } = useTasks(params?.uuid);
+	const { isTasksLoading, task } = useTask(params?.uuid);
 
 	if (!task) return null;
 

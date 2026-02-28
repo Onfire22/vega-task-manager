@@ -29,7 +29,7 @@ export interface ITask {
 	loggedTime: string | null;
 	taskPriorityUuid: string | null;
 	projectUuid: string | null;
-	taskReporterUuid: string;
+	reporterUuid: string;
 	taskStackUuid: string;
 	taskStatusUuid: string;
 	title: string;

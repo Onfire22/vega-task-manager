@@ -32,7 +32,7 @@ export interface ITask extends ICreateTask {
 	estimatedTime: string | null;
 	loggedTime: string | null;
 	assigneeUuid: string | null;
-	taskReporterUuid: string;
+	reporterUuid: string;
 	projectUuid: string | null;
 	taskStatusUuid: string;
 	createdAt: string;
@@ -55,3 +55,11 @@ export interface IDictionary {
 export type IDictionariesResponse = {
 	dictionaries: Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
 };
+
+export interface IUsers {
+	usersList: Array<{
+		id: string;
+		name: string;
+		secondName: string;
+	}>;
+}

@@ -27,7 +27,6 @@ export const transformTasksDataToTable = (tasks: Array<ITask>, dictionaries: IDi
 				name: taskStatus?.name ?? '-',
 				color: taskStatus?.color ?? '#fff',
 			},
-			reporterUuid: '-',
 		};
 	});
 };
