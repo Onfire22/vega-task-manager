@@ -9,4 +9,6 @@ tasksRouter.post(ROUTES.updateTask, updateTask);
 tasksRouter.post(ROUTES.tasks, getUserTasks);
 tasksRouter.get(ROUTES.task, getTaskByUuid);
 
+console.log('test');
+
 export { tasksRouter };
