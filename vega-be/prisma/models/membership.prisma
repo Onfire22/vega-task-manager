@@ -1,7 +1,7 @@
 model Membership {
   id String @id @default(uuid())
 
-  userUuid    String   @unique
+  userUuid    String
   user        User     @relation(fields: [userUuid], references: [id])
   projectUuid String   @map("prject_uuid")
   project     Projects @relation(fields: [projectUuid], references: [id])
@@ -12,5 +12,6 @@ model Membership {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@unique([userUuid, projectUuid])
   @@map("memberships")
 }

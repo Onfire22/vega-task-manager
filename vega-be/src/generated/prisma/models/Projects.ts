@@ -28,6 +28,7 @@ export type ProjectsMinAggregateOutputType = {
   id: string | null
   title: string | null
   description: string | null
+  code: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -36,6 +37,7 @@ export type ProjectsMaxAggregateOutputType = {
   id: string | null
   title: string | null
   description: string | null
+  code: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +46,7 @@ export type ProjectsCountAggregateOutputType = {
   id: number
   title: number
   description: number
+  code: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -54,6 +57,7 @@ export type ProjectsMinAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  code?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -62,6 +66,7 @@ export type ProjectsMaxAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  code?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -70,6 +75,7 @@ export type ProjectsCountAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  code?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -151,6 +157,7 @@ export type ProjectsGroupByOutputType = {
   id: string
   title: string
   description: string
+  code: string
   createdAt: Date
   updatedAt: Date
   _count: ProjectsCountAggregateOutputType | null
@@ -180,6 +187,7 @@ export type ProjectsWhereInput = {
   id?: Prisma.StringFilter<"Projects"> | string
   title?: Prisma.StringFilter<"Projects"> | string
   description?: Prisma.StringFilter<"Projects"> | string
+  code?: Prisma.StringFilter<"Projects"> | string
   createdAt?: Prisma.DateTimeFilter<"Projects"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Projects"> | Date | string
   tasks?: Prisma.TaskListRelationFilter
@@ -190,6 +198,7 @@ export type ProjectsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tasks?: Prisma.TaskOrderByRelationAggregateInput
@@ -203,6 +212,7 @@ export type ProjectsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectsWhereInput | Prisma.ProjectsWhereInput[]
   title?: Prisma.StringFilter<"Projects"> | string
   description?: Prisma.StringFilter<"Projects"> | string
+  code?: Prisma.StringFilter<"Projects"> | string
   createdAt?: Prisma.DateTimeFilter<"Projects"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Projects"> | Date | string
   tasks?: Prisma.TaskListRelationFilter
@@ -213,6 +223,7 @@ export type ProjectsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProjectsCountOrderByAggregateInput
@@ -227,6 +238,7 @@ export type ProjectsScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Projects"> | string
   title?: Prisma.StringWithAggregatesFilter<"Projects"> | string
   description?: Prisma.StringWithAggregatesFilter<"Projects"> | string
+  code?: Prisma.StringWithAggregatesFilter<"Projects"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Projects"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Projects"> | Date | string
 }
@@ -235,6 +247,7 @@ export type ProjectsCreateInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -245,6 +258,7 @@ export type ProjectsUncheckedCreateInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
@@ -255,6 +269,7 @@ export type ProjectsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
@@ -265,6 +280,7 @@ export type ProjectsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
@@ -275,6 +291,7 @@ export type ProjectsCreateManyInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -283,6 +300,7 @@ export type ProjectsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -291,6 +309,7 @@ export type ProjectsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -304,6 +323,7 @@ export type ProjectsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -312,6 +332,7 @@ export type ProjectsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -320,6 +341,7 @@ export type ProjectsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -363,6 +385,7 @@ export type ProjectsCreateWithoutMembershipsInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -372,6 +395,7 @@ export type ProjectsUncheckedCreateWithoutMembershipsInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
@@ -397,6 +421,7 @@ export type ProjectsUpdateWithoutMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
@@ -406,6 +431,7 @@ export type ProjectsUncheckedUpdateWithoutMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
@@ -415,6 +441,7 @@ export type ProjectsCreateWithoutTasksInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipCreateNestedManyWithoutProjectInput
@@ -424,6 +451,7 @@ export type ProjectsUncheckedCreateWithoutTasksInput = {
   id?: string
   title: string
   description: string
+  code: string
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutProjectInput
@@ -449,6 +477,7 @@ export type ProjectsUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUpdateManyWithoutProjectNestedInput
@@ -458,6 +487,7 @@ export type ProjectsUncheckedUpdateWithoutTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutProjectNestedInput
@@ -507,6 +537,7 @@ export type ProjectsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   title?: boolean
   description?: boolean
+  code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tasks?: boolean | Prisma.Projects$tasksArgs<ExtArgs>
@@ -518,6 +549,7 @@ export type ProjectsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   title?: boolean
   description?: boolean
+  code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["projects"]>
@@ -526,6 +558,7 @@ export type ProjectsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   title?: boolean
   description?: boolean
+  code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["projects"]>
@@ -534,11 +567,12 @@ export type ProjectsSelectScalar = {
   id?: boolean
   title?: boolean
   description?: boolean
+  code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["projects"]>
+export type ProjectsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["projects"]>
 export type ProjectsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | Prisma.Projects$tasksArgs<ExtArgs>
   memberships?: boolean | Prisma.Projects$membershipsArgs<ExtArgs>
@@ -557,6 +591,7 @@ export type $ProjectsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     title: string
     description: string
+    code: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["projects"]>
@@ -987,6 +1022,7 @@ export interface ProjectsFieldRefs {
   readonly id: Prisma.FieldRef<"Projects", 'String'>
   readonly title: Prisma.FieldRef<"Projects", 'String'>
   readonly description: Prisma.FieldRef<"Projects", 'String'>
+  readonly code: Prisma.FieldRef<"Projects", 'String'>
   readonly createdAt: Prisma.FieldRef<"Projects", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Projects", 'DateTime'>
 }

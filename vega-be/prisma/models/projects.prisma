@@ -3,6 +3,7 @@ model Projects {
 
   title       String
   description String
+  code        String
 
   tasks       Task[]
   memberships Membership[]
