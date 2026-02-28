@@ -1,8 +1,7 @@
 import { Button, Modal, Select, Textarea, TextInput } from '@mantine/core';
 import './styles.less';
 import React from 'react';
-import type { IDictionaryItem } from '../../../../api/types.ts';
-import type { IFormErrors, IFormValues } from '../../types.ts';
+import type { IFormErrors, IFormValues, ISelectType } from '../../types.ts';
 
 interface IProps {
 	isModalShown: boolean;
@@ -13,8 +12,8 @@ interface IProps {
 	};
 	onSelectFieldChange: (name: string, value: string) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
-	stackListData?: IDictionaryItem[];
-	taskPrioritiesData?: IDictionaryItem[];
+	stackListData?: ISelectType[];
+	taskPrioritiesData?: ISelectType[];
 	formValues: IFormValues;
 	formErrors: IFormErrors;
 }
