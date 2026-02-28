@@ -8,7 +8,8 @@
 		"start": "ts-node src/app.ts",
 		"dev": "tsx watch src/app.ts",
 		"seed": "npx prisma db seed",
-		"generate": "npx prisma generate"
+		"generate": "npx prisma generate",
+		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.4.0",
