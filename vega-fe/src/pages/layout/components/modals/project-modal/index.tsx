@@ -1,21 +1,21 @@
+import React from 'react';
 import { ProjectModalView } from './project-modal-view';
 import { useFormik } from 'formik';
-import { PROJECT_INITIAL_VALUES } from '../../constants.ts';
-import { CreateProjectValidationSchema } from '../../validation.ts';
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
-import { getActiveModalSelector } from '../../selectors.ts';
-import { setActiveModal } from '../../slice.ts';
-import { useUsersOptions } from '../../../../api/hooks.ts';
+import { PROJECT_FORM_INITIAL_VALUES } from '../../../contsants.ts';
+import { CreateProjectValidationSchema } from '../../../validation.ts';
+import { useAppDispatch, useAppSelector } from '../../../../../store/hooks.ts';
+import { getActiveModalShownSelector } from '../../../selectors.ts';
+import { useUsersOptions } from '../../../../../api/hooks.ts';
+import { setActiveModal } from '../../../slice.ts';
 // import { setNotification } from '../../../components/notifications/slice.ts';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
-	const activeModal = useAppSelector(getActiveModalSelector());
+	const activeModal = useAppSelector(getActiveModalShownSelector());
 	const { usersListOptions, isUsersLoading } = useUsersOptions();
 
 	const formik = useFormik({
-		initialValues: PROJECT_INITIAL_VALUES,
+		initialValues: PROJECT_FORM_INITIAL_VALUES,
 		validationSchema: CreateProjectValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {

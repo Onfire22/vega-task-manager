@@ -1,14 +1,14 @@
 import React from 'react';
 import { TaskModalView } from './task-modal-view';
-import { setActiveModal } from '../../slice.ts';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
-import { getActiveModalSelector } from '../../selectors.ts';
 import { useFormik } from 'formik';
-import { CreateTaskValidationSchema } from '../../validation.ts';
-import { BASE_DICTIONARIES_META, INITIAL_VALUES } from '../../constants.ts';
-import { useCreateTaskMutation } from '../../../../api/queries/tasks.api.ts';
-import { setNotification } from '../../../../components/notifications/slice.ts';
-import { useDictionariesOptions } from '../../../../api/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../../store/hooks.ts';
+import { useCreateTaskMutation } from '../../../../../api/queries/tasks.api.ts';
+import { useDictionariesOptions } from '../../../../../api/hooks.ts';
+import { getActiveModalShownSelector } from '../../../selectors.ts';
+import { setNotification } from '../../../../../components/notifications/slice.ts';
+import { setActiveModal } from '../../../slice.ts';
+import { BASE_DICTIONARIES_META, TASK_FORM_INITIAL_VALUES } from '../../../contsants.ts';
+import { CreateTaskValidationSchema } from '../../../validation.ts';
 
 const TaskModal = () => {
 	const dispatch = useAppDispatch();
@@ -17,10 +17,10 @@ const TaskModal = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
-	const activeModal = useAppSelector(getActiveModalSelector());
+	const activeModal = useAppSelector(getActiveModalShownSelector());
 
 	const formik = useFormik({
-		initialValues: INITIAL_VALUES,
+		initialValues: TASK_FORM_INITIAL_VALUES,
 		validationSchema: CreateTaskValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {

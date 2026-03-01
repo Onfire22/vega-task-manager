@@ -1,7 +1,7 @@
 import { Button, Modal, Select, Textarea, TextInput } from '@mantine/core';
 import './styles.less';
 import React from 'react';
-import type { IFormErrors, IFormValues, ISelectType } from '../../../types.ts';
+import type { ITaskFormErrors, ITaskFormValues, ISelectType } from '../../../../types.ts';
 
 interface IProps {
 	onModalClose: () => void;
@@ -13,8 +13,8 @@ interface IProps {
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	stackListData?: ISelectType[];
 	taskPrioritiesData?: ISelectType[];
-	formValues: IFormValues;
-	formErrors: IFormErrors;
+	formValues: ITaskFormValues;
+	formErrors: ITaskFormErrors;
 	activeModal: 'project' | 'task' | null;
 }
 
