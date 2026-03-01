@@ -1,7 +1,7 @@
 import { IconArrowNarrowDownDashed, IconArrowNarrowUpDashed } from '@tabler/icons-react';
 import React from 'react';
 import './styles.less';
-import { THEME } from '../../../../shared/utils.ts';
+import { THEME } from '../../../../utils.ts';
 
 interface IProps {
 	column: {

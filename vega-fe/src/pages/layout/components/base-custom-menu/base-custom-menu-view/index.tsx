@@ -1,4 +1,4 @@
-import Logo from '../../../../assets/images/logo.png';
+import Logo from '../../../../../assets/images/logo.png';
 import {
 	IconClipboardCopy,
 	IconLogout2,
@@ -8,10 +8,10 @@ import {
 	IconUserCircle,
 } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../shared/constants.ts';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
+import { FRONT_ROUTES } from '../../../../../constants.ts';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
@@ -22,7 +22,7 @@ interface IProps {
 	userData: { name?: string; secondName?: string };
 }
 
-const CustomMenuView: React.FC<IProps> = ({
+const BaseCustomMenuView: React.FC<IProps> = ({
 	searchValue,
 	onSearchChange,
 	onProfileCLick,
@@ -31,14 +31,14 @@ const CustomMenuView: React.FC<IProps> = ({
 	userData,
 }) => {
 	return (
-		<div className="custom-menu">
-			<div className="custom-menu__info">
-				<Link className="custom-menu__logo" to={FRONT_ROUTES.root}>
-					<img className="custom-menu__image" src={Logo} />
+		<div className="base-custom-menu">
+			<div className="base-custom-menu__info">
+				<Link className="base-custom-menu__logo" to={FRONT_ROUTES.root}>
+					<img className="base-custom-menu__image" src={Logo} />
 				</Link>
-				<div className="custom-menu__crumbs">Core / Tasks</div>
+				<div className="base-custom-menu__crumbs">Core / Tasks</div>
 			</div>
-			<div className="custom-menu__controls">
+			<div className="base-custom-menu__controls">
 				<Input
 					placeholder="Поиск..."
 					rightSectionPointerEvents="all"
@@ -68,7 +68,7 @@ const CustomMenuView: React.FC<IProps> = ({
 				</Menu>
 				<Menu shadow="md" width={200}>
 					<Menu.Target>
-						<div className="custom-menu__profile">
+						<div className="base-custom-menu__profile">
 							<IconUserCircle size={32} color="#2BABA4" />
 						</div>
 					</Menu.Target>
@@ -87,4 +87,4 @@ const CustomMenuView: React.FC<IProps> = ({
 	);
 };
 
-export { CustomMenuView };
+export { BaseCustomMenuView };

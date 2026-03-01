@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { FRONT_ROUTES } from '../shared/constants.ts';
+import { FRONT_ROUTES } from '../constants.ts';
 
 const ProtectedRoute = ({ isError, isFetching }: { isError: boolean; isFetching: boolean }) => {
 	if (isFetching) return null;

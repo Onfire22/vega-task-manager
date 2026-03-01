@@ -1,8 +1,8 @@
 import { ProjectTableView } from './project-table-view';
-import { useProjects } from '../../hooks.ts';
+import { useProjectsTableData } from '../../hooks.ts';
 
 const ProjectTable = () => {
-	const { projects, isLoading } = useProjects();
+	const { projects, isLoading } = useProjectsTableData();
 
 	return <ProjectTableView projects={projects} isLoading={isLoading} />;
 };

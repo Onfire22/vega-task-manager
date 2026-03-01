@@ -1,4 +1,5 @@
 import { IconBriefcase2, IconCancel, IconCircleCheck, IconPencil } from '@tabler/icons-react';
+import type { TDictionariesTypes } from '../../api/types.ts';
 
 export const BULLET_ICONS = {
 	todo: IconPencil,
@@ -13,3 +14,7 @@ export const TASK_STATUS_NUMBER = {
 	done: 2,
 	stopped: 3,
 } as const;
+
+export const DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_TYPE', 'TASK_STATUS'];
+
+export const DATE_FORMAT = 'dd.MM.yyyy';

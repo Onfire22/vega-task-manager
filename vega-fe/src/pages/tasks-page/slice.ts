@@ -2,8 +2,6 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { IInitialState, TActiveTab } from './types.ts';
 
 export const initialState: IInitialState = {
-	isModalShown: false,
-	activeModal: null,
 	activeTab: 'table',
 	isAssignee: false,
 	sorting: {
@@ -16,9 +14,6 @@ const tasksSlice = createSlice({
 	name: '@@tasks',
 	initialState,
 	reducers: {
-		setIsModalShown: (state, action: PayloadAction<boolean>) => {
-			state.isModalShown = action.payload;
-		},
 		setActiveTab: (state, action: PayloadAction<TActiveTab>) => {
 			state.activeTab = action.payload;
 		},
@@ -28,12 +23,9 @@ const tasksSlice = createSlice({
 		setSorting: (state, action: PayloadAction<{ column: string; direction: 'asc' | 'desc' }>) => {
 			state.sorting = action.payload;
 		},
-		setActiveModal: (state, action: PayloadAction<'project' | 'task' | null>) => {
-			state.activeModal = action.payload;
-		},
 	},
 });
 
-export const { setIsModalShown, setActiveTab, setIsAssignee, setSorting, setActiveModal } = tasksSlice.actions;
+export const { setActiveTab, setIsAssignee, setSorting } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

@@ -1,12 +1,12 @@
-import { CustomMenuView } from './custom-menu-view';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../shared/constants.ts';
-import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../api/queries/auth.api.ts';
-import { useAppDispatch } from '../../../store/hooks.ts';
-import { setActiveModal } from '../slice.ts';
+import { FRONT_ROUTES } from '../../../../constants.ts';
+import { setActiveModal } from '../../slice.ts';
+import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
+import { useAppDispatch } from '../../../../store/hooks.ts';
+import { BaseCustomMenuView } from './base-custom-menu-view';
 
-const CustomMenu = () => {
+const BaseCustomMenu = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
@@ -33,7 +33,7 @@ const CustomMenu = () => {
 	};
 
 	return (
-		<CustomMenuView
+		<BaseCustomMenuView
 			searchValue={searchValue}
 			userData={{ name: data?.name, secondName: data?.secondName }}
 			onSearchChange={handleSearchChange}
@@ -44,4 +44,4 @@ const CustomMenu = () => {
 	);
 };
 
-export { CustomMenu };
+export { BaseCustomMenu };

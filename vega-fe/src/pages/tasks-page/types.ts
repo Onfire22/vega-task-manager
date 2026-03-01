@@ -1,22 +1,11 @@
 export interface IInitialState {
-	isModalShown: boolean;
 	activeTab: TActiveTab;
 	isAssignee: boolean;
 	sorting: {
 		column: string;
 		direction: 'asc' | 'desc';
 	};
-	activeModal: 'project' | 'task' | null;
 }
-
-export interface IFormValues {
-	title: string;
-	description: string;
-	taskStackUuid: string;
-	taskPriorityUuid: string;
-}
-
-export type IFormErrors = Partial<IFormValues>;
 
 export type TActiveTab = 'table' | 'kanban';
 
@@ -70,15 +59,3 @@ export interface ITaskTableData {
 		color: string;
 	};
 }
-
-export interface ISelectType {
-	value: string;
-	label: string;
-}
-
-export interface IProjectFormValues {
-	title: string;
-	description: string;
-}
-
-export type IProjectErrors = Partial<IProjectFormValues>;
