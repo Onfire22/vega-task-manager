@@ -6,6 +6,7 @@ export const FRONT_ROUTES = {
 	signUp: '/sign-up',
 	profile: '/profile',
 	task: '/tasks/:uuid',
+	projects: '/projects',
 	all: '*',
 };
 

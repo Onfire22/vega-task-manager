@@ -7,6 +7,7 @@ import { ProtectedRoute } from './protected-route.tsx';
 import { PublicRoute } from './public-route.tsx';
 import { TaskPage } from '../pages/task-page';
 import { UserProfilePage } from '../pages/user-profile-page';
+import { ProjectsPage } from '../pages/projects-page';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
@@ -27,6 +28,7 @@ const Router = () => {
 				<Route index element={<TasksPage />} />
 				<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 				<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
+				<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />
 		</Routes>

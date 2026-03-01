@@ -5,10 +5,11 @@ import { TASK_STATUS_NUMBER } from '../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useTask } from '../hooks.ts';
 import { useUpdateTaskStatusMutation } from '../../../api/queries/task.api.ts';
+import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 
 const Task = () => {
 	const params = useParams();
-	const { dictionaries } = useDictionaries();
+	const { dictionaries } = useDictionaries(false, BASE_DICTIONARIES_META);
 	const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
 	const { isTasksLoading, task } = useTask(params?.uuid);

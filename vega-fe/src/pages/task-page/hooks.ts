@@ -2,10 +2,10 @@ import { format } from 'date-fns';
 import { useGetTaskQuery } from '../../api/queries/task.api.ts';
 import { useGetUsersQuery } from '../../api/queries/users.api.ts';
 import { useDictionaries } from '../../shared/hooks.ts';
-import { DATE_FORMAT } from '../tasks-page/constants.ts';
+import { BASE_DICTIONARIES_META, DATE_FORMAT } from '../tasks-page/constants.ts';
 
 export const useTask = (uuid?: string) => {
-	const { dictionaries } = useDictionaries();
+	const { dictionaries } = useDictionaries(false, BASE_DICTIONARIES_META);
 	const { data: usersListData } = useGetUsersQuery();
 
 	const { task, isTasksLoading } = useGetTaskQuery(uuid!, {

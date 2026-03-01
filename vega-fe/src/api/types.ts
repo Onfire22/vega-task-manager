@@ -63,3 +63,12 @@ export interface IUsers {
 		secondName: string;
 	}>;
 }
+
+export interface IProject {
+	code: string;
+	createdAt: Date;
+	description: string;
+	id: string;
+	memberships: [{ userUuid: string; userRoleUuid: string }];
+	title: string;
+}

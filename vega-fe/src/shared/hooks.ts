@@ -1,10 +1,10 @@
 import { useGetDictionariesQuery } from '../api/queries/dictionaries.api.ts';
-import { BASE_DICTIONARIES_META } from '../pages/tasks-page/constants.ts';
 import { transformDictionaries } from '../pages/tasks-page/utils.ts';
 import { CACHING_SETTINGS } from './constants.ts';
+import type { TDictionariesTypes } from '../api/types.ts';
 
-export const useDictionaries = (isFormDictionaries: boolean = false) => {
-	const { data, isLoading, isSuccess } = useGetDictionariesQuery(BASE_DICTIONARIES_META, CACHING_SETTINGS);
+export const useDictionaries = (isFormDictionaries: boolean = false, meta: TDictionariesTypes[]) => {
+	const { data, isLoading, isSuccess } = useGetDictionariesQuery(meta, CACHING_SETTINGS);
 
 	if (isSuccess) {
 		let selectorsData = null;

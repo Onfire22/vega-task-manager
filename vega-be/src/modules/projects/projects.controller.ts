@@ -12,6 +12,12 @@ export const getProjects = async (req: Request, res: Response, next: NextFunctio
 				description: true,
 				code: true,
 				createdAt: true,
+				memberships: {
+					select: {
+						userUuid: true,
+						userRoleUuid: true,
+					},
+				},
 			},
 		});
 

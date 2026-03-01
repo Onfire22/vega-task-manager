@@ -4,9 +4,10 @@ import { transformTasksDataToTable } from './utils.ts';
 import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '../../store/hooks.ts';
 import { useDictionaries } from '../../shared/hooks.ts';
+import { BASE_DICTIONARIES_META } from './constants.ts';
 
 export const useTableData = () => {
-	const { dictionaries } = useDictionaries();
+	const { dictionaries } = useDictionaries(false, BASE_DICTIONARIES_META);
 	const filters = useAppSelector(getFiltersSelector());
 
 	const { tableData } = useGetTasksQuery(
