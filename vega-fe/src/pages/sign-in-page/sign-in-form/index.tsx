@@ -5,7 +5,7 @@ import { SIGN_IN_DEFAULT_VALUES } from '../constants.ts';
 import { SignUpValidationSchema } from '../validation.ts';
 import { useSignInUserMutation } from '../../../api/queries/auth.api.ts';
 import { useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../shared/constants.ts';
+import { FRONT_ROUTES } from '../../../constants.ts';
 import { LoadingOverlay } from '@mantine/core';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setNotification } from '../../../components/notifications/slice.ts';

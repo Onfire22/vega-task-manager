@@ -1,6 +1,6 @@
 import { TaskView } from './task-view';
 import { Loader } from '@mantine/core';
-import { useDictionaries } from '../../../shared/hooks.ts';
+import { useDictionaries } from '../../../api/hooks.ts';
 import { TASK_STATUS_NUMBER } from '../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useTask } from '../hooks.ts';
@@ -9,7 +9,7 @@ import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 
 const Task = () => {
 	const params = useParams();
-	const { dictionaries } = useDictionaries(false, BASE_DICTIONARIES_META);
+	const { dictionaries } = useDictionaries(BASE_DICTIONARIES_META);
 	const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
 	const { isTasksLoading, task } = useTask(params?.uuid);

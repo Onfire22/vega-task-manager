@@ -1,14 +1,11 @@
-import { useDictionaries } from '../../shared/hooks.ts';
-import { useGetUsersQuery } from '../../api/queries/users.api.ts';
-import { useGetProjectsQuery } from '../../api/queries/projects.api.ts';
+import { useDictionaries, useProjects, useUsers } from '../../api/hooks.ts';
 import { format } from 'date-fns';
+import { DATE_FORMAT } from './constants.ts';
 
-export const useProjects = () => {
-	const { dictionaries, isDictionariesLoading } = useDictionaries(false, ['ROLE_TYPE']);
-	const { data: usersListData, isLoading: isUsersLoading } = useGetUsersQuery();
-	const { data: projectsListData, isLoading: isProjectsLoading } = useGetProjectsQuery();
-
-	const ownerDictionaryUuid = dictionaries?.role_type.find((role) => role.name === 'owner')?.id;
+export const useProjectsTableData = () => {
+	const { dictionaries, isDictionariesLoading } = useDictionaries(['ROLE_TYPE']);
+	const { usersList, isUsersLoading } = useUsers();
+	const { projectsList, isProjectsLoading } = useProjects();
 
 	const isProjectDataLoading = isDictionariesLoading || isUsersLoading || isProjectsLoading;
 
@@ -19,16 +16,18 @@ export const useProjects = () => {
 		};
 	}
 
-	const projects = projectsListData?.projects.map((project) => {
+	const ownerDictionaryUuid = dictionaries?.role_type?.find((role) => role.name === 'owner')?.id;
+
+	const projects = projectsList.map((project) => {
 		const ownerUuid = project.memberships.find((member) => member.userRoleUuid === ownerDictionaryUuid)?.userUuid;
-		const owner = usersListData?.usersList.find((user) => user.id === ownerUuid);
+		const owner = usersList.find((user) => user.id === ownerUuid);
 
 		return {
 			id: project.id,
 			code: project.code,
 			description: project.description,
 			title: project.title,
-			createdAt: format(project.createdAt, 'dd.MM.yyyy'),
+			createdAt: format(project.createdAt, DATE_FORMAT),
 			owner: owner ? `${owner.name} ${owner.secondName}` : '-',
 		};
 	});

@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSignUpUserMutation } from '../../../../api/queries/auth.api.ts';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../shared/constants.ts';
+import { FRONT_ROUTES } from '../../../../constants.ts';
 import { LoadingOverlay } from '@mantine/core';
 
 const SignUpForm = () => {

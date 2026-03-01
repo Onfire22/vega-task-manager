@@ -53,7 +53,7 @@ export interface IDictionary {
 }
 
 export type IDictionariesResponse = {
-	dictionaries: Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
+	dictionaries: Partial<Record<Lowercase<TDictionariesTypes>, IDictionary[]>>;
 };
 
 export interface IUsers {

@@ -3,7 +3,7 @@ import Logo from '../../../../../assets/images/logo.png';
 import { IconLogout2, IconSettings, IconUserCircle } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import { CloseButton, Input, Menu } from '@mantine/core';
-import { FRONT_ROUTES } from '../../../../../shared/constants.ts';
+import { FRONT_ROUTES } from '../../../../../constants.ts';
 import './styles.less';
 
 interface IProps {

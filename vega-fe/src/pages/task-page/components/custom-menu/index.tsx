@@ -2,7 +2,7 @@ import { CustomMenuView } from './custom-menu-view';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
-import { FRONT_ROUTES } from '../../../../shared/constants.ts';
+import { FRONT_ROUTES } from '../../../../constants.ts';
 
 const CustomMenu = () => {
 	const navigate = useNavigate();

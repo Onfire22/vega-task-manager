@@ -6,13 +6,13 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { getActiveModalSelector } from '../../selectors.ts';
 import { setActiveModal } from '../../slice.ts';
-import { useUsersData } from '../../hooks.ts';
+import { useUsersOptions } from '../../../../api/hooks.ts';
 // import { setNotification } from '../../../components/notifications/slice.ts';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
 	const activeModal = useAppSelector(getActiveModalSelector());
-	const { userList, isLoading } = useUsersData();
+	const { usersListOptions, isUsersLoading } = useUsersOptions();
 
 	const formik = useFormik({
 		initialValues: PROJECT_INITIAL_VALUES,
@@ -41,8 +41,8 @@ const ProjectModal = () => {
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}
-			userList={userList}
-			isLoading={isLoading}
+			userList={usersListOptions}
+			isLoading={isUsersLoading}
 			onFieldChange={handleFieldChange}
 			onFormSubmit={formik.handleSubmit}
 			onModalClose={handleModalClose}

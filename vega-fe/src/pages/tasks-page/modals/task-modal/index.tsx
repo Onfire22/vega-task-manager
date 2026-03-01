@@ -8,14 +8,14 @@ import { CreateTaskValidationSchema } from '../../validation.ts';
 import { BASE_DICTIONARIES_META, INITIAL_VALUES } from '../../constants.ts';
 import { useCreateTaskMutation } from '../../../../api/queries/tasks.api.ts';
 import { setNotification } from '../../../../components/notifications/slice.ts';
-import { useDictionaries } from '../../../../shared/hooks.ts';
+import { useDictionariesOptions } from '../../../../api/hooks.ts';
 
 const TaskModal = () => {
 	const dispatch = useAppDispatch();
 
 	const [createTask] = useCreateTaskMutation();
 
-	const { selectorsData } = useDictionaries(true, BASE_DICTIONARIES_META);
+	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());
 
@@ -52,8 +52,8 @@ const TaskModal = () => {
 
 	return (
 		<TaskModalView
-			taskPrioritiesData={selectorsData?.priorities}
-			stackListData={selectorsData?.stackTypes}
+			taskPrioritiesData={dictionariesOptions?.task_priority}
+			stackListData={dictionariesOptions?.stack_type}
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}
