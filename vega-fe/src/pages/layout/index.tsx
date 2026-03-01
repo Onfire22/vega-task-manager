@@ -6,6 +6,7 @@ import { Header } from './components/header';
 import { Router } from '../../router/Router.tsx';
 import { useLocation } from 'react-router-dom';
 import { HEADERLESS_PAGES } from './contsants.ts';
+import { Sidebar } from './components/sidebar';
 
 const Layout = () => {
 	const location = useLocation();
@@ -18,6 +19,7 @@ const Layout = () => {
 			{!HEADERLESS_PAGES.includes(location.pathname) ? <Header menu={<BaseCustomMenu />} /> : null}
 			<Router />
 			{ActiveModal && <ActiveModal />}
+			<Sidebar />
 		</>
 	);
 };

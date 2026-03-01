@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';
-import { setActiveModal } from '../../slice.ts';
-import { useGetCurrentUserQuery, useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
-import { useAppDispatch } from '../../../../store/hooks.ts';
+import { setActiveModal, setIsSidebarOpened } from '../../slice.ts';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu-view';
+import { getIsSidebarOpenedSelector } from '../../selectors.ts';
 
 const BaseCustomMenu = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+
 	const dispatch = useAppDispatch();
 
-	const [logOutUser] = useLogOutUserMutation();
-
-	const { data } = useGetCurrentUserQuery();
-
 	const [searchValue, setSearchValue] = useState('');
+
+	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
 	const handleSearchChange = (value: string) => {
 		setSearchValue(value);
@@ -24,22 +24,29 @@ const BaseCustomMenu = () => {
 		navigate(FRONT_ROUTES.profile);
 	};
 
-	const handleLogOutClick = async () => {
-		await logOutUser();
-	};
-
 	const handleModalOpen = (modal: 'task' | 'project') => {
 		dispatch(setActiveModal(modal));
+	};
+
+	const handleBurgerClick = () => {
+		dispatch(setIsSidebarOpened(true));
+	};
+
+	const handleGoBack = () => {
+		if (location.pathname === '/') return;
+		navigate(-1);
 	};
 
 	return (
 		<BaseCustomMenuView
 			searchValue={searchValue}
-			userData={{ name: data?.name, secondName: data?.secondName }}
+			isSidebarOpened={isSidebarOpened}
+			path={location.pathname}
 			onSearchChange={handleSearchChange}
 			onProfileCLick={handleProfileCLick}
-			onLogOutClick={handleLogOutClick}
 			onModalOpen={handleModalOpen}
+			onBurgerClick={handleBurgerClick}
+			onGoBack={handleGoBack}
 		/>
 	);
 };

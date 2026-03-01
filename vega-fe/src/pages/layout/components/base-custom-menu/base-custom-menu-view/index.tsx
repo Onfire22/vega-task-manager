@@ -1,14 +1,7 @@
 import Logo from '../../../../../assets/images/logo.png';
-import {
-	IconClipboardCopy,
-	IconLogout2,
-	IconPlus,
-	IconSettings,
-	IconSitemap,
-	IconUserCircle,
-} from '@tabler/icons-react';
+import { IconArrowBackUp, IconClipboardCopy, IconPlus, IconSitemap } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
-import { Button, CloseButton, Input, Menu } from '@mantine/core';
+import { Burger, Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
 import { FRONT_ROUTES } from '../../../../../constants.ts';
@@ -16,23 +9,27 @@ import { FRONT_ROUTES } from '../../../../../constants.ts';
 interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
-	onLogOutClick: () => void;
+	onBurgerClick: () => void;
+	onGoBack: () => void;
 	onModalOpen: (modal: 'task' | 'project') => void;
 	searchValue: string;
-	userData: { name?: string; secondName?: string };
+	path: string;
+	isSidebarOpened: boolean;
 }
 
 const BaseCustomMenuView: React.FC<IProps> = ({
 	searchValue,
 	onSearchChange,
-	onProfileCLick,
-	onLogOutClick,
+	onBurgerClick,
 	onModalOpen,
-	userData,
+	isSidebarOpened,
+	onGoBack,
+	path,
 }) => {
 	return (
 		<div className="base-custom-menu">
 			<div className="base-custom-menu__info">
+				<Burger lineSize={2} opened={isSidebarOpened} onClick={onBurgerClick} />
 				<Link className="base-custom-menu__logo" to={FRONT_ROUTES.root}>
 					<img className="base-custom-menu__image" src={Logo} />
 				</Link>
@@ -66,22 +63,9 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
-				<Menu shadow="md" width={200}>
-					<Menu.Target>
-						<div className="base-custom-menu__profile">
-							<IconUserCircle size={32} color="#2BABA4" />
-						</div>
-					</Menu.Target>
-					<Menu.Dropdown>
-						<Menu.Label>{`${userData.name} ${userData.secondName}`}</Menu.Label>
-						<Menu.Item leftSection={<IconSettings size={20} />} onClick={onProfileCLick}>
-							Профиль
-						</Menu.Item>
-						<Menu.Item leftSection={<IconLogout2 size={20} />} onClick={onLogOutClick}>
-							Выход
-						</Menu.Item>
-					</Menu.Dropdown>
-				</Menu>
+				{path !== '/' && (
+					<Button className="base-custom-menu__button" leftSection={<IconArrowBackUp />} onClick={onGoBack} />
+				)}
 			</div>
 		</div>
 	);

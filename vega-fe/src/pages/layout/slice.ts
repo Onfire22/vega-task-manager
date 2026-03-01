@@ -3,6 +3,7 @@ import type { IInitialState, TActiveModal } from './types.ts';
 
 export const initialState: IInitialState = {
 	activeModal: null,
+	isSidebarOpened: false,
 };
 
 const tasksSlice = createSlice({
@@ -12,8 +13,11 @@ const tasksSlice = createSlice({
 		setActiveModal: (state, action: PayloadAction<TActiveModal>) => {
 			state.activeModal = action.payload;
 		},
+		setIsSidebarOpened: (state, action: PayloadAction<boolean>) => {
+			state.isSidebarOpened = action.payload;
+		},
 	},
 });
 
-export const { setActiveModal } = tasksSlice.actions;
+export const { setActiveModal, setIsSidebarOpened } = tasksSlice.actions;
 export default tasksSlice.reducer;

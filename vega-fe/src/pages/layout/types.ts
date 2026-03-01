@@ -1,5 +1,6 @@
 export interface IInitialState {
 	activeModal: TActiveModal;
+	isSidebarOpened: boolean;
 }
 
 export type TActiveModal = 'project' | 'task' | null;
