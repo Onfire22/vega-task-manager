@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { getActiveModalSelector } from '../../selectors.ts';
 import { useFormik } from 'formik';
 import { CreateTaskValidationSchema } from '../../validation.ts';
-import { INITIAL_VALUES } from '../../constants.ts';
+import { BASE_DICTIONARIES_META, INITIAL_VALUES } from '../../constants.ts';
 import { useCreateTaskMutation } from '../../../../api/queries/tasks.api.ts';
 import { setNotification } from '../../../../components/notifications/slice.ts';
 import { useDictionaries } from '../../../../shared/hooks.ts';
@@ -15,7 +15,7 @@ const TaskModal = () => {
 
 	const [createTask] = useCreateTaskMutation();
 
-	const { selectorsData } = useDictionaries(true);
+	const { selectorsData } = useDictionaries(true, BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());
 
