@@ -7,11 +7,16 @@ import { useAppDispatch, useAppSelector } from '../../../../../store/hooks.ts';
 import { getActiveModalShownSelector } from '../../../selectors.ts';
 import { useUsersOptions } from '../../../../../api/hooks.ts';
 import { setActiveModal } from '../../../slice.ts';
-// import { setNotification } from '../../../components/notifications/slice.ts';
+import { useCreateProjectMutation } from '../../../../../api/queries/projects.api.ts';
+import { setNotification } from '../../../../../components/notifications/slice.ts';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
+
+	const [createProject] = useCreateProjectMutation();
+
 	const activeModal = useAppSelector(getActiveModalShownSelector());
+
 	const { usersListOptions, isUsersLoading } = useUsersOptions();
 
 	const formik = useFormik({
@@ -19,7 +24,11 @@ const ProjectModal = () => {
 		validationSchema: CreateProjectValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			console.log(values);
+			const response = await createProject(values);
+			if (response?.data?.newProject) {
+				dispatch(setNotification({ type: 'success', text: 'Проект успешно создан' }));
+				dispatch(setActiveModal(null));
+			}
 		},
 	});
 
@@ -36,6 +45,11 @@ const ProjectModal = () => {
 		dispatch(setActiveModal(null));
 	};
 
+	const handleSelectFieldChange = (name: string, value: string[]) => {
+		formik.setFieldError(name, '');
+		formik.setFieldValue(name, value);
+	};
+
 	return (
 		<ProjectModalView
 			formValues={formik.values}
@@ -46,6 +60,7 @@ const ProjectModal = () => {
 			onFieldChange={handleFieldChange}
 			onFormSubmit={formik.handleSubmit}
 			onModalClose={handleModalClose}
+			onSelectFieldChange={handleSelectFieldChange}
 		/>
 	);
 };

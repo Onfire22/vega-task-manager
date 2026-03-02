@@ -15,6 +15,7 @@ interface IProps {
 	};
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	onModalClose: () => void;
+	onSelectFieldChange: (name: string, value: string[]) => void;
 }
 
 const ProjectModalView: React.FC<IProps> = ({
@@ -26,6 +27,7 @@ const ProjectModalView: React.FC<IProps> = ({
 	onModalClose,
 	userList,
 	isLoading,
+	onSelectFieldChange,
 }) => {
 	return (
 		<Modal opened={activeModal === 'project'} onClose={onModalClose} size="50%" title="Создать проект">
@@ -33,7 +35,7 @@ const ProjectModalView: React.FC<IProps> = ({
 				<div className="create-project-modal__field">
 					<TextInput
 						label="Название"
-						placeholder="Исправить ошибку на странице..."
+						placeholder="Название проекта"
 						name="title"
 						description="Название проекта"
 						value={formValues.title}
@@ -59,7 +61,14 @@ const ProjectModalView: React.FC<IProps> = ({
 						label="Пользователи"
 						placeholder="Выберите пользователей"
 						description="Список участников проекта"
+						name="usersUuids"
 						data={userList}
+						value={formValues.usersUuids}
+						onChange={(value) => {
+							if (value) {
+								onSelectFieldChange('usersUuids', value);
+							}
+						}}
 						rightSection={isLoading && <Loader size="xs" />}
 						clearable
 					/>

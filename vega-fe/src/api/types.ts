@@ -72,3 +72,9 @@ export interface IProject {
 	memberships: [{ userUuid: string; userRoleUuid: string }];
 	title: string;
 }
+
+export interface IProjectCreate {
+	title: string;
+	description: string;
+	usersUuids: string[];
+}

@@ -20,4 +20,5 @@ export const ROUTES = {
 	getUsers: '/api/users',
 	updateTaskStatus: '/api/tasks/status-update',
 	projects: '/api/projects',
+	createProject: '/api/projects/create',
 };

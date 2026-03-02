@@ -21,6 +21,11 @@ export interface ISelectType {
 export interface IProjectFormValues {
 	title: string;
 	description: string;
+	usersUuids: string[];
 }
 
-export type IProjectErrors = Partial<IProjectFormValues>;
+export interface IProjectErrors {
+	title?: string;
+	description?: string;
+	usersUuids?: string | string[] | never[];
+}
