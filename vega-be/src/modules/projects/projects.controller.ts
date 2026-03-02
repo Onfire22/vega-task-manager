@@ -29,34 +29,64 @@ export const getProjects = async (req: Request, res: Response, next: NextFunctio
 
 export const createProject = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const projectData = req.body;
+		const { usersUuids, title, description } = req.body;
 
 		const userId = res.locals?.user?.id;
 
+		const userUUids = [...usersUuids, userId];
+
 		const code = req.body.title.slice(0, 2).toUpperCase();
+
+		const dictionaries = await prismaAppClient.dictionaries.findMany({
+			where: {
+				name: {
+					in: ['member', 'owner'],
+				},
+				type: 'ROLE_TYPE',
+			},
+			select: {
+				id: true,
+				name: true,
+			},
+		});
+
+		const { owner, member } = dictionaries.reduce(
+			(acc, item) => {
+				acc[item.name] = item;
+				return acc;
+			},
+			{} as Record<string, { name: string; id: string }>,
+		);
+
+		if (!owner || !member) {
+			next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+			return;
+		}
+
+		const usersData = userUUids.map((uuid) => {
+			return {
+				user: { connect: { id: uuid } },
+				userRole: {
+					connect: {
+						id: uuid === userId ? owner.id : member.id,
+					},
+				},
+			};
+		});
 
 		const newProject = await prismaAppClient.projects.create({
 			data: {
-				...projectData,
+				title,
+				description,
 				code,
 				memberships: {
-					create: {
-						user: { connect: { id: userId } },
-						userRole: {
-							connect: {
-								name_type: {
-									name: 'owner',
-									type: 'ROLE_TYPE',
-								},
-							},
-						},
-					},
+					create: usersData,
 				},
 			},
 		});
 
 		res.status(200).json({ newProject });
 	} catch (e) {
-		next(next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError)));
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };
