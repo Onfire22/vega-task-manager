@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CustomForm } from '../../../../../ui/custom-form';
+import { CustomForm } from '../../../../../components/custom-form';
 import { Button, PasswordInput, Popover, Progress, TextInput } from '@mantine/core';
 import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';

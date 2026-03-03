@@ -1,7 +1,7 @@
 import { BaseCustomMenu } from './components/base-custom-menu';
 import { useAppSelector } from '../../store/hooks.ts';
-import { getActiveModalShownSelector } from './selectors.ts';
-import { modal } from './components/modals';
+import { getActiveModalSelector } from '../../modules/modals/selectors.ts';
+import { modal } from '../../modules/modals';
 import { Header } from './components/header';
 import { Router } from '../../router/Router.tsx';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +10,8 @@ import { Sidebar } from './components/sidebar';
 
 const Layout = () => {
 	const location = useLocation();
-	const activeModal = useAppSelector(getActiveModalShownSelector());
+
+	const activeModal = useAppSelector(getActiveModalSelector());
 
 	const ActiveModal = activeModal ? modal[activeModal] : null;
 

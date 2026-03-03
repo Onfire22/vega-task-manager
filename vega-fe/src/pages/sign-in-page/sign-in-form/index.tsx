@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../constants.ts';
 import { LoadingOverlay } from '@mantine/core';
 import { useAppDispatch } from '../../../store/hooks.ts';
-import { setNotification } from '../../../components/notifications/slice.ts';
+import { setNotification } from '../../../modules/notifications/slice.ts';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
