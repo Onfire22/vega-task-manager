@@ -1,13 +1,13 @@
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from './modules/notifications';
 import { THEME } from './utils.ts';
-import { Layout } from './pages/layout';
+import { Router } from './router/Router.tsx';
 
 const App = () => {
 	return (
 		<MantineProvider theme={THEME} defaultColorScheme="dark">
 			<Notifications />
-			<Layout />
+			<Router />
 		</MantineProvider>
 	);
 };

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Drawer, NavLink } from '@mantine/core';
+import { Drawer } from '@mantine/core';
 import './styles.less';
 import { LINKS } from '../../../contsants.ts';
 import { IconLogout2 } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 interface IProps {
 	isSidebarOpened: boolean;
@@ -22,24 +23,23 @@ const SidebarView: React.FC<IProps> = ({ isSidebarOpened, onCloseSidebar, pathna
 						<p className="sidebar__name">{`${userData.name} ${userData.secondName}`}</p>
 					</div>
 					<div className="sidebar__links">
-						{LINKS.map(({ href, label, color, icon: Icon }) => (
-							<NavLink
+						{LINKS.map(({ href, label, icon: Icon }) => (
+							<Link
+								className={`sidebar__link ${pathname === href ? ' sidebar__link_active' : ''}`}
 								key={href}
-								href={href}
-								label={label}
-								color={color}
-								active={pathname === href}
-								leftSection={<Icon />}
-							/>
+								to={href}
+								onClick={onCloseSidebar}
+							>
+								<Icon />
+								{label}
+							</Link>
 						))}
 					</div>
 				</div>
-				<NavLink
-					className="sidebar__exit"
-					label="Выход"
-					leftSection={<IconLogout2 />}
-					onClick={onLogOutClick}
-				/>
+				<a className="sidebar__link" onClick={onLogOutClick}>
+					<IconLogout2 />
+					<span>Выход</span>
+				</a>
 			</aside>
 		</Drawer>
 	);

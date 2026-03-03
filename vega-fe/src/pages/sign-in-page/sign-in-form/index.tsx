@@ -29,7 +29,6 @@ const SignUpForm = () => {
 		validateOnChange: false,
 		onSubmit: async (values) => {
 			const response = await signInUser(values);
-			console.log(response);
 			if (response?.data?.user) {
 				navigate(FRONT_ROUTES.root);
 			} else {

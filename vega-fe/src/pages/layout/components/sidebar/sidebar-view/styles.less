@@ -24,6 +24,33 @@
 		width: 100%;
 	}
 
+	&__link {
+		color: rgb(201, 201, 201);
+		cursor: pointer;
+		width: 100%;
+		padding: 15px;
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		text-decoration: none;
+
+		&:hover {
+			background-color: var(--mantine-color-dark-6);
+		}
+
+		&_active {
+			background-color: var(--mantine-color-teal-light);
+
+			&:hover {
+				background-color: var(--mantine-color-teal-light-hover);
+			}
+		}
+
+		a {
+			text-decoration: none;
+		}
+	}
+
 	&__exit {
 		margin-top: 43vw;
 	}
