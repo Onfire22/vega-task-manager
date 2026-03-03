@@ -4,8 +4,9 @@ import { generateToken } from './auth.service';
 import { HOUR_IN_MS, RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import bcrypt from 'bcryptjs';
+import { ISignInReqBody, IAuthRes, ISignUpReqBody } from './auth.types';
 
-export const signupUser = async (req: Request, res: Response, next: NextFunction) => {
+export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
 		const userData = req.body;
 
@@ -36,7 +37,7 @@ export const signupUser = async (req: Request, res: Response, next: NextFunction
 	}
 };
 
-export const signInUser = async (req: Request, res: Response, next: NextFunction) => {
+export const signInUser = async (req: Request<{}, {}, ISignInReqBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
 		const { email, password } = req.body;
 
@@ -74,7 +75,6 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
 				user: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
 			});
 	} catch (e) {
-		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}
 };

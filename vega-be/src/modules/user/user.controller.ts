@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
+import { ILocals } from '../../common/types';
+import { IGetUserListRequestBody, IGetUserListResponse, IUserResponse } from './user.types';
 
-export const getCurrentUser = async (req: Request, res: Response, next: NextFunction) => {
+export const getCurrentUser = async (req: Request, res: Response<IUserResponse, ILocals>, next: NextFunction) => {
 	const id = res.locals?.user?.id;
 	try {
 		if (id) {
@@ -18,17 +20,21 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
 			});
 
 			if (!currentUser) {
-				throw new AppError('User not found', RESPONSE_STATUSES.notFound);
+				return next(new AppError('User not found', RESPONSE_STATUSES.notFound));
 			}
 
-			res.status(RESPONSE_STATUSES.success).json(currentUser);
+			res.status(RESPONSE_STATUSES.success).json({ currentUser });
 		}
 	} catch (e) {
 		next(e);
 	}
 };
 
-export const getUserList = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserList = async (
+	req: Request<{}, {}, IGetUserListRequestBody>,
+	res: Response<IGetUserListResponse>,
+	next: NextFunction,
+) => {
 	const filters = req.body?.filters;
 
 	const filterData = {

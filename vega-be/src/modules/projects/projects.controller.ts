@@ -2,8 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
+import { ICreateProjectRequestBody, IProjectsResponse } from './projects.types';
+import { IDefaultResponse, ILocals } from '../../common/types';
 
-export const getProjects = async (req: Request, res: Response, next: NextFunction) => {
+export const getProjects = async (req: Request, res: Response<IProjectsResponse>, next: NextFunction) => {
 	try {
 		const projects = await prismaAppClient.projects.findMany({
 			select: {
@@ -27,11 +29,15 @@ export const getProjects = async (req: Request, res: Response, next: NextFunctio
 	}
 };
 
-export const createProject = async (req: Request, res: Response, next: NextFunction) => {
+export const createProject = async (
+	req: Request<{}, {}, ICreateProjectRequestBody>,
+	res: Response<IDefaultResponse, ILocals>,
+	next: NextFunction,
+) => {
 	try {
 		const { usersUuids, title, description } = req.body;
 
-		const userId = res.locals?.user?.id;
+		const userId = res.locals.user.id;
 
 		const userUUids = [...usersUuids, userId];
 
@@ -74,7 +80,7 @@ export const createProject = async (req: Request, res: Response, next: NextFunct
 			};
 		});
 
-		const newProject = await prismaAppClient.projects.create({
+		await prismaAppClient.projects.create({
 			data: {
 				title,
 				description,
@@ -85,7 +91,7 @@ export const createProject = async (req: Request, res: Response, next: NextFunct
 			},
 		});
 
-		res.status(200).json({ newProject });
+		res.status(200).json({ success: true });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
