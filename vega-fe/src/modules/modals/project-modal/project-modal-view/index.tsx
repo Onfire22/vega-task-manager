@@ -1,7 +1,7 @@
 import './styles.less';
 import { Button, Loader, Modal, MultiSelect, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
-import type { IProjectErrors, IProjectFormValues } from '../../../../types.ts';
+import type { IProjectErrors, IProjectFormValues } from '../../types.ts';
 
 interface IProps {
 	formValues: IProjectFormValues;

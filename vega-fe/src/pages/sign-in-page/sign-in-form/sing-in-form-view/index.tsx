@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.less';
-import { CustomForm } from '../../../../ui/custom-form';
+import { CustomForm } from '../../../../components/custom-form';
 import { Link } from 'react-router-dom';
 import { Button, PasswordInput, TextInput } from '@mantine/core';
 import { IconAt, IconLock } from '@tabler/icons-react';

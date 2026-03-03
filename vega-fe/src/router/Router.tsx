@@ -8,6 +8,7 @@ import { PublicRoute } from './public-route.tsx';
 import { TaskPage } from '../pages/task-page';
 import { UserProfilePage } from '../pages/user-profile-page';
 import { ProjectsPage } from '../pages/projects-page';
+import { Layout } from '../pages/layout';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
@@ -25,10 +26,12 @@ const Router = () => {
 				<Route path={FRONT_ROUTES.signUp} element={<SignUpPage />} />
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
-				<Route index element={<TasksPage />} />
-				<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
-				<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
-				<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />
+				<Route element={<Layout />}>
+					<Route index element={<TasksPage />} />
+					<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
+					<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
+					<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />
+				</Route>
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />
 		</Routes>

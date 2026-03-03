@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';
-import { setActiveModal, setIsSidebarOpened } from '../../slice.ts';
+import { setIsSidebarOpened } from '../../slice.ts';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu-view';
 import { getIsSidebarOpenedSelector } from '../../selectors.ts';
+import { setActiveModal } from '../../../../modules/modals/slice.ts';
 
 const BaseCustomMenu = () => {
 	const navigate = useNavigate();

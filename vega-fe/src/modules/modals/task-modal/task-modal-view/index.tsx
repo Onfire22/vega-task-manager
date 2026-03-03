@@ -1,7 +1,7 @@
 import { Button, Modal, Select, Textarea, TextInput } from '@mantine/core';
 import './styles.less';
 import React from 'react';
-import type { ITaskFormErrors, ITaskFormValues, ISelectType } from '../../../../types.ts';
+import type { ISelectType, ITaskFormErrors, ITaskFormValues } from '../../types.ts';
 
 interface IProps {
 	onModalClose: () => void;
