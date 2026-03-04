@@ -78,3 +78,26 @@ export interface IProjectCreate {
 	description: string;
 	usersUuids: string[];
 }
+
+export interface IDefaultResponse {
+	success: boolean;
+}
+
+export type TDirection = 'desc' | 'asc';
+
+export interface ISorting {
+	column: string;
+	direction: TDirection;
+}
+
+export interface IGetUserTasksRequest {
+	filters: {
+		isAssignee: false;
+		sorting: ISorting;
+	};
+}
+
+export interface IUpdateTaskStatusRequest {
+	uuid: string;
+	status: string;
+}

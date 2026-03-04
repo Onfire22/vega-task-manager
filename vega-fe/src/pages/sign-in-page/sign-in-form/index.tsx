@@ -28,13 +28,17 @@ const SignUpForm = () => {
 		validationSchema: SignUpValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			const response = await signInUser(values);
-			if (response?.data?.user) {
+			try {
+				await signInUser(values).unwrap();
 				navigate(FRONT_ROUTES.root);
-			} else {
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-expect-error
-				dispatch(setNotification({ type: 'error', text: response.error?.data.message }));
+			} catch (e: unknown) {
+				const error = e as { data?: { message?: string } };
+				dispatch(
+					setNotification({
+						type: 'error',
+						text: error.data?.message ?? 'Something went wrong',
+					}),
+				);
 			}
 		},
 	});

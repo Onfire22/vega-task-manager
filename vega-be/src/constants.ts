@@ -19,7 +19,7 @@ export const ROUTES = {
 	currentUser: '/api/users/current',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
-	task: '/api/task',
+	task: '/api/task/:uuid',
 	createTask: '/api/tasks/create',
 	updateTask: '/api/tasks/update',
 	updateTaskStatus: '/api/tasks/status-update',

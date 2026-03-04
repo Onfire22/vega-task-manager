@@ -1,10 +1,17 @@
 import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ICreateTask, ITask, ITaskResponse } from '../types.ts';
+import type {
+	ICreateTask,
+	IDefaultResponse,
+	IGetUserTasksRequest,
+	ITask,
+	ITaskResponse,
+	IUpdateTaskStatusRequest,
+} from '../types.ts';
 
 const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		createTask: builder.mutation<{ newTask: ITask }, ICreateTask>({
+		createTask: builder.mutation<IDefaultResponse, ICreateTask>({
 			query: (taskData) => ({
 				url: ROUTES.createTask,
 				method: METHODS.post,
@@ -12,10 +19,7 @@ const tasksApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Tasks'],
 		}),
-		getTasks: builder.query<
-			ITaskResponse,
-			{ filters: { isAssignee: boolean; sorting: { column: string; direction: 'asc' | 'desc' } } }
-		>({
+		getTasks: builder.query<ITaskResponse, IGetUserTasksRequest>({
 			query: ({ filters }) => ({
 				url: ROUTES.getTasks,
 				method: METHODS.post,
@@ -23,7 +27,24 @@ const tasksApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['Tasks'],
 		}),
+		getTask: builder.query<{ task: ITask }, string>({
+			query: (uuid) => {
+				return {
+					url: `${ROUTES.getTask}${uuid}`,
+					method: METHODS.get,
+				};
+			},
+			providesTags: ['Task'],
+		}),
+		updateTaskStatus: builder.mutation<IDefaultResponse, IUpdateTaskStatusRequest>({
+			query: ({ uuid, status }) => ({
+				url: ROUTES.updateTaskStatus,
+				method: METHODS.patch,
+				body: { uuid, status },
+			}),
+			invalidatesTags: ['Task'],
+		}),
 	}),
 });
 
-export const { useCreateTaskMutation, useGetTasksQuery } = tasksApi;
+export const { useCreateTaskMutation, useGetTasksQuery, useGetTaskQuery, useUpdateTaskStatusMutation } = tasksApi;

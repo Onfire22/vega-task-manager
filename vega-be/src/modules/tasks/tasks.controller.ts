@@ -2,7 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import { ICreateTaskBody, IGetUserTasksBody, ITasksResponse, IUpdateTaskStatusBody } from './tasks.types';
+import {
+	ICreateTaskBody,
+	IGetTaskParams,
+	IGetUserTasksBody,
+	ITasksResponse,
+	IUpdateTaskStatusBody,
+} from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 
 export const createTask = async (
@@ -67,13 +73,12 @@ export const getUserTasks = async (
 	}
 };
 
-export const getTaskByUuid = async (req: Request, res: Response, next: NextFunction) => {
+export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response, next: NextFunction) => {
 	try {
-		const uuid = req.query.uuid;
+		const uuid = req.params.uuid;
 
-		if (typeof uuid !== 'string') {
-			next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
-			return;
+		if (!uuid) {
+			return next(new AppError('missing task uuid', RESPONSE_STATUSES.iternalError));
 		}
 
 		const task = await prismaAppClient.task.findUnique({

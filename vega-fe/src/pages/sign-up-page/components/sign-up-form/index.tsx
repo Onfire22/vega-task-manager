@@ -8,8 +8,11 @@ import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../constants.ts';
 import { LoadingOverlay } from '@mantine/core';
+import { setNotification } from '../../../../modules/notifications/slice.ts';
+import { useAppDispatch } from '../../../../store/hooks.ts';
 
 const SignUpForm = () => {
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -31,9 +34,17 @@ const SignUpForm = () => {
 		validationSchema: SignUpValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			const response = await signUpUser(values);
-			if (response?.data?.user) {
+			try {
+				await signUpUser(values).unwrap();
 				navigate(FRONT_ROUTES.root);
+			} catch (e) {
+				const error = e as { data?: { message?: string } };
+				dispatch(
+					setNotification({
+						type: 'error',
+						text: error.data?.message ?? 'Something went wrong',
+					}),
+				);
 			}
 		},
 	});

@@ -1,5 +1,5 @@
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ISignInUserData, IUserData, IAuthUserResponse } from '../types.ts';
+import type { ISignInUserData, IUserData, IAuthUserResponse, IDefaultResponse } from '../types.ts';
 import { baseApi } from '../index.ts';
 
 const authApi = baseApi.injectEndpoints({
@@ -36,7 +36,7 @@ const authApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['CurrentUser'],
 		}),
-		logOutUser: builder.mutation<{ success: boolean }, void>({
+		logOutUser: builder.mutation<IDefaultResponse, void>({
 			query: () => ({
 				url: ROUTES.logout,
 				method: METHODS.post,

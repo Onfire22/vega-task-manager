@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { useGetTaskQuery } from '../../api/queries/task.api.ts';
+import { useGetTaskQuery } from '../../api/queries/tasks.api.ts';
 import { useDictionaries, useUsers } from '../../api/hooks.ts';
 import { DATE_FORMAT, DICTIONARIES_META } from './constants.ts';
 

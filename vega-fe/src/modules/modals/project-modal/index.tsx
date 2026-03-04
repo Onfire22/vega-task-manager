@@ -25,7 +25,7 @@ const ProjectModal = () => {
 		validateOnChange: false,
 		onSubmit: async (values) => {
 			const response = await createProject(values);
-			if (response?.data?.newProject) {
+			if (response?.data?.success) {
 				dispatch(setNotification({ type: 'success', text: 'Проект успешно создан' }));
 				dispatch(setActiveModal(null));
 			}

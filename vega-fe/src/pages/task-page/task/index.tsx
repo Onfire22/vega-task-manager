@@ -4,7 +4,7 @@ import { useDictionaries } from '../../../api/hooks.ts';
 import { TASK_STATUS_NUMBER } from '../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useTask } from '../hooks.ts';
-import { useUpdateTaskStatusMutation } from '../../../api/queries/task.api.ts';
+import { useUpdateTaskStatusMutation } from '../../../api/queries/tasks.api.ts';
 import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 
 const Task = () => {
