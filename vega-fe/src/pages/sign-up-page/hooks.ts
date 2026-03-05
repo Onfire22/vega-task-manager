@@ -81,6 +81,7 @@ export const useSignUpForm = () => {
 
 	return {
 		formik,
+		activeStep,
 		isSignUpLoading: isLoading,
 		handleNextStepClick,
 		handlePrevStepClick,

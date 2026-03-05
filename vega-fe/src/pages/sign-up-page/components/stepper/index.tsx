@@ -1,50 +1,39 @@
-import { StepperView } from './stepper-view';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
-import { getActiveStepSelector } from '../../selectors.ts';
-import { setActiveStep } from '../../slice.ts';
 import React from 'react';
+import { Button, Group, Stepper } from '@mantine/core';
+import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react';
+import './styles.less';
 
 interface IProps {
+	activeStep: number;
 	isNextButtonDisabled: boolean;
-	onEmailCheck: () => Promise<boolean>;
-	onFormikValidate: () => Promise<boolean>;
-	onFormSubmit: () => void;
+	onPrevStepClick: () => void;
+	onNextStepClick: () => void;
 }
 
-const Stepper: React.FC<IProps> = ({ isNextButtonDisabled, onEmailCheck, onFormikValidate, onFormSubmit }) => {
-	const dispatch = useAppDispatch();
-	const activeStep = useAppSelector(getActiveStepSelector());
-
-	const handleNextStepClick = async () => {
-		if (activeStep === 0) {
-			const isEmailFree = await onEmailCheck();
-
-			if (!isEmailFree) return;
-		}
-
-		const isFormValid = await onFormikValidate();
-
-		if (!isFormValid) return;
-
-		if (activeStep === 1) {
-			onFormSubmit();
-		}
-
-		dispatch(setActiveStep(activeStep < 2 ? activeStep + 1 : activeStep));
-	};
-
-	const handlePrevStepClick = () => {
-		dispatch(setActiveStep(activeStep > 0 ? activeStep - 1 : activeStep));
-	};
-
+const CustomStepper: React.FC<IProps> = ({ activeStep, onPrevStepClick, onNextStepClick, isNextButtonDisabled }) => {
 	return (
-		<StepperView
-			activeStep={activeStep}
-			isNextButtonDisabled={isNextButtonDisabled}
-			onPrevStepClick={handlePrevStepClick}
-			onNextStepClick={handleNextStepClick}
-		/>
+		<div className="custom-stepper">
+			<Stepper active={activeStep}>
+				<Stepper.Step label="Первый шаг" description="Регистрация" />
+				<Stepper.Step label="Второй шаг" description="Инфо о себе" />
+			</Stepper>
+			<Group justify="center" mt="xl">
+				{activeStep > 0 && (
+					<Button className="custom-stepper__button" variant="default" onClick={onPrevStepClick}>
+						<IconArrowNarrowLeft />
+					</Button>
+				)}
+				<Button
+					className="custom-stepper__button"
+					type="button"
+					disabled={isNextButtonDisabled}
+					onClick={onNextStepClick}
+				>
+					<IconArrowNarrowRight />
+				</Button>
+			</Group>
+		</div>
 	);
 };
 
-export { Stepper };
+export { CustomStepper };

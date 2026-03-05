@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CustomForm } from '../../../../../components/custom-form';
 import { AccountStep } from '../account-step';
-import { Stepper } from '../../stepper';
+import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';
 import './styles.less';
 
@@ -32,11 +32,10 @@ interface IProps {
 	popoverData: { strength: number; color: string };
 	onSelectFieldChange: (name: string, value: string) => void;
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onFormSubmit: () => void;
 	onPopoverOpened: (value: boolean) => void;
 	onGeneratePasswordClick: () => void;
-	onEmailCheck: () => Promise<boolean>;
-	onFormikValidate: () => Promise<boolean>;
+	onNextStepClick: () => void;
+	onPrevStepClick: () => void;
 }
 
 const SignUpFormView: React.FC<IProps> = ({
@@ -46,16 +45,15 @@ const SignUpFormView: React.FC<IProps> = ({
 	isPopoverOpened,
 	popoverData,
 	onFieldChange,
-	onFormSubmit,
 	onPopoverOpened,
 	onGeneratePasswordClick,
 	passwordRef,
 	emailRef,
 	isNextButtonDisabled,
-	onEmailCheck,
-	onFormikValidate,
 	stackOptions,
 	onSelectFieldChange,
+	onPrevStepClick,
+	onNextStepClick,
 }) => {
 	return (
 		<div className="signup-form">
@@ -85,11 +83,11 @@ const SignUpFormView: React.FC<IProps> = ({
 							/>
 						)}
 					</div>
-					<Stepper
+					<CustomStepper
+						activeStep={activeStep}
 						isNextButtonDisabled={isNextButtonDisabled}
-						onEmailCheck={onEmailCheck}
-						onFormikValidate={onFormikValidate}
-						onFormSubmit={onFormSubmit}
+						onPrevStepClick={onPrevStepClick}
+						onNextStepClick={onNextStepClick}
 					/>
 					<div className="signup-form__text">
 						<span>Уже есть аккаунт? </span>
