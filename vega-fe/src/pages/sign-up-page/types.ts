@@ -1,7 +1,5 @@
-export type FormType = 'signup' | 'info';
-
 export interface InitialState {
-	activeForm: FormType;
+	activeStep: number;
 }
 
 export interface IRequirement {

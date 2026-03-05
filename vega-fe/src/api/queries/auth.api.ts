@@ -36,6 +36,13 @@ const authApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['CurrentUser'],
 		}),
+		checkIsEmailFree: builder.mutation<{ success: true }, string>({
+			query: (email) => ({
+				url: ROUTES.userByEmail,
+				method: METHODS.post,
+				body: { email },
+			}),
+		}),
 		logOutUser: builder.mutation<IDefaultResponse, void>({
 			query: () => ({
 				url: ROUTES.logout,
@@ -46,4 +53,10 @@ const authApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useSignUpUserMutation, useSignInUserMutation, useLogOutUserMutation, useGetCurrentUserQuery } = authApi;
+export const {
+	useSignUpUserMutation,
+	useSignInUserMutation,
+	useLogOutUserMutation,
+	useGetCurrentUserQuery,
+	useCheckIsEmailFreeMutation,
+} = authApi;

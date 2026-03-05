@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CustomForm } from '../../../../../components/custom-form';
-import { Button, PasswordInput, Popover, Progress, TextInput } from '@mantine/core';
-import { PasswordRequirement } from '../../password-requirement';
-import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
-import { IconAt, IconLock } from '@tabler/icons-react';
+import { AccountStep } from '../account-step';
+import { Stepper } from '../../stepper';
+import { ProfileStep } from '../profile-step';
 import './styles.less';
 
 interface IProps {
+	activeStep: number;
 	formValues: {
 		email: string;
 		password: string;
 		passwordRepeat: string;
 		name: string;
 		secondName: string;
+		stackUuid: string;
 	};
 	formErrors: {
 		email?: string;
@@ -21,18 +22,25 @@ interface IProps {
 		passwordRepeat?: string;
 		name?: string;
 		secondName?: string;
+		stackUuid?: string;
 	};
 	isPopoverOpened: boolean;
+	isNextButtonDisabled: boolean;
+	stackOptions: Array<{ label: string; value: string }>;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
 	emailRef: React.RefObject<HTMLInputElement | null>;
 	popoverData: { strength: number; color: string };
+	onSelectFieldChange: (name: string, value: string) => void;
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
+	onFormSubmit: () => void;
 	onPopoverOpened: (value: boolean) => void;
 	onGeneratePasswordClick: () => void;
+	onEmailCheck: () => Promise<boolean>;
+	onFormikValidate: () => Promise<boolean>;
 }
 
 const SignUpFormView: React.FC<IProps> = ({
+	activeStep,
 	formValues,
 	formErrors,
 	isPopoverOpened,
@@ -43,126 +51,54 @@ const SignUpFormView: React.FC<IProps> = ({
 	onGeneratePasswordClick,
 	passwordRef,
 	emailRef,
+	isNextButtonDisabled,
+	onEmailCheck,
+	onFormikValidate,
+	stackOptions,
+	onSelectFieldChange,
 }) => {
 	return (
 		<div className="signup-form">
-			<CustomForm title="Регистрация" onSubmit={onFormSubmit}>
-				<div className="signup-form__input">
-					<TextInput
-						id="email"
-						type="text"
-						label="Электронная почта"
-						name="email"
-						placeholder="username@host.com"
-						value={formValues.email}
-						error={formErrors.email}
-						onChange={onFieldChange}
-						withAsterisk
-						leftSection={<IconAt color="#D5D8DB" size={23} />}
-						ref={emailRef}
-					/>
-				</div>
-				<div className="signup-form__input signup-form__input_random">
-					<a className="signup-form__generator" onClick={onGeneratePasswordClick}>
-						generate random
-					</a>
-					<Popover
-						opened={isPopoverOpened}
-						position="bottom"
-						width="target"
-						shadow="md"
-						transitionProps={{ transition: 'pop' }}
-					>
-						<Popover.Target>
-							<div
-								onFocusCapture={() => onPopoverOpened(true)}
-								onBlurCapture={() => onPopoverOpened(false)}
-							>
-								<PasswordInput
-									id="password"
-									type="password"
-									label="Пароль"
-									name="password"
-									placeholder="********"
-									value={formValues.password}
-									error={formErrors.password}
-									onChange={onFieldChange}
-									withAsterisk
-									leftSection={<IconLock color="#D5D8DB" size={23} />}
-									ref={passwordRef}
-								/>
-							</div>
-						</Popover.Target>
-						<Popover.Dropdown>
-							<Progress color={popoverData.color} value={popoverData.strength} size={5} mb="xs" />
-							<PasswordRequirement
-								label={VALIDATION_MESSAGES.passwordLength}
-								meets={formValues.password.length > MINIMAL_PASSWORD_LENGTH}
+			<div className="signup-form__wrapper">
+				<CustomForm title="Регистрация">
+					<div className="signup-form__step">
+						{activeStep === 0 && (
+							<AccountStep
+								formValues={formValues}
+								formErrors={formErrors}
+								isPopoverOpened={isPopoverOpened}
+								passwordRef={passwordRef}
+								emailRef={emailRef}
+								onPopoverOpened={onPopoverOpened}
+								onGeneratePasswordClick={onGeneratePasswordClick}
+								popoverData={popoverData}
+								onFieldChange={onFieldChange}
 							/>
-							{PASSWORD_REQUIREMENTS.map((requirement, index) => {
-								return (
-									<PasswordRequirement
-										key={index}
-										label={requirement.label}
-										meets={requirement.regex.test(formValues.password)}
-									/>
-								);
-							})}
-						</Popover.Dropdown>
-					</Popover>
-				</div>
-				<div className="signup-form__input">
-					<PasswordInput
-						id="password-repeat"
-						type="password"
-						label="Повторите пароль"
-						name="passwordRepeat"
-						placeholder="********"
-						value={formValues.passwordRepeat}
-						error={formErrors.passwordRepeat}
-						onChange={onFieldChange}
-						withAsterisk
-						leftSection={<IconLock color="#D5D8DB" size={23} />}
+						)}
+						{activeStep === 1 && (
+							<ProfileStep
+								formValues={formValues}
+								formErrors={formErrors}
+								onFieldChange={onFieldChange}
+								stackOptions={stackOptions}
+								onSelectFieldChange={onSelectFieldChange}
+							/>
+						)}
+					</div>
+					<Stepper
+						isNextButtonDisabled={isNextButtonDisabled}
+						onEmailCheck={onEmailCheck}
+						onFormikValidate={onFormikValidate}
+						onFormSubmit={onFormSubmit}
 					/>
-				</div>
-				<div className="signup-form__group">
-					<div className="signup-form__input">
-						<TextInput
-							id="name"
-							type="text"
-							label="Имя"
-							name="name"
-							placeholder="Иван"
-							value={formValues.name}
-							error={formErrors.name}
-							onChange={onFieldChange}
-							withAsterisk
-						/>
+					<div className="signup-form__text">
+						<span>Уже есть аккаунт? </span>
+						<Link className="signup-form__link" to="/sign-in">
+							Войти
+						</Link>
 					</div>
-					<div className="signup-form__input">
-						<TextInput
-							id="secondName"
-							type="text"
-							label="Фамилия"
-							name="secondName"
-							placeholder="Иванов"
-							value={formValues.secondName}
-							error={formErrors.secondName}
-							onChange={onFieldChange}
-							withAsterisk
-						/>
-					</div>
-				</div>
-				<div className="signup-form__text">
-					<span>Уже есть аккаунт? </span>
-					<Link className="signup-form__link" to="/sign-in">
-						Войти
-					</Link>
-				</div>
-				<Button className="button" type="submit">
-					Зарегистрироваться
-				</Button>
-			</CustomForm>
+				</CustomForm>
+			</div>
 		</div>
 	);
 };

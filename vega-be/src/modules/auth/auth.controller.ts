@@ -79,6 +79,24 @@ export const signInUser = async (req: Request<{}, {}, ISignInReqBody>, res: Resp
 	}
 };
 
+export const getUserByEmail = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { email } = req.body;
+
+		const user = await prismaAppClient.user.findUnique({
+			where: { email },
+		});
+
+		if (user) {
+			return next(new AppError('Пользователь с таким email уже существует', RESPONSE_STATUSES.iternalError));
+		}
+
+		res.status(200).json({ success: true });
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
+	}
+};
+
 export const logOutUser = async (req: Request, res: Response, next: NextFunction) => {
 	res.clearCookie('token', {
 		httpOnly: true,

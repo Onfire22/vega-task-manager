@@ -6,6 +6,7 @@ import { authRouter } from './modules/auth/auth.router';
 import { authMiddleware } from './modules/auth/auth.middleware';
 import cors from 'cors';
 import { errorMiddleware } from './errors/middleware';
+import { dictionaryRouter } from './modules/dictionary/dictionary.router';
 
 const port = process.env.PORT;
 
@@ -23,6 +24,7 @@ app.use(json());
 app.use(cookieParser());
 
 app.use(authRouter);
+app.use(dictionaryRouter);
 
 app.use(authMiddleware);
 
