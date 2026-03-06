@@ -17,6 +17,7 @@ export const ROUTES = {
 	logout: '/api/logout',
 	users: '/api/users',
 	currentUser: '/api/users/current',
+	userByEmail: '/api/users/email',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
 	task: '/api/task/:uuid',

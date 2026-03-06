@@ -3,6 +3,11 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
+	userStackUUid: string;
+}
+
+export interface IUserResponse {
+	currentUser: IUserData;
 }
 
 export interface IAuthUserResponse {
@@ -92,7 +97,7 @@ export interface ISorting {
 
 export interface IGetUserTasksRequest {
 	filters: {
-		isAssignee: false;
+		isAssignee: boolean;
 		sorting: ISorting;
 	};
 }

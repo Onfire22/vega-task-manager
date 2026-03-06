@@ -28,7 +28,7 @@ const Sidebar = () => {
 		<SidebarView
 			isSidebarOpened={isSidebarOpened}
 			pathname={location.pathname}
-			userData={{ name: data?.name, secondName: data?.secondName }}
+			userData={{ name: data?.currentUser?.name, secondName: data?.currentUser?.secondName }}
 			onCloseSidebar={handleCloseSidebar}
 			onLogOutClick={handleLogOutClick}
 		/>

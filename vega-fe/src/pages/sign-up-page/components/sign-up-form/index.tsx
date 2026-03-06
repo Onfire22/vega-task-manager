@@ -1,53 +1,27 @@
 import { SignUpFormView } from './sign-up-form-view';
-import { useFormik } from 'formik';
-import { PASSWORD_REQUIREMENTS, RED_COLOR, SIGNUP_DEFAULT_VALUES, TEAL_COLOR, YELLOW_COLOR } from '../../constants.ts';
-import { SignUpValidationSchema } from '../../validation.ts';
+import { PASSWORD_REQUIREMENTS, RED_COLOR, TEAL_COLOR, YELLOW_COLOR } from '../../constants.ts';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSignUpUserMutation } from '../../../../api/queries/auth.api.ts';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
-import { useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../constants.ts';
+import { useDictionariesOptions } from '../../../../api/hooks.ts';
 import { LoadingOverlay } from '@mantine/core';
-import { setNotification } from '../../../../modules/notifications/slice.ts';
-import { useAppDispatch } from '../../../../store/hooks.ts';
+import { useSignUpForm } from '../../hooks.ts';
 
 const SignUpForm = () => {
-	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
+	const [isPopoverOpened, setPopoverOpened] = useState(false);
 
 	const passwordRef = useRef<HTMLInputElement>(null);
 
 	const emailRef = useRef<HTMLInputElement>(null);
 
-	const [isPopoverOpened, setPopoverOpened] = useState(false);
+	const { dictionariesOptions } = useDictionariesOptions(['STACK_TYPE']);
 
-	const [signUpUser, { isLoading }] = useSignUpUserMutation();
+	const { handleNextStepClick, handlePrevStepClick, isSignUpLoading, activeStep, formik } = useSignUpForm();
 
 	useEffect(() => {
 		if (emailRef?.current) {
 			emailRef.current.focus();
 		}
 	}, []);
-
-	const formik = useFormik({
-		initialValues: SIGNUP_DEFAULT_VALUES,
-		validationSchema: SignUpValidationSchema,
-		validateOnChange: false,
-		onSubmit: async (values) => {
-			try {
-				await signUpUser(values).unwrap();
-				navigate(FRONT_ROUTES.root);
-			} catch (e) {
-				const error = e as { data?: { message?: string } };
-				dispatch(
-					setNotification({
-						type: 'error',
-						text: error.data?.message ?? 'Something went wrong',
-					}),
-				);
-			}
-		},
-	});
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name } = e.target;
@@ -73,6 +47,11 @@ const SignUpForm = () => {
 		}
 	};
 
+	const handleSelectFieldChange = (name: string, value: string) => {
+		formik.setFieldError(name, '');
+		formik.setFieldValue(name, value);
+	};
+
 	const popoverData = useMemo(() => {
 		const strength = getPasswordStrength(formik.values.password, PASSWORD_REQUIREMENTS);
 
@@ -82,20 +61,45 @@ const SignUpForm = () => {
 		};
 	}, [formik.values.password]);
 
+	const isNextButtonDisabled = useMemo(() => {
+		if (activeStep === 0) {
+			return !(formik.values.email && formik.values.password && formik.values.passwordRepeat);
+		}
+
+		if (activeStep === 1) {
+			return !(formik.values.name && formik.values.secondName && formik.values.userStackUUid);
+		}
+
+		return false;
+	}, [
+		activeStep,
+		formik.values.email,
+		formik.values.password,
+		formik.values.passwordRepeat,
+		formik.values.name,
+		formik.values.secondName,
+		formik.values.userStackUUid,
+	]);
+
 	return (
 		<>
-			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+			<LoadingOverlay visible={isSignUpLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
 			<SignUpFormView
+				activeStep={activeStep}
 				formValues={formik.values}
 				formErrors={formik.errors}
 				isPopoverOpened={isPopoverOpened}
 				popoverData={popoverData}
 				passwordRef={passwordRef}
 				emailRef={emailRef}
+				isNextButtonDisabled={isNextButtonDisabled}
+				stackOptions={dictionariesOptions?.stack_type}
 				onFieldChange={handleFieldChange}
-				onFormSubmit={formik.handleSubmit}
 				onPopoverOpened={handlePopoverOpened}
 				onGeneratePasswordClick={handleGeneratePasswordClick}
+				onSelectFieldChange={handleSelectFieldChange}
+				onNextStepClick={handleNextStepClick}
+				onPrevStepClick={handlePrevStepClick}
 			/>
 		</>
 	);

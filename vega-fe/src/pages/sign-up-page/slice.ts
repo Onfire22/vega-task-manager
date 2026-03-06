@@ -1,19 +1,19 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { FormType, InitialState } from './types.ts';
+import type { InitialState } from './types.ts';
 
 export const initialState: InitialState = {
-	activeForm: 'signup',
+	activeStep: 0,
 };
 
 const signUpSlice = createSlice({
 	name: '@@sign-up',
 	initialState,
 	reducers: {
-		setActiveForm: (state, action: PayloadAction<FormType>) => {
-			state.activeForm = action.payload;
+		setActiveStep: (state, action: PayloadAction<number>) => {
+			state.activeStep = action.payload;
 		},
 	},
 });
 
-export const { setActiveForm } = signUpSlice.actions;
+export const { setActiveStep } = signUpSlice.actions;
 export default signUpSlice.reducer;

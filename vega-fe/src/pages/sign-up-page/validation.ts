@@ -6,13 +6,16 @@ const passwordSchema = PASSWORD_REQUIREMENTS.reduce(
 	yup.string().required(VALIDATION_MESSAGES.required).min(8, VALIDATION_MESSAGES.passwordLength),
 );
 
-export const SignUpValidationSchema = yup.object().shape({
+export const AccountStepValidationSchema = yup.object().shape({
 	email: yup.string().email(VALIDATION_MESSAGES.email).required(VALIDATION_MESSAGES.required),
 	password: passwordSchema,
 	passwordRepeat: yup
 		.string()
 		.oneOf([yup.ref('password'), undefined], VALIDATION_MESSAGES.passwordRepeat)
 		.required(VALIDATION_MESSAGES.required),
+});
+
+export const ProfileStepValidationSchema = yup.object().shape({
 	name: yup
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, VALIDATION_MESSAGES.lettersOnly)
@@ -21,4 +24,5 @@ export const SignUpValidationSchema = yup.object().shape({
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, VALIDATION_MESSAGES.lettersOnly)
 		.required(VALIDATION_MESSAGES.required),
+	userStackUUid: yup.string().required(),
 });

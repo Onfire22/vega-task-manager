@@ -21,6 +21,7 @@ export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Resp
 				id: true,
 				name: true,
 				secondName: true,
+				userStackUUid: true,
 			},
 		});
 
@@ -74,6 +75,24 @@ export const signInUser = async (req: Request<{}, {}, ISignInReqBody>, res: Resp
 			.json({
 				user: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
 			});
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
+	}
+};
+
+export const getUserByEmail = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { email } = req.body;
+
+		const user = await prismaAppClient.user.findUnique({
+			where: { email },
+		});
+
+		if (user) {
+			return next(new AppError('Пользователь с таким email уже существует', RESPONSE_STATUSES.iternalError));
+		}
+
+		res.status(200).json({ success: true });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}

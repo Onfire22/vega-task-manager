@@ -4,7 +4,7 @@ import './styles.less';
 interface IProps {
 	title: string;
 	children: React.ReactNode;
-	onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
+	onSubmit?: (e: React.ChangeEvent<HTMLFormElement>) => void;
 }
 
 const CustomForm: React.FC<IProps> = ({ title, children, onSubmit }) => {

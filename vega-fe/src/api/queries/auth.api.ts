@@ -1,16 +1,17 @@
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ISignInUserData, IUserData, IAuthUserResponse, IDefaultResponse } from '../types.ts';
+import type { ISignInUserData, IUserData, IAuthUserResponse, IDefaultResponse, IUserResponse } from '../types.ts';
 import { baseApi } from '../index.ts';
 
 const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		signUpUser: builder.mutation<IAuthUserResponse, IUserData>({
-			query: ({ email, name, password, secondName }) => {
+			query: ({ email, name, password, secondName, userStackUUid }) => {
 				const fieldsForRequest = {
 					email,
 					name,
 					password,
 					secondName,
+					userStackUUid,
 				};
 
 				return {
@@ -29,12 +30,19 @@ const authApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['CurrentUser'],
 		}),
-		getCurrentUser: builder.query<IUserData, void>({
+		getCurrentUser: builder.query<IUserResponse, void>({
 			query: () => ({
 				url: ROUTES.currentUser,
 				method: METHODS.get,
 			}),
 			providesTags: ['CurrentUser'],
+		}),
+		checkIsEmailFree: builder.mutation<{ success: true }, string>({
+			query: (email) => ({
+				url: ROUTES.userByEmail,
+				method: METHODS.post,
+				body: { email },
+			}),
 		}),
 		logOutUser: builder.mutation<IDefaultResponse, void>({
 			query: () => ({
@@ -46,4 +54,10 @@ const authApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useSignUpUserMutation, useSignInUserMutation, useLogOutUserMutation, useGetCurrentUserQuery } = authApi;
+export const {
+	useSignUpUserMutation,
+	useSignInUserMutation,
+	useLogOutUserMutation,
+	useGetCurrentUserQuery,
+	useCheckIsEmailFreeMutation,
+} = authApi;
