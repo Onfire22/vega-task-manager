@@ -12,7 +12,7 @@ const TasksTable = () => {
 	const activeTab = useAppSelector(getActiveTabSelector());
 
 	const handleRowDoubleClick = (uuid: string) => {
-		navigate(`/tasks/${uuid}`);
+		navigate(`/task/${uuid}`);
 	};
 
 	return <TasksTableView activeTab={activeTab} tableData={tableData} onRowDoubleClick={handleRowDoubleClick} />;
