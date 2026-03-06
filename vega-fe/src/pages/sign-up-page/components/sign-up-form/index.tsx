@@ -15,7 +15,7 @@ const SignUpForm = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(['STACK_TYPE']);
 
-	const { formik, handleNextStepClick, handlePrevStepClick, isSignUpLoading, activeStep } = useSignUpForm();
+	const { handleNextStepClick, handlePrevStepClick, isSignUpLoading, activeStep, formik } = useSignUpForm();
 
 	useEffect(() => {
 		if (emailRef?.current) {
@@ -67,7 +67,7 @@ const SignUpForm = () => {
 		}
 
 		if (activeStep === 1) {
-			return !(formik.values.name && formik.values.secondName && formik.values.stackUuid);
+			return !(formik.values.name && formik.values.secondName && formik.values.userStackUUid);
 		}
 
 		return false;
@@ -78,7 +78,7 @@ const SignUpForm = () => {
 		formik.values.passwordRepeat,
 		formik.values.name,
 		formik.values.secondName,
-		formik.values.stackUuid,
+		formik.values.userStackUUid,
 	]);
 
 	return (

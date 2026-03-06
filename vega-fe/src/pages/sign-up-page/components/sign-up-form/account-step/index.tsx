@@ -4,22 +4,11 @@ import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
 import React from 'react';
 import './styles.less';
+import type { IFormErrors, IFormValues } from '../../../types.ts';
 
 interface IProps {
-	formValues: {
-		email: string;
-		password: string;
-		passwordRepeat: string;
-		name: string;
-		secondName: string;
-	};
-	formErrors: {
-		email?: string;
-		password?: string;
-		passwordRepeat?: string;
-		name?: string;
-		secondName?: string;
-	};
+	formValues: IFormValues;
+	formErrors: IFormErrors;
 	isPopoverOpened: boolean;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
 	emailRef: React.RefObject<HTMLInputElement | null>;

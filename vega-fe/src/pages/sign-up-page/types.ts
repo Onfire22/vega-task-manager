@@ -8,3 +8,26 @@ export interface IRequirement {
 }
 
 export type DictionaryKey = 'lowerCaseLetters' | 'upperCaseLetters' | 'symbols' | 'numbers';
+
+export interface IFormValues {
+	email: string;
+	password: string;
+	passwordRepeat: string;
+	name: string;
+	secondName: string;
+	userStackUUid: string;
+}
+
+export interface IFormErrors {
+	email?: string;
+	password?: string;
+	passwordRepeat?: string;
+	name?: string;
+	secondName?: string;
+	userStackUUid?: string;
+}
+
+export interface IOptions {
+	label: string;
+	value: string;
+}

@@ -70,6 +70,8 @@ export const useSignUpForm = () => {
 
 		if (activeStep === 1) {
 			formik.handleSubmit();
+			dispatch(setActiveStep(0));
+			formik.resetForm();
 		}
 
 		dispatch(setActiveStep(activeStep < 2 ? activeStep + 1 : activeStep));

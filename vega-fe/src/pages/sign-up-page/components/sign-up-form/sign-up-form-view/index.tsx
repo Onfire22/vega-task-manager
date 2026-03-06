@@ -5,28 +5,15 @@ import { AccountStep } from '../account-step';
 import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';
 import './styles.less';
+import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
 
 interface IProps {
 	activeStep: number;
-	formValues: {
-		email: string;
-		password: string;
-		passwordRepeat: string;
-		name: string;
-		secondName: string;
-		stackUuid: string;
-	};
-	formErrors: {
-		email?: string;
-		password?: string;
-		passwordRepeat?: string;
-		name?: string;
-		secondName?: string;
-		stackUuid?: string;
-	};
+	formValues: IFormValues;
+	formErrors: IFormErrors;
 	isPopoverOpened: boolean;
 	isNextButtonDisabled: boolean;
-	stackOptions: Array<{ label: string; value: string }>;
+	stackOptions: Array<IOptions>;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
 	emailRef: React.RefObject<HTMLInputElement | null>;
 	popoverData: { strength: number; color: string };

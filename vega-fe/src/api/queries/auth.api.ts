@@ -1,16 +1,17 @@
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ISignInUserData, IUserData, IAuthUserResponse, IDefaultResponse } from '../types.ts';
+import type { ISignInUserData, IUserData, IAuthUserResponse, IDefaultResponse, IUserResponse } from '../types.ts';
 import { baseApi } from '../index.ts';
 
 const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		signUpUser: builder.mutation<IAuthUserResponse, IUserData>({
-			query: ({ email, name, password, secondName }) => {
+			query: ({ email, name, password, secondName, userStackUUid }) => {
 				const fieldsForRequest = {
 					email,
 					name,
 					password,
 					secondName,
+					userStackUUid,
 				};
 
 				return {
@@ -29,7 +30,7 @@ const authApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['CurrentUser'],
 		}),
-		getCurrentUser: builder.query<IUserData, void>({
+		getCurrentUser: builder.query<IUserResponse, void>({
 			query: () => ({
 				url: ROUTES.currentUser,
 				method: METHODS.get,

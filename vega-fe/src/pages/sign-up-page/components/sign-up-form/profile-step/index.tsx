@@ -1,25 +1,12 @@
-import { Select, TextInput } from '@mantine/core';
 import React from 'react';
+import { Select, TextInput } from '@mantine/core';
+import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
 import './styles.less';
 
 interface IProps {
-	formValues: {
-		email: string;
-		password: string;
-		passwordRepeat: string;
-		name: string;
-		secondName: string;
-		stackUuid: string;
-	};
-	formErrors: {
-		email?: string;
-		password?: string;
-		passwordRepeat?: string;
-		name?: string;
-		secondName?: string;
-		stackUuid?: string;
-	};
-	stackOptions: Array<{ label: string; value: string }>;
+	formValues: IFormValues;
+	formErrors: IFormErrors;
+	stackOptions: Array<IOptions>;
 	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onSelectFieldChange: (name: string, value: string) => void;
 }
@@ -63,15 +50,15 @@ const ProfileStep: React.FC<IProps> = ({
 				<Select
 					label="Специализация"
 					placeholder="Выберите значение"
-					name="stackUuid"
+					name="userStackUUid"
 					data={stackOptions}
-					value={formValues.stackUuid}
+					value={formValues.userStackUUid}
 					onChange={(value) => {
 						if (value) {
-							onSelectFieldChange('stackUuid', value);
+							onSelectFieldChange('userStackUUid', value);
 						}
 					}}
-					error={formErrors?.stackUuid}
+					error={formErrors?.userStackUUid}
 					withAsterisk
 				/>
 			</div>

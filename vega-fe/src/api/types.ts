@@ -3,6 +3,11 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
+	userStackUUid: string;
+}
+
+export interface IUserResponse {
+	currentUser: IUserData;
 }
 
 export interface IAuthUserResponse {
