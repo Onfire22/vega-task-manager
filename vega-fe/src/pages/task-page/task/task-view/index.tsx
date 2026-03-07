@@ -1,17 +1,34 @@
 import './styles.less';
-import { Button, Popover, Progress, Timeline } from '@mantine/core';
+import { Button, Popover, Progress, Select, Textarea, TextInput, Timeline } from '@mantine/core';
 import type { IDictionary, ITask } from '../../../../api/types.ts';
 import React from 'react';
 import { BULLET_ICONS } from '../../constants.ts';
+import { IconDeviceFloppy, IconPencil } from '@tabler/icons-react';
 
 interface IProps {
 	task: ITask;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
 	onTaskStatusUpdate: (uuid: string, status: string) => void;
+	field: { fieldName: string; value: string };
+	onSetEditField: (fieldName: string, value: string) => void;
+	onFieldChange: {
+		(fieldName: string, e: React.ChangeEvent<HTMLInputElement>): void;
+		(fieldName: string, e: React.ChangeEvent<HTMLTextAreaElement>): void;
+	};
+	options: { type: Array<{ label: string; value: string }>; priority: Array<{ label: string; value: string }> };
 }
 
-const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses, onTaskStatusUpdate }) => {
+const TaskView: React.FC<IProps> = ({
+	task,
+	activeTaskStatus,
+	taskStatuses,
+	onTaskStatusUpdate,
+	field,
+	onSetEditField,
+	onFieldChange,
+	options,
+}) => {
 	return (
 		<div className="task">
 			<div className="task__header">
@@ -22,9 +39,17 @@ const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses, onTa
 					<div className="task__title">
 						<div className="task__project">Project / Task_CODE</div>
 					</div>
-					<div className="task__subtitle">
-						<p className="task__name">{task.title}</p>
-					</div>
+					{field.fieldName === 'title' ? (
+						<div className="task__field">
+							<TextInput value={field.value} onChange={(e) => onFieldChange('title', e)} />
+							<IconDeviceFloppy size={35} />
+						</div>
+					) : (
+						<div className="task__subtitle task__editable-field">
+							<p className="task__name">{task.title}</p>
+							<IconPencil size={18} onClick={() => onSetEditField('title', task.title)} />
+						</div>
+					)}
 				</div>
 			</div>
 			<div className="task__container">
@@ -68,17 +93,75 @@ const TaskView: React.FC<IProps> = ({ task, activeTaskStatus, taskStatuses, onTa
 						<div className="task__description">
 							<div className="task__row">
 								<span className="task__key">Тип</span>
-								<span className="task__value">{task.taskStackUuid}</span>
+								{field.fieldName === 'task_status' ? (
+									<div className="task__field">
+										<Select
+											value={field.value}
+											data={options.type}
+											onChange={(value) => {
+												if (value) {
+													onSetEditField('task_status', value);
+												}
+											}}
+										/>
+										<IconDeviceFloppy size={35} />
+									</div>
+								) : (
+									<div className="task__subtitle task__editable-field">
+										<p className="task__name">{task.taskStatusUuid}</p>
+										<IconPencil
+											size={18}
+											onClick={() => onSetEditField('task_status', task.taskStatusUuid)}
+										/>
+									</div>
+								)}
 							</div>
 							<div className="task__row">
 								<span className="task__key">Приоритет:</span>
-								<span className="task__value">{task.taskPriorityUuid}</span>
+								{field.fieldName === 'taskPriorityUuid' ? (
+									<div className="task__field">
+										<Select
+											className="task__textarea"
+											value={field.value}
+											data={options.type}
+											onChange={(value) => {
+												if (value) {
+													onSetEditField('taskPriorityUuid', value);
+												}
+											}}
+										/>
+										<IconDeviceFloppy size={35} />
+									</div>
+								) : (
+									<div className="task__subtitle task__editable-field">
+										<p className="task__name">{task.taskPriorityUuid}</p>
+										<IconPencil
+											size={18}
+											onClick={() => onSetEditField('taskPriorityUuid', task.taskPriorityUuid)}
+										/>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
 					<div className="task__description">
 						<div className="task__heading">Описание задачи:</div>
-						<div className="task__text">{task.description}</div>
+						{field.fieldName === 'description' ? (
+							<div className="task__field">
+								<Textarea
+									className="task__textarea"
+									resize="vertical"
+									value={field.value}
+									onChange={(e) => onFieldChange('description', e)}
+								/>
+								<IconDeviceFloppy size={35} />
+							</div>
+						) : (
+							<div className="task__subtitle task__editable-field">
+								<p className="task__name">{task.description}</p>
+								<IconPencil size={18} onClick={() => onSetEditField('description', task.description)} />
+							</div>
+						)}
 					</div>
 				</div>
 				<aside className="task__sidebar">

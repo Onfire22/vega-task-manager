@@ -18,3 +18,5 @@ export const TASK_STATUS_NUMBER = {
 export const DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_TYPE', 'TASK_STATUS'];
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
+
+export const SELECT_FIELDS = ['stack_type'];
