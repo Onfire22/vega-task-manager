@@ -19,4 +19,4 @@ export const DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
-export const SELECT_FIELDS = ['stack_type'];
+export const SELECT_FIELDS = ['stack_type', 'task_priority'];
