@@ -5,6 +5,7 @@ import signUpReducer from '../pages/sign-up-page/slice';
 import notificationsReducer from '../modules/notifications/slice';
 import modalsReducer from '../modules/modals/slice';
 import layoutReducer from '../pages/layout/slice';
+import taskSlice from '../pages/task-page/slice';
 
 export default combineReducers({
 	tasksReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
 	notificationsReducer,
 	layoutReducer,
 	modalsReducer,
+	taskSlice,
 	[baseApi.reducerPath]: baseApi.reducer,
 });

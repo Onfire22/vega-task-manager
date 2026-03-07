@@ -1,7 +1,13 @@
 import { Task } from './task';
+import { ModalWindow } from './modal-window';
 
 const TaskPage = () => {
-	return <Task />;
+	return (
+		<>
+			<Task />
+			<ModalWindow />
+		</>
+	);
 };
 
 export { TaskPage };

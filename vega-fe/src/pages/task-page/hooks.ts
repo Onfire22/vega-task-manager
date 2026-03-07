@@ -22,13 +22,16 @@ export const useTask = (uuid?: string) => {
 			const reporterName = reporter ? `${reporter?.name} ${reporter?.secondName}` : '-';
 			const assigneeName = assignee ? `${assignee?.name} ${assignee?.secondName}` : 'unassigned';
 
+			const taskPriorityUuid = task_priority?.find((item) => item.id === data.task.taskPriorityUuid);
+			const taskStackUuid = stack_type?.find((item) => item.id === data.task.taskStackUuid);
+			const taskStatusUuid = task_status?.find((item) => item.id === data.task.taskStatusUuid);
+
 			return {
 				task: {
 					...data.task,
-					taskPriorityUuid:
-						task_priority?.find((item) => item.id === data.task.taskPriorityUuid)?.name ?? '-',
-					taskStackUuid: stack_type?.find((item) => item.id === data.task.taskStackUuid)?.name ?? '-',
-					taskStatusUuid: task_status?.find((item) => item.id === data.task.taskStatusUuid)?.name ?? '-',
+					taskPriorityUuid: { name: taskPriorityUuid?.name || '-', color: taskPriorityUuid?.color },
+					taskStackUuid: { name: taskStackUuid?.name || '-', color: taskStackUuid?.color },
+					taskStatusUuid: { name: taskStatusUuid?.name || '-', color: taskStatusUuid?.color },
 					reporterUuid: reporterName,
 					assigneeUuid: assigneeName,
 					updatedAt: format(new Date(data.task.updatedAt), DATE_FORMAT),

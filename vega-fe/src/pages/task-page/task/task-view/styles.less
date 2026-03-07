@@ -45,6 +45,7 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		margin-bottom: 3px;
 	}
 
 	&__button {
@@ -70,6 +71,14 @@
 		flex-direction: column;
 		gap: 20px;
 	}
+	
+	&__link {
+		cursor: pointer;
+	}
+
+	&__description {
+		width: 90%;
+	}
 
 	&__dropdown {
 		&-button {
@@ -83,16 +92,16 @@
 
 	&__subtitle {
 		display: flex;
-		align-items: center;
+		align-items: start;
 		gap: 7px;
 	}
 
 	&__editable-field {
-		svg {
+		.task__edit-icon {
 			opacity: 0;
 		}
 
-		&:hover svg {
+		&:hover .task__edit-icon {
 			cursor: pointer;
 			opacity: 1;
 		}

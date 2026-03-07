@@ -1,5 +1,4 @@
 import type { TDictionariesTypes } from '../../api/types.ts';
-import { IconArrowNarrowDown, IconArrowNarrowUp, IconArrowNarrowUpDashed } from '@tabler/icons-react';
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
@@ -8,13 +7,6 @@ export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'S
 export const CELLS_WITH_BADGES = ['taskStatusUuid', 'taskStackUuid'];
 
 export const STATUS_CELL = 'taskPriorityUuid';
-
-export const PRIORITIES_MAP = {
-	highest: IconArrowNarrowUpDashed,
-	high: IconArrowNarrowUp,
-	medium: IconArrowNarrowDown,
-	low: IconArrowNarrowDown,
-};
 
 export const RED_COLOR = '#fa5252';
 

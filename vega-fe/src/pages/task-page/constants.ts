@@ -20,3 +20,20 @@ export const DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
 export const SELECT_FIELDS = ['stack_type', 'task_priority'];
+
+export const LOG_TIME_INITIAL_VALUES = {
+	estimate: '',
+	loggedTime: '',
+	logComment: '',
+};
+
+export const USER_FIELD = 'assigneeUuid';
+
+export const RED_COLOR = '#fa5252';
+
+export const GREEN_COLOR = '#40c057';
+
+export const INITIAL_FIELD_VALUES = {
+	fieldName: '',
+	value: '',
+};
