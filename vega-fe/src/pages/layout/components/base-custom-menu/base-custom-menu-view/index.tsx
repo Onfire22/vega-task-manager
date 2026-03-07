@@ -15,6 +15,7 @@ interface IProps {
 	searchValue: string;
 	path: string;
 	isSidebarOpened: boolean;
+	breadCrumbs: string;
 }
 
 const BaseCustomMenuView: React.FC<IProps> = ({
@@ -25,6 +26,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 	isSidebarOpened,
 	onGoBack,
 	path,
+	breadCrumbs,
 }) => {
 	return (
 		<div className="base-custom-menu">
@@ -33,7 +35,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				<Link className="base-custom-menu__logo" to={FRONT_ROUTES.root}>
 					<img className="base-custom-menu__image" src={Logo} />
 				</Link>
-				<div className="base-custom-menu__crumbs">Core / Tasks</div>
+				<div className="base-custom-menu__crumbs">{breadCrumbs}</div>
 			</div>
 			<div className="base-custom-menu__controls">
 				<Input

@@ -9,6 +9,7 @@ import { TaskPage } from '../pages/task-page';
 import { UserProfilePage } from '../pages/user-profile-page';
 import { ProjectsPage } from '../pages/projects-page';
 import { Layout } from '../pages/layout';
+import { ProjectPage } from '../pages/project-page';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
@@ -31,6 +32,7 @@ const Router = () => {
 					<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 					<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
 					<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />
+					<Route path={FRONT_ROUTES.project} element={<ProjectPage />} />
 				</Route>
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />

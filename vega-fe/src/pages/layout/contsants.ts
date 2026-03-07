@@ -6,3 +6,8 @@ export const LINKS = [
 	{ href: FRONT_ROUTES.root, label: 'Задачи', icon: IconClipboardCopy },
 	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: IconSitemap },
 ];
+
+export const BREADCRUMBS = {
+	profile: 'Профиль',
+	projects: 'Проекты',
+};
