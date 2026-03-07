@@ -3,11 +3,14 @@ import { useDictionaries, useTask, useUsers } from '../../api/hooks.ts';
 import { DATE_FORMAT, DICTIONARIES_META, TASK_STATUS_NUMBER } from './constants.ts';
 
 export const useTaskData = (uuid?: string) => {
-	const { dictionaries } = useDictionaries(DICTIONARIES_META);
+	const { dictionaries, isDictionariesLoading } = useDictionaries(DICTIONARIES_META);
 	const { usersList, isUsersLoading } = useUsers();
 	const { task, isTaskLoading } = useTask(uuid);
 
-	if (!task || !usersList.length) return { task: null, isTaskLoading: false, activeTaskStatus: 0 };
+	const idTaskDataLoading = isTaskLoading || isDictionariesLoading || isUsersLoading;
+
+	if (!task || !usersList.length || !Object.keys(dictionaries).length)
+		return { task: null, isTaskLoading: idTaskDataLoading, activeTaskStatus: 0 };
 
 	const { task_priority, stack_type, task_status } = dictionaries;
 
@@ -37,6 +40,6 @@ export const useTaskData = (uuid?: string) => {
 	return {
 		task: taskData,
 		activeTaskStatus,
-		isTasksLoading: isTaskLoading || isUsersLoading,
+		isTasksLoading: idTaskDataLoading,
 	};
 };

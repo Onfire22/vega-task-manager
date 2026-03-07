@@ -16,6 +16,7 @@ export const ROUTES = {
 	createTask: '/api/tasks/create',
 	getTask: '/api/task/',
 	getTasks: '/api/tasks',
+	updateTask: '/api/task/',
 	dictionaries: '/api/dictionaries',
 	getUsers: '/api/users',
 	userByEmail: '/api/users/email',

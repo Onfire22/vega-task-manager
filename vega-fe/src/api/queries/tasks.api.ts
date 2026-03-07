@@ -1,13 +1,6 @@
 import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
-import type {
-	ICreateTask,
-	IDefaultResponse,
-	IGetUserTasksRequest,
-	ITask,
-	ITaskResponse,
-	IUpdateTaskStatusRequest,
-} from '../types.ts';
+import type { ICreateTask, IDefaultResponse, IGetUserTasksRequest, ITask, ITaskResponse } from '../types.ts';
 
 const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -36,15 +29,15 @@ const tasksApi = baseApi.injectEndpoints({
 			},
 			providesTags: ['Task'],
 		}),
-		updateTaskStatus: builder.mutation<IDefaultResponse, IUpdateTaskStatusRequest>({
-			query: ({ uuid, status }) => ({
-				url: ROUTES.updateTaskStatus,
+		updateTask: builder.mutation({
+			query: ({ uuid, ...rest }) => ({
+				url: `${ROUTES.updateTask}${uuid}`,
 				method: METHODS.patch,
-				body: { uuid, status },
+				body: rest,
 			}),
 			invalidatesTags: ['Task'],
 		}),
 	}),
 });
 
-export const { useCreateTaskMutation, useGetTasksQuery, useGetTaskQuery, useUpdateTaskStatusMutation } = tasksApi;
+export const { useCreateTaskMutation, useGetTasksQuery, useGetTaskQuery, useUpdateTaskMutation } = tasksApi;

@@ -12,11 +12,11 @@ interface IProps {
 	task: ITask | null;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
-	onTaskStatusUpdate: (uuid: string, status: string) => void;
 	field: { fieldName: string; value: string };
 	onEditField: (fieldName: string, value: string | null) => void;
 	onCancelChanges: () => void;
 	onLogWorkModalShown: () => void;
+	onUpdateTask: () => void;
 	onFieldChange: {
 		(fieldName: string, e: React.ChangeEvent<HTMLInputElement>): void;
 		(fieldName: string, e: React.ChangeEvent<HTMLTextAreaElement>): void;
@@ -29,7 +29,6 @@ const TaskView: React.FC<IProps> = ({
 	task,
 	activeTaskStatus,
 	taskStatuses,
-	onTaskStatusUpdate,
 	field,
 	onEditField,
 	onFieldChange,
@@ -37,6 +36,7 @@ const TaskView: React.FC<IProps> = ({
 	onCancelChanges,
 	onLogWorkModalShown,
 	usersListOptions,
+	onUpdateTask,
 }) => {
 	if (!task) return null;
 	return (
@@ -52,7 +52,7 @@ const TaskView: React.FC<IProps> = ({
 					{field.fieldName === 'title' ? (
 						<div className="task__field">
 							<TextInput value={field.value} onChange={(e) => onFieldChange('title', e)} size="xs" />
-							<IconCheck size={25} color={GREEN_COLOR} />
+							<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
 							<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 						</div>
 					) : (
@@ -86,11 +86,7 @@ const TaskView: React.FC<IProps> = ({
 											return (
 												<Timeline.Item
 													bullet={
-														<button
-															className="task__dropdown-button"
-															type="button"
-															onClick={() => onTaskStatusUpdate(task.id, status.id)}
-														>
+														<button className="task__dropdown-button" type="button">
 															<Icon size={20} />
 														</button>
 													}
@@ -181,7 +177,7 @@ const TaskView: React.FC<IProps> = ({
 									value={field.value}
 									onChange={(e) => onFieldChange('description', e)}
 								/>
-								<IconCheck size={25} color={GREEN_COLOR} />
+								<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
 								<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 							</div>
 						) : (

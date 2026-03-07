@@ -38,11 +38,6 @@ export interface ITasksResponse {
 	tasks: Array<ITask>;
 }
 
-export interface IUpdateTaskStatusBody {
-	uuid: string;
-	status: string;
-}
-
 export interface IGetTaskParams {
 	uuid: string;
 }

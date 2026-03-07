@@ -4,7 +4,7 @@ import { useDictionaries, useDictionariesOptions, useUsersOptions } from '../../
 import { INITIAL_FIELD_VALUES, SELECT_FIELDS, USER_FIELD } from '../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useTaskData } from '../hooks.ts';
-import { useUpdateTaskStatusMutation } from '../../../api/queries/tasks.api.ts';
+import { useUpdateTaskMutation } from '../../../api/queries/tasks.api.ts';
 import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 import React, { useState } from 'react';
 import type { DictionaryKey } from '../types.ts';
@@ -21,11 +21,7 @@ const Task = () => {
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 	const { isTasksLoading, task, activeTaskStatus } = useTaskData(params.uuid);
 	const { usersListOptions } = useUsersOptions();
-	const [updateTaskStatus] = useUpdateTaskStatusMutation();
-
-	const handleTaskStatusUpdate = (uuid: string, status: string) => {
-		updateTaskStatus({ uuid, status });
-	};
+	const [updateTask] = useUpdateTaskMutation();
 
 	const handleEditField = (fieldName: string, value: string | null) => {
 		let data = value;
@@ -57,20 +53,34 @@ const Task = () => {
 		dispatch(setIsModalShown(true));
 	};
 
-	return isTasksLoading ? (
-		<Loader />
-	) : (
+	const handleUpdateTask = async () => {
+		try {
+			const data = {
+				[field.fieldName]: field.value,
+			};
+			console.log(data);
+			const response = await updateTask({ ...data, uuid: params.uuid }).unwrap();
+			setEditField(INITIAL_FIELD_VALUES);
+			console.log(response);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	if (isTasksLoading) return <Loader />;
+
+	return (
 		<TaskView
 			task={task}
 			field={field}
 			activeTaskStatus={activeTaskStatus}
 			taskStatuses={dictionaries?.task_status}
 			usersListOptions={usersListOptions}
-			onTaskStatusUpdate={handleTaskStatusUpdate}
 			onEditField={handleEditField}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
 			onLogWorkModalShown={handleLogWorkModalShown}
+			onUpdateTask={handleUpdateTask}
 			options={{ type: dictionariesOptions.stack_type, priority: dictionariesOptions.task_priority }}
 		/>
 	);

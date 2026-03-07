@@ -2,14 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import {
-	ICreateTaskBody,
-	IGetTaskParams,
-	IGetUserTasksBody,
-	ITasksResponse,
-	IUpdateTaskStatusBody,
-	TUpdateTask,
-} from './tasks.types';
+import { ICreateTaskBody, IGetTaskParams, IGetUserTasksBody, ITasksResponse, TUpdateTask } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 
 export const createTask = async (
@@ -92,36 +85,22 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 	}
 };
 
-export const updateTask = async (req: Request<{}, {}, TUpdateTask>, res: Response, next: NextFunction) => {
+export const updateTask = async (
+	req: Request<{ uuid: string }, {}, TUpdateTask>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
-		const userTask = req.body;
+		console.log(req.body, req.params);
 
 		const task = await prismaAppClient.task.update({
-			where: { id: userTask.id },
+			where: { id: req.params.uuid },
 			data: req.body,
 		});
 
 		res.status(200).json({ task });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
-	}
-};
-
-export const updateTaskStatus = async (
-	req: Request<{}, {}, IUpdateTaskStatusBody>,
-	res: Response<IDefaultResponse>,
-	next: NextFunction,
-) => {
-	try {
-		const { uuid, status } = req.body;
-
-		await prismaAppClient.task.update({
-			where: { id: uuid },
-			data: { taskStatusUuid: status },
-		});
-
-		res.status(200).json({ success: true });
-	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

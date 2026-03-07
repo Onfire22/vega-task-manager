@@ -101,8 +101,3 @@ export interface IGetUserTasksRequest {
 		sorting: ISorting;
 	};
 }
-
-export interface IUpdateTaskStatusRequest {
-	uuid: string;
-	status: string;
-}
