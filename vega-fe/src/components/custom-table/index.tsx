@@ -1,4 +1,4 @@
-import { Table } from '@mantine/core';
+import { Loader, Table } from '@mantine/core';
 import React from 'react';
 
 interface IProps {
@@ -11,10 +11,11 @@ interface IProps {
 		customCellComponent?: React.ComponentType<{ data: any; columnName: string }>;
 	}>;
 	outOfDataMessage: string;
+	isLoading?: boolean;
 	onRowDoubleClick: (uuid: string) => void;
 }
 
-const CustomTable: React.FC<IProps> = ({ tableData, headerData, outOfDataMessage, onRowDoubleClick }) => {
+const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOfDataMessage, onRowDoubleClick }) => {
 	return (
 		<Table highlightOnHover withTableBorder withColumnBorders>
 			<Table.Thead>
@@ -29,6 +30,11 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, outOfDataMessage
 					})}
 				</Table.Tr>
 			</Table.Thead>
+			{isLoading && (
+				<Table.Caption>
+					<Loader />
+				</Table.Caption>
+			)}
 			{!tableData.length && <Table.Caption>{outOfDataMessage}</Table.Caption>}
 			<Table.Tbody>
 				{tableData.map((data) => {

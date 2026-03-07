@@ -1,5 +1,7 @@
+import { Project } from './components/project';
+
 const ProjectPage = () => {
-	return 123;
+	return <Project />;
 };
 
 export { ProjectPage };

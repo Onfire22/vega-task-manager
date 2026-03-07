@@ -45,7 +45,10 @@ export interface ITaskTableData {
 	estimatedTime: string | null;
 	id: string;
 	loggedTime: string | null;
-	taskPriorityUuid: string | null;
+	taskPriorityUuid: {
+		name: string;
+		color: string;
+	};
 	projectUuid: string | null;
 	reporterUuid: string;
 	title: string;
