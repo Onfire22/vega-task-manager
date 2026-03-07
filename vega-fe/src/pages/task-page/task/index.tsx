@@ -1,9 +1,9 @@
 import { TaskView } from './task-view';
 import { Loader } from '@mantine/core';
 import { useDictionaries, useDictionariesOptions, useUsersOptions } from '../../../api/hooks.ts';
-import { INITIAL_FIELD_VALUES, SELECT_FIELDS, TASK_STATUS_NUMBER, USER_FIELD } from '../constants.ts';
+import { INITIAL_FIELD_VALUES, SELECT_FIELDS, USER_FIELD } from '../constants.ts';
 import { useParams } from 'react-router-dom';
-import { useTask } from '../hooks.ts';
+import { useTaskData } from '../hooks.ts';
 import { useUpdateTaskStatusMutation } from '../../../api/queries/tasks.api.ts';
 import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 import React, { useState } from 'react';
@@ -19,13 +19,9 @@ const Task = () => {
 
 	const { dictionaries } = useDictionaries(BASE_DICTIONARIES_META);
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
-	const { isTasksLoading, task } = useTask(params?.uuid);
+	const { isTasksLoading, task, activeTaskStatus } = useTaskData(params.uuid);
 	const { usersListOptions } = useUsersOptions();
 	const [updateTaskStatus] = useUpdateTaskStatusMutation();
-
-	if (!task) return null;
-
-	const activeTaskStatus = TASK_STATUS_NUMBER[task.taskStatusUuid.name as keyof typeof TASK_STATUS_NUMBER];
 
 	const handleTaskStatusUpdate = (uuid: string, status: string) => {
 		updateTaskStatus({ uuid, status });

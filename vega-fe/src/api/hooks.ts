@@ -4,6 +4,7 @@ import { CACHING_SETTINGS } from '../constants.ts';
 import type { TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectsQuery } from './queries/projects.api.ts';
+import { useGetTaskQuery } from './queries/tasks.api.ts';
 
 export const useDictionaries = (meta: TDictionariesTypes[]) => {
 	const { data, isLoading, isSuccess } = useGetDictionariesQuery(meta, CACHING_SETTINGS);
@@ -69,4 +70,12 @@ export const useProjectsOptions = () => {
 	}));
 
 	return { projectOptions, isProjectsLoading };
+};
+
+export const useTask = (uuid?: string) => {
+	const { data, isLoading, isSuccess } = useGetTaskQuery(uuid!, { skip: !uuid });
+
+	const task = isSuccess ? data.task : null;
+
+	return { task, isTaskLoading: isLoading };
 };

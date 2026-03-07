@@ -9,7 +9,7 @@ import { CustomBadge } from '../../../../components/custom-badge';
 import { CustomStatus } from '../../../../components/custom-status';
 
 interface IProps {
-	task: ITask;
+	task: ITask | null;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
 	onTaskStatusUpdate: (uuid: string, status: string) => void;
@@ -38,6 +38,7 @@ const TaskView: React.FC<IProps> = ({
 	onLogWorkModalShown,
 	usersListOptions,
 }) => {
+	if (!task) return null;
 	return (
 		<div className="task">
 			<div className="task__header">
