@@ -46,3 +46,8 @@ export interface IUpdateTaskStatusBody {
 export interface IGetTaskParams {
 	uuid: string;
 }
+
+export type TUpdateTask = Pick<
+	ITask,
+	'id' | 'title' | 'taskStackUuid' | 'taskPriorityUuid' | 'description' | 'assigneeUuid'
+>;

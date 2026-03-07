@@ -8,6 +8,7 @@ import {
 	IGetUserTasksBody,
 	ITasksResponse,
 	IUpdateTaskStatusBody,
+	TUpdateTask,
 } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 
@@ -91,13 +92,15 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 	}
 };
 
-export const updateTask = async (req: Request, res: Response, next: NextFunction) => {
+export const updateTask = async (req: Request<{}, {}, TUpdateTask>, res: Response, next: NextFunction) => {
 	try {
 		const userTask = req.body;
+
 		const task = await prismaAppClient.task.update({
 			where: { id: userTask.id },
-			data: userTask,
+			data: req.body,
 		});
+
 		res.status(200).json({ task });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
