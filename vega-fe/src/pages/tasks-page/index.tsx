@@ -1,7 +1,7 @@
-import { TasksTable } from './tasks-table';
+import { Tasks } from './tasks';
 
 const TasksPage = () => {
-	return <TasksTable />;
+	return <Tasks />;
 };
 
 export { TasksPage };

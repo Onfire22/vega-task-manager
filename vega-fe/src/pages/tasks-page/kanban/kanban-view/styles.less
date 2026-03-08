@@ -1,0 +1,18 @@
+.kanban {
+	height: calc(100vh - 134px);
+
+	&__columns {
+		height: 100%;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 15px;
+	}
+
+	&__column {
+		height: 100%;
+		border: 1px solid var(--mantine-color-default-border);
+		border-radius: 10px;
+		border-top: none;
+		background-color: #242424;
+	}
+}
