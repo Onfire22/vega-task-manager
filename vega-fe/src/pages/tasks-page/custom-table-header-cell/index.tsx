@@ -17,12 +17,12 @@ const CustomTableHeaderCell: React.FC<IProps> = ({ column }) => {
 	const dispatch = useAppDispatch();
 	const sortingState = useAppSelector(getSortingSelector());
 
-	const handleSortColumn = (id: string) => {
-		if (!id) return;
-		if (sortingState.column !== id) {
-			dispatch(setSorting({ column: id, direction: 'asc' }));
+	const handleSortColumn = (sorting?: string) => {
+		if (!sorting) return;
+		if (sortingState.column !== sorting) {
+			dispatch(setSorting({ column: sorting, direction: 'asc' }));
 		} else {
-			dispatch(setSorting({ column: id, direction: sortingState.direction === 'asc' ? 'desc' : 'asc' }));
+			dispatch(setSorting({ column: sorting, direction: sortingState.direction === 'asc' ? 'desc' : 'asc' }));
 		}
 	};
 

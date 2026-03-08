@@ -12,12 +12,12 @@ interface IProps {
 	task: ITask | null;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
+	currentUserId?: string;
 	field: { fieldName: string; value: string };
 	onEditField: (fieldName: string, value: string | null) => void;
 	onCancelChanges: () => void;
 	onLogWorkModalShown: () => void;
-	onUpdateTask: () => void;
-	onAssignOnMeClick: () => void;
+	onUpdateTask: (customField?: { fieldName: string; value: string }) => void;
 	onFieldChange: {
 		(fieldName: string, e: React.ChangeEvent<HTMLInputElement>): void;
 		(fieldName: string, e: React.ChangeEvent<HTMLTextAreaElement>): void;
@@ -38,7 +38,7 @@ const TaskView: React.FC<IProps> = ({
 	onLogWorkModalShown,
 	usersListOptions,
 	onUpdateTask,
-	onAssignOnMeClick,
+	currentUserId,
 }) => {
 	if (!task) return null;
 	return (
@@ -54,7 +54,7 @@ const TaskView: React.FC<IProps> = ({
 					{field.fieldName === 'title' ? (
 						<div className="task__field">
 							<TextInput value={field.value} onChange={(e) => onFieldChange('title', e)} size="xs" />
-							<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
+							<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
 							<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 						</div>
 					) : (
@@ -88,7 +88,16 @@ const TaskView: React.FC<IProps> = ({
 											return (
 												<Timeline.Item
 													bullet={
-														<button className="task__dropdown-button" type="button">
+														<button
+															className="task__dropdown-button"
+															type="button"
+															onClick={() =>
+																onUpdateTask({
+																	fieldName: 'taskStatus',
+																	value: status.id,
+																})
+															}
+														>
 															<Icon size={20} />
 														</button>
 													}
@@ -120,23 +129,23 @@ const TaskView: React.FC<IProps> = ({
 												}
 											}}
 										/>
-										<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
+										<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
 										<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 									</div>
 								) : (
 									<div className="task__subtitle task__editable-field">
-										<CustomBadge color={task.taskStackUuid.color} text={task.taskStackUuid.name} />
+										<CustomBadge color={task.taskStack.color} text={task.taskStack.name} />
 										<IconPencil
 											className="task__edit-icon"
 											size={18}
-											onClick={() => onEditField('stackType', task.taskStackUuid.name)}
+											onClick={() => onEditField('stackType', task.taskStack.name)}
 										/>
 									</div>
 								)}
 							</div>
 							<div className="task__row">
 								<span className="task__key">Статус:</span>
-								<CustomBadge text={task.taskStatusUuid.name} color={task.taskStatusUuid.color} />
+								<CustomBadge text={task.taskStatus.name} color={task.taskStatus.color} />
 							</div>
 							<div className="task__row">
 								<span className="task__key">Приоритет:</span>
@@ -152,16 +161,16 @@ const TaskView: React.FC<IProps> = ({
 												}
 											}}
 										/>
-										<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
+										<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
 										<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 									</div>
 								) : (
 									<div className="task__subtitle task__editable-field">
-										<CustomStatus data={task.taskPriorityUuid} size={17} />
+										<CustomStatus data={task.taskPriority} size={17} />
 										<IconPencil
 											className="task__edit-icon"
 											size={18}
-											onClick={() => onEditField('taskPriority', task.taskPriorityUuid.name)}
+											onClick={() => onEditField('taskPriority', task.taskPriority.name)}
 										/>
 									</div>
 								)}
@@ -179,7 +188,7 @@ const TaskView: React.FC<IProps> = ({
 									value={field.value}
 									onChange={(e) => onFieldChange('description', e)}
 								/>
-								<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
+								<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
 								<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 							</div>
 						) : (
@@ -201,11 +210,11 @@ const TaskView: React.FC<IProps> = ({
 						<div className="task__heading">Сотрудники</div>
 						<div className="task__row">
 							<span className="task__key">Автор:</span>
-							<span className="task__value">{task.reporterUuid}</span>
+							<span className="task__value">{task.reporter}</span>
 						</div>
 						<div className="task__row">
 							<span className="task__key">Испольнитель:</span>
-							{field.fieldName === 'assigneeUuid' ? (
+							{field.fieldName === 'assignee' ? (
 								<div className="task__field">
 									<Select
 										value={field.value}
@@ -213,25 +222,28 @@ const TaskView: React.FC<IProps> = ({
 										size="xs"
 										onChange={(value) => {
 											if (value) {
-												onEditField('assigneeUuid', value);
+												onEditField('assignee', value);
 											}
 										}}
 									/>
-									<IconCheck size={25} color={GREEN_COLOR} onClick={onUpdateTask} />
+									<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
 									<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
 								</div>
 							) : (
 								<div className="task__subtitle task__editable-field">
-									<p className="task__name">{task.assigneeUuid}</p>
+									<p className="task__name">{task.assignee}</p>
 									<IconPencil
 										className="task__edit-icon"
 										size={18}
-										onClick={() => onEditField('assigneeUuid', task.assigneeUuid)}
+										onClick={() => onEditField('assignee', task.assignee)}
 									/>
 								</div>
 							)}
 						</div>
-						<a className="task__link" onClick={onAssignOnMeClick}>
+						<a
+							className="task__link"
+							onClick={() => onUpdateTask({ fieldName: 'assignee', value: currentUserId! })}
+						>
 							assign on me
 						</a>
 					</div>

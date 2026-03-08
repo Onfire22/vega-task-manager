@@ -9,56 +9,22 @@ export interface IInitialState {
 
 export type TActiveTab = 'table' | 'kanban';
 
-export interface ITask {
-	assigneeUuid: string | null;
-	code: string | null;
-	createdAt: string;
-	description: string;
-	estimatedTime: string | null;
-	id: string;
-	loggedTime: string | null;
-	taskPriorityUuid: string | null;
-	projectUuid: string | null;
-	reporterUuid: string;
-	taskStackUuid: string;
-	taskStatusUuid: string;
-	title: string;
-	updatedAt: string;
-}
-
-export type TDictionariesTypes = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
-
-export interface IDictionary {
+export interface IExpDictData {
+	color?: string | null;
 	id: string;
 	name: string;
-	color: string | null;
-	fullName: string | null;
 }
 
-export type IDict = Record<TDictionariesTypes, IDictionary[]>;
-
-export interface ITaskTableData {
-	assigneeUuid: string | null;
-	code: string | null;
-	createdAt: string;
-	description: string;
-	estimatedTime: string | null;
+export interface ITask {
 	id: string;
-	loggedTime: string | null;
-	taskPriorityUuid: {
-		name: string;
-		color: string;
-	};
-	projectUuid: string | null;
-	reporterUuid: string;
+	code: string | null;
 	title: string;
-	updatedAt: string;
-	taskStatusUuid: {
-		name: string;
-		color: string;
-	};
-	taskStackUuid: {
-		name: string;
-		color: string;
-	};
+	estimatedTime: string | null;
+	loggedTime: string | null;
+	taskPriority: IExpDictData;
+	taskStack: IExpDictData;
+	taskStatus: IExpDictData;
+	createdAt: string;
 }
+
+export type TTaskList = Array<ITask>;

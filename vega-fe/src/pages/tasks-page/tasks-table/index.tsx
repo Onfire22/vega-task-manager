@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const TasksTable = () => {
 	const navigate = useNavigate();
 
-	const tableData = useTableData();
+	const { tableData } = useTableData();
 
 	const activeTab = useAppSelector(getActiveTabSelector());
 

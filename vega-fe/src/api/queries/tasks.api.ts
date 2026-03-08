@@ -1,6 +1,6 @@
 import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ICreateTask, IDefaultResponse, IGetUserTasksRequest, ITask, ITaskResponse } from '../types.ts';
+import type { ICreateTask, IDefaultResponse, IExpTaskResponse, IGetUserTasksRequest, TTaskList } from '../types.ts';
 
 const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -12,7 +12,7 @@ const tasksApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Tasks'],
 		}),
-		getTasks: builder.query<ITaskResponse, IGetUserTasksRequest>({
+		getTasks: builder.query<TTaskList, IGetUserTasksRequest>({
 			query: ({ filters }) => ({
 				url: ROUTES.getTasks,
 				method: METHODS.post,
@@ -20,7 +20,7 @@ const tasksApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['Tasks'],
 		}),
-		getTask: builder.query<{ task: ITask }, string>({
+		getTask: builder.query<{ task: IExpTaskResponse }, string>({
 			query: (uuid) => {
 				return {
 					url: `${ROUTES.getTask}${uuid}`,

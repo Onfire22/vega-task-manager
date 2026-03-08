@@ -20,7 +20,7 @@ const Task = () => {
 
 	const { dictionaries } = useDictionaries(BASE_DICTIONARIES_META);
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
-	const { isTasksLoading, task, activeTaskStatus } = useTaskData(params.uuid);
+	const { isTaskLoading, task, activeTaskStatus } = useTaskData(params.uuid);
 	const { usersListOptions } = useUsersOptions();
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
@@ -55,13 +55,11 @@ const Task = () => {
 		dispatch(setIsModalShown(true));
 	};
 
-	const handleUpdateTask = async () => {
+	const handleUpdateTask = async (customField?: { fieldName: string; value: string }) => {
 		try {
-			const key = SELECT_FIELDS.includes(field.fieldName) ? `${field.fieldName}Uuid` : field.fieldName;
-			const data = {
-				[key]: field.value,
-			};
-			const response = await updateTask({ ...data, uuid: params.uuid }).unwrap();
+			const fieldData = customField ?? field;
+
+			const response = await updateTask({ ...fieldData, uuid: params.uuid }).unwrap();
 			setEditField(INITIAL_FIELD_VALUES);
 			console.log(response);
 		} catch (e) {
@@ -69,13 +67,7 @@ const Task = () => {
 		}
 	};
 
-	const handleAssignOnMeClick = () => {
-		if (data?.currentUser?.id) {
-			setEditField({ fieldName: 'assigneeUuid', value: data.currentUser.id });
-		}
-	};
-
-	return isTasksLoading ? (
+	return isTaskLoading ? (
 		<Loader />
 	) : (
 		<TaskView
@@ -84,12 +76,12 @@ const Task = () => {
 			activeTaskStatus={activeTaskStatus}
 			taskStatuses={dictionaries?.taskStatus}
 			usersListOptions={usersListOptions}
+			currentUserId={data?.currentUser.id}
 			onEditField={handleEditField}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
 			onLogWorkModalShown={handleLogWorkModalShown}
 			onUpdateTask={handleUpdateTask}
-			onAssignOnMeClick={handleAssignOnMeClick}
 			options={{ type: dictionariesOptions.stackType, priority: dictionariesOptions.taskPriority }}
 		/>
 	);

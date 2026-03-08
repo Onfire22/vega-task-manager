@@ -2,8 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import { ICreateTaskBody, IGetTaskParams, IGetUserTasksBody, ITasksResponse, TUpdateTask } from './tasks.types';
+import { ICreateTaskBody, IGetTaskParams, IGetUserTasksBody, ITaskListResponse, TUpdateTask } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
+import { DICTIONARY_SELECT, FIELDS_MAP, USER_SELECT } from './constants';
 
 export const createTask = async (
 	req: Request<{}, {}, ICreateTaskBody>,
@@ -44,7 +45,7 @@ export const createTask = async (
 
 export const getUserTasks = async (
 	req: Request<{}, {}, IGetUserTasksBody>,
-	res: Response<ITasksResponse, ILocals>,
+	res: Response<ITaskListResponse, ILocals>,
 	next: NextFunction,
 ) => {
 	try {
@@ -58,6 +59,23 @@ export const getUserTasks = async (
 			},
 			orderBy: {
 				[sorting.column]: sorting.direction,
+			},
+			select: {
+				id: true,
+				code: true,
+				title: true,
+				taskPriority: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStatus: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStack: {
+					select: DICTIONARY_SELECT,
+				},
+				estimatedTime: true,
+				loggedTime: true,
+				createdAt: true,
 			},
 		});
 
@@ -76,6 +94,31 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 		}
 
 		const task = await prismaAppClient.task.findUnique({
+			select: {
+				id: true,
+				code: true,
+				title: true,
+				description: true,
+				estimatedTime: true,
+				loggedTime: true,
+				createdAt: true,
+				updatedAt: true,
+				taskPriority: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStatus: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStack: {
+					select: DICTIONARY_SELECT,
+				},
+				reporter: {
+					select: USER_SELECT,
+				},
+				assignee: {
+					select: USER_SELECT,
+				},
+			},
 			where: { id: uuid },
 		});
 
@@ -91,16 +134,17 @@ export const updateTask = async (
 	next: NextFunction,
 ) => {
 	try {
-		console.log(req.body, req.params);
+		const { fieldName, value } = req.body;
 
 		const task = await prismaAppClient.task.update({
 			where: { id: req.params.uuid },
-			data: req.body,
+			data: {
+				[FIELDS_MAP[fieldName]]: value,
+			},
 		});
 
 		res.status(200).json({ task });
 	} catch (e) {
-		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

@@ -9,6 +9,7 @@ import { BASE_DICTIONARIES_META, TASK_FORM_INITIAL_VALUES } from '../contsants.t
 import { getActiveModalSelector } from '../selectors.ts';
 import { CreateTaskValidationSchema } from '../validation.ts';
 import { setActiveModal } from '../slice.ts';
+
 const TaskModal = () => {
 	const dispatch = useAppDispatch();
 

@@ -1,45 +1,25 @@
 import { format } from 'date-fns';
-import { useDictionaries, useTask, useUsers } from '../../api/hooks.ts';
-import { DATE_FORMAT, DICTIONARIES_META, TASK_STATUS_NUMBER } from './constants.ts';
+import { useTask } from '../../api/hooks.ts';
+import { DATE_FORMAT, TASK_STATUS_NUMBER } from './constants.ts';
 
 export const useTaskData = (uuid?: string) => {
-	const { dictionaries, isDictionariesLoading } = useDictionaries(DICTIONARIES_META);
-	const { usersList, isUsersLoading } = useUsers();
 	const { task, isTaskLoading } = useTask(uuid);
 
-	const idTaskDataLoading = isTaskLoading || isDictionariesLoading || isUsersLoading;
-
-	if (!task || !usersList.length || !Object.keys(dictionaries).length)
-		return { task: null, isTaskLoading: idTaskDataLoading, activeTaskStatus: 0 };
-
-	const { taskPriority, stackType, taskStatus } = dictionaries;
-
-	const reporter = usersList.find((item) => item.id === task.reporterUuid);
-	const assignee = usersList.find((item) => item.id === task.assigneeUuid);
-
-	const reporterName = reporter ? `${reporter?.name} ${reporter?.secondName}` : '-';
-	const assigneeName = assignee ? `${assignee?.name} ${assignee?.secondName}` : 'unassigned';
-
-	const taskPriorityUuid = taskPriority?.find((item) => item.id === task.taskPriorityUuid);
-	const taskStackUuid = stackType?.find((item) => item.id === task.taskStackUuid);
-	const taskStatusUuid = taskStatus?.find((item) => item.id === task.taskStatusUuid);
+	if (!task) return { task: null, isTaskLoading, activeTaskStatus: 0 };
 
 	const taskData = {
 		...task,
-		taskPriorityUuid: { name: taskPriorityUuid?.name || '-', color: taskPriorityUuid?.color },
-		taskStackUuid: { name: taskStackUuid?.name || '-', color: taskStackUuid?.color },
-		taskStatusUuid: { name: taskStatusUuid?.name || '-', color: taskStatusUuid?.color },
-		reporterUuid: reporterName,
-		assigneeUuid: assigneeName,
+		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
+		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : 'unassigned',
 		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
 		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
 	};
 
-	const activeTaskStatus = TASK_STATUS_NUMBER[taskData.taskStatusUuid.name as keyof typeof TASK_STATUS_NUMBER];
+	const activeTaskStatus = TASK_STATUS_NUMBER[task.taskStatus.name as keyof typeof TASK_STATUS_NUMBER];
 
 	return {
 		task: taskData,
 		activeTaskStatus,
-		isTasksLoading: idTaskDataLoading,
+		isTaskLoading,
 	};
 };

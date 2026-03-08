@@ -6,21 +6,24 @@ export interface IInitialState {
 
 export type TOption = { label: string; value: string };
 
-export type TDictField = { name: string; color?: string | null };
+export interface IExpDictData {
+	color: string;
+	id: string;
+	name: string;
+}
 
 export interface ITask {
-	title: string;
-	description: string;
-	taskPriorityUuid: TDictField;
-	taskStackUuid: TDictField;
 	id: string;
 	code: string | null;
+	title: string;
+	description: string;
 	estimatedTime: string | null;
 	loggedTime: string | null;
-	assigneeUuid: string | null;
-	reporterUuid: string;
-	projectUuid: string | null;
-	taskStatusUuid: TDictField;
+	assignee: string | null;
+	reporter: string;
+	taskPriority: IExpDictData;
+	taskStack: IExpDictData;
+	taskStatus: IExpDictData;
 	createdAt: string;
 	updatedAt: string;
 }
