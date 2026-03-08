@@ -21,7 +21,7 @@ export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Resp
 				id: true,
 				name: true,
 				secondName: true,
-				userStackUUid: true,
+				userStackUuid: true,
 			},
 		});
 

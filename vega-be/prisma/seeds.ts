@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 const makeSeed = async () => {
-	await prisma.dictionaries.createMany({
+	await prisma.dictionary.createMany({
 		data: [
 			{ type: 'ROLE_TYPE', name: 'viewer' },
 			{ type: 'ROLE_TYPE', name: 'member' },

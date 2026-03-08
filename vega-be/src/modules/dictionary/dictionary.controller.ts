@@ -22,7 +22,7 @@ export const getDictionaries = async (
 
 		const validFilters: TypeKey[] = filters.filter((f): f is TypeKey => Object.keys(Type).includes(f));
 
-		const dictionaries = await prismaAppClient.dictionaries.findMany({
+		const dictionaries = await prismaAppClient.dictionary.findMany({
 			where: { type: { in: validFilters } },
 			select: { id: true, name: true, color: true, type: true, fullName: true },
 		});

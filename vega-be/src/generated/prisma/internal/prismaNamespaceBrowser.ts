@@ -52,9 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Comment: 'Comment',
-  Dictionaries: 'Dictionaries',
+  Dictionary: 'Dictionary',
   Membership: 'Membership',
-  Projects: 'Projects',
+  Project: 'Project',
   Task: 'Task',
   User: 'User'
 } as const
@@ -87,7 +87,7 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const DictionariesScalarFieldEnum = {
+export const DictionaryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   fullName: 'fullName',
@@ -97,7 +97,7 @@ export const DictionariesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type DictionariesScalarFieldEnum = (typeof DictionariesScalarFieldEnum)[keyof typeof DictionariesScalarFieldEnum]
+export type DictionaryScalarFieldEnum = (typeof DictionaryScalarFieldEnum)[keyof typeof DictionaryScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {
@@ -112,7 +112,7 @@ export const MembershipScalarFieldEnum = {
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
 
 
-export const ProjectsScalarFieldEnum = {
+export const ProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
@@ -121,7 +121,7 @@ export const ProjectsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {
@@ -150,7 +150,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
-  userStackUUid: 'userStackUUid',
+  userStackUuid: 'userStackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

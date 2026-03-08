@@ -191,8 +191,8 @@ export type MembershipWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  project?: Prisma.XOR<Prisma.ProjectsScalarRelationFilter, Prisma.ProjectsWhereInput>
-  userRole?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
 }
 
 export type MembershipOrderByWithRelationInput = {
@@ -203,8 +203,8 @@ export type MembershipOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  project?: Prisma.ProjectsOrderByWithRelationInput
-  userRole?: Prisma.DictionariesOrderByWithRelationInput
+  project?: Prisma.ProjectOrderByWithRelationInput
+  userRole?: Prisma.DictionaryOrderByWithRelationInput
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -219,8 +219,8 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  project?: Prisma.XOR<Prisma.ProjectsScalarRelationFilter, Prisma.ProjectsWhereInput>
-  userRole?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
 }, "id" | "userUuid_projectUuid">
 
 export type MembershipOrderByWithAggregationInput = {
@@ -252,8 +252,8 @@ export type MembershipCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
-  project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
-  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
+  project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateInput = {
@@ -270,8 +270,8 @@ export type MembershipUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
-  project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
-  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
+  project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateInput = {
@@ -480,7 +480,7 @@ export type MembershipCreateWithoutUserRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
-  project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
+  project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutUserRoleInput = {
@@ -534,7 +534,7 @@ export type MembershipCreateWithoutProjectInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
-  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutProjectInput = {
@@ -575,8 +575,8 @@ export type MembershipCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  project: Prisma.ProjectsCreateNestedOneWithoutMembershipsInput
-  userRole: Prisma.DictionariesCreateNestedOneWithoutMembershipsInput
+  project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutUserInput = {
@@ -626,7 +626,7 @@ export type MembershipUpdateWithoutUserRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
-  project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
+  project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserRoleInput = {
@@ -658,7 +658,7 @@ export type MembershipUpdateWithoutProjectInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
-  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutProjectInput = {
@@ -689,8 +689,8 @@ export type MembershipUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project?: Prisma.ProjectsUpdateOneRequiredWithoutMembershipsNestedInput
-  userRole?: Prisma.DictionariesUpdateOneRequiredWithoutMembershipsNestedInput
+  project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserInput = {
@@ -719,8 +719,8 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -731,8 +731,8 @@ export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -743,8 +743,8 @@ export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectScalar = {
@@ -759,26 +759,26 @@ export type MembershipSelectScalar = {
 export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userUuid" | "projectUuid" | "userRoleUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
 export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  project?: boolean | Prisma.ProjectsDefaultArgs<ExtArgs>
-  userRole?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }
 
 export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Membership"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    project: Prisma.$ProjectsPayload<ExtArgs>
-    userRole: Prisma.$DictionariesPayload<ExtArgs>
+    project: Prisma.$ProjectPayload<ExtArgs>
+    userRole: Prisma.$DictionaryPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1182,8 +1182,8 @@ readonly fields: MembershipFieldRefs;
 export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  project<T extends Prisma.ProjectsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectsClient<runtime.Types.Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  userRole<T extends Prisma.DictionariesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionariesDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionariesClient<runtime.Types.Result.GetResult<Prisma.$DictionariesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  userRole<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

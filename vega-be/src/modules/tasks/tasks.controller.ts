@@ -14,7 +14,7 @@ export const createTask = async (
 		const task = req.body;
 		const userId = res.locals.user.id;
 
-		const baseTaskStatusUuid = await prismaAppClient.dictionaries.findUnique({
+		const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
 			where: { name_type: { name: 'todo', type: 'TASK_STATUS' } },
 			select: { id: true },
 		});
