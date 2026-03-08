@@ -24,4 +24,5 @@ export const ROUTES = {
 	createTask: '/api/tasks/create',
 	projects: '/api/projects',
 	projectsCreate: '/api/projects/create',
+	createTaskLog: '/api/taskLogs/create',
 };
