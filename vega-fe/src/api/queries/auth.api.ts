@@ -5,13 +5,13 @@ import { baseApi } from '../index.ts';
 const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		signUpUser: builder.mutation<IAuthUserResponse, IUserData>({
-			query: ({ email, name, password, secondName, userStackUUid }) => {
+			query: ({ email, name, password, secondName, userStackUuid }) => {
 				const fieldsForRequest = {
 					email,
 					name,
 					password,
 					secondName,
-					userStackUUid,
+					userStackUuid,
 				};
 
 				return {

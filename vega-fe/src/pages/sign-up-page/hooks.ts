@@ -10,7 +10,7 @@ import { setActiveStep } from './slice.ts';
 export const useSignUpForm = () => {
 	const dispatch = useAppDispatch();
 
-	const [signUpUser, { isLoading }] = useSignUpUserMutation();
+	const [signUpUser, { isLoading, isError }] = useSignUpUserMutation();
 	const [checkIsEmailFree] = useCheckIsEmailFreeMutation();
 
 	const activeStep = useAppSelector(getActiveStepSelector());
@@ -84,6 +84,7 @@ export const useSignUpForm = () => {
 	return {
 		formik,
 		activeStep,
+		isError,
 		isSignUpLoading: isLoading,
 		handleNextStepClick,
 		handlePrevStepClick,

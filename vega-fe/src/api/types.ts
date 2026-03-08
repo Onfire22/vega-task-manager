@@ -3,7 +3,7 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
-	userStackUUid: string;
+	userStackUuid: string;
 }
 
 export interface ICurrentUser {
