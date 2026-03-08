@@ -134,4 +134,4 @@ export interface ITaskList {
 	createdAt: string;
 }
 
-export type TTaskList = Array<ITaskList>;
+export type TTaskList = { tasks: Array<ITaskList> };
