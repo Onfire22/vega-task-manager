@@ -43,6 +43,11 @@ export type Project = Prisma.ProjectModel
  */
 export type Task = Prisma.TaskModel
 /**
+ * Model TimeLog
+ * 
+ */
+export type TimeLog = Prisma.TimeLogModel
+/**
  * Model User
  * 
  */

@@ -1,0 +1,15 @@
+model TimeLog {
+  id           String  @id @default(uuid())
+  estimateTime String? @map("estimate_time")
+  loggedTime   String? @map("logged_time")
+  text         String?
+  userUuid     String
+  user         User    @relation(fields: [userUuid], references: [id])
+  taskUuid     String
+  task         Task    @relation(fields: [taskUuid], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("time_logs")
+}

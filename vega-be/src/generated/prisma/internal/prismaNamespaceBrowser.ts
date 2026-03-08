@@ -56,6 +56,7 @@ export const ModelName = {
   Membership: 'Membership',
   Project: 'Project',
   Task: 'Task',
+  TimeLog: 'TimeLog',
   User: 'User'
 } as const
 
@@ -142,6 +143,20 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const TimeLogScalarFieldEnum = {
+  id: 'id',
+  estimateTime: 'estimateTime',
+  loggedTime: 'loggedTime',
+  text: 'text',
+  userUuid: 'userUuid',
+  taskUuid: 'taskUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TimeLogScalarFieldEnum = (typeof TimeLogScalarFieldEnum)[keyof typeof TimeLogScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

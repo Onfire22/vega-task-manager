@@ -389,6 +389,7 @@ export const ModelName = {
   Membership: 'Membership',
   Project: 'Project',
   Task: 'Task',
+  TimeLog: 'TimeLog',
   User: 'User'
 } as const
 
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "dictionary" | "membership" | "project" | "task" | "user"
+    modelProps: "comment" | "dictionary" | "membership" | "project" | "task" | "timeLog" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -779,6 +780,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TimeLog: {
+      payload: Prisma.$TimeLogPayload<ExtArgs>
+      fields: Prisma.TimeLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TimeLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TimeLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        findFirst: {
+          args: Prisma.TimeLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TimeLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        findMany: {
+          args: Prisma.TimeLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>[]
+        }
+        create: {
+          args: Prisma.TimeLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        createMany: {
+          args: Prisma.TimeLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TimeLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>[]
+        }
+        delete: {
+          args: Prisma.TimeLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        update: {
+          args: Prisma.TimeLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.TimeLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TimeLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TimeLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.TimeLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimeLogPayload>
+        }
+        aggregate: {
+          args: Prisma.TimeLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTimeLog>
+        }
+        groupBy: {
+          args: Prisma.TimeLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TimeLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TimeLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TimeLogCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -959,6 +1034,20 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const TimeLogScalarFieldEnum = {
+  id: 'id',
+  estimateTime: 'estimateTime',
+  loggedTime: 'loggedTime',
+  text: 'text',
+  userUuid: 'userUuid',
+  taskUuid: 'taskUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TimeLogScalarFieldEnum = (typeof TimeLogScalarFieldEnum)[keyof typeof TimeLogScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -1174,6 +1263,7 @@ export type GlobalOmitConfig = {
   membership?: Prisma.MembershipOmit
   project?: Prisma.ProjectOmit
   task?: Prisma.TaskOmit
+  timeLog?: Prisma.TimeLogOmit
   user?: Prisma.UserOmit
 }
 

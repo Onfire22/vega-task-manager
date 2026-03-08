@@ -298,6 +298,7 @@ export type TaskWhereInput = {
   taskPriority?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   taskStatus?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   taskStack?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  timeLogs?: Prisma.TimeLogListRelationFilter
   comments?: Prisma.CommentListRelationFilter
 }
 
@@ -322,6 +323,7 @@ export type TaskOrderByWithRelationInput = {
   taskPriority?: Prisma.DictionaryOrderByWithRelationInput
   taskStatus?: Prisma.DictionaryOrderByWithRelationInput
   taskStack?: Prisma.DictionaryOrderByWithRelationInput
+  timeLogs?: Prisma.TimeLogOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
 }
 
@@ -349,6 +351,7 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   taskPriority?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   taskStatus?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   taskStack?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  timeLogs?: Prisma.TimeLogListRelationFilter
   comments?: Prisma.CommentListRelationFilter
 }, "id" | "code">
 
@@ -409,6 +412,7 @@ export type TaskCreateInput = {
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -427,6 +431,7 @@ export type TaskUncheckedCreateInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -445,6 +450,7 @@ export type TaskUpdateInput = {
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -463,6 +469,7 @@ export type TaskUncheckedUpdateInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -777,6 +784,20 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type TaskCreateNestedOneWithoutTimeLogsInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTimeLogsInput, Prisma.TaskUncheckedCreateWithoutTimeLogsInput>
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTimeLogsInput
+  connect?: Prisma.TaskWhereUniqueInput
+}
+
+export type TaskUpdateOneRequiredWithoutTimeLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutTimeLogsInput, Prisma.TaskUncheckedCreateWithoutTimeLogsInput>
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTimeLogsInput
+  upsert?: Prisma.TaskUpsertWithoutTimeLogsInput
+  connect?: Prisma.TaskWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskUpdateToOneWithWhereWithoutTimeLogsInput, Prisma.TaskUpdateWithoutTimeLogsInput>, Prisma.TaskUncheckedUpdateWithoutTimeLogsInput>
+}
+
 export type TaskCreateNestedManyWithoutAssigneeInput = {
   create?: Prisma.XOR<Prisma.TaskCreateWithoutAssigneeInput, Prisma.TaskUncheckedCreateWithoutAssigneeInput> | Prisma.TaskCreateWithoutAssigneeInput[] | Prisma.TaskUncheckedCreateWithoutAssigneeInput[]
   connectOrCreate?: Prisma.TaskCreateOrConnectWithoutAssigneeInput | Prisma.TaskCreateOrConnectWithoutAssigneeInput[]
@@ -876,6 +897,7 @@ export type TaskCreateWithoutCommentsInput = {
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
 }
 
 export type TaskUncheckedCreateWithoutCommentsInput = {
@@ -893,6 +915,7 @@ export type TaskUncheckedCreateWithoutCommentsInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
 }
 
 export type TaskCreateOrConnectWithoutCommentsInput = {
@@ -926,6 +949,7 @@ export type TaskUpdateWithoutCommentsInput = {
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutCommentsInput = {
@@ -943,6 +967,7 @@ export type TaskUncheckedUpdateWithoutCommentsInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
 }
 
 export type TaskCreateWithoutTaskPriorityInput = {
@@ -959,6 +984,7 @@ export type TaskCreateWithoutTaskPriorityInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -976,6 +1002,7 @@ export type TaskUncheckedCreateWithoutTaskPriorityInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1003,6 +1030,7 @@ export type TaskCreateWithoutTaskStatusInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1020,6 +1048,7 @@ export type TaskUncheckedCreateWithoutTaskStatusInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1047,6 +1076,7 @@ export type TaskCreateWithoutTaskStackInput = {
   project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1064,6 +1094,7 @@ export type TaskUncheckedCreateWithoutTaskStackInput = {
   taskStatusUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1159,6 +1190,7 @@ export type TaskCreateWithoutProjectInput = {
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1176,6 +1208,7 @@ export type TaskUncheckedCreateWithoutProjectInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1205,6 +1238,94 @@ export type TaskUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutProjectInput>
 }
 
+export type TaskCreateWithoutTimeLogsInput = {
+  id?: string
+  code?: string | null
+  title: string
+  description: string
+  estimatedTime?: number | null
+  loggedTime?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
+  reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
+}
+
+export type TaskUncheckedCreateWithoutTimeLogsInput = {
+  id?: string
+  code?: string | null
+  title: string
+  description: string
+  estimatedTime?: number | null
+  loggedTime?: number | null
+  assigneeUuid?: string | null
+  reporterUuid: string
+  projectUuid?: string | null
+  taskPriorityUuid: string
+  taskStatusUuid: string
+  taskStackUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
+}
+
+export type TaskCreateOrConnectWithoutTimeLogsInput = {
+  where: Prisma.TaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.TaskCreateWithoutTimeLogsInput, Prisma.TaskUncheckedCreateWithoutTimeLogsInput>
+}
+
+export type TaskUpsertWithoutTimeLogsInput = {
+  update: Prisma.XOR<Prisma.TaskUpdateWithoutTimeLogsInput, Prisma.TaskUncheckedUpdateWithoutTimeLogsInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutTimeLogsInput, Prisma.TaskUncheckedCreateWithoutTimeLogsInput>
+  where?: Prisma.TaskWhereInput
+}
+
+export type TaskUpdateToOneWithWhereWithoutTimeLogsInput = {
+  where?: Prisma.TaskWhereInput
+  data: Prisma.XOR<Prisma.TaskUpdateWithoutTimeLogsInput, Prisma.TaskUncheckedUpdateWithoutTimeLogsInput>
+}
+
+export type TaskUpdateWithoutTimeLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
+  reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
+}
+
+export type TaskUncheckedUpdateWithoutTimeLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  taskStatusUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
+}
+
 export type TaskCreateWithoutAssigneeInput = {
   id?: string
   code?: string | null
@@ -1219,6 +1340,7 @@ export type TaskCreateWithoutAssigneeInput = {
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1236,6 +1358,7 @@ export type TaskUncheckedCreateWithoutAssigneeInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1263,6 +1386,7 @@ export type TaskCreateWithoutReporterInput = {
   taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
   taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1280,6 +1404,7 @@ export type TaskUncheckedCreateWithoutReporterInput = {
   taskStackUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutTaskInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1387,6 +1512,7 @@ export type TaskUpdateWithoutTaskPriorityInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1404,6 +1530,7 @@ export type TaskUncheckedUpdateWithoutTaskPriorityInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1437,6 +1564,7 @@ export type TaskUpdateWithoutTaskStatusInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1454,6 +1582,7 @@ export type TaskUncheckedUpdateWithoutTaskStatusInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1487,6 +1616,7 @@ export type TaskUpdateWithoutTaskStackInput = {
   project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1504,6 +1634,7 @@ export type TaskUncheckedUpdateWithoutTaskStackInput = {
   taskStatusUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1553,6 +1684,7 @@ export type TaskUpdateWithoutProjectInput = {
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1570,6 +1702,7 @@ export type TaskUncheckedUpdateWithoutProjectInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1635,6 +1768,7 @@ export type TaskUpdateWithoutAssigneeInput = {
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1652,6 +1786,7 @@ export type TaskUncheckedUpdateWithoutAssigneeInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1685,6 +1820,7 @@ export type TaskUpdateWithoutReporterInput = {
   taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
   taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1702,6 +1838,7 @@ export type TaskUncheckedUpdateWithoutReporterInput = {
   taskStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutTaskNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1727,10 +1864,12 @@ export type TaskUncheckedUpdateManyWithoutReporterInput = {
  */
 
 export type TaskCountOutputType = {
+  timeLogs: number
   comments: number
 }
 
 export type TaskCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  timeLogs?: boolean | TaskCountOutputTypeCountTimeLogsArgs
   comments?: boolean | TaskCountOutputTypeCountCommentsArgs
 }
 
@@ -1742,6 +1881,13 @@ export type TaskCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the TaskCountOutputType
    */
   select?: Prisma.TaskCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TaskCountOutputType without action
+ */
+export type TaskCountOutputTypeCountTimeLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimeLogWhereInput
 }
 
 /**
@@ -1773,6 +1919,7 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  timeLogs?: boolean | Prisma.Task$timeLogsArgs<ExtArgs>
   comments?: boolean | Prisma.Task$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
@@ -1848,6 +1995,7 @@ export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  timeLogs?: boolean | Prisma.Task$timeLogsArgs<ExtArgs>
   comments?: boolean | Prisma.Task$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1877,6 +2025,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     taskPriority: Prisma.$DictionaryPayload<ExtArgs>
     taskStatus: Prisma.$DictionaryPayload<ExtArgs>
     taskStack: Prisma.$DictionaryPayload<ExtArgs>
+    timeLogs: Prisma.$TimeLogPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2294,6 +2443,7 @@ export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Typ
   taskPriority<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   taskStatus<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   taskStack<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  timeLogs<T extends Prisma.Task$timeLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$timeLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Task$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2769,6 +2919,30 @@ export type Task$projectArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ProjectInclude<ExtArgs> | null
   where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * Task.timeLogs
+ */
+export type Task$timeLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TimeLog
+   */
+  select?: Prisma.TimeLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TimeLog
+   */
+  omit?: Prisma.TimeLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeLogInclude<ExtArgs> | null
+  where?: Prisma.TimeLogWhereInput
+  orderBy?: Prisma.TimeLogOrderByWithRelationInput | Prisma.TimeLogOrderByWithRelationInput[]
+  cursor?: Prisma.TimeLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimeLogScalarFieldEnum | Prisma.TimeLogScalarFieldEnum[]
 }
 
 /**

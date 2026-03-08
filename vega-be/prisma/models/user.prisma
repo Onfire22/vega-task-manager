@@ -12,6 +12,7 @@ model User {
   reportedTasks Task[]       @relation("ReportedTasks")
   memberships   Membership[]
   comments      Comment[]
+  timeLogs      TimeLog[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

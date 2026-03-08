@@ -19,6 +19,7 @@ model Task {
   taskStackUuid    String     @map("task_stack_uuid")
   taskStack        Dictionary @relation("TaskStack", fields: [taskStackUuid], references: [id])
 
+  timeLogs TimeLog[]
   comments Comment[]
 
   createdAt DateTime @default(now()) @map("created_at")

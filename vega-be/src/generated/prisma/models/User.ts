@@ -211,6 +211,7 @@ export type UserWhereInput = {
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  timeLogs?: Prisma.TimeLogListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -227,6 +228,7 @@ export type UserOrderByWithRelationInput = {
   reportedTasks?: Prisma.TaskOrderByRelationAggregateInput
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
+  timeLogs?: Prisma.TimeLogOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -246,6 +248,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  timeLogs?: Prisma.TimeLogListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -289,6 +292,7 @@ export type UserCreateInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -304,6 +308,7 @@ export type UserUncheckedCreateInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +324,7 @@ export type UserUpdateInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -334,6 +340,7 @@ export type UserUncheckedUpdateInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -521,6 +528,20 @@ export type UserUpdateOneRequiredWithoutReportedTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportedTasksInput, Prisma.UserUpdateWithoutReportedTasksInput>, Prisma.UserUncheckedUpdateWithoutReportedTasksInput>
 }
 
+export type UserCreateNestedOneWithoutTimeLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTimeLogsInput, Prisma.UserUncheckedCreateWithoutTimeLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTimeLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTimeLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTimeLogsInput, Prisma.UserUncheckedCreateWithoutTimeLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTimeLogsInput
+  upsert?: Prisma.UserUpsertWithoutTimeLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTimeLogsInput, Prisma.UserUpdateWithoutTimeLogsInput>, Prisma.UserUncheckedUpdateWithoutTimeLogsInput>
+}
+
 export type UserCreateWithoutCommentsInput = {
   id?: string
   name: string
@@ -533,6 +554,7 @@ export type UserCreateWithoutCommentsInput = {
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -547,6 +569,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -577,6 +600,7 @@ export type UserUpdateWithoutCommentsInput = {
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -591,6 +615,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserStackInput = {
@@ -605,6 +630,7 @@ export type UserCreateWithoutUserStackInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserStackInput = {
@@ -619,6 +645,7 @@ export type UserUncheckedCreateWithoutUserStackInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserStackInput = {
@@ -673,6 +700,7 @@ export type UserCreateWithoutMembershipsInput = {
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -687,6 +715,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -717,6 +746,7 @@ export type UserUpdateWithoutMembershipsInput = {
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -731,6 +761,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -745,6 +776,7 @@ export type UserCreateWithoutAssignedTasksInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -759,6 +791,7 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -778,6 +811,7 @@ export type UserCreateWithoutReportedTasksInput = {
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportedTasksInput = {
@@ -792,6 +826,7 @@ export type UserUncheckedCreateWithoutReportedTasksInput = {
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportedTasksInput = {
@@ -822,6 +857,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -836,6 +872,7 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReportedTasksInput = {
@@ -861,6 +898,7 @@ export type UserUpdateWithoutReportedTasksInput = {
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportedTasksInput = {
@@ -873,6 +911,83 @@ export type UserUncheckedUpdateWithoutReportedTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTimeLogsInput = {
+  id?: string
+  name: string
+  secondName?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userStack: Prisma.DictionaryCreateNestedOneWithoutUsersInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutTimeLogsInput = {
+  id?: string
+  name: string
+  secondName?: string | null
+  email: string
+  password: string
+  userStackUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutTimeLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTimeLogsInput, Prisma.UserUncheckedCreateWithoutTimeLogsInput>
+}
+
+export type UserUpsertWithoutTimeLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTimeLogsInput, Prisma.UserUncheckedUpdateWithoutTimeLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTimeLogsInput, Prisma.UserUncheckedCreateWithoutTimeLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTimeLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTimeLogsInput, Prisma.UserUncheckedUpdateWithoutTimeLogsInput>
+}
+
+export type UserUpdateWithoutTimeLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userStack?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTimeLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  userStackUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
 }
@@ -899,6 +1014,7 @@ export type UserUpdateWithoutUserStackInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStackInput = {
@@ -913,6 +1029,7 @@ export type UserUncheckedUpdateWithoutUserStackInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutUserStackInput = {
@@ -935,6 +1052,7 @@ export type UserCountOutputType = {
   reportedTasks: number
   memberships: number
   comments: number
+  timeLogs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -942,6 +1060,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reportedTasks?: boolean | UserCountOutputTypeCountReportedTasksArgs
   memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  timeLogs?: boolean | UserCountOutputTypeCountTimeLogsArgs
 }
 
 /**
@@ -982,6 +1101,13 @@ export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.CommentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTimeLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimeLogWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -997,6 +1123,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  timeLogs?: boolean | Prisma.User$timeLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1042,6 +1169,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  timeLogs?: boolean | Prisma.User$timeLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1059,6 +1187,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reportedTasks: Prisma.$TaskPayload<ExtArgs>[]
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
+    timeLogs: Prisma.$TimeLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1468,6 +1597,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reportedTasks<T extends Prisma.User$reportedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  timeLogs<T extends Prisma.User$timeLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$timeLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1994,6 +2124,30 @@ export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * User.timeLogs
+ */
+export type User$timeLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TimeLog
+   */
+  select?: Prisma.TimeLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TimeLog
+   */
+  omit?: Prisma.TimeLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeLogInclude<ExtArgs> | null
+  where?: Prisma.TimeLogWhereInput
+  orderBy?: Prisma.TimeLogOrderByWithRelationInput | Prisma.TimeLogOrderByWithRelationInput[]
+  cursor?: Prisma.TimeLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimeLogScalarFieldEnum | Prisma.TimeLogScalarFieldEnum[]
 }
 
 /**
