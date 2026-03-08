@@ -7,7 +7,7 @@ import { IDefaultResponse, ILocals } from '../../common/types';
 
 export const getProjects = async (req: Request, res: Response<IProjectsResponse>, next: NextFunction) => {
 	try {
-		const projects = await prismaAppClient.projects.findMany({
+		const projects = await prismaAppClient.project.findMany({
 			select: {
 				id: true,
 				title: true,
@@ -43,7 +43,7 @@ export const createProject = async (
 
 		const code = req.body.title.slice(0, 2).toUpperCase();
 
-		const dictionaries = await prismaAppClient.dictionaries.findMany({
+		const dictionaries = await prismaAppClient.dictionary.findMany({
 			where: {
 				name: {
 					in: ['member', 'owner'],
@@ -80,7 +80,7 @@ export const createProject = async (
 			};
 		});
 
-		await prismaAppClient.projects.create({
+		await prismaAppClient.project.create({
 			data: {
 				title,
 				description,

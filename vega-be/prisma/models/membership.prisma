@@ -2,12 +2,12 @@ model Membership {
   id String @id @default(uuid())
 
   userUuid    String
-  user        User     @relation(fields: [userUuid], references: [id])
-  projectUuid String   @map("prject_uuid")
-  project     Projects @relation(fields: [projectUuid], references: [id])
+  user        User    @relation(fields: [userUuid], references: [id])
+  projectUuid String  @map("prject_uuid")
+  project     Project @relation(fields: [projectUuid], references: [id])
 
-  userRoleUuid String       @map("user_role_uuid")
-  userRole     Dictionaries @relation(fields: [userRoleUuid], references: [id])
+  userRoleUuid String     @map("user_role_uuid")
+  userRole     Dictionary @relation(fields: [userRoleUuid], references: [id])
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

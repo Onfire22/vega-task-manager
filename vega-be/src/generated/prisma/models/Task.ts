@@ -294,10 +294,10 @@ export type TaskWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   assignee?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  project?: Prisma.XOR<Prisma.ProjectsNullableScalarRelationFilter, Prisma.ProjectsWhereInput> | null
-  taskPriority?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
-  taskStatus?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
-  taskStack?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
+  taskPriority?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  taskStatus?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  taskStack?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   comments?: Prisma.CommentListRelationFilter
 }
 
@@ -318,10 +318,10 @@ export type TaskOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   assignee?: Prisma.UserOrderByWithRelationInput
   reporter?: Prisma.UserOrderByWithRelationInput
-  project?: Prisma.ProjectsOrderByWithRelationInput
-  taskPriority?: Prisma.DictionariesOrderByWithRelationInput
-  taskStatus?: Prisma.DictionariesOrderByWithRelationInput
-  taskStack?: Prisma.DictionariesOrderByWithRelationInput
+  project?: Prisma.ProjectOrderByWithRelationInput
+  taskPriority?: Prisma.DictionaryOrderByWithRelationInput
+  taskStatus?: Prisma.DictionaryOrderByWithRelationInput
+  taskStack?: Prisma.DictionaryOrderByWithRelationInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
 }
 
@@ -345,10 +345,10 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   assignee?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  project?: Prisma.XOR<Prisma.ProjectsNullableScalarRelationFilter, Prisma.ProjectsWhereInput> | null
-  taskPriority?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
-  taskStatus?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
-  taskStack?: Prisma.XOR<Prisma.DictionariesScalarRelationFilter, Prisma.DictionariesWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
+  taskPriority?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  taskStatus?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  taskStack?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   comments?: Prisma.CommentListRelationFilter
 }, "id" | "code">
 
@@ -405,10 +405,10 @@ export type TaskCreateInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -441,10 +441,10 @@ export type TaskUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -872,10 +872,10 @@ export type TaskCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
 }
 
 export type TaskUncheckedCreateWithoutCommentsInput = {
@@ -922,10 +922,10 @@ export type TaskUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutCommentsInput = {
@@ -956,9 +956,9 @@ export type TaskCreateWithoutTaskPriorityInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1000,9 +1000,9 @@ export type TaskCreateWithoutTaskStatusInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1044,9 +1044,9 @@ export type TaskCreateWithoutTaskStackInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1156,9 +1156,9 @@ export type TaskCreateWithoutProjectInput = {
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1215,10 +1215,10 @@ export type TaskCreateWithoutAssigneeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1259,10 +1259,10 @@ export type TaskCreateWithoutReporterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
-  project?: Prisma.ProjectsCreateNestedOneWithoutTasksInput
-  taskPriority: Prisma.DictionariesCreateNestedOneWithoutTaskPrioritiesInput
-  taskStatus: Prisma.DictionariesCreateNestedOneWithoutTaskStatusesInput
-  taskStack: Prisma.DictionariesCreateNestedOneWithoutTaskStacksInput
+  project?: Prisma.ProjectCreateNestedOneWithoutTasksInput
+  taskPriority: Prisma.DictionaryCreateNestedOneWithoutTaskPrioritiesInput
+  taskStatus: Prisma.DictionaryCreateNestedOneWithoutTaskStatusesInput
+  taskStack: Prisma.DictionaryCreateNestedOneWithoutTaskStacksInput
   comments?: Prisma.CommentCreateNestedManyWithoutTaskInput
 }
 
@@ -1384,9 +1384,9 @@ export type TaskUpdateWithoutTaskPriorityInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1434,9 +1434,9 @@ export type TaskUpdateWithoutTaskStatusInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1484,9 +1484,9 @@ export type TaskUpdateWithoutTaskStackInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1550,9 +1550,9 @@ export type TaskUpdateWithoutProjectInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1631,10 +1631,10 @@ export type TaskUpdateWithoutAssigneeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1681,10 +1681,10 @@ export type TaskUpdateWithoutReporterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
-  project?: Prisma.ProjectsUpdateOneWithoutTasksNestedInput
-  taskPriority?: Prisma.DictionariesUpdateOneRequiredWithoutTaskPrioritiesNestedInput
-  taskStatus?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStatusesNestedInput
-  taskStack?: Prisma.DictionariesUpdateOneRequiredWithoutTaskStacksNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutTasksNestedInput
+  taskPriority?: Prisma.DictionaryUpdateOneRequiredWithoutTaskPrioritiesNestedInput
+  taskStatus?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStatusesNestedInput
+  taskStack?: Prisma.DictionaryUpdateOneRequiredWithoutTaskStacksNestedInput
   comments?: Prisma.CommentUpdateManyWithoutTaskNestedInput
 }
 
@@ -1770,9 +1770,9 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Task$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
@@ -1795,9 +1795,9 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1818,9 +1818,9 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectScalar = {
@@ -1845,9 +1845,9 @@ export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Task$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1855,17 +1855,17 @@ export type TaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }
 export type TaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Task$projectArgs<ExtArgs>
-  taskPriority?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStatus?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
-  taskStack?: boolean | Prisma.DictionariesDefaultArgs<ExtArgs>
+  taskPriority?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStatus?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  taskStack?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
 }
 
 export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1873,10 +1873,10 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     assignee: Prisma.$UserPayload<ExtArgs> | null
     reporter: Prisma.$UserPayload<ExtArgs>
-    project: Prisma.$ProjectsPayload<ExtArgs> | null
-    taskPriority: Prisma.$DictionariesPayload<ExtArgs>
-    taskStatus: Prisma.$DictionariesPayload<ExtArgs>
-    taskStack: Prisma.$DictionariesPayload<ExtArgs>
+    project: Prisma.$ProjectPayload<ExtArgs> | null
+    taskPriority: Prisma.$DictionaryPayload<ExtArgs>
+    taskStatus: Prisma.$DictionaryPayload<ExtArgs>
+    taskStack: Prisma.$DictionaryPayload<ExtArgs>
     comments: Prisma.$CommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2290,10 +2290,10 @@ export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   assignee<T extends Prisma.Task$assigneeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$assigneeArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reporter<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  project<T extends Prisma.Task$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectsClient<runtime.Types.Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  taskPriority<T extends Prisma.DictionariesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionariesDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionariesClient<runtime.Types.Result.GetResult<Prisma.$DictionariesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  taskStatus<T extends Prisma.DictionariesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionariesDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionariesClient<runtime.Types.Result.GetResult<Prisma.$DictionariesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  taskStack<T extends Prisma.DictionariesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionariesDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionariesClient<runtime.Types.Result.GetResult<Prisma.$DictionariesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.Task$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  taskPriority<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  taskStatus<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  taskStack<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   comments<T extends Prisma.Task$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2757,18 +2757,18 @@ export type Task$assigneeArgs<ExtArgs extends runtime.Types.Extensions.InternalA
  */
 export type Task$projectArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Projects
+   * Select specific fields to fetch from the Project
    */
-  select?: Prisma.ProjectsSelect<ExtArgs> | null
+  select?: Prisma.ProjectSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Projects
+   * Omit specific fields from the Project
    */
-  omit?: Prisma.ProjectsOmit<ExtArgs> | null
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProjectsInclude<ExtArgs> | null
-  where?: Prisma.ProjectsWhereInput
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
 }
 
 /**

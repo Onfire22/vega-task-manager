@@ -385,9 +385,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Comment: 'Comment',
-  Dictionaries: 'Dictionaries',
+  Dictionary: 'Dictionary',
   Membership: 'Membership',
-  Projects: 'Projects',
+  Project: 'Project',
   Task: 'Task',
   User: 'User'
 } as const
@@ -405,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "dictionaries" | "membership" | "projects" | "task" | "user"
+    modelProps: "comment" | "dictionary" | "membership" | "project" | "task" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -483,77 +483,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Dictionaries: {
-      payload: Prisma.$DictionariesPayload<ExtArgs>
-      fields: Prisma.DictionariesFieldRefs
+    Dictionary: {
+      payload: Prisma.$DictionaryPayload<ExtArgs>
+      fields: Prisma.DictionaryFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.DictionariesFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload> | null
+          args: Prisma.DictionaryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.DictionariesFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         findFirst: {
-          args: Prisma.DictionariesFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload> | null
+          args: Prisma.DictionaryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.DictionariesFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         findMany: {
-          args: Prisma.DictionariesFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+          args: Prisma.DictionaryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>[]
         }
         create: {
-          args: Prisma.DictionariesCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         createMany: {
-          args: Prisma.DictionariesCreateManyArgs<ExtArgs>
+          args: Prisma.DictionaryCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.DictionariesCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+          args: Prisma.DictionaryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>[]
         }
         delete: {
-          args: Prisma.DictionariesDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         update: {
-          args: Prisma.DictionariesUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         deleteMany: {
-          args: Prisma.DictionariesDeleteManyArgs<ExtArgs>
+          args: Prisma.DictionaryDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.DictionariesUpdateManyArgs<ExtArgs>
+          args: Prisma.DictionaryUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.DictionariesUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>[]
+          args: Prisma.DictionaryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>[]
         }
         upsert: {
-          args: Prisma.DictionariesUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionariesPayload>
+          args: Prisma.DictionaryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DictionaryPayload>
         }
         aggregate: {
-          args: Prisma.DictionariesAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDictionaries>
+          args: Prisma.DictionaryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDictionary>
         }
         groupBy: {
-          args: Prisma.DictionariesGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DictionariesGroupByOutputType>[]
+          args: Prisma.DictionaryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DictionaryGroupByOutputType>[]
         }
         count: {
-          args: Prisma.DictionariesCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DictionariesCountAggregateOutputType> | number
+          args: Prisma.DictionaryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DictionaryCountAggregateOutputType> | number
         }
       }
     }
@@ -631,77 +631,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Projects: {
-      payload: Prisma.$ProjectsPayload<ExtArgs>
-      fields: Prisma.ProjectsFieldRefs
+    Project: {
+      payload: Prisma.$ProjectPayload<ExtArgs>
+      fields: Prisma.ProjectFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ProjectsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload> | null
+          args: Prisma.ProjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ProjectsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         findFirst: {
-          args: Prisma.ProjectsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload> | null
+          args: Prisma.ProjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ProjectsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         findMany: {
-          args: Prisma.ProjectsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>[]
+          args: Prisma.ProjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>[]
         }
         create: {
-          args: Prisma.ProjectsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         createMany: {
-          args: Prisma.ProjectsCreateManyArgs<ExtArgs>
+          args: Prisma.ProjectCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ProjectsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>[]
+          args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>[]
         }
         delete: {
-          args: Prisma.ProjectsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         update: {
-          args: Prisma.ProjectsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         deleteMany: {
-          args: Prisma.ProjectsDeleteManyArgs<ExtArgs>
+          args: Prisma.ProjectDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ProjectsUpdateManyArgs<ExtArgs>
+          args: Prisma.ProjectUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ProjectsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>[]
+          args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>[]
         }
         upsert: {
-          args: Prisma.ProjectsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectsPayload>
+          args: Prisma.ProjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPayload>
         }
         aggregate: {
-          args: Prisma.ProjectsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProjects>
+          args: Prisma.ProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProject>
         }
         groupBy: {
-          args: Prisma.ProjectsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProjectsGroupByOutputType>[]
+          args: Prisma.ProjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ProjectsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProjectsCountAggregateOutputType> | number
+          args: Prisma.ProjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCountAggregateOutputType> | number
         }
       }
     }
@@ -904,7 +904,7 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const DictionariesScalarFieldEnum = {
+export const DictionaryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   fullName: 'fullName',
@@ -914,7 +914,7 @@ export const DictionariesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type DictionariesScalarFieldEnum = (typeof DictionariesScalarFieldEnum)[keyof typeof DictionariesScalarFieldEnum]
+export type DictionaryScalarFieldEnum = (typeof DictionaryScalarFieldEnum)[keyof typeof DictionaryScalarFieldEnum]
 
 
 export const MembershipScalarFieldEnum = {
@@ -929,7 +929,7 @@ export const MembershipScalarFieldEnum = {
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
 
 
-export const ProjectsScalarFieldEnum = {
+export const ProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
@@ -938,7 +938,7 @@ export const ProjectsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type ProjectsScalarFieldEnum = (typeof ProjectsScalarFieldEnum)[keyof typeof ProjectsScalarFieldEnum]
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {
@@ -967,7 +967,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
-  userStackUUid: 'userStackUUid',
+  userStackUuid: 'userStackUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1170,9 +1170,9 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   comment?: Prisma.CommentOmit
-  dictionaries?: Prisma.DictionariesOmit
+  dictionary?: Prisma.DictionaryOmit
   membership?: Prisma.MembershipOmit
-  projects?: Prisma.ProjectsOmit
+  project?: Prisma.ProjectOmit
   task?: Prisma.TaskOmit
   user?: Prisma.UserOmit
 }

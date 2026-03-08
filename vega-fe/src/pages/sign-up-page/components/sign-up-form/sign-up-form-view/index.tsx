@@ -12,6 +12,7 @@ interface IProps {
 	formValues: IFormValues;
 	formErrors: IFormErrors;
 	isPopoverOpened: boolean;
+	isError: boolean;
 	isNextButtonDisabled: boolean;
 	stackOptions: Array<IOptions>;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
@@ -41,7 +42,9 @@ const SignUpFormView: React.FC<IProps> = ({
 	onSelectFieldChange,
 	onPrevStepClick,
 	onNextStepClick,
+	isError,
 }) => {
+	console.log(isError);
 	return (
 		<div className="signup-form">
 			<div className="signup-form__wrapper">

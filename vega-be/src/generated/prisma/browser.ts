@@ -23,20 +23,20 @@ export * from './enums.js';
  */
 export type Comment = Prisma.CommentModel
 /**
- * Model Dictionaries
+ * Model Dictionary
  * 
  */
-export type Dictionaries = Prisma.DictionariesModel
+export type Dictionary = Prisma.DictionaryModel
 /**
  * Model Membership
  * 
  */
 export type Membership = Prisma.MembershipModel
 /**
- * Model Projects
+ * Model Project
  * 
  */
-export type Projects = Prisma.ProjectsModel
+export type Project = Prisma.ProjectModel
 /**
  * Model Task
  * 

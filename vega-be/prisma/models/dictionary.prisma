@@ -5,7 +5,7 @@ enum Type {
   TASK_STATUS
 }
 
-model Dictionaries {
+model Dictionary {
   id String @id @default(uuid())
 
   name     String
