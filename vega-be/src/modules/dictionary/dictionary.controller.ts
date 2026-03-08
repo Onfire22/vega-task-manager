@@ -27,7 +27,7 @@ export const getDictionaries = async (
 			select: { id: true, name: true, color: true, type: true, fullName: true },
 		});
 
-		const payload = dictionaries.reduce((acc, item) => {
+		const dictionariesData = dictionaries.reduce((acc, item) => {
 			const dictionaryType = item.type.toLowerCase();
 			if (!acc[dictionaryType as TDictionariesTypes]) {
 				acc[dictionaryType as TDictionariesTypes] = [];
@@ -37,6 +37,13 @@ export const getDictionaries = async (
 
 			return acc;
 		}, {} as TPayload);
+
+		const payload = {
+			taskPriority: dictionariesData.task_priority,
+			roleType: dictionariesData.role_type,
+			stackType: dictionariesData.stack_type,
+			taskStatus: dictionariesData.task_status,
+		};
 
 		res.status(RESPONSE_STATUSES.success).json({ dictionaries: payload });
 	} catch (e) {

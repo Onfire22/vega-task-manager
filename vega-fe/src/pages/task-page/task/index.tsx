@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import type { DictionaryKey } from '../types.ts';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';
+import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
 
 const Task = () => {
 	const params = useParams();
@@ -21,12 +22,13 @@ const Task = () => {
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 	const { isTasksLoading, task, activeTaskStatus } = useTaskData(params.uuid);
 	const { usersListOptions } = useUsersOptions();
+	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 
 	const handleEditField = (fieldName: string, value: string | null) => {
 		let data = value;
 
-		if (SELECT_FIELDS.includes(fieldName)) {
+		if (SELECT_FIELDS.includes(fieldName) || fieldName === USER_FIELD) {
 			const options =
 				fieldName === USER_FIELD ? usersListOptions : dictionariesOptions[fieldName as DictionaryKey];
 
@@ -55,10 +57,10 @@ const Task = () => {
 
 	const handleUpdateTask = async () => {
 		try {
+			const key = SELECT_FIELDS.includes(field.fieldName) ? `${field.fieldName}Uuid` : field.fieldName;
 			const data = {
-				[field.fieldName]: field.value,
+				[key]: field.value,
 			};
-			console.log(data);
 			const response = await updateTask({ ...data, uuid: params.uuid }).unwrap();
 			setEditField(INITIAL_FIELD_VALUES);
 			console.log(response);
@@ -67,21 +69,28 @@ const Task = () => {
 		}
 	};
 
-	if (isTasksLoading) return <Loader />;
+	const handleAssignOnMeClick = () => {
+		if (data?.currentUser?.id) {
+			setEditField({ fieldName: 'assigneeUuid', value: data.currentUser.id });
+		}
+	};
 
-	return (
+	return isTasksLoading ? (
+		<Loader />
+	) : (
 		<TaskView
 			task={task}
 			field={field}
 			activeTaskStatus={activeTaskStatus}
-			taskStatuses={dictionaries?.task_status}
+			taskStatuses={dictionaries?.taskStatus}
 			usersListOptions={usersListOptions}
 			onEditField={handleEditField}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
 			onLogWorkModalShown={handleLogWorkModalShown}
 			onUpdateTask={handleUpdateTask}
-			options={{ type: dictionariesOptions.stack_type, priority: dictionariesOptions.task_priority }}
+			onAssignOnMeClick={handleAssignOnMeClick}
+			options={{ type: dictionariesOptions.stackType, priority: dictionariesOptions.taskPriority }}
 		/>
 	);
 };

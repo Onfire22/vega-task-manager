@@ -12,7 +12,7 @@ export const useTaskData = (uuid?: string) => {
 	if (!task || !usersList.length || !Object.keys(dictionaries).length)
 		return { task: null, isTaskLoading: idTaskDataLoading, activeTaskStatus: 0 };
 
-	const { task_priority, stack_type, task_status } = dictionaries;
+	const { taskPriority, stackType, taskStatus } = dictionaries;
 
 	const reporter = usersList.find((item) => item.id === task.reporterUuid);
 	const assignee = usersList.find((item) => item.id === task.assigneeUuid);
@@ -20,9 +20,9 @@ export const useTaskData = (uuid?: string) => {
 	const reporterName = reporter ? `${reporter?.name} ${reporter?.secondName}` : '-';
 	const assigneeName = assignee ? `${assignee?.name} ${assignee?.secondName}` : 'unassigned';
 
-	const taskPriorityUuid = task_priority?.find((item) => item.id === task.taskPriorityUuid);
-	const taskStackUuid = stack_type?.find((item) => item.id === task.taskStackUuid);
-	const taskStatusUuid = task_status?.find((item) => item.id === task.taskStatusUuid);
+	const taskPriorityUuid = taskPriority?.find((item) => item.id === task.taskPriorityUuid);
+	const taskStackUuid = stackType?.find((item) => item.id === task.taskStackUuid);
+	const taskStatusUuid = taskStatus?.find((item) => item.id === task.taskStatusUuid);
 
 	const taskData = {
 		...task,

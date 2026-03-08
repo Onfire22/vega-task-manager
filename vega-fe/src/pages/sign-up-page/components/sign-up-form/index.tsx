@@ -93,7 +93,7 @@ const SignUpForm = () => {
 				passwordRef={passwordRef}
 				emailRef={emailRef}
 				isNextButtonDisabled={isNextButtonDisabled}
-				stackOptions={dictionariesOptions?.stack_type}
+				stackOptions={dictionariesOptions?.stackType}
 				onFieldChange={handleFieldChange}
 				onPopoverOpened={handlePopoverOpened}
 				onGeneratePasswordClick={handleGeneratePasswordClick}

@@ -1,4 +1,4 @@
-export type DictionaryKey = 'task_priority' | 'role_type' | 'stack_type' | 'task_status';
+export type DictionaryKey = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
 
 export interface IInitialState {
 	isModalShown: boolean;

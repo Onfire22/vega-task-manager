@@ -6,8 +6,15 @@ export interface IUserData {
 	userStackUUid: string;
 }
 
+export interface ICurrentUser {
+	email: string;
+	id: string;
+	name: string;
+	secondName: string;
+}
+
 export interface IUserResponse {
-	currentUser: IUserData;
+	currentUser: ICurrentUser;
 }
 
 export interface IAuthUserResponse {
@@ -50,6 +57,8 @@ export interface ITaskResponse {
 
 export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
 
+type TDictionariesMapped = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
+
 export interface IDictionary {
 	id: string;
 	name: string;
@@ -58,7 +67,7 @@ export interface IDictionary {
 }
 
 export type IDictionariesResponse = {
-	dictionaries: Partial<Record<Lowercase<TDictionariesTypes>, IDictionary[]>>;
+	dictionaries: Partial<Record<TDictionariesMapped, IDictionary[]>>;
 };
 
 export interface IUsers {

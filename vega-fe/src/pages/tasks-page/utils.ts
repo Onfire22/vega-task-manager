@@ -12,9 +12,9 @@ export const transformTasksDataToTable = (tasks: Array<ITask>, dictionaries: IDi
 	if (!tasks.length || !dictionaries) return [];
 
 	return tasks.map((task) => {
-		const taskStack = dictionaries.stack_type.find((item) => item.id === task.taskStackUuid);
-		const taskStatus = dictionaries.task_status.find((item) => item.id === task.taskStatusUuid);
-		const taskPriority = dictionaries.task_priority.find((item) => item.id === task.taskPriorityUuid);
+		const taskStack = dictionaries.stackType.find((item) => item.id === task.taskStackUuid);
+		const taskStatus = dictionaries.taskStatus.find((item) => item.id === task.taskStatusUuid);
+		const taskPriority = dictionaries.taskPriority.find((item) => item.id === task.taskPriorityUuid);
 
 		return {
 			...task,

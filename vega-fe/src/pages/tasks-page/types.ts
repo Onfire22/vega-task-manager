@@ -26,7 +26,7 @@ export interface ITask {
 	updatedAt: string;
 }
 
-export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
+export type TDictionariesTypes = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
 
 export interface IDictionary {
 	id: string;
@@ -35,7 +35,7 @@ export interface IDictionary {
 	fullName: string | null;
 }
 
-export type IDict = Record<Lowercase<TDictionariesTypes>, IDictionary[]>;
+export type IDict = Record<TDictionariesTypes, IDictionary[]>;
 
 export interface ITaskTableData {
 	assigneeUuid: string | null;
