@@ -1,29 +1,21 @@
 import { useGetTasksQuery } from '../../api/queries/tasks.api.ts';
-import { transformTasksDataToTable } from './utils.ts';
 import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '../../store/hooks.ts';
-import { useDictionaries } from '../../api/hooks.ts';
-import { BASE_DICTIONARIES_META } from './constants.ts';
-import type { IDict } from './types.ts';
+import { format } from 'date-fns';
+import { DATE_FORMAT } from './constants.ts';
 
 export const useTableData = () => {
-	const { dictionaries } = useDictionaries(BASE_DICTIONARIES_META);
 	const filters = useAppSelector(getFiltersSelector());
+	const { data, isSuccess, isLoading } = useGetTasksQuery({ filters });
 
-	const { tableData } = useGetTasksQuery(
-		{ filters },
-		{
-			selectFromResult: (result) => {
-				if (!result?.isSuccess || !Object.keys(dictionaries).length)
-					return { tableData: [], isTableDataLoading: false };
+	if (!isSuccess) return { tableData: [], isTasksLoading: isLoading };
 
-				return {
-					tableData: transformTasksDataToTable(result.data.tasks, dictionaries as IDict),
-					isTableDataLoading: result.isLoading,
-				};
-			},
-		},
-	);
+	const tasks = data.tasks.map((item) => {
+		return {
+			...item,
+			createdAt: format(item.createdAt, DATE_FORMAT),
+		};
+	});
 
-	return tableData;
+	return { tableData: tasks, isTasksLoading: isLoading };
 };

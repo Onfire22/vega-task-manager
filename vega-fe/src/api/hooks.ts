@@ -1,10 +1,10 @@
 import { useGetDictionariesQuery } from './queries/dictionaries.api.ts';
-import { transformDictionaries } from '../pages/tasks-page/utils.ts';
 import { CACHING_SETTINGS } from '../constants.ts';
 import type { TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectsQuery } from './queries/projects.api.ts';
 import { useGetTaskQuery } from './queries/tasks.api.ts';
+import { transformDictionaries } from './utils.ts';
 
 export const useDictionaries = (meta: TDictionariesTypes[]) => {
 	const { data, isLoading, isSuccess } = useGetDictionariesQuery(meta, CACHING_SETTINGS);

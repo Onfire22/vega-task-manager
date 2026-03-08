@@ -14,17 +14,17 @@ interface IProps {
 		column: string;
 		direction: 'asc' | 'desc';
 	};
-	onSortColumn: (id: string) => void;
+	onSortColumn: (sorting?: string) => void;
 }
 
 const CustomTableHederCellView: React.FC<IProps> = ({ column, onSortColumn, sortingState }) => {
 	return (
 		<div
 			className={`custom-table-header-cell${column?.sorting ? ' custom-table-header-cell_sortable' : ''}`}
-			onClick={() => onSortColumn(column?.sorting ? column.id : '')}
+			onClick={() => onSortColumn(column.sorting)}
 		>
 			<span className="custom-table-header-cell__title">{column.name}</span>
-			{column.id === sortingState.column && (
+			{column.sorting === sortingState.column && (
 				<div className="custom-table-header-cell__sotring">
 					{sortingState.direction === 'asc' ? (
 						<IconArrowNarrowUpDashed size={20} color={THEME?.other?.colorSuccess} />

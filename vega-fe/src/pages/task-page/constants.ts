@@ -1,5 +1,4 @@
 import { IconBriefcase2, IconCancel, IconCircleCheck, IconPencil } from '@tabler/icons-react';
-import type { TDictionariesTypes } from '../../api/types.ts';
 
 export const BULLET_ICONS = {
 	todo: IconPencil,
@@ -15,8 +14,6 @@ export const TASK_STATUS_NUMBER = {
 	stopped: 3,
 } as const;
 
-export const DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_TYPE', 'TASK_STATUS'];
-
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
 export const SELECT_FIELDS = ['stackType', 'taskPriority'];
@@ -27,7 +24,7 @@ export const LOG_TIME_INITIAL_VALUES = {
 	logComment: '',
 };
 
-export const USER_FIELD = 'assigneeUuid';
+export const USER_FIELD = 'assignee';
 
 export const RED_COLOR = '#fa5252';
 

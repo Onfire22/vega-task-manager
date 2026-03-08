@@ -1,13 +1,13 @@
 import './styles.less';
 import { TableControls } from '../../table-controls';
-import type { ITaskTableData, TActiveTab } from '../../types.ts';
+import type { TTaskList, TActiveTab } from '../../types.ts';
 import React from 'react';
 import { TABLE_HEADER } from '../../table-header.ts';
 import { CustomTable } from '../../../../components/custom-table';
 
 interface IProps {
 	activeTab: TActiveTab;
-	tableData: ITaskTableData[];
+	tableData: TTaskList;
 	onRowDoubleClick: (uuid: string) => void;
 }
 

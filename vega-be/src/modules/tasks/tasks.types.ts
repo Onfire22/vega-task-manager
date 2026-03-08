@@ -17,32 +17,45 @@ export interface IGetUserTasksBody {
 	sorting: ISorting;
 }
 
+export interface IExpDictData {
+	color?: string | null;
+	id: string;
+	name: string;
+}
+
+export interface IExpUserDict {
+	id: string;
+	name: string;
+	secondName: string;
+}
+
 export interface ITask {
-	assigneeUuid: string | null;
+	id: string;
 	code: string | null;
-	createdAt: Date;
+	title: string;
 	description: string;
 	estimatedTime: number | null;
-	id: string;
 	loggedTime: number | null;
-	projectUuid: string | null;
-	reporterUuid: string;
-	taskPriorityUuid: string;
-	taskStackUuid: string;
-	taskStatusUuid: string;
-	title: string;
+	assignee: IExpUserDict | null;
+	reporter: IExpUserDict;
+	taskPriority: IExpDictData;
+	taskStack: IExpDictData;
+	taskStatus: IExpDictData;
+	createdAt: Date;
 	updatedAt: Date;
 }
 
-export interface ITasksResponse {
-	tasks: Array<ITask>;
+export interface ITaskListResponse {
+	tasks: Array<Omit<ITask, 'description' | 'assignee' | 'reporter' | 'updatedAt'>>;
 }
 
 export interface IGetTaskParams {
 	uuid: string;
 }
 
-export type TUpdateTask = Pick<
-	ITask,
-	'id' | 'title' | 'taskStackUuid' | 'taskPriorityUuid' | 'description' | 'assigneeUuid'
->;
+export type TUpdateTaskFields = 'title' | 'stackType' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+
+export type TUpdateTask = {
+	fieldName: TUpdateTaskFields;
+	value: string;
+};

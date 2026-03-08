@@ -38,23 +38,6 @@ export interface ICreateTask {
 	taskStackUuid: string;
 }
 
-export interface ITask extends ICreateTask {
-	id: string;
-	code: string | null;
-	estimatedTime: string | null;
-	loggedTime: string | null;
-	assigneeUuid: string | null;
-	reporterUuid: string;
-	projectUuid: string | null;
-	taskStatusUuid: string;
-	createdAt: string;
-	updatedAt: string;
-}
-
-export interface ITaskResponse {
-	tasks: ITask[];
-}
-
 export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
 
 type TDictionariesMapped = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
@@ -110,3 +93,45 @@ export interface IGetUserTasksRequest {
 		sorting: ISorting;
 	};
 }
+
+export interface IExpDictData {
+	color: string;
+	id: string;
+	name: string;
+}
+
+export interface IExpUserDict {
+	id: string;
+	name: string;
+	secondName: string;
+}
+
+export interface IExpTaskResponse {
+	id: string;
+	code: string | null;
+	title: string;
+	description: string;
+	estimatedTime: string | null;
+	loggedTime: string | null;
+	assignee: IExpUserDict | null;
+	reporter: IExpUserDict;
+	taskPriority: IExpDictData;
+	taskStack: IExpDictData;
+	taskStatus: IExpDictData;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface ITaskList {
+	id: string;
+	code: string | null;
+	title: string;
+	estimatedTime: string | null;
+	loggedTime: string | null;
+	taskPriority: IExpDictData;
+	taskStack: IExpDictData;
+	taskStatus: IExpDictData;
+	createdAt: string;
+}
+
+export type TTaskList = Array<ITaskList>;
