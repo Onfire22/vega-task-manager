@@ -130,8 +130,8 @@ export const TaskScalarFieldEnum = {
   code: 'code',
   title: 'title',
   description: 'description',
-  estimatedTime: 'estimatedTime',
-  loggedTime: 'loggedTime',
+  estimateTime: 'estimateTime',
+  remainigTime: 'remainigTime',
   assigneeUuid: 'assigneeUuid',
   reporterUuid: 'reporterUuid',
   projectUuid: 'projectUuid',
@@ -147,9 +147,8 @@ export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof Task
 
 export const TimeLogScalarFieldEnum = {
   id: 'id',
-  estimateTime: 'estimateTime',
   loggedTime: 'loggedTime',
-  text: 'text',
+  description: 'description',
   userUuid: 'userUuid',
   taskUuid: 'taskUuid',
   createdAt: 'createdAt',

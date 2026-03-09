@@ -27,13 +27,13 @@ export type AggregateTask = {
 }
 
 export type TaskAvgAggregateOutputType = {
-  estimatedTime: number | null
-  loggedTime: number | null
+  estimateTime: number | null
+  remainigTime: number | null
 }
 
 export type TaskSumAggregateOutputType = {
-  estimatedTime: number | null
-  loggedTime: number | null
+  estimateTime: number | null
+  remainigTime: number | null
 }
 
 export type TaskMinAggregateOutputType = {
@@ -41,8 +41,8 @@ export type TaskMinAggregateOutputType = {
   code: string | null
   title: string | null
   description: string | null
-  estimatedTime: number | null
-  loggedTime: number | null
+  estimateTime: number | null
+  remainigTime: number | null
   assigneeUuid: string | null
   reporterUuid: string | null
   projectUuid: string | null
@@ -58,8 +58,8 @@ export type TaskMaxAggregateOutputType = {
   code: string | null
   title: string | null
   description: string | null
-  estimatedTime: number | null
-  loggedTime: number | null
+  estimateTime: number | null
+  remainigTime: number | null
   assigneeUuid: string | null
   reporterUuid: string | null
   projectUuid: string | null
@@ -75,8 +75,8 @@ export type TaskCountAggregateOutputType = {
   code: number
   title: number
   description: number
-  estimatedTime: number
-  loggedTime: number
+  estimateTime: number
+  remainigTime: number
   assigneeUuid: number
   reporterUuid: number
   projectUuid: number
@@ -90,13 +90,13 @@ export type TaskCountAggregateOutputType = {
 
 
 export type TaskAvgAggregateInputType = {
-  estimatedTime?: true
-  loggedTime?: true
+  estimateTime?: true
+  remainigTime?: true
 }
 
 export type TaskSumAggregateInputType = {
-  estimatedTime?: true
-  loggedTime?: true
+  estimateTime?: true
+  remainigTime?: true
 }
 
 export type TaskMinAggregateInputType = {
@@ -104,8 +104,8 @@ export type TaskMinAggregateInputType = {
   code?: true
   title?: true
   description?: true
-  estimatedTime?: true
-  loggedTime?: true
+  estimateTime?: true
+  remainigTime?: true
   assigneeUuid?: true
   reporterUuid?: true
   projectUuid?: true
@@ -121,8 +121,8 @@ export type TaskMaxAggregateInputType = {
   code?: true
   title?: true
   description?: true
-  estimatedTime?: true
-  loggedTime?: true
+  estimateTime?: true
+  remainigTime?: true
   assigneeUuid?: true
   reporterUuid?: true
   projectUuid?: true
@@ -138,8 +138,8 @@ export type TaskCountAggregateInputType = {
   code?: true
   title?: true
   description?: true
-  estimatedTime?: true
-  loggedTime?: true
+  estimateTime?: true
+  remainigTime?: true
   assigneeUuid?: true
   reporterUuid?: true
   projectUuid?: true
@@ -242,8 +242,8 @@ export type TaskGroupByOutputType = {
   code: string | null
   title: string
   description: string
-  estimatedTime: number | null
-  loggedTime: number | null
+  estimateTime: number | null
+  remainigTime: number | null
   assigneeUuid: string | null
   reporterUuid: string
   projectUuid: string | null
@@ -282,8 +282,8 @@ export type TaskWhereInput = {
   code?: Prisma.StringNullableFilter<"Task"> | string | null
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringFilter<"Task"> | string
-  estimatedTime?: Prisma.IntNullableFilter<"Task"> | number | null
-  loggedTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  estimateTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  remainigTime?: Prisma.IntNullableFilter<"Task"> | number | null
   assigneeUuid?: Prisma.StringNullableFilter<"Task"> | string | null
   reporterUuid?: Prisma.StringFilter<"Task"> | string
   projectUuid?: Prisma.StringNullableFilter<"Task"> | string | null
@@ -307,8 +307,8 @@ export type TaskOrderByWithRelationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  estimatedTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  loggedTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  estimateTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  remainigTime?: Prisma.SortOrderInput | Prisma.SortOrder
   assigneeUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   reporterUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -335,8 +335,8 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TaskWhereInput | Prisma.TaskWhereInput[]
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringFilter<"Task"> | string
-  estimatedTime?: Prisma.IntNullableFilter<"Task"> | number | null
-  loggedTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  estimateTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  remainigTime?: Prisma.IntNullableFilter<"Task"> | number | null
   assigneeUuid?: Prisma.StringNullableFilter<"Task"> | string | null
   reporterUuid?: Prisma.StringFilter<"Task"> | string
   projectUuid?: Prisma.StringNullableFilter<"Task"> | string | null
@@ -360,8 +360,8 @@ export type TaskOrderByWithAggregationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  estimatedTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  loggedTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  estimateTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  remainigTime?: Prisma.SortOrderInput | Prisma.SortOrder
   assigneeUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   reporterUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -385,8 +385,8 @@ export type TaskScalarWhereWithAggregatesInput = {
   code?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Task"> | string
   description?: Prisma.StringWithAggregatesFilter<"Task"> | string
-  estimatedTime?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
-  loggedTime?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
+  estimateTime?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
+  remainigTime?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
   assigneeUuid?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
   reporterUuid?: Prisma.StringWithAggregatesFilter<"Task"> | string
   projectUuid?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
@@ -402,8 +402,8 @@ export type TaskCreateInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -421,8 +421,8 @@ export type TaskUncheckedCreateInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -440,8 +440,8 @@ export type TaskUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -459,8 +459,8 @@ export type TaskUncheckedUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -478,8 +478,8 @@ export type TaskCreateManyInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -495,8 +495,8 @@ export type TaskUpdateManyMutationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -506,8 +506,8 @@ export type TaskUncheckedUpdateManyInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -538,8 +538,8 @@ export type TaskCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  estimatedTime?: Prisma.SortOrder
-  loggedTime?: Prisma.SortOrder
+  estimateTime?: Prisma.SortOrder
+  remainigTime?: Prisma.SortOrder
   assigneeUuid?: Prisma.SortOrder
   reporterUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
@@ -551,8 +551,8 @@ export type TaskCountOrderByAggregateInput = {
 }
 
 export type TaskAvgOrderByAggregateInput = {
-  estimatedTime?: Prisma.SortOrder
-  loggedTime?: Prisma.SortOrder
+  estimateTime?: Prisma.SortOrder
+  remainigTime?: Prisma.SortOrder
 }
 
 export type TaskMaxOrderByAggregateInput = {
@@ -560,8 +560,8 @@ export type TaskMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  estimatedTime?: Prisma.SortOrder
-  loggedTime?: Prisma.SortOrder
+  estimateTime?: Prisma.SortOrder
+  remainigTime?: Prisma.SortOrder
   assigneeUuid?: Prisma.SortOrder
   reporterUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
@@ -577,8 +577,8 @@ export type TaskMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  estimatedTime?: Prisma.SortOrder
-  loggedTime?: Prisma.SortOrder
+  estimateTime?: Prisma.SortOrder
+  remainigTime?: Prisma.SortOrder
   assigneeUuid?: Prisma.SortOrder
   reporterUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
@@ -590,8 +590,8 @@ export type TaskMinOrderByAggregateInput = {
 }
 
 export type TaskSumOrderByAggregateInput = {
-  estimatedTime?: Prisma.SortOrder
-  loggedTime?: Prisma.SortOrder
+  estimateTime?: Prisma.SortOrder
+  remainigTime?: Prisma.SortOrder
 }
 
 export type TaskCreateNestedOneWithoutCommentsInput = {
@@ -887,8 +887,8 @@ export type TaskCreateWithoutCommentsInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -905,8 +905,8 @@ export type TaskUncheckedCreateWithoutCommentsInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -939,8 +939,8 @@ export type TaskUpdateWithoutCommentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -957,8 +957,8 @@ export type TaskUncheckedUpdateWithoutCommentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -975,8 +975,8 @@ export type TaskCreateWithoutTaskPriorityInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -993,8 +993,8 @@ export type TaskUncheckedCreateWithoutTaskPriorityInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1021,8 +1021,8 @@ export type TaskCreateWithoutTaskStatusInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -1039,8 +1039,8 @@ export type TaskUncheckedCreateWithoutTaskStatusInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1067,8 +1067,8 @@ export type TaskCreateWithoutTaskStackInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -1085,8 +1085,8 @@ export type TaskUncheckedCreateWithoutTaskStackInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1132,8 +1132,8 @@ export type TaskScalarWhereInput = {
   code?: Prisma.StringNullableFilter<"Task"> | string | null
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringFilter<"Task"> | string
-  estimatedTime?: Prisma.IntNullableFilter<"Task"> | number | null
-  loggedTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  estimateTime?: Prisma.IntNullableFilter<"Task"> | number | null
+  remainigTime?: Prisma.IntNullableFilter<"Task"> | number | null
   assigneeUuid?: Prisma.StringNullableFilter<"Task"> | string | null
   reporterUuid?: Prisma.StringFilter<"Task"> | string
   projectUuid?: Prisma.StringNullableFilter<"Task"> | string | null
@@ -1181,8 +1181,8 @@ export type TaskCreateWithoutProjectInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -1199,8 +1199,8 @@ export type TaskUncheckedCreateWithoutProjectInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   taskPriorityUuid: string
@@ -1243,8 +1243,8 @@ export type TaskCreateWithoutTimeLogsInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -1261,8 +1261,8 @@ export type TaskUncheckedCreateWithoutTimeLogsInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1295,8 +1295,8 @@ export type TaskUpdateWithoutTimeLogsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1313,8 +1313,8 @@ export type TaskUncheckedUpdateWithoutTimeLogsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1331,8 +1331,8 @@ export type TaskCreateWithoutAssigneeInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportedTasksInput
@@ -1349,8 +1349,8 @@ export type TaskUncheckedCreateWithoutAssigneeInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   reporterUuid: string
   projectUuid?: string | null
   taskPriorityUuid: string
@@ -1377,8 +1377,8 @@ export type TaskCreateWithoutReporterInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignee?: Prisma.UserCreateNestedOneWithoutAssignedTasksInput
@@ -1395,8 +1395,8 @@ export type TaskUncheckedCreateWithoutReporterInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   projectUuid?: string | null
   taskPriorityUuid: string
@@ -1455,8 +1455,8 @@ export type TaskCreateManyTaskPriorityInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1471,8 +1471,8 @@ export type TaskCreateManyTaskStatusInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1487,8 +1487,8 @@ export type TaskCreateManyTaskStackInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   projectUuid?: string | null
@@ -1503,8 +1503,8 @@ export type TaskUpdateWithoutTaskPriorityInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1521,8 +1521,8 @@ export type TaskUncheckedUpdateWithoutTaskPriorityInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1539,8 +1539,8 @@ export type TaskUncheckedUpdateManyWithoutTaskPriorityInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1555,8 +1555,8 @@ export type TaskUpdateWithoutTaskStatusInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1573,8 +1573,8 @@ export type TaskUncheckedUpdateWithoutTaskStatusInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1591,8 +1591,8 @@ export type TaskUncheckedUpdateManyWithoutTaskStatusInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1607,8 +1607,8 @@ export type TaskUpdateWithoutTaskStackInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1625,8 +1625,8 @@ export type TaskUncheckedUpdateWithoutTaskStackInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1643,8 +1643,8 @@ export type TaskUncheckedUpdateManyWithoutTaskStackInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1659,8 +1659,8 @@ export type TaskCreateManyProjectInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   reporterUuid: string
   taskPriorityUuid: string
@@ -1675,8 +1675,8 @@ export type TaskUpdateWithoutProjectInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1693,8 +1693,8 @@ export type TaskUncheckedUpdateWithoutProjectInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1711,8 +1711,8 @@ export type TaskUncheckedUpdateManyWithoutProjectInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1727,8 +1727,8 @@ export type TaskCreateManyAssigneeInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   reporterUuid: string
   projectUuid?: string | null
   taskPriorityUuid: string
@@ -1743,8 +1743,8 @@ export type TaskCreateManyReporterInput = {
   code?: string | null
   title: string
   description: string
-  estimatedTime?: number | null
-  loggedTime?: number | null
+  estimateTime?: number | null
+  remainigTime?: number | null
   assigneeUuid?: string | null
   projectUuid?: string | null
   taskPriorityUuid: string
@@ -1759,8 +1759,8 @@ export type TaskUpdateWithoutAssigneeInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedTasksNestedInput
@@ -1777,8 +1777,8 @@ export type TaskUncheckedUpdateWithoutAssigneeInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1795,8 +1795,8 @@ export type TaskUncheckedUpdateManyWithoutAssigneeInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reporterUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1811,8 +1811,8 @@ export type TaskUpdateWithoutReporterInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignee?: Prisma.UserUpdateOneWithoutAssignedTasksNestedInput
@@ -1829,8 +1829,8 @@ export type TaskUncheckedUpdateWithoutReporterInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1847,8 +1847,8 @@ export type TaskUncheckedUpdateManyWithoutReporterInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  estimatedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  loggedTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estimateTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remainigTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assigneeUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskPriorityUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1903,8 +1903,8 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   code?: boolean
   title?: boolean
   description?: boolean
-  estimatedTime?: boolean
-  loggedTime?: boolean
+  estimateTime?: boolean
+  remainigTime?: boolean
   assigneeUuid?: boolean
   reporterUuid?: boolean
   projectUuid?: boolean
@@ -1929,8 +1929,8 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   title?: boolean
   description?: boolean
-  estimatedTime?: boolean
-  loggedTime?: boolean
+  estimateTime?: boolean
+  remainigTime?: boolean
   assigneeUuid?: boolean
   reporterUuid?: boolean
   projectUuid?: boolean
@@ -1952,8 +1952,8 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   title?: boolean
   description?: boolean
-  estimatedTime?: boolean
-  loggedTime?: boolean
+  estimateTime?: boolean
+  remainigTime?: boolean
   assigneeUuid?: boolean
   reporterUuid?: boolean
   projectUuid?: boolean
@@ -1975,8 +1975,8 @@ export type TaskSelectScalar = {
   code?: boolean
   title?: boolean
   description?: boolean
-  estimatedTime?: boolean
-  loggedTime?: boolean
+  estimateTime?: boolean
+  remainigTime?: boolean
   assigneeUuid?: boolean
   reporterUuid?: boolean
   projectUuid?: boolean
@@ -1987,7 +1987,7 @@ export type TaskSelectScalar = {
   updatedAt?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "title" | "description" | "estimatedTime" | "loggedTime" | "assigneeUuid" | "reporterUuid" | "projectUuid" | "taskPriorityUuid" | "taskStatusUuid" | "taskStackUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "title" | "description" | "estimateTime" | "remainigTime" | "assigneeUuid" | "reporterUuid" | "projectUuid" | "taskPriorityUuid" | "taskStatusUuid" | "taskStackUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2033,8 +2033,8 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     code: string | null
     title: string
     description: string
-    estimatedTime: number | null
-    loggedTime: number | null
+    estimateTime: number | null
+    remainigTime: number | null
     assigneeUuid: string | null
     reporterUuid: string
     projectUuid: string | null
@@ -2478,8 +2478,8 @@ export interface TaskFieldRefs {
   readonly code: Prisma.FieldRef<"Task", 'String'>
   readonly title: Prisma.FieldRef<"Task", 'String'>
   readonly description: Prisma.FieldRef<"Task", 'String'>
-  readonly estimatedTime: Prisma.FieldRef<"Task", 'Int'>
-  readonly loggedTime: Prisma.FieldRef<"Task", 'Int'>
+  readonly estimateTime: Prisma.FieldRef<"Task", 'Int'>
+  readonly remainigTime: Prisma.FieldRef<"Task", 'Int'>
   readonly assigneeUuid: Prisma.FieldRef<"Task", 'String'>
   readonly reporterUuid: Prisma.FieldRef<"Task", 'String'>
   readonly projectUuid: Prisma.FieldRef<"Task", 'String'>
