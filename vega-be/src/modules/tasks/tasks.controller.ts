@@ -5,6 +5,7 @@ import { AppError } from '../../errors/errors';
 import { ICreateTaskBody, IGetTaskParams, IGetUserTasksBody, ITaskListResponse, TUpdateTask } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { DICTIONARY_SELECT, FIELDS_MAP, USER_SELECT } from './constants';
+import { transformTimeToSeconds } from './utils';
 
 export const createTask = async (
 	req: Request<{}, {}, ICreateTaskBody>,
@@ -21,8 +22,7 @@ export const createTask = async (
 		});
 
 		if (!baseTaskStatusUuid) {
-			next(new AppError('Статус не найден', RESPONSE_STATUSES.iternalError));
-			return;
+			return next(new AppError('Статус не найден', RESPONSE_STATUSES.iternalError));
 		}
 
 		const data = {
@@ -74,8 +74,7 @@ export const getUserTasks = async (
 				taskStack: {
 					select: DICTIONARY_SELECT,
 				},
-				estimatedTime: true,
-				loggedTime: true,
+				estimateTime: true,
 				createdAt: true,
 			},
 		});
@@ -100,8 +99,7 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 				code: true,
 				title: true,
 				description: true,
-				estimatedTime: true,
-				loggedTime: true,
+				estimateTime: true,
 				createdAt: true,
 				updatedAt: true,
 				taskPriority: {
@@ -146,6 +144,65 @@ export const updateTask = async (
 
 		res.status(200).json({ task });
 	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+	}
+};
+
+export const estimateTaskTime = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const formData = req.body;
+		const { uuid: taskUuid } = req.params;
+		const userId = res.locals.user.id;
+
+		const estimate = transformTimeToSeconds(formData.estimateTime);
+
+		const loggedTime = transformTimeToSeconds(formData.loggedTime);
+
+		if (!taskUuid) {
+			return next(new AppError('missing task uuid', RESPONSE_STATUSES.iternalError));
+		}
+
+		if (!formData.estimateTime && formData.loggedTime) {
+			const timeLog = await prismaAppClient.timeLog.create({
+				data: {
+					...formData,
+					loggedTime,
+					user: {
+						connect: { id: userId },
+					},
+					task: {
+						connect: { id: taskUuid },
+					},
+				},
+			});
+
+			return res.status(RESPONSE_STATUSES.success).json({ timeLog });
+		}
+
+		if (formData.estimateTime && formData.loggedTime) {
+			await prismaAppClient.$transaction(async (tx) => {
+				const task = await tx.task.update({
+					where: { id: taskUuid },
+					data: { estimateTime: estimate },
+				});
+
+				await tx.timeLog.create({
+					data: {
+						loggedTime,
+						description: formData?.description,
+						user: {
+							connect: { id: userId },
+						},
+						task: {
+							connect: { id: taskUuid },
+						},
+					},
+				});
+				return res.status(RESPONSE_STATUSES.success).json({ task });
+			});
+		}
+	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

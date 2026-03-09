@@ -34,8 +34,7 @@ export interface ITask {
 	code: string | null;
 	title: string;
 	description: string;
-	estimatedTime: number | null;
-	loggedTime: number | null;
+	estimateTime: number | null;
 	assignee: IExpUserDict | null;
 	reporter: IExpUserDict;
 	taskPriority: IExpDictData;

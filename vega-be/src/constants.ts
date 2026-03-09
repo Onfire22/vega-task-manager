@@ -22,7 +22,10 @@ export const ROUTES = {
 	tasks: '/api/tasks',
 	task: '/api/task/:uuid',
 	createTask: '/api/tasks/create',
+	estimateTask: '/api/tasks/:uuid/estimate',
 	projects: '/api/projects',
 	projectsCreate: '/api/projects/create',
 	createTaskLog: '/api/taskLogs/create',
 };
+
+export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

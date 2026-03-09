@@ -1,10 +1,10 @@
 model TimeLog {
   id          String  @id @default(uuid())
-  loggedTime  String  @map("logged_time")
+  loggedTime  Int     @map("logged_time")
   description String?
-  userUuid    String
+  userUuid    String  @map("user_uuid")
   user        User    @relation(fields: [userUuid], references: [id])
-  taskUuid    String
+  taskUuid    String  @map("task_uuid")
   task        Task    @relation(fields: [taskUuid], references: [id])
 
   createdAt DateTime @default(now()) @map("created_at")
