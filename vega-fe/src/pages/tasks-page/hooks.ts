@@ -3,12 +3,14 @@ import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '../../store/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
+import { useDictionaries } from '../../api/hooks.ts';
+import { useMemo } from 'react';
 
-export const useTableData = () => {
+export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());
 	const { data, isSuccess, isLoading } = useGetTasksQuery({ filters });
 
-	if (!isSuccess) return { tableData: [], isTasksLoading: isLoading };
+	if (!isSuccess) return { userTasks: [], isTasksLoading: isLoading };
 
 	const tasks = data.tasks.map((item) => {
 		return {
@@ -17,5 +19,32 @@ export const useTableData = () => {
 		};
 	});
 
-	return { tableData: tasks, isTasksLoading: isLoading };
+	return { userTasks: tasks, isTasksLoading: isLoading };
+};
+
+export const useKanbanTasks = () => {
+	const { dictionaries, isDictionariesLoading } = useDictionaries(['TASK_STATUS']);
+	const { userTasks, isTasksLoading } = useUserTasks();
+
+	const isColumnsLoading = isDictionariesLoading || isTasksLoading;
+
+	const columns = useMemo(
+		() =>
+			isColumnsLoading
+				? []
+				: dictionaries?.taskStatus?.map((item) => {
+						return {
+							id: item.id,
+							name: item.name,
+							color: item.color,
+							tasks: userTasks.filter((task) => task.taskStatus.id === item.id),
+						};
+					}),
+		[dictionaries?.taskStatus, userTasks, isColumnsLoading],
+	);
+
+	return {
+		columns,
+		isColumnsLoading,
+	};
 };

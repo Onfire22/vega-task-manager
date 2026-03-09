@@ -46,7 +46,7 @@ export interface ITask {
 }
 
 export interface ITaskListResponse {
-	tasks: Array<Omit<ITask, 'description' | 'assignee' | 'reporter' | 'updatedAt'>>;
+	tasks: Array<Omit<ITask, 'assignee' | 'reporter' | 'updatedAt'>>;
 }
 
 export interface IGetTaskParams {

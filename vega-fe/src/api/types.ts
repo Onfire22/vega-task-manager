@@ -128,6 +128,7 @@ export interface ITaskList {
 	title: string;
 	estimatedTime: string | null;
 	loggedTime: string | null;
+	description: string;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;
 	taskStatus: IExpDictData;

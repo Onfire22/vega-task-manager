@@ -1,5 +1,6 @@
 import { Loader, Table } from '@mantine/core';
 import React from 'react';
+import './styles.less';
 
 interface IProps {
 	tableData: Array<{ [key: string]: any }>;
@@ -39,7 +40,12 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOf
 			<Table.Tbody>
 				{tableData.map((data) => {
 					return (
-						<Table.Tr ta="center" key={data.id} onDoubleClick={() => onRowDoubleClick(data.id)}>
+						<Table.Tr
+							className="table__row"
+							ta="center"
+							key={data.id}
+							onDoubleClick={() => onRowDoubleClick(data.id)}
+						>
 							{headerData.map((item) => {
 								const CustomCell = item?.customCellComponent;
 								if (CustomCell) {

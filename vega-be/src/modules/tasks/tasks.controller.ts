@@ -64,6 +64,7 @@ export const getUserTasks = async (
 				id: true,
 				code: true,
 				title: true,
+				description: true,
 				taskPriority: {
 					select: DICTIONARY_SELECT,
 				},

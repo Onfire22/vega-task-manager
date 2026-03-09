@@ -258,33 +258,35 @@ const TaskView: React.FC<IProps> = ({
 							<span className="task__value">{task.updatedAt}</span>
 						</div>
 					</div>
-					<div className="task__details">
-						<div className="task__heading">Учет времени</div>
-						<div className="task__progress">
-							<span className="task__key">Оценка:</span>
-							<Progress.Root size="xl">
-								<Progress.Section value={100}>
-									<Progress.Label>1h</Progress.Label>
-								</Progress.Section>
-							</Progress.Root>
+					{(task.estimatedTime || task.loggedTime) && (
+						<div className="task__details">
+							<div className="task__heading">Учет времени</div>
+							<div className="task__progress">
+								<span className="task__key">Оценка:</span>
+								<Progress.Root size="xl">
+									<Progress.Section value={100}>
+										<Progress.Label>1h</Progress.Label>
+									</Progress.Section>
+								</Progress.Root>
+							</div>
+							<div className="task__progress">
+								<span className="task__key">Потрачено:</span>
+								<Progress.Root size="xl">
+									<Progress.Section value={50}>
+										<Progress.Label>1h</Progress.Label>
+									</Progress.Section>
+								</Progress.Root>
+							</div>
+							<div className="task__progress">
+								<span className="task__key">Осталось:</span>
+								<Progress.Root size="xl">
+									<Progress.Section value={50}>
+										<Progress.Label>1h</Progress.Label>
+									</Progress.Section>
+								</Progress.Root>
+							</div>
 						</div>
-						<div className="task__progress">
-							<span className="task__key">Потрачено:</span>
-							<Progress.Root size="xl">
-								<Progress.Section value={50}>
-									<Progress.Label>1h</Progress.Label>
-								</Progress.Section>
-							</Progress.Root>
-						</div>
-						<div className="task__progress">
-							<span className="task__key">Осталось:</span>
-							<Progress.Root size="xl">
-								<Progress.Section value={50}>
-									<Progress.Label>1h</Progress.Label>
-								</Progress.Section>
-							</Progress.Root>
-						</div>
-					</div>
+					)}
 				</aside>
 			</div>
 		</div>

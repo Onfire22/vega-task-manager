@@ -19,6 +19,7 @@ export interface ITask {
 	id: string;
 	code: string | null;
 	title: string;
+	description: string;
 	estimatedTime: string | null;
 	loggedTime: string | null;
 	taskPriority: IExpDictData;
@@ -28,3 +29,7 @@ export interface ITask {
 }
 
 export type TTaskList = Array<ITask>;
+
+export interface IKanbanTasks extends IExpDictData {
+	tasks: TTaskList;
+}

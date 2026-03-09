@@ -1,17 +1,17 @@
 import { TasksTableView } from './tasks-table-view';
-import { useTableData } from '../hooks.ts';
+import { useUserTasks } from '../hooks.ts';
 import { useNavigate } from 'react-router-dom';
 
 const TasksTable = () => {
 	const navigate = useNavigate();
 
-	const { tableData } = useTableData();
+	const { userTasks } = useUserTasks();
 
 	const handleRowDoubleClick = (uuid: string) => {
 		navigate(`/task/${uuid}`);
 	};
 
-	return <TasksTableView tableData={tableData} onRowDoubleClick={handleRowDoubleClick} />;
+	return <TasksTableView tableData={userTasks} onRowDoubleClick={handleRowDoubleClick} />;
 };
 
 export { TasksTable };

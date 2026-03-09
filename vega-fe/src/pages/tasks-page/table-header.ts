@@ -3,7 +3,13 @@ import { CustomTableCell } from './custom-table-cell';
 
 export const TABLE_HEADER = [
 	{ id: 'code', name: 'Код', width: '110px' },
-	{ id: 'title', name: 'Название', sorting: 'title', customHeaderComponent: CustomTableHeaderCell },
+	{
+		id: 'title',
+		name: 'Название',
+		sorting: 'title',
+		customHeaderComponent: CustomTableHeaderCell,
+		customCellComponent: CustomTableCell,
+	},
 	{
 		id: 'taskPriority',
 		name: 'Приоритет',
