@@ -1,3 +1,5 @@
+import { estimateTaskTime } from './tasks.controller';
+
 export interface ICreateTaskBody {
 	title: string;
 	description: string;
@@ -58,3 +60,9 @@ export type TUpdateTask = {
 	fieldName: TUpdateTaskFields;
 	value: string;
 };
+
+export interface IEstimateTaskTimeBody {
+	estimateTime?: string;
+	loggedTime?: string;
+	description?: string;
+}

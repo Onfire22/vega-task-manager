@@ -1,6 +1,6 @@
 import { TIME_COEFFICIENTS } from '../../constants';
 
-export const transformTimeToSeconds = (time: string) => {
+export const transformTimeToSeconds = (time?: string) => {
 	if (!time) return 0;
 
 	return time.split(' ').reduce((acc, item) => {

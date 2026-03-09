@@ -5,7 +5,7 @@ model Task {
   title            String
   description      String
   estimateTime     Int?       @map("estimate_time")
-  remainigTime     Int?       @map("remainig_time")
+  remainingTime    Int?       @map("remaining_time")
   assigneeUuid     String?    @map("assignee_uuid")
   assignee         User?      @relation("AssignedTasks", fields: [assigneeUuid], references: [id])
   reporterUuid     String     @map("reporter_uuid")

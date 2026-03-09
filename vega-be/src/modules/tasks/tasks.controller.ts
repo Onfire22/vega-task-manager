@@ -2,7 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import { ICreateTaskBody, IGetTaskParams, IGetUserTasksBody, ITaskListResponse, TUpdateTask } from './tasks.types';
+import {
+	ICreateTaskBody,
+	IEstimateTaskTimeBody,
+	IGetTaskParams,
+	IGetUserTasksBody,
+	ITaskListResponse,
+	TUpdateTask,
+} from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { DICTIONARY_SELECT, FIELDS_MAP, USER_SELECT } from './constants';
 import { transformTimeToSeconds } from './utils';
@@ -148,42 +155,83 @@ export const updateTask = async (
 	}
 };
 
-export const estimateTaskTime = async (req: Request, res: Response, next: NextFunction) => {
+export const estimateTaskTime = async (
+	req: Request<{ uuid: string }, {}, IEstimateTaskTimeBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const formData = req.body;
+
 		const { uuid: taskUuid } = req.params;
+
 		const userId = res.locals.user.id;
 
-		const estimate = transformTimeToSeconds(formData.estimateTime);
+		const estimate = transformTimeToSeconds(formData?.estimateTime);
 
-		const loggedTime = transformTimeToSeconds(formData.loggedTime);
+		const loggedTime = transformTimeToSeconds(formData?.loggedTime);
 
 		if (!taskUuid) {
 			return next(new AppError('missing task uuid', RESPONSE_STATUSES.iternalError));
 		}
 
-		if (!formData.estimateTime && formData.loggedTime) {
-			const timeLog = await prismaAppClient.timeLog.create({
+		//только estimate
+		if (formData.estimateTime && !formData.loggedTime) {
+			const task = await prismaAppClient.task.update({
+				where: { id: taskUuid },
 				data: {
-					...formData,
-					loggedTime,
-					user: {
-						connect: { id: userId },
-					},
-					task: {
-						connect: { id: taskUuid },
-					},
+					estimateTime: estimate,
+					remainingTime: estimate,
 				},
 			});
 
-			return res.status(RESPONSE_STATUSES.success).json({ timeLog });
+			return res.status(RESPONSE_STATUSES.success).json({ task });
 		}
 
-		if (formData.estimateTime && formData.loggedTime) {
+		//только log
+		if (!formData.estimateTime && formData.loggedTime) {
+			const task = await prismaAppClient.task.findUnique({
+				where: { id: taskUuid },
+				select: { estimateTime: true },
+			});
+
+			if (!task?.estimateTime) {
+				return next(new AppError('Нельзя логать время в задачу без оценки', RESPONSE_STATUSES.badRequest));
+			}
+
+			const remainingTime = task.estimateTime - loggedTime;
+
 			await prismaAppClient.$transaction(async (tx) => {
-				const task = await tx.task.update({
+				await tx.timeLog.create({
+					data: {
+						loggedTime,
+						description: formData?.description,
+						user: {
+							connect: { id: userId },
+						},
+						task: {
+							connect: { id: taskUuid },
+						},
+					},
+				});
+
+				await tx.task.update({
 					where: { id: taskUuid },
-					data: { estimateTime: estimate },
+					data: { remainingTime },
+				});
+			});
+
+			return res.status(RESPONSE_STATUSES.success).json({ success: true });
+		}
+
+		//сразу лог и estimate
+		if (formData.estimateTime && formData.loggedTime) {
+			const task = await prismaAppClient.$transaction(async (tx) => {
+				const remainingTime = estimate - loggedTime;
+
+				await tx.task.update({
+					where: { id: taskUuid },
+					data: { estimateTime: estimate, remainingTime },
 				});
 
 				await tx.timeLog.create({
@@ -198,9 +246,10 @@ export const estimateTaskTime = async (req: Request, res: Response, next: NextFu
 						},
 					},
 				});
-				return res.status(RESPONSE_STATUSES.success).json({ task });
 			});
+			return res.status(RESPONSE_STATUSES.success).json({ task });
 		}
+		return next(new AppError('Invalid request data', RESPONSE_STATUSES.badRequest));
 	} catch (e) {
 		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));

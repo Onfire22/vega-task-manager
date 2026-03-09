@@ -8,6 +8,7 @@ export const RESPONSE_STATUSES = {
 	notAuthorised: 401,
 	notFound: 404,
 	iternalError: 500,
+	badRequest: 400,
 };
 
 export const ROUTES = {
