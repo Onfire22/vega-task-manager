@@ -12,14 +12,20 @@ export interface IExpDictData {
 	name: string;
 }
 
+export interface ITimeLog {
+	description: string | null;
+	id: string;
+	loggedTime: Partial<{ minutes: string; hours: string }>;
+}
+
 export interface ITask {
 	id: string;
 	code: string | null;
 	title: string;
-	description: string;
-	estimatedTime: string | null;
-	loggedTime: string | null;
 	assignee: string | null;
+	description: string;
+	estimateTime: string | null;
+	timeLogs: Array<ITimeLog>;
 	reporter: string;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;

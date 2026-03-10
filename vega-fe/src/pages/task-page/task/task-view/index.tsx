@@ -1,18 +1,21 @@
 import './styles.less';
-import { Button, Popover, Progress, Select, Textarea, TextInput, Timeline } from '@mantine/core';
+import { Button, Popover, Progress, Select, Tabs, Textarea, TextInput, Timeline } from '@mantine/core';
 import type { IDictionary } from '../../../../api/types.ts';
 import React from 'react';
 import { BULLET_ICONS, GREEN_COLOR, RED_COLOR } from '../../constants.ts';
-import { IconCheck, IconPencil, IconX } from '@tabler/icons-react';
+import { IconCheck, IconMessageCircle, IconPencil, IconPhoto, IconX } from '@tabler/icons-react';
 import type { ITask, TOption } from '../../types.ts';
 import { CustomBadge } from '../../../../components/custom-badge';
 import { CustomStatus } from '../../../../components/custom-status';
+import { Comments } from '../../comments';
+import { TaskLogs } from '../../task-logs';
 
 interface IProps {
 	task: ITask | null;
 	taskStatuses?: IDictionary[];
 	activeTaskStatus: number;
 	currentUserId?: string;
+	activeTab: string | null;
 	field: { fieldName: string; value: string };
 	onEditField: (fieldName: string, value: string | null) => void;
 	onCancelChanges: () => void;
@@ -24,6 +27,7 @@ interface IProps {
 	};
 	options: { type: Array<TOption>; priority: Array<TOption> };
 	usersListOptions: Array<TOption>;
+	onSetActiveTab: (value: string | null) => void;
 }
 
 const TaskView: React.FC<IProps> = ({
@@ -39,6 +43,8 @@ const TaskView: React.FC<IProps> = ({
 	usersListOptions,
 	onUpdateTask,
 	currentUserId,
+	onSetActiveTab,
+	activeTab,
 }) => {
 	if (!task) return null;
 	return (
@@ -258,7 +264,7 @@ const TaskView: React.FC<IProps> = ({
 							<span className="task__value">{task.updatedAt}</span>
 						</div>
 					</div>
-					{(task.estimatedTime || task.loggedTime) && (
+					{(task.estimateTime || task.timeLogs.length > 0) && (
 						<div className="task__details">
 							<div className="task__heading">Учет времени</div>
 							<div className="task__progress">
@@ -288,6 +294,19 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					)}
 				</aside>
+			</div>
+			<div className="task__footer">
+				<Tabs defaultValue="comments" onChange={onSetActiveTab}>
+					<Tabs.List>
+						<Tabs.Tab value="comments" leftSection={<IconPhoto size={12} />}>
+							Комментарии
+						</Tabs.Tab>
+						<Tabs.Tab value="logs" leftSection={<IconMessageCircle size={12} />}>
+							Логи
+						</Tabs.Tab>
+					</Tabs.List>
+				</Tabs>
+				{activeTab === 'comments' ? <Comments /> : <TaskLogs logs={task.timeLogs} />}
 			</div>
 		</div>
 	);

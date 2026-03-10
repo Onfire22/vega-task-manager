@@ -17,6 +17,13 @@ const Task = () => {
 	const dispatch = useAppDispatch();
 
 	const [field, setEditField] = useState(INITIAL_FIELD_VALUES);
+	const [activeTab, setActiveTab] = useState('comments');
+
+	const handleSetActiveTab = (value: string | null) => {
+		if (value) {
+			setActiveTab(value);
+		}
+	};
 
 	const { dictionaries } = useDictionaries(BASE_DICTIONARIES_META);
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
@@ -77,11 +84,13 @@ const Task = () => {
 			taskStatuses={dictionaries?.taskStatus}
 			usersListOptions={usersListOptions}
 			currentUserId={data?.currentUser.id}
+			activeTab={activeTab}
 			onEditField={handleEditField}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
 			onLogWorkModalShown={handleLogWorkModalShown}
 			onUpdateTask={handleUpdateTask}
+			onSetActiveTab={handleSetActiveTab}
 			options={{ type: dictionariesOptions.stackType, priority: dictionariesOptions.taskPriority }}
 		/>
 	);

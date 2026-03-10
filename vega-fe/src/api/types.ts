@@ -106,13 +106,19 @@ export interface IExpUserDict {
 	secondName: string;
 }
 
+export interface ITimeLog {
+	description: string | null;
+	id: string;
+	loggedTime: Partial<{ minutes: string; hours: string }>;
+}
+
 export interface IExpTaskResponse {
 	id: string;
 	code: string | null;
 	title: string;
 	description: string;
-	estimatedTime: string | null;
-	loggedTime: string | null;
+	estimateTime: string | null;
+	timeLogs: Array<ITimeLog>;
 	assignee: IExpUserDict | null;
 	reporter: IExpUserDict;
 	taskPriority: IExpDictData;
@@ -126,8 +132,8 @@ export interface ITaskList {
 	id: string;
 	code: string | null;
 	title: string;
-	estimatedTime: string | null;
-	loggedTime: string | null;
+	estimateTime: string | null;
+	timeLogs: Array<ITimeLog> | null;
 	description: string;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;

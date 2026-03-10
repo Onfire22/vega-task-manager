@@ -2,17 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import {
-	ICreateTaskBody,
-	IEstimateTaskTimeBody,
-	IGetTaskParams,
-	IGetUserTasksBody,
-	ITaskListResponse,
-	TUpdateTask,
-} from './tasks.types';
+import { ICreateTaskBody, IEstimateTaskTimeBody, IGetTaskParams, IGetUserTasksBody, TUpdateTask } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { DICTIONARY_SELECT, FIELDS_MAP, USER_SELECT } from './constants';
-import { transformTimeToSeconds } from './utils';
+import { getTaskWithTransformedTime, transformTimeToSeconds } from './utils';
 
 export const createTask = async (
 	req: Request<{}, {}, ICreateTaskBody>,
@@ -50,11 +43,7 @@ export const createTask = async (
 	}
 };
 
-export const getUserTasks = async (
-	req: Request<{}, {}, IGetUserTasksBody>,
-	res: Response<ITaskListResponse, ILocals>,
-	next: NextFunction,
-) => {
+export const getUserTasks = async (req: Request<{}, {}, IGetUserTasksBody>, res: Response, next: NextFunction) => {
 	try {
 		const { isAssignee, sorting } = req.body;
 
@@ -81,12 +70,24 @@ export const getUserTasks = async (
 				taskStack: {
 					select: DICTIONARY_SELECT,
 				},
+				timeLogs: {
+					select: {
+						id: true,
+						loggedTime: true,
+						description: true,
+						user: true,
+						createdAt: true,
+						updatedAt: true,
+					},
+				},
 				estimateTime: true,
 				createdAt: true,
 			},
 		});
 
-		res.status(200).json({ tasks });
+		const transformedTasks = tasks.map((task) => getTaskWithTransformedTime(task));
+
+		res.status(200).json({ tasks: transformedTasks });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -124,11 +125,26 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 				assignee: {
 					select: USER_SELECT,
 				},
+				timeLogs: {
+					select: {
+						id: true,
+						loggedTime: true,
+						description: true,
+						user: { select: { name: true, secondName: true, id: true } },
+						createdAt: true,
+						updatedAt: true,
+					},
+				},
 			},
 			where: { id: uuid },
 		});
 
-		res.status(200).json({ task });
+		if (task) {
+			const transformedTask = getTaskWithTransformedTime(task);
+			return res.status(200).json({ task: transformedTask });
+		}
+
+		next(new AppError('Task not found', RESPONSE_STATUSES.notFound));
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -155,7 +171,7 @@ export const updateTask = async (
 	}
 };
 
-export const estimateTaskTime = async (
+export const updateTaskTime = async (
 	req: Request<{ uuid: string }, {}, IEstimateTaskTimeBody>,
 	res: Response,
 	next: NextFunction,
@@ -190,18 +206,18 @@ export const estimateTaskTime = async (
 
 		//только log
 		if (!formData.estimateTime && formData.loggedTime) {
-			const task = await prismaAppClient.task.findUnique({
-				where: { id: taskUuid },
-				select: { estimateTime: true },
-			});
-
-			if (!task?.estimateTime) {
-				return next(new AppError('Нельзя логать время в задачу без оценки', RESPONSE_STATUSES.badRequest));
-			}
-
-			const remainingTime = task.estimateTime - loggedTime;
-
 			await prismaAppClient.$transaction(async (tx) => {
+				const task = await prismaAppClient.task.findUnique({
+					where: { id: taskUuid },
+					select: { estimateTime: true },
+				});
+
+				if (!task?.estimateTime) {
+					return next(new AppError('Нельзя логать время в задачу без оценки', RESPONSE_STATUSES.badRequest));
+				}
+
+				const remainingTime = task.estimateTime - loggedTime;
+
 				await tx.timeLog.create({
 					data: {
 						loggedTime,
@@ -226,7 +242,7 @@ export const estimateTaskTime = async (
 
 		//сразу лог и estimate
 		if (formData.estimateTime && formData.loggedTime) {
-			const task = await prismaAppClient.$transaction(async (tx) => {
+			await prismaAppClient.$transaction(async (tx) => {
 				const remainingTime = estimate - loggedTime;
 
 				await tx.task.update({
@@ -247,7 +263,7 @@ export const estimateTaskTime = async (
 					},
 				});
 			});
-			return res.status(RESPONSE_STATUSES.success).json({ task });
+			return res.status(RESPONSE_STATUSES.success).json({ success: true });
 		}
 		return next(new AppError('Invalid request data', RESPONSE_STATUSES.badRequest));
 	} catch (e) {
