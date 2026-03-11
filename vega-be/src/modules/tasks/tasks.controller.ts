@@ -13,8 +13,12 @@ export const createTask = async (
 	next: NextFunction,
 ) => {
 	try {
-		const task = req.body;
+		const { taskProjectUuid, ...task } = req.body;
 		const userId = res.locals.user.id;
+
+		if (!taskProjectUuid) {
+			return next(new AppError('Задачу можно создать только в проекте', RESPONSE_STATUSES.iternalError));
+		}
 
 		const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
 			where: { name_type: { name: 'todo', type: 'TASK_STATUS' } },
@@ -25,13 +29,14 @@ export const createTask = async (
 			return next(new AppError('Статус не найден', RESPONSE_STATUSES.iternalError));
 		}
 
-		const data = {
-			...task,
-			reporterUuid: userId,
-			taskStatusUuid: baseTaskStatusUuid.id,
-		};
-
-		const newTask = await prismaAppClient.task.create({ data });
+		const newTask = await prismaAppClient.task.create({
+			data: {
+				...task,
+				reporterUuid: userId,
+				taskStatusUuid: baseTaskStatusUuid.id,
+				projectUuid: taskProjectUuid,
+			},
+		});
 
 		if (!newTask) {
 			next(new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError));
@@ -39,6 +44,7 @@ export const createTask = async (
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

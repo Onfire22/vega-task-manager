@@ -3,7 +3,7 @@ import { TaskModalView } from './task-modal-view';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
-import { useDictionariesOptions } from '../../../api/hooks.ts';
+import { useDictionariesOptions, useProjectsOptions } from '../../../api/hooks.ts';
 import { setNotification } from '../../notifications/slice.ts';
 import { BASE_DICTIONARIES_META, TASK_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { getActiveModalSelector } from '../selectors.ts';
@@ -15,6 +15,7 @@ const TaskModal = () => {
 
 	const [createTask] = useCreateTaskMutation();
 
+	const { projectOptions } = useProjectsOptions();
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());
@@ -24,10 +25,18 @@ const TaskModal = () => {
 		validationSchema: CreateTaskValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			const response = await createTask(values);
-			if (response?.data?.success) {
+			try {
+				await createTask(values).unwrap();
 				dispatch(setNotification({ type: 'success', text: 'Задача успешно создана' }));
 				dispatch(setActiveModal(null));
+			} catch (e) {
+				const error = e as { data?: { message?: string } };
+				dispatch(
+					setNotification({
+						type: 'error',
+						text: error.data?.message ?? 'Something went wrong',
+					}),
+				);
 			}
 		},
 	});
@@ -57,6 +66,7 @@ const TaskModal = () => {
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}
+			projectOptions={projectOptions}
 			onModalClose={handleModalClose}
 			onFieldChange={handleFieldChange}
 			onSelectFieldChange={handleSelectFieldChange}

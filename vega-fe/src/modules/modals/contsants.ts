@@ -5,6 +5,7 @@ export const TASK_FORM_INITIAL_VALUES = {
 	description: '',
 	taskStackUuid: '',
 	taskPriorityUuid: '',
+	taskProjectUuid: '',
 };
 
 export const PROJECT_FORM_INITIAL_VALUES = {

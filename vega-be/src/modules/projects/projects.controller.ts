@@ -20,6 +20,22 @@ export const getProjects = async (req: Request, res: Response<IProjectsResponse>
 						userRoleUuid: true,
 					},
 				},
+				tasks: {
+					select: {
+						code: true,
+						title: true,
+						createdAt: true,
+						taskPriority: {
+							select: { color: true, id: true, name: true },
+						},
+						taskStatus: {
+							select: { color: true, id: true, name: true },
+						},
+						taskStack: {
+							select: { color: true, id: true, name: true },
+						},
+					},
+				},
 			},
 		});
 

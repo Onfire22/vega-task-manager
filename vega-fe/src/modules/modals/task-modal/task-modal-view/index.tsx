@@ -13,6 +13,7 @@ interface IProps {
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	stackListData?: ISelectType[];
 	taskPrioritiesData?: ISelectType[];
+	projectOptions: ISelectType[];
 	formValues: ITaskFormValues;
 	formErrors: ITaskFormErrors;
 	activeModal: 'project' | 'task' | null;
@@ -28,6 +29,7 @@ const TaskModalView: React.FC<IProps> = ({
 	taskPrioritiesData,
 	formValues,
 	formErrors,
+	projectOptions,
 }) => {
 	return (
 		<Modal opened={activeModal === 'task'} onClose={onModalClose} size="100%" title="Создать задачу">
@@ -87,6 +89,23 @@ const TaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskPriorityUuid}
+						withAsterisk
+					/>
+				</div>
+				<div className="task-modal__field">
+					<Select
+						label="Проект"
+						placeholder="Выберите значение"
+						name="taskProjectUuid"
+						description="Проект в котором будет выполняться задача"
+						data={projectOptions}
+						value={formValues.taskProjectUuid}
+						onChange={(value) => {
+							if (value) {
+								onSelectFieldChange('taskProjectUuid', value);
+							}
+						}}
+						error={formErrors?.taskProjectUuid}
 						withAsterisk
 					/>
 				</div>

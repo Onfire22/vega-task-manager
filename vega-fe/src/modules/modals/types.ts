@@ -11,6 +11,7 @@ export interface ITaskFormValues {
 	description: string;
 	taskStackUuid: string;
 	taskPriorityUuid: string;
+	taskProjectUuid: string;
 }
 export interface ISelectType {
 	value: string;

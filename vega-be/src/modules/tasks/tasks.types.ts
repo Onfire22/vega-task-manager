@@ -3,6 +3,7 @@ export interface ICreateTaskBody {
 	description: string;
 	taskStackUuid: string;
 	taskPriorityUuid: string;
+	taskProjectUuid: string;
 }
 
 export type TDirection = 'desc' | 'asc';
