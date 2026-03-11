@@ -20,13 +20,23 @@ export type TimeLogModel = runtime.Types.Result.DefaultSelection<Prisma.$TimeLog
 
 export type AggregateTimeLog = {
   _count: TimeLogCountAggregateOutputType | null
+  _avg: TimeLogAvgAggregateOutputType | null
+  _sum: TimeLogSumAggregateOutputType | null
   _min: TimeLogMinAggregateOutputType | null
   _max: TimeLogMaxAggregateOutputType | null
 }
 
+export type TimeLogAvgAggregateOutputType = {
+  loggedTime: number | null
+}
+
+export type TimeLogSumAggregateOutputType = {
+  loggedTime: number | null
+}
+
 export type TimeLogMinAggregateOutputType = {
   id: string | null
-  loggedTime: string | null
+  loggedTime: number | null
   description: string | null
   userUuid: string | null
   taskUuid: string | null
@@ -36,7 +46,7 @@ export type TimeLogMinAggregateOutputType = {
 
 export type TimeLogMaxAggregateOutputType = {
   id: string | null
-  loggedTime: string | null
+  loggedTime: number | null
   description: string | null
   userUuid: string | null
   taskUuid: string | null
@@ -55,6 +65,14 @@ export type TimeLogCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TimeLogAvgAggregateInputType = {
+  loggedTime?: true
+}
+
+export type TimeLogSumAggregateInputType = {
+  loggedTime?: true
+}
 
 export type TimeLogMinAggregateInputType = {
   id?: true
@@ -125,6 +143,18 @@ export type TimeLogAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TimeLogAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TimeLogSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TimeLogMinAggregateInputType
@@ -155,19 +185,23 @@ export type TimeLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: TimeLogCountAggregateInputType | true
+  _avg?: TimeLogAvgAggregateInputType
+  _sum?: TimeLogSumAggregateInputType
   _min?: TimeLogMinAggregateInputType
   _max?: TimeLogMaxAggregateInputType
 }
 
 export type TimeLogGroupByOutputType = {
   id: string
-  loggedTime: string
+  loggedTime: number
   description: string | null
   userUuid: string
   taskUuid: string
   createdAt: Date
   updatedAt: Date
   _count: TimeLogCountAggregateOutputType | null
+  _avg: TimeLogAvgAggregateOutputType | null
+  _sum: TimeLogSumAggregateOutputType | null
   _min: TimeLogMinAggregateOutputType | null
   _max: TimeLogMaxAggregateOutputType | null
 }
@@ -192,7 +226,7 @@ export type TimeLogWhereInput = {
   OR?: Prisma.TimeLogWhereInput[]
   NOT?: Prisma.TimeLogWhereInput | Prisma.TimeLogWhereInput[]
   id?: Prisma.StringFilter<"TimeLog"> | string
-  loggedTime?: Prisma.StringFilter<"TimeLog"> | string
+  loggedTime?: Prisma.IntFilter<"TimeLog"> | number
   description?: Prisma.StringNullableFilter<"TimeLog"> | string | null
   userUuid?: Prisma.StringFilter<"TimeLog"> | string
   taskUuid?: Prisma.StringFilter<"TimeLog"> | string
@@ -219,7 +253,7 @@ export type TimeLogWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TimeLogWhereInput | Prisma.TimeLogWhereInput[]
   OR?: Prisma.TimeLogWhereInput[]
   NOT?: Prisma.TimeLogWhereInput | Prisma.TimeLogWhereInput[]
-  loggedTime?: Prisma.StringFilter<"TimeLog"> | string
+  loggedTime?: Prisma.IntFilter<"TimeLog"> | number
   description?: Prisma.StringNullableFilter<"TimeLog"> | string | null
   userUuid?: Prisma.StringFilter<"TimeLog"> | string
   taskUuid?: Prisma.StringFilter<"TimeLog"> | string
@@ -238,8 +272,10 @@ export type TimeLogOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TimeLogCountOrderByAggregateInput
+  _avg?: Prisma.TimeLogAvgOrderByAggregateInput
   _max?: Prisma.TimeLogMaxOrderByAggregateInput
   _min?: Prisma.TimeLogMinOrderByAggregateInput
+  _sum?: Prisma.TimeLogSumOrderByAggregateInput
 }
 
 export type TimeLogScalarWhereWithAggregatesInput = {
@@ -247,7 +283,7 @@ export type TimeLogScalarWhereWithAggregatesInput = {
   OR?: Prisma.TimeLogScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TimeLogScalarWhereWithAggregatesInput | Prisma.TimeLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TimeLog"> | string
-  loggedTime?: Prisma.StringWithAggregatesFilter<"TimeLog"> | string
+  loggedTime?: Prisma.IntWithAggregatesFilter<"TimeLog"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"TimeLog"> | string | null
   userUuid?: Prisma.StringWithAggregatesFilter<"TimeLog"> | string
   taskUuid?: Prisma.StringWithAggregatesFilter<"TimeLog"> | string
@@ -257,7 +293,7 @@ export type TimeLogScalarWhereWithAggregatesInput = {
 
 export type TimeLogCreateInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -267,7 +303,7 @@ export type TimeLogCreateInput = {
 
 export type TimeLogUncheckedCreateInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   userUuid: string
   taskUuid: string
@@ -277,7 +313,7 @@ export type TimeLogUncheckedCreateInput = {
 
 export type TimeLogUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -287,7 +323,7 @@ export type TimeLogUpdateInput = {
 
 export type TimeLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -297,7 +333,7 @@ export type TimeLogUncheckedUpdateInput = {
 
 export type TimeLogCreateManyInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   userUuid: string
   taskUuid: string
@@ -307,7 +343,7 @@ export type TimeLogCreateManyInput = {
 
 export type TimeLogUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -315,7 +351,7 @@ export type TimeLogUpdateManyMutationInput = {
 
 export type TimeLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -343,6 +379,10 @@ export type TimeLogCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type TimeLogAvgOrderByAggregateInput = {
+  loggedTime?: Prisma.SortOrder
+}
+
 export type TimeLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   loggedTime?: Prisma.SortOrder
@@ -361,6 +401,10 @@ export type TimeLogMinOrderByAggregateInput = {
   taskUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type TimeLogSumOrderByAggregateInput = {
+  loggedTime?: Prisma.SortOrder
 }
 
 export type TimeLogCreateNestedManyWithoutTaskInput = {
@@ -403,6 +447,14 @@ export type TimeLogUncheckedUpdateManyWithoutTaskNestedInput = {
   update?: Prisma.TimeLogUpdateWithWhereUniqueWithoutTaskInput | Prisma.TimeLogUpdateWithWhereUniqueWithoutTaskInput[]
   updateMany?: Prisma.TimeLogUpdateManyWithWhereWithoutTaskInput | Prisma.TimeLogUpdateManyWithWhereWithoutTaskInput[]
   deleteMany?: Prisma.TimeLogScalarWhereInput | Prisma.TimeLogScalarWhereInput[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type TimeLogCreateNestedManyWithoutUserInput = {
@@ -449,7 +501,7 @@ export type TimeLogUncheckedUpdateManyWithoutUserNestedInput = {
 
 export type TimeLogCreateWithoutTaskInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -458,7 +510,7 @@ export type TimeLogCreateWithoutTaskInput = {
 
 export type TimeLogUncheckedCreateWithoutTaskInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   userUuid: string
   createdAt?: Date | string
@@ -496,7 +548,7 @@ export type TimeLogScalarWhereInput = {
   OR?: Prisma.TimeLogScalarWhereInput[]
   NOT?: Prisma.TimeLogScalarWhereInput | Prisma.TimeLogScalarWhereInput[]
   id?: Prisma.StringFilter<"TimeLog"> | string
-  loggedTime?: Prisma.StringFilter<"TimeLog"> | string
+  loggedTime?: Prisma.IntFilter<"TimeLog"> | number
   description?: Prisma.StringNullableFilter<"TimeLog"> | string | null
   userUuid?: Prisma.StringFilter<"TimeLog"> | string
   taskUuid?: Prisma.StringFilter<"TimeLog"> | string
@@ -506,7 +558,7 @@ export type TimeLogScalarWhereInput = {
 
 export type TimeLogCreateWithoutUserInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -515,7 +567,7 @@ export type TimeLogCreateWithoutUserInput = {
 
 export type TimeLogUncheckedCreateWithoutUserInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   taskUuid: string
   createdAt?: Date | string
@@ -550,7 +602,7 @@ export type TimeLogUpdateManyWithWhereWithoutUserInput = {
 
 export type TimeLogCreateManyTaskInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   userUuid: string
   createdAt?: Date | string
@@ -559,7 +611,7 @@ export type TimeLogCreateManyTaskInput = {
 
 export type TimeLogUpdateWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,7 +620,7 @@ export type TimeLogUpdateWithoutTaskInput = {
 
 export type TimeLogUncheckedUpdateWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -577,7 +629,7 @@ export type TimeLogUncheckedUpdateWithoutTaskInput = {
 
 export type TimeLogUncheckedUpdateManyWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -586,7 +638,7 @@ export type TimeLogUncheckedUpdateManyWithoutTaskInput = {
 
 export type TimeLogCreateManyUserInput = {
   id?: string
-  loggedTime: string
+  loggedTime: number
   description?: string | null
   taskUuid: string
   createdAt?: Date | string
@@ -595,7 +647,7 @@ export type TimeLogCreateManyUserInput = {
 
 export type TimeLogUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -604,7 +656,7 @@ export type TimeLogUpdateWithoutUserInput = {
 
 export type TimeLogUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -613,7 +665,7 @@ export type TimeLogUncheckedUpdateWithoutUserInput = {
 
 export type TimeLogUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  loggedTime?: Prisma.StringFieldUpdateOperationsInput | string
+  loggedTime?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,7 +742,7 @@ export type $TimeLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    loggedTime: string
+    loggedTime: number
     description: string | null
     userUuid: string
     taskUuid: string
@@ -1122,7 +1174,7 @@ export interface Prisma__TimeLogClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface TimeLogFieldRefs {
   readonly id: Prisma.FieldRef<"TimeLog", 'String'>
-  readonly loggedTime: Prisma.FieldRef<"TimeLog", 'String'>
+  readonly loggedTime: Prisma.FieldRef<"TimeLog", 'Int'>
   readonly description: Prisma.FieldRef<"TimeLog", 'String'>
   readonly userUuid: Prisma.FieldRef<"TimeLog", 'String'>
   readonly taskUuid: Prisma.FieldRef<"TimeLog", 'String'>

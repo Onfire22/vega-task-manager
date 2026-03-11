@@ -1,0 +1,38 @@
+.task-logs {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 14px;
+
+	&__log {
+		padding: 10px;
+		&:hover {
+			background-color: var(--mantine-color-dark-8);
+		}
+	}
+
+	&__data {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	&__description {
+		display: flex;
+		align-items: center;
+		gap: 3px;
+		margin-bottom: 5px;
+	}
+
+	&__info {
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__edit {
+		color: var(--mantine-color-red-8);
+	}
+}

@@ -20,8 +20,6 @@ export interface ITask {
 	code: string | null;
 	title: string;
 	description: string;
-	estimatedTime: string | null;
-	loggedTime: string | null;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;
 	taskStatus: IExpDictData;

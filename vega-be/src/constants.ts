@@ -8,6 +8,7 @@ export const RESPONSE_STATUSES = {
 	notAuthorised: 401,
 	notFound: 404,
 	iternalError: 500,
+	badRequest: 400,
 };
 
 export const ROUTES = {
@@ -22,7 +23,10 @@ export const ROUTES = {
 	tasks: '/api/tasks',
 	task: '/api/task/:uuid',
 	createTask: '/api/tasks/create',
+	estimateTask: '/api/tasks/:uuid/estimate',
 	projects: '/api/projects',
 	projectsCreate: '/api/projects/create',
 	createTaskLog: '/api/taskLogs/create',
 };
+
+export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

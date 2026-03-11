@@ -12,6 +12,19 @@ export interface ISorting {
 	direction: TDirection;
 }
 
+export interface ITimeLog {
+	id: string;
+	description: string | null;
+	loggedTime: number | null;
+	user: {
+		id: string;
+		name: string;
+		secondName: string | null;
+	};
+	createdAt: Date;
+	updatedAt?: Date;
+}
+
 export interface IGetUserTasksBody {
 	isAssignee: false;
 	sorting: ISorting;
@@ -26,7 +39,7 @@ export interface IExpDictData {
 export interface IExpUserDict {
 	id: string;
 	name: string;
-	secondName: string;
+	secondName: string | null;
 }
 
 export interface ITask {
@@ -34,8 +47,9 @@ export interface ITask {
 	code: string | null;
 	title: string;
 	description: string;
-	estimatedTime: number | null;
-	loggedTime: number | null;
+	estimateTime: number | null;
+	remainingTime: number | null;
+	timeLogs: Array<ITimeLog>;
 	assignee: IExpUserDict | null;
 	reporter: IExpUserDict;
 	taskPriority: IExpDictData;
@@ -43,10 +57,6 @@ export interface ITask {
 	taskStatus: IExpDictData;
 	createdAt: Date;
 	updatedAt: Date;
-}
-
-export interface ITaskListResponse {
-	tasks: Array<Omit<ITask, 'assignee' | 'reporter' | 'updatedAt'>>;
 }
 
 export interface IGetTaskParams {
@@ -58,4 +68,24 @@ export type TUpdateTaskFields = 'title' | 'stackType' | 'taskPriority' | 'taskSt
 export type TUpdateTask = {
 	fieldName: TUpdateTaskFields;
 	value: string;
+};
+
+export interface IEstimateTaskTimeBody {
+	estimateTime?: string;
+	loggedTime?: string;
+	description?: string;
+}
+
+export interface ITime {
+	hours: string;
+	minutes: string;
+}
+
+export type ITaskTransformed = Omit<ITask, 'estimateTime' | 'timeLogs'> & {
+	estimateTime: Partial<ITime> | null;
+	timeLogs: Array<
+		Omit<ITimeLog, 'loggedTime'> & {
+			loggedTime: Partial<ITime> | null;
+		}
+	>;
 };
