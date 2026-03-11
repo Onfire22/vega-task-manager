@@ -20,6 +20,7 @@ interface IProps {
 	onLogWorkModalShown: () => void;
 	onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	isModalShown: boolean;
+	estimateTime?: string;
 }
 
 const ModalWindowView: React.FC<IProps> = ({
@@ -29,6 +30,7 @@ const ModalWindowView: React.FC<IProps> = ({
 	onLogWorkModalShown,
 	isModalShown,
 	onSubmit,
+	estimateTime,
 }) => {
 	return (
 		<Modal opened={isModalShown} onClose={onLogWorkModalShown} title="Учет времени">
@@ -42,6 +44,7 @@ const ModalWindowView: React.FC<IProps> = ({
 						placeholder="Формат времени: 1h 30m"
 						value={formValues.estimate}
 						error={formErrors.estimate}
+						disabled={Boolean(estimateTime)}
 						onChange={onFieldChange}
 					/>
 				</div>

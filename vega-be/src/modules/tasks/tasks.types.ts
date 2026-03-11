@@ -48,6 +48,7 @@ export interface ITask {
 	title: string;
 	description: string;
 	estimateTime: number | null;
+	remainingTime: number | null;
 	timeLogs: Array<ITimeLog>;
 	assignee: IExpUserDict | null;
 	reporter: IExpUserDict;

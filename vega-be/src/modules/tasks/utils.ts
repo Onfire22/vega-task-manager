@@ -37,15 +37,28 @@ export const transformSecondsToTime = (seconds: number) => {
 	return result;
 };
 
-export const getTaskWithTransformedTime = <T extends Pick<ITask, 'estimateTime' | 'timeLogs'>>(
+export const getTaskWithTransformedTime = <T extends Pick<ITask, 'estimateTime' | 'timeLogs' | 'remainingTime'>>(
 	task: T,
 ): Omit<T, 'estimateTime' | 'timeLogs'> & {
 	estimateTime: Partial<ITime> | null;
 	timeLogs: Array<Omit<ITimeLog, 'loggedTime'> & { loggedTime: Partial<ITime> | null }>;
 } => {
+	const totalLoggedTimeInSecs = task.timeLogs.reduce((acc, log) => {
+		if (log.loggedTime) {
+			acc += log.loggedTime;
+		}
+
+		return acc;
+	}, 0);
+
 	return {
 		...task,
+		totalLoggedTimeInSecs,
+		...(totalLoggedTimeInSecs > 0 ? { totalLoggedTime: transformSecondsToTime(totalLoggedTimeInSecs) } : {}),
 		estimateTime: task.estimateTime ? transformSecondsToTime(task.estimateTime) : null,
+		estimateTimeInSecs: task.estimateTime,
+		remainingTime: task.remainingTime ? transformSecondsToTime(task.remainingTime) : null,
+		remainingTimeInSecs: task.remainingTime,
 		timeLogs:
 			task.timeLogs.length > 0
 				? task.timeLogs.map((log) => {
@@ -55,6 +68,7 @@ export const getTaskWithTransformedTime = <T extends Pick<ITask, 'estimateTime' 
 							...rest,
 							...(isDateEquals(log.createdAt, updatedAt) ? {} : { updatedAt: log.updatedAt }),
 							loggedTime: log.loggedTime ? transformSecondsToTime(log.loggedTime) : null,
+							loggedTimeInSecs: log.loggedTime,
 						};
 					})
 				: [],

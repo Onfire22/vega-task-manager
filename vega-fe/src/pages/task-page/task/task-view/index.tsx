@@ -3,7 +3,7 @@ import { Button, Popover, Progress, Select, Tabs, Textarea, TextInput, Timeline 
 import type { IDictionary } from '../../../../api/types.ts';
 import React from 'react';
 import { BULLET_ICONS, GREEN_COLOR, RED_COLOR } from '../../constants.ts';
-import { IconCheck, IconMessageCircle, IconPencil, IconPhoto, IconX } from '@tabler/icons-react';
+import { IconCheck, IconMessageCircle, IconPencil, IconClockHour3, IconX } from '@tabler/icons-react';
 import type { ITask, TOption } from '../../types.ts';
 import { CustomBadge } from '../../../../components/custom-badge';
 import { CustomStatus } from '../../../../components/custom-status';
@@ -271,23 +271,23 @@ const TaskView: React.FC<IProps> = ({
 								<span className="task__key">Оценка:</span>
 								<Progress.Root size="xl">
 									<Progress.Section value={100}>
-										<Progress.Label>1h</Progress.Label>
+										<Progress.Label>{task.estimateTime}</Progress.Label>
 									</Progress.Section>
 								</Progress.Root>
 							</div>
 							<div className="task__progress">
 								<span className="task__key">Потрачено:</span>
 								<Progress.Root size="xl">
-									<Progress.Section value={50}>
-										<Progress.Label>1h</Progress.Label>
+									<Progress.Section value={task.loggedPercents ?? 0}>
+										<Progress.Label>{task.totalLoggedTime}</Progress.Label>
 									</Progress.Section>
 								</Progress.Root>
 							</div>
 							<div className="task__progress">
 								<span className="task__key">Осталось:</span>
 								<Progress.Root size="xl">
-									<Progress.Section value={50}>
-										<Progress.Label>1h</Progress.Label>
+									<Progress.Section value={task.remainingPercents ?? 0}>
+										<Progress.Label>{task.remainingTime}</Progress.Label>
 									</Progress.Section>
 								</Progress.Root>
 							</div>
@@ -298,10 +298,10 @@ const TaskView: React.FC<IProps> = ({
 			<div className="task__footer">
 				<Tabs defaultValue="comments" onChange={onSetActiveTab}>
 					<Tabs.List>
-						<Tabs.Tab value="comments" leftSection={<IconPhoto size={12} />}>
+						<Tabs.Tab value="comments" leftSection={<IconMessageCircle size={15} />}>
 							Комментарии
 						</Tabs.Tab>
-						<Tabs.Tab value="logs" leftSection={<IconMessageCircle size={12} />}>
+						<Tabs.Tab value="logs" leftSection={<IconClockHour3 size={15} />}>
 							Логи
 						</Tabs.Tab>
 					</Tabs.List>

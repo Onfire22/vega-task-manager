@@ -15,7 +15,14 @@ export interface IExpDictData {
 export interface ITimeLog {
 	description: string | null;
 	id: string;
-	loggedTime: Partial<{ minutes: string; hours: string }>;
+	loggedTime: string;
+	createdAt: string;
+	updatedAt: string;
+	user: {
+		id: string;
+		name: string;
+		secondName: string;
+	};
 }
 
 export interface ITask {
@@ -24,7 +31,12 @@ export interface ITask {
 	title: string;
 	assignee: string | null;
 	description: string;
-	estimateTime: string | null;
+	estimateTime: string;
+	remainingTime: string;
+	totalLoggedTime: string;
+	estimateTimeInSecs: number;
+	remainingPercents: number | null;
+	loggedPercents: number | null;
 	timeLogs: Array<ITimeLog>;
 	reporter: string;
 	taskPriority: IExpDictData;

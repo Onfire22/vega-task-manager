@@ -16,10 +16,11 @@ export const TASK_STATUS_NUMBER = {
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
+export const DATE_TIME_FORMAT = 'dd.MM.yyyy hh:mm';
+
 export const SELECT_FIELDS = ['stackType', 'taskPriority'];
 
 export const LOG_TIME_INITIAL_VALUES = {
-	estimate: '',
 	loggedTime: '',
 	logComment: '',
 };

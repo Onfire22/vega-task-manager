@@ -6,16 +6,22 @@ import React from 'react';
 import { setIsModalShown } from '../slice.ts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { getIsModalShownSelector } from '../selectors.ts';
+import { useTaskData } from '../hooks.ts';
+import { useParams } from 'react-router-dom';
 
 const ModalWindow = () => {
 	const dispatch = useAppDispatch();
+	const params = useParams();
+
+	const { task } = useTaskData(params.uuid);
 
 	const isModalShown = useAppSelector(getIsModalShownSelector());
 
 	const formik = useFormik({
-		initialValues: LOG_TIME_INITIAL_VALUES,
+		initialValues: { ...LOG_TIME_INITIAL_VALUES, estimate: task?.estimateTime || '' },
 		validationSchema: LogTimeFormValidation,
 		validateOnChange: false,
+		enableReinitialize: true,
 		onSubmit: async (values) => {
 			console.log(values);
 		},
@@ -38,6 +44,7 @@ const ModalWindow = () => {
 		<ModalWindowView
 			formValues={formik.values}
 			formErrors={formik.errors}
+			estimateTime={task?.estimateTime}
 			isModalShown={isModalShown}
 			onSubmit={formik.handleSubmit}
 			onFieldChange={handleFieldChange}

@@ -61,6 +61,7 @@ export const getUserTasks = async (req: Request<{}, {}, IGetUserTasksBody>, res:
 				code: true,
 				title: true,
 				description: true,
+				remainingTime: true,
 				taskPriority: {
 					select: DICTIONARY_SELECT,
 				},
@@ -108,6 +109,7 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 				title: true,
 				description: true,
 				estimateTime: true,
+				remainingTime: true,
 				createdAt: true,
 				updatedAt: true,
 				taskPriority: {
@@ -267,7 +269,6 @@ export const updateTaskTime = async (
 		}
 		return next(new AppError('Invalid request data', RESPONSE_STATUSES.badRequest));
 	} catch (e) {
-		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };
