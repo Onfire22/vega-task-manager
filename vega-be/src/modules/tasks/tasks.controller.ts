@@ -4,8 +4,9 @@ import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import { ICreateTaskBody, IEstimateTaskTimeBody, IGetTaskParams, IGetUserTasksBody, TUpdateTask } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
-import { DICTIONARY_SELECT, FIELDS_MAP, USER_SELECT } from './constants';
+import { FIELDS_MAP } from './constants';
 import { getTaskWithTransformedTime, transformTimeToSeconds } from './utils';
+import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 
 export const createTask = async (
 	req: Request<{}, {}, ICreateTaskBody>,

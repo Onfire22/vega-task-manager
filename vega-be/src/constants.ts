@@ -9,6 +9,7 @@ export const RESPONSE_STATUSES = {
 	notFound: 404,
 	iternalError: 500,
 	badRequest: 400,
+	notAllowed: 405,
 };
 
 export const ROUTES = {
@@ -26,6 +27,8 @@ export const ROUTES = {
 	estimateTask: '/api/tasks/:uuid/estimate',
 	projects: '/api/projects',
 	projectsCreate: '/api/projects/create',
+	project: '/api/projects/:uuid',
+	projectUsers: '/api/projects/:uuid/members',
 	createTaskLog: '/api/taskLogs/create',
 };
 
