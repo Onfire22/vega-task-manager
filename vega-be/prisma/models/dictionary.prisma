@@ -1,27 +1,30 @@
 enum Type {
   TASK_PRIORITY
   ROLE_TYPE
-  STACK_TYPE
+  USER_SPECIALISATION
   TASK_STATUS
+  TASK_TYPE
+  PROJECT_STATUS
 }
 
 model Dictionary {
   id String @id @default(uuid())
 
-  name     String
-  fullName String? @map("full_name")
-  color    String?
-  type     Type
+  label       String
+  key         String
+  type        Type
+  description String?
 
   users          User[]
   memberships    Membership[]
   taskPriorities Task[]       @relation("TaskPriority")
   taskStatuses   Task[]       @relation("TaskStatus")
   taskStacks     Task[]       @relation("TaskStack")
+  projectStatus  Project[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@unique([name, type])
+  @@unique([label, type])
   @@map("dictionaries")
 }

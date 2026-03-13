@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageContentWrapper } from '../../components/page-content-wrapper/page-content-wrapper.tsx';
 import './styles.less';
-import { FRONT_ROUTES } from '../../constants.ts';
+import { FRONT_ROUTES } from '../../app/constants.ts';
 
 const NotFoundPage = () => {
 	return (

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../constants.ts';
+import { FRONT_ROUTES } from '../../../../app/constants.ts';
 import { setIsSidebarOpened } from '../../slice.ts';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu-view';

@@ -26,30 +26,30 @@ export type AggregateDictionary = {
 
 export type DictionaryMinAggregateOutputType = {
   id: string | null
-  name: string | null
-  fullName: string | null
-  color: string | null
+  label: string | null
+  key: string | null
   type: $Enums.Type | null
+  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type DictionaryMaxAggregateOutputType = {
   id: string | null
-  name: string | null
-  fullName: string | null
-  color: string | null
+  label: string | null
+  key: string | null
   type: $Enums.Type | null
+  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type DictionaryCountAggregateOutputType = {
   id: number
-  name: number
-  fullName: number
-  color: number
+  label: number
+  key: number
   type: number
+  description: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -58,30 +58,30 @@ export type DictionaryCountAggregateOutputType = {
 
 export type DictionaryMinAggregateInputType = {
   id?: true
-  name?: true
-  fullName?: true
-  color?: true
+  label?: true
+  key?: true
   type?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type DictionaryMaxAggregateInputType = {
   id?: true
-  name?: true
-  fullName?: true
-  color?: true
+  label?: true
+  key?: true
   type?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type DictionaryCountAggregateInputType = {
   id?: true
-  name?: true
-  fullName?: true
-  color?: true
+  label?: true
+  key?: true
   type?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -161,10 +161,10 @@ export type DictionaryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type DictionaryGroupByOutputType = {
   id: string
-  name: string
-  fullName: string | null
-  color: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description: string | null
   createdAt: Date
   updatedAt: Date
   _count: DictionaryCountAggregateOutputType | null
@@ -192,10 +192,10 @@ export type DictionaryWhereInput = {
   OR?: Prisma.DictionaryWhereInput[]
   NOT?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
   id?: Prisma.StringFilter<"Dictionary"> | string
-  name?: Prisma.StringFilter<"Dictionary"> | string
-  fullName?: Prisma.StringNullableFilter<"Dictionary"> | string | null
-  color?: Prisma.StringNullableFilter<"Dictionary"> | string | null
+  label?: Prisma.StringFilter<"Dictionary"> | string
+  key?: Prisma.StringFilter<"Dictionary"> | string
   type?: Prisma.EnumTypeFilter<"Dictionary"> | $Enums.Type
+  description?: Prisma.StringNullableFilter<"Dictionary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Dictionary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Dictionary"> | Date | string
   users?: Prisma.UserListRelationFilter
@@ -203,14 +203,15 @@ export type DictionaryWhereInput = {
   taskPriorities?: Prisma.TaskListRelationFilter
   taskStatuses?: Prisma.TaskListRelationFilter
   taskStacks?: Prisma.TaskListRelationFilter
+  projectStatus?: Prisma.ProjectListRelationFilter
 }
 
 export type DictionaryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  fullName?: Prisma.SortOrderInput | Prisma.SortOrder
-  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  label?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
@@ -218,18 +219,19 @@ export type DictionaryOrderByWithRelationInput = {
   taskPriorities?: Prisma.TaskOrderByRelationAggregateInput
   taskStatuses?: Prisma.TaskOrderByRelationAggregateInput
   taskStacks?: Prisma.TaskOrderByRelationAggregateInput
+  projectStatus?: Prisma.ProjectOrderByRelationAggregateInput
 }
 
 export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  name_type?: Prisma.DictionaryNameTypeCompoundUniqueInput
+  label_type?: Prisma.DictionaryLabelTypeCompoundUniqueInput
   AND?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
   OR?: Prisma.DictionaryWhereInput[]
   NOT?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
-  name?: Prisma.StringFilter<"Dictionary"> | string
-  fullName?: Prisma.StringNullableFilter<"Dictionary"> | string | null
-  color?: Prisma.StringNullableFilter<"Dictionary"> | string | null
+  label?: Prisma.StringFilter<"Dictionary"> | string
+  key?: Prisma.StringFilter<"Dictionary"> | string
   type?: Prisma.EnumTypeFilter<"Dictionary"> | $Enums.Type
+  description?: Prisma.StringNullableFilter<"Dictionary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Dictionary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Dictionary"> | Date | string
   users?: Prisma.UserListRelationFilter
@@ -237,14 +239,15 @@ export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   taskPriorities?: Prisma.TaskListRelationFilter
   taskStatuses?: Prisma.TaskListRelationFilter
   taskStacks?: Prisma.TaskListRelationFilter
-}, "id" | "name_type">
+  projectStatus?: Prisma.ProjectListRelationFilter
+}, "id" | "label_type">
 
 export type DictionaryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  fullName?: Prisma.SortOrderInput | Prisma.SortOrder
-  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  label?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DictionaryCountOrderByAggregateInput
@@ -257,135 +260,139 @@ export type DictionaryScalarWhereWithAggregatesInput = {
   OR?: Prisma.DictionaryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DictionaryScalarWhereWithAggregatesInput | Prisma.DictionaryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
-  name?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
-  fullName?: Prisma.StringNullableWithAggregatesFilter<"Dictionary"> | string | null
-  color?: Prisma.StringNullableWithAggregatesFilter<"Dictionary"> | string | null
+  label?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
+  key?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
   type?: Prisma.EnumTypeWithAggregatesFilter<"Dictionary"> | $Enums.Type
+  description?: Prisma.StringNullableWithAggregatesFilter<"Dictionary"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Dictionary"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Dictionary"> | Date | string
 }
 
 export type DictionaryCreateInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryCreateManyInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type DictionaryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DictionaryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type DictionaryNameTypeCompoundUniqueInput = {
-  name: string
+export type DictionaryLabelTypeCompoundUniqueInput = {
+  label: string
   type: $Enums.Type
 }
 
 export type DictionaryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  color?: Prisma.SortOrder
+  label?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type DictionaryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  color?: Prisma.SortOrder
+  label?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type DictionaryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  color?: Prisma.SortOrder
+  label?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -395,12 +402,12 @@ export type DictionaryScalarRelationFilter = {
   isNot?: Prisma.DictionaryWhereInput
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type EnumTypeFieldUpdateOperationsInput = {
   set?: $Enums.Type
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type DictionaryCreateNestedOneWithoutMembershipsInput = {
@@ -415,6 +422,20 @@ export type DictionaryUpdateOneRequiredWithoutMembershipsNestedInput = {
   upsert?: Prisma.DictionaryUpsertWithoutMembershipsInput
   connect?: Prisma.DictionaryWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DictionaryUpdateToOneWithWhereWithoutMembershipsInput, Prisma.DictionaryUpdateWithoutMembershipsInput>, Prisma.DictionaryUncheckedUpdateWithoutMembershipsInput>
+}
+
+export type DictionaryCreateNestedOneWithoutProjectStatusInput = {
+  create?: Prisma.XOR<Prisma.DictionaryCreateWithoutProjectStatusInput, Prisma.DictionaryUncheckedCreateWithoutProjectStatusInput>
+  connectOrCreate?: Prisma.DictionaryCreateOrConnectWithoutProjectStatusInput
+  connect?: Prisma.DictionaryWhereUniqueInput
+}
+
+export type DictionaryUpdateOneRequiredWithoutProjectStatusNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionaryCreateWithoutProjectStatusInput, Prisma.DictionaryUncheckedCreateWithoutProjectStatusInput>
+  connectOrCreate?: Prisma.DictionaryCreateOrConnectWithoutProjectStatusInput
+  upsert?: Prisma.DictionaryUpsertWithoutProjectStatusInput
+  connect?: Prisma.DictionaryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionaryUpdateToOneWithWhereWithoutProjectStatusInput, Prisma.DictionaryUpdateWithoutProjectStatusInput>, Prisma.DictionaryUncheckedUpdateWithoutProjectStatusInput>
 }
 
 export type DictionaryCreateNestedOneWithoutTaskPrioritiesInput = {
@@ -475,30 +496,32 @@ export type DictionaryUpdateOneRequiredWithoutUsersNestedInput = {
 
 export type DictionaryCreateWithoutMembershipsInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateWithoutMembershipsInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryCreateOrConnectWithoutMembershipsInput = {
@@ -519,27 +542,105 @@ export type DictionaryUpdateToOneWithWhereWithoutMembershipsInput = {
 
 export type DictionaryUpdateWithoutMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+}
+
+export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+}
+
+export type DictionaryCreateWithoutProjectStatusInput = {
+  id?: string
+  label: string
+  key: string
+  type: $Enums.Type
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionaryUncheckedCreateWithoutProjectStatusInput = {
+  id?: string
+  label: string
+  key: string
+  type: $Enums.Type
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+}
+
+export type DictionaryCreateOrConnectWithoutProjectStatusInput = {
+  where: Prisma.DictionaryWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionaryCreateWithoutProjectStatusInput, Prisma.DictionaryUncheckedCreateWithoutProjectStatusInput>
+}
+
+export type DictionaryUpsertWithoutProjectStatusInput = {
+  update: Prisma.XOR<Prisma.DictionaryUpdateWithoutProjectStatusInput, Prisma.DictionaryUncheckedUpdateWithoutProjectStatusInput>
+  create: Prisma.XOR<Prisma.DictionaryCreateWithoutProjectStatusInput, Prisma.DictionaryUncheckedCreateWithoutProjectStatusInput>
+  where?: Prisma.DictionaryWhereInput
+}
+
+export type DictionaryUpdateToOneWithWhereWithoutProjectStatusInput = {
+  where?: Prisma.DictionaryWhereInput
+  data: Prisma.XOR<Prisma.DictionaryUpdateWithoutProjectStatusInput, Prisma.DictionaryUncheckedUpdateWithoutProjectStatusInput>
+}
+
+export type DictionaryUpdateWithoutProjectStatusInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
 }
 
-export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
+export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
@@ -547,30 +648,32 @@ export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
 
 export type DictionaryCreateWithoutTaskPrioritiesInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskPrioritiesInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskPrioritiesInput = {
@@ -580,30 +683,32 @@ export type DictionaryCreateOrConnectWithoutTaskPrioritiesInput = {
 
 export type DictionaryCreateWithoutTaskStatusesInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStatusesInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskStatusesInput = {
@@ -613,30 +718,32 @@ export type DictionaryCreateOrConnectWithoutTaskStatusesInput = {
 
 export type DictionaryCreateWithoutTaskStacksInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStacksInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserStackInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskStacksInput = {
@@ -657,30 +764,32 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskPrioritiesInput = {
 
 export type DictionaryUpdateWithoutTaskPrioritiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskPrioritiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUpsertWithoutTaskStatusesInput = {
@@ -696,30 +805,32 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskStatusesInput = {
 
 export type DictionaryUpdateWithoutTaskStatusesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStatusesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUpsertWithoutTaskStacksInput = {
@@ -735,58 +846,62 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskStacksInput = {
 
 export type DictionaryUpdateWithoutTaskStacksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserStackNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryCreateWithoutUsersInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryUncheckedCreateWithoutUsersInput = {
   id?: string
-  name: string
-  fullName?: string | null
-  color?: string | null
+  label: string
+  key: string
   type: $Enums.Type
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
 }
 
 export type DictionaryCreateOrConnectWithoutUsersInput = {
@@ -807,30 +922,32 @@ export type DictionaryUpdateToOneWithWhereWithoutUsersInput = {
 
 export type DictionaryUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
 }
 
 
@@ -844,6 +961,7 @@ export type DictionaryCountOutputType = {
   taskPriorities: number
   taskStatuses: number
   taskStacks: number
+  projectStatus: number
 }
 
 export type DictionaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -852,6 +970,7 @@ export type DictionaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   taskPriorities?: boolean | DictionaryCountOutputTypeCountTaskPrioritiesArgs
   taskStatuses?: boolean | DictionaryCountOutputTypeCountTaskStatusesArgs
   taskStacks?: boolean | DictionaryCountOutputTypeCountTaskStacksArgs
+  projectStatus?: boolean | DictionaryCountOutputTypeCountProjectStatusArgs
 }
 
 /**
@@ -899,13 +1018,20 @@ export type DictionaryCountOutputTypeCountTaskStacksArgs<ExtArgs extends runtime
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * DictionaryCountOutputType without action
+ */
+export type DictionaryCountOutputTypeCountProjectStatusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectWhereInput
+}
+
 
 export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  fullName?: boolean
-  color?: boolean
+  label?: boolean
+  key?: boolean
   type?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   users?: boolean | Prisma.Dictionary$usersArgs<ExtArgs>
@@ -913,46 +1039,48 @@ export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   taskPriorities?: boolean | Prisma.Dictionary$taskPrioritiesArgs<ExtArgs>
   taskStatuses?: boolean | Prisma.Dictionary$taskStatusesArgs<ExtArgs>
   taskStacks?: boolean | Prisma.Dictionary$taskStacksArgs<ExtArgs>
+  projectStatus?: boolean | Prisma.Dictionary$projectStatusArgs<ExtArgs>
   _count?: boolean | Prisma.DictionaryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  fullName?: boolean
-  color?: boolean
+  label?: boolean
+  key?: boolean
   type?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  fullName?: boolean
-  color?: boolean
+  label?: boolean
+  key?: boolean
   type?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectScalar = {
   id?: boolean
-  name?: boolean
-  fullName?: boolean
-  color?: boolean
+  label?: boolean
+  key?: boolean
   type?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DictionaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "fullName" | "color" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionary"]>
+export type DictionaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "key" | "type" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionary"]>
 export type DictionaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Dictionary$usersArgs<ExtArgs>
   memberships?: boolean | Prisma.Dictionary$membershipsArgs<ExtArgs>
   taskPriorities?: boolean | Prisma.Dictionary$taskPrioritiesArgs<ExtArgs>
   taskStatuses?: boolean | Prisma.Dictionary$taskStatusesArgs<ExtArgs>
   taskStacks?: boolean | Prisma.Dictionary$taskStacksArgs<ExtArgs>
+  projectStatus?: boolean | Prisma.Dictionary$projectStatusArgs<ExtArgs>
   _count?: boolean | Prisma.DictionaryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DictionaryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -966,13 +1094,14 @@ export type $DictionaryPayload<ExtArgs extends runtime.Types.Extensions.Internal
     taskPriorities: Prisma.$TaskPayload<ExtArgs>[]
     taskStatuses: Prisma.$TaskPayload<ExtArgs>[]
     taskStacks: Prisma.$TaskPayload<ExtArgs>[]
+    projectStatus: Prisma.$ProjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: string
-    fullName: string | null
-    color: string | null
+    label: string
+    key: string
     type: $Enums.Type
+    description: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["dictionary"]>
@@ -1374,6 +1503,7 @@ export interface Prisma__DictionaryClient<T, Null = never, ExtArgs extends runti
   taskPriorities<T extends Prisma.Dictionary$taskPrioritiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$taskPrioritiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taskStatuses<T extends Prisma.Dictionary$taskStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$taskStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taskStacks<T extends Prisma.Dictionary$taskStacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$taskStacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projectStatus<T extends Prisma.Dictionary$projectStatusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$projectStatusArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1404,10 +1534,10 @@ export interface Prisma__DictionaryClient<T, Null = never, ExtArgs extends runti
  */
 export interface DictionaryFieldRefs {
   readonly id: Prisma.FieldRef<"Dictionary", 'String'>
-  readonly name: Prisma.FieldRef<"Dictionary", 'String'>
-  readonly fullName: Prisma.FieldRef<"Dictionary", 'String'>
-  readonly color: Prisma.FieldRef<"Dictionary", 'String'>
+  readonly label: Prisma.FieldRef<"Dictionary", 'String'>
+  readonly key: Prisma.FieldRef<"Dictionary", 'String'>
   readonly type: Prisma.FieldRef<"Dictionary", 'Type'>
+  readonly description: Prisma.FieldRef<"Dictionary", 'String'>
   readonly createdAt: Prisma.FieldRef<"Dictionary", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Dictionary", 'DateTime'>
 }
@@ -1915,6 +2045,30 @@ export type Dictionary$taskStacksArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Dictionary.projectStatus
+ */
+export type Dictionary$projectStatusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
+  orderBy?: Prisma.ProjectOrderByWithRelationInput | Prisma.ProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
 }
 
 /**

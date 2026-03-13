@@ -1,5 +1,5 @@
 import { useGetDictionariesQuery } from './queries/dictionaries.api.ts';
-import { CACHING_SETTINGS } from '../constants.ts';
+import { CACHING_SETTINGS } from '../app/constants.ts';
 import type { TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectsQuery } from './queries/projects.api.ts';

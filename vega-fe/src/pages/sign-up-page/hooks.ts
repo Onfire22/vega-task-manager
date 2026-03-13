@@ -20,6 +20,7 @@ export const useSignUpForm = () => {
 		validationSchema: activeStep === 0 ? AccountStepValidationSchema : ProfileStepValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
+			console.log(values);
 			try {
 				await signUpUser(values).unwrap();
 			} catch (e) {
@@ -70,8 +71,6 @@ export const useSignUpForm = () => {
 
 		if (activeStep === 1) {
 			formik.handleSubmit();
-			dispatch(setActiveStep(0));
-			formik.resetForm();
 		}
 
 		dispatch(setActiveStep(activeStep < 2 ? activeStep + 1 : activeStep));

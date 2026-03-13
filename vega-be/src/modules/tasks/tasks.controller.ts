@@ -22,7 +22,7 @@ export const createTask = async (
 		}
 
 		const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
-			where: { name_type: { name: 'todo', type: 'TASK_STATUS' } },
+			where: { label_type: { label: 'todo', type: 'TASK_STATUS' } },
 			select: { id: true },
 		});
 
@@ -97,6 +97,7 @@ export const getUserTasks = async (req: Request<{}, {}, IGetUserTasksBody>, res:
 
 		res.status(200).json({ tasks: transformedTasks });
 	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

@@ -1,10 +1,7 @@
-import Logo from '../../../../../assets/images/logo.png';
-import { IconArrowBackUp, IconClipboardCopy, IconPlus, IconSitemap } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { IconArrowBack, IconClipboardCopy, IconPlus, IconSitemap } from '@tabler/icons-react';
 import { Burger, Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
-import { FRONT_ROUTES } from '../../../../../constants.ts';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
@@ -32,9 +29,6 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 		<div className="base-custom-menu">
 			<div className="base-custom-menu__info">
 				<Burger lineSize={2} opened={isSidebarOpened} onClick={onBurgerClick} />
-				<Link className="base-custom-menu__logo" to={FRONT_ROUTES.root}>
-					<img className="base-custom-menu__image" src={Logo} />
-				</Link>
 				<div className="base-custom-menu__crumbs">{breadCrumbs}</div>
 			</div>
 			<div className="base-custom-menu__controls">
@@ -53,7 +47,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				/>
 				<Menu shadow="md" width={180}>
 					<Menu.Target>
-						<Button rightSection={<IconPlus size={17} />}>Создать</Button>
+						<Button leftSection={<IconPlus size={17} />}>Создать</Button>
 					</Menu.Target>
 					<Menu.Dropdown>
 						<Menu.Label>Задачу / проект</Menu.Label>
@@ -66,7 +60,11 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 					</Menu.Dropdown>
 				</Menu>
 				{path !== '/' && (
-					<Button className="base-custom-menu__button" leftSection={<IconArrowBackUp />} onClick={onGoBack} />
+					<Button
+						className="base-custom-menu__button"
+						leftSection={<IconArrowBack size={18} />}
+						onClick={onGoBack}
+					/>
 				)}
 			</div>
 		</div>

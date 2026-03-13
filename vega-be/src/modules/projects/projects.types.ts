@@ -1,3 +1,7 @@
+import { Project } from '../../generated/prisma/client';
+import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
+import { ProjectGetPayload } from '../../generated/prisma/models/Project';
+
 export interface IAssignee {
 	id: string;
 	name: string;
@@ -42,8 +46,34 @@ export interface IProjectDB {
 }
 
 export interface IProjectsResponse {
-	projects: Array<Omit<IProjectDB, 'memberships' | 'tasks' | 'description'>>;
+	projects: Array<Omit<Project, 'memberships' | 'tasks' | 'description'>>;
 }
+
+export type ProjectWithDetails = ProjectGetPayload<{
+	select: {
+		id: true;
+		title: true;
+		description: true;
+		createdAt: true;
+		memberships: {
+			select: {
+				userRole: { select: { id: true; label: true } };
+				user: { select: { id: true; name: true; secondName: true } };
+			};
+		};
+		tasks: {
+			select: {
+				id: true;
+				code: true;
+				title: true;
+				taskPriority: { select: typeof DICTIONARY_SELECT };
+				taskStatus: { select: typeof DICTIONARY_SELECT };
+				taskStack: { select: typeof DICTIONARY_SELECT };
+				assignee: { select: typeof USER_SELECT };
+			};
+		};
+	};
+}>;
 
 export interface ICreateProjectRequestBody {
 	title: string;

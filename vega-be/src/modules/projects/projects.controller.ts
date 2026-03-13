@@ -2,19 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
-import {
-	ICreateProjectRequestBody,
-	IProjectDB,
-	IProjectResponse,
-	IProjectsRequest,
-	IProjectsResponse,
-	TUpdateProjectRequest,
-} from './projects.types';
+import { ICreateProjectRequestBody, IProjectsRequest, TUpdateProjectRequest } from './projects.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { normalizeProject } from './projects.mappers';
 
-export const getProjects = async (req: Request, res: Response<IProjectsResponse>, next: NextFunction) => {
+export const getProjects = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const projects = await prismaAppClient.project.findMany({
 			select: {
@@ -35,13 +28,13 @@ export const getProjects = async (req: Request, res: Response<IProjectsResponse>
 						title: true,
 						createdAt: true,
 						taskPriority: {
-							select: { color: true, id: true, name: true },
+							select: { id: true, label: true },
 						},
 						taskStatus: {
-							select: { color: true, id: true, name: true },
+							select: { id: true, label: true },
 						},
 						taskStack: {
-							select: { color: true, id: true, name: true },
+							select: { id: true, label: true },
 						},
 					},
 				},
@@ -70,27 +63,34 @@ export const createProject = async (
 
 		const dictionaries = await prismaAppClient.dictionary.findMany({
 			where: {
-				name: {
-					in: ['member', 'owner'],
-				},
-				type: 'ROLE_TYPE',
+				OR: [
+					{
+						key: { in: ['member', 'owner'] },
+						type: 'ROLE_TYPE',
+					},
+					{
+						key: 'p_backlog',
+						type: 'PROJECT_STATUS',
+					},
+				],
 			},
 			select: {
 				id: true,
-				name: true,
+				label: true,
+				key: true,
 			},
 		});
 
-		const { owner, member } = dictionaries.reduce(
+		const { owner, member, p_backlog } = dictionaries.reduce(
 			(acc, item) => {
-				acc[item.name] = item;
+				acc[item.key] = item;
 				return acc;
 			},
-			{} as Record<string, { name: string; id: string }>,
+			{} as Record<string, { label: string; id: string; key: string }>,
 		);
 
 		if (!owner || !member) {
-			next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+			next(new AppError('Справочник не найден', RESPONSE_STATUSES.iternalError));
 			return;
 		}
 
@@ -110,6 +110,7 @@ export const createProject = async (
 				title,
 				description,
 				code,
+				projectStatusUuid: p_backlog.id,
 				memberships: {
 					create: usersData,
 				},
@@ -122,11 +123,7 @@ export const createProject = async (
 	}
 };
 
-export const getProjectByUuid = async (
-	req: Request<IProjectsRequest>,
-	res: Response<IProjectResponse>,
-	next: NextFunction,
-) => {
+export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Response, next: NextFunction) => {
 	try {
 		const projectUuid = req.params.uuid;
 
@@ -134,7 +131,7 @@ export const getProjectByUuid = async (
 			return next(new AppError('missing project uuid', RESPONSE_STATUSES.iternalError));
 		}
 
-		const project = await prismaAppClient.project.findUnique({
+		const project = await prismaAppClient.project.findUniqueOrThrow({
 			where: {
 				id: projectUuid,
 			},
@@ -151,7 +148,7 @@ export const getProjectByUuid = async (
 						userRole: {
 							select: {
 								id: true,
-								name: true,
+								label: true,
 							},
 						},
 						user: {
@@ -185,7 +182,7 @@ export const getProjectByUuid = async (
 			},
 		});
 
-		const mappedProject = normalizeProject(project as IProjectDB);
+		const mappedProject = normalizeProject(project);
 
 		res.status(RESPONSE_STATUSES.success).json({ project: mappedProject });
 	} catch (e) {
@@ -223,7 +220,7 @@ export const addUserToProject = async (
 		const { userUuid } = req.body;
 
 		const memberRole = await prismaAppClient.dictionary.findUnique({
-			where: { name_type: { name: 'member', type: 'ROLE_TYPE' } },
+			where: { label_type: { label: 'member', type: 'ROLE_TYPE' } },
 			select: { id: true },
 		});
 
@@ -232,7 +229,7 @@ export const addUserToProject = async (
 		}
 
 		await prismaAppClient.membership.upsert({
-			where: { userUuid_projectUuid: { projectUuid: uuid, userUuid } },
+			where: { user_project: { projectUuid: uuid, userUuid } },
 			update: {
 				userRoleUuid: memberRole.id,
 			},

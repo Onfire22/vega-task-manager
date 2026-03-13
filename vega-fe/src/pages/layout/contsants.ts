@@ -1,4 +1,4 @@
-import { FRONT_ROUTES } from '../../constants.ts';
+import { FRONT_ROUTES } from '../../app/constants.ts';
 import { IconClipboardCopy, IconSitemap, IconUserCog } from '@tabler/icons-react';
 
 export const LINKS = [

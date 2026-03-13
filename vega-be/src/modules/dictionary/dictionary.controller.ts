@@ -24,7 +24,7 @@ export const getDictionaries = async (
 
 		const dictionaries = await prismaAppClient.dictionary.findMany({
 			where: { type: { in: validFilters } },
-			select: { id: true, name: true, color: true, type: true, fullName: true },
+			select: { id: true, label: true, type: true, key: true, description: true },
 		});
 
 		const dictionariesData = dictionaries.reduce((acc, item) => {
@@ -41,8 +41,11 @@ export const getDictionaries = async (
 		const payload = {
 			taskPriority: dictionariesData.task_priority,
 			roleType: dictionariesData.role_type,
-			stackType: dictionariesData.stack_type,
 			taskStatus: dictionariesData.task_status,
+			userSpecialisation: dictionariesData.user_specialisation,
+			taskType: dictionariesData.task_type,
+			projectStatus: dictionariesData.project_status,
+			projectType: dictionariesData.project_type,
 		};
 
 		res.status(RESPONSE_STATUSES.success).json({ dictionaries: payload });

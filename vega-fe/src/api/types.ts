@@ -3,7 +3,7 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
-	userStackUuid: string;
+	userSpecialisationUuid: string;
 }
 
 export interface ICurrentUser {
@@ -38,15 +38,27 @@ export interface ICreateTask {
 	taskStackUuid: string;
 }
 
-export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
+export type TDictionariesTypes =
+	| 'TASK_PRIORITY'
+	| 'ROLE_TYPE'
+	| 'USER_SPECIALISATION'
+	| 'TASK_STATUS'
+	| 'TASK_TYPE'
+	| 'PROJECT_STATUS';
 
-type TDictionariesMapped = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
+type TDictionariesMapped =
+	| 'taskPriority'
+	| 'roleType'
+	| 'userSpecialisation'
+	| 'taskStatus'
+	| 'taskType'
+	| 'projectStatus';
 
 export interface IDictionary {
 	id: string;
-	name: string;
-	color: string | null;
-	fullName: string | null;
+	label: string;
+	key: string;
+	description?: string;
 }
 
 export type IDictionariesResponse = {

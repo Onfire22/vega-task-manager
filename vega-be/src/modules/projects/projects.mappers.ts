@@ -1,6 +1,6 @@
-import { IProjectDB } from './projects.types';
+import { ProjectWithDetails } from './projects.types';
 
-export const normalizeProject = (project: IProjectDB) => {
+export const normalizeProject = (project: ProjectWithDetails) => {
 	return {
 		...project,
 		memberships: project.memberships.map((item) => {
