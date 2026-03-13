@@ -170,7 +170,7 @@ export const theme = createTheme({
 							'--button-bg': '#111',
 							'--button-hover': '#2a2a2a',
 							'--button-bd': '0.5px solid rgba(255,255,255,0.35)',
-							'--button-color': 'rgba(255,255,255,0.75)',
+							'--button-color': '#fff',
 						},
 					};
 				}
@@ -289,16 +289,18 @@ export const theme = createTheme({
 			},
 		},
 		Tabs: {
-			defaultProps: { variant: 'underline' },
-			styles: (theme: any) => ({
+			defaultProps: { variant: 'default' },
+			vars: (theme: any) => ({
+				root: {
+					'--tabs-color': theme.colors.violet[6],
+				},
+			}),
+			styles: () => ({
 				tab: {
 					fontSize: '13px',
 					color: 'rgba(255,255,255,0.4)',
-					'&[data-active]': {
-						color: 'rgba(255,255,255,0.9)',
-						borderBottomColor: theme.colors.violet[6],
-					},
 				},
+				tabLabel: {},
 			}),
 		},
 		Menu: {

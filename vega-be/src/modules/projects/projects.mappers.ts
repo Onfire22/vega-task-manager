@@ -1,14 +1,13 @@
 import { ProjectWithDetails } from './projects.types';
 
 export const normalizeProject = (project: ProjectWithDetails) => {
+	const { memberships, ...rest } = project;
 	return {
-		...project,
-		memberships: project.memberships.map((item) => {
+		...rest,
+		users: memberships.map((item) => {
 			return {
-				user: {
-					...item.user,
-					role: item.userRole,
-				},
+				...item.user,
+				role: item.userRole,
 			};
 		}),
 	};

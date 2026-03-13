@@ -12,7 +12,7 @@ export const checkIsOwnerMiddleware = async (req: Request<IProjectsRequest>, res
 		const { uuid } = req.params;
 
 		const ownerRole = await prismaAppClient.membership.findUnique({
-			where: { userUuid_projectUuid: { projectUuid: uuid, userUuid: userId } },
+			where: { user_project: { projectUuid: uuid, userUuid: userId } },
 			select: { userRoleUuid: true },
 		});
 

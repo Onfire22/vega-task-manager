@@ -166,3 +166,26 @@ export interface ITaskList {
 }
 
 export type TTaskList = { tasks: Array<ITaskList> };
+
+export interface IProjectUser {
+	id: string;
+	name: string;
+	secondName: string;
+	role: {
+		id: string;
+		label: string;
+		key: string;
+	};
+}
+
+export interface IProjectResponse {
+	project: {
+		id: string;
+		title: string;
+		code: string;
+		description: string;
+		createdAt: string;
+		tasks: [];
+		users: Array<IProjectUser>;
+	};
+}

@@ -140,6 +140,7 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 				title: true,
 				description: true,
 				createdAt: true,
+				code: true,
 				memberships: {
 					where: {
 						projectUuid,
@@ -149,6 +150,7 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 							select: {
 								id: true,
 								label: true,
+								key: true,
 							},
 						},
 						user: {

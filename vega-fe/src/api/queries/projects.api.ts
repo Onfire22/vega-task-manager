@@ -1,6 +1,6 @@
 import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { IDefaultResponse, IProject, IProjectCreate } from '../types.ts';
+import type { IDefaultResponse, IProject, IProjectCreate, IProjectResponse } from '../types.ts';
 
 const projectsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -19,7 +19,13 @@ const projectsApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ['Projects'],
 		}),
+		getProjectByUuid: builder.query<IProjectResponse, string>({
+			query: (uuid) => ({
+				url: `${ROUTES.getProject}/${uuid}`,
+				method: METHODS.get,
+			}),
+		}),
 	}),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation } = projectsApi;
+export const { useGetProjectsQuery, useCreateProjectMutation, useGetProjectByUuidQuery } = projectsApi;
