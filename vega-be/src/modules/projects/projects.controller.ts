@@ -3,7 +3,6 @@ import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
 import { ICreateProjectRequestBody, IProjectsRequest, TUpdateProjectRequest } from './projects.types';
-import { IDefaultResponse, ILocals } from '../../common/types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { normalizeProject } from './projects.mappers';
 
@@ -49,7 +48,7 @@ export const getProjects = async (req: Request, res: Response, next: NextFunctio
 
 export const createProject = async (
 	req: Request<{}, {}, ICreateProjectRequestBody>,
-	res: Response<IDefaultResponse, ILocals>,
+	res: Response,
 	next: NextFunction,
 ) => {
 	try {
@@ -58,8 +57,6 @@ export const createProject = async (
 		const userId = res.locals.user.id;
 
 		const userUUids = [...usersUuids, userId];
-
-		const code = req.body.title.slice(0, 2).toUpperCase();
 
 		const dictionaries = await prismaAppClient.dictionary.findMany({
 			where: {
@@ -105,19 +102,28 @@ export const createProject = async (
 			};
 		});
 
-		await prismaAppClient.project.create({
-			data: {
-				title,
-				description,
-				code,
-				projectStatusUuid: p_backlog.id,
-				memberships: {
-					create: usersData,
+		const project = await prismaAppClient.$transaction(async (tx) => {
+			const project = await tx.project.create({
+				data: {
+					title,
+					description,
+					projectStatusUuid: p_backlog.id,
+					memberships: {
+						create: usersData,
+					},
 				},
-			},
+				select: { id: true },
+			});
+
+			const code = `#${project.id.slice(0, 4).toUpperCase()}`;
+
+			return tx.project.update({
+				where: { id: project.id },
+				data: { code },
+			});
 		});
 
-		res.status(200).json({ success: true });
+		res.status(200).json({ project });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -141,6 +147,14 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 				description: true,
 				createdAt: true,
 				code: true,
+				projectStatus: {
+					select: {
+						label: true,
+						description: true,
+						id: true,
+						key: true,
+					},
+				},
 				memberships: {
 					where: {
 						projectUuid,
@@ -158,6 +172,9 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 								id: true,
 								name: true,
 								secondName: true,
+								userSpecialisation: {
+									select: { label: true },
+								},
 							},
 						},
 					},

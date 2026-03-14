@@ -55,10 +55,10 @@ type TDictionariesMapped =
 	| 'projectStatus';
 
 export interface IDictionary {
+	description: string;
 	id: string;
 	label: string;
 	key: string;
-	description?: string;
 }
 
 export type IDictionariesResponse = {
@@ -176,6 +176,9 @@ export interface IProjectUser {
 		label: string;
 		key: string;
 	};
+	userSpecialisation: {
+		label: string;
+	};
 }
 
 export interface IProjectResponse {
@@ -185,7 +188,26 @@ export interface IProjectResponse {
 		code: string;
 		description: string;
 		createdAt: string;
+		deadline?: string;
 		tasks: [];
 		users: Array<IProjectUser>;
+		projectStatus: {
+			description: string;
+			id: string;
+			label: string;
+			key: string;
+		};
+	};
+}
+
+export interface ICreateProjectResponse {
+	project: {
+		code: string;
+		createdAt: string;
+		description: string;
+		id: string;
+		projectStatusUuid: string;
+		title: string;
+		updatedAt: string;
 	};
 }

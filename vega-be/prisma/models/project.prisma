@@ -3,7 +3,7 @@ model Project {
 
   title             String
   description       String
-  code              String
+  code              String     @default("system_code")
   projectStatusUuid String     @map("project_status_uuid")
   projectStatus     Dictionary @relation(fields: [projectStatusUuid], references: [id])
 

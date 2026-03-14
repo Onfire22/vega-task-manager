@@ -262,7 +262,7 @@ export type ProjectCreateInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   projectStatus: Prisma.DictionaryCreateNestedOneWithoutProjectStatusInput
@@ -274,7 +274,7 @@ export type ProjectUncheckedCreateInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   projectStatusUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -310,7 +310,7 @@ export type ProjectCreateManyInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   projectStatusUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -461,7 +461,7 @@ export type ProjectCreateWithoutProjectStatusInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -472,7 +472,7 @@ export type ProjectUncheckedCreateWithoutProjectStatusInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
@@ -522,7 +522,7 @@ export type ProjectCreateWithoutMembershipsInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   projectStatus: Prisma.DictionaryCreateNestedOneWithoutProjectStatusInput
@@ -533,7 +533,7 @@ export type ProjectUncheckedCreateWithoutMembershipsInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   projectStatusUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -582,7 +582,7 @@ export type ProjectCreateWithoutTasksInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   projectStatus: Prisma.DictionaryCreateNestedOneWithoutProjectStatusInput
@@ -593,7 +593,7 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   projectStatusUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -642,7 +642,7 @@ export type ProjectCreateManyProjectStatusInput = {
   id?: string
   title: string
   description: string
-  code: string
+  code?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }

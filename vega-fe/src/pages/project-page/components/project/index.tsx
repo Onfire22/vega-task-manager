@@ -9,7 +9,7 @@ const Project = () => {
 
 	const [activeTab, setActiveTab] = useState('description');
 
-	const { project, isProjectLoading } = useProjectData(params.uuid);
+	const { project, isProjectLoading, dictionariesOptions } = useProjectData(params.uuid);
 
 	const handleTabClick = (tab: string | null) => {
 		if (tab) {
@@ -20,7 +20,12 @@ const Project = () => {
 	return isProjectLoading ? (
 		<Loader />
 	) : (
-		<ProjectView project={project} activeTab={activeTab} onTabClick={handleTabClick} />
+		<ProjectView
+			project={project}
+			activeTab={activeTab}
+			dictionariesOptions={dictionariesOptions.projectStatus}
+			onTabClick={handleTabClick}
+		/>
 	);
 };
 

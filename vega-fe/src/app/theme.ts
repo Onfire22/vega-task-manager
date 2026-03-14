@@ -1,52 +1,52 @@
 import { createTheme, type MantineColorsTuple } from '@mantine/core';
 
 const violet: MantineColorsTuple = [
-	'#EEEDFE', // 0
-	'#CECBF6', // 1
-	'#AFA9EC', // 2
-	'#9590E8', // 3
-	'#7F77DD', // 4
-	'#6860D4', // 5
-	'#5046e5', // 6 ← primary (buttons, links, focus rings)
-	'#4139C4', // 7
-	'#3C3489', // 8
-	'#26215C', // 9
+	'#EEEDFE',
+	'#CECBF6',
+	'#AFA9EC',
+	'#9590E8',
+	'#7F77DD',
+	'#6860D4',
+	'#5046e5', // 6 ← primary
+	'#4139C4',
+	'#3C3489',
+	'#26215C',
 ];
 
 const indigo: MantineColorsTuple = [
 	'#EEF0FE',
-	'#D5D9FB',
+	'#EEF0FE',
 	'#B3BAF7',
-	'#9199F2',
+	'#B3BAF7',
 	'#7179ED',
-	'#5560E8',
-	'#4752E3',
+	'#7179ED',
+	'#4752E3', // 6
 	'#3A44CC',
-	'#3039B5',
+	'#3A44CC',
 	'#262E9E',
 ];
 
 const amber: MantineColorsTuple = [
 	'#FAEEDA',
-	'#FAD9A0',
+	'#FAEEDA',
 	'#F7C160',
-	'#F5AE38',
-	'#F59E0b',
-	'#D98A06',
+	'#F7C160',
+	'#F59E0B',
+	'#F59E0B',
+	'#D98A06', // 6
 	'#BA7517',
-	'#9B5F0F',
 	'#633806',
 	'#412402',
 ];
 
-const purple: MantineColorsTuple = [
+const grape: MantineColorsTuple = [
 	'#F5EFFE',
-	'#E9D8FC',
+	'#F5EFFE',
 	'#D5B8F9',
-	'#C395F6',
+	'#D5B8F9',
 	'#C084FC',
-	'#A855F7',
-	'#9333EA',
+	'#C084FC',
+	'#A855F7', // 6
 	'#7E22CE',
 	'#6B21A8',
 	'#581C87',
@@ -54,56 +54,42 @@ const purple: MantineColorsTuple = [
 
 const teal: MantineColorsTuple = [
 	'#E1F5EE',
-	'#A7E9D0',
+	'#E1F5EE',
 	'#6EDDB2',
-	'#34d399',
-	'#1D9E75',
-	'#178060',
+	'#6EDDB2',
+	'#34D399',
+	'#34D399',
+	'#1D9E75', // 6
 	'#0F6E56',
 	'#085041',
-	'#054D3C',
 	'#04342C',
 ];
 
 // Просрочено / ошибки
 const red: MantineColorsTuple = [
 	'#FCEBEB',
-	'#F7C1C1',
+	'#FCEBEB',
 	'#F09595',
-	'#EC6E6E',
-	'#E24B4A',
-	'#CC3333',
-	'#f87171',
+	'#F09595',
+	'#F87171',
+	'#F87171',
+	'#E24B4A', // 6
 	'#A32D2D',
 	'#791F1F',
 	'#501313',
 ];
 
-// Теги: BE
-const green: MantineColorsTuple = [
-	'#EAF3DE',
-	'#C0DD97',
-	'#9DD45D',
-	'#7EC235',
-	'#639922',
-	'#4E7B18',
-	'#3B6D11',
-	'#2D570C',
-	'#27500A',
-	'#173404',
-];
-
 const dark: MantineColorsTuple = [
-	'#C9C9C9', // 0 — самый светлый текст на тёмном фоне
+	'#C9C9C9', // 0 — текст на тёмном
 	'#B8B8B8', // 1
-	'#828282', // 2
+	'#828282', // 2 — muted текст
 	'#696969', // 3
-	'#424242', // 4 — border tertiary
+	'#3a3a3a', // 4 — border tertiary
 	'#2e2e2e', // 5 — border secondary
-	'#1e1e1e', // 6 — surface (карточки, дропдауны)
-	'#181818', // 7 — sidebar / панели
-	'#111111', // 8 — основной фон страницы
-	'#0e0e0e', // 9 — topbar / самый тёмный
+	'#1e1e1e', // 6 — surface: карточки, дропдауны, кнопки default
+	'#181818', // 7 — sidebar
+	'#141414', // 8 — основной фон
+	'#0e0e0e', // 9 — topbar
 ];
 
 export const theme = createTheme({
@@ -114,26 +100,25 @@ export const theme = createTheme({
 		violet,
 		indigo,
 		amber,
-		purple,
+		grape,
 		teal,
 		red,
-		green,
 		dark,
 	},
 
 	fontSizes: {
-		xs: '11px',
-		sm: '12px',
-		md: '13px',
-		lg: '15px',
-		xl: '18px',
+		xs: '12px',
+		sm: '13px',
+		md: '14px',
+		lg: '16px',
+		xl: '20px',
 	},
 	lineHeights: {
 		xs: '1.4',
 		sm: '1.5',
-		md: '1.7',
-		lg: '1.8',
-		xl: '1.9',
+		md: '1.6',
+		lg: '1.7',
+		xl: '1.8',
 	},
 	radius: {
 		xs: '4px',
@@ -142,6 +127,7 @@ export const theme = createTheme({
 		lg: '10px',
 		xl: '16px',
 	},
+
 	defaultRadius: 'md',
 	shadows: {
 		xs: 'none',
@@ -153,10 +139,11 @@ export const theme = createTheme({
 	spacing: {
 		xs: '4px',
 		sm: '8px',
-		md: '12px',
-		lg: '16px',
-		xl: '24px',
+		md: '14px',
+		lg: '20px',
+		xl: '28px',
 	},
+
 	components: {
 		Button: {
 			defaultProps: {
@@ -203,36 +190,6 @@ export const theme = createTheme({
 				},
 			},
 		},
-		Select: {
-			defaultProps: { radius: 'md' },
-			vars: () => ({
-				input: {
-					'--input-bd-focus': 'rgba(59,130,246,0.6)',
-				},
-			}),
-			styles: {
-				input: {
-					fontSize: '13px',
-					backgroundColor: 'rgba(255,255,255,0.05)',
-					borderColor: 'rgba(255,255,255,0.09)',
-				},
-			},
-		},
-		MultiSelect: {
-			defaultProps: { radius: 'md' },
-			vars: () => ({
-				input: {
-					'--input-bd-focus': 'rgba(59,130,246,0.6)',
-				},
-			}),
-			styles: {
-				input: {
-					fontSize: '13px',
-					backgroundColor: 'rgba(255,255,255,0.05)',
-					borderColor: 'rgba(255,255,255,0.09)',
-				},
-			},
-		},
 		Table: {
 			defaultProps: { striped: false, highlightOnHover: true },
 			styles: {
@@ -252,41 +209,8 @@ export const theme = createTheme({
 				},
 			},
 		},
-		Card: {
-			defaultProps: { radius: 'lg', padding: 'md' },
-			styles: {
-				root: {
-					backgroundColor: 'rgba(255,255,255,0.04)',
-					border: '0.5px solid rgba(255,255,255,0.08)',
-				},
-			},
-		},
 		Modal: {
 			defaultProps: { radius: 'lg', centered: true },
-			styles: {
-				content: {
-					backgroundColor: '#1e1e1e',
-					border: '0.5px solid rgba(255,255,255,0.1)',
-				},
-				header: {
-					backgroundColor: '#1e1e1e',
-				},
-			},
-		},
-		AppShell: {
-			styles: {
-				navbar: {
-					backgroundColor: '#111111',
-					borderRight: '0.5px solid rgba(255,255,255,0.06)',
-				},
-				header: {
-					backgroundColor: '#0e0e0e',
-					borderBottom: '0.5px solid rgba(255,255,255,0.08)',
-				},
-				main: {
-					backgroundColor: '#111111',
-				},
-			},
 		},
 		Tabs: {
 			defaultProps: { variant: 'default' },
@@ -305,51 +229,6 @@ export const theme = createTheme({
 		},
 		Menu: {
 			defaultProps: { radius: 'md' },
-			styles: {
-				dropdown: {
-					backgroundColor: '#1e1e1e',
-					border: '0.5px solid rgba(255,255,255,0.12)',
-				},
-				item: {
-					fontSize: '13px',
-					color: 'rgba(255,255,255,0.75)',
-					'&:hover': {
-						backgroundColor: 'rgba(255,255,255,0.05)',
-					},
-				},
-			},
-		},
-		Tooltip: {
-			defaultProps: { radius: 'sm' },
-			styles: {
-				tooltip: {
-					fontSize: '12px',
-					backgroundColor: '#2e2e2e',
-					color: 'rgba(255,255,255,0.82)',
-					border: '0.5px solid rgba(255,255,255,0.1)',
-				},
-			},
-		},
-		Avatar: {
-			defaultProps: { radius: 'xl' },
-		},
-		Progress: {
-			defaultProps: { radius: 'xs' },
-			styles: {
-				root: {
-					backgroundColor: 'rgba(255,255,255,0.07)',
-				},
-			},
-		},
-		ActionIcon: {
-			defaultProps: { variant: 'subtle', radius: 'md' },
-		},
-		Divider: {
-			styles: {
-				root: {
-					borderColor: 'rgba(255,255,255,0.06)',
-				},
-			},
 		},
 		Textarea: {
 			defaultProps: { radius: 'md' },
