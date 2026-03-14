@@ -28,7 +28,7 @@ const Router = () => {
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route element={<Layout />}>
-					<Route index element={<TasksPage />} />
+					<Route path={FRONT_ROUTES.root} element={<TasksPage />} />
 					<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 					<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
 					<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />

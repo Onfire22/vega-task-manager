@@ -5,6 +5,6 @@ interface IProps {
 	children: React.ReactNode;
 }
 
-const PageContentWrapper: React.FC<IProps> = ({ children }) => <div className="page-content-wrapper">{children}</div>;
+const PageContentWrapper: React.FC<IProps> = ({ children }) => <main className="page-content-wrapper">{children}</main>;
 
 export { PageContentWrapper };

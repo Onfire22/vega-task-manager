@@ -1,26 +1,22 @@
 import { IconArrowBack, IconClipboardCopy, IconPlus, IconSitemap } from '@tabler/icons-react';
-import { Burger, Button, CloseButton, Input, Menu } from '@mantine/core';
+import { Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
-	onBurgerClick: () => void;
 	onGoBack: () => void;
 	onModalOpen: (modal: 'task' | 'project') => void;
 	searchValue: string;
 	path: string;
-	isSidebarOpened: boolean;
 	breadCrumbs: string;
 }
 
 const BaseCustomMenuView: React.FC<IProps> = ({
 	searchValue,
 	onSearchChange,
-	onBurgerClick,
 	onModalOpen,
-	isSidebarOpened,
 	onGoBack,
 	path,
 	breadCrumbs,
@@ -28,7 +24,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 	return (
 		<div className="base-custom-menu">
 			<div className="base-custom-menu__info">
-				<Burger lineSize={2} opened={isSidebarOpened} onClick={onBurgerClick} />
+				<div className="base-custom-menu__logo">V</div>
 				<div className="base-custom-menu__crumbs">{breadCrumbs}</div>
 			</div>
 			<div className="base-custom-menu__controls">

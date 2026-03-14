@@ -1,7 +1,6 @@
 import type { IDictionary, IProject } from '../../../types.ts';
 import React from 'react';
 import { Button, Progress, Tabs } from '@mantine/core';
-import { IconPlus } from '@tabler/icons-react';
 import './styles.less';
 import { SelectWithDot } from '../../../../../ui/select-with-dot';
 import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
@@ -10,11 +9,12 @@ import { TasksTable } from '../../tasks-table';
 interface IProps {
 	project: IProject | null;
 	activeTab: string;
+	projectProgress: number;
 	dictionariesOptions: Array<IDictionary>;
 	onTabClick: (tab: string | null) => void;
 }
 
-const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, dictionariesOptions }) => {
+const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, dictionariesOptions, projectProgress }) => {
 	if (!project) return null;
 	return (
 		<div className="project">
@@ -22,10 +22,10 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 				<div className="project__header">
 					<div className="project__avatar" />
 					<div className="project__info">
-						<div className="project__title">{project?.title}</div>
+						<div className="project__title">{project.title}</div>
 						<div className="project__meta">
 							<span>
-								Создан {project?.createdAt} - ID {project?.code}
+								Создан {project.createdAt} - ID {project.code}
 							</span>
 						</div>
 					</div>
@@ -41,7 +41,7 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 					</Tabs>
 				</div>
 				<div className="project__data">
-					{activeTab === 'description' && <div className="project__data-content">{project?.description}</div>}
+					{activeTab === 'description' && <div className="project__data-content">{project.description}</div>}
 					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
@@ -57,18 +57,18 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 					</div>
 					<div className="project__wrapper">
 						<span className="project__subtitle">Дата проекта</span>
-						<span className="project__date">{project?.createdAt}</span>
+						<span className="project__date">{project.createdAt}</span>
 					</div>
 					<div className="project__wrapper">
 						<span className="project__subtitle">Дедлайн</span>
-						<span className={`project__date${project?.deadline ? 'project__date_deadline' : ''}`}>
-							{project?.deadline}
+						<span className={`project__date${project.deadline ? 'project__date_deadline' : ''}`}>
+							{project.deadline}
 						</span>
 					</div>
 					<div className="project__wrapper">
 						<span className="project__subtitle">Прогресс</span>
 						<Progress.Root size="xs">
-							<Progress.Section value={100}></Progress.Section>
+							<Progress.Section value={projectProgress}></Progress.Section>
 						</Progress.Root>
 					</div>
 				</div>
@@ -77,11 +77,11 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 					<div className="project__users-title">
 						<span className="project__subtitle">Участники проекта</span>
 						<Button size="xs" className="project__button">
-							<IconPlus size={10} color="#fff" />
+							+
 						</Button>
 					</div>
 					<ul className="project__users-list">
-						{project?.users.map((user) => {
+						{project.users.map((user) => {
 							return (
 								<li className="project__user" key={user.id}>
 									<div className="project__user-avatar" />

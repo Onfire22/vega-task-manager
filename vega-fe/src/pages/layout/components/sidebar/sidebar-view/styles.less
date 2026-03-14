@@ -1,57 +1,53 @@
 .sidebar {
-	&__content {
-		height: 100%;
+	height: calc(100vh - 53px);
+	width: 54px;
+	background-color: var(--mantine-color-dark-9);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-right: 1px solid var(--mantine-color-dark-5);
+
+	&__menu {
+		padding: 5px;
 		display: flex;
 		flex-direction: column;
-		align-items: start;
-		gap: 20px;
+		gap: 10px;
 	}
 
-	&__profile {
+	&__item {
+		padding: 10px;
 		display: flex;
 		align-items: center;
-		gap: 20px;
-	}
+		justify-content: center;
+		border-radius: 7px;
+		transition: 0.3s ease-in;
 
-	&__avatar {
-		width: 40px;
-		height: 40px;
-		background-color: purple;
-		border-radius: 50vw;
-	}
-
-	&__links {
-		width: 100%;
-	}
-
-	&__link {
-		color: rgb(201, 201, 201);
-		cursor: pointer;
-		width: 100%;
-		padding: 15px;
-		display: flex;
-		align-items: center;
-		gap: 15px;
-		text-decoration: none;
-
-		&:hover {
-			background-color: var(--mantine-color-dark-6);
+		&:not(&_active):hover {
+			background-color: var(--mantine-color-dark-4);
+			transition: 0.3s ease-in;
 		}
 
 		&_active {
-			background-color: var(--mantine-color-teal-light);
-
-			&:hover {
-				background-color: var(--mantine-color-teal-light-hover);
-			}
-		}
-
-		a {
-			text-decoration: none;
+			background-color: var(--mantine-color-violet-9);
 		}
 	}
 
-	&__exit {
-		margin-top: 43vw;
+	&__link {
+		width: 24px;
+		height: 24px;
+		color: var(--mantine-color-dark-0);
+
+		&_active {
+			color: var(--mantine-color-violet-3);
+		}
+	}
+
+	&__button {
+		width: 24px;
+		height: 24px;
+		background-color: transparent;
+		border: none;
+		color: var(--mantine-color-dark-0);
+		cursor: pointer;
 	}
 }

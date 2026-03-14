@@ -1,6 +1,7 @@
 import { useDictionariesOptions, useProject } from '../../api/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
+import { useMemo } from 'react';
 
 export const useProjectData = (uuid?: string) => {
 	const { project, isProjectLoading } = useProject(uuid);
@@ -25,8 +26,21 @@ export const useProjectData = (uuid?: string) => {
 			}
 		: null;
 
+	const projectTasks = project?.tasks ?? null;
+
+	const projectProgress = useMemo(() => {
+		if (!projectTasks) return 0;
+
+		const totalTasks = projectTasks.length;
+
+		const completedTasks = projectTasks.filter((task) => task.taskStatus.label === 'completed').length;
+
+		return (completedTasks / totalTasks) * 100;
+	}, [projectTasks]);
+
 	return {
 		dictionariesOptions,
+		projectProgress,
 		project: projectData,
 		isProjectLoading: isProjectLoading || isDictionariesLoading,
 	};

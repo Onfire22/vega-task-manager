@@ -9,7 +9,7 @@ const Project = () => {
 
 	const [activeTab, setActiveTab] = useState('description');
 
-	const { project, isProjectLoading, dictionariesOptions } = useProjectData(params.uuid);
+	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);
 
 	const handleTabClick = (tab: string | null) => {
 		if (tab) {
@@ -24,6 +24,7 @@ const Project = () => {
 			project={project}
 			activeTab={activeTab}
 			dictionariesOptions={dictionariesOptions.projectStatus}
+			projectProgress={projectProgress}
 			onTabClick={handleTabClick}
 		/>
 	);

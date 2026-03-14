@@ -6,6 +6,7 @@ export const TABLE_HEADER = [
 		id: 'title',
 		name: 'Название',
 		sorting: 'title',
+		customCellComponent: CustomTableCell,
 	},
 	{
 		id: 'taskPriority',

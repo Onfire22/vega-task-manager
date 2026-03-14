@@ -7,7 +7,6 @@ const TasksTable = () => {
 	const params = useParams();
 
 	const { tasks, isProjectLoading } = useProjectTasks(params.uuid);
-	console.log(tasks);
 
 	const handleRowDoubleClick = (uuid: string) => {
 		navigate(`/task/${uuid}`);

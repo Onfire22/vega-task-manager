@@ -172,6 +172,7 @@ export const theme = createTheme({
 					fontSize: '11px',
 					textTransform: 'none',
 					letterSpacing: 0,
+					boxShadow: 'inset 0 0 0 1px var(--badge-color)',
 				},
 			},
 		},
@@ -213,19 +214,12 @@ export const theme = createTheme({
 			defaultProps: { radius: 'lg', centered: true },
 		},
 		Tabs: {
-			defaultProps: { variant: 'default' },
-			vars: (theme: any) => ({
-				root: {
-					'--tabs-color': theme.colors.violet[6],
-				},
-			}),
-			styles: () => ({
+			defaultProps: { variant: 'underline' },
+			styles: {
 				tab: {
 					fontSize: '13px',
-					color: 'rgba(255,255,255,0.4)',
 				},
-				tabLabel: {},
-			}),
+			},
 		},
 		Menu: {
 			defaultProps: { radius: 'md' },
