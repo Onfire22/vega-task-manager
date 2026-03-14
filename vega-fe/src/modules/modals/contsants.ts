@@ -12,6 +12,7 @@ export const PROJECT_FORM_INITIAL_VALUES = {
 	title: '',
 	description: '',
 	usersUuids: [],
+	deadLine: '',
 };
 
-export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'STACK_TYPE', 'TASK_STATUS'];
+export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'TASK_TYPE', 'TASK_STATUS'];

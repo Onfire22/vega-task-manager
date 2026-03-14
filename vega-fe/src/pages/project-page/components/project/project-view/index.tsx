@@ -5,6 +5,7 @@ import { IconPlus } from '@tabler/icons-react';
 import './styles.less';
 import { SelectWithDot } from '../../../../../ui/select-with-dot';
 import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
+import { TasksTable } from '../../tasks-table';
 
 interface IProps {
 	project: IProject | null;
@@ -41,6 +42,7 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 				</div>
 				<div className="project__data">
 					{activeTab === 'description' && <div className="project__data-content">{project?.description}</div>}
+					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
 			<aside className="project__sidebar">

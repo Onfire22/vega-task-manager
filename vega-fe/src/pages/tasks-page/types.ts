@@ -10,9 +10,8 @@ export interface IInitialState {
 export type TActiveTab = 'table' | 'kanban';
 
 export interface IExpDictData {
-	color?: string | null;
 	id: string;
-	name: string;
+	label: string;
 }
 
 export interface ITask {

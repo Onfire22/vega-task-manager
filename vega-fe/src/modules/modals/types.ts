@@ -22,6 +22,7 @@ export interface IProjectFormValues {
 	title: string;
 	description: string;
 	usersUuids: string[];
+	deadLine?: string;
 }
 
 export interface IProjectErrors {

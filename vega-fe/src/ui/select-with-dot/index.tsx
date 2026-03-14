@@ -1,5 +1,6 @@
 import { Group, Select, Text } from '@mantine/core';
 import React from 'react';
+import './styles.less';
 
 interface ISelectOption {
 	description: string;
@@ -24,18 +25,14 @@ const SelectWithDot: React.FC<IProps> = ({ options, value, statuses }) => {
 				const opt = option as ISelectOption;
 				const status = statuses.find((status) => status.value === opt.key)!;
 				return (
-					<Group gap="sm" wrap="nowrap" style={{ width: '100%' }}>
+					<Group gap="sm" wrap="nowrap" className="select-with-dot__content">
 						<div
 							className="select-with-dot__dot"
 							style={{
-								width: 8,
-								height: 8,
-								borderRadius: '50%',
 								background: status.color,
-								flexShrink: 0,
 							}}
 						/>
-						<div style={{ flex: 1 }} className="select-with-dot__text">
+						<div className="select-with-dot__text">
 							<Text size="sm" fw={checked ? 500 : 400}>
 								{opt.label}
 							</Text>

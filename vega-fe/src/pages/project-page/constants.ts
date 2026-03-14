@@ -12,3 +12,5 @@ export const ROLES_COLORS = {
 	member: '#818cf8',
 	viewer: '#888888',
 };
+
+export const CELLS_WITH_BADGES = ['taskStatus', 'taskStack', 'taskPriority'];

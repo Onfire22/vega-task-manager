@@ -1,4 +1,3 @@
-import { CustomTableHeaderCell } from './custom-table-header-cell';
 import { CustomTableCell } from '../../components/custom-table-cell';
 
 export const TABLE_HEADER = [
@@ -7,15 +6,12 @@ export const TABLE_HEADER = [
 		id: 'title',
 		name: 'Название',
 		sorting: 'title',
-		customHeaderComponent: CustomTableHeaderCell,
-		customCellComponent: CustomTableCell,
 	},
 	{
 		id: 'taskPriority',
 		name: 'Приоритет',
 		width: '120px',
 		sorting: 'taskPriorityUuid',
-		customHeaderComponent: CustomTableHeaderCell,
 		customCellComponent: CustomTableCell,
 	},
 	{
@@ -23,11 +19,9 @@ export const TABLE_HEADER = [
 		name: 'Статус',
 		width: '90px',
 		sorting: 'taskStatusUuid',
-		customHeaderComponent: CustomTableHeaderCell,
 		customCellComponent: CustomTableCell,
 	},
 	{ id: 'taskStack', name: 'Тэг', width: '70px', customCellComponent: CustomTableCell },
-	{ id: 'estimatedTime', name: 'Оценка', width: '100px' },
-	{ id: 'loggedTime', name: 'Затрачено', width: '100px' },
+	{ id: 'assignee', name: 'Исполнитель', width: '100px' },
 	{ id: 'createdAt', name: 'Дата создания', width: '130px' },
 ];

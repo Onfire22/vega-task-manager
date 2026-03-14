@@ -62,7 +62,7 @@ const TaskModal = () => {
 	return (
 		<TaskModalView
 			taskPrioritiesData={dictionariesOptions?.taskPriority}
-			stackListData={dictionariesOptions?.stackType}
+			stackListData={dictionariesOptions?.taskType}
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}

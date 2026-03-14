@@ -184,6 +184,7 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 						id: true,
 						code: true,
 						title: true,
+						createdAt: true,
 						taskPriority: {
 							select: DICTIONARY_SELECT,
 						},

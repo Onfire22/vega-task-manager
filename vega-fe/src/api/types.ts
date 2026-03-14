@@ -107,9 +107,8 @@ export interface IGetUserTasksRequest {
 }
 
 export interface IExpDictData {
-	color: string;
 	id: string;
-	name: string;
+	label: string;
 }
 
 export interface IExpUserDict {
@@ -181,6 +180,22 @@ export interface IProjectUser {
 	};
 }
 
+export interface ITaskDictionary {
+	id: string;
+	label: string;
+}
+
+export interface IProjectTask {
+	assignee: string | null;
+	code: string | null;
+	createdAt: string;
+	id: string;
+	taskPriority: ITaskDictionary;
+	taskStack: ITaskDictionary;
+	taskStatus: ITaskDictionary;
+	title: string;
+}
+
 export interface IProjectResponse {
 	project: {
 		id: string;
@@ -189,7 +204,7 @@ export interface IProjectResponse {
 		description: string;
 		createdAt: string;
 		deadline?: string;
-		tasks: [];
+		tasks: Array<IProjectTask>;
 		users: Array<IProjectUser>;
 		projectStatus: {
 			description: string;

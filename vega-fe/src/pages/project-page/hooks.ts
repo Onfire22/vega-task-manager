@@ -31,3 +31,21 @@ export const useProjectData = (uuid?: string) => {
 		isProjectLoading: isProjectLoading || isDictionariesLoading,
 	};
 };
+
+export const useProjectTasks = (uuid?: string) => {
+	const { project, isProjectLoading } = useProject(uuid);
+
+	const tasks = project
+		? project.tasks.map((item) => {
+				return {
+					...item,
+					createdAt: format(item.createdAt, DATE_FORMAT),
+				};
+			})
+		: [];
+
+	return {
+		tasks,
+		isProjectLoading,
+	};
+};

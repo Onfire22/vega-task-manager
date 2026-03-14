@@ -8,6 +8,22 @@ export interface IProjectUser {
 	};
 }
 
+export interface ITaskDictionary {
+	id: string;
+	label: string;
+}
+
+export interface IProjectTask {
+	assignee: string | null;
+	code: string | null;
+	createdAt: string;
+	id: string;
+	taskPriority: ITaskDictionary;
+	taskStack: ITaskDictionary;
+	taskStatus: ITaskDictionary;
+	title: string;
+}
+
 export interface IProject {
 	id: string;
 	title: string;
@@ -15,7 +31,7 @@ export interface IProject {
 	description: string;
 	createdAt: string;
 	deadline?: string;
-	tasks: [];
+	tasks: Array<IProjectTask>;
 	users: Array<IProjectUser>;
 	projectStatus: {
 		description: string;
