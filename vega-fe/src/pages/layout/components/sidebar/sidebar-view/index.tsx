@@ -1,47 +1,64 @@
 import React from 'react';
-import { Drawer } from '@mantine/core';
 import './styles.less';
-import { LINKS } from '../../../contsants.ts';
-import { IconLogout2 } from '@tabler/icons-react';
+import { BOTTOM_LINKS, TOP_LINKS } from '../../../contsants.ts';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '@mantine/core';
 
 interface IProps {
-	isSidebarOpened: boolean;
 	pathname: string;
-	onCloseSidebar: () => void;
 	onLogOutClick: () => void;
-	userData: { name?: string; secondName?: string };
 }
 
-const SidebarView: React.FC<IProps> = ({ isSidebarOpened, onCloseSidebar, pathname, onLogOutClick, userData }) => {
+const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick }) => {
 	return (
-		<Drawer size="xs" opened={isSidebarOpened} onClose={onCloseSidebar} title="Vega">
-			<aside className="sidebar">
-				<div className="sidebar__content">
-					<div className="sidebar__profile">
-						<div className="sidebar__avatar" />
-						<p className="sidebar__name">{`${userData.name} ${userData.secondName}`}</p>
-					</div>
-					<div className="sidebar__links">
-						{LINKS.map(({ href, label, icon: Icon }) => (
-							<Link
-								className={`sidebar__link ${pathname === href ? ' sidebar__link_active' : ''}`}
-								key={href}
-								to={href}
-								onClick={onCloseSidebar}
-							>
-								<Icon />
-								{label}
-							</Link>
-						))}
-					</div>
-				</div>
-				<a className="sidebar__link" onClick={onLogOutClick}>
-					<IconLogout2 />
-					<span>Выход</span>
-				</a>
-			</aside>
-		</Drawer>
+		<nav className="sidebar">
+			<ul className="sidebar__menu">
+				{TOP_LINKS.map((link) => {
+					const Icon = link.icon;
+					return (
+						<li
+							className={`sidebar__item${pathname.includes(link.href) ? ' sidebar__item_active' : ''}`}
+							key={link.href}
+						>
+							<Tooltip label={link.label} position="right">
+								<Link
+									to={link.href}
+									className={`sidebar__link${pathname.includes(link.href) ? ' sidebar__link_active' : ''}`}
+								>
+									<Icon />
+								</Link>
+							</Tooltip>
+						</li>
+					);
+				})}
+			</ul>
+			<ul className="sidebar__menu">
+				{BOTTOM_LINKS.map((link) => {
+					const Icon = link.icon;
+					return (
+						<li
+							key={link.href}
+							className={`sidebar__item${pathname.includes(link.href) ? ' sidebar__item_active' : ''}`}
+						>
+							<Tooltip label={link.label} position="right">
+								{link.href === 'logout' ? (
+									<button className="sidebar__button" type="button" onClick={onLogOutClick}>
+										<Icon />
+									</button>
+								) : (
+									<Link
+										to={link.href}
+										className={`sidebar__link${pathname.includes(link.href) ? ' sidebar__link_active' : ''}`}
+									>
+										<Icon />
+									</Link>
+								)}
+							</Tooltip>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 };
 

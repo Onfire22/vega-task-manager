@@ -13,7 +13,7 @@ const SignUpForm = () => {
 
 	const emailRef = useRef<HTMLInputElement>(null);
 
-	const { dictionariesOptions } = useDictionariesOptions(['STACK_TYPE']);
+	const { dictionariesOptions } = useDictionariesOptions(['USER_SPECIALISATION']);
 
 	const { handleNextStepClick, handlePrevStepClick, isSignUpLoading, activeStep, formik, isError } = useSignUpForm();
 
@@ -67,7 +67,7 @@ const SignUpForm = () => {
 		}
 
 		if (activeStep === 1) {
-			return !(formik.values.name && formik.values.secondName && formik.values.userStackUuid);
+			return !(formik.values.name && formik.values.secondName && formik.values.userSpecialisationUuid);
 		}
 
 		return false;
@@ -78,10 +78,8 @@ const SignUpForm = () => {
 		formik.values.passwordRepeat,
 		formik.values.name,
 		formik.values.secondName,
-		formik.values.userStackUuid,
+		formik.values.userSpecialisationUuid,
 	]);
-
-	console.log(formik.values);
 
 	return (
 		<>
@@ -95,7 +93,7 @@ const SignUpForm = () => {
 				passwordRef={passwordRef}
 				emailRef={emailRef}
 				isNextButtonDisabled={isNextButtonDisabled}
-				stackOptions={dictionariesOptions?.stackType}
+				stackOptions={dictionariesOptions?.userSpecialisation}
 				isError={isError}
 				onFieldChange={handleFieldChange}
 				onPopoverOpened={handlePopoverOpened}

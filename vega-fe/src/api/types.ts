@@ -3,7 +3,7 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
-	userStackUuid: string;
+	userSpecialisationUuid: string;
 }
 
 export interface ICurrentUser {
@@ -38,15 +38,27 @@ export interface ICreateTask {
 	taskStackUuid: string;
 }
 
-export type TDictionariesTypes = 'TASK_PRIORITY' | 'ROLE_TYPE' | 'STACK_TYPE' | 'TASK_STATUS';
+export type TDictionariesTypes =
+	| 'TASK_PRIORITY'
+	| 'ROLE_TYPE'
+	| 'USER_SPECIALISATION'
+	| 'TASK_STATUS'
+	| 'TASK_TYPE'
+	| 'PROJECT_STATUS';
 
-type TDictionariesMapped = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
+type TDictionariesMapped =
+	| 'taskPriority'
+	| 'roleType'
+	| 'userSpecialisation'
+	| 'taskStatus'
+	| 'taskType'
+	| 'projectStatus';
 
 export interface IDictionary {
+	description: string;
 	id: string;
-	name: string;
-	color: string | null;
-	fullName: string | null;
+	label: string;
+	key: string;
 }
 
 export type IDictionariesResponse = {
@@ -95,9 +107,8 @@ export interface IGetUserTasksRequest {
 }
 
 export interface IExpDictData {
-	color: string;
 	id: string;
-	name: string;
+	label: string;
 }
 
 export interface IExpUserDict {
@@ -154,3 +165,64 @@ export interface ITaskList {
 }
 
 export type TTaskList = { tasks: Array<ITaskList> };
+
+export interface IProjectUser {
+	id: string;
+	name: string;
+	secondName: string;
+	role: {
+		id: string;
+		label: string;
+		key: string;
+	};
+	userSpecialisation: {
+		label: string;
+	};
+}
+
+export interface ITaskDictionary {
+	id: string;
+	label: string;
+}
+
+export interface IProjectTask {
+	assignee: string | null;
+	code: string | null;
+	createdAt: string;
+	id: string;
+	taskPriority: ITaskDictionary;
+	taskStack: ITaskDictionary;
+	taskStatus: ITaskDictionary;
+	title: string;
+}
+
+export interface IProjectResponse {
+	project: {
+		id: string;
+		title: string;
+		code: string;
+		description: string;
+		createdAt: string;
+		deadline?: string;
+		tasks: Array<IProjectTask>;
+		users: Array<IProjectUser>;
+		projectStatus: {
+			description: string;
+			id: string;
+			label: string;
+			key: string;
+		};
+	};
+}
+
+export interface ICreateProjectResponse {
+	project: {
+		code: string;
+		createdAt: string;
+		description: string;
+		id: string;
+		projectStatusUuid: string;
+		title: string;
+		updatedAt: string;
+	};
+}

@@ -35,8 +35,7 @@ export const useKanbanTasks = () => {
 				: dictionaries?.taskStatus?.map((item) => {
 						return {
 							id: item.id,
-							name: item.name,
-							color: item.color,
+							label: item.label,
 							tasks: userTasks.filter((task) => task.taskStatus.id === item.id),
 						};
 					}),

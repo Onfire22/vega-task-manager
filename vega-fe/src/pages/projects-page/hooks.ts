@@ -16,7 +16,8 @@ export const useProjectsTableData = () => {
 		};
 	}
 
-	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.name === 'owner')?.id;
+	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.key === 'owner')?.id;
+	console.log(dictionaries);
 
 	const projects = projectsList.map((project) => {
 		const ownerUuid = project.memberships.find((member) => member.userRoleUuid === ownerDictionaryUuid)?.userUuid;

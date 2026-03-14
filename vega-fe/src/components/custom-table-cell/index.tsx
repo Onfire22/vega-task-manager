@@ -2,7 +2,7 @@ import { CustomTableCellView } from './custom-table-cell-view';
 import React from 'react';
 
 interface IProps {
-	data: { name: string; color: string };
+	data: { label: string; id: string; key: string } | string;
 	columnName: string;
 }
 

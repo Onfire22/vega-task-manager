@@ -5,8 +5,6 @@ import React from 'react';
 import { BULLET_ICONS, GREEN_COLOR, RED_COLOR } from '../../constants.ts';
 import { IconCheck, IconMessageCircle, IconPencil, IconClockHour3, IconX } from '@tabler/icons-react';
 import type { ITask, TOption } from '../../types.ts';
-import { CustomBadge } from '../../../../components/custom-badge';
-import { CustomStatus } from '../../../../components/custom-status';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 
@@ -140,7 +138,6 @@ const TaskView: React.FC<IProps> = ({
 									</div>
 								) : (
 									<div className="task__subtitle task__editable-field">
-										<CustomBadge color={task.taskStack.color} text={task.taskStack.name} />
 										<IconPencil
 											className="task__edit-icon"
 											size={18}
@@ -151,7 +148,6 @@ const TaskView: React.FC<IProps> = ({
 							</div>
 							<div className="task__row">
 								<span className="task__key">Статус:</span>
-								<CustomBadge text={task.taskStatus.name} color={task.taskStatus.color} />
 							</div>
 							<div className="task__row">
 								<span className="task__key">Приоритет:</span>
@@ -172,7 +168,6 @@ const TaskView: React.FC<IProps> = ({
 									</div>
 								) : (
 									<div className="task__subtitle task__editable-field">
-										<CustomStatus data={task.taskPriority} size={17} />
 										<IconPencil
 											className="task__edit-icon"
 											size={18}

@@ -981,10 +981,10 @@ export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeo
 
 export const DictionaryScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  fullName: 'fullName',
-  color: 'color',
+  label: 'label',
+  key: 'key',
   type: 'type',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1009,6 +1009,7 @@ export const ProjectScalarFieldEnum = {
   title: 'title',
   description: 'description',
   code: 'code',
+  projectStatusUuid: 'projectStatusUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1055,7 +1056,7 @@ export const UserScalarFieldEnum = {
   secondName: 'secondName',
   email: 'email',
   password: 'password',
-  userStackUuid: 'userStackUuid',
+  userSpecialisationUuid: 'userSpecialisationUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

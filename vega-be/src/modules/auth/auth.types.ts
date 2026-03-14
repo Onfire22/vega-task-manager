@@ -8,7 +8,7 @@ export interface ISignUpReqBody {
 	name: string;
 	password: string;
 	secondName: string;
-	userStackUuid: string;
+	userSpecialisationUuid: string;
 }
 
 export interface IAuthRes {

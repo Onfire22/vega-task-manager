@@ -52,13 +52,13 @@ const ProfileStep: React.FC<IProps> = ({
 					placeholder="Выберите значение"
 					name="userStackUuid"
 					data={stackOptions}
-					value={formValues.userStackUuid}
+					value={formValues.userSpecialisationUuid}
 					onChange={(value) => {
 						if (value) {
-							onSelectFieldChange('userStackUuid', value);
+							onSelectFieldChange('userSpecialisationUuid', value);
 						}
 					}}
-					error={formErrors?.userStackUuid}
+					error={formErrors?.userSpecialisationUuid}
 					withAsterisk
 				/>
 			</div>

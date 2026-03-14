@@ -1,8 +1,8 @@
 import { useGetDictionariesQuery } from './queries/dictionaries.api.ts';
-import { CACHING_SETTINGS } from '../constants.ts';
+import { CACHING_SETTINGS } from '../app/constants.ts';
 import type { TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
-import { useGetProjectsQuery } from './queries/projects.api.ts';
+import { useGetProjectByUuidQuery, useGetProjectsQuery } from './queries/projects.api.ts';
 import { useGetTaskQuery } from './queries/tasks.api.ts';
 import { transformDictionaries } from './utils.ts';
 
@@ -78,4 +78,12 @@ export const useTask = (uuid?: string) => {
 	const task = isSuccess ? data.task : null;
 
 	return { task, isTaskLoading: isLoading };
+};
+
+export const useProject = (uuid?: string) => {
+	const { data, isLoading, isSuccess } = useGetProjectByUuidQuery(uuid!, { skip: !uuid });
+
+	const project = isSuccess ? data.project : null;
+
+	return { project, isProjectLoading: isLoading };
 };

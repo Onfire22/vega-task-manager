@@ -1,13 +1,19 @@
-import { FRONT_ROUTES } from '../../constants.ts';
-import { IconClipboardCopy, IconSitemap, IconUserCog } from '@tabler/icons-react';
+import { FRONT_ROUTES } from '../../app/constants.ts';
+import { IconCalendarCheck, IconChartBar, IconLayoutGrid, IconLogout2, IconUser } from '@tabler/icons-react';
 
-export const LINKS = [
-	{ href: FRONT_ROUTES.profile, label: 'Профиль', icon: IconUserCog },
-	{ href: FRONT_ROUTES.root, label: 'Задачи', icon: IconClipboardCopy },
-	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: IconSitemap },
+export const TOP_LINKS = [
+	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: IconLayoutGrid },
+	{ href: FRONT_ROUTES.root, label: 'Задачи', icon: IconCalendarCheck },
+	{ href: '#', label: 'Статистика', icon: IconChartBar },
+];
+
+export const BOTTOM_LINKS = [
+	{ href: FRONT_ROUTES.profile, label: 'Профиль', icon: IconUser },
+	{ href: 'logout', label: 'Выход', icon: IconLogout2 },
 ];
 
 export const BREADCRUMBS = {
 	profile: 'Профиль',
 	projects: 'Проекты',
+	dashboard: 'Задачи',
 };

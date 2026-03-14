@@ -1,5 +1,5 @@
 import { CustomTableHeaderCell } from './custom-table-header-cell';
-import { CustomTableCell } from './custom-table-cell';
+import { CustomTableCell } from '../../components/custom-table-cell';
 
 export const TABLE_HEADER = [
 	{ id: 'code', name: 'Код', width: '110px' },

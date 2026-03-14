@@ -209,7 +209,7 @@ export type MembershipOrderByWithRelationInput = {
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userUuid_projectUuid?: Prisma.MembershipUserUuidProjectUuidCompoundUniqueInput
+  user_project?: Prisma.MembershipUser_projectCompoundUniqueInput
   AND?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
   OR?: Prisma.MembershipWhereInput[]
   NOT?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
@@ -221,7 +221,7 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
-}, "id" | "userUuid_projectUuid">
+}, "id" | "user_project">
 
 export type MembershipOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -317,7 +317,7 @@ export type MembershipOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type MembershipUserUuidProjectUuidCompoundUniqueInput = {
+export type MembershipUser_projectCompoundUniqueInput = {
   userUuid: string
   projectUuid: string
 }

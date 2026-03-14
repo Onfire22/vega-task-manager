@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { FRONT_ROUTES } from '../constants.ts';
+import { FRONT_ROUTES } from '../app/constants.ts';
 
 const PublicRoute = ({ isError, isFetching }: { isError: boolean; isFetching: boolean }) => {
 	if (isFetching) return <Outlet />;

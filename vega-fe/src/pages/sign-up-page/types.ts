@@ -15,7 +15,7 @@ export interface IFormValues {
 	passwordRepeat: string;
 	name: string;
 	secondName: string;
-	userStackUuid: string;
+	userSpecialisationUuid: string;
 }
 
 export interface IFormErrors {
@@ -24,7 +24,7 @@ export interface IFormErrors {
 	passwordRepeat?: string;
 	name?: string;
 	secondName?: string;
-	userStackUuid?: string;
+	userSpecialisationUuid?: string;
 }
 
 export interface IOptions {

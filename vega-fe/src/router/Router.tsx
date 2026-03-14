@@ -13,7 +13,7 @@ import { ProjectPage } from '../pages/project-page';
 import { Loader } from '@mantine/core';
 import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
-import { FRONT_ROUTES } from '../constants.ts';
+import { FRONT_ROUTES } from '../app/constants.ts';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();
@@ -28,7 +28,7 @@ const Router = () => {
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route element={<Layout />}>
-					<Route index element={<TasksPage />} />
+					<Route path={FRONT_ROUTES.root} element={<TasksPage />} />
 					<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 					<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
 					<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />

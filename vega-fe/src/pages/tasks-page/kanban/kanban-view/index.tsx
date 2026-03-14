@@ -1,6 +1,5 @@
 import type { IKanbanTasks } from '../../types.ts';
 import React from 'react';
-import { CustomBadge } from '../../../../components/custom-badge';
 import './styles.less';
 
 interface IProps {
@@ -16,9 +15,7 @@ const KanbanView: React.FC<IProps> = ({ columns, onTaskDoubleClick }) => {
 					return (
 						<div className="kanban__column" key={column.id}>
 							<div className="kanban__header">
-								<div className="kanban__title">
-									<CustomBadge color={column.color} text={column.name} />
-								</div>
+								<div className="kanban__title"></div>
 							</div>
 							<div className="kanban__content">
 								{column.tasks?.map((task) => {
@@ -34,18 +31,8 @@ const KanbanView: React.FC<IProps> = ({ columns, onTaskDoubleClick }) => {
 											</div>
 											<div className="kanban__task-descrription">{task.description}</div>
 											<div className="kanban__task-badges">
-												<div className="kanban__task-badge">
-													<CustomBadge
-														text={task.taskStack.name}
-														color={task.taskStack.color}
-													/>
-												</div>
-												<div className="kanban__task-badge">
-													<CustomBadge
-														text={task.taskPriority.name}
-														color={task.taskPriority.color}
-													/>
-												</div>
+												<div className="kanban__task-badge"></div>
+												<div className="kanban__task-badge"></div>
 											</div>
 											<div className="kanban__task-dates">{task.createdAt}</div>
 										</div>

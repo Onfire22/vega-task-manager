@@ -23,4 +23,5 @@ export const ROUTES = {
 	updateTaskStatus: '/api/tasks/status-update',
 	projects: '/api/projects',
 	createProject: '/api/projects/create',
+	getProject: '/api/projects',
 };

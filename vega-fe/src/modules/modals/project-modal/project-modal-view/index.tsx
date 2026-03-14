@@ -56,6 +56,7 @@ const ProjectModalView: React.FC<IProps> = ({
 						withAsterisk
 					/>
 				</div>
+				<div className="create-project-modal__field"></div>
 				<div className="create-project-modal__field">
 					<MultiSelect
 						label="Пользователи"

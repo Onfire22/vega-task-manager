@@ -4,7 +4,7 @@ export const SIGNUP_DEFAULT_VALUES = {
 	passwordRepeat: '',
 	name: '',
 	secondName: '',
-	userStackUuid: '',
+	userSpecialisationUuid: '',
 };
 
 export const VALIDATION_MESSAGES = {
