@@ -1,12 +1,13 @@
 import './styles.less';
-import { Button, Popover, Progress, Select, Tabs, Textarea, TextInput, Timeline } from '@mantine/core';
+import { Button, Divider, Popover, Progress, Select, Tabs, Textarea, TextInput, Timeline } from '@mantine/core';
 import type { IDictionary } from '../../../../api/types.ts';
 import React from 'react';
 import { BULLET_ICONS, GREEN_COLOR, RED_COLOR } from '../../constants.ts';
-import { IconCheck, IconMessageCircle, IconPencil, IconClockHour3, IconX } from '@tabler/icons-react';
+import { IconCheck, IconMessageCircle, IconPencil, IconClockHour3, IconX, IconPlus } from '@tabler/icons-react';
 import type { ITask, TOption } from '../../types.ts';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
+import { SelectWithDot } from '../../../../ui/select-with-dot';
 
 interface IProps {
 	task: ITask | null;
@@ -47,262 +48,117 @@ const TaskView: React.FC<IProps> = ({
 	if (!task) return null;
 	return (
 		<div className="task">
-			<div className="task__header">
-				<div className="task__avatar">
-					<img />
+			<div className="task__content">
+				<div className="task__breadcrumbs">project Задачи num</div>
+				<div className="task__title">task title</div>
+				<div className="task__controls">
+					<SelectWithDot options={[]} size="xs" />
+					<SelectWithDot options={[]} size="xs" />
+					<SelectWithDot options={[]} size="xs" />
 				</div>
-				<div className="task__info">
-					<div className="task__title">
-						<div className="task__project">Project / Task_CODE</div>
-					</div>
-					{field.fieldName === 'title' ? (
-						<div className="task__field">
-							<TextInput value={field.value} onChange={(e) => onFieldChange('title', e)} size="xs" />
-							<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
-							<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
-						</div>
-					) : (
-						<div className="task__subtitle task__editable-field">
-							<p className="task__name">{task.title}</p>
-							<IconPencil
-								className="task__edit-icon"
-								size={18}
-								onClick={() => onEditField('title', task.title)}
-							/>
-						</div>
-					)}
-				</div>
-			</div>
-			<div className="task__container">
-				<div className="task__content">
-					<div className="task__controlls">
-						<Button className="task__button" onClick={onLogWorkModalShown}>
-							Учет времени
-						</Button>
-						<Popover width={200} trapFocus position="bottom" withArrow shadow="md">
-							<Popover.Target>
-								<Button className="task__button">Статус</Button>
-							</Popover.Target>
-							<Popover.Dropdown>
-								<div className="task__dropdown">
-									<Timeline active={activeTaskStatus} bulletSize={34} lineWidth={4}>
-										{taskStatuses?.map((status) => {
-											const Icon = BULLET_ICONS[status.name as keyof typeof BULLET_ICONS];
-
-											return (
-												<Timeline.Item
-													bullet={
-														<button
-															className="task__dropdown-button"
-															type="button"
-															onClick={() =>
-																onUpdateTask({
-																	fieldName: 'taskStatus',
-																	value: status.id,
-																})
-															}
-														>
-															<Icon size={20} />
-														</button>
-													}
-													title={status.name}
-												>
-													test text
-												</Timeline.Item>
-											);
-										})}
-									</Timeline>
-								</div>
-							</Popover.Dropdown>
-						</Popover>
-					</div>
-					<div className="task__details">
-						<div className="task__heading">Детали задачи</div>
-						<div className="task__description">
-							<div className="task__row">
-								<span className="task__key">Тип:</span>
-								{field.fieldName === 'stackType' ? (
-									<div className="task__field">
-										<Select
-											value={field.value}
-											data={options.type}
-											size="xs"
-											onChange={(value) => {
-												if (value) {
-													onEditField('stackType', value);
-												}
-											}}
-										/>
-										<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
-										<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
-									</div>
-								) : (
-									<div className="task__subtitle task__editable-field">
-										<IconPencil
-											className="task__edit-icon"
-											size={18}
-											onClick={() => onEditField('stackType', task.taskStack.name)}
-										/>
-									</div>
-								)}
-							</div>
-							<div className="task__row">
-								<span className="task__key">Статус:</span>
-							</div>
-							<div className="task__row">
-								<span className="task__key">Приоритет:</span>
-								{field.fieldName === 'taskPriority' ? (
-									<div className="task__field">
-										<Select
-											value={field.value}
-											data={options.priority}
-											size="xs"
-											onChange={(value) => {
-												if (value) {
-													onEditField('taskPriority', value);
-												}
-											}}
-										/>
-										<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
-										<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
-									</div>
-								) : (
-									<div className="task__subtitle task__editable-field">
-										<IconPencil
-											className="task__edit-icon"
-											size={18}
-											onClick={() => onEditField('taskPriority', task.taskPriority.name)}
-										/>
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
-					<div className="task__description">
-						<div className="task__heading">Описание задачи:</div>
-						{field.fieldName === 'description' ? (
-							<div className="task__field">
-								<Textarea
-									className="task__textarea"
-									autosize
-									resize="vertical"
-									value={field.value}
-									onChange={(e) => onFieldChange('description', e)}
-								/>
-								<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
-								<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
-							</div>
-						) : (
-							<div className="task__subtitle task__editable-field">
-								<p className="task__name">{task.description}</p>
-								<div className="task__icon">
-									<IconPencil
-										className="task__edit-icon"
-										size={18}
-										onClick={() => onEditField('description', task.description)}
-									/>
-								</div>
-							</div>
-						)}
+				<Divider orientation="horizontal" className="task__divider" />
+				<div className="task__description">
+					<div className="task__subtitle">Описание</div>
+					<div className="task__text">
+						task with lon titlte task with lon titlte task with lon titlte task with lon titlte task with
+						lon titlte task with lon titlte task with lon titlte task with lon titlte task with lon titlte
+						task with lon titlte task with lon titlte task with lon titlte task with lon titlte task with
+						lon titlte.
 					</div>
 				</div>
-				<aside className="task__sidebar">
-					<div className="task__details">
-						<div className="task__heading">Сотрудники</div>
-						<div className="task__row">
-							<span className="task__key">Автор:</span>
-							<span className="task__value">{task.reporter}</span>
+				<Divider orientation="horizontal" className="task__divider" />
+				<div className="task__tabs">
+					<Tabs>
+						<Tabs.List className="task__tabs-list">
+							<Tabs.Tab value="description">Комментарии</Tabs.Tab>
+							<Tabs.Tab value="tasks">Логи</Tabs.Tab>
+						</Tabs.List>
+					</Tabs>
+				</div>
+			</div>
+			<aside className="task__aside">
+				<div className="task__block">
+					<div className="task__info">
+						<div className="task__subtitle">Описание</div>
+						<div className="task__label">
+							<div className="task__key">Автор</div>
+							<div className="task__value">Иванов Иван</div>
 						</div>
-						<div className="task__row">
-							<span className="task__key">Испольнитель:</span>
-							{field.fieldName === 'assignee' ? (
-								<div className="task__field">
-									<Select
-										value={field.value}
-										data={usersListOptions}
-										size="xs"
-										onChange={(value) => {
-											if (value) {
-												onEditField('assignee', value);
-											}
-										}}
-									/>
-									<IconCheck size={25} color={GREEN_COLOR} onClick={() => onUpdateTask()} />
-									<IconX size={25} onClick={onCancelChanges} color={RED_COLOR} />
-								</div>
-							) : (
-								<div className="task__subtitle task__editable-field">
-									<p className="task__name">{task.assignee}</p>
-									<IconPencil
-										className="task__edit-icon"
-										size={18}
-										onClick={() => onEditField('assignee', task.assignee)}
-									/>
-								</div>
-							)}
+						<div className="task__label">
+							<div className="task__key">Исполнитель</div>
+							<div className="task__value">
+								<a className="task__link">+ назначить меня</a>
+							</div>
 						</div>
-						<a
-							className="task__link"
-							onClick={() => onUpdateTask({ fieldName: 'assignee', value: currentUserId! })}
-						>
-							assign on me
-						</a>
-					</div>
-					<div className="task__details">
-						<div className="task__heading">Даты</div>
-						<div className="task__row">
-							<span className="task__key">Создано:</span>
-							<span className="task__value">{task.createdAt}</span>
-						</div>
-						<div className="task__row">
-							<span className="task__key">Обновлено:</span>
-							<span className="task__value">{task.updatedAt}</span>
+						<div className="task__label">
+							<div className="task__key" />
+							<div className="task__value">
+								<a className="task__link">+ назначить</a>
+							</div>
 						</div>
 					</div>
-					{(task.estimateTime || task.timeLogs.length > 0) && (
-						<div className="task__details">
-							<div className="task__heading">Учет времени</div>
-							<div className="task__progress">
-								<span className="task__key">Оценка:</span>
-								<Progress.Root size="xl">
-									<Progress.Section value={100}>
-										<Progress.Label>{task.estimateTime}</Progress.Label>
-									</Progress.Section>
-								</Progress.Root>
+				</div>
+				<div className="task__block">
+					<div className="task__info">
+						<div className="task__subtitle">Даты</div>
+						<div className="task__label">
+							<div className="task__key">Создано</div>
+							<div className="task__value">09.03.2026</div>
+						</div>
+						<div className="task__label">
+							<div className="task__key">Обновлено</div>
+							<div className="task__value">10.03.2026</div>
+						</div>
+					</div>
+				</div>
+				<div className="task__block">
+					<div className="task__info">
+						<div className="task__subtitle">Учёт времени</div>
+						<div className="task__progress">
+							<div className="task__bar">
+								<div className="task__time">
+									<span className="task__estimate">Оценка</span>
+									<span className="task__log">1ч</span>
+								</div>
+								<Progress value={50} size="xs" />
 							</div>
-							<div className="task__progress">
-								<span className="task__key">Потрачено:</span>
-								<Progress.Root size="xl">
-									<Progress.Section value={task.loggedPercents ?? 0}>
-										<Progress.Label>{task.totalLoggedTime}</Progress.Label>
-									</Progress.Section>
-								</Progress.Root>
+							<div className="task__bar">
+								<div className="task__time">
+									<span className="task__estimate">Потрачено</span>
+									<span className="task__log">30м</span>
+								</div>
+								<Progress value={50} size="xs" />
 							</div>
-							<div className="task__progress">
-								<span className="task__key">Осталось:</span>
-								<Progress.Root size="xl">
-									<Progress.Section value={task.remainingPercents ?? 0}>
-										<Progress.Label>{task.remainingTime}</Progress.Label>
-									</Progress.Section>
-								</Progress.Root>
+							<div className="task__bar">
+								<div className="task__time">
+									<span className="task__estimate">Осталось</span>
+									<span className="task__log">30м</span>
+								</div>
+								<Progress value={50} size="xs" />
 							</div>
 						</div>
-					)}
-				</aside>
-			</div>
-			<div className="task__footer">
-				<Tabs defaultValue="comments" onChange={onSetActiveTab}>
-					<Tabs.List>
-						<Tabs.Tab value="comments" leftSection={<IconMessageCircle size={15} />}>
-							Комментарии
-						</Tabs.Tab>
-						<Tabs.Tab value="logs" leftSection={<IconClockHour3 size={15} />}>
-							Логи
-						</Tabs.Tab>
-					</Tabs.List>
-				</Tabs>
-				{activeTab === 'comments' ? <Comments /> : <TaskLogs logs={task.timeLogs} />}
-			</div>
+						<div className="task__button">
+							<Button>
+								<IconPlus size={18} />
+								<span>Записать время</span>
+							</Button>
+						</div>
+					</div>
+				</div>
+				<div className="task__block">
+					<div className="task__info">
+						<div className="task__subtitle">Проект</div>
+						<div className="task__label">
+							<div className="task__key">Название</div>
+							<div className="task__value">Title</div>
+						</div>
+						<div className="task__label">
+							<div className="task__key">Статус</div>
+							<div className="task__value">Бэклог</div>
+						</div>
+					</div>
+				</div>
+			</aside>
 		</div>
 	);
 };

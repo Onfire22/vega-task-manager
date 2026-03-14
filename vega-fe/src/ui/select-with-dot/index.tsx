@@ -13,13 +13,15 @@ interface IProps {
 	options: Array<ISelectOption>;
 	statuses: Array<Record<string, string>>;
 	value: string;
+	size?: string;
 }
 
-const SelectWithDot: React.FC<IProps> = ({ options, value, statuses }) => {
+const SelectWithDot: React.FC<IProps> = ({ options, value, statuses, size = 'sm' }) => {
 	return (
 		<Select
 			data={options}
 			value={value}
+			size={size}
 			className="select-with-dot"
 			renderOption={({ option, checked }) => {
 				const opt = option as ISelectOption;
