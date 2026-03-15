@@ -41,9 +41,11 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
-				<Menu shadow="md" width={180}>
+				<Menu width={180}>
 					<Menu.Target>
-						<Button leftSection={<IconPlus size={17} />}>Создать</Button>
+						<Button variant="accent" leftSection={<IconPlus size={17} />}>
+							Создать
+						</Button>
 					</Menu.Target>
 					<Menu.Dropdown>
 						<Menu.Label>Задачу / проект</Menu.Label>

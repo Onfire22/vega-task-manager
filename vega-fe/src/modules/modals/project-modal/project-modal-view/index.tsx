@@ -74,7 +74,7 @@ const ProjectModalView: React.FC<IProps> = ({
 						clearable
 					/>
 				</div>
-				<Button variant="filled" type="submit">
+				<Button variant="accent" type="submit">
 					Создать
 				</Button>
 			</form>

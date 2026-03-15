@@ -1,7 +1,4 @@
-.table-controls {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.tasks-controls {
 	position: relative;
 	margin-bottom: 20px;
 
@@ -17,23 +14,19 @@
 	}
 
 	&__tabs {
-		display: flex;
-		align-items: center;
-		gap: 10px;
+		margin-bottom: 10px;
 	}
 
-	&__tab {
-		font-size: 16px;
-		border: none;
-		background-color: transparent;
-		cursor: pointer;
-		position: relative;
-		border-bottom: 1px solid transparent;
-		z-index: 2;
+	&__filters {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 
-		&_active {
-			border-bottom: 1px solid var(--mantine-color-teal-4);
-		}
+	&__elements {
+		display: flex;
+		align-items: center;
+		gap: 5px;
 	}
 
 	&__switch {

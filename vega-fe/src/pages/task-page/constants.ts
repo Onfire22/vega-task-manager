@@ -1,6 +1,10 @@
+import type { TDictionariesTypes } from '../../api/types.ts';
+
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
 export const DATE_TIME_FORMAT = 'dd.MM.yyyy hh:mm';
+
+export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'TASK_TYPE', 'TASK_STATUS'];
 
 export const LOG_TIME_INITIAL_VALUES = {
 	loggedTime: '',

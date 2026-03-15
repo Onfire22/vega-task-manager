@@ -1,20 +1,18 @@
 import { TableControlsView } from './table-controls-view';
-import type { TActiveTab } from '../types.ts';
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { setActiveTab, setIsAssignee } from '../slice.ts';
-import { getIsAssigneeSelector } from '../selectors.ts';
+import { getActiveTabSelector, getIsAssigneeSelector } from '../selectors.ts';
+import { useDictionariesOptions } from '../../../api/hooks.ts';
+import { BASE_DICTIONARIES_META } from '../constants.ts';
 
-interface IProps {
-	activeTab: TActiveTab;
-}
-
-const TableControls: React.FC<IProps> = ({ activeTab }) => {
+const TableControls = () => {
 	const isAssignee = useAppSelector(getIsAssigneeSelector());
+	const activeTab = useAppSelector(getActiveTabSelector());
+	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const dispatch = useAppDispatch();
 
-	const handleTabClick = (tab: TActiveTab) => {
+	const handleTabClick = (tab: string | null) => {
 		dispatch(setActiveTab(tab));
 	};
 
@@ -26,6 +24,8 @@ const TableControls: React.FC<IProps> = ({ activeTab }) => {
 		<TableControlsView
 			activeTab={activeTab}
 			isAssignee={isAssignee}
+			dictionariesOptions={dictionariesOptions}
+			isDictionariesLoading={isDictionariesLoading}
 			onTabClick={handleTabClick}
 			onSwitchClick={handleSwitchClick}
 		/>

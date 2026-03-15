@@ -1,13 +1,11 @@
 export interface IInitialState {
-	activeTab: TActiveTab;
+	activeTab: string;
 	isAssignee: boolean;
 	sorting: {
 		column: string;
 		direction: 'asc' | 'desc';
 	};
 }
-
-export type TActiveTab = 'table' | 'kanban';
 
 export interface IExpDictData {
 	id: string;
@@ -29,4 +27,15 @@ export type TTaskList = Array<ITask>;
 
 export interface IKanbanTasks extends IExpDictData {
 	tasks: TTaskList;
+}
+
+export interface IOptionType {
+	label: string;
+	value: string;
+}
+
+export interface IDictionaries {
+	taskPriority: Array<IOptionType>;
+	taskStatus: Array<IOptionType>;
+	taskType: Array<IOptionType>;
 }

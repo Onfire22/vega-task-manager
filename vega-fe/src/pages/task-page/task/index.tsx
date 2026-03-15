@@ -1,11 +1,10 @@
 import { TaskView } from './task-view';
 import { Loader } from '@mantine/core';
 import { useDictionariesOptions, useUsersOptions } from '../../../api/hooks.ts';
-import { INITIAL_FIELD_VALUES } from '../constants.ts';
+import { BASE_DICTIONARIES_META, INITIAL_FIELD_VALUES } from '../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useTaskData } from '../hooks.ts';
 import { useUpdateTaskMutation } from '../../../api/queries/tasks.api.ts';
-import { BASE_DICTIONARIES_META } from '../../tasks-page/constants.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';

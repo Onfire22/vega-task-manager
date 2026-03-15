@@ -1,19 +1,16 @@
-import type { TActiveTab } from '../../types.ts';
 import React from 'react';
 import { TableControls } from '../../table-controls';
-import { Kanban } from '../../kanban';
-import { TasksTable } from '../../tasks-table';
 import './styles.less';
 
 interface IProps {
-	activeTab: TActiveTab;
+	component: React.ComponentType;
 }
 
-const TasksView: React.FC<IProps> = ({ activeTab }) => {
+const TasksView: React.FC<IProps> = ({ component: Component }) => {
 	return (
 		<div className="tasks">
-			<TableControls activeTab={activeTab} />
-			{activeTab === 'table' ? <TasksTable /> : <Kanban />}
+			<TableControls />
+			<Component />
 		</div>
 	);
 };

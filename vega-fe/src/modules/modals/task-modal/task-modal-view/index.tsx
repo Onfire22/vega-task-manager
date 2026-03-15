@@ -109,7 +109,7 @@ const TaskModalView: React.FC<IProps> = ({
 						withAsterisk
 					/>
 				</div>
-				<Button variant="filled" type="submit">
+				<Button variant="accent" type="submit">
 					Создать
 				</Button>
 			</form>

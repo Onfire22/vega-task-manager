@@ -161,6 +161,15 @@ export const theme = createTheme({
 						},
 					};
 				}
+				if (props.variant === 'accent') {
+					return {
+						root: {
+							'--button-bg': '#3A44CC',
+							'--button-hover': '#262E9E',
+							'--button-color': '#fff',
+						},
+					};
+				}
 				return { root: {} };
 			},
 		},
