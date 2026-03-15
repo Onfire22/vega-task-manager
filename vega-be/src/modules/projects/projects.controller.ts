@@ -4,43 +4,40 @@ import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
 import { ICreateProjectRequestBody, IProjectsRequest, TUpdateProjectRequest } from './projects.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
-import { normalizeProject } from './projects.mappers';
+import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
 export const getProjects = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const projects = await prismaAppClient.project.findMany({
 			select: {
 				id: true,
-				title: true,
-				description: true,
 				code: true,
+				title: true,
 				createdAt: true,
+				projectStatus: {
+					select: {
+						id: true,
+						key: true,
+						label: true,
+					},
+				},
 				memberships: {
 					select: {
-						userUuid: true,
-						userRoleUuid: true,
+						userRole: { select: { id: true, label: true, key: true } },
+						user: { select: { id: true, name: true, secondName: true } },
 					},
 				},
 				tasks: {
 					select: {
-						code: true,
-						title: true,
-						createdAt: true,
-						taskPriority: {
-							select: { id: true, label: true },
-						},
 						taskStatus: {
-							select: { id: true, label: true },
-						},
-						taskStack: {
-							select: { id: true, label: true },
+							select: { id: true, label: true, key: true },
 						},
 					},
 				},
 			},
 		});
 
-		res.status(200).json({ projects });
+		res.status(200).json({ projects: normalizeProjectsList(projects) });
 	} catch (e) {
 		next(next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError)));
 	}

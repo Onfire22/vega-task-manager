@@ -1,5 +1,6 @@
 export const FRONT_ROUTES = {
-	root: '/dashboard',
+	root: '/',
+	dashboard: '/dashboard',
 	signIn: '/sign-in',
 	signUp: '/sign-up',
 	profile: '/profile',

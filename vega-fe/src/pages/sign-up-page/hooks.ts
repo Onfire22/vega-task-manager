@@ -20,7 +20,6 @@ export const useSignUpForm = () => {
 		validationSchema: activeStep === 0 ? AccountStepValidationSchema : ProfileStepValidationSchema,
 		validateOnChange: false,
 		onSubmit: async (values) => {
-			console.log(values);
 			try {
 				await signUpUser(values).unwrap();
 			} catch (e) {

@@ -76,10 +76,12 @@ export interface IUsers {
 export interface IProject {
 	code: string;
 	createdAt: Date;
-	description: string;
 	id: string;
-	memberships: [{ userUuid: string; userRoleUuid: string }];
 	title: string;
+	projectStatus: IDictionary;
+	tasksCount: number;
+	projectProgress: number;
+	users: Array<{ id: string; name: string; secondName: string; role: IDictionary }>;
 }
 
 export interface IProjectCreate {

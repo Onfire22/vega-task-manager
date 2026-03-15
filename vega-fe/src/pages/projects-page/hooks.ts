@@ -1,13 +1,12 @@
-import { useDictionaries, useProjects, useUsers } from '../../api/hooks.ts';
+import { useDictionaries, useProjects } from '../../api/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
 
 export const useProjectsTableData = () => {
 	const { dictionaries, isDictionariesLoading } = useDictionaries(['ROLE_TYPE']);
-	const { usersList, isUsersLoading } = useUsers();
 	const { projectsList, isProjectsLoading } = useProjects();
 
-	const isProjectDataLoading = isDictionariesLoading || isUsersLoading || isProjectsLoading;
+	const isProjectDataLoading = isDictionariesLoading || isProjectsLoading;
 
 	if (isProjectDataLoading) {
 		return {
@@ -17,17 +16,12 @@ export const useProjectsTableData = () => {
 	}
 
 	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.key === 'owner')?.id;
-	console.log(dictionaries);
 
 	const projects = projectsList.map((project) => {
-		const ownerUuid = project.memberships.find((member) => member.userRoleUuid === ownerDictionaryUuid)?.userUuid;
-		const owner = usersList.find((user) => user.id === ownerUuid);
+		const owner = project.users.find((user) => user.role.id === ownerDictionaryUuid);
 
 		return {
-			id: project.id,
-			code: project.code,
-			description: project.description,
-			title: project.title,
+			...project,
 			createdAt: format(project.createdAt, DATE_FORMAT),
 			owner: owner ? `${owner.name} ${owner.secondName}` : '-',
 		};

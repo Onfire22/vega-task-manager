@@ -1,7 +1,7 @@
-import { ProjectTable } from './components/project-table';
+import { Projects } from './components/projects';
 
 const ProjectsPage = () => {
-	return <ProjectTable />;
+	return <Projects />;
 };
 
 export { ProjectsPage };

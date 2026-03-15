@@ -1,0 +1,48 @@
+.projects {
+	width: 100%;
+	padding: 20px;
+
+	&__info {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 5px;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 500;
+		color: #fff;
+	}
+
+	&__controlls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__tabs {
+		display: flex;
+		align-items: center;
+		background-color: var(--mantine-color-dark-5);
+		border-radius: 5px;
+	}
+
+	&__button {
+		padding: 4px 10px;
+		font-size: 12px;
+		border-radius: 5px;
+		gap: 2px;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		background-color: transparent;
+		color: var(--mantine-color-dark-2);
+
+		&_active {
+			background-color: var(--mantine-color-dark-4);
+			color: #fff;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { TasksPage } from '../pages/tasks-page';
 import { SignInPage } from '../pages/sign-in-page';
 import { SignUpPage } from '../pages/sign-up-page';
@@ -28,7 +28,8 @@ const Router = () => {
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route element={<Layout />}>
-					<Route path={FRONT_ROUTES.root} element={<TasksPage />} />
+					<Route path={FRONT_ROUTES.root} element={<Navigate to={FRONT_ROUTES.dashboard} replace />} />
+					<Route path={FRONT_ROUTES.dashboard} element={<TasksPage />} />
 					<Route path={FRONT_ROUTES.task} element={<TaskPage />} />
 					<Route path={FRONT_ROUTES.profile} element={<UserProfilePage />} />
 					<Route path={FRONT_ROUTES.projects} element={<ProjectsPage />} />

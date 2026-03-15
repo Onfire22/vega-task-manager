@@ -18,7 +18,7 @@ interface IProps {
 
 const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOfDataMessage, onRowDoubleClick }) => {
 	return (
-		<Table highlightOnHover withTableBorder withColumnBorders>
+		<Table highlightOnHover className="table">
 			<Table.Thead>
 				<Table.Tr>
 					{headerData.map((data) => {
@@ -40,12 +40,7 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOf
 			<Table.Tbody>
 				{tableData.map((data) => {
 					return (
-						<Table.Tr
-							className="table__row"
-							ta="center"
-							key={data.id}
-							onDoubleClick={() => onRowDoubleClick(data.id)}
-						>
+						<Table.Tr className="table__row" key={data.id} onDoubleClick={() => onRowDoubleClick(data.id)}>
 							{headerData.map((item) => {
 								const CustomCell = item?.customCellComponent;
 								if (CustomCell) {
@@ -55,7 +50,6 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOf
 										</Table.Td>
 									);
 								}
-								console.log(data[item.id]);
 								return <Table.Td key={item.id}>{data[item.id] as string}</Table.Td>;
 							})}
 						</Table.Tr>

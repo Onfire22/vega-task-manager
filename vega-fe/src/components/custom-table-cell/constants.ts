@@ -1,4 +1,6 @@
-export const CELLS_WITH_BADGES = ['taskStatus', 'taskStack', 'taskPriority'];
+export const CELLS_WITH_BADGES = ['taskStatus', 'taskStack', 'taskPriority', 'projectStatus'];
+
+export const PROGRESS_CELL = 'projectProgress';
 
 export const COLORS = {
 	medium: '#D98A06',
@@ -17,4 +19,6 @@ export const COLORS = {
 	fs: '#A855F7',
 	qa: '#D98A06',
 	an: '#E24B4A',
+
+	p_backlog: '#fff',
 };

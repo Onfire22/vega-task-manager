@@ -10,7 +10,7 @@ interface IProps {
 	onRowDoubleClick: (uuid: string) => void;
 }
 
-const ProjectTableView: React.FC<IProps> = ({ projects, isLoading, onRowDoubleClick }) => {
+const ProjectsTableView: React.FC<IProps> = ({ projects, isLoading, onRowDoubleClick }) => {
 	return (
 		<div className="projects-table">
 			<CustomTable
@@ -24,4 +24,4 @@ const ProjectTableView: React.FC<IProps> = ({ projects, isLoading, onRowDoubleCl
 	);
 };
 
-export { ProjectTableView };
+export { ProjectsTableView };

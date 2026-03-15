@@ -1,8 +1,8 @@
-import { ProjectTableView } from './project-table-view';
+import { ProjectsTableView } from './projects-table-view';
 import { useProjectsTableData } from '../../hooks.ts';
 import { useNavigate } from 'react-router-dom';
 
-const ProjectTable = () => {
+const ProjectsTable = () => {
 	const navigate = useNavigate();
 
 	const { projects, isLoading } = useProjectsTableData();
@@ -11,7 +11,7 @@ const ProjectTable = () => {
 		navigate(`/project/${uuid}`);
 	};
 
-	return <ProjectTableView projects={projects} isLoading={isLoading} onRowDoubleClick={handleRowDoubleClick} />;
+	return <ProjectsTableView projects={projects} isLoading={isLoading} onRowDoubleClick={handleRowDoubleClick} />;
 };
 
-export { ProjectTable };
+export { ProjectsTable };

@@ -53,7 +53,6 @@ export type ProjectWithDetails = ProjectGetPayload<{
 	select: {
 		id: true;
 		title: true;
-		description: true;
 		createdAt: true;
 		memberships: {
 			select: {
@@ -63,17 +62,15 @@ export type ProjectWithDetails = ProjectGetPayload<{
 		};
 		tasks: {
 			select: {
-				id: true;
-				code: true;
-				title: true;
-				taskPriority: { select: typeof DICTIONARY_SELECT };
-				taskStatus: { select: typeof DICTIONARY_SELECT };
-				taskStack: { select: typeof DICTIONARY_SELECT };
-				assignee: { select: typeof USER_SELECT };
+				taskStatus: {
+					select: { id: true; label: true; key: true };
+				};
 			};
 		};
 	};
 }>;
+
+export type TProjectTasks = ProjectWithDetails['tasks'][number];
 
 export interface ICreateProjectRequestBody {
 	title: string;

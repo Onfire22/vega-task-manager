@@ -3,7 +3,7 @@ import { IconCalendarCheck, IconChartBar, IconLayoutGrid, IconLogout2, IconUser 
 
 export const TOP_LINKS = [
 	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: IconLayoutGrid },
-	{ href: FRONT_ROUTES.root, label: 'Задачи', icon: IconCalendarCheck },
+	{ href: FRONT_ROUTES.dashboard, label: 'Задачи', icon: IconCalendarCheck },
 	{ href: '#', label: 'Статистика', icon: IconChartBar },
 ];
 
