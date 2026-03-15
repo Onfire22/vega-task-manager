@@ -51,8 +51,11 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 						<span className="project__subtitle">Статус</span>
 						<SelectWithDot
 							options={dictionariesOptions}
-							value={project.projectStatus.id}
+							value={project.projectStatus}
 							statuses={STATUSES}
+							onChange={(value) => {
+								if (!value) return;
+							}}
 						/>
 					</div>
 					<div className="project__wrapper">

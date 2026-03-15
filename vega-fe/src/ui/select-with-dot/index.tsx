@@ -9,17 +9,40 @@ interface ISelectOption {
 	value: string;
 }
 
+interface IValue {
+	id: string;
+	key: string;
+	label: string;
+}
+
 interface IProps {
 	options: Array<ISelectOption>;
 	statuses: Array<Record<string, string>>;
-	value: string;
+	value: IValue;
+	size?: string;
+	leftSection?: string;
+	onChange: (value: string | null) => void;
 }
 
-const SelectWithDot: React.FC<IProps> = ({ options, value, statuses }) => {
+const SelectWithDot: React.FC<IProps> = ({ options, value, statuses, leftSection, onChange, size = 'sm' }) => {
+	const activeColor = statuses.find((status) => status.value === value.key)?.color;
 	return (
 		<Select
 			data={options}
-			value={value}
+			value={value.id}
+			size={size}
+			leftSectionWidth={leftSection ? leftSection.length * 6 + 14 : undefined}
+			styles={{
+				section: {
+					justifyContent: 'left',
+					paddingLeft: '3px',
+				},
+				input: {
+					backgroundColor: activeColor + '33',
+					borderColor: activeColor,
+					color: activeColor,
+				},
+			}}
 			className="select-with-dot"
 			renderOption={({ option, checked }) => {
 				const opt = option as ISelectOption;
@@ -48,6 +71,10 @@ const SelectWithDot: React.FC<IProps> = ({ options, value, statuses }) => {
 					</Group>
 				);
 			}}
+			{...(leftSection
+				? { leftSection: <div className="select-with-dot__left-section">{leftSection}</div> }
+				: {})}
+			onChange={onChange}
 		/>
 	);
 };

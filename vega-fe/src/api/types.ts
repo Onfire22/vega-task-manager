@@ -109,6 +109,7 @@ export interface IGetUserTasksRequest {
 export interface IExpDictData {
 	id: string;
 	label: string;
+	key: string;
 }
 
 export interface IExpUserDict {
@@ -141,6 +142,11 @@ export interface IExpTaskResponse {
 	estimateTime: Partial<{ minutes: string; hours: string }> | null;
 	remainingTime: Partial<{ minutes: string; hours: string }> | null;
 	totalLoggedTime: Partial<{ minutes: string; hours: string }> | null;
+	project: {
+		code: string;
+		id: string;
+		title: string;
+	};
 	timeLogs: Array<ITimeLog>;
 	assignee: IExpUserDict | null;
 	reporter: IExpUserDict;

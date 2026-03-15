@@ -1,6 +1,6 @@
 export const FIELDS_MAP = {
 	title: 'title',
-	stackType: 'taskStackUuid',
+	taskStack: 'taskStackUuid',
 	taskPriority: 'taskPriorityUuid',
 	assignee: 'assigneeUuid',
 	taskStatus: 'taskStatusUuid',
