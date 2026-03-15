@@ -9,10 +9,19 @@ export const getIsAssigneeSelector = () => (state: RootState) =>
 
 export const getSortingSelector = () => (state: RootState) => state.tasksReducer?.sorting || initialState.sorting;
 
+export const getFiltersStateSelector = () => (state: RootState) => state.tasksReducer?.filters || initialState.filters;
+
 export const getFiltersSelector = () =>
-	createSelector(getSortingSelector(), getIsAssigneeSelector(), (sorting, isAssignee) => {
-		return {
-			sorting,
-			isAssignee,
-		};
-	});
+	createSelector(
+		getSortingSelector(),
+		getIsAssigneeSelector(),
+		getFiltersStateSelector(),
+		(sorting, isAssignee, filters) => {
+			const filtersData = Object.keys(filters).reduce((acc, filter) => {}, {});
+
+			return {
+				sorting,
+				isAssignee,
+			};
+		},
+	);

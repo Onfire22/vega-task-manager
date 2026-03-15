@@ -1,11 +1,20 @@
 export interface IInitialState {
-	activeTab: string;
+	activeTab: string | null;
 	isAssignee: boolean;
 	sorting: {
 		column: string;
 		direction: 'asc' | 'desc';
 	};
+	filters: IFilters;
 }
+
+export interface IFilters {
+	taskPriority: Record<string, boolean>;
+	taskStatus: Record<string, boolean>;
+	taskType: Record<string, boolean>;
+}
+
+export type TFilter = 'taskPriority' | 'taskStatus' | 'taskType';
 
 export interface IExpDictData {
 	id: string;

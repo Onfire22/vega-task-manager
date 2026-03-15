@@ -8,7 +8,7 @@ import type { IDictionaries } from '../../types.ts';
 interface IProps {
 	onTabClick: (value: string | null) => void;
 	onSwitchClick: () => void;
-	activeTab: string;
+	activeTab: string | null;
 	isAssignee: boolean;
 	isDictionariesLoading: boolean;
 	dictionariesOptions: IDictionaries;
@@ -42,13 +42,20 @@ const TableControlsView: React.FC<IProps> = ({
 								component={Button}
 								options={dictionariesOptions.taskPriority}
 								placeholder="Приоритет"
+								filter="taskPriority"
 							/>
 							<FiltersMenu
 								component={Button}
 								options={dictionariesOptions.taskStatus}
 								placeholder="Статус"
+								filter="taskStatus"
 							/>
-							<FiltersMenu component={Button} options={dictionariesOptions.taskType} placeholder="Тег" />
+							<FiltersMenu
+								component={Button}
+								options={dictionariesOptions.taskType}
+								placeholder="Тег"
+								filter="taskType"
+							/>
 						</>
 					)}
 				</div>
