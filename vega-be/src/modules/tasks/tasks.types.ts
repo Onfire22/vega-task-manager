@@ -64,7 +64,7 @@ export interface IGetTaskParams {
 	uuid: string;
 }
 
-export type TUpdateTaskFields = 'title' | 'stackType' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+export type TUpdateTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
 
 export type TUpdateTask = {
 	fieldName: TUpdateTaskFields;

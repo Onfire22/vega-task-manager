@@ -1,26 +1,24 @@
 import { format } from 'date-fns';
 import { useTask } from '../../api/hooks.ts';
-import { DATE_FORMAT, DATE_TIME_FORMAT, TASK_STATUS_NUMBER } from './constants.ts';
+import { DATE_FORMAT, DATE_TIME_FORMAT } from './constants.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
 
-	if (!task) return { task: null, isTaskLoading, activeTaskStatus: 0 };
+	if (!task) return { task: null, isTaskLoading };
 
-	const remainingPercents = task.remainingTimeInSecs
-		? (task.remainingTimeInSecs * 100) / task.estimateTimeInSecs
-		: null;
+	const remainingPercents = task.remainingTimeInSecs ? (task.remainingTimeInSecs * 100) / task.estimateTimeInSecs : 0;
 
 	const loggedPercents = task.totalLoggedTimeInSecs
 		? (task.totalLoggedTimeInSecs * 100) / task.estimateTimeInSecs
-		: null;
+		: 0;
 
 	const taskData = {
 		...task,
 		remainingPercents,
 		loggedPercents,
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
-		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : 'unassigned',
+		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
 		remainingTime:
 			task?.remainingTime?.hours || task?.remainingTime?.minutes
 				? `${task.remainingTime.hours || ''} ${task.remainingTime.minutes || ''}`
@@ -44,11 +42,8 @@ export const useTaskData = (uuid?: string) => {
 		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
 	};
 
-	const activeTaskStatus = TASK_STATUS_NUMBER[task.taskStatus.name as keyof typeof TASK_STATUS_NUMBER];
-
 	return {
 		task: taskData,
-		activeTaskStatus,
 		isTaskLoading,
 	};
 };

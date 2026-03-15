@@ -23,6 +23,6 @@ export const TABLE_HEADER = [
 		customCellComponent: CustomTableCell,
 	},
 	{ id: 'taskStack', name: 'Тэг', width: '70px', customCellComponent: CustomTableCell },
-	{ id: 'assignee', name: 'Исполнитель', width: '100px' },
+	// { id: 'assignee', name: 'Исполнитель', width: '100px' },
 	{ id: 'createdAt', name: 'Дата создания', width: '130px' },
 ];

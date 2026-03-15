@@ -1,37 +1,42 @@
-import { IconBriefcase2, IconCancel, IconCircleCheck, IconPencil } from '@tabler/icons-react';
-
-export const BULLET_ICONS = {
-	todo: IconPencil,
-	in_progress: IconBriefcase2,
-	done: IconCircleCheck,
-	stopped: IconCancel,
-} as const;
-
-export const TASK_STATUS_NUMBER = {
-	todo: 0,
-	in_progress: 1,
-	done: 2,
-	stopped: 3,
-} as const;
-
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
 export const DATE_TIME_FORMAT = 'dd.MM.yyyy hh:mm';
-
-export const SELECT_FIELDS = ['stackType', 'taskPriority'];
 
 export const LOG_TIME_INITIAL_VALUES = {
 	loggedTime: '',
 	logComment: '',
 };
 
-export const USER_FIELD = 'assignee';
+export const RED_COLOR = '#E24B4A';
 
-export const RED_COLOR = '#fa5252';
+export const GREEN_COLOR = '#1D9E75';
 
-export const GREEN_COLOR = '#40c057';
+export const BLUE_COLOR = '#4752E3';
 
 export const INITIAL_FIELD_VALUES = {
 	fieldName: '',
 	value: '',
 };
+
+export const TASK_TYPES = [
+	{ value: 'fe', color: '#4752E3' },
+	{ value: 'be', color: '#1D9E75' },
+	{ value: 'fs', color: '#A855F7' },
+	{ value: 'qa', color: '#D98A06' },
+	{ value: 'an', color: '#E24B4A' },
+];
+
+export const TASK_PRIORITIES = [
+	{ value: 'low', color: '#1D9E75' },
+	{ value: 'medium', color: '#D98A06' },
+	{ value: 'high', color: '#E24B4A' },
+	{ value: 'highest', color: '#791F1F' },
+];
+
+export const TASK_STATUSES = [
+	{ value: 'todo', color: '#4752E3' },
+	{ value: 'in_progress', color: '#A855F7' },
+	{ value: 'testing', color: '#D98A06' },
+	{ value: 'done', color: '#1D9E75' },
+	{ value: 'stopped', color: '#E24B4A' },
+];

@@ -1,15 +1,15 @@
-export type DictionaryKey = 'taskPriority' | 'roleType' | 'stackType' | 'taskStatus';
+export type DictionaryKey = 'taskPriority' | 'taskType' | 'taskStatus';
 
 export interface IInitialState {
 	isModalShown: boolean;
 }
 
-export type TOption = { label: string; value: string };
+export type TOption = { description: string; key: string; label: string; value: string };
 
 export interface IExpDictData {
-	color: string;
 	id: string;
-	name: string;
+	label: string;
+	key: string;
 }
 
 export interface ITimeLog {
@@ -35,8 +35,12 @@ export interface ITask {
 	remainingTime: string;
 	totalLoggedTime: string;
 	estimateTimeInSecs: number;
-	remainingPercents: number | null;
-	loggedPercents: number | null;
+	remainingPercents: number;
+	loggedPercents: number;
+	project: {
+		code: string;
+		id: string;
+	};
 	timeLogs: Array<ITimeLog>;
 	reporter: string;
 	taskPriority: IExpDictData;

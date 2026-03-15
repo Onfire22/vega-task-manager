@@ -55,6 +55,7 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOf
 										</Table.Td>
 									);
 								}
+								console.log(data[item.id]);
 								return <Table.Td key={item.id}>{data[item.id] as string}</Table.Td>;
 							})}
 						</Table.Tr>
