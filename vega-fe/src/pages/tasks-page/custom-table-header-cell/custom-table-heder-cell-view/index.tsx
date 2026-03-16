@@ -1,6 +1,7 @@
-import { IconArrowNarrowDownDashed, IconArrowNarrowUpDashed } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import React from 'react';
 import './styles.less';
+import { RED_COLOR, TEAL_COLOR } from '../../constants.ts';
 
 interface IProps {
 	column: {
@@ -26,9 +27,9 @@ const CustomTableHederCellView: React.FC<IProps> = ({ column, onSortColumn, sort
 			{column.sorting === sortingState.column && (
 				<div className="custom-table-header-cell__sotring">
 					{sortingState.direction === 'asc' ? (
-						<IconArrowNarrowUpDashed size={20} />
+						<IconChevronUp size={20} color={TEAL_COLOR} />
 					) : (
-						<IconArrowNarrowDownDashed size={20} />
+						<IconChevronDown size={20} color={RED_COLOR} />
 					)}
 				</div>
 			)}

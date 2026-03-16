@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 
 export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());
-	const { data, isSuccess, isLoading } = useGetTasksQuery({ filters });
+	const { data, isSuccess, isLoading } = useGetTasksQuery(filters);
 
 	if (!isSuccess) return { userTasks: [], isTasksLoading: isLoading };
 

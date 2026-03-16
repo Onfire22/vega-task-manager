@@ -26,9 +26,16 @@ export interface ITimeLog {
 	updatedAt?: Date;
 }
 
+export interface IFilters {
+	taskPriority: Array<string>;
+	taskStatus: Array<string>;
+	taskType: Array<string>;
+}
+
 export interface IGetUserTasksBody {
 	isAssignee: false;
 	sorting: ISorting;
+	filters: IFilters;
 }
 
 export interface IExpDictData {

@@ -11,17 +11,44 @@ export const getSortingSelector = () => (state: RootState) => state.tasksReducer
 
 export const getFiltersStateSelector = () => (state: RootState) => state.tasksReducer?.filters || initialState.filters;
 
+export const getActiveFilters = () =>
+	createSelector(getFiltersStateSelector(), (filters) => {
+		return Object.entries(filters).reduce<Record<string, Array<string>>>((acc, [key, value]) => {
+			acc[key] = Object.keys(value).reduce<Array<string>>((acc, item) => {
+				if (value[item]) {
+					acc.push(item);
+				}
+
+				return acc;
+			}, []);
+
+			return acc;
+		}, {});
+	});
+
 export const getFiltersSelector = () =>
 	createSelector(
 		getSortingSelector(),
 		getIsAssigneeSelector(),
-		getFiltersStateSelector(),
+		getActiveFilters(),
 		(sorting, isAssignee, filters) => {
-			const filtersData = Object.keys(filters).reduce((acc, filter) => {}, {});
+			const activeFilters = Object.entries(filters).reduce<Record<string, Array<string>>>((acc, [key, value]) => {
+				if (value?.length > 0) {
+					acc[key] = value;
+				}
+
+				return acc;
+			}, {});
 
 			return {
 				sorting,
 				isAssignee,
+				filters: activeFilters,
 			};
 		},
 	);
+
+export const isAllFiltersButtonDisabled = () =>
+	createSelector(getActiveFilters(), (activeFilters) => {
+		return Object.values(activeFilters).reduce((acc, item) => (acc += item.length), 0) === 0;
+	});

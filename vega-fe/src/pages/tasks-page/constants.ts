@@ -10,7 +10,21 @@ export const TEAL_COLOR = '#1D9E75';
 
 export const BLUE_COLOR = '#0369ff';
 
+export const RED_COLOR = '#E24B4A';
+
 export const TASKS_COMPONENTS = {
 	table: TasksTable,
 	kanban: Kanban,
+};
+
+export const FILTERS_COLORS = {
+	taskPriorityUuid: '#1D9E75',
+	taskStatusUuid: '#0369ff',
+	taskStackUuid: '#D98A06',
+};
+
+export const FILTERS_INITIAL_VALUES = {
+	taskPriorityUuid: {},
+	taskStatusUuid: {},
+	taskStackUuid: {},
 };

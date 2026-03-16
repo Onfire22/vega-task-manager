@@ -101,11 +101,16 @@ export interface ISorting {
 	direction: TDirection;
 }
 
+export interface IFilters {
+	taskPriorityUuid?: Array<string>;
+	taskStatusUuid?: Array<string>;
+	taskStackUuid?: Array<string>;
+}
+
 export interface IGetUserTasksRequest {
-	filters: {
-		isAssignee: boolean;
-		sorting: ISorting;
-	};
+	isAssignee: boolean;
+	sorting: ISorting;
+	filters: IFilters;
 }
 
 export interface IExpDictData {

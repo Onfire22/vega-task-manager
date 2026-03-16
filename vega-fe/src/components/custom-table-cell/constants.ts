@@ -5,12 +5,12 @@ export const PROGRESS_CELL = 'projectProgress';
 export const COLORS = {
 	medium: '#D98A06',
 	low: '#1D9E75',
-	high: '#0F6E56',
-	highest: '#E24B4A',
+	high: '#E24B4A',
+	highest: '#791F1F',
 	todo: '#4752E3',
 
-	in_progress: '#D98A06',
-	testing: '#4752E3',
+	testing: '#D98A06',
+	in_progress: '#4752E3',
 	done: '#1D9E75',
 	stopped: '#E24B4A',
 

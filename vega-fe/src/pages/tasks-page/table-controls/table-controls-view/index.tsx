@@ -1,16 +1,19 @@
 import './styles.less';
 import React from 'react';
-import { Button, Skeleton, Switch, Tabs } from '@mantine/core';
+import { Button, Skeleton, Switch, Tabs, Tooltip } from '@mantine/core';
 import { BLUE_COLOR, TEAL_COLOR } from '../../constants.ts';
 import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
+import { IconArrowBackUp } from '@tabler/icons-react';
 
 interface IProps {
 	onTabClick: (value: string | null) => void;
 	onSwitchClick: () => void;
+	onResetAllFiltersClick: () => void;
 	activeTab: string | null;
 	isAssignee: boolean;
 	isDictionariesLoading: boolean;
+	isAllFiltersButton: boolean;
 	dictionariesOptions: IDictionaries;
 }
 
@@ -21,6 +24,8 @@ const TableControlsView: React.FC<IProps> = ({
 	isAssignee,
 	dictionariesOptions,
 	isDictionariesLoading,
+	isAllFiltersButton,
+	onResetAllFiltersClick,
 }) => {
 	return (
 		<div className="tasks-controls">
@@ -42,20 +47,25 @@ const TableControlsView: React.FC<IProps> = ({
 								component={Button}
 								options={dictionariesOptions.taskPriority}
 								placeholder="Приоритет"
-								filter="taskPriority"
+								filter="taskPriorityUuid"
 							/>
 							<FiltersMenu
 								component={Button}
 								options={dictionariesOptions.taskStatus}
 								placeholder="Статус"
-								filter="taskStatus"
+								filter="taskStatusUuid"
 							/>
 							<FiltersMenu
 								component={Button}
 								options={dictionariesOptions.taskType}
 								placeholder="Тег"
-								filter="taskType"
+								filter="taskStackUuid"
 							/>
+							<Tooltip label="Сбросить фильтры">
+								<Button size="xs" disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
+									<IconArrowBackUp size={15} />
+								</Button>
+							</Tooltip>
 						</>
 					)}
 				</div>

@@ -3,7 +3,8 @@ import React, { useMemo } from 'react';
 import type { IOptionType, TFilter } from '../types.ts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { setFilters } from '../slice.ts';
-import { getFiltersStateSelector } from '../selectors.ts';
+import { getActiveFilters, getFiltersStateSelector } from '../selectors.ts';
+import { FILTERS_COLORS } from '../constants.ts';
 
 interface IProps {
 	options: Array<IOptionType>;
@@ -13,12 +14,14 @@ interface IProps {
 	component: React.ComponentType<{
 		children: string;
 		size: string;
+		leftSection: React.ReactNode;
 	}>;
 }
 
 const FiltersMenu: React.FC<IProps> = ({ component, options, placeholder, size, filter }) => {
 	const dispatch = useAppDispatch();
 	const filters = useAppSelector(getFiltersStateSelector());
+	const activeFilters = useAppSelector(getActiveFilters());
 
 	const handleCheckboxClick = (value: string) => {
 		const currentValue = filters[filter][value];
@@ -34,9 +37,24 @@ const FiltersMenu: React.FC<IProps> = ({ component, options, placeholder, size, 
 		);
 	};
 
-	const filtersCount = useMemo(() => Object.keys(filters[filter]).length, [filters, filter]);
+	const handleResetFilters = () => {
+		dispatch(
+			setFilters({
+				...filters,
+				[filter]: {},
+			}),
+		);
+	};
 
-	console.log(filtersCount);
+	const filtersCount = useMemo(() => activeFilters[filter].length, [activeFilters, filter]);
+
+	const activeFilterColor = useMemo(() => {
+		const activeFilter = activeFilters[filter];
+
+		if (activeFilter.length > 0) {
+			return `${FILTERS_COLORS[filter]}80`;
+		}
+	}, [filter, activeFilters]);
 
 	return (
 		<FiltersMenuView
@@ -46,7 +64,10 @@ const FiltersMenu: React.FC<IProps> = ({ component, options, placeholder, size, 
 			size={size}
 			filters={filters}
 			filter={filter}
+			filtersCount={filtersCount}
+			activeFilterColor={activeFilterColor}
 			onCheckboxClick={handleCheckboxClick}
+			onResetFilters={handleResetFilters}
 		/>
 	);
 };

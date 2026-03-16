@@ -13,7 +13,7 @@ const tasksApi = baseApi.injectEndpoints({
 			invalidatesTags: ['Tasks'],
 		}),
 		getTasks: builder.query<TTaskList, IGetUserTasksRequest>({
-			query: ({ filters }) => ({
+			query: (filters) => ({
 				url: ROUTES.getTasks,
 				method: METHODS.post,
 				body: filters,

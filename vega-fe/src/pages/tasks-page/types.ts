@@ -9,12 +9,12 @@ export interface IInitialState {
 }
 
 export interface IFilters {
-	taskPriority: Record<string, boolean>;
-	taskStatus: Record<string, boolean>;
-	taskType: Record<string, boolean>;
+	taskPriorityUuid: Record<string, boolean>;
+	taskStatusUuid: Record<string, boolean>;
+	taskStackUuid: Record<string, boolean>;
 }
 
-export type TFilter = 'taskPriority' | 'taskStatus' | 'taskType';
+export type TFilter = 'taskPriorityUuid' | 'taskStatusUuid' | 'taskStackUuid';
 
 export interface IExpDictData {
 	id: string;

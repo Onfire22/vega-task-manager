@@ -9,9 +9,9 @@ export const initialState: IInitialState = {
 		direction: 'desc',
 	},
 	filters: {
-		taskPriority: {},
-		taskStatus: {},
-		taskType: {},
+		taskPriorityUuid: {},
+		taskStatusUuid: {},
+		taskStackUuid: {},
 	},
 };
 

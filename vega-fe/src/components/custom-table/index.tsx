@@ -18,7 +18,7 @@ interface IProps {
 
 const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOfDataMessage, onRowDoubleClick }) => {
 	return (
-		<Table highlightOnHover className="table">
+		<Table highlightOnHover withColumnBorders className="table">
 			<Table.Thead>
 				<Table.Tr>
 					{headerData.map((data) => {
