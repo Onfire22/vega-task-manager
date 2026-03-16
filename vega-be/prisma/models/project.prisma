@@ -5,6 +5,7 @@ model Project {
   description       String
   code              String     @default("system_code")
   projectStatusUuid String     @map("project_status_uuid")
+  deadlineDate      DateTime?  @map("deadline_date")
   projectStatus     Dictionary @relation(fields: [projectStatusUuid], references: [id])
 
   tasks       Task[]

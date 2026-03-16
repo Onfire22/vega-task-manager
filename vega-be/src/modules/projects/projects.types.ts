@@ -75,6 +75,7 @@ export type TProjectTasks = ProjectWithDetails['tasks'][number];
 export interface ICreateProjectRequestBody {
 	title: string;
 	description: string;
+	deadlineDate: Date;
 	usersUuids: Array<string>;
 }
 

@@ -22,7 +22,7 @@ export interface IProjectFormValues {
 	title: string;
 	description: string;
 	usersUuids: string[];
-	deadLine?: string;
+	deadlineDate?: string | null;
 }
 
 export interface IProjectErrors {

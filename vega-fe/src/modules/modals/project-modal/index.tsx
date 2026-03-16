@@ -45,7 +45,7 @@ const ProjectModal = () => {
 		dispatch(setActiveModal(null));
 	};
 
-	const handleSelectFieldChange = (name: string, value: string[]) => {
+	const handleSelectFieldChange = (name: string, value: Array<string> | string) => {
 		formik.setFieldError(name, '');
 		formik.setFieldValue(name, value);
 	};
