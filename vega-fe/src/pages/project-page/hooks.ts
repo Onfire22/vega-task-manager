@@ -22,7 +22,7 @@ export const useProjectData = (uuid?: string) => {
 					};
 				}),
 				createdAt: project?.createdAt ? format(project.createdAt, DATE_FORMAT) : '-',
-				deadline: project?.deadline ? format(project.deadline, DATE_FORMAT) : '-',
+				deadlineDate: project?.deadlineDate ? format(project.deadlineDate, DATE_FORMAT) : null,
 			}
 		: null;
 

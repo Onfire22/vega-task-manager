@@ -49,7 +49,7 @@ export const createProject = async (
 	next: NextFunction,
 ) => {
 	try {
-		const { usersUuids, title, description } = req.body;
+		const { usersUuids, title, description, deadlineDate } = req.body;
 
 		const userId = res.locals.user.id;
 
@@ -104,6 +104,7 @@ export const createProject = async (
 				data: {
 					title,
 					description,
+					deadlineDate: new Date(deadlineDate).toISOString(),
 					projectStatusUuid: p_backlog.id,
 					memberships: {
 						create: usersData,
@@ -144,6 +145,7 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 				description: true,
 				createdAt: true,
 				code: true,
+				deadlineDate: true,
 				projectStatus: {
 					select: {
 						label: true,

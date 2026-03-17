@@ -2,6 +2,9 @@ import './styles.less';
 import { Button, Loader, Modal, MultiSelect, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
 import type { IProjectErrors, IProjectFormValues } from '../../types.ts';
+import { DatePickerInput, DatesProvider } from '@mantine/dates';
+import { CALENDAR_SETTINGS } from '../../contsants.ts';
+import 'dayjs/locale/ru';
 
 interface IProps {
 	formValues: IProjectFormValues;
@@ -15,7 +18,7 @@ interface IProps {
 	};
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	onModalClose: () => void;
-	onSelectFieldChange: (name: string, value: string[]) => void;
+	onSelectFieldChange: (name: string, value: Array<string> | string) => void;
 }
 
 const ProjectModalView: React.FC<IProps> = ({
@@ -56,7 +59,21 @@ const ProjectModalView: React.FC<IProps> = ({
 						withAsterisk
 					/>
 				</div>
-				<div className="create-project-modal__field"></div>
+				<div className="create-project-modal__field">
+					<DatesProvider settings={CALENDAR_SETTINGS}>
+						<DatePickerInput
+							label="Дедлайн"
+							placeholder="Выберите дату"
+							description="Дата окончания проекта"
+							name="deadlineDate"
+							value={formValues.deadlineDate}
+							onChange={(value) => {
+								if (!value) return;
+								onSelectFieldChange('deadlineDate', value);
+							}}
+						/>
+					</DatesProvider>
+				</div>
 				<div className="create-project-modal__field">
 					<MultiSelect
 						label="Пользователи"

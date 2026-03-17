@@ -216,7 +216,7 @@ export interface IProjectResponse {
 		code: string;
 		description: string;
 		createdAt: string;
-		deadline?: string;
+		deadlineDate?: string;
 		tasks: Array<IProjectTask>;
 		users: Array<IProjectUser>;
 		projectStatus: {

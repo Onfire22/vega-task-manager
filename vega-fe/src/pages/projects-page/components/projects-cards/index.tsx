@@ -12,8 +12,6 @@ const ProjectsCards = () => {
 		navigate(`/project/${uuid}`);
 	};
 
-	console.log(projects);
-
 	return isLoading ? <Loader /> : <ProjectsCardsView projects={projects} onCardClick={handleCardClick} />;
 };
 

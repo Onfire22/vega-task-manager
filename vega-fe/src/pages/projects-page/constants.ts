@@ -7,3 +7,9 @@ export const PROJECTS_COMPONENT = {
 	table: ProjectsTable,
 	cards: ProjectsCards,
 };
+
+export const PLURAL_OPTIONS = {
+	one: 'задача',
+	few: 'задачи',
+	many: 'задач',
+};
