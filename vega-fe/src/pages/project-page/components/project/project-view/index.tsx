@@ -1,20 +1,36 @@
 import type { IDictionary, IProject } from '../../../types.ts';
 import React from 'react';
-import { Button, Progress, Tabs } from '@mantine/core';
+import { Button, Popover, Progress, Tabs, TextInput, Tooltip } from '@mantine/core';
 import './styles.less';
 import { SelectWithDot } from '../../../../../ui/select-with-dot';
 import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
+import { IconUserCheck, IconUserExclamation, IconUserPlus } from '@tabler/icons-react';
+import { DatePicker, DatesProvider } from '@mantine/dates';
+import { parseDate } from '../../../utils.ts';
+import 'dayjs/locale/ru';
 
 interface IProps {
 	project: IProject | null;
 	activeTab: string;
 	projectProgress: number;
+	usersListOptions: Array<{ label: string; value: string }>;
 	dictionariesOptions: Array<IDictionary>;
 	onTabClick: (tab: string | null) => void;
+	activeField: { fieldName: string; value: string | null };
+	onSetActiveFiled: (fieldName: string, value: string | null) => void;
 }
 
-const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, dictionariesOptions, projectProgress }) => {
+const ProjectView: React.FC<IProps> = ({
+	project,
+	activeTab,
+	onTabClick,
+	dictionariesOptions,
+	projectProgress,
+	usersListOptions,
+	activeField,
+	onSetActiveFiled,
+}) => {
 	if (!project) return null;
 	return (
 		<div className="project">
@@ -63,10 +79,36 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 						<span className="project__date">{project.createdAt}</span>
 					</div>
 					<div className="project__wrapper">
-						<span className="project__subtitle">Дедлайн</span>
-						<span className={`project__date${project.deadline ? 'project__date_deadline' : ''}`}>
-							{project.deadline}
-						</span>
+						{activeField.fieldName === 'deadlineDate' ? (
+							<div className="project__calendar">
+								<DatesProvider settings={{ locale: 'ru' }}>
+									<DatePicker value={parseDate(project.deadlineDate)} />
+								</DatesProvider>
+								<Button onClick={() => onSetActiveFiled('', '')} size="xs">
+									Отмена
+								</Button>
+							</div>
+						) : (
+							<>
+								<span className="project__subtitle">
+									<span>Дедлайн</span>
+									{project.deadlineDate ? (
+										<a onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}>
+											изменить
+										</a>
+									) : null}
+								</span>
+								<span
+									className={`project__date${project.deadlineDate ? ' project__date_deadline' : ''}`}
+								>
+									{project.deadlineDate ?? (
+										<a onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}>
+											+ установить
+										</a>
+									)}
+								</span>
+							</>
+						)}
 					</div>
 					<div className="project__wrapper">
 						<span className="project__subtitle">Прогресс</span>
@@ -79,9 +121,42 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick, diction
 				<div className="project__users">
 					<div className="project__users-title">
 						<span className="project__subtitle">Участники проекта</span>
-						<Button size="xs" className="project__button">
-							+
-						</Button>
+						<Popover width={260} position="bottom" withArrow>
+							<Popover.Target>
+								<Button size="xs" className="project__button">
+									+
+								</Button>
+							</Popover.Target>
+							<Popover.Dropdown>
+								<TextInput placeholder="Поиск" size="xs" />
+								<ul className="project__users-list">
+									{usersListOptions.map((user) => {
+										return (
+											<li className="project__user" key={user.value}>
+												<span>{user.label}</span>
+												<div className="project__user-controls">
+													<Tooltip label="Пригласить" className="project__user-control">
+														<IconUserPlus size={25} />
+													</Tooltip>
+													<Tooltip
+														label="Сделать участником"
+														className="project__user-control"
+													>
+														<IconUserCheck size={25} />
+													</Tooltip>
+													<Tooltip
+														label="Сделать владельцем"
+														className="project__user-control"
+													>
+														<IconUserExclamation size={25} />
+													</Tooltip>
+												</div>
+											</li>
+										);
+									})}
+								</ul>
+							</Popover.Dropdown>
+						</Popover>
 					</div>
 					<ul className="project__users-list">
 						{project.users.map((user) => {

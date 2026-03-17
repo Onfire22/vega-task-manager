@@ -30,7 +30,7 @@ export interface IProject {
 	code: string;
 	description: string;
 	createdAt: string;
-	deadline?: string;
+	deadlineDate: string | null;
 	tasks: Array<IProjectTask>;
 	users: Array<IProjectUser>;
 	projectStatus: {
