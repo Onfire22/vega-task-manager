@@ -1,4 +1,11 @@
-import { IconArrowBack, IconClipboardCopy, IconPlus, IconSitemap } from '@tabler/icons-react';
+import {
+	IconArrowBack,
+	IconChevronLeft,
+	IconChevronRight,
+	IconClipboardCopy,
+	IconPlus,
+	IconSitemap,
+} from '@tabler/icons-react';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
@@ -7,10 +14,11 @@ interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
 	onGoBack: () => void;
+	onMenuButtonClick: () => void;
 	onModalOpen: (modal: 'task' | 'project') => void;
 	searchValue: string;
 	path: string;
-	breadCrumbs: string;
+	isSidebarOpened: boolean;
 }
 
 const BaseCustomMenuView: React.FC<IProps> = ({
@@ -19,13 +27,18 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 	onModalOpen,
 	onGoBack,
 	path,
-	breadCrumbs,
+	onMenuButtonClick,
+	isSidebarOpened,
 }) => {
 	return (
 		<div className="base-custom-menu">
 			<div className="base-custom-menu__info">
-				<div className="base-custom-menu__logo">V</div>
-				<div className="base-custom-menu__crumbs">{breadCrumbs}</div>
+				<div
+					className={`base-custom-menu__control${isSidebarOpened ? ' base-custom-menu__control_active' : ''}`}
+					onClick={onMenuButtonClick}
+				>
+					{isSidebarOpened ? <IconChevronLeft /> : <IconChevronRight />}
+				</div>
 			</div>
 			<div className="base-custom-menu__controls">
 				<Input

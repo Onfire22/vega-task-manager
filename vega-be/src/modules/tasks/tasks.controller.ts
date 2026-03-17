@@ -30,18 +30,34 @@ export const createTask = async (
 			return next(new AppError('Статус не найден', RESPONSE_STATUSES.iternalError));
 		}
 
-		const newTask = await prismaAppClient.task.create({
-			data: {
-				...task,
-				reporterUuid: userId,
-				taskStatusUuid: baseTaskStatusUuid.id,
-				projectUuid: taskProjectUuid,
-			},
-		});
+		await prismaAppClient.$transaction(async (tx) => {
+			const project = await tx.project.findUnique({
+				where: { id: taskProjectUuid },
+				select: { code: true, tasks: true },
+			});
 
-		if (!newTask) {
-			next(new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError));
-		}
+			if (!project) {
+				throw new AppError('Проект не найден', RESPONSE_STATUSES.iternalError);
+			}
+
+			const tasksCount = String(project.tasks.length + 1).padStart(3, '0');
+
+			const taskCode = `${project.code}-${tasksCount}`;
+
+			const newTask = await tx.task.create({
+				data: {
+					...task,
+					code: taskCode,
+					reporterUuid: userId,
+					taskStatusUuid: baseTaskStatusUuid.id,
+					projectUuid: taskProjectUuid,
+				},
+			});
+
+			if (!newTask) {
+				next(new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError));
+			}
+		});
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {

@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../../app/constants.ts';
-import { useAppDispatch } from '../../../../store/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu-view';
 import { setActiveModal } from '../../../../modules/modals/slice.ts';
-import { BREADCRUMBS } from '../../contsants.ts';
+import { getIsSidebarOpenedSelector } from '../../selectors.ts';
+import { setIsSidebarOpened } from '../../slice.ts';
 
 const BaseCustomMenu = () => {
 	const navigate = useNavigate();
@@ -13,6 +14,8 @@ const BaseCustomMenu = () => {
 	const dispatch = useAppDispatch();
 
 	const [searchValue, setSearchValue] = useState('');
+
+	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
 	const handleSearchChange = (value: string) => {
 		setSearchValue(value);
@@ -31,25 +34,20 @@ const BaseCustomMenu = () => {
 		navigate(-1);
 	};
 
-	const breadCrumbs = useMemo(() => {
-		const key = Object.keys(BREADCRUMBS).find((item) => location.pathname.includes(item));
-
-		if (key) {
-			return BREADCRUMBS[key as keyof typeof BREADCRUMBS];
-		}
-
-		return '';
-	}, [location.pathname]);
+	const handleMenuButtonClick = () => {
+		dispatch(setIsSidebarOpened(!isSidebarOpened));
+	};
 
 	return (
 		<BaseCustomMenuView
-			searchValue={searchValue}
 			path={location.pathname}
-			breadCrumbs={breadCrumbs}
+			searchValue={searchValue}
+			isSidebarOpened={isSidebarOpened}
 			onSearchChange={handleSearchChange}
 			onProfileCLick={handleProfileCLick}
 			onModalOpen={handleModalOpen}
 			onGoBack={handleGoBack}
+			onMenuButtonClick={handleMenuButtonClick}
 		/>
 	);
 };

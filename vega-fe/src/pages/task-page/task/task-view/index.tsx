@@ -7,6 +7,7 @@ import { SelectWithDot } from '../../../../ui/select-with-dot';
 import './styles.less';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
+import { Link } from 'react-router-dom';
 
 interface IProps {
 	task: ITask | null;
@@ -45,10 +46,19 @@ const TaskView: React.FC<IProps> = ({
 		<div className="task">
 			<div className="task__content">
 				<div className="task__breadcrumbs">
-					<span>{task.project.code}</span>
+					<Link className="task__breadcrumb" to={`/project/${task.project.id}`}>
+						project {task.project.code}
+					</Link>
 					<IconArrowBadgeRight size={15} />
-					<span>задачи</span>
+					<Link
+						className="task__breadcrumb"
+						state={{ from: location.pathname }}
+						to={`/project/${task.project.id}`}
+					>
+						задачи
+					</Link>
 					<IconArrowBadgeRight size={15} />
+					<span>{task.code}</span>
 				</div>
 				{field.fieldName === 'title' ? (
 					<div className="task__input">

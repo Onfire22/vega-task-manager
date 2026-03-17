@@ -1,18 +1,21 @@
 import { ProjectView } from './project-view';
 import { useProjectData } from '../../hooks.ts';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Loader } from '@mantine/core';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 
 const Project = () => {
 	const params = useParams();
+	const location = useLocation();
+
 	const [activeField, setActiveField] = useState<{ fieldName: string; value: string | null }>({
 		fieldName: '',
 		value: '',
 	});
 
-	const [activeTab, setActiveTab] = useState('description');
+	const [activeTab, setActiveTab] = useState(location.state?.from ? 'tasks' : 'description');
+
 	const { usersListOptions } = useUsersOptions();
 
 	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);

@@ -1,21 +1,27 @@
 import { SidebarView } from './sidebar-view';
-import { useAppDispatch } from '../../../../store/hooks.ts';
-import { setIsSidebarOpened } from '../../slice.ts';
 import { useLocation } from 'react-router-dom';
 import { useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
+import { useAppSelector } from '../../../../store/hooks.ts';
+import { getIsSidebarOpenedSelector } from '../../selectors.ts';
 
 const Sidebar = () => {
-	const dispatch = useAppDispatch();
 	const location = useLocation();
+
+	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
 	const [logOutUser] = useLogOutUserMutation();
 
 	const handleLogOutClick = async () => {
 		await logOutUser();
-		dispatch(setIsSidebarOpened(false));
 	};
 
-	return <SidebarView pathname={location.pathname} onLogOutClick={handleLogOutClick} />;
+	return (
+		<SidebarView
+			pathname={location.pathname.split('/')[1]}
+			isSidebarOpened={isSidebarOpened}
+			onLogOutClick={handleLogOutClick}
+		/>
+	);
 };
 
 export { Sidebar };

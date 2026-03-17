@@ -6,6 +6,12 @@
 	flex-direction: column;
 	justify-content: space-between;
 	border-right: 1px solid var(--mantine-color-dark-5);
+	transition: width 0.3s ease;
+
+	&_expanded {
+		width: 300px;
+		transition: width 0.3s ease;
+	}
 
 	&__menu {
 		padding: 5px;
@@ -18,7 +24,6 @@
 		padding: 10px;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		border-radius: 7px;
 		transition: 0.3s ease-in;
 
@@ -40,6 +45,14 @@
 		&_active {
 			color: var(--mantine-color-violet-3);
 		}
+
+		&_expanded {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			text-decoration: none;
+		}
 	}
 
 	&__button {
@@ -49,5 +62,12 @@
 		border: none;
 		color: var(--mantine-color-dark-0);
 		cursor: pointer;
+
+		&_expanded {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
 	}
 }
