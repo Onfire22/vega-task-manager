@@ -22,7 +22,7 @@ export const createTask = async (
 		}
 
 		const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
-			where: { label_type: { label: 'todo', type: 'TASK_STATUS' } },
+			where: { key_type: { key: 'todo', type: 'TASK_STATUS' } },
 			select: { id: true },
 		});
 

@@ -135,6 +135,7 @@ const TaskView: React.FC<IProps> = ({
 					{field.fieldName === 'description' ? (
 						<div className="task__input">
 							<Textarea
+								resize="vertical"
 								value={field.value}
 								onChange={(e) => {
 									onFieldChange(e, 'description');
@@ -159,7 +160,7 @@ const TaskView: React.FC<IProps> = ({
 							<div
 								className="task__text"
 								onClick={() => {
-									onSetFieldToEdit('description', task.title);
+									onSetFieldToEdit('description', task.description);
 								}}
 							>
 								{task.description}
