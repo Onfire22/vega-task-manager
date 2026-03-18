@@ -1,9 +1,10 @@
 import { ProjectView } from './project-view';
-import { useProjectData } from '../../hooks.ts';
+import { useProjectData, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
 import { Loader } from '@mantine/core';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
+import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
 
 const Project = () => {
 	const params = useParams();
@@ -20,6 +21,10 @@ const Project = () => {
 
 	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);
 
+	const [updateUserRole] = useUpdateUserRoleMutation();
+
+	const { handleUpdateProject } = useUpdateProject(params.uuid);
+
 	const handleTabClick = (tab: string | null) => {
 		if (tab) {
 			setActiveTab(tab);
@@ -28,6 +33,17 @@ const Project = () => {
 
 	const handleSetActiveFiled = (fieldName: string, value: string | null) => {
 		setActiveField({ fieldName, value });
+	};
+
+	const handleProjectFieldChange = (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string) => {
+		handleUpdateProject(fieldName, value);
+		setActiveField({ fieldName: '', value: '' });
+	};
+
+	const handleUpdateUserRole = (userUuid: string, userRole: string) => {
+		if (!params.uuid) return;
+
+		updateUserRole({ uuid: params.uuid, userUuid, userRole });
 	};
 
 	return isProjectLoading ? (
@@ -42,6 +58,8 @@ const Project = () => {
 			activeField={activeField}
 			onTabClick={handleTabClick}
 			onSetActiveFiled={handleSetActiveFiled}
+			onProjectFieldChange={handleProjectFieldChange}
+			onUpdateUserRole={handleUpdateUserRole}
 		/>
 	);
 };

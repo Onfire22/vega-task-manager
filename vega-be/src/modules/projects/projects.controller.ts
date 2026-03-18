@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
-import { ICreateProjectRequestBody, IProjectsRequest, TUpdateProjectRequest } from './projects.types';
+import { ICreateProjectRequestBody, IEditProjectResponse, IProjectsRequest } from './projects.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
@@ -210,53 +210,18 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 };
 
 export const updateProject = async (
-	req: Request<IProjectsRequest, {}, TUpdateProjectRequest>,
+	req: Request<{ uuid: string }, {}, IEditProjectResponse>,
 	res: Response,
 	next: NextFunction,
 ) => {
 	try {
-		const { uuid } = req.params;
+		const { field, value } = req.body;
+
+		const data = field === 'deadlineDate' ? new Date(value).toISOString() : value;
 
 		await prismaAppClient.project.update({
-			where: { id: uuid },
-			data: req.body,
-		});
-
-		res.status(RESPONSE_STATUSES.success).json({ success: true });
-	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
-	}
-};
-
-export const addUserToProject = async (
-	req: Request<IProjectsRequest, {}, { userUuid: string }>,
-	res: Response,
-	next: NextFunction,
-) => {
-	try {
-		const { uuid } = req.params;
-
-		const { userUuid } = req.body;
-
-		const memberRole = await prismaAppClient.dictionary.findUnique({
-			where: { label_type: { label: 'member', type: 'ROLE_TYPE' } },
-			select: { id: true },
-		});
-
-		if (!memberRole) {
-			return next(new AppError('Роль не найдена', RESPONSE_STATUSES.notFound));
-		}
-
-		await prismaAppClient.membership.upsert({
-			where: { user_project: { projectUuid: uuid, userUuid } },
-			update: {
-				userRoleUuid: memberRole.id,
-			},
-			create: {
-				userUuid: userUuid,
-				projectUuid: uuid,
-				userRoleUuid: memberRole.id,
-			},
+			where: { id: req.params.uuid },
+			data: { [field]: data },
 		});
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });

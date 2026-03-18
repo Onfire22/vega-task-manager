@@ -239,3 +239,16 @@ export interface ICreateProjectResponse {
 		updatedAt: string;
 	};
 }
+
+export interface IProjectUpdateRequest {
+	uuid: string;
+	field: 'deadlineDate' | 'projectStatusUuid';
+	value: string;
+	userRoleUuid: string;
+}
+
+export interface IUpdateUserRole {
+	uuid: string;
+	userUuid: string;
+	userRole: string;
+}

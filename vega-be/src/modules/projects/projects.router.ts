@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addUserToProject, createProject, getProjectByUuid, getProjects, updateProject } from './projects.controller';
+import { createProject, getProjectByUuid, getProjects, updateProject } from './projects.controller';
 import { ROUTES } from '../../constants';
 import { checkIsOwnerMiddleware } from './projects.middleware';
 
@@ -9,6 +9,5 @@ projectsRouter.get(ROUTES.projects, getProjects);
 projectsRouter.post(ROUTES.projectsCreate, createProject);
 projectsRouter.get(ROUTES.project, getProjectByUuid);
 projectsRouter.post(ROUTES.project, checkIsOwnerMiddleware, updateProject);
-projectsRouter.post(ROUTES.projectUsers, checkIsOwnerMiddleware, addUserToProject);
 
 export { projectsRouter };

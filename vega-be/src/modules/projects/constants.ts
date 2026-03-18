@@ -1,1 +1,0 @@
-export const OWNER_ROLE_UUID = '297344cb-4d9f-45b9-9249-83f160cd608b';

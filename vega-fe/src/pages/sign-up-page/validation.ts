@@ -24,5 +24,5 @@ export const ProfileStepValidationSchema = yup.object().shape({
 		.string()
 		.matches(/^[A-Za-zА-Яа-яЁё]+$/, VALIDATION_MESSAGES.lettersOnly)
 		.required(VALIDATION_MESSAGES.required),
-	userStackUuid: yup.string().required(),
+	userSpecialisationUuid: yup.string().required(),
 });

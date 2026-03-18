@@ -19,6 +19,8 @@ interface IProps {
 	onTabClick: (tab: string | null) => void;
 	activeField: { fieldName: string; value: string | null };
 	onSetActiveFiled: (fieldName: string, value: string | null) => void;
+	onUpdateUserRole: (userUuid: string, userRole: string) => void;
+	onProjectFieldChange: (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string) => void;
 }
 
 const ProjectView: React.FC<IProps> = ({
@@ -30,6 +32,8 @@ const ProjectView: React.FC<IProps> = ({
 	usersListOptions,
 	activeField,
 	onSetActiveFiled,
+	onProjectFieldChange,
+	onUpdateUserRole,
 }) => {
 	if (!project) return null;
 	return (
@@ -71,6 +75,7 @@ const ProjectView: React.FC<IProps> = ({
 							statuses={STATUSES}
 							onChange={(value) => {
 								if (!value) return;
+								onProjectFieldChange('projectStatusUuid', value);
 							}}
 						/>
 					</div>
@@ -82,7 +87,13 @@ const ProjectView: React.FC<IProps> = ({
 						{activeField.fieldName === 'deadlineDate' ? (
 							<div className="project__calendar">
 								<DatesProvider settings={{ locale: 'ru' }}>
-									<DatePicker value={parseDate(project.deadlineDate)} />
+									<DatePicker
+										value={parseDate(project.deadlineDate)}
+										onChange={(value) => {
+											if (!value) return;
+											onProjectFieldChange('deadlineDate', value);
+										}}
+									/>
 								</DatesProvider>
 								<Button onClick={() => onSetActiveFiled('', '')} size="xs">
 									Отмена
@@ -136,19 +147,28 @@ const ProjectView: React.FC<IProps> = ({
 												<span>{user.label}</span>
 												<div className="project__user-controls">
 													<Tooltip label="Пригласить" className="project__user-control">
-														<IconUserPlus size={25} />
+														<IconUserPlus
+															size={25}
+															onClick={() => onUpdateUserRole(user.value, 'viewer')}
+														/>
 													</Tooltip>
 													<Tooltip
 														label="Сделать участником"
 														className="project__user-control"
 													>
-														<IconUserCheck size={25} />
+														<IconUserCheck
+															size={25}
+															onClick={() => onUpdateUserRole(user.value, 'member')}
+														/>
 													</Tooltip>
 													<Tooltip
 														label="Сделать владельцем"
 														className="project__user-control"
 													>
-														<IconUserExclamation size={25} />
+														<IconUserExclamation
+															size={25}
+															onClick={() => onUpdateUserRole(user.value, 'owner')}
+														/>
 													</Tooltip>
 												</div>
 											</li>

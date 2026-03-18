@@ -1,6 +1,13 @@
 import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ICreateProjectResponse, IProject, IProjectCreate, IProjectResponse } from '../types.ts';
+import type {
+	ICreateProjectResponse,
+	IProject,
+	IProjectCreate,
+	IProjectResponse,
+	IProjectUpdateRequest,
+	IUpdateUserRole,
+} from '../types.ts';
 
 const projectsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -21,11 +28,34 @@ const projectsApi = baseApi.injectEndpoints({
 		}),
 		getProjectByUuid: builder.query<IProjectResponse, string>({
 			query: (uuid) => ({
-				url: `${ROUTES.getProject}/${uuid}`,
+				url: `${ROUTES.project}/${uuid}`,
 				method: METHODS.get,
 			}),
+			providesTags: ['Project'],
+		}),
+		updateProject: builder.mutation<{ success: boolean }, IProjectUpdateRequest>({
+			query: ({ uuid, ...data }) => ({
+				url: `${ROUTES.project}/${uuid}`,
+				method: METHODS.post,
+				body: data,
+			}),
+			invalidatesTags: ['Project'],
+		}),
+		updateUserRole: builder.mutation<{ success: true }, IUpdateUserRole>({
+			query: ({ uuid, ...userData }) => ({
+				url: `${ROUTES.project}/${uuid}/members`,
+				method: METHODS.post,
+				body: userData,
+			}),
+			invalidatesTags: ['Project'],
 		}),
 	}),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation, useGetProjectByUuidQuery } = projectsApi;
+export const {
+	useGetProjectsQuery,
+	useCreateProjectMutation,
+	useGetProjectByUuidQuery,
+	useUpdateProjectMutation,
+	useUpdateUserRoleMutation,
+} = projectsApi;

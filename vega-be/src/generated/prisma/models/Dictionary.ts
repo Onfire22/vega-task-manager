@@ -224,7 +224,7 @@ export type DictionaryOrderByWithRelationInput = {
 
 export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  label_type?: Prisma.DictionaryLabelTypeCompoundUniqueInput
+  key_type?: Prisma.DictionaryKeyTypeCompoundUniqueInput
   AND?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
   OR?: Prisma.DictionaryWhereInput[]
   NOT?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
@@ -240,7 +240,7 @@ export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   taskStatuses?: Prisma.TaskListRelationFilter
   taskStacks?: Prisma.TaskListRelationFilter
   projectStatus?: Prisma.ProjectListRelationFilter
-}, "id" | "label_type">
+}, "id" | "key_type">
 
 export type DictionaryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -362,8 +362,8 @@ export type DictionaryUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type DictionaryLabelTypeCompoundUniqueInput = {
-  label: string
+export type DictionaryKeyTypeCompoundUniqueInput = {
+  key: string
   type: $Enums.Type
 }
 

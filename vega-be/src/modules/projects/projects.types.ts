@@ -106,4 +106,9 @@ export interface IProjectResponse {
 	};
 }
 
-export type TUpdateProjectRequest = Record<'title' | 'description', string>;
+export interface IEditProjectResponse {
+	projectUuid: string;
+	field: 'deadlineDate' | 'projectStatusUuid';
+	value: string;
+	userRoleUuid: string;
+}
