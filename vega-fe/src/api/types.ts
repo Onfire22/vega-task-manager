@@ -252,3 +252,29 @@ export interface IUpdateUserRole {
 	userUuid: string;
 	userRole: string;
 }
+
+export interface ICommentCreateBody {
+	taskUuid: string;
+	text: string;
+}
+
+export interface IComment {
+	id: string;
+	text: string;
+	createdAt: string;
+	updatedAt: string;
+	author: {
+		id: string;
+		name: string;
+		secondName: string;
+	};
+}
+
+export interface ICommentsResponse {
+	comments: Array<IComment>;
+}
+
+export interface IEditCommentPayload {
+	commentUuid: string;
+	text: string;
+}

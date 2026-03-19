@@ -30,6 +30,8 @@ export const ROUTES = {
 	project: '/api/projects/:uuid',
 	projectUsers: '/api/projects/:uuid/members',
 	createTaskLog: '/api/taskLogs/create',
+	comment: '/api/tasks/comments/:uuid',
+	comments: '/api/tasks/:uuid/comments',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

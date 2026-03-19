@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { useTask } from '../../api/hooks.ts';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from './constants.ts';
+import { DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
+import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
@@ -45,5 +46,33 @@ export const useTaskData = (uuid?: string) => {
 	return {
 		task: taskData,
 		isTaskLoading,
+	};
+};
+
+export const useComments = (uuid: string) => {
+	const { data, isLoading } = useGetTaskCommentsQuery(uuid);
+
+	if (!data?.comments) {
+		return {
+			comments: [],
+			isLoading,
+		};
+	}
+
+	const comments = data.comments.map((item) => {
+		return {
+			id: item.id,
+			text: item.text,
+			user: {
+				name: `${item.author.name} ${item.author.name}`,
+				userUuid: item.author.id,
+			},
+			commentDate: `${format(item.createdAt, DATE_FORMAT)} в ${format(item.createdAt, TIME_FORMAT)}`,
+		};
+	});
+
+	return {
+		comments,
+		isLoading,
 	};
 };

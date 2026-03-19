@@ -1,0 +1,58 @@
+.comments {
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+
+	&__input {
+		width: 100%;
+	}
+
+	&__field {
+		display: flex;
+		align-items: start;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__comment {
+		padding: 5px;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: var(--mantine-color-dark-4);
+		}
+	}
+
+	&__date {
+		font-size: 12px;
+		color: var(--mantine-color-dark-2);
+	}
+
+	&__text {
+		color: var(--mantine-color-dark-1);
+	}
+
+	&__controls {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	&__control {
+		cursor: pointer;
+
+		&:hover {
+			color: var(--mantine-color-dark-2);
+		}
+	}
+}

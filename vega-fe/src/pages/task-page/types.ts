@@ -49,3 +49,13 @@ export interface ITask {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export interface IComment {
+	id: string;
+	user: {
+		name: string;
+		userUuid: string;
+	};
+	text: string;
+	commentDate: string;
+}

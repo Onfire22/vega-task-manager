@@ -24,4 +24,7 @@ export const ROUTES = {
 	projects: '/api/projects',
 	createProject: '/api/projects/create',
 	project: '/api/projects',
+	comments: '/api/tasks/comments',
 };
+
+export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments'];
