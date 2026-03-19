@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.less';
-import { Badge, Progress } from '@mantine/core';
-import { CELLS_WITH_BADGES, COLORS, PROGRESS_CELL } from '../constants.ts';
+import { Progress } from '@mantine/core';
+import { CELLS_WITH_BADGES, PROGRESS_CELL } from '../constants.ts';
+import { CustomBadge } from '../../custom-badge';
 
 interface IProps {
 	data: { label: string; id: string; key: string } | string | number;
@@ -10,13 +11,9 @@ interface IProps {
 
 const CustomTableCellView: React.FC<IProps> = ({ data, columnName }) => {
 	if (CELLS_WITH_BADGES.includes(columnName) && typeof data !== 'string' && typeof data !== 'number') {
-		const color = COLORS[data.key as keyof typeof COLORS];
-
 		return (
 			<div className="custom-table-cell">
-				<Badge fullWidth color={color}>
-					{data.label}
-				</Badge>
+				<CustomBadge text={data.label} label={data.key} isFullWidth />
 			</div>
 		);
 	}

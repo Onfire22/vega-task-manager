@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconBorderAll, IconList } from '@tabler/icons-react';
+import { Grid2x2, TableOfContents } from 'lucide-react';
 import './styles.less';
 
 interface IProps {
@@ -19,14 +19,14 @@ const ProjectsView: React.FC<IProps> = ({ activeTab, onTabClick, component: Comp
 							className={`projects__button${activeTab === 'table' ? ' projects__button_active' : ''}`}
 							onClick={() => onTabClick('table')}
 						>
-							<IconList size={12} />
+							<TableOfContents size={12} />
 							<span>Таблица</span>
 						</button>
 						<button
 							className={`projects__button${activeTab === 'cards' ? ' projects__button_active' : ''}`}
 							onClick={() => onTabClick('cards')}
 						>
-							<IconBorderAll size={12} />
+							<Grid2x2 size={12} />
 							<span>Карточки</span>
 						</button>
 					</div>

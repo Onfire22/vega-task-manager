@@ -1,4 +1,4 @@
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import React from 'react';
 import './styles.less';
 import { RED_COLOR, TEAL_COLOR } from '../../constants.ts';
@@ -27,9 +27,9 @@ const CustomTableHederCellView: React.FC<IProps> = ({ column, onSortColumn, sort
 			{column.sorting === sortingState.column && (
 				<div className="custom-table-header-cell__sotring">
 					{sortingState.direction === 'asc' ? (
-						<IconChevronUp size={20} color={TEAL_COLOR} />
+						<ChevronUp size={20} color={TEAL_COLOR} />
 					) : (
-						<IconChevronDown size={20} color={RED_COLOR} />
+						<ChevronDown size={20} color={RED_COLOR} />
 					)}
 				</div>
 			)}

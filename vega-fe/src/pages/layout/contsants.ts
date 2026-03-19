@@ -1,13 +1,13 @@
 import { FRONT_ROUTES } from '../../app/constants.ts';
-import { IconCalendarCheck, IconChartBar, IconLayoutGrid, IconLogout2, IconUser } from '@tabler/icons-react';
+import { Briefcase, FolderKanban, LogOut, TrendingUp, User } from 'lucide-react';
 
 export const TOP_LINKS = [
-	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: IconLayoutGrid, activeRoutes: ['project', 'projects'] },
-	{ href: FRONT_ROUTES.dashboard, label: 'Задачи', icon: IconCalendarCheck, activeRoutes: ['task', 'dashboard'] },
-	{ href: '#', label: 'Статистика', icon: IconChartBar, activeRoutes: ['#'] },
+	{ href: FRONT_ROUTES.projects, label: 'Проекты', icon: FolderKanban, activeRoutes: ['project', 'projects'] },
+	{ href: FRONT_ROUTES.dashboard, label: 'Задачи', icon: Briefcase, activeRoutes: ['task', 'dashboard'] },
+	{ href: '#', label: 'Статистика', icon: TrendingUp, activeRoutes: ['#'] },
 ];
 
 export const BOTTOM_LINKS = [
-	{ href: FRONT_ROUTES.profile, label: 'Профиль', icon: IconUser, activeRoutes: ['profile'] },
-	{ href: 'logout', label: 'Выход', icon: IconLogout2, activeRoutes: [] },
+	{ href: FRONT_ROUTES.profile, label: 'Профиль', icon: User, activeRoutes: ['profile'] },
+	{ href: 'logout', label: 'Выход', icon: LogOut, activeRoutes: [] },
 ];

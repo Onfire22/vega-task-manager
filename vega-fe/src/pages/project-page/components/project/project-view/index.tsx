@@ -5,7 +5,7 @@ import './styles.less';
 import { SelectWithDot } from '../../../../../ui/select-with-dot';
 import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
-import { IconUserCheck, IconUserExclamation, IconUserPlus } from '@tabler/icons-react';
+import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
 import { DatePicker, DatesProvider } from '@mantine/dates';
 import { parseDate } from '../../../utils.ts';
 import 'dayjs/locale/ru';
@@ -147,7 +147,7 @@ const ProjectView: React.FC<IProps> = ({
 												<span>{user.label}</span>
 												<div className="project__user-controls">
 													<Tooltip label="Пригласить" className="project__user-control">
-														<IconUserPlus
+														<UserPlus
 															size={25}
 															onClick={() => onUpdateUserRole(user.value, 'viewer')}
 														/>
@@ -156,7 +156,7 @@ const ProjectView: React.FC<IProps> = ({
 														label="Сделать участником"
 														className="project__user-control"
 													>
-														<IconUserCheck
+														<UserRoundCheck
 															size={25}
 															onClick={() => onUpdateUserRole(user.value, 'member')}
 														/>
@@ -165,7 +165,7 @@ const ProjectView: React.FC<IProps> = ({
 														label="Сделать владельцем"
 														className="project__user-control"
 													>
-														<IconUserExclamation
+														<UserStar
 															size={25}
 															onClick={() => onUpdateUserRole(user.value, 'owner')}
 														/>

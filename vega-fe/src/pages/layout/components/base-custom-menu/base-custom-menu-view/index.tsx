@@ -1,11 +1,4 @@
-import {
-	IconArrowBack,
-	IconChevronLeft,
-	IconChevronRight,
-	IconClipboardCopy,
-	IconPlus,
-	IconSitemap,
-} from '@tabler/icons-react';
+import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus } from 'lucide-react';
 import { Button, CloseButton, Input, Menu } from '@mantine/core';
 import './styles.less';
 import React from 'react';
@@ -37,7 +30,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 					className={`base-custom-menu__control${isSidebarOpened ? ' base-custom-menu__control_active' : ''}`}
 					onClick={onMenuButtonClick}
 				>
-					{isSidebarOpened ? <IconChevronLeft /> : <IconChevronRight />}
+					{isSidebarOpened ? <ChevronLeft /> : <ChevronRight />}
 				</div>
 			</div>
 			<div className="base-custom-menu__controls">
@@ -56,26 +49,22 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				/>
 				<Menu width={180}>
 					<Menu.Target>
-						<Button variant="accent" leftSection={<IconPlus size={17} />}>
+						<Button variant="accent" leftSection={<Plus size={17} />}>
 							Создать
 						</Button>
 					</Menu.Target>
 					<Menu.Dropdown>
 						<Menu.Label>Задачу / проект</Menu.Label>
-						<Menu.Item leftSection={<IconSitemap size={20} />} onClick={() => onModalOpen('project')}>
+						<Menu.Item leftSection={<FolderKanban size={17} />} onClick={() => onModalOpen('project')}>
 							Проект
 						</Menu.Item>
-						<Menu.Item leftSection={<IconClipboardCopy size={20} />} onClick={() => onModalOpen('task')}>
+						<Menu.Item leftSection={<Briefcase size={17} />} onClick={() => onModalOpen('task')}>
 							Задачу
 						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
-				{path !== '/' && (
-					<Button
-						className="base-custom-menu__button"
-						leftSection={<IconArrowBack size={18} />}
-						onClick={onGoBack}
-					/>
+				{path !== '/dashboard' && (
+					<Button className="base-custom-menu__button" leftSection={<Undo2 size={18} />} onClick={onGoBack} />
 				)}
 			</div>
 		</div>

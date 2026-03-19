@@ -1,5 +1,3 @@
-import { Kanban } from './kanban';
-import { TasksTable } from './tasks-table';
 import type { TDictionariesTypes } from '../../api/types.ts';
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
@@ -11,11 +9,6 @@ export const TEAL_COLOR = '#1D9E75';
 export const BLUE_COLOR = '#0369ff';
 
 export const RED_COLOR = '#E24B4A';
-
-export const TASKS_COMPONENTS = {
-	table: TasksTable,
-	kanban: Kanban,
-};
 
 export const FILTERS_COLORS = {
 	taskPriorityUuid: '#1D9E75',

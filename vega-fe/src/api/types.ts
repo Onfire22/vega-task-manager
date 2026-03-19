@@ -153,6 +153,10 @@ export interface IExpTaskResponse {
 		code: string;
 		id: string;
 		title: string;
+		projectStatus: {
+			key: string;
+			label: string;
+		};
 	};
 	timeLogs: Array<ITimeLog>;
 	assignee: IExpUserDict | null;

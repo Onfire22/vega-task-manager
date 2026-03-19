@@ -1,7 +1,7 @@
 import type { IComment } from '../../types.ts';
 import React from 'react';
 import { Button, Textarea } from '@mantine/core';
-import { IconArrowUp, IconPencil, IconTrash } from '@tabler/icons-react';
+import { CornerRightUp, Pencil, Trash2 } from 'lucide-react';
 import './styles.less';
 
 interface IProps {
@@ -45,7 +45,7 @@ const CommentsView: React.FC<IProps> = ({
 								}}
 							/>
 							<Button onClick={() => onEditComment(item.id)}>
-								<IconArrowUp />
+								<CornerRightUp />
 							</Button>
 						</div>
 					) : (
@@ -55,14 +55,14 @@ const CommentsView: React.FC<IProps> = ({
 								<div className="comments__date">{item.commentDate}</div>
 								{currentUserUuid === item.user.userUuid && (
 									<div className="comments__controls">
-										<IconPencil
+										<Pencil
 											className="comments__control"
-											size={17}
+											size={15}
 											onClick={() => onSetActiveField(item.id, item.text)}
 										/>
-										<IconTrash
+										<Trash2
 											className="comments__control"
-											size={17}
+											size={15}
 											onClick={() => onDeleteComment(item.id)}
 										/>
 									</div>
@@ -82,7 +82,7 @@ const CommentsView: React.FC<IProps> = ({
 					onChange={onSetValue}
 				/>
 				<Button onClick={onCreateComment}>
-					<IconArrowUp />
+					<CornerRightUp />
 				</Button>
 			</div>
 		</div>
