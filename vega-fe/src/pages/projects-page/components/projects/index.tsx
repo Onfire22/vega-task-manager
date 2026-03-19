@@ -1,6 +1,12 @@
 import { ProjectsView } from './projects-view';
 import { useState } from 'react';
-import { PROJECTS_COMPONENT } from '../../constants.ts';
+import { ProjectsTable } from '../projects-table';
+import { ProjectsCards } from '../projects-cards';
+
+const PROJECTS_COMPONENT = {
+	table: ProjectsTable,
+	cards: ProjectsCards,
+};
 
 const Projects = () => {
 	const [activeTab, setActiveTab] = useState('table');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Group, Stepper } from '@mantine/core';
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react';
+import { MoveLeft, MoveRight } from 'lucide-react';
 import './styles.less';
 
 interface IProps {
@@ -20,7 +20,7 @@ const CustomStepper: React.FC<IProps> = ({ activeStep, onPrevStepClick, onNextSt
 			<Group justify="center" mt="xl">
 				{activeStep > 0 && (
 					<Button className="custom-stepper__button" variant="default" onClick={onPrevStepClick}>
-						<IconArrowNarrowLeft />
+						<MoveLeft />
 					</Button>
 				)}
 				<Button
@@ -29,7 +29,7 @@ const CustomStepper: React.FC<IProps> = ({ activeStep, onPrevStepClick, onNextSt
 					disabled={isNextButtonDisabled}
 					onClick={onNextStepClick}
 				>
-					<IconArrowNarrowRight />
+					<MoveRight />
 				</Button>
 			</Group>
 		</div>

@@ -40,6 +40,10 @@ export interface ITask {
 	project: {
 		code: string;
 		id: string;
+		projectStatus: {
+			key: string;
+			label: string;
+		};
 	};
 	timeLogs: Array<ITimeLog>;
 	reporter: string;

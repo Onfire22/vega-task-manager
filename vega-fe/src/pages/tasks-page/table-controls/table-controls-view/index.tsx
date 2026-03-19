@@ -4,7 +4,7 @@ import { Button, Skeleton, Switch, Tabs, Tooltip } from '@mantine/core';
 import { BLUE_COLOR, TEAL_COLOR } from '../../constants.ts';
 import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
-import { IconArrowBackUp } from '@tabler/icons-react';
+import { IterationCw } from 'lucide-react';
 
 interface IProps {
 	onTabClick: (value: string | null) => void;
@@ -63,7 +63,7 @@ const TableControlsView: React.FC<IProps> = ({
 							/>
 							<Tooltip label="Сбросить фильтры">
 								<Button size="xs" disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
-									<IconArrowBackUp size={15} />
+									<IterationCw size={15} />
 								</Button>
 							</Tooltip>
 						</>

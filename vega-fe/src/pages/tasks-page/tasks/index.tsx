@@ -1,7 +1,13 @@
 import { TasksView } from './tasks-view';
 import { useAppSelector } from '../../../store/hooks.ts';
 import { getActiveTabSelector } from '../selectors.ts';
-import { TASKS_COMPONENTS } from '../constants.ts';
+import { TasksTable } from '../tasks-table';
+import { Kanban } from '../kanban';
+
+const TASKS_COMPONENTS = {
+	table: TasksTable,
+	kanban: Kanban,
+};
 
 const Tasks = () => {
 	const activeTab = useAppSelector(getActiveTabSelector());

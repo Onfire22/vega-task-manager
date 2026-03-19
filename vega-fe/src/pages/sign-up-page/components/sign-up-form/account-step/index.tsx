@@ -1,5 +1,5 @@
 import { PasswordInput, Popover, Progress, TextInput } from '@mantine/core';
-import { IconAt, IconLock } from '@tabler/icons-react';
+import { AtSign, Lock } from 'lucide-react';
 import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
 import React from 'react';
@@ -42,7 +42,7 @@ const AccountStep: React.FC<IProps> = ({
 					error={formErrors.email}
 					onChange={onFieldChange}
 					withAsterisk
-					leftSection={<IconAt color="#D5D8DB" size={23} />}
+					leftSection={<AtSign color="#D5D8DB" size={21} />}
 					ref={emailRef}
 				/>
 			</div>
@@ -69,7 +69,7 @@ const AccountStep: React.FC<IProps> = ({
 								error={formErrors.password}
 								onChange={onFieldChange}
 								withAsterisk
-								leftSection={<IconLock color="#D5D8DB" size={23} />}
+								leftSection={<Lock color="#D5D8DB" size={21} />}
 								ref={passwordRef}
 							/>
 						</div>
@@ -103,7 +103,7 @@ const AccountStep: React.FC<IProps> = ({
 					error={formErrors.passwordRepeat}
 					onChange={onFieldChange}
 					withAsterisk
-					leftSection={<IconLock color="#D5D8DB" size={23} />}
+					leftSection={<Lock color="#D5D8DB" size={21} />}
 				/>
 			</div>
 		</>

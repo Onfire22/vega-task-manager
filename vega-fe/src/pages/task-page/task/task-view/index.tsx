@@ -1,13 +1,14 @@
 import { Button, Divider, Popover, Progress, Tabs, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
 import { BLUE_COLOR, GREEN_COLOR, RED_COLOR, TASK_PRIORITIES, TASK_STATUSES, TASK_TYPES } from '../../constants.ts';
-import { IconPlus, IconArrowBadgeRight } from '@tabler/icons-react';
+import { ArrowBigRight, Plus } from 'lucide-react';
 import type { ITask, TOption } from '../../types.ts';
 import { SelectWithDot } from '../../../../ui/select-with-dot';
 import './styles.less';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 import { Link } from 'react-router-dom';
+import { CustomBadge } from '../../../../components/custom-badge';
 
 interface IProps {
 	task: ITask | null;
@@ -49,7 +50,7 @@ const TaskView: React.FC<IProps> = ({
 					<Link className="task__breadcrumb" to={`/project/${task.project.id}`}>
 						project {task.project.code}
 					</Link>
-					<IconArrowBadgeRight size={15} />
+					<ArrowBigRight size={15} />
 					<Link
 						className="task__breadcrumb"
 						state={{ from: location.pathname }}
@@ -57,7 +58,7 @@ const TaskView: React.FC<IProps> = ({
 					>
 						задачи
 					</Link>
-					<IconArrowBadgeRight size={15} />
+					<ArrowBigRight size={15} />
 					<span>{task.code}</span>
 				</div>
 				{field.fieldName === 'title' ? (
@@ -277,7 +278,7 @@ const TaskView: React.FC<IProps> = ({
 						)}
 						<div className="task__button">
 							<Button onClick={onLogWorkModalShown}>
-								<IconPlus size={18} />
+								<Plus size={18} />
 								{task.estimateTime ? <span>Записать время</span> : <span>Оценить задачу</span>}
 							</Button>
 						</div>
@@ -292,7 +293,13 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 						<div className="task__label">
 							<div className="task__key">Статус</div>
-							<div className="task__value">Бэклог</div>
+							<div className="task__value">
+								<CustomBadge
+									label={task.project.projectStatus.key}
+									text={task.project.projectStatus.label}
+									isFullWidth={false}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
