@@ -173,6 +173,12 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 						id: true,
 						code: true,
 						title: true,
+						projectStatus: {
+							select: {
+								key: true,
+								label: true,
+							},
+						},
 					},
 				},
 			},
