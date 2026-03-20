@@ -9,6 +9,7 @@ import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
 import { DatePicker, DatesProvider } from '@mantine/dates';
 import { parseDate } from '../../../utils.ts';
 import 'dayjs/locale/ru';
+import { getAvatarColor } from '../../../../../app/utils.ts';
 
 interface IProps {
 	project: IProject | null;
@@ -40,7 +41,14 @@ const ProjectView: React.FC<IProps> = ({
 		<div className="project">
 			<div className="project__content">
 				<div className="project__header">
-					<div className="project__avatar" />
+					<div
+						className="project__avatar"
+						style={{
+							backgroundColor: getAvatarColor(project.id),
+						}}
+					>
+						{project.code.substring(1, 3)}
+					</div>
 					<div className="project__info">
 						<div className="project__title">{project.title}</div>
 						<div className="project__meta">

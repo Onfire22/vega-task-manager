@@ -5,6 +5,7 @@ import './styles.less';
 import { pluralValue } from '../../../utils.ts';
 import { PLURAL_OPTIONS } from '../../../constants.ts';
 import { CustomBadge } from '../../../../../components/custom-badge';
+import { getAvatarColor } from '../../../../../app/utils.ts';
 
 interface IProps {
 	projects: IProject[];
@@ -18,7 +19,14 @@ const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 				return (
 					<article key={project.id} className="projects-cards__card" onClick={() => onCardClick(project.id)}>
 						<div className="projects-cards__header">
-							<div className="projects-cards__avatar">IT</div>
+							<div
+								className="projects-cards__avatar"
+								style={{
+									backgroundColor: getAvatarColor(project.id),
+								}}
+							>
+								IT
+							</div>
 							<div className="projects-cards__info">
 								<div className="projects-cards__title">{project.title}</div>
 								<div className="projects-cards__code">{project.code}</div>
