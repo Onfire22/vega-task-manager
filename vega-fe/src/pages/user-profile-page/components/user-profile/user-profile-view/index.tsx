@@ -39,8 +39,7 @@ const UserProfileView = () => {
 					</div>
 					<div className="user-profile__row">
 						<div className="user-profile__data">
-							<p className="user-profile__key">Юзернейм</p>
-							<p className="user-profile__value">Используется в @упоминаниях</p>
+							<p className="user-profile__key">Фамилия</p>
 						</div>
 						<div className="user-profile__control">
 							<TextInput size="xs" />

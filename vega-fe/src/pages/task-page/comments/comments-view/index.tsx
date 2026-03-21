@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, Textarea } from '@mantine/core';
 import { CornerRightUp, Pencil, Trash2 } from 'lucide-react';
 import './styles.less';
+import { getAvatarColor } from '../../../../app/utils.ts';
 
 interface IProps {
 	value: string;
@@ -50,25 +51,33 @@ const CommentsView: React.FC<IProps> = ({
 						</div>
 					) : (
 						<li className="comments__comment" key={item.id}>
-							<div className="comments__header">
-								<div className="comments__user">{item.user.name}</div>
-								<div className="comments__date">{item.commentDate}</div>
-								{currentUserUuid === item.user.userUuid && (
-									<div className="comments__controls">
-										<Pencil
-											className="comments__control"
-											size={15}
-											onClick={() => onSetActiveField(item.id, item.text)}
-										/>
-										<Trash2
-											className="comments__control"
-											size={15}
-											onClick={() => onDeleteComment(item.id)}
-										/>
-									</div>
-								)}
+							<div
+								className="comments__avatar"
+								style={{ backgroundColor: getAvatarColor(item.user.userUuid) }}
+							>
+								{item.user.name.substring(0, 2)}
 							</div>
-							<div className="comments__text">{item.text}</div>
+							<div>
+								<div className="comments__header">
+									<div className="comments__user">{item.user.name}</div>
+									<div className="comments__date">{item.commentDate}</div>
+									{currentUserUuid === item.user.userUuid && (
+										<div className="comments__controls">
+											<Pencil
+												className="comments__control"
+												size={15}
+												onClick={() => onSetActiveField(item.id, item.text)}
+											/>
+											<Trash2
+												className="comments__control"
+												size={15}
+												onClick={() => onDeleteComment(item.id)}
+											/>
+										</div>
+									)}
+								</div>
+								<div className="comments__text">{item.text}</div>
+							</div>
 						</li>
 					);
 				})}

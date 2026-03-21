@@ -25,7 +25,7 @@ const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 									backgroundColor: getAvatarColor(project.id),
 								}}
 							>
-								IT
+								{project.code.substring(1, 3)}
 							</div>
 							<div className="projects-cards__info">
 								<div className="projects-cards__title">{project.title}</div>
