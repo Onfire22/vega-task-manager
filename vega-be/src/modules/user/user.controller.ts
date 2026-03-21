@@ -16,6 +16,13 @@ export const getCurrentUser = async (req: Request, res: Response<IUserResponse, 
 					email: true,
 					name: true,
 					secondName: true,
+					userName: true,
+					userSpecialisation: {
+						select: {
+							label: true,
+							key: true,
+						},
+					},
 				},
 			});
 
