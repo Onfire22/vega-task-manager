@@ -190,7 +190,12 @@ const ProjectView: React.FC<IProps> = ({
 						{project.users.map((user) => {
 							return (
 								<li className="project__user" key={user.id}>
-									<div className="project__user-avatar" />
+									<div
+										className="project__user-avatar"
+										style={{ backgroundColor: getAvatarColor(user.id) }}
+									>
+										{user.userInitials}
+									</div>
 									<div className="project__user-info">
 										<div className="project__user-header">
 											<div className="project__user-name">{user.userName}</div>

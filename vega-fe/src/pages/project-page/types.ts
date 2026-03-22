@@ -2,6 +2,7 @@ export interface IProjectUser {
 	id: string;
 	userName: string;
 	userSpecialisation: string;
+	userInitials: string;
 	userRole: {
 		label: string;
 		key: string;

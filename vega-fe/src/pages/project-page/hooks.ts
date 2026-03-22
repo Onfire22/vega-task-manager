@@ -17,6 +17,7 @@ export const useProjectData = (uuid?: string) => {
 						id: user.id,
 						userName: `${user.name} ${user.secondName}`,
 						userSpecialisation: user.userSpecialisation.label,
+						userInitials: `${user.name[0]} ${user.secondName[0]}`,
 						userRole: {
 							label: user.role.label,
 							key: user.role.key,

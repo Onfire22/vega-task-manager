@@ -32,8 +32,6 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				>
 					{isSidebarOpened ? <ChevronLeft /> : <ChevronRight />}
 				</div>
-			</div>
-			<div className="base-custom-menu__controls">
 				<Input
 					placeholder="Поиск..."
 					rightSectionPointerEvents="all"
@@ -47,6 +45,8 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 						/>
 					}
 				/>
+			</div>
+			<div className="base-custom-menu__controls">
 				<Menu width={180}>
 					<Menu.Target>
 						<Button variant="accent" leftSection={<Plus size={17} />}>
