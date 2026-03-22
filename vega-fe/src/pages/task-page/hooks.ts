@@ -20,6 +20,7 @@ export const useTaskData = (uuid?: string) => {
 		loggedPercents,
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
 		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
+		assigneeUuid: task.assignee ? task.assignee.id : undefined,
 		remainingTime:
 			task?.remainingTime?.hours || task?.remainingTime?.minutes
 				? `${task.remainingTime.hours || ''} ${task.remainingTime.minutes || ''}`

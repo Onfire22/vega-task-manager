@@ -19,7 +19,12 @@ const Task = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
 	const { isTaskLoading, task } = useTaskData(params.uuid);
-	const { usersListOptions } = useUsersOptions();
+	const { usersListOptions } = useUsersOptions(
+		{
+			filters: { withProject: task?.project.id, withoutUser: task?.assigneeUuid },
+		},
+		Boolean(!task),
+	);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 

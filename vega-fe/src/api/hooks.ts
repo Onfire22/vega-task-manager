@@ -1,6 +1,6 @@
 import { useGetDictionariesQuery } from './queries/dictionaries.api.ts';
 import { CACHING_SETTINGS } from '../app/constants.ts';
-import type { TDictionariesTypes } from './types.ts';
+import type { IFiltersRequest, TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectByUuidQuery, useGetProjectsQuery } from './queries/projects.api.ts';
 import { useGetTaskQuery } from './queries/tasks.api.ts';
@@ -34,16 +34,16 @@ export const useDictionariesOptions = (meta: TDictionariesTypes[]) => {
 	return { dictionariesOptions, isDictionariesLoading };
 };
 
-export const useUsers = () => {
-	const { data, isLoading, isSuccess } = useGetUsersQuery();
+export const useUsers = (filters: IFiltersRequest, skip = false) => {
+	const { data, isLoading, isSuccess } = useGetUsersQuery(filters, { skip });
 
 	const usersList = isSuccess ? data.usersList : [];
 
 	return { usersList, isUsersLoading: isLoading };
 };
 
-export const useUsersOptions = () => {
-	const { usersList, isUsersLoading } = useUsers();
+export const useUsersOptions = (filters: IFiltersRequest, skip = false) => {
+	const { usersList, isUsersLoading } = useUsers(filters, skip);
 
 	const usersListOptions = usersList.map((user) => ({
 		label: `${user.name} ${user.secondName}`,

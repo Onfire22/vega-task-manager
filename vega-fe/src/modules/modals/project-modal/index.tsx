@@ -9,15 +9,18 @@ import { PROJECT_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { CreateProjectValidationSchema } from '../validation.ts';
 import { setNotification } from '../../notifications/slice.ts';
 import { setActiveModal } from '../slice.ts';
+import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
 
-	const [createProject] = useCreateProjectMutation();
-
 	const activeModal = useAppSelector(getActiveModalSelector());
 
-	const { usersListOptions, isUsersLoading } = useUsersOptions();
+	const { data } = useGetCurrentUserQuery();
+	const [createProject] = useCreateProjectMutation();
+	const { usersListOptions, isUsersLoading } = useUsersOptions({
+		filters: { ...(data?.currentUser ? { withoutUser: data.currentUser.id } : {}) },
+	});
 
 	const formik = useFormik({
 		initialValues: PROJECT_FORM_INITIAL_VALUES,
