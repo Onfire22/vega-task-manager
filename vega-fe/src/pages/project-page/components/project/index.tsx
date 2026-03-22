@@ -17,7 +17,9 @@ const Project = () => {
 
 	const [activeTab, setActiveTab] = useState(location.state?.from ? 'tasks' : 'description');
 
-	const { usersListOptions } = useUsersOptions();
+	const { usersListOptions } = useUsersOptions({
+		filters: { ...(params.uuid ? { withOutProject: params.uuid } : {}) },
+	});
 
 	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);
 

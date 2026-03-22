@@ -6,8 +6,9 @@ import { ILocals } from '../../common/types';
 import { IGetUserListRequestBody, IGetUserListResponse, IUserResponse } from './user.types';
 
 export const getCurrentUser = async (req: Request, res: Response<IUserResponse, ILocals>, next: NextFunction) => {
-	const id = res.locals?.user?.id;
 	try {
+		const id = res.locals?.user?.id;
+
 		if (id) {
 			const currentUser = await prismaAppClient.user.findUnique({
 				where: { id },
@@ -16,6 +17,13 @@ export const getCurrentUser = async (req: Request, res: Response<IUserResponse, 
 					email: true,
 					name: true,
 					secondName: true,
+					userName: true,
+					userSpecialisation: {
+						select: {
+							label: true,
+							key: true,
+						},
+					},
 				},
 			});
 
@@ -35,16 +43,17 @@ export const getUserList = async (
 	res: Response<IGetUserListResponse>,
 	next: NextFunction,
 ) => {
-	const filters = req.body?.filters;
-
-	const filterData = {
-		memberships: {
-			...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
-			...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
-		},
-	};
-
 	try {
+		const filters = req.body?.filters;
+
+		const filterData = {
+			...(filters?.withoutUser ? { id: { not: filters.withoutUser } } : {}),
+			memberships: {
+				...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
+				...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
+			},
+		};
+
 		const usersList = await prismaAppClient.user.findMany({
 			...(filters ? { where: filterData } : {}),
 			select: {
@@ -56,6 +65,7 @@ export const getUserList = async (
 
 		res.status(RESPONSE_STATUSES.success).json({ usersList });
 	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
 };

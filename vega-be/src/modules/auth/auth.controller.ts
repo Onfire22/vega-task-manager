@@ -5,6 +5,7 @@ import { HOUR_IN_MS, RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import bcrypt from 'bcryptjs';
 import { ISignInReqBody, IAuthRes, ISignUpReqBody } from './auth.types';
+import { generateName } from './utils';
 
 export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
@@ -14,15 +15,28 @@ export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Resp
 
 		userData.password = await bcrypt.hash(userData.password, salt);
 
-		const newUser = await prismaAppClient.user.create({
-			data: userData,
-			select: {
-				email: true,
-				id: true,
-				name: true,
-				secondName: true,
-				userSpecialisationUuid: true,
-			},
+		const newUser = await prismaAppClient.$transaction(async (tx) => {
+			const users = await tx.user.findMany({
+				select: {
+					userName: true,
+				},
+			});
+
+			const userNames = users.map((user) => user.userName);
+
+			const userName = generateName(userData.name, userData.secondName, userNames);
+
+			return tx.user.create({
+				data: { ...userData, userName },
+				select: {
+					email: true,
+					id: true,
+					name: true,
+					secondName: true,
+					userSpecialisationUuid: true,
+					userName: true,
+				},
+			});
 		});
 
 		const token = generateToken(newUser.id);
@@ -94,6 +108,7 @@ export const getUserByEmail = async (req: Request, res: Response, next: NextFunc
 
 		res.status(200).json({ success: true });
 	} catch (e) {
+		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}
 };

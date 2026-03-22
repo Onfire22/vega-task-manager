@@ -5,6 +5,7 @@ model User {
   secondName String @map("second_name")
   email      String @unique
   password   String
+  userName   String @unique @map("user_name")
 
   userSpecialisationUuid String       @map("user_specialisation_uuid")
   userSpecialisation     Dictionary   @relation(fields: [userSpecialisationUuid], references: [id])

@@ -282,3 +282,11 @@ export interface IEditCommentPayload {
 	commentUuid: string;
 	text: string;
 }
+
+export interface IFiltersRequest {
+	filters: Partial<{
+		withOutProject: string;
+		withProject: string;
+		withoutUser: string;
+	}>;
+}

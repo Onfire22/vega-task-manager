@@ -12,6 +12,7 @@ export interface IUserResponse {
 export interface IFilters {
 	withOutProject: string;
 	withProject: string;
+	withoutUser: string;
 }
 
 export interface IGetUserListRequestBody {
