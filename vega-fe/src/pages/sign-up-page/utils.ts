@@ -2,6 +2,8 @@ import type { DictionaryKey, IRequirement } from './types.ts';
 import { MINIMAL_PASSWORD_LENGTH } from './constants.ts';
 
 export const getPasswordStrength = (password: string, requirements: Array<IRequirement>): number => {
+	if (!password.length) return 0;
+
 	let multiplier = password.length > MINIMAL_PASSWORD_LENGTH ? 0 : 1;
 
 	requirements.forEach((requirement) => {

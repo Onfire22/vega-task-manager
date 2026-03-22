@@ -1,10 +1,12 @@
-import { PasswordInput, Popover, Progress, TextInput } from '@mantine/core';
 import { AtSign, Lock } from 'lucide-react';
 import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
 import React from 'react';
-import './styles.less';
 import type { IFormErrors, IFormValues } from '../../../types.ts';
+import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomPasswordInput } from '@/components/common/custom-password-input.tsx';
+import { CustomPopover } from '@/components/common/custom-popover.tsx';
+import { CustomProgress } from '@/components/common/custom-progress.tsx';
 
 interface IProps {
 	formValues: IFormValues;
@@ -31,8 +33,8 @@ const AccountStep: React.FC<IProps> = ({
 }) => {
 	return (
 		<>
-			<div className="account-step__input">
-				<TextInput
+			<div className="relative min-h-16.5 mb-2.5">
+				<CustomInput
 					id="email"
 					type="text"
 					label="Электронная почта"
@@ -41,25 +43,22 @@ const AccountStep: React.FC<IProps> = ({
 					value={formValues.email}
 					error={formErrors.email}
 					onChange={onFieldChange}
-					withAsterisk
-					leftSection={<AtSign color="#D5D8DB" size={21} />}
+					leftIcon={<AtSign color="#D5D8DB" size={21} />}
 					ref={emailRef}
+					isRequired
 				/>
 			</div>
-			<div className="account-step__input account-step__input_random">
-				<a className="account-step__generator" onClick={onGeneratePasswordClick}>
+			<div className="relative min-h-16.5 mb-2.5">
+				<a className="absolute link-styled right-0 top-0.75 text-[12px]" onClick={onGeneratePasswordClick}>
 					generate random
 				</a>
-				<Popover
-					opened={isPopoverOpened}
-					position="bottom"
-					width="target"
-					shadow="md"
-					transitionProps={{ transition: 'pop' }}
-				>
-					<Popover.Target>
-						<div onFocusCapture={() => onPopoverOpened(true)} onBlurCapture={() => onPopoverOpened(false)}>
-							<PasswordInput
+				<CustomPopover
+					width="438px"
+					isOpen={isPopoverOpened}
+					setIsOpened={onPopoverOpened}
+					trigger={
+						<div>
+							<CustomPasswordInput
 								id="password"
 								type="password"
 								label="Пароль"
@@ -68,32 +67,34 @@ const AccountStep: React.FC<IProps> = ({
 								value={formValues.password}
 								error={formErrors.password}
 								onChange={onFieldChange}
-								withAsterisk
-								leftSection={<Lock color="#D5D8DB" size={21} />}
+								leftIcon={<Lock color="#D5D8DB" size={21} />}
 								ref={passwordRef}
+								isRequired
 							/>
 						</div>
-					</Popover.Target>
-					<Popover.Dropdown>
-						<Progress color={popoverData.color} value={popoverData.strength} size={5} mb="xs" />
-						<PasswordRequirement
-							label={VALIDATION_MESSAGES.passwordLength}
-							meets={formValues.password.length > MINIMAL_PASSWORD_LENGTH}
-						/>
-						{PASSWORD_REQUIREMENTS.map((requirement, index) => {
-							return (
-								<PasswordRequirement
-									key={index}
-									label={requirement.label}
-									meets={requirement.regex.test(formValues.password)}
-								/>
-							);
-						})}
-					</Popover.Dropdown>
-				</Popover>
+					}
+					content={
+						<>
+							<CustomProgress color={popoverData.color} progress={popoverData.strength} />
+							<PasswordRequirement
+								label={VALIDATION_MESSAGES.passwordLength}
+								meets={formValues.password.length > MINIMAL_PASSWORD_LENGTH}
+							/>
+							{PASSWORD_REQUIREMENTS.map((requirement, index) => {
+								return (
+									<PasswordRequirement
+										key={index}
+										label={requirement.label}
+										meets={requirement.regex.test(formValues.password)}
+									/>
+								);
+							})}
+						</>
+					}
+				/>
 			</div>
-			<div className="account-step__input">
-				<PasswordInput
+			<div className="relative min-h-16.5 mb-2.5">
+				<CustomPasswordInput
 					id="password-repeat"
 					type="password"
 					label="Повторите пароль"
@@ -102,8 +103,8 @@ const AccountStep: React.FC<IProps> = ({
 					value={formValues.passwordRepeat}
 					error={formErrors.passwordRepeat}
 					onChange={onFieldChange}
-					withAsterisk
-					leftSection={<Lock color="#D5D8DB" size={21} />}
+					leftIcon={<Lock color="#D5D8DB" size={21} />}
+					isRequired
 				/>
 			</div>
 		</>

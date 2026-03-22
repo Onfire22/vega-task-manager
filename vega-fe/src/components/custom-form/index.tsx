@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.less';
 
 interface IProps {
 	title: string;
@@ -9,8 +8,11 @@ interface IProps {
 
 const CustomForm: React.FC<IProps> = ({ title, children, onSubmit }) => {
 	return (
-		<form className="custom-form" onSubmit={onSubmit}>
-			<h1 className="custom-form__title">{title}</h1>
+		<form
+			className="w-full p-7.5 flex-centered-column gap-2.5 border border-border rounded-[5px]"
+			onSubmit={onSubmit}
+		>
+			<h1 className="text-2xl">{title}</h1>
 			{children}
 		</form>
 	);

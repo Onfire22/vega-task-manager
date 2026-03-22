@@ -6,9 +6,9 @@ import { SignUpValidationSchema } from '../validation.ts';
 import { useSignInUserMutation } from '../../../api/queries/auth.api.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../app/constants.ts';
-import { LoadingOverlay } from '@mantine/core';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setNotification } from '../../../modules/notifications/slice.ts';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
@@ -51,7 +51,7 @@ const SignUpForm = () => {
 
 	return (
 		<>
-			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+			{isLoading && <CustomLoader isFull />}
 			<SignInFormView
 				formValues={formik.values}
 				formErrors={formik.errors}

@@ -8,7 +8,7 @@ import './styles.less';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 import { Link } from 'react-router-dom';
-import { CustomBadge } from '../../../../components/custom-badge';
+import { CustomBadge } from '@/components/common/custom-badge.tsx';
 
 interface IProps {
 	task: ITask | null;
@@ -297,7 +297,6 @@ const TaskView: React.FC<IProps> = ({
 								<CustomBadge
 									label={task.project.projectStatus.key}
 									text={task.project.projectStatus.label}
-									isFullWidth={false}
 								/>
 							</div>
 						</div>

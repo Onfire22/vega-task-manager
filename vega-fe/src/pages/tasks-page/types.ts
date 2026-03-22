@@ -1,5 +1,5 @@
 export interface IInitialState {
-	activeTab: string | null;
+	activeTab: string;
 	isAssignee: boolean;
 	sorting: {
 		column: string;

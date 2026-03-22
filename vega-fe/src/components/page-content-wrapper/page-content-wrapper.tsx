@@ -1,10 +1,11 @@
 import React from 'react';
-import './styles.less';
 
 interface IProps {
 	children: React.ReactNode;
 }
 
-const PageContentWrapper: React.FC<IProps> = ({ children }) => <main className="page-content-wrapper">{children}</main>;
+const PageContentWrapper: React.FC<IProps> = ({ children }) => (
+	<main className="w-full h-[calc(100vh-53px)] flex justify-center bg-background">{children}</main>
+);
 
 export { PageContentWrapper };

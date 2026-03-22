@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import './styles.less';
 import { FRONT_ROUTES } from '../../app/constants.ts';
 
 const NotFoundPage = () => {
 	return (
-		<div className="not-found">
-			<h1 className="not-found__title">404</h1>
-			<div className="not-found__text">Станица не найдена...</div>
-			<Link className="not-found__link" to={FRONT_ROUTES.root}>
+		<div className="w-full h-screen flex-centered-column gap-12.5">
+			<h1 className="text-teal text-[150px]">404</h1>
+			<div className="text-[50px]">Станица не найдена...</div>
+			<Link className="link-styled text-[30px]" to={FRONT_ROUTES.root}>
 				На главную
 			</Link>
 		</div>

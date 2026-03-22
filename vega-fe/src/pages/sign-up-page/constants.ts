@@ -22,11 +22,11 @@ export const PASSWORD_REQUIREMENTS = [
 	{ regex: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Хотя бы один спец. символ' },
 ];
 
-export const RED_COLOR = '#fa5252';
+export const RED_COLOR = 'bg-danger';
 
-export const TEAL_COLOR = '#12b886';
+export const TEAL_COLOR = 'bg-teal';
 
-export const YELLOW_COLOR = '#fab005';
+export const YELLOW_COLOR = 'bg-amber';
 
 export const BLUE_COLOR = '#0369ff';
 

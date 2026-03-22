@@ -27,9 +27,9 @@ const TableControls = () => {
 		}
 	}, [dispatch]);
 
-	const handleTabClick = (tab: string | null) => {
+	const handleTabClick = (tab: string) => {
 		dispatch(setActiveTab(tab));
-		localStorage.setItem('activeTab', tab!);
+		localStorage.setItem('activeTab', tab);
 	};
 
 	const handleSwitchClick = () => {

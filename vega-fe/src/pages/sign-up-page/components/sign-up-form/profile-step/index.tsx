@@ -1,7 +1,7 @@
 import React from 'react';
-import { Select, TextInput } from '@mantine/core';
 import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
-import './styles.less';
+import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomSelect } from '@/components/common/custom-select.tsx';
 
 interface IProps {
 	formValues: IFormValues;
@@ -20,8 +20,8 @@ const ProfileStep: React.FC<IProps> = ({
 }) => {
 	return (
 		<>
-			<div className="profile-step__input">
-				<TextInput
+			<div className="min-h-16.5 mb-2.5">
+				<CustomInput
 					id="name"
 					type="text"
 					label="Имя"
@@ -30,11 +30,11 @@ const ProfileStep: React.FC<IProps> = ({
 					value={formValues.name}
 					error={formErrors.name}
 					onChange={onFieldChange}
-					withAsterisk
+					isRequired
 				/>
 			</div>
-			<div className="profile-step__input">
-				<TextInput
+			<div className="min-h-16.5 mb-2.5">
+				<CustomInput
 					id="secondName"
 					type="text"
 					label="Фамилия"
@@ -43,15 +43,15 @@ const ProfileStep: React.FC<IProps> = ({
 					value={formValues.secondName}
 					error={formErrors.secondName}
 					onChange={onFieldChange}
-					withAsterisk
+					isRequired
 				/>
 			</div>
-			<div className="profile-step__input">
-				<Select
+			<div className="min-h-16.5 mb-2.5">
+				<CustomSelect
 					label="Специализация"
 					placeholder="Выберите значение"
 					name="userStackUuid"
-					data={stackOptions}
+					options={stackOptions}
 					value={formValues.userSpecialisationUuid}
 					onChange={(value) => {
 						if (value) {
@@ -59,7 +59,7 @@ const ProfileStep: React.FC<IProps> = ({
 						}
 					}}
 					error={formErrors?.userSpecialisationUuid}
-					withAsterisk
+					isRequired
 				/>
 			</div>
 		</>
