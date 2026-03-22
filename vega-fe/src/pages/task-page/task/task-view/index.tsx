@@ -288,8 +288,8 @@ const TaskView: React.FC<IProps> = ({
 					<div className="task__info">
 						<div className="task__subtitle">Проект</div>
 						<div className="task__label">
-							<div className="task__key">Название</div>
-							<div className="task__value">Title</div>
+							<div className="task__key">Код</div>
+							<div className="task__value">{task.project.code}</div>
 						</div>
 						<div className="task__label">
 							<div className="task__key">Статус</div>
