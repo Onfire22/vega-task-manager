@@ -14,7 +14,7 @@ const CustomProgress: React.FC<IProps> = ({ progress, percents, label, color }) 
 		<Field className="min-w-full">
 			<FieldLabel htmlFor="progress-upload">
 				{label && <span className="text-[12px]">{label}</span>}
-				{percents && <span className="ml-auto">{`${percents}%`}</span>}
+				{percents && <span className="ml-auto text-[12px]">{`${percents}`}</span>}
 			</FieldLabel>
 			<Progress value={progress} id="progress-upload" indicatorClassName={color} />
 		</Field>

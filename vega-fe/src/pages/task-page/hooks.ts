@@ -1,7 +1,9 @@
 import { format } from 'date-fns';
-import { useTask } from '../../api/hooks.ts';
-import { DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
+import { useDictionariesOptions, useTask } from '../../api/hooks.ts';
+import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
 import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
+import { typedEntries } from '@/app/utils.ts';
+import type { TDictionariesWithColors } from '@/pages/task-page/types.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
@@ -76,4 +78,23 @@ export const useComments = (uuid: string) => {
 		comments,
 		isLoading,
 	};
+};
+
+export const useDictionariesWithColors = () => {
+	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
+
+	if (!dictionariesOptions) return {};
+
+	const options = typedEntries(dictionariesOptions).reduce((acc, [key, options]) => {
+		acc[key as keyof TDictionariesWithColors] = options.map((option) => {
+			return {
+				...option,
+				color: COLORS[option.key as keyof typeof COLORS],
+			};
+		});
+
+		return acc;
+	}, {} as TDictionariesWithColors);
+
+	return { dictionariesOptions: options };
 };

@@ -1,9 +1,9 @@
 import { TaskView } from './task-view';
 import { Loader } from '@mantine/core';
-import { useDictionariesOptions, useUsersOptions } from '../../../api/hooks.ts';
-import { BASE_DICTIONARIES_META, INITIAL_FIELD_VALUES } from '../constants.ts';
+import { useUsersOptions } from '../../../api/hooks.ts';
+import { INITIAL_FIELD_VALUES } from '../constants.ts';
 import { useParams } from 'react-router-dom';
-import { useTaskData } from '../hooks.ts';
+import { useDictionariesWithColors, useTaskData } from '../hooks.ts';
 import { useUpdateTaskMutation } from '../../../api/queries/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../store/hooks.ts';
@@ -17,7 +17,7 @@ const Task = () => {
 	const [field, setEditField] = useState(INITIAL_FIELD_VALUES);
 	const [activeTab, setActiveTab] = useState('comments');
 
-	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
+	const { dictionariesOptions } = useDictionariesWithColors();
 	const { isTaskLoading, task } = useTaskData(params.uuid);
 	const { usersListOptions } = useUsersOptions(
 		{
@@ -28,7 +28,7 @@ const Task = () => {
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 
-	const handleSetActiveTab = (value: string | null) => {
+	const handleSetActiveTab = (value: string) => {
 		if (value) {
 			setActiveTab(value);
 		}
@@ -76,7 +76,7 @@ const Task = () => {
 			field={field}
 			activeTab={activeTab}
 			usersListOptions={usersListOptions}
-			options={dictionariesOptions}
+			options={dictionariesOptions ?? { taskType: [], taskPriority: [], taskStatus: [] }}
 			currentUserId={data?.currentUser.id}
 			onSetFieldToEdit={handleSetFieldToEdit}
 			onFieldChange={handleFieldChange}

@@ -1,6 +1,5 @@
 import type { ITimeLog } from '../../types.ts';
 import React from 'react';
-import './styles.less';
 
 interface IProps {
 	logs: Array<ITimeLog>;
@@ -8,25 +7,24 @@ interface IProps {
 
 const TaskLogsView: React.FC<IProps> = ({ logs }) => {
 	return (
-		<div className="task-logs">
+		<div className="flex flex-column gap-2.5 text-[14px]">
 			{logs.map((log) => {
 				return (
-					<div className="task-logs__log" key={log.id}>
-						<div className="task-logs__info">
-							<div className="task-logs__data">
-								<a className="task-logs__user">{`${log.user.name} ${log.user.secondName}`}</a>
+					<div className="p-2.5 hover:bg-background" key={log.id}>
+						<div className="mb-2.5 flex items-center justify-between">
+							<div className="flex items-center gap-1.25">
+								<a>{`${log.user.name} ${log.user.secondName}`}</a>
 								<span>logged</span>
-								<div className="task-logs__date">{log.createdAt}</div>
+								<div>{log.createdAt}</div>
 							</div>
-							{log?.updatedAt && <div className="task-logs__edit">edited</div>}
 						</div>
-						<div className="task-logs__description">
-							<div className="task-logs__title">Time:</div>
-							<div className="task-logs__text">{log.loggedTime}</div>
+						<div className="flex items-center gap-1.25 mb-1.25">
+							<div>Time:</div>
+							<div>{log.loggedTime}</div>
 						</div>
-						<div className="task-logs__description">
-							<div className="task-logs__title">Work log:</div>
-							<div className="task-logs__text">{`${log.description}`}</div>
+						<div className="flex items-center gap-1.25 mb-1.25">
+							<div>Work log:</div>
+							<div>{`${log.description}`}</div>
 						</div>
 					</div>
 				);

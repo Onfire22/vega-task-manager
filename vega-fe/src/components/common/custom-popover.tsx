@@ -4,7 +4,7 @@ import React, { type ReactNode, useRef } from 'react';
 interface IProps {
 	trigger: ReactNode;
 	content: ReactNode;
-	width: string;
+	width?: string;
 	isOpen?: boolean;
 	setIsOpened?: (value: boolean) => void;
 }

@@ -4,13 +4,13 @@ import { cn } from '@/lib/utils.ts';
 
 interface IProps {
 	type: string;
-	id: string;
-	placeholder: string;
-	label: string;
+	id?: string;
+	placeholder?: string;
+	label?: string;
 	value: string;
-	name: string;
+	name?: string;
 	error?: string;
-	onChange: (e: ChangeEvent<HTMLInputElement, Element>) => void;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;
 	ref?: React.RefObject<HTMLInputElement | null>;
 	rightIcon?: ReactNode;

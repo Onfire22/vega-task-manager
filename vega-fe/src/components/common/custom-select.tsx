@@ -10,12 +10,12 @@ import React from 'react';
 import { cn } from '@/lib/utils.ts';
 
 interface IProps {
-	placeholder: string;
+	placeholder?: string;
 	value: string;
 	error?: string;
 	description?: string;
 	label?: string;
-	name: string;
+	name?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
 	options: Array<{ value: string; label: string; description?: string; color?: string }>;
@@ -32,6 +32,8 @@ const CustomSelect: React.FC<IProps> = ({
 	description,
 	name,
 }) => {
+	const chosenColor = options.find((option) => option.value === value)?.color;
+
 	return (
 		<div>
 			<div className="flex flex-col">
@@ -47,9 +49,10 @@ const CustomSelect: React.FC<IProps> = ({
 			</div>
 			<Select value={value} onValueChange={onChange} name={name}>
 				<SelectTrigger
+					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(
 						error && 'border-(--color-danger)',
-						'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full',
+						'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full text-white',
 					)}
 				>
 					<SelectValue placeholder={placeholder} />

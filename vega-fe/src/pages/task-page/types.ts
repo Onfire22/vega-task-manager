@@ -4,7 +4,7 @@ export interface IInitialState {
 	isModalShown: boolean;
 }
 
-export type TOption = { description: string; key: string; label: string; value: string };
+export type TOption = { description?: string; key: string; label: string; value: string; color: string };
 
 export interface IExpDictData {
 	id: string;
@@ -63,3 +63,9 @@ export interface IComment {
 	text: string;
 	commentDate: string;
 }
+
+export type TDictionariesWithColors = {
+	taskType: Array<TOption>;
+	taskPriority: Array<TOption>;
+	taskStatus: Array<TOption>;
+};
