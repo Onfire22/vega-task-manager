@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Skeleton } from '@mantine/core';
+import { Skeleton } from '@mantine/core';
 import { TABS } from '../../constants.ts';
 import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
@@ -8,6 +8,8 @@ import { cn } from '@/lib/utils.ts';
 import { CustomTabs } from '@/components/common/custom-tabs.tsx';
 import { CustomSwitch } from '@/components/common/custom-switch.tsx';
 import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { FiltersTrigger } from '../../filters-trigger/index.tsx';
 
 interface IProps {
 	onTabClick: (value: string) => void;
@@ -33,7 +35,7 @@ const TableControlsView: React.FC<IProps> = ({
 	return (
 		<div className="relative mb-5">
 			<div className="mb-2.5">
-				<CustomTabs variant="line" triggers={TABS} defaultValue={activeTab} onChange={onTabClick} />
+				<CustomTabs variant="line" triggers={TABS} onChange={onTabClick} activeTab={activeTab} />
 			</div>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-1.25">
@@ -42,28 +44,25 @@ const TableControlsView: React.FC<IProps> = ({
 					) : (
 						<>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskPriorityUuid" text="Приоритет" />}
 								options={dictionariesOptions.taskPriority}
-								placeholder="Приоритет"
 								filter="taskPriorityUuid"
 							/>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskStatusUuid" text="Статус" />}
 								options={dictionariesOptions.taskStatus}
-								placeholder="Статус"
 								filter="taskStatusUuid"
 							/>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskStackUuid" text="Тег" />}
 								options={dictionariesOptions.taskType}
-								placeholder="Тег"
 								filter="taskStackUuid"
 							/>
 							<CustomTooltip
 								content="Сбросить фильтры"
 								position="top"
 								trigger={
-									<Button size="xs" disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
+									<Button disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
 										<IterationCw size={15} />
 									</Button>
 								}

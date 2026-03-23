@@ -19,7 +19,7 @@ const tasksSlice = createSlice({
 	name: '@@tasks',
 	initialState,
 	reducers: {
-		setActiveTab: (state, action: PayloadAction<string | null>) => {
+		setActiveTab: (state, action: PayloadAction<string>) => {
 			state.activeTab = action.payload;
 		},
 		setIsAssignee: (state, action: PayloadAction<boolean>) => {
