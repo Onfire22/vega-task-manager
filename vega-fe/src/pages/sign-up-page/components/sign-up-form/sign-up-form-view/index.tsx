@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CustomForm } from '../../../../../components/custom-form';
+import { CustomForm } from '../../../../../components/common/custom-form.tsx';
 import { AccountStep } from '../account-step';
 import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';

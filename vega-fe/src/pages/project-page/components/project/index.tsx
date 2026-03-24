@@ -21,7 +21,7 @@ const Project = () => {
 		filters: { ...(params.uuid ? { withOutProject: params.uuid } : {}) },
 	});
 
-	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);
+	const { project, isProjectLoading, options, projectProgress } = useProjectData(params.uuid);
 
 	const [updateUserRole] = useUpdateUserRoleMutation();
 
@@ -37,7 +37,7 @@ const Project = () => {
 		setActiveField({ fieldName, value });
 	};
 
-	const handleProjectFieldChange = (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string) => {
+	const handleProjectFieldChange = (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => {
 		handleUpdateProject(fieldName, value);
 		setActiveField({ fieldName: '', value: '' });
 	};
@@ -54,7 +54,7 @@ const Project = () => {
 		<ProjectView
 			project={project}
 			activeTab={activeTab}
-			dictionariesOptions={dictionariesOptions.projectStatus}
+			dictionariesOptions={options}
 			projectProgress={projectProgress}
 			usersListOptions={usersListOptions}
 			activeField={activeField}

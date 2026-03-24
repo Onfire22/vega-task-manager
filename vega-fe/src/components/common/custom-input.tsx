@@ -12,6 +12,7 @@ interface IProps {
 	error?: string;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;
+	disabled?: boolean;
 	ref?: React.RefObject<HTMLInputElement | null>;
 	rightIcon?: ReactNode;
 	leftIcon?: ReactNode;
@@ -29,12 +30,13 @@ const CustomInput: React.FC<IProps> = ({
 	leftIcon,
 	name,
 	ref,
+	disabled,
 	isRequired = false,
 }) => {
 	return (
 		<div>
 			{label && (
-				<label htmlFor={id} className="text-[14px]">
+				<label htmlFor={id} className="text-[14px] mb-1.25 block">
 					{label}
 					{isRequired && <span className="text-(--color-danger)"> *</span>}
 				</label>
@@ -55,6 +57,7 @@ const CustomInput: React.FC<IProps> = ({
 					name={name}
 					onChange={onChange}
 					ref={ref}
+					disabled={disabled}
 				/>
 				{rightIcon && <div className="pr-2 flex items-center">{rightIcon}</div>}
 			</div>

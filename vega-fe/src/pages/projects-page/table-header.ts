@@ -1,4 +1,4 @@
-import { CustomTableCell } from '../../components/custom-table-cell';
+import { CustomTableCell } from '../../components/common/custom-table-cell.tsx';
 
 export const TABLE_HEADER = [
 	{ id: 'code', name: 'Код', width: '100px' },

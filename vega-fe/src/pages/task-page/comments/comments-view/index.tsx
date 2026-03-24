@@ -1,9 +1,9 @@
 import type { IComment } from '../../types.ts';
 import React from 'react';
-import { Button, Textarea } from '@mantine/core';
 import { CornerRightUp, Pencil, Trash2 } from 'lucide-react';
-import './styles.less';
 import { getAvatarColor } from '../../../../app/utils.ts';
+import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
+import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
 	value: string;
@@ -31,15 +31,13 @@ const CommentsView: React.FC<IProps> = ({
 	onEditComment,
 }) => {
 	return (
-		<div className="comments">
-			<ul className="comments__list">
+		<div>
+			<ul className="flex flex-col gap-2.5 mb-2.5">
 				{comments.map((item) => {
 					return field.uuid === item.id ? (
 						<div className="comments__field" key={item.id}>
-							<Textarea
+							<CustomTextarea
 								value={field.value}
-								className="comments__input"
-								resize="vertical"
 								placeholder="Изменить комментарий..."
 								onChange={(e) => {
 									onSetCommentValue(item.id, e);
@@ -50,47 +48,41 @@ const CommentsView: React.FC<IProps> = ({
 							</Button>
 						</div>
 					) : (
-						<li className="comments__comment" key={item.id}>
+						<li className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary" key={item.id}>
 							<div
-								className="comments__avatar"
+								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
 								style={{ backgroundColor: getAvatarColor(item.user.userUuid) }}
 							>
 								{item.user.name.substring(0, 2)}
 							</div>
 							<div>
-								<div className="comments__header">
-									<div className="comments__user">{item.user.name}</div>
-									<div className="comments__date">{item.commentDate}</div>
+								<div className="flex items-center gap-2.5">
+									<div>{item.user.name}</div>
+									<div className="text-[12px] text-muted-foreground">{item.commentDate}</div>
 									{currentUserUuid === item.user.userUuid && (
-										<div className="comments__controls">
+										<div className="flex items-center gap-1.25">
 											<Pencil
-												className="comments__control"
+												className="cursor-pointer hover:text-muted-foreground"
 												size={15}
 												onClick={() => onSetActiveField(item.id, item.text)}
 											/>
 											<Trash2
-												className="comments__control"
+												className="cursor-pointer hover:text-muted-foreground"
 												size={15}
 												onClick={() => onDeleteComment(item.id)}
 											/>
 										</div>
 									)}
 								</div>
-								<div className="comments__text">{item.text}</div>
+								<div>{item.text}</div>
 							</div>
 						</li>
 					);
 				})}
 			</ul>
-			<div className="comments__field">
-				<Textarea
-					value={value}
-					className="comments__input"
-					resize="vertical"
-					placeholder="Написать комментарий..."
-					onChange={onSetValue}
-				/>
-				<Button onClick={onCreateComment}>
+			<div className="flex gap-2.5 mb-2.5">
+				<CustomTextarea value={value} placeholder="Написать комментарий..." onChange={onSetValue} />
+				<Button onClick={onCreateComment} disabled={!value.length}>
 					<CornerRightUp />
 				</Button>
 			</div>

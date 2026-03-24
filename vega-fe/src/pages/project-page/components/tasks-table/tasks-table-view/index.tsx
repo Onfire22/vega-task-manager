@@ -1,7 +1,7 @@
 import React from 'react';
-import { CustomTable } from '../../../../../components/custom-table';
 import { TABLE_HEADER } from '../../../table-header.ts';
 import type { IProjectTask } from '../../../types.ts';
+import { CustomTable } from '@/components/common/custom-table.tsx';
 
 interface IProps {
 	tableData: Array<IProjectTask>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomForm } from '../../../../components/custom-form';
+import { CustomForm } from '../../../../components/common/custom-form.tsx';
 import { Link } from 'react-router-dom';
 import { AtSign, Lock } from 'lucide-react';
 import { CustomInput } from '@/components/common/custom-input.tsx';

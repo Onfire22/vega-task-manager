@@ -7,22 +7,34 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog.tsx';
 import React, { type ReactNode } from 'react';
+import { cn } from '@/lib/utils.ts';
 
 interface IProps {
-	trigger: ReactNode;
+	trigger?: ReactNode;
 	title: string;
 	description?: string;
 	children: ReactNode;
+	isOpen: boolean;
+	onOpenChange: () => void;
+	size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-const CustomModal: React.FC<IProps> = ({ trigger, title, description, children }) => {
+const sizeMap = {
+	sm: 'max-w-md',
+	md: 'max-w-lg',
+	lg: 'max-w-2xl',
+	xl: 'max-w-4xl',
+};
+
+const CustomModal: React.FC<IProps> = ({ trigger, title, description, isOpen, onOpenChange, children, size }) => {
+	console.log(sizeMap[size ?? 'md']);
 	return (
-		<Dialog>
-			<DialogTrigger asChild>{trigger}</DialogTrigger>
-			<DialogContent>
+		<Dialog open={isOpen} onOpenChange={onOpenChange}>
+			{trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
+			<DialogContent className={cn(sizeMap[size ?? 'md'])}>
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
-					{description && <DialogDescription>{description}</DialogDescription>}
+					<DialogDescription>{description}</DialogDescription>
 				</DialogHeader>
 				{children}
 			</DialogContent>

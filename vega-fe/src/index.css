@@ -55,6 +55,7 @@
     --color-teal: var(--teal);
     --color-danger: var(--danger);
     --color-red: var(--red);
+    --color-purple: var(--purple);
 }
 
 :root {
@@ -77,8 +78,8 @@
     --input: #2e2e2e;
     --ring: #5046e5;
     --radius: 0.625rem;
+    --sidebar: #0e0e0e;
 
-    --sidebar: #181818;
     --sidebar-foreground: #C9C9C9;
     --sidebar-primary: #5046e5;
     --sidebar-primary-foreground: #ffffff;
@@ -100,6 +101,7 @@
     --teal: #1D9E75;
     --danger: #E24B4A;
     --red: #A32D2D;
+    --purple: #818cf8;
 }
 
 .dark {
@@ -152,7 +154,7 @@
 
 @layer components {
     .link-styled {
-        @apply text-primary cursor-pointer underline decoration-dashed;
+        @apply text-purple cursor-pointer underline decoration-dashed;
     }
     .flex-centered-line {
         @apply flex items-center justify-center

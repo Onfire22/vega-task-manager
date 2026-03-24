@@ -31,14 +31,14 @@ const CustomTable: React.FC<IProps> = ({ tableData, headerData, isLoading, outOf
 					})}
 				</TableRow>
 			</TableHeader>
-			{isLoading && (
-				<TableRow className="hover:bg-transparent">
-					<TableCell colSpan={headerData.length} className="text-center py-8">
-						<CustomLoader />
-					</TableCell>
-				</TableRow>
-			)}
 			<TableBody>
+				{isLoading && (
+					<TableRow className="hover:bg-transparent">
+						<TableCell colSpan={headerData.length} className="text-center py-8">
+							<CustomLoader />
+						</TableCell>
+					</TableRow>
+				)}
 				{!tableData.length && (
 					<TableRow className="hover:bg-transparent">
 						<TableCell colSpan={headerData.length} className="text-center text-muted-foreground">

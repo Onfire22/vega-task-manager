@@ -1,6 +1,8 @@
-import { Button, Modal, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
-import './styles.less';
+import { CustomModal } from '@/components/common/custom-modal.tsx';
+import { CustomInput } from '@/components/common/custom-input.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
 
 interface IProps {
 	formValues: {
@@ -33,10 +35,10 @@ const ModalWindowView: React.FC<IProps> = ({
 	estimateTime,
 }) => {
 	return (
-		<Modal opened={isModalShown} onClose={onLogWorkModalShown} title="Учет времени">
-			<form className="modal-window" onSubmit={onSubmit}>
-				<div className="modal-window__field">
-					<TextInput
+		<CustomModal title="Учет времени" isOpen={isModalShown} onOpenChange={onLogWorkModalShown} size="lg">
+			<form className="flex flex-col items-center gap-2.5" onSubmit={onSubmit}>
+				<div className="w-full">
+					<CustomInput
 						id="estimate"
 						type="text"
 						label="Оценка задачи"
@@ -48,8 +50,8 @@ const ModalWindowView: React.FC<IProps> = ({
 						onChange={onFieldChange}
 					/>
 				</div>
-				<div className="modal-window__field">
-					<TextInput
+				<div className="w-full">
+					<CustomInput
 						id="loggedTime"
 						type="text"
 						label="Затраченное время"
@@ -60,20 +62,21 @@ const ModalWindowView: React.FC<IProps> = ({
 						onChange={onFieldChange}
 					/>
 				</div>
-				<div className="modal-window__field">
-					<Textarea
+				<div className="w-full">
+					<CustomTextarea
 						label="Комментарий"
-						resize="vertical"
 						name="description"
-						description="Описание проделанной работы"
+						placeholder="Описание проделанной работы"
 						value={formValues.logComment}
 						error={formErrors?.logComment}
 						onChange={onFieldChange}
 					/>
 				</div>
-				<Button type="submit">Учесть время</Button>
+				<Button type="submit" variant="primary" size="lg">
+					Учесть время
+				</Button>
 			</form>
-		</Modal>
+		</CustomModal>
 	);
 };
 
