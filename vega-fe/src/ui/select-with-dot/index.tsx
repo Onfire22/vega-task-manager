@@ -20,63 +20,62 @@ interface IProps {
 	statuses: Array<Record<string, string>>;
 	value: IValue;
 	size?: string;
+	label?: string;
 	leftSection?: string;
 	onChange: (value: string | null) => void;
 }
 
-const SelectWithDot: React.FC<IProps> = ({ options, value, statuses, leftSection, onChange, size = 'sm' }) => {
+const CustomSelect: React.FC<IProps> = ({ options, value, statuses, label, onChange, size = 'sm' }) => {
 	const activeColor = statuses.find((status) => status.value === value.key)?.color;
 	return (
-		<Select
-			data={options}
-			value={value.id}
-			size={size}
-			leftSectionWidth={leftSection ? leftSection.length * 6 + 14 : undefined}
-			styles={{
-				section: {
-					justifyContent: 'left',
-					paddingLeft: '3px',
-				},
-				input: {
-					backgroundColor: activeColor + '33',
-					borderColor: activeColor,
-					color: activeColor,
-				},
-			}}
-			className="select-with-dot"
-			renderOption={({ option, checked }) => {
-				const opt = option as ISelectOption;
-				const status = statuses.find((status) => status.value === opt.key)!;
-				return (
-					<Group gap="sm" wrap="nowrap" className="select-with-dot__content">
-						<div
-							className="select-with-dot__dot"
-							style={{
-								background: status.color,
-							}}
-						/>
-						<div className="select-with-dot__text">
-							<Text size="sm" fw={checked ? 500 : 400}>
-								{opt.label}
-							</Text>
-							<Text size="xs" c="dimmed">
-								{opt.description}
-							</Text>
-						</div>
-						{checked && (
-							<Text size="xs" c="dimmed">
-								✓
-							</Text>
-						)}
-					</Group>
-				);
-			}}
-			{...(leftSection
-				? { leftSection: <div className="select-with-dot__left-section">{leftSection}</div> }
-				: {})}
-			onChange={onChange}
-		/>
+		<div className="custom-select">
+			{label && <label className="custom-select__label">{label}</label>}
+			<Select
+				data={options}
+				value={value.id}
+				size={size}
+				styles={{
+					section: {
+						justifyContent: 'left',
+						paddingLeft: '3px',
+					},
+					input: {
+						backgroundColor: activeColor + '53',
+						borderColor: activeColor,
+					},
+				}}
+				className="custom-select__select"
+				renderOption={({ option, checked }) => {
+					const opt = option as ISelectOption;
+					const status = statuses.find((status) => status.value === opt.key)!;
+					return (
+						<Group gap="sm" wrap="nowrap" className="custom-select__content">
+							<div
+								className="custom-select__dot"
+								style={{
+									background: status.color,
+								}}
+							/>
+							<div className="custom-select__text">
+								<Text size="sm" fw={checked ? 500 : 400}>
+									{opt.label}
+								</Text>
+								<Text size="xs" c="dimmed">
+									{opt.description}
+								</Text>
+							</div>
+							{checked && (
+								<Text size="xs" c="dimmed">
+									✓
+								</Text>
+							)}
+						</Group>
+					);
+				}}
+				onChange={onChange}
+			/>
+		</div>
 	);
 };
 
-export { SelectWithDot };
+export { CustomSelect };

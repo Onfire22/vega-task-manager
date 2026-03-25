@@ -3,7 +3,7 @@ import React from 'react';
 import { BLUE_COLOR, GREEN_COLOR, RED_COLOR, TASK_PRIORITIES, TASK_STATUSES, TASK_TYPES } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
 import type { ITask, TOption } from '../../types.ts';
-import { SelectWithDot } from '../../../../ui/select-with-dot';
+import { CustomSelect } from '../../../../ui/select-with-dot';
 import './styles.less';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
@@ -96,9 +96,9 @@ const TaskView: React.FC<IProps> = ({
 					</div>
 				)}
 				<div className="task__controls">
-					<SelectWithDot
+					<CustomSelect
 						size="xs"
-						leftSection="Статус"
+						label="Статус"
 						options={options.taskStatus}
 						statuses={TASK_STATUSES}
 						value={task.taskStatus}
@@ -107,9 +107,9 @@ const TaskView: React.FC<IProps> = ({
 							onUpdateTask('taskStatus', value);
 						}}
 					/>
-					<SelectWithDot
+					<CustomSelect
 						size="xs"
-						leftSection="Тип"
+						label="Тип"
 						options={options.taskType}
 						statuses={TASK_TYPES}
 						value={task.taskStack}
@@ -118,9 +118,9 @@ const TaskView: React.FC<IProps> = ({
 							onUpdateTask('taskStack', value);
 						}}
 					/>
-					<SelectWithDot
+					<CustomSelect
 						size="xs"
-						leftSection="Приоритет"
+						label="Приоритет"
 						options={options.taskPriority}
 						statuses={TASK_PRIORITIES}
 						value={task.taskPriority}

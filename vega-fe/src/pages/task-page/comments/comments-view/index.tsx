@@ -1,7 +1,7 @@
 import type { IComment } from '../../types.ts';
 import React from 'react';
 import { Button, Textarea } from '@mantine/core';
-import { CornerRightUp, Pencil, Trash2 } from 'lucide-react';
+import { CornerRightUp, Pencil, Trash2, X } from 'lucide-react';
 import './styles.less';
 import { getAvatarColor } from '../../../../app/utils.ts';
 
@@ -45,9 +45,14 @@ const CommentsView: React.FC<IProps> = ({
 									onSetCommentValue(item.id, e);
 								}}
 							/>
-							<Button onClick={() => onEditComment(item.id)}>
-								<CornerRightUp />
-							</Button>
+							<div className="comments__buttons">
+								<Button size="xs" onClick={() => onEditComment(item.id)}>
+									<CornerRightUp size={15} />
+								</Button>
+								<Button size="xs" onClick={() => onSetActiveField('', '')}>
+									<X size={15} />
+								</Button>
+							</div>
 						</div>
 					) : (
 						<li className="comments__comment" key={item.id}>
@@ -90,8 +95,8 @@ const CommentsView: React.FC<IProps> = ({
 					placeholder="Написать комментарий..."
 					onChange={onSetValue}
 				/>
-				<Button onClick={onCreateComment}>
-					<CornerRightUp />
+				<Button size="xs" onClick={onCreateComment} disabled={!value}>
+					<CornerRightUp size={15} />
 				</Button>
 			</div>
 		</div>

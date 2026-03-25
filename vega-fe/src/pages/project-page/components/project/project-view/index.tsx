@@ -2,7 +2,7 @@ import type { IDictionary, IProject } from '../../../types.ts';
 import React from 'react';
 import { Button, Popover, Progress, Tabs, TextInput, Tooltip } from '@mantine/core';
 import './styles.less';
-import { SelectWithDot } from '../../../../../ui/select-with-dot';
+import { CustomSelect } from '../../../../../ui/select-with-dot';
 import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
 import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
@@ -77,7 +77,7 @@ const ProjectView: React.FC<IProps> = ({
 				<div className="project__information">
 					<div className="project__wrapper">
 						<span className="project__subtitle">Статус</span>
-						<SelectWithDot
+						<CustomSelect
 							options={dictionariesOptions}
 							value={project.projectStatus}
 							statuses={STATUSES}

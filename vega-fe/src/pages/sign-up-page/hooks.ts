@@ -63,7 +63,6 @@ export const useSignUpForm = () => {
 		}
 
 		const validationResult = await formik.validateForm();
-		console.log(validationResult);
 
 		const isFormValid = !Object.keys(validationResult).length;
 
@@ -73,7 +72,7 @@ export const useSignUpForm = () => {
 			formik.handleSubmit();
 		}
 
-		dispatch(setActiveStep(activeStep < 2 ? activeStep + 1 : activeStep));
+		dispatch(setActiveStep(activeStep < 1 ? activeStep + 1 : activeStep));
 	};
 
 	const handlePrevStepClick = () => {
