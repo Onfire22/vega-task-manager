@@ -1,7 +1,11 @@
-import { Button, Modal, Select, Textarea, TextInput } from '@mantine/core';
-import './styles.less';
 import React from 'react';
 import type { ISelectType, ITaskFormErrors, ITaskFormValues } from '../../types.ts';
+import { CustomModal } from '@/components/common/custom-modal.tsx';
+import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
+import { CustomSelect } from '@/components/common/custom-select.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 interface IProps {
 	onModalClose: () => void;
@@ -11,12 +15,13 @@ interface IProps {
 	};
 	onSelectFieldChange: (name: string, value: string) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
-	stackListData?: ISelectType[];
-	taskPrioritiesData?: ISelectType[];
+	stackListData: ISelectType[];
+	taskPrioritiesData: ISelectType[];
 	projectOptions: ISelectType[];
 	formValues: ITaskFormValues;
 	formErrors: ITaskFormErrors;
 	activeModal: 'project' | 'task' | null;
+	isDictionariesLoading: boolean;
 }
 
 const TaskModalView: React.FC<IProps> = ({
@@ -30,12 +35,16 @@ const TaskModalView: React.FC<IProps> = ({
 	formValues,
 	formErrors,
 	projectOptions,
+	isDictionariesLoading,
 }) => {
-	return (
-		<Modal opened={activeModal === 'task'} onClose={onModalClose} size="100%" title="Создать задачу">
-			<form className="task-modal__form" onSubmit={onFormSubmit}>
-				<div className="task-modal__field">
-					<TextInput
+	return isDictionariesLoading ? (
+		<CustomLoader />
+	) : (
+		<CustomModal isOpen={activeModal === 'task'} onOpenChange={onModalClose} title="Создать задачу">
+			<form className="flex flex-col items-center gap-2.5" onSubmit={onFormSubmit}>
+				<div className="w-full">
+					<CustomInput
+						type="text"
 						label="Название"
 						placeholder="Исправить ошибку на странице..."
 						name="title"
@@ -43,28 +52,27 @@ const TaskModalView: React.FC<IProps> = ({
 						value={formValues.title}
 						onChange={onFieldChange}
 						error={formErrors?.title}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="task-modal__field">
-					<Textarea
+				<div className="w-full">
+					<CustomTextarea
 						label="Описание"
-						resize="vertical"
 						name="description"
 						description="Подробное описание задачи"
 						value={formValues.description}
 						onChange={onFieldChange}
 						error={formErrors?.description}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="task-modal__field">
-					<Select
+				<div className="w-full">
+					<CustomSelect
 						label="Стек технологий"
 						placeholder="Выберите значение"
 						name="taskStackUuid"
 						description="Для какой команды задача"
-						data={stackListData}
+						options={stackListData}
 						value={formValues.taskStackUuid}
 						onChange={(value) => {
 							if (value) {
@@ -72,16 +80,16 @@ const TaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskStackUuid}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="task-modal__field">
-					<Select
+				<div className="w-full">
+					<CustomSelect
 						label="Приоритет задачи"
 						placeholder="Выберите значение"
 						name="taskPriorityUuid"
 						description="Критичность задачи"
-						data={taskPrioritiesData}
+						options={taskPrioritiesData}
 						value={formValues.taskPriorityUuid}
 						onChange={(value) => {
 							if (value) {
@@ -89,16 +97,16 @@ const TaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskPriorityUuid}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="task-modal__field">
-					<Select
+				<div className="w-full">
+					<CustomSelect
 						label="Проект"
 						placeholder="Выберите значение"
 						name="taskProjectUuid"
 						description="Проект в котором будет выполняться задача"
-						data={projectOptions}
+						options={projectOptions}
 						value={formValues.taskProjectUuid}
 						onChange={(value) => {
 							if (value) {
@@ -106,14 +114,14 @@ const TaskModalView: React.FC<IProps> = ({
 							}
 						}}
 						error={formErrors?.taskProjectUuid}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<Button variant="accent" type="submit">
+				<Button variant="primary" type="submit">
 					Создать
 				</Button>
 			</form>
-		</Modal>
+		</CustomModal>
 	);
 };
 

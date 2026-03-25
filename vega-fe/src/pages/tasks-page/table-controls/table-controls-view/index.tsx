@@ -1,5 +1,4 @@
 import React from 'react';
-import { Skeleton } from '@mantine/core';
 import { TABS } from '../../constants.ts';
 import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
@@ -10,6 +9,7 @@ import { CustomSwitch } from '@/components/common/custom-switch.tsx';
 import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { FiltersTrigger } from '../../filters-trigger/index.tsx';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 interface IProps {
 	onTabClick: (value: string) => void;
@@ -40,7 +40,7 @@ const TableControlsView: React.FC<IProps> = ({
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-1.25">
 					{isDictionariesLoading ? (
-						<Skeleton visible={isDictionariesLoading} />
+						<CustomLoader />
 					) : (
 						<>
 							<FiltersMenu

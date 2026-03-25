@@ -16,7 +16,7 @@ const TaskModal = () => {
 	const [createTask] = useCreateTaskMutation();
 
 	const { projectOptions } = useProjectsOptions();
-	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
+	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());
 
@@ -41,6 +41,8 @@ const TaskModal = () => {
 		},
 	});
 
+	console.log(isDictionariesLoading);
+
 	const handleModalClose = () => {
 		dispatch(setActiveModal(null));
 	};
@@ -61,12 +63,13 @@ const TaskModal = () => {
 
 	return (
 		<TaskModalView
-			taskPrioritiesData={dictionariesOptions?.taskPriority}
-			stackListData={dictionariesOptions?.taskType}
+			taskPrioritiesData={dictionariesOptions.taskPriority}
+			stackListData={dictionariesOptions.taskType}
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}
 			projectOptions={projectOptions}
+			isDictionariesLoading={isDictionariesLoading}
 			onModalClose={handleModalClose}
 			onFieldChange={handleFieldChange}
 			onSelectFieldChange={handleSelectFieldChange}

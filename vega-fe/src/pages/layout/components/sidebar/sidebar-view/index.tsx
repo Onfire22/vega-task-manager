@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles.less';
 import { BOTTOM_LINKS, TOP_LINKS } from '../../../contsants.ts';
 import { Link } from 'react-router-dom';
-import { Tooltip } from '@mantine/core';
+import { cn } from '@/lib/utils.ts';
+import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
 
 interface IProps {
 	pathname: string;
@@ -12,51 +12,75 @@ interface IProps {
 
 const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpened }) => {
 	return (
-		<nav className={`sidebar${isSidebarOpened ? ' sidebar_expanded' : ''}`}>
-			<ul className="sidebar__menu">
+		<nav
+			className={cn(
+				'h-[calc(100vh-53px)] w-13.5 flex flex-col justify-between border-r transition-[width] duration-300 ease-in-out',
+				isSidebarOpened && 'w-75 transition-[width] duration-300 ease-in-out',
+			)}
+		>
+			<ul className="p-1.25 flex flex-col gap-2.5">
 				{TOP_LINKS.map((link) => {
 					const Icon = link.icon;
 
 					return isSidebarOpened ? (
 						<li
-							className={`sidebar__item${link.activeRoutes.includes(pathname) ? ' sidebar__item_active' : ''}`}
+							className={cn(
+								'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
+								link.activeRoutes.includes(pathname) &&
+									'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
+							)}
 							key={link.href}
 						>
 							<Link
 								to={link.href}
-								className={`sidebar__link${link.activeRoutes.includes(pathname) ? ' sidebar__link_active' : ''} sidebar__link_expanded`}
+								className={cn('h-6 text-foreground w-full flex items-center gap-2.5 no-underline')}
 							>
 								<Icon />
 								<span>{link.label}</span>
 							</Link>
 						</li>
 					) : (
-						<Tooltip label={link.label} key={link.href} position="right">
-							<li
-								className={`sidebar__item${link.activeRoutes.includes(pathname) ? ' sidebar__item_active' : ''}`}
-							>
-								<Link
-									to={link.href}
-									className={`sidebar__link${link.activeRoutes.includes(pathname) ? ' sidebar__link_active' : ''}`}
+						<CustomTooltip
+							content={link.label}
+							trigger={
+								<li
+									className={cn(
+										'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
+										link.activeRoutes.includes(pathname) &&
+											'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
+									)}
 								>
-									<Icon />
-								</Link>
-							</li>
-						</Tooltip>
+									<Link
+										to={link.href}
+										className={cn(
+											'h-6 text-foreground w-full flex items-center gap-2.5 no-underline',
+										)}
+									>
+										<Icon />
+									</Link>
+								</li>
+							}
+							key={link.href}
+							position="right"
+						/>
 					);
 				})}
 			</ul>
-			<ul className="sidebar__menu">
+			<ul className="p-1.25 flex flex-col gap-2.5">
 				{BOTTOM_LINKS.map((link) => {
 					const Icon = link.icon;
 					return isSidebarOpened ? (
 						<li
-							className={`sidebar__item${link.activeRoutes.includes(pathname) ? ' sidebar__item_active' : ''}`}
+							className={cn(
+								'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
+								link.activeRoutes.includes(pathname) &&
+									'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
+							)}
 							key={link.href}
 						>
 							{link.href === 'logout' ? (
 								<button
-									className="sidebar__button sidebar__button_expanded"
+									className="w-6 h-6 bg-transparent border-none cursor-pointer"
 									type="button"
 									onClick={onLogOutClick}
 								>
@@ -66,7 +90,7 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 							) : (
 								<Link
 									to={link.href}
-									className={`sidebar__link${link.activeRoutes.includes(pathname) ? ' sidebar__link_active' : ''} sidebar__link_expanded`}
+									className={cn('h-6 text-foreground w-full flex items-center gap-2.5 no-underline')}
 								>
 									<Icon />
 									<span>{link.label}</span>
@@ -74,24 +98,37 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 							)}
 						</li>
 					) : (
-						<Tooltip key={link.href} label={link.label} position="right">
-							<li
-								className={`sidebar__item${link.activeRoutes.includes(pathname) ? ' sidebar__item_active' : ''}`}
-							>
-								{link.href === 'logout' ? (
-									<button className="sidebar__button" type="button" onClick={onLogOutClick}>
-										<Icon />
-									</button>
-								) : (
-									<Link
-										to={link.href}
-										className={`sidebar__link${link.activeRoutes.includes(pathname) ? ' sidebar__link_active' : ''} sidebar__link_expanded`}
-									>
-										<Icon />
-									</Link>
-								)}
-							</li>
-						</Tooltip>
+						<CustomTooltip
+							key={link.href}
+							content={link.label}
+							position="right"
+							trigger={
+								<li
+									className={cn(
+										'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
+										link.activeRoutes.includes(pathname) &&
+											'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
+									)}
+								>
+									{link.href === 'logout' ? (
+										<button
+											className="w-6 h-6 bg-transparent border-none cursor-pointer"
+											type="button"
+											onClick={onLogOutClick}
+										>
+											<Icon />
+										</button>
+									) : (
+										<Link
+											to={link.href}
+											className="h-6 text-foreground w-full flex items-center gap-2.5 no-underline"
+										>
+											<Icon />
+										</Link>
+									)}
+								</li>
+							}
+						/>
 					);
 				})}
 			</ul>

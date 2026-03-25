@@ -36,16 +36,14 @@ const CustomSelect: React.FC<IProps> = ({
 
 	return (
 		<div>
-			<div className="flex flex-col">
+			<div className="flex flex-col ml-1 mb-1">
 				{label && (
-					<label className="text-[14px] ml-2 items-center">
+					<label className="text-[14px] items-center">
 						{label}
 						{isRequired && <span className="text-(--color-danger)"> *</span>}
 					</label>
 				)}
-				{description && (
-					<span className="text-[12px] ml-2 items-center text-muted-foreground">{description}</span>
-				)}
+				{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
 			</div>
 			<Select value={value} onValueChange={onChange} name={name}>
 				<SelectTrigger

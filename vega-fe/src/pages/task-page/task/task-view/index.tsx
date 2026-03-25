@@ -1,4 +1,3 @@
-import { Divider } from '@mantine/core';
 import React from 'react';
 import { TABS } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
@@ -51,7 +50,7 @@ const TaskView: React.FC<IProps> = ({
 	return (
 		<div className="flex items-start w-full">
 			<div className="w-full py-2.5">
-				<div className="px-[25px] flex items-center gap-[5px] text-[13px] mb-[5px]">
+				<div className="px-6.25 flex items-center gap-1.25 text-[13px] mb-1.25">
 					<Link
 						className="transition-colors duration-300 hover:text-white"
 						to={`/project/${task.project.id}`}
@@ -125,7 +124,7 @@ const TaskView: React.FC<IProps> = ({
 						label="Приоритет"
 					/>
 				</div>
-				<Divider orientation="horizontal" className="task__divider" />
+				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
 				<div className="mb-5">
 					<div className="pl-6.25 text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>
 					{field.fieldName === 'description' ? (
@@ -164,7 +163,7 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					)}
 				</div>
-				<Divider orientation="horizontal" className="task__divider" />
+				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
 				<div className="pl-6.25">
 					<CustomTabs variant="line" triggers={TABS} activeTab={activeTab} onChange={onSetActiveTab} />
 				</div>

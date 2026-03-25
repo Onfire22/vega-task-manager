@@ -1,5 +1,4 @@
 import { TaskView } from './task-view';
-import { Loader } from '@mantine/core';
 import { useUsersOptions } from '../../../api/hooks.ts';
 import { INITIAL_FIELD_VALUES } from '../constants.ts';
 import { useParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 const Task = () => {
 	const params = useParams();
@@ -69,7 +69,7 @@ const Task = () => {
 	};
 
 	return isTaskLoading ? (
-		<Loader />
+		<CustomLoader />
 	) : (
 		<TaskView
 			task={task}

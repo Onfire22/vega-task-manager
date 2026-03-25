@@ -16,6 +16,8 @@ export interface ITaskFormValues {
 export interface ISelectType {
 	value: string;
 	label: string;
+	description?: string;
+	color?: string;
 }
 
 export interface IProjectFormValues {

@@ -10,6 +10,7 @@ interface IProps {
 	value: string;
 	name?: string;
 	error?: string;
+	description?: string;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;
 	disabled?: boolean;
@@ -31,16 +32,20 @@ const CustomInput: React.FC<IProps> = ({
 	name,
 	ref,
 	disabled,
+	description,
 	isRequired = false,
 }) => {
 	return (
 		<div>
-			{label && (
-				<label htmlFor={id} className="text-[14px] mb-1.25 block">
-					{label}
-					{isRequired && <span className="text-(--color-danger)"> *</span>}
-				</label>
-			)}
+			<div className="flex flex-col ml-1 mb-1">
+				{label && (
+					<label htmlFor={id} className="text-[14px] block">
+						{label}
+						{isRequired && <span className="text-(--color-danger)"> *</span>}
+					</label>
+				)}
+				{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
+			</div>
 			<div
 				className={cn(
 					'border border-input rounded-lg flex items-center justify-between focus-within:border-primary min-w-full overflow-hidden',

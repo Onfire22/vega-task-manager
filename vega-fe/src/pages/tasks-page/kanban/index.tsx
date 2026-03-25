@@ -1,7 +1,7 @@
 import { KanbanView } from './kanban-view';
-import { Loader } from '@mantine/core';
 import { useKanbanTasks } from '../hooks.ts';
 import { useNavigate } from 'react-router-dom';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 const Kanban = () => {
 	const navigate = useNavigate();
@@ -12,7 +12,11 @@ const Kanban = () => {
 		navigate(`/task/${uuid}`);
 	};
 
-	return isColumnsLoading ? <Loader /> : <KanbanView columns={columns} onTaskDoubleClick={handleTaskDoubleClick} />;
+	return isColumnsLoading ? (
+		<CustomLoader />
+	) : (
+		<KanbanView columns={columns} onTaskDoubleClick={handleTaskDoubleClick} />
+	);
 };
 
 export { Kanban };

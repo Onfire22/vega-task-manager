@@ -1,10 +1,10 @@
 import { ProjectView } from './project-view';
 import { useProjectData, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
-import { Loader } from '@mantine/core';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 const Project = () => {
 	const params = useParams();
@@ -49,7 +49,7 @@ const Project = () => {
 	};
 
 	return isProjectLoading ? (
-		<Loader />
+		<CustomLoader />
 	) : (
 		<ProjectView
 			project={project}

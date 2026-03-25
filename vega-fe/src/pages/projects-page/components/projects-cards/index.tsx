@@ -1,7 +1,7 @@
 import { ProjectsCardsView } from './projects-cards-view';
 import { useProjectsTableData } from '../../hooks.ts';
-import { Loader } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import { CustomLoader } from '@/components/common/custom-loader.tsx';
 
 const ProjectsCards = () => {
 	const navigate = useNavigate();
@@ -12,7 +12,7 @@ const ProjectsCards = () => {
 		navigate(`/project/${uuid}`);
 	};
 
-	return isLoading ? <Loader /> : <ProjectsCardsView projects={projects} onCardClick={handleCardClick} />;
+	return isLoading ? <CustomLoader /> : <ProjectsCardsView projects={projects} onCardClick={handleCardClick} />;
 };
 
 export { ProjectsCards };

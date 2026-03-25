@@ -9,19 +9,33 @@ interface IProps {
 	value: string;
 	name?: string;
 	error?: string;
+	description?: string;
 	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 	isRequired?: boolean;
 }
 
-const CustomTextarea: React.FC<IProps> = ({ id, placeholder, label, value, name, error, onChange, isRequired }) => {
+const CustomTextarea: React.FC<IProps> = ({
+	id,
+	placeholder,
+	label,
+	value,
+	name,
+	error,
+	onChange,
+	isRequired,
+	description,
+}) => {
 	return (
 		<div className="w-full">
-			{label && (
-				<label htmlFor={id} className="text-[14px] mb-1.25 block">
-					{label}
-					{isRequired && <span className="text-(--color-danger)"> *</span>}
-				</label>
-			)}
+			<div className="ml-1 mb-1">
+				{label && (
+					<label htmlFor={id} className="text-[14px] block">
+						{label}
+						{isRequired && <span className="text-(--color-danger)"> *</span>}
+					</label>
+				)}
+				<span className="text-[12px] items-center text-muted-foreground">{description}</span>
+			</div>
 			<Textarea
 				className={cn(error && 'border-(--color-danger)')}
 				placeholder={placeholder}

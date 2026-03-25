@@ -1,10 +1,10 @@
 import type { IProject } from '../../../types.ts';
 import React from 'react';
-import { Progress } from '@mantine/core';
 import { pluralValue } from '../../../utils.ts';
 import { PLURAL_OPTIONS } from '../../../constants.ts';
 import { getAvatarColor } from '../../../../../app/utils.ts';
 import { CustomBadge } from '@/components/common/custom-badge.tsx';
+import { CustomProgress } from '@/components/common/custom-progress.tsx';
 
 interface IProps {
 	projects: IProject[];
@@ -41,7 +41,7 @@ const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 							<div>{project.owner}</div>
 							<div>{project.createdAt}</div>
 						</div>
-						<Progress value={project.projectProgress} size="xs" />
+						<CustomProgress progress={project.projectProgress} />
 						<div className="text-[12px] text-muted-foreground flex items-center justify-between">
 							<div>{`${project.tasksCount} ${pluralValue(project.tasksCount, PLURAL_OPTIONS)}`}</div>
 							<CustomBadge label={project.projectStatus.key} text={project.projectStatus.label} />

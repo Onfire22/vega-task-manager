@@ -3,7 +3,6 @@ import { PASSWORD_REQUIREMENTS, RED_COLOR, TEAL_COLOR, YELLOW_COLOR } from '../.
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useDictionariesOptions } from '../../../../api/hooks.ts';
-import { LoadingOverlay } from '@mantine/core';
 import { useSignUpForm } from '../../hooks.ts';
 
 const SignUpForm = () => {
@@ -15,7 +14,7 @@ const SignUpForm = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(['USER_SPECIALISATION']);
 
-	const { handleNextStepClick, handlePrevStepClick, isSignUpLoading, activeStep, formik, isError } = useSignUpForm();
+	const { handleNextStepClick, handlePrevStepClick, activeStep, formik, isError } = useSignUpForm();
 
 	useEffect(() => {
 		if (emailRef?.current) {
@@ -82,27 +81,24 @@ const SignUpForm = () => {
 	]);
 
 	return (
-		<>
-			<LoadingOverlay visible={isSignUpLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-			<SignUpFormView
-				activeStep={activeStep}
-				formValues={formik.values}
-				formErrors={formik.errors}
-				isPopoverOpened={isPopoverOpened}
-				popoverData={popoverData}
-				passwordRef={passwordRef}
-				emailRef={emailRef}
-				isNextButtonDisabled={isNextButtonDisabled}
-				stackOptions={dictionariesOptions?.userSpecialisation}
-				isError={isError}
-				onFieldChange={handleFieldChange}
-				onPopoverOpened={handlePopoverOpened}
-				onGeneratePasswordClick={handleGeneratePasswordClick}
-				onSelectFieldChange={handleSelectFieldChange}
-				onNextStepClick={handleNextStepClick}
-				onPrevStepClick={handlePrevStepClick}
-			/>
-		</>
+		<SignUpFormView
+			activeStep={activeStep}
+			formValues={formik.values}
+			formErrors={formik.errors}
+			isPopoverOpened={isPopoverOpened}
+			popoverData={popoverData}
+			passwordRef={passwordRef}
+			emailRef={emailRef}
+			isNextButtonDisabled={isNextButtonDisabled}
+			stackOptions={dictionariesOptions?.userSpecialisation}
+			isError={isError}
+			onFieldChange={handleFieldChange}
+			onPopoverOpened={handlePopoverOpened}
+			onGeneratePasswordClick={handleGeneratePasswordClick}
+			onSelectFieldChange={handleSelectFieldChange}
+			onNextStepClick={handleNextStepClick}
+			onPrevStepClick={handlePrevStepClick}
+		/>
 	);
 };
 

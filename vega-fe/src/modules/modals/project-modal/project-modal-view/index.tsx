@@ -1,10 +1,15 @@
 import './styles.less';
-import { Button, Loader, Modal, MultiSelect, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
 import type { IProjectErrors, IProjectFormValues } from '../../types.ts';
 import { DatePickerInput, DatesProvider } from '@mantine/dates';
 import { CALENDAR_SETTINGS } from '../../contsants.ts';
 import 'dayjs/locale/ru';
+import { CustomModal } from '@/components/common/custom-modal.tsx';
+import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
+import { CustomMultiSelect } from '@/components/common/custom-multi-select.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { DateInput } from '@/components/common/date-input.tsx';
 
 interface IProps {
 	formValues: IProjectFormValues;
@@ -29,14 +34,14 @@ const ProjectModalView: React.FC<IProps> = ({
 	activeModal,
 	onModalClose,
 	userList,
-	isLoading,
 	onSelectFieldChange,
 }) => {
 	return (
-		<Modal opened={activeModal === 'project'} onClose={onModalClose} size="50%" title="Создать проект">
+		<CustomModal isOpen={activeModal === 'project'} onOpenChange={onModalClose} title="Создать проект">
 			<form className="create-project-modal__form" onSubmit={onFormSubmit}>
 				<div className="create-project-modal__field">
-					<TextInput
+					<CustomInput
+						type="text"
 						label="Название"
 						placeholder="Название проекта"
 						name="title"
@@ -44,24 +49,23 @@ const ProjectModalView: React.FC<IProps> = ({
 						value={formValues.title}
 						error={formErrors?.title}
 						onChange={onFieldChange}
-						withAsterisk
+						isRequired
 					/>
 				</div>
 				<div className="create-project-modal__field">
-					<Textarea
+					<CustomTextarea
 						label="Описание"
-						resize="vertical"
 						name="description"
 						description="Подробное описание проекта"
 						value={formValues.description}
 						error={formErrors?.description}
 						onChange={onFieldChange}
-						withAsterisk
+						isRequired
 					/>
 				</div>
 				<div className="create-project-modal__field">
 					<DatesProvider settings={CALENDAR_SETTINGS}>
-						<DatePickerInput
+						<DateInput
 							label="Дедлайн"
 							placeholder="Выберите дату"
 							description="Дата окончания проекта"
@@ -75,27 +79,24 @@ const ProjectModalView: React.FC<IProps> = ({
 					</DatesProvider>
 				</div>
 				<div className="create-project-modal__field">
-					<MultiSelect
+					<CustomMultiSelect
 						label="Пользователи"
 						placeholder="Выберите пользователей"
 						description="Список участников проекта"
-						name="usersUuids"
-						data={userList}
-						value={formValues.usersUuids}
-						onChange={(value) => {
+						options={userList}
+						values={formValues.usersUuids}
+						setValues={(value) => {
 							if (value) {
 								onSelectFieldChange('usersUuids', value);
 							}
 						}}
-						rightSection={isLoading && <Loader size="xs" />}
-						clearable
 					/>
 				</div>
-				<Button variant="accent" type="submit">
+				<Button variant="primary" type="submit">
 					Создать
 				</Button>
 			</form>
-		</Modal>
+		</CustomModal>
 	);
 };
 
