@@ -36,8 +36,6 @@ const TaskModal = () => {
 		},
 	});
 
-	console.log(isDictionariesLoading);
-
 	const handleModalClose = () => {
 		dispatch(setActiveModal(null));
 	};

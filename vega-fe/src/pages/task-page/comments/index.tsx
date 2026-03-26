@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useComments } from '../hooks.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
+import { toast } from 'sonner';
 
 const Comments = () => {
 	const params = useParams();
@@ -31,7 +32,8 @@ const Comments = () => {
 				await createComment({ taskUuid: params.uuid, text: value }).unwrap();
 				setValue('');
 			} catch (e) {
-				console.log(e);
+				const error = e as { data?: { message?: string } };
+				toast.error(error.data?.message ?? 'Something went wrong');
 			}
 		}
 	};
@@ -42,7 +44,8 @@ const Comments = () => {
 				await editComment({ commentUuid: uuid, text: field.value });
 				setField({ uuid: '', value: '' });
 			} catch (e) {
-				console.log(e);
+				const error = e as { data?: { message?: string } };
+				toast.error(error.data?.message ?? 'Something went wrong');
 			}
 		}
 	};

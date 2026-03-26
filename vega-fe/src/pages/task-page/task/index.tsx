@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { toast } from 'sonner';
 
 const Task = () => {
 	const params = useParams();
@@ -36,11 +37,11 @@ const Task = () => {
 
 	const handleUpdateTask = async (fieldName: string, value: string) => {
 		try {
-			const response = await updateTask({ fieldName, value, uuid: params.uuid }).unwrap();
+			await updateTask({ fieldName, value, uuid: params.uuid }).unwrap();
 			setEditField(INITIAL_FIELD_VALUES);
-			console.log(response);
 		} catch (e) {
-			console.log(e);
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
 		}
 	};
 
