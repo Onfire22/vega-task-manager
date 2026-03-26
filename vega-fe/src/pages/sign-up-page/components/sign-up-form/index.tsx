@@ -14,7 +14,7 @@ const SignUpForm = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(['USER_SPECIALISATION']);
 
-	const { handleNextStepClick, handlePrevStepClick, activeStep, formik, isError } = useSignUpForm();
+	const { handleNextStepClick, handlePrevStepClick, activeStep, formik } = useSignUpForm();
 
 	useEffect(() => {
 		if (emailRef?.current) {
@@ -91,7 +91,6 @@ const SignUpForm = () => {
 			emailRef={emailRef}
 			isNextButtonDisabled={isNextButtonDisabled}
 			stackOptions={dictionariesOptions?.userSpecialisation}
-			isError={isError}
 			onFieldChange={handleFieldChange}
 			onPopoverOpened={handlePopoverOpened}
 			onGeneratePasswordClick={handleGeneratePasswordClick}
