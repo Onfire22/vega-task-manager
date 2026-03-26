@@ -5,14 +5,14 @@ import type { ITask, TOption } from '../../types.ts';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 import { Link } from 'react-router-dom';
-import { CustomBadge } from '@/components/common/custom-badge.tsx';
-import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { Textarea } from '@/components/ui/textarea.tsx';
-import { CustomTabs } from '@/components/common/custom-tabs.tsx';
-import { CustomPopover } from '@/components/common/custom-popover.tsx';
-import { CustomProgress } from '@/components/common/custom-progress.tsx';
-import { CustomSelect } from '@/components/common/custom-select.tsx';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 
 interface IProps {
 	task: ITask | null;
@@ -186,7 +186,7 @@ const TaskView: React.FC<IProps> = ({
 								{task.assignee ? (
 									<span>{task.assignee}</span>
 								) : (
-									<a className="task__link" onClick={() => onUpdateTask('assignee', currentUserId!)}>
+									<a className="link-styled" onClick={() => onUpdateTask('assignee', currentUserId!)}>
 										+ назначить меня
 									</a>
 								)}

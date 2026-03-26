@@ -1,7 +1,7 @@
 import React from 'react';
 import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
-import { CustomInput } from '@/components/common/custom-input.tsx';
-import { CustomSelect } from '@/components/common/custom-select.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 
 interface IProps {
 	formValues: IFormValues;

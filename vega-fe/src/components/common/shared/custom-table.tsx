@@ -1,6 +1,6 @@
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table.tsx';
 import React from 'react';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 interface IProps {
 	tableData: Array<{ [key: string]: any }>;

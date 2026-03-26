@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { cn } from '@/lib/utils';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover.tsx';
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from '@/components/ui/command.tsx';
+import { cn } from '@/lib/utils.ts';
 
 interface Option {
 	value: string;
@@ -43,14 +50,16 @@ export const CustomMultiSelect: React.FC<IProps> = ({
 	const selectedLabels = options.filter((o) => values.includes(o.value));
 
 	return (
-		<div className="flex flex-col gap-1">
-			{label && (
-				<label className="text-[14px] ml-2">
-					{label}
-					{isRequired && <span className="text-(--color-danger)"> *</span>}
-				</label>
-			)}
-			{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
+		<div className="flex flex-col">
+			<div className="ml-2 mb-1">
+				{label && (
+					<label className="text-[14px] block">
+						{label}
+						{isRequired && <span className="text-(--color-danger)"> *</span>}
+					</label>
+				)}
+				{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
+			</div>
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<button

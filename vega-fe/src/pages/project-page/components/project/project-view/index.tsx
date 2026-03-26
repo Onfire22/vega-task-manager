@@ -3,17 +3,16 @@ import React from 'react';
 import { ROLES_COLORS, TABS } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
 import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
-import { parseDate } from '../../../utils.ts';
-import { getAvatarColor } from '../../../../../app/utils.ts';
-import { CustomTabs } from '@/components/common/custom-tabs.tsx';
+import { getAvatarColor, parseDate } from '../../../../../app/utils.ts';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { cn } from '@/lib/utils.ts';
-import { CustomSelect } from '@/components/common/custom-select.tsx';
-import { CustomProgress } from '@/components/common/custom-progress.tsx';
-import { CustomPopover } from '@/components/common/custom-popover.tsx';
-import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
-import { CustomCalendar } from '@/components/common/custom-calendar.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import { CustomCalendar } from '@/components/common/shared/custom-calendar.tsx';
 
 interface IProps {
 	project: IProject | null;

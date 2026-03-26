@@ -6,13 +6,11 @@ import { SignUpValidationSchema } from '../validation.ts';
 import { useSignInUserMutation } from '../../../api/queries/auth.api.ts';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../app/constants.ts';
-import { useAppDispatch } from '../../../store/hooks.ts';
-import { setNotification } from '../../../modules/notifications/slice.ts';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { toast } from 'sonner';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
-	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const [signInUser, { isLoading }] = useSignInUserMutation();
@@ -33,12 +31,7 @@ const SignUpForm = () => {
 				navigate(FRONT_ROUTES.root);
 			} catch (e: unknown) {
 				const error = e as { data?: { message?: string } };
-				dispatch(
-					setNotification({
-						type: 'error',
-						text: error.data?.message ?? 'Something went wrong',
-					}),
-				);
+				toast.error(error.data?.message ?? 'Something went wrong');
 			}
 		},
 	});

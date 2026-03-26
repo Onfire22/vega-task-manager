@@ -1,11 +1,11 @@
 import React from 'react';
 import type { ISelectType, ITaskFormErrors, ITaskFormValues } from '../../types.ts';
-import { CustomModal } from '@/components/common/custom-modal.tsx';
-import { CustomInput } from '@/components/common/custom-input.tsx';
-import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
-import { CustomSelect } from '@/components/common/custom-select.tsx';
+import { CustomModal } from '@/components/common/ui/custom-modal.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 interface IProps {
 	onModalClose: () => void;

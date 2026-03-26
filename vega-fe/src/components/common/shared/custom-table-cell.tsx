@@ -1,6 +1,6 @@
 import React from 'react';
-import { CustomBadge } from '@/components/common/custom-badge.tsx';
-import { CustomProgress } from '@/components/common/custom-progress.tsx';
+import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 
 const CELLS_WITH_BADGES = ['taskStatus', 'taskStack', 'taskPriority', 'projectStatus'];
 

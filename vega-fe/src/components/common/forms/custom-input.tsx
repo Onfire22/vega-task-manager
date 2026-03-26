@@ -3,7 +3,7 @@ import React, { type ChangeEvent, type ReactNode } from 'react';
 import { cn } from '@/lib/utils.ts';
 
 interface IProps {
-	type: string;
+	type?: string;
 	id?: string;
 	placeholder?: string;
 	label?: string;

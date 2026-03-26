@@ -1,7 +1,7 @@
 import { Header } from '../header';
 import { BaseCustomMenu } from '../base-custom-menu';
 import { Sidebar } from '../sidebar';
-import { PageContentWrapper } from '../../../../components/common/page-content-wrapper.tsx';
+import { PageContentWrapper } from '../../../../components/common/shared/page-content-wrapper.tsx';
 import { Outlet } from 'react-router-dom';
 import React from 'react';
 

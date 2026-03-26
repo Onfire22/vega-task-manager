@@ -2,7 +2,7 @@ import React from 'react';
 import { BOTTOM_LINKS, TOP_LINKS } from '../../../contsants.ts';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils.ts';
-import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 
 interface IProps {
 	pathname: string;
@@ -80,7 +80,7 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 						>
 							{link.href === 'logout' ? (
 								<button
-									className="w-6 h-6 bg-transparent border-none cursor-pointer"
+									className="'h-6 text-foreground w-full flex items-center gap-2.5"
 									type="button"
 									onClick={onLogOutClick}
 								>

@@ -27,7 +27,6 @@ const sizeMap = {
 };
 
 const CustomModal: React.FC<IProps> = ({ trigger, title, description, isOpen, onOpenChange, children, size }) => {
-	console.log(sizeMap[size ?? 'md']);
 	return (
 		<Dialog open={isOpen} onOpenChange={onOpenChange}>
 			{trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}

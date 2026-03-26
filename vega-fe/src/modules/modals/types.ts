@@ -24,7 +24,7 @@ export interface IProjectFormValues {
 	title: string;
 	description: string;
 	usersUuids: string[];
-	deadlineDate?: string | null;
+	deadlineDate?: Date;
 }
 
 export interface IProjectErrors {

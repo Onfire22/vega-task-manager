@@ -1,8 +1,8 @@
 import React from 'react';
-import { CustomModal } from '@/components/common/custom-modal.tsx';
-import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomModal } from '@/components/common/ui/custom-modal.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
+import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 
 interface IProps {
 	formValues: {

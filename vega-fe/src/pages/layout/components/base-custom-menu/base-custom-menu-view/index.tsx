@@ -1,9 +1,9 @@
 import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus, X } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils.ts';
-import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { CustomPopover } from '@/components/common/custom-popover.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 
 interface IProps {
 	onSearchChange: (value: string) => void;

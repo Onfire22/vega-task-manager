@@ -1,9 +1,8 @@
 import React from 'react';
-import { CustomForm } from '../../../../components/common/custom-form.tsx';
 import { Link } from 'react-router-dom';
 import { AtSign, Lock } from 'lucide-react';
-import { CustomInput } from '@/components/common/custom-input.tsx';
-import { CustomPasswordInput } from '@/components/common/custom-password-input.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomPasswordInput } from '@/components/common/forms/custom-password-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
@@ -24,7 +23,11 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 	return (
 		<div className="w-full h-screen flex-centered-line">
 			<div className="w-125">
-				<CustomForm title="Вход" onSubmit={onFormSubmit}>
+				<form
+					className="w-full p-7.5 flex-centered-column gap-2.5 border border-border rounded-[5px]"
+					onSubmit={onFormSubmit}
+				>
+					<h1 className="text-2xl">Вход</h1>
 					<div className="w-full">
 						<CustomInput
 							id="email"
@@ -63,7 +66,7 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 					<Button type="submit" size="lg" variant="primary">
 						Войти
 					</Button>
-				</CustomForm>
+				</form>
 			</div>
 		</div>
 	);

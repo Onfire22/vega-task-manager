@@ -49,8 +49,8 @@ const CustomSelect: React.FC<IProps> = ({
 				<SelectTrigger
 					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(
+						'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full text-white cursor-pointer',
 						error && 'border-(--color-danger)',
-						'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full text-white',
 					)}
 				>
 					<SelectValue placeholder={placeholder} />
@@ -62,7 +62,7 @@ const CustomSelect: React.FC<IProps> = ({
 								key={option.value}
 								value={option.value}
 								textValue={option.label}
-								className="items-start p-2"
+								className="items-start p-2 cursor-pointer"
 							>
 								<span className="flex items-center">
 									{option.color && (

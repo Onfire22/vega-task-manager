@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../store/hooks.ts';
 import { setIsModalShown } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const Task = () => {
 	const params = useParams();

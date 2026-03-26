@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CustomForm } from '../../../../../components/common/custom-form.tsx';
 import { AccountStep } from '../account-step';
 import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';
@@ -48,7 +47,8 @@ const SignUpFormView: React.FC<IProps> = ({
 	return (
 		<div className="w-full h-screen flex-centered-line">
 			<div className="w-125">
-				<CustomForm title="Регистрация">
+				<form className="w-full p-7.5 flex-centered-column gap-2.5 border border-border rounded-[5px]">
+					<h1 className="text-2xl">Регистрация</h1>
 					<div className="w-full">
 						{activeStep === 0 && (
 							<AccountStep
@@ -85,7 +85,7 @@ const SignUpFormView: React.FC<IProps> = ({
 							Войти
 						</Link>
 					</div>
-				</CustomForm>
+				</form>
 			</div>
 		</div>
 	);

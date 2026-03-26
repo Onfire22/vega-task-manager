@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomTabs } from '@/components/common/custom-tabs.tsx';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { TABS } from '@/pages/projects-page/constants.ts';
 
 interface IProps {

@@ -1,7 +1,7 @@
 import { KanbanView } from './kanban-view';
 import { useKanbanTasks } from '../hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const Kanban = () => {
 	const navigate = useNavigate();

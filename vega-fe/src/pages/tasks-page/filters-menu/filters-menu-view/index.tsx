@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import type { IFilters, IOptionType, TFilter } from '../../types.ts';
-import { CustomPopover } from '@/components/common/custom-popover.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field.tsx';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { Button } from '@/components/ui/button.tsx';

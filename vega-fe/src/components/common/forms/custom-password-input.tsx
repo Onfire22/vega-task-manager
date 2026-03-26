@@ -1,14 +1,14 @@
 import React, { type ReactNode, useState } from 'react';
-import { CustomInput } from '@/components/common/custom-input.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 interface IProps {
-	type: string;
-	id: string;
-	placeholder: string;
-	label: string;
+	type?: string;
+	id?: string;
+	placeholder?: string;
+	label?: string;
 	value: string;
-	name: string;
+	name?: string;
 	error?: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;

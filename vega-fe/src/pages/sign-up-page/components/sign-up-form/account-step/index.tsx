@@ -3,10 +3,10 @@ import { PasswordRequirement } from '../../password-requirement';
 import { MINIMAL_PASSWORD_LENGTH, PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from '../../../constants.ts';
 import React from 'react';
 import type { IFormErrors, IFormValues } from '../../../types.ts';
-import { CustomInput } from '@/components/common/custom-input.tsx';
-import { CustomPasswordInput } from '@/components/common/custom-password-input.tsx';
-import { CustomPopover } from '@/components/common/custom-popover.tsx';
-import { CustomProgress } from '@/components/common/custom-progress.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomPasswordInput } from '@/components/common/forms/custom-password-input.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 
 interface IProps {
 	formValues: IFormValues;

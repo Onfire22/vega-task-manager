@@ -1,7 +1,7 @@
 import { ProjectsCardsView } from './projects-cards-view';
 import { useProjectsTableData } from '../../hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const ProjectsCards = () => {
 	const navigate = useNavigate();

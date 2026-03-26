@@ -1,4 +1,4 @@
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover.tsx';
 import React, { type ReactNode, useRef } from 'react';
 
 interface IProps {

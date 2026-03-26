@@ -47,7 +47,6 @@
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
 
-    /* Твои дополнительные цвета */
     --color-violet: var(--violet);
     --color-indigo-brand: var(--blue);
     --color-amber: var(--amber);

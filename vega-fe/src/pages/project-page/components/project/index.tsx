@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const Project = () => {
 	const params = useParams();

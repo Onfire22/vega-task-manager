@@ -11,7 +11,7 @@ const CustomTooltip: React.FC<IProps> = ({ trigger, content, position }) => {
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>{trigger}</TooltipTrigger>
-			<TooltipContent className="bg-card" side={position}>
+			<TooltipContent className="bg-sidebar-foreground text-secondary" side={position}>
 				{content}
 			</TooltipContent>
 		</Tooltip>

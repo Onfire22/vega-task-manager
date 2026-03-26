@@ -1,117 +1,85 @@
-import { Button, PasswordInput, Select, TextInput } from '@mantine/core';
-import './styles.less';
+import { Button } from '@/components/ui/button.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
+import { CustomPasswordInput } from '@/components/common/forms/custom-password-input.tsx';
 
 const UserProfileView = () => {
 	return (
-		<div className="user-profile">
-			<div className="user-profile__content">
-				<div className="user-profile__user">
-					<div className="user-profile__avatar" />
-					<div className="user-profile__info">
-						<div className="user-profile__title">Алексей Смирнов</div>
-						<div className="user-profile__description">@a.smirnov · Platform team</div>
-						<div className="user-profile__controlls">
-							<Button size="xs" className="user-profile__button">
+		<div className="w-full p-6 flex flex-col gap-5">
+			<div className="bg-card rounded-lg">
+				<div className="flex items-center gap-5 px-4.5 py-5">
+					<div className="w-15 h-15 rounded-full bg-[blueviolet]" />
+					<div>
+						<div className="text-white">Алексей Смирнов</div>
+						<div className="text-[12px] text-muted-foreground">@a.smirnov · Platform team</div>
+						<div className="-ml-1.25">
+							<Button size="xs" variant="default">
 								Загрузить фото
 							</Button>
-							<Button size="xs" className="user-profile__button">
+							<Button size="xs" variant="default">
 								Удалить фото
 							</Button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className="user-profile__content">
+			<div className="bg-card rounded-lg">
 				<div className="user-profile__wrapper">
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Личные данные</p>
-							<p className="user-profile__value">Отображается в задачах, комментариях и упоминаниях</p>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end">
+						<div className="px-4.5 py-3.5">
+							<p className="text-white">Личные данные</p>
+							<p className="text-[12px] text-muted-foreground">
+								Отображается в задачах, комментариях и упоминаниях
+							</p>
 						</div>
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Имя</p>
-						</div>
-						<div className="user-profile__control">
-							<TextInput size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Имя</p>
+						<CustomInput value="" onChange={() => {}} type="text" />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Фамилия</p>
-						</div>
-						<div className="user-profile__control">
-							<TextInput size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Фамилия</p>
+						<CustomInput value="" onChange={() => {}} type="text" />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Должность / роль</p>
-						</div>
-						<div className="user-profile__control">
-							<Select size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Должность / роль</p>
+						<CustomSelect options={[]} onChange={() => {}} value="" />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Команда</p>
-						</div>
-						<div className="user-profile__control">
-							<Select size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Команда</p>
+						<CustomSelect options={[]} onChange={() => {}} value="" />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Часовой пояс</p>
-						</div>
-						<div className="user-profile__control">
-							<Select size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Часовой пояс</p>
+						<CustomSelect options={[]} onChange={() => {}} value="" />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__save">
-							<Button variant="accent">Сохранить</Button>
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75 py-2.5">
+						<Button variant="primary">Сохранить</Button>
 					</div>
 				</div>
 			</div>
-			<div className="user-profile__content">
+			<div className="bg-card rounded-lg">
 				<div className="user-profile__wrapper">
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Пароль</p>
-							<p className="user-profile__value">Изменить пароль</p>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<div className="px-4.5 py-3.5">
+							<p className="text-white">Настройки пароля</p>
+							<p className="text-[12px] text-muted-foreground">Изменить пароль</p>
 						</div>
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Старый пароль</p>
-						</div>
-						<div className="user-profile__control">
-							<PasswordInput size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Старый пароль</p>
+						<CustomPasswordInput value="" onChange={() => {}} />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Новый пароль</p>
-						</div>
-						<div className="user-profile__control">
-							<PasswordInput size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Новый пароль</p>
+						<CustomPasswordInput value="" onChange={() => {}} />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__data">
-							<p className="user-profile__key">Повторите пароль</p>
-						</div>
-						<div className="user-profile__control">
-							<PasswordInput size="xs" />
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75">
+						<p className="text-white px-4.5 py-3.5">Повторите пароль</p>
+						<CustomPasswordInput value="" onChange={() => {}} />
 					</div>
-					<div className="user-profile__row">
-						<div className="user-profile__save">
-							<Button variant="accent">Изменить пароль</Button>
-						</div>
+					<div className="flex items-center justify-between border-b last:border-b-0 last:justify-end pr-3.75 py-2.5">
+						<Button variant="primary">Изменить пароль</Button>
 					</div>
 				</div>
 			</div>

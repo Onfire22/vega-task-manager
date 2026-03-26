@@ -1,8 +1,8 @@
 import type { IComment } from '../../types.ts';
 import React from 'react';
-import { CornerRightUp, Pencil, Trash2 } from 'lucide-react';
+import { CornerRightUp, Pencil, Trash2, XIcon } from 'lucide-react';
 import { getAvatarColor } from '../../../../app/utils.ts';
-import { CustomTextarea } from '@/components/common/custom-textarea.tsx';
+import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
@@ -35,7 +35,7 @@ const CommentsView: React.FC<IProps> = ({
 			<ul className="flex flex-col gap-2.5 mb-2.5">
 				{comments.map((item) => {
 					return field.uuid === item.id ? (
-						<div className="comments__field" key={item.id}>
+						<div className="flex gap-2.5 mb-2.5" key={item.id}>
 							<CustomTextarea
 								value={field.value}
 								placeholder="Изменить комментарий..."
@@ -43,9 +43,14 @@ const CommentsView: React.FC<IProps> = ({
 									onSetCommentValue(item.id, e);
 								}}
 							/>
-							<Button onClick={() => onEditComment(item.id)}>
-								<CornerRightUp />
-							</Button>
+							<div>
+								<Button onClick={() => onEditComment(item.id)}>
+									<CornerRightUp />
+								</Button>
+								<Button onClick={() => onSetActiveField('', '')}>
+									<XIcon />
+								</Button>
+							</div>
 						</div>
 					) : (
 						<li className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary" key={item.id}>

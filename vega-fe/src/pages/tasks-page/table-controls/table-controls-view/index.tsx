@@ -4,12 +4,12 @@ import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
 import { IterationCw } from 'lucide-react';
 import { cn } from '@/lib/utils.ts';
-import { CustomTabs } from '@/components/common/custom-tabs.tsx';
-import { CustomSwitch } from '@/components/common/custom-switch.tsx';
-import { CustomTooltip } from '@/components/common/custom-tooltip.tsx';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { FiltersTrigger } from '../../filters-trigger/index.tsx';
-import { CustomLoader } from '@/components/common/custom-loader.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { Switch } from '@/components/ui/switch.tsx';
 
 interface IProps {
 	onTabClick: (value: string) => void;
@@ -72,7 +72,11 @@ const TableControlsView: React.FC<IProps> = ({
 				</div>
 				<div className="flex items-center gap-2.5">
 					<span className={cn(!isAssignee && 'font-semibold text-white')}>Мои задачи</span>
-					<CustomSwitch checked={isAssignee} onChange={onSwitchClick} />
+					<Switch
+						className="data-[state=checked]:bg-teal data-[state=unchecked]:bg-violet cursor-pointer"
+						checked={isAssignee}
+						onCheckedChange={onSwitchClick}
+					/>
 					<span className={cn(isAssignee && 'font-semibold text-white')}>Я исполнитель</span>
 				</div>
 			</div>

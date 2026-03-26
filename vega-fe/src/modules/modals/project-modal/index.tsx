@@ -7,9 +7,9 @@ import { getActiveModalSelector } from '../selectors.ts';
 import { useUsersOptions } from '../../../api/hooks.ts';
 import { PROJECT_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { CreateProjectValidationSchema } from '../validation.ts';
-import { setNotification } from '../../notifications/slice.ts';
 import { setActiveModal } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
+import { toast } from 'sonner';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ const ProjectModal = () => {
 		onSubmit: async (values) => {
 			const response = await createProject(values);
 			if (response?.data?.project) {
-				dispatch(setNotification({ type: 'success', text: 'Проект успешно создан' }));
+				toast.success('Проект успешно создан');
 				dispatch(setActiveModal(null));
 			}
 		},
@@ -48,7 +48,7 @@ const ProjectModal = () => {
 		dispatch(setActiveModal(null));
 	};
 
-	const handleSelectFieldChange = (name: string, value: Array<string> | string) => {
+	const handleSelectFieldChange = (name: string, value: Array<string> | string | Date) => {
 		formik.setFieldError(name, '');
 		formik.setFieldValue(name, value);
 	};

@@ -33,7 +33,11 @@ interface IProps {
 const CustomBadge: React.FC<IProps> = ({ label, text }) => {
 	const variant = COLORS[label as keyof typeof COLORS];
 
-	return <Badge variant={variant}>{text}</Badge>;
+	return (
+		<Badge className="w-full" variant={variant}>
+			{text}
+		</Badge>
+	);
 };
 
 export { CustomBadge };

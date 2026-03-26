@@ -3,9 +3,9 @@ import { useCheckIsEmailFreeMutation, useSignUpUserMutation } from '../../api/qu
 import { useFormik } from 'formik';
 import { SIGNUP_DEFAULT_VALUES } from './constants.ts';
 import { AccountStepValidationSchema, ProfileStepValidationSchema } from './validation.ts';
-import { setNotification } from '../../modules/notifications/slice.ts';
 import { getActiveStepSelector } from './selectors.ts';
 import { setActiveStep } from './slice.ts';
+import { toast } from 'sonner';
 
 export const useSignUpForm = () => {
 	const dispatch = useAppDispatch();
@@ -24,12 +24,7 @@ export const useSignUpForm = () => {
 				await signUpUser(values).unwrap();
 			} catch (e) {
 				const error = e as { data?: { message?: string } };
-				dispatch(
-					setNotification({
-						type: 'error',
-						text: error.data?.message ?? 'Something went wrong',
-					}),
-				);
+				toast.error(error.data?.message ?? 'Something went wrong');
 			}
 		},
 	});
@@ -44,12 +39,7 @@ export const useSignUpForm = () => {
 			}
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
-			dispatch(
-				setNotification({
-					type: 'error',
-					text: error.data?.message ?? 'Something went wrong',
-				}),
-			);
+			toast.error(error.data?.message ?? 'Something went wrong');
 		}
 
 		return false;
@@ -73,7 +63,7 @@ export const useSignUpForm = () => {
 			formik.handleSubmit();
 		}
 
-		dispatch(setActiveStep(activeStep < 2 ? activeStep + 1 : activeStep));
+		dispatch(setActiveStep(activeStep < 1 ? activeStep + 1 : activeStep));
 	};
 
 	const handlePrevStepClick = () => {
