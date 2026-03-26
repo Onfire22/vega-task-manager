@@ -53,7 +53,6 @@ export const useSignUpForm = () => {
 		}
 
 		const validationResult = await formik.validateForm();
-		console.log(validationResult);
 
 		const isFormValid = !Object.keys(validationResult).length;
 
