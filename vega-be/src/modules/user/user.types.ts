@@ -22,3 +22,9 @@ export interface IGetUserListRequestBody {
 export interface IGetUserListResponse {
 	usersList: Array<Partial<Pick<IUser, 'id' | 'name' | 'secondName'>>>;
 }
+
+export interface IUpdateUserBody {
+	name: string;
+	secondName: string;
+	userSpecialisationUuid: string;
+}
