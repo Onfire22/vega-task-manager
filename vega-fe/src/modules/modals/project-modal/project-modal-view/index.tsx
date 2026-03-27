@@ -1,10 +1,11 @@
-import './styles.less';
-import { Button, Loader, Modal, MultiSelect, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
 import type { IProjectErrors, IProjectFormValues } from '../../types.ts';
-import { DatePickerInput, DatesProvider } from '@mantine/dates';
-import { CALENDAR_SETTINGS } from '../../contsants.ts';
-import 'dayjs/locale/ru';
+import { CustomModal } from '@/components/common/ui/custom-modal.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
+import { CustomMultiSelect } from '@/components/common/forms/custom-multi-select.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { DateInput } from '@/components/common/forms/date-input.tsx';
 
 interface IProps {
 	formValues: IProjectFormValues;
@@ -18,7 +19,7 @@ interface IProps {
 	};
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	onModalClose: () => void;
-	onSelectFieldChange: (name: string, value: Array<string> | string) => void;
+	onSelectFieldChange: (name: string, value: Array<string> | string | Date) => void;
 }
 
 const ProjectModalView: React.FC<IProps> = ({
@@ -29,14 +30,14 @@ const ProjectModalView: React.FC<IProps> = ({
 	activeModal,
 	onModalClose,
 	userList,
-	isLoading,
 	onSelectFieldChange,
 }) => {
 	return (
-		<Modal opened={activeModal === 'project'} onClose={onModalClose} size="50%" title="Создать проект">
-			<form className="create-project-modal__form" onSubmit={onFormSubmit}>
-				<div className="create-project-modal__field">
-					<TextInput
+		<CustomModal isOpen={activeModal === 'project'} onOpenChange={onModalClose} title="Создать проект">
+			<form className="flex flex-col items-center gap-2.5" onSubmit={onFormSubmit}>
+				<div className="w-full">
+					<CustomInput
+						type="text"
 						label="Название"
 						placeholder="Название проекта"
 						name="title"
@@ -44,58 +45,50 @@ const ProjectModalView: React.FC<IProps> = ({
 						value={formValues.title}
 						error={formErrors?.title}
 						onChange={onFieldChange}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="create-project-modal__field">
-					<Textarea
+				<div className="w-full">
+					<CustomTextarea
 						label="Описание"
-						resize="vertical"
 						name="description"
 						description="Подробное описание проекта"
 						value={formValues.description}
 						error={formErrors?.description}
 						onChange={onFieldChange}
-						withAsterisk
+						isRequired
 					/>
 				</div>
-				<div className="create-project-modal__field">
-					<DatesProvider settings={CALENDAR_SETTINGS}>
-						<DatePickerInput
-							label="Дедлайн"
-							placeholder="Выберите дату"
-							description="Дата окончания проекта"
-							name="deadlineDate"
-							value={formValues.deadlineDate}
-							onChange={(value) => {
-								if (!value) return;
-								onSelectFieldChange('deadlineDate', value);
-							}}
-						/>
-					</DatesProvider>
+				<div className="w-full">
+					<DateInput
+						label="Дедлайн"
+						description="Дата сдачи проекта"
+						value={formValues.deadlineDate}
+						onChange={(value) => {
+							if (!value) return;
+							onSelectFieldChange('deadlineDate', value);
+						}}
+					/>
 				</div>
-				<div className="create-project-modal__field">
-					<MultiSelect
+				<div className="w-full">
+					<CustomMultiSelect
 						label="Пользователи"
 						placeholder="Выберите пользователей"
 						description="Список участников проекта"
-						name="usersUuids"
-						data={userList}
-						value={formValues.usersUuids}
-						onChange={(value) => {
+						options={userList}
+						values={formValues.usersUuids}
+						setValues={(value) => {
 							if (value) {
 								onSelectFieldChange('usersUuids', value);
 							}
 						}}
-						rightSection={isLoading && <Loader size="xs" />}
-						clearable
 					/>
 				</div>
-				<Button variant="accent" type="submit">
+				<Button variant="primary" type="submit">
 					Создать
 				</Button>
 			</form>
-		</Modal>
+		</CustomModal>
 	);
 };
 

@@ -13,36 +13,42 @@ export const LOG_TIME_INITIAL_VALUES = {
 	logComment: '',
 };
 
-export const RED_COLOR = '#E24B4A';
-
-export const GREEN_COLOR = '#1D9E75';
-
-export const BLUE_COLOR = '#4752E3';
-
 export const INITIAL_FIELD_VALUES = {
 	fieldName: '',
 	value: '',
 };
 
-export const TASK_TYPES = [
-	{ value: 'fe', color: '#4752E3' },
-	{ value: 'be', color: '#1D9E75' },
-	{ value: 'fs', color: '#A855F7' },
-	{ value: 'qa', color: '#D98A06' },
-	{ value: 'an', color: '#E24B4A' },
-];
+export const COLORS = {
+	medium: '#D98A06',
+	low: '#1D9E75',
+	high: '#E24B4A',
+	highest: '#791F1F',
 
-export const TASK_PRIORITIES = [
-	{ value: 'low', color: '#1D9E75' },
-	{ value: 'medium', color: '#D98A06' },
-	{ value: 'high', color: '#E24B4A' },
-	{ value: 'highest', color: '#791F1F' },
-];
+	todo: '#4752E3',
+	in_progress: '#A855F7',
+	testing: '#D98A06',
+	done: '#1D9E75',
+	stopped: '#E24B4A',
 
-export const TASK_STATUSES = [
-	{ value: 'todo', color: '#4752E3' },
-	{ value: 'in_progress', color: '#A855F7' },
-	{ value: 'testing', color: '#D98A06' },
-	{ value: 'done', color: '#1D9E75' },
-	{ value: 'stopped', color: '#E24B4A' },
+	fe: '#4752E3',
+	be: '#1D9E75',
+	fs: '#A855F7',
+	qa: '#D98A06',
+	an: '#E24B4A',
+
+	p_backlog: '#fff',
+	p_in_progress: '#D98A06',
+	p_closed: '#1D9E75',
+	p_stopped: '#E24B4A',
+};
+
+export const TABS = [
+	{
+		text: 'Комментарии',
+		value: 'comments',
+	},
+	{
+		text: 'Логи',
+		value: 'logs',
+	},
 ];

@@ -12,9 +12,7 @@ export const PROJECT_FORM_INITIAL_VALUES = {
 	title: '',
 	description: '',
 	usersUuids: [],
-	deadlineDate: null,
+	deadlineDate: undefined,
 };
 
 export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'TASK_TYPE', 'TASK_STATUS'];
-
-export const CALENDAR_SETTINGS = { locale: 'ru' };

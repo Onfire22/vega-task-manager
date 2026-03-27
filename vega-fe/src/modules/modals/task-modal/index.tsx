@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
 import { useDictionariesOptions, useProjectsOptions } from '../../../api/hooks.ts';
-import { setNotification } from '../../notifications/slice.ts';
 import { BASE_DICTIONARIES_META, TASK_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { getActiveModalSelector } from '../selectors.ts';
 import { CreateTaskValidationSchema } from '../validation.ts';
 import { setActiveModal } from '../slice.ts';
+import { toast } from 'sonner';
 
 const TaskModal = () => {
 	const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ const TaskModal = () => {
 	const [createTask] = useCreateTaskMutation();
 
 	const { projectOptions } = useProjectsOptions();
-	const { dictionariesOptions } = useDictionariesOptions(BASE_DICTIONARIES_META);
+	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());
 
@@ -27,16 +27,11 @@ const TaskModal = () => {
 		onSubmit: async (values) => {
 			try {
 				await createTask(values).unwrap();
-				dispatch(setNotification({ type: 'success', text: 'Задача успешно создана' }));
+				toast.success('Задача успешно создана');
 				dispatch(setActiveModal(null));
 			} catch (e) {
 				const error = e as { data?: { message?: string } };
-				dispatch(
-					setNotification({
-						type: 'error',
-						text: error.data?.message ?? 'Something went wrong',
-					}),
-				);
+				toast.error(error.data?.message ?? 'Something went wrong');
 			}
 		},
 	});
@@ -61,12 +56,13 @@ const TaskModal = () => {
 
 	return (
 		<TaskModalView
-			taskPrioritiesData={dictionariesOptions?.taskPriority}
-			stackListData={dictionariesOptions?.taskType}
+			taskPrioritiesData={dictionariesOptions.taskPriority}
+			stackListData={dictionariesOptions.taskType}
 			formValues={formik.values}
 			formErrors={formik.errors}
 			activeModal={activeModal}
 			projectOptions={projectOptions}
+			isDictionariesLoading={isDictionariesLoading}
 			onModalClose={handleModalClose}
 			onFieldChange={handleFieldChange}
 			onSelectFieldChange={handleSelectFieldChange}

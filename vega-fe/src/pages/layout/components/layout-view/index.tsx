@@ -1,26 +1,22 @@
 import { Header } from '../header';
 import { BaseCustomMenu } from '../base-custom-menu';
 import { Sidebar } from '../sidebar';
-import { PageContentWrapper } from '../../../../components/page-content-wrapper/page-content-wrapper.tsx';
+import { PageContentWrapper } from '../../../../components/common/shared/page-content-wrapper.tsx';
 import { Outlet } from 'react-router-dom';
-import React from 'react';
-import './styles.less';
+import { ProjectModal, TaskModal } from '@/modules/modals';
 
-interface IProps {
-	component: React.ComponentType | null;
-}
-
-const LayoutView: React.FC<IProps> = ({ component: ActiveModal }) => {
+const LayoutView = () => {
 	return (
-		<div className="layout">
+		<div>
 			<Header menu={<BaseCustomMenu />} />
-			<div className="layout__content">
+			<div className="flex items-center">
 				<Sidebar />
 				<PageContentWrapper>
 					<Outlet />
 				</PageContentWrapper>
 			</div>
-			{ActiveModal && <ActiveModal />}
+			<ProjectModal />
+			<TaskModal />
 		</div>
 	);
 };

@@ -1,15 +1,18 @@
 import type { IDictionary, IProject } from '../../../types.ts';
 import React from 'react';
-import { Button, Popover, Progress, Tabs, TextInput, Tooltip } from '@mantine/core';
-import './styles.less';
-import { CustomSelect } from '../../../../../ui/select-with-dot';
-import { ROLES_COLORS, STATUSES } from '../../../constants.ts';
+import { ROLES_COLORS, TABS } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
 import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
-import { DatePicker, DatesProvider } from '@mantine/dates';
-import { parseDate } from '../../../utils.ts';
-import 'dayjs/locale/ru';
-import { getAvatarColor } from '../../../../../app/utils.ts';
+import { getAvatarColor, parseDate } from '../../../../../app/utils.ts';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
+import { cn } from '@/lib/utils.ts';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import { CustomCalendar } from '@/components/common/shared/custom-calendar.tsx';
 
 interface IProps {
 	project: IProject | null;
@@ -21,7 +24,7 @@ interface IProps {
 	activeField: { fieldName: string; value: string | null };
 	onSetActiveFiled: (fieldName: string, value: string | null) => void;
 	onUpdateUserRole: (userUuid: string, userRole: string) => void;
-	onProjectFieldChange: (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string) => void;
+	onProjectFieldChange: (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => void;
 }
 
 const ProjectView: React.FC<IProps> = ({
@@ -38,88 +41,81 @@ const ProjectView: React.FC<IProps> = ({
 }) => {
 	if (!project) return null;
 	return (
-		<div className="project">
-			<div className="project__content">
-				<div className="project__header">
+		<div className="w-full h-full flex items-start">
+			<div className="w-full px-3.75 py-2.5">
+				<div className="flex items-center gap-2.5 mb-2.5">
 					<div
-						className="project__avatar"
+						className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[18px]"
 						style={{
 							backgroundColor: getAvatarColor(project.id),
 						}}
 					>
 						{project.code.substring(1, 3)}
 					</div>
-					<div className="project__info">
-						<div className="project__title">{project.title}</div>
-						<div className="project__meta">
+					<div>
+						<div className="text-[20px] text-white">{project.title}</div>
+						<div className="text-[12px] text-muted-foreground">
 							<span>
 								Создан {project.createdAt} - ID {project.code}
 							</span>
 						</div>
 					</div>
 				</div>
-				<div className="project__tabs">
-					<Tabs value={activeTab} onChange={onTabClick}>
-						<Tabs.List>
-							<Tabs.Tab value="description">Описание</Tabs.Tab>
-							<Tabs.Tab value="tasks">Задачи</Tabs.Tab>
-							<Tabs.Tab value="files">Файлы</Tabs.Tab>
-							<Tabs.Tab value="activity">Активность</Tabs.Tab>
-						</Tabs.List>
-					</Tabs>
-				</div>
-				<div className="project__data">
-					{activeTab === 'description' && <div className="project__data-content">{project.description}</div>}
+				<CustomTabs triggers={TABS} activeTab={activeTab} onChange={onTabClick} variant="line" />
+				<div className="p-2.5">
+					{activeTab === 'description' && <div>{project.description}</div>}
 					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
-			<aside className="project__sidebar">
-				<div className="project__information">
-					<div className="project__wrapper">
-						<span className="project__subtitle">Статус</span>
+			<aside className="w-[30%] h-full p-3.75 border flex flex-col gap-5">
+				<div className="flex flex-col gap-5">
+					<div className="flex flex-col">
+						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
+							Статус
+						</span>
 						<CustomSelect
 							options={dictionariesOptions}
-							value={project.projectStatus}
-							statuses={STATUSES}
+							value={project.projectStatus.id}
 							onChange={(value) => {
 								if (!value) return;
 								onProjectFieldChange('projectStatusUuid', value);
 							}}
 						/>
 					</div>
-					<div className="project__wrapper">
-						<span className="project__subtitle">Дата проекта</span>
-						<span className="project__date">{project.createdAt}</span>
+					<div className="flex flex-col">
+						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
+							Дата проекта
+						</span>
+						<span className="text-[14px] font-medium">{project.createdAt}</span>
 					</div>
-					<div className="project__wrapper">
+					<div className="flex flex-col">
 						{activeField.fieldName === 'deadlineDate' ? (
-							<div className="project__calendar">
-								<DatesProvider settings={{ locale: 'ru' }}>
-									<DatePicker
-										value={parseDate(project.deadlineDate)}
-										onChange={(value) => {
-											if (!value) return;
-											onProjectFieldChange('deadlineDate', value);
-										}}
-									/>
-								</DatesProvider>
-								<Button onClick={() => onSetActiveFiled('', '')} size="xs">
+							<div className="flex flex-col gap-2.5">
+								<CustomCalendar
+									value={parseDate(project.deadlineDate)}
+									onChange={(value) => {
+										if (!value) return;
+										onProjectFieldChange('deadlineDate', value);
+									}}
+								/>
+								<Button onClick={() => onSetActiveFiled('', '')} size="lg">
 									Отмена
 								</Button>
 							</div>
 						) : (
 							<>
-								<span className="project__subtitle">
+								<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
 									<span>Дедлайн</span>
 									{project.deadlineDate ? (
-										<a onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}>
+										<a
+											className="link-styled"
+											onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}
+										>
 											изменить
 										</a>
 									) : null}
 								</span>
-								<span
-									className={`project__date${project.deadlineDate ? ' project__date_deadline' : ''}`}
-								>
+								<span className={cn('font-medium text-[14px]', project.deadlineDate && 'text-danger')}>
 									{project.deadlineDate ?? (
 										<a onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}>
 											+ установить
@@ -129,78 +125,97 @@ const ProjectView: React.FC<IProps> = ({
 							</>
 						)}
 					</div>
-					<div className="project__wrapper">
-						<span className="project__subtitle">Прогресс</span>
-						<Progress.Root size="xs">
-							<Progress.Section value={projectProgress}></Progress.Section>
-						</Progress.Root>
+					<div className="flex flex-col">
+						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
+							Прогресс
+						</span>
+						<CustomProgress progress={projectProgress} />
 					</div>
 				</div>
-				<div className="project__divider" />
-				<div className="project__users">
-					<div className="project__users-title">
-						<span className="project__subtitle">Участники проекта</span>
-						<Popover width={260} position="bottom" withArrow>
-							<Popover.Target>
-								<Button size="xs" className="project__button">
+				<div className="h-px bg-border" />
+				<div>
+					<div className="flex items-center justify-between">
+						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
+							Участники проекта
+						</span>
+						<CustomPopover
+							trigger={
+								<Button size="xs" className="p-0 w-7.5 h-5 text-white">
 									+
 								</Button>
-							</Popover.Target>
-							<Popover.Dropdown>
-								<TextInput placeholder="Поиск" size="xs" />
-								<ul className="project__users-list">
-									{usersListOptions.map((user) => {
-										return (
-											<li className="project__user" key={user.value}>
-												<span>{user.label}</span>
-												<div className="project__user-controls">
-													<Tooltip label="Пригласить" className="project__user-control">
-														<UserPlus
-															size={25}
-															onClick={() => onUpdateUserRole(user.value, 'viewer')}
+							}
+							content={
+								<>
+									<CustomInput placeholder="Поиск" value="123" onChange={() => {}} type="text" />
+									<ul className="mt-2.5">
+										{usersListOptions.map((user) => {
+											return (
+												<li
+													className="p-1.25 text-sm flex items-center justify-between"
+													key={user.value}
+												>
+													<span>{user.label}</span>
+													<div className="flex items-center gap-1.75">
+														<CustomTooltip
+															content="Пригласить"
+															position="top"
+															trigger={
+																<UserPlus
+																	size={25}
+																	onClick={() =>
+																		onUpdateUserRole(user.value, 'viewer')
+																	}
+																/>
+															}
 														/>
-													</Tooltip>
-													<Tooltip
-														label="Сделать участником"
-														className="project__user-control"
-													>
-														<UserRoundCheck
-															size={25}
-															onClick={() => onUpdateUserRole(user.value, 'member')}
+														<CustomTooltip
+															content="Сделать участником"
+															position="top"
+															trigger={
+																<UserRoundCheck
+																	size={25}
+																	onClick={() =>
+																		onUpdateUserRole(user.value, 'member')
+																	}
+																/>
+															}
 														/>
-													</Tooltip>
-													<Tooltip
-														label="Сделать владельцем"
-														className="project__user-control"
-													>
-														<UserStar
-															size={25}
-															onClick={() => onUpdateUserRole(user.value, 'owner')}
+														<CustomTooltip
+															content="Сделать владельцем"
+															position="top"
+															trigger={
+																<UserStar
+																	size={25}
+																	onClick={() =>
+																		onUpdateUserRole(user.value, 'owner')
+																	}
+																/>
+															}
 														/>
-													</Tooltip>
-												</div>
-											</li>
-										);
-									})}
-								</ul>
-							</Popover.Dropdown>
-						</Popover>
+													</div>
+												</li>
+											);
+										})}
+									</ul>
+								</>
+							}
+						/>
 					</div>
-					<ul className="project__users-list">
+					<ul className="mt-2.5">
 						{project.users.map((user) => {
 							return (
-								<li className="project__user" key={user.id}>
+								<li className="p-1.25 text-sm flex items-center gap-2.5" key={user.id}>
 									<div
-										className="project__user-avatar"
+										className="w-7.5 h-6.25 text-[11px] text-white flex items-center justify-center rounded-full"
 										style={{ backgroundColor: getAvatarColor(user.id) }}
 									>
 										{user.userInitials}
 									</div>
-									<div className="project__user-info">
-										<div className="project__user-header">
-											<div className="project__user-name">{user.userName}</div>
+									<div className="w-full text-[11px] text-muted-foreground">
+										<div className="flex items-center justify-between">
+											<div className="text-[12px] text-foreground">{user.userName}</div>
 											<div
-												className="project__user-role"
+												className="text-[12px]"
 												style={{
 													color: ROLES_COLORS[user.userRole.key as keyof typeof ROLES_COLORS],
 												}}
@@ -208,7 +223,7 @@ const ProjectView: React.FC<IProps> = ({
 												{user.userRole.label}
 											</div>
 										</div>
-										<div className="project__user-specialisation">{user.userSpecialisation}</div>
+										<div>{user.userSpecialisation}</div>
 									</div>
 								</li>
 							);

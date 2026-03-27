@@ -1,7 +1,7 @@
 import React from 'react';
-import { CustomTable } from '../../../../../components/custom-table';
 import { TABLE_HEADER } from '../../../table-header.ts';
 import type { IProjectTask } from '../../../types.ts';
+import { CustomTable } from '@/components/common/shared/custom-table.tsx';
 
 interface IProps {
 	tableData: Array<IProjectTask>;
@@ -11,14 +11,12 @@ interface IProps {
 
 const TasksTableView: React.FC<IProps> = ({ tableData, onRowDoubleClick }) => {
 	return (
-		<div className="tasks-table">
-			<CustomTable
-				headerData={TABLE_HEADER}
-				onRowDoubleClick={onRowDoubleClick}
-				tableData={tableData}
-				outOfDataMessage="Задач не найдено"
-			/>
-		</div>
+		<CustomTable
+			headerData={TABLE_HEADER}
+			onRowDoubleClick={onRowDoubleClick}
+			tableData={tableData}
+			outOfDataMessage="Задач не найдено"
+		/>
 	);
 };
 

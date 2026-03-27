@@ -1,16 +1,21 @@
-import './styles.less';
 import React from 'react';
-import { Button, Skeleton, Switch, Tabs, Tooltip } from '@mantine/core';
-import { BLUE_COLOR, TEAL_COLOR } from '../../constants.ts';
+import { TABS } from '../../constants.ts';
 import { FiltersMenu } from '../../filters-menu';
 import type { IDictionaries } from '../../types.ts';
 import { IterationCw } from 'lucide-react';
+import { cn } from '@/lib/utils.ts';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { FiltersTrigger } from '../../filters-trigger/index.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { Switch } from '@/components/ui/switch.tsx';
 
 interface IProps {
-	onTabClick: (value: string | null) => void;
+	onTabClick: (value: string) => void;
 	onSwitchClick: () => void;
 	onResetAllFiltersClick: () => void;
-	activeTab: string | null;
+	activeTab: string;
 	isAssignee: boolean;
 	isDictionariesLoading: boolean;
 	isAllFiltersButton: boolean;
@@ -28,65 +33,51 @@ const TableControlsView: React.FC<IProps> = ({
 	onResetAllFiltersClick,
 }) => {
 	return (
-		<div className="tasks-controls">
-			<div className="tasks-controls__tabs">
-				<Tabs value={activeTab} onChange={onTabClick}>
-					<Tabs.List>
-						<Tabs.Tab value="table">Таблица</Tabs.Tab>
-						<Tabs.Tab value="kanban">Канбан</Tabs.Tab>
-					</Tabs.List>
-				</Tabs>
+		<div className="relative mb-5">
+			<div className="mb-2.5">
+				<CustomTabs variant="line" triggers={TABS} onChange={onTabClick} activeTab={activeTab} />
 			</div>
-			<div className="tasks-controls__filters">
-				<div className="tasks-controls__elements">
+			<div className="flex items-center justify-between">
+				<div className="flex items-center gap-1.25">
 					{isDictionariesLoading ? (
-						<Skeleton visible={isDictionariesLoading} />
+						<CustomLoader />
 					) : (
 						<>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskPriorityUuid" text="Приоритет" />}
 								options={dictionariesOptions.taskPriority}
-								placeholder="Приоритет"
 								filter="taskPriorityUuid"
 							/>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskStatusUuid" text="Статус" />}
 								options={dictionariesOptions.taskStatus}
-								placeholder="Статус"
 								filter="taskStatusUuid"
 							/>
 							<FiltersMenu
-								component={Button}
+								component={<FiltersTrigger filter="taskStackUuid" text="Тег" />}
 								options={dictionariesOptions.taskType}
-								placeholder="Тег"
 								filter="taskStackUuid"
 							/>
-							<Tooltip label="Сбросить фильтры">
-								<Button size="xs" disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
-									<IterationCw size={15} />
-								</Button>
-							</Tooltip>
+							<CustomTooltip
+								content="Сбросить фильтры"
+								position="top"
+								trigger={
+									<Button disabled={isAllFiltersButton} onClick={onResetAllFiltersClick}>
+										<IterationCw size={15} />
+									</Button>
+								}
+							/>
 						</>
 					)}
 				</div>
-				<div className="tasks-controls__switch">
-					<span className={`table-controls__text${!isAssignee ? ' table-controls__text_active' : ''}`}>
-						Мои задачи
-					</span>
+				<div className="flex items-center gap-2.5">
+					<span className={cn(!isAssignee && 'font-semibold text-white')}>Мои задачи</span>
 					<Switch
-						className="tasks-controls__toggler"
+						className="data-[state=checked]:bg-teal data-[state=unchecked]:bg-violet cursor-pointer"
 						checked={isAssignee}
-						onChange={onSwitchClick}
-						styles={{
-							track: {
-								backgroundColor: isAssignee ? BLUE_COLOR : TEAL_COLOR,
-							},
-						}}
-						style={{ '--before-color': isAssignee ? BLUE_COLOR : TEAL_COLOR }}
+						onCheckedChange={onSwitchClick}
 					/>
-					<span className={`tasks-controls__text${isAssignee ? ' tasks-controls__text_active' : ''}`}>
-						Я исполнитель
-					</span>
+					<span className={cn(isAssignee && 'font-semibold text-white')}>Я исполнитель</span>
 				</div>
 			</div>
 		</div>

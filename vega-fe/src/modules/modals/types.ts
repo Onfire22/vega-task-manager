@@ -16,13 +16,15 @@ export interface ITaskFormValues {
 export interface ISelectType {
 	value: string;
 	label: string;
+	description?: string;
+	color?: string;
 }
 
 export interface IProjectFormValues {
 	title: string;
 	description: string;
 	usersUuids: string[];
-	deadlineDate?: string | null;
+	deadlineDate?: Date;
 }
 
 export interface IProjectErrors {

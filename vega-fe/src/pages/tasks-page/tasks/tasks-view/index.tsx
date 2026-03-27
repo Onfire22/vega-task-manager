@@ -1,6 +1,5 @@
 import React from 'react';
 import { TableControls } from '../../table-controls';
-import './styles.less';
 
 interface IProps {
 	component: React.ComponentType;
@@ -8,7 +7,7 @@ interface IProps {
 
 const TasksView: React.FC<IProps> = ({ component: Component }) => {
 	return (
-		<div className="tasks">
+		<div className="w-full p-5">
 			<TableControls />
 			<Component />
 		</div>

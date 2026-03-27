@@ -10,15 +10,14 @@ import { UserProfilePage } from '../pages/user-profile-page';
 import { ProjectsPage } from '../pages/projects-page';
 import { Layout } from '../pages/layout';
 import { ProjectPage } from '../pages/project-page';
-import { Loader } from '@mantine/core';
-import { BLUE_COLOR } from '../pages/sign-up-page/constants.ts';
 import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
 import { FRONT_ROUTES } from '../app/constants.ts';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();
 
-	if (isLoading) return <Loader color={BLUE_COLOR} size={40} />;
+	if (isLoading) return <CustomLoader />;
 
 	return (
 		<Routes>

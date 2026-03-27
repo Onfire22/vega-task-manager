@@ -1,11 +1,10 @@
 import type { IProject } from '../../../types.ts';
 import React from 'react';
-import { Progress } from '@mantine/core';
-import './styles.less';
 import { pluralValue } from '../../../utils.ts';
 import { PLURAL_OPTIONS } from '../../../constants.ts';
-import { CustomBadge } from '../../../../../components/custom-badge';
 import { getAvatarColor } from '../../../../../app/utils.ts';
+import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 
 interface IProps {
 	projects: IProject[];
@@ -14,13 +13,19 @@ interface IProps {
 
 const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 	return (
-		<div className="projects-cards">
+		<div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3.75 mt-2.5">
 			{projects.map((project) => {
 				return (
-					<article key={project.id} className="projects-cards__card" onClick={() => onCardClick(project.id)}>
-						<div className="projects-cards__header">
+					<article
+						key={project.id}
+						className="text-[14px] p-3.75 bg--sidebar flex flex-col gap-2.5
+            border border-accent rounded-[10px] cursor-pointer
+            transition-colors duration-300 hover:bg-card"
+						onClick={() => onCardClick(project.id)}
+					>
+						<div className="flex items-center gap-2.5">
 							<div
-								className="projects-cards__avatar"
+								className="w-7.5 h-7.5 rounded-[5px] flex items-center justify-center"
 								style={{
 									backgroundColor: getAvatarColor(project.id),
 								}}
@@ -28,24 +33,20 @@ const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 								{project.code.substring(1, 3)}
 							</div>
 							<div className="projects-cards__info">
-								<div className="projects-cards__title">{project.title}</div>
-								<div className="projects-cards__code">{project.code}</div>
+								<div className="text-white">{project.title}</div>
+								<div className="text-[12px] text-muted-foreground">{project.code}</div>
 							</div>
 						</div>
-						<div className="projects-cards__conetnt">
-							<div className="projects-cards__owner">{project.owner}</div>
-							<div className="projects-cards__date">{project.createdAt}</div>
+						<div className="text-[12px] text-muted-foreground flex items-center justify-between">
+							<div>{project.owner}</div>
+							<div>{project.createdAt}</div>
 						</div>
-						<Progress value={project.projectProgress} size="xs" />
-						<div className="projects-cards__conetnt">
-							<div className="projects-cards__tasks">
-								{`${project.tasksCount} ${pluralValue(project.tasksCount, PLURAL_OPTIONS)}`}
+						<CustomProgress progress={project.projectProgress} />
+						<div className="text-[12px] text-muted-foreground flex items-center justify-between">
+							<div>{`${project.tasksCount} ${pluralValue(project.tasksCount, PLURAL_OPTIONS)}`}</div>
+							<div className="w-25">
+								<CustomBadge label={project.projectStatus.key} text={project.projectStatus.label} />
 							</div>
-							<CustomBadge
-								label={project.projectStatus.key}
-								text={project.projectStatus.label}
-								isFullWidth={false}
-							/>
 						</div>
 					</article>
 				);

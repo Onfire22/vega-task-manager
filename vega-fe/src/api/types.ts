@@ -200,6 +200,7 @@ export interface IProjectUser {
 export interface ITaskDictionary {
 	id: string;
 	label: string;
+	key: string;
 }
 
 export interface IProjectTask {
@@ -247,7 +248,7 @@ export interface ICreateProjectResponse {
 export interface IProjectUpdateRequest {
 	uuid: string;
 	field: 'deadlineDate' | 'projectStatusUuid';
-	value: string;
+	value: string | Date;
 	userRoleUuid: string;
 }
 

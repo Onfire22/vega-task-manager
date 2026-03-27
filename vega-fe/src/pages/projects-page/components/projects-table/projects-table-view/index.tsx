@@ -1,8 +1,7 @@
 import React from 'react';
 import { TABLE_HEADER } from '../../../table-header.ts';
-import './styles.less';
 import type { IProject } from '../../../types.ts';
-import { CustomTable } from '../../../../../components/custom-table';
+import { CustomTable } from '@/components/common/shared/custom-table.tsx';
 
 interface IProps {
 	projects: IProject[];
@@ -12,7 +11,7 @@ interface IProps {
 
 const ProjectsTableView: React.FC<IProps> = ({ projects, isLoading, onRowDoubleClick }) => {
 	return (
-		<div className="projects-table">
+		<div className="w-full">
 			<CustomTable
 				tableData={projects}
 				headerData={TABLE_HEADER}

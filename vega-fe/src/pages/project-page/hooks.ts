@@ -1,6 +1,6 @@
 import { useDictionariesOptions, useProject } from '../../api/hooks.ts';
 import { format } from 'date-fns';
-import { DATE_FORMAT } from './constants.ts';
+import { DATE_FORMAT, STATUSES } from './constants.ts';
 import { useMemo } from 'react';
 import { useGetCurrentUserQuery } from '../../api/queries/auth.api.ts';
 import { useUpdateProjectMutation } from '../../api/queries/projects.api.ts';
@@ -37,13 +37,22 @@ export const useProjectData = (uuid?: string) => {
 
 		const totalTasks = projectTasks.length;
 
-		const completedTasks = projectTasks.filter((task) => task.taskStatus.label === 'completed').length;
+		const completedTasks = projectTasks.filter((task) => task.taskStatus.key === 'done').length;
 
 		return (completedTasks / totalTasks) * 100;
 	}, [projectTasks]);
 
+	const options = dictionariesOptions.projectStatus
+		? dictionariesOptions.projectStatus.map((item) => {
+				return {
+					...item,
+					color: STATUSES[item.key as keyof typeof STATUSES],
+				};
+			})
+		: [];
+
 	return {
-		dictionariesOptions,
+		options,
 		projectProgress,
 		project: projectData,
 		isProjectLoading: isProjectLoading || isDictionariesLoading,
@@ -74,7 +83,7 @@ export const useUpdateProject = (uuid?: string) => {
 	const [updateProject, { isLoading, isSuccess }] = useUpdateProjectMutation();
 	const userRoleUuid = project?.users.find((user) => user.id === data?.currentUser.id)?.userRole?.id;
 
-	const handleUpdateProject = (field: 'deadlineDate' | 'projectStatusUuid', value: string) => {
+	const handleUpdateProject = (field: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => {
 		if (!uuid || !userRoleUuid) return;
 		updateProject({ uuid, field, value, userRoleUuid });
 	};

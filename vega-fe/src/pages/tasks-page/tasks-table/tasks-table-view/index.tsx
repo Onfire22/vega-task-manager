@@ -1,8 +1,7 @@
-import './styles.less';
 import type { TTaskList } from '../../types.ts';
 import React from 'react';
 import { TABLE_HEADER } from '../../table-header.ts';
-import { CustomTable } from '../../../../components/custom-table';
+import { CustomTable } from '@/components/common/shared/custom-table.tsx';
 
 interface IProps {
 	tableData: TTaskList;
@@ -11,7 +10,7 @@ interface IProps {
 
 const TasksTableView: React.FC<IProps> = ({ tableData, onRowDoubleClick }) => {
 	return (
-		<div className="tasks-table">
+		<div className="w-full">
 			<CustomTable
 				headerData={TABLE_HEADER}
 				onRowDoubleClick={onRowDoubleClick}

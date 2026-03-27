@@ -1,19 +1,23 @@
-import { Button, Divider, Popover, Progress, Tabs, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
-import { BLUE_COLOR, GREEN_COLOR, RED_COLOR, TASK_PRIORITIES, TASK_STATUSES, TASK_TYPES } from '../../constants.ts';
+import { TABS } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
 import type { ITask, TOption } from '../../types.ts';
-import { CustomSelect } from '../../../../ui/select-with-dot';
-import './styles.less';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 import { Link } from 'react-router-dom';
-import { CustomBadge } from '../../../../components/custom-badge';
+import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { Textarea } from '@/components/ui/textarea.tsx';
+import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
+import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 
 interface IProps {
 	task: ITask | null;
 	currentUserId?: string;
-	activeTab: string | null;
+	activeTab: string;
 	field: { fieldName: string; value: string };
 	onSetFieldToEdit: (fieldName: string, value: string | null) => void;
 	onCancelChanges: () => void;
@@ -25,7 +29,7 @@ interface IProps {
 	};
 	options: { taskType: Array<TOption>; taskPriority: Array<TOption>; taskStatus: Array<TOption> };
 	usersListOptions: Array<{ label: string; value: string }>;
-	onSetActiveTab: (value: string | null) => void;
+	onSetActiveTab: (value: string) => void;
 }
 
 const TaskView: React.FC<IProps> = ({
@@ -44,15 +48,18 @@ const TaskView: React.FC<IProps> = ({
 }) => {
 	if (!task) return null;
 	return (
-		<div className="task">
-			<div className="task__content">
-				<div className="task__breadcrumbs">
-					<Link className="task__breadcrumb" to={`/project/${task.project.id}`}>
+		<div className="flex items-start w-full">
+			<div className="w-full py-2.5">
+				<div className="px-6.25 flex items-center gap-1.25 text-[13px] mb-1.25">
+					<Link
+						className="transition-colors duration-300 hover:text-white"
+						to={`/project/${task.project.id}`}
+					>
 						project {task.project.code}
 					</Link>
 					<ArrowBigRight size={15} />
 					<Link
-						className="task__breadcrumb"
+						className="transition-colors duration-300 hover:text-white"
 						state={{ from: location.pathname }}
 						to={`/project/${task.project.id}`}
 					>
@@ -62,15 +69,17 @@ const TaskView: React.FC<IProps> = ({
 					<span>{task.code}</span>
 				</div>
 				{field.fieldName === 'title' ? (
-					<div className="task__input">
-						<TextInput
+					<div className="px-6.25">
+						<CustomInput
+							type="text"
 							value={field.value}
 							onChange={(e) => {
 								onFieldChange(e, 'title');
 							}}
 						/>
-						<div className="task__butons">
+						<div className="mt-2.5 mb-2.5 flex items-center gap-1.25">
 							<Button
+								variant="primary"
 								size="xs"
 								onClick={() => {
 									onUpdateTask(field.fieldName, field.value);
@@ -84,9 +93,9 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				) : (
-					<div className="task__field">
+					<div className="px-6.25">
 						<div
-							className="task__title"
+							className="text-[18px] text-white mb-4 cursor-text hover:pl-0.75 hover:rounded-[5px] hover:outline-1 hover:bg-accent hover:outline-border"
 							onClick={() => {
 								onSetFieldToEdit('title', task.title);
 							}}
@@ -95,56 +104,41 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				)}
-				<div className="task__controls">
+				<div className="px-6.25 pb-4 flex items-center gap-2.5">
 					<CustomSelect
-						size="xs"
+						options={options?.taskStatus}
+						value={task.taskStatus.id}
+						onChange={(value) => onUpdateTask('taskStatus', value)}
 						label="Статус"
-						options={options.taskStatus}
-						statuses={TASK_STATUSES}
-						value={task.taskStatus}
-						onChange={(value) => {
-							if (!value) return;
-							onUpdateTask('taskStatus', value);
-						}}
 					/>
 					<CustomSelect
-						size="xs"
-						label="Тип"
 						options={options.taskType}
-						statuses={TASK_TYPES}
-						value={task.taskStack}
-						onChange={(value) => {
-							if (!value) return;
-							onUpdateTask('taskStack', value);
-						}}
+						value={task.taskStack.id}
+						onChange={(value) => onUpdateTask('taskStack', value)}
+						label="Тип"
 					/>
 					<CustomSelect
-						size="xs"
-						label="Приоритет"
 						options={options.taskPriority}
-						statuses={TASK_PRIORITIES}
-						value={task.taskPriority}
-						onChange={(value) => {
-							if (!value) return;
-							onUpdateTask('taskPriority', value);
-						}}
+						value={task.taskPriority.id}
+						onChange={(value) => onUpdateTask('taskPriority', value)}
+						label="Приоритет"
 					/>
 				</div>
-				<Divider orientation="horizontal" className="task__divider" />
-				<div className="task__description">
-					<div className="task__description-subtitle">Описание</div>
+				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
+				<div className="mb-5">
+					<div className="pl-6.25 text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>
 					{field.fieldName === 'description' ? (
-						<div className="task__input">
+						<div className="px-6.25 mb-5">
 							<Textarea
-								resize="vertical"
 								value={field.value}
 								onChange={(e) => {
 									onFieldChange(e, 'description');
 								}}
 							/>
-							<div className="task__butons">
+							<div className="mt-2.5 flex items-center gap-1.25">
 								<Button
 									size="xs"
+									variant="primary"
 									onClick={() => {
 										onUpdateTask(field.fieldName, field.value);
 									}}
@@ -157,9 +151,9 @@ const TaskView: React.FC<IProps> = ({
 							</div>
 						</div>
 					) : (
-						<div className="task__field">
+						<div className="px-6.25">
 							<div
-								className="task__text"
+								className="cursor-text hover:pl-0.75 hover:rounded-[5px] hover:outline-1 hover:bg-accent hover:outline-border"
 								onClick={() => {
 									onSetFieldToEdit('description', task.description);
 								}}
@@ -169,114 +163,104 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					)}
 				</div>
-				<Divider orientation="horizontal" className="task__divider" />
-				<div className="task__tabs">
-					<Tabs value={activeTab} onChange={onSetActiveTab}>
-						<Tabs.List className="task__tabs-list">
-							<Tabs.Tab value="comments">Комментарии</Tabs.Tab>
-							<Tabs.Tab value="logs">Логи</Tabs.Tab>
-						</Tabs.List>
-					</Tabs>
+				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
+				<div className="pl-6.25">
+					<CustomTabs variant="line" triggers={TABS} activeTab={activeTab} onChange={onSetActiveTab} />
 				</div>
-				<div className="task__comments">
+				<div className="p-6.25">
 					{activeTab === 'comments' && <Comments />}
 					{activeTab === 'logs' && <TaskLogs logs={task.timeLogs} />}
 				</div>
 			</div>
-			<aside className="task__aside">
-				<div className="task__block">
-					<div className="task__info">
-						<div className="task__subtitle">Описание</div>
-						<div className="task__label">
-							<div className="task__key">Автор</div>
-							<div className="task__value">{task.reporter}</div>
+			<aside className="w-[30%] h-full border-l">
+				<div className="border-b">
+					<div className="p-3.75">
+						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Автор</div>
+							<div className="text-[14px]">{task.reporter}</div>
 						</div>
-						<div className="task__label">
-							<div className="task__key">Исполнитель</div>
-							<div className="task__value">
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Исполнитель</div>
+							<div className="text-[14px]">
 								{task.assignee ? (
 									<span>{task.assignee}</span>
 								) : (
-									<a className="task__link" onClick={() => onUpdateTask('assignee', currentUserId!)}>
+									<a className="link-styled" onClick={() => onUpdateTask('assignee', currentUserId!)}>
 										+ назначить меня
 									</a>
 								)}
 							</div>
 						</div>
-						<div className="task__label">
-							<div className="task__key" />
-							<div className="task__value">
-								<Popover width={260} position="bottom" withArrow>
-									<Popover.Target>
-										<a className="task__link">+ назначить</a>
-									</Popover.Target>
-									<Popover.Dropdown>
-										<TextInput placeholder="Поиск" size="xs" />
-										<ul className="task__users">
-											{usersListOptions.map((user) => {
-												return (
-													<li
-														className="task__user"
-														key={user.value}
-														onClick={() => onUpdateTask('assignee', user.value)}
-													>
-														{user.label}
-													</li>
-												);
-											})}
-										</ul>
-									</Popover.Dropdown>
-								</Popover>
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]" />
+							<div className="text-[14px]">
+								<CustomPopover
+									trigger={<a className="link-styled">+ назначить</a>}
+									content={
+										<>
+											<CustomInput
+												placeholder="Поиск"
+												type="text"
+												value="123"
+												onChange={() => {}}
+											/>
+											<ul className="mt-2.5">
+												{usersListOptions.map((user) => {
+													return (
+														<li
+															className="cursor-pointer text-[14px] p-1.25 hover:bg-secondary rounded-[5px]"
+															key={user.value}
+															onClick={() => onUpdateTask('assignee', user.value)}
+														>
+															{user.label}
+														</li>
+													);
+												})}
+											</ul>
+										</>
+									}
+								/>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div className="task__block">
-					<div className="task__info">
-						<div className="task__subtitle">Даты</div>
-						<div className="task__label">
-							<div className="task__key">Создано</div>
-							<div className="task__value">09.03.2026</div>
+				<div className="border-b">
+					<div className="p-3.75">
+						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Даты</div>
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Создано</div>
+							<div className="text-[14px]">09.03.2026</div>
 						</div>
-						<div className="task__label">
-							<div className="task__key">Обновлено</div>
-							<div className="task__value">10.03.2026</div>
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Обновлено</div>
+							<div className="text-[14px]">10.03.2026</div>
 						</div>
 					</div>
 				</div>
-				<div className="task__block">
-					<div className="task__info">
-						<div className="task__subtitle">Учёт времени</div>
+				<div className="border-b">
+					<div className="p-3.75">
+						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Учёт времени</div>
 						{(task.estimateTime || task.totalLoggedTime) && (
-							<div className="task__progress">
-								<div className="task__bar">
-									<div className="task__time">
-										<span className="task__estimate">Оценка</span>
-										<span className="task__log">{task.estimateTime}</span>
-									</div>
-									<Progress value={task.estimateTimeInSecs} size="xs" />
+							<div className="flex flex-col gap-2.5 mb-3.75">
+								<div className="flex items-center justify-between">
+									<span className="text-[12px]">Оценка</span>
+									<span className="text-[12px]">{task.estimateTime}</span>
 								</div>
-								<div className="task__bar">
-									<div className="task__time">
-										<span className="task__estimate">Потрачено</span>
-										<span className="task__log">{task.totalLoggedTime}</span>
-									</div>
-									<Progress value={task.loggedPercents} size="xs" color={BLUE_COLOR} />
-								</div>
-								<div className="task__bar">
-									<div className="task__time">
-										<span className="task__estimate">Осталось</span>
-										<span className="task__log">{task.remainingTime}</span>
-									</div>
-									<Progress
-										value={task.remainingPercents}
-										size="xs"
-										color={task.remainingPercents >= 50 ? GREEN_COLOR : RED_COLOR}
-									/>
-								</div>
+								<CustomProgress
+									progress={task.loggedPercents}
+									label="Потрачено"
+									percents={task.totalLoggedTime}
+								/>
+								<CustomProgress
+									progress={task.remainingPercents}
+									label="Осталось"
+									percents={task.remainingTime}
+									color={task.remainingPercents >= 50 ? 'bg-teal' : 'bg-danger'}
+								/>
 							</div>
 						)}
-						<div className="task__button">
+						<div className="w-full flex justify-center">
 							<Button onClick={onLogWorkModalShown}>
 								<Plus size={18} />
 								{task.estimateTime ? <span>Записать время</span> : <span>Оценить задачу</span>}
@@ -284,20 +268,19 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				</div>
-				<div className="task__block">
-					<div className="task__info">
-						<div className="task__subtitle">Проект</div>
-						<div className="task__label">
-							<div className="task__key">Код</div>
-							<div className="task__value">{task.project.code}</div>
+				<div className="border-b">
+					<div className="p-3.75">
+						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Проект</div>
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Код</div>
+							<div className="text-[14px]">{task.project.code}</div>
 						</div>
-						<div className="task__label">
-							<div className="task__key">Статус</div>
-							<div className="task__value">
+						<div className="flex items-center justify-between">
+							<div className="text-[12px]">Статус</div>
+							<div className="text-[14px]">
 								<CustomBadge
 									label={task.project.projectStatus.key}
 									text={task.project.projectStatus.label}
-									isFullWidth={false}
 								/>
 							</div>
 						</div>

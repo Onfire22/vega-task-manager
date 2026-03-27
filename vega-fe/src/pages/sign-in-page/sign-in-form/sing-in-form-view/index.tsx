@@ -1,9 +1,9 @@
 import React from 'react';
-import './styles.less';
-import { CustomForm } from '../../../../components/custom-form';
 import { Link } from 'react-router-dom';
-import { Button, PasswordInput, TextInput } from '@mantine/core';
 import { AtSign, Lock } from 'lucide-react';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { CustomPasswordInput } from '@/components/common/forms/custom-password-input.tsx';
+import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
 	formValues: {
@@ -21,11 +21,15 @@ interface IProps {
 
 const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, onFieldChange, onFormSubmit }) => {
 	return (
-		<div className="signin-form">
-			<div className="signin-form__wrapper">
-				<CustomForm title="Вход" onSubmit={onFormSubmit}>
-					<div className="signin-form__input">
-						<TextInput
+		<div className="w-full h-screen flex-centered-line">
+			<div className="w-125">
+				<form
+					className="w-full p-7.5 flex-centered-column gap-2.5 border border-border rounded-[5px]"
+					onSubmit={onFormSubmit}
+				>
+					<h1 className="text-2xl">Вход</h1>
+					<div className="w-full">
+						<CustomInput
 							id="email"
 							type="text"
 							label="Электронная почта"
@@ -34,13 +38,13 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 							value={formValues.email}
 							error={formErrors.email}
 							onChange={onFieldChange}
-							withAsterisk
-							leftSection={<AtSign color="#D5D8DB" size={21} />}
+							leftIcon={<AtSign color="#D5D8DB" size={21} />}
 							ref={loginRef}
+							isRequired
 						/>
 					</div>
-					<div className="signin-form__input">
-						<PasswordInput
+					<div className="w-full">
+						<CustomPasswordInput
 							id="password"
 							type="password"
 							label="Пароль"
@@ -49,18 +53,20 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 							value={formValues.password}
 							error={formErrors.password}
 							onChange={onFieldChange}
-							withAsterisk
-							leftSection={<Lock color="#D5D8DB" size={21} />}
+							isRequired
+							leftIcon={<Lock color="#D5D8DB" size={21} />}
 						/>
 					</div>
-					<div className="signin-form__text">
+					<div className="my-2.5 text-sm">
 						<span>Нет аккаунта? </span>
-						<Link className="signin-form__link" to="/sign-up">
+						<Link className="link-styled" to="/sign-up">
 							Зарегистрироваться
 						</Link>
 					</div>
-					<Button type="submit">Войти</Button>
-				</CustomForm>
+					<Button type="submit" size="lg" variant="primary">
+						Войти
+					</Button>
+				</form>
 			</div>
 		</div>
 	);

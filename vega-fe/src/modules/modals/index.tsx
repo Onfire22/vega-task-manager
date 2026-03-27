@@ -1,7 +1,2 @@
-import { ProjectModal } from './project-modal';
-import { TaskModal } from './task-modal';
-
-export const modal = {
-	project: ProjectModal,
-	task: TaskModal,
-};
+export { ProjectModal } from './project-modal';
+export { TaskModal } from './task-modal';

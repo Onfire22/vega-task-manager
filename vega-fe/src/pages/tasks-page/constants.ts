@@ -21,3 +21,14 @@ export const FILTERS_INITIAL_VALUES = {
 	taskStatusUuid: {},
 	taskStackUuid: {},
 };
+
+export const TABS = [
+	{
+		text: 'Таблица',
+		value: 'table',
+	},
+	{
+		text: 'Канбан',
+		value: 'kanban',
+	},
+];

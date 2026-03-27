@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CustomForm } from '../../../../../components/custom-form';
 import { AccountStep } from '../account-step';
 import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';
-import './styles.less';
 import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
+import { FRONT_ROUTES } from '@/app/constants.ts';
 
 interface IProps {
 	activeStep: number;
@@ -43,10 +42,11 @@ const SignUpFormView: React.FC<IProps> = ({
 	onNextStepClick,
 }) => {
 	return (
-		<div className="signup-form">
-			<div className="signup-form__wrapper">
-				<CustomForm title="Регистрация">
-					<div className="signup-form__step">
+		<div className="w-full h-screen flex-centered-line">
+			<div className="w-125">
+				<form className="w-full p-7.5 flex-centered-column gap-2.5 border border-border rounded-[5px]">
+					<h1 className="text-2xl">Регистрация</h1>
+					<div className="w-full">
 						{activeStep === 0 && (
 							<AccountStep
 								formValues={formValues}
@@ -76,13 +76,13 @@ const SignUpFormView: React.FC<IProps> = ({
 						onPrevStepClick={onPrevStepClick}
 						onNextStepClick={onNextStepClick}
 					/>
-					<div className="signup-form__text">
+					<div className="text-[14px] my-2.5">
 						<span>Уже есть аккаунт? </span>
-						<Link className="signup-form__link" to="/sign-in">
+						<Link className="link-styled" to={FRONT_ROUTES.signIn}>
 							Войти
 						</Link>
 					</div>
-				</CustomForm>
+				</form>
 			</div>
 		</div>
 	);

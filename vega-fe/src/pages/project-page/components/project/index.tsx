@@ -1,10 +1,10 @@
 import { ProjectView } from './project-view';
 import { useProjectData, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
-import { Loader } from '@mantine/core';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 const Project = () => {
 	const params = useParams();
@@ -21,7 +21,7 @@ const Project = () => {
 		filters: { ...(params.uuid ? { withOutProject: params.uuid } : {}) },
 	});
 
-	const { project, isProjectLoading, dictionariesOptions, projectProgress } = useProjectData(params.uuid);
+	const { project, isProjectLoading, options, projectProgress } = useProjectData(params.uuid);
 
 	const [updateUserRole] = useUpdateUserRoleMutation();
 
@@ -37,7 +37,7 @@ const Project = () => {
 		setActiveField({ fieldName, value });
 	};
 
-	const handleProjectFieldChange = (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string) => {
+	const handleProjectFieldChange = (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => {
 		handleUpdateProject(fieldName, value);
 		setActiveField({ fieldName: '', value: '' });
 	};
@@ -49,12 +49,12 @@ const Project = () => {
 	};
 
 	return isProjectLoading ? (
-		<Loader />
+		<CustomLoader />
 	) : (
 		<ProjectView
 			project={project}
 			activeTab={activeTab}
-			dictionariesOptions={dictionariesOptions.projectStatus}
+			dictionariesOptions={options}
 			projectProgress={projectProgress}
 			usersListOptions={usersListOptions}
 			activeField={activeField}

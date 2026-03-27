@@ -1,7 +1,9 @@
-import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus } from 'lucide-react';
-import { Button, CloseButton, Input, Menu } from '@mantine/core';
-import './styles.less';
+import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus, X } from 'lucide-react';
 import React from 'react';
+import { cn } from '@/lib/utils.ts';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
@@ -24,47 +26,63 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 	isSidebarOpened,
 }) => {
 	return (
-		<div className="base-custom-menu">
-			<div className="base-custom-menu__info">
+		<div className="flex items-center justify-between">
+			<div className="flex items-center gap-2.5">
 				<div
-					className={`base-custom-menu__control${isSidebarOpened ? ' base-custom-menu__control_active' : ''}`}
+					className={cn(
+						'w-9 h-9 flex items-center justify-center cursor-pointer rounded-md transition-colors duration-300 ease-in hover:bg-accent',
+						isSidebarOpened && 'bg-primary hover:bg-primary',
+					)}
 					onClick={onMenuButtonClick}
 				>
 					{isSidebarOpened ? <ChevronLeft /> : <ChevronRight />}
 				</div>
-				<Input
+				<CustomInput
+					type="text"
 					placeholder="Поиск..."
-					rightSectionPointerEvents="all"
 					value={searchValue}
 					onChange={(e) => onSearchChange(e.target.value)}
-					rightSection={
-						<CloseButton
-							aria-label="Clear input"
+					rightIcon={
+						<X
+							size={15}
 							onClick={() => onSearchChange('')}
 							style={{ display: searchValue ? undefined : 'none' }}
 						/>
 					}
 				/>
 			</div>
-			<div className="base-custom-menu__controls">
-				<Menu width={180}>
-					<Menu.Target>
-						<Button variant="accent" leftSection={<Plus size={17} />}>
+			<div className="flex items-center gap-2.5">
+				<CustomPopover
+					width="150px"
+					trigger={
+						<Button variant="primary">
+							<Plus size={17} />
 							Создать
 						</Button>
-					</Menu.Target>
-					<Menu.Dropdown>
-						<Menu.Label>Задачу / проект</Menu.Label>
-						<Menu.Item leftSection={<FolderKanban size={17} />} onClick={() => onModalOpen('project')}>
-							Проект
-						</Menu.Item>
-						<Menu.Item leftSection={<Briefcase size={17} />} onClick={() => onModalOpen('task')}>
-							Задачу
-						</Menu.Item>
-					</Menu.Dropdown>
-				</Menu>
+					}
+					content={
+						<ul className="flex flex-col gap-2.5">
+							<li
+								className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+								onClick={() => onModalOpen('project')}
+							>
+								<FolderKanban size={17} />
+								<span>Проект</span>
+							</li>
+							<li
+								className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+								onClick={() => onModalOpen('task')}
+							>
+								<Briefcase size={17} />
+								<span>Задачу</span>
+							</li>
+						</ul>
+					}
+				/>
 				{path !== '/dashboard' && (
-					<Button className="base-custom-menu__button" leftSection={<Undo2 size={18} />} onClick={onGoBack} />
+					<Button onClick={onGoBack}>
+						<Undo2 size={18} />
+					</Button>
 				)}
 			</div>
 		</div>

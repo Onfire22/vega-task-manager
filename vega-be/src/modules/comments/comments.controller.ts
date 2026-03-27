@@ -4,10 +4,10 @@ import { RESPONSE_STATUSES } from '../../constants';
 import { ICommentCreateBody, ICommentUpdateBody } from './comments.types';
 import { prismaAppClient } from '../../lib/prisma';
 
-export const getTaskComments = async (req: Request<{ taskUuid: string }>, res: Response, next: NextFunction) => {
+export const getTaskComments = async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
 	try {
 		const comments = await prismaAppClient.comment.findMany({
-			where: { taskUuid: req.params.taskUuid },
+			where: { taskUuid: req.params.uuid },
 			select: {
 				id: true,
 				text: true,
