@@ -3,13 +3,9 @@ import { BaseCustomMenu } from '../base-custom-menu';
 import { Sidebar } from '../sidebar';
 import { PageContentWrapper } from '../../../../components/common/shared/page-content-wrapper.tsx';
 import { Outlet } from 'react-router-dom';
-import React from 'react';
+import { ProjectModal, TaskModal } from '@/modules/modals';
 
-interface IProps {
-	component: React.ComponentType | null;
-}
-
-const LayoutView: React.FC<IProps> = ({ component: ActiveModal }) => {
+const LayoutView = () => {
 	return (
 		<div>
 			<Header menu={<BaseCustomMenu />} />
@@ -19,7 +15,8 @@ const LayoutView: React.FC<IProps> = ({ component: ActiveModal }) => {
 					<Outlet />
 				</PageContentWrapper>
 			</div>
-			{ActiveModal && <ActiveModal />}
+			<ProjectModal />
+			<TaskModal />
 		</div>
 	);
 };
