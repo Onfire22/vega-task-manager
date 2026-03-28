@@ -11,6 +11,8 @@ export interface ICurrentUser {
 	id: string;
 	name: string;
 	secondName: string;
+	userName: string;
+	userSpecialisation: { id: string };
 }
 
 export interface IUserResponse {

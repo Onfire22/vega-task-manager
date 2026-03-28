@@ -53,11 +53,7 @@ const ProfileStep: React.FC<IProps> = ({
 					name="userStackUuid"
 					options={stackOptions}
 					value={formValues.userSpecialisationUuid}
-					onChange={(value) => {
-						if (value) {
-							onSelectFieldChange('userSpecialisationUuid', value);
-						}
-					}}
+					onChange={(value) => onSelectFieldChange('userSpecialisationUuid', value)}
 					error={formErrors?.userSpecialisationUuid}
 					isRequired
 				/>

@@ -74,11 +74,7 @@ const TaskModalView: React.FC<IProps> = ({
 						description="Для какой команды задача"
 						options={stackListData}
 						value={formValues.taskStackUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskStackUuid', value);
-							}
-						}}
+						onChange={(value) => onSelectFieldChange('taskStackUuid', value)}
 						error={formErrors?.taskStackUuid}
 						isRequired
 					/>
@@ -91,11 +87,7 @@ const TaskModalView: React.FC<IProps> = ({
 						description="Критичность задачи"
 						options={taskPrioritiesData}
 						value={formValues.taskPriorityUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskPriorityUuid', value);
-							}
-						}}
+						onChange={(value) => onSelectFieldChange('taskPriorityUuid', value)}
 						error={formErrors?.taskPriorityUuid}
 						isRequired
 					/>
@@ -108,11 +100,7 @@ const TaskModalView: React.FC<IProps> = ({
 						description="Проект в котором будет выполняться задача"
 						options={projectOptions}
 						value={formValues.taskProjectUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskProjectUuid', value);
-							}
-						}}
+						onChange={(value) => onSelectFieldChange('taskProjectUuid', value)}
 						error={formErrors?.taskProjectUuid}
 						isRequired
 					/>

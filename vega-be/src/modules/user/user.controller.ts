@@ -22,6 +22,7 @@ export const getCurrentUser = async (req: Request, res: Response<IUserResponse, 
 					userName: true,
 					userSpecialisation: {
 						select: {
+							id: true,
 							label: true,
 							key: true,
 						},

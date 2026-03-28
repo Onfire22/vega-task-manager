@@ -5,6 +5,7 @@ import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectByUuidQuery, useGetProjectsQuery } from './queries/projects.api.ts';
 import { useGetTaskQuery } from './queries/tasks.api.ts';
 import { transformDictionaries } from './utils.ts';
+import { useMemo } from 'react';
 
 export const useDictionaries = (meta: TDictionariesTypes[]) => {
 	const { data, isLoading, isSuccess } = useGetDictionariesQuery(meta, CACHING_SETTINGS);
@@ -17,19 +18,20 @@ export const useDictionaries = (meta: TDictionariesTypes[]) => {
 export const useDictionariesOptions = (meta: TDictionariesTypes[]) => {
 	const { dictionaries, isDictionariesLoading } = useDictionaries(meta);
 
-	const dictionariesOptions = (Object.keys(dictionaries) as Array<keyof typeof dictionaries>).reduce(
-		(acc, key) => {
-			if (dictionaries[key]) {
-				return {
-					...acc,
-					[key]: transformDictionaries(dictionaries[key]),
-				};
-			}
-
-			return acc;
-		},
-		{} as Record<keyof typeof dictionaries, ReturnType<typeof transformDictionaries>>,
-	);
+	const dictionariesOptions = useMemo(() => {
+		return (Object.keys(dictionaries) as Array<keyof typeof dictionaries>).reduce(
+			(acc, key) => {
+				if (dictionaries[key]) {
+					return {
+						...acc,
+						[key]: transformDictionaries(dictionaries[key]),
+					};
+				}
+				return acc;
+			},
+			{} as Record<keyof typeof dictionaries, ReturnType<typeof transformDictionaries>>,
+		);
+	}, [dictionaries]);
 
 	return { dictionariesOptions, isDictionariesLoading };
 };

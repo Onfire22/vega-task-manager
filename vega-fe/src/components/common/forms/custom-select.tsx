@@ -34,6 +34,10 @@ const CustomSelect: React.FC<IProps> = ({
 }) => {
 	const chosenColor = options.find((option) => option.value === value)?.color;
 
+	const handleChange = (value: string) => {
+		if (value) onChange(value);
+	};
+
 	return (
 		<div>
 			<div className="flex flex-col ml-1 mb-1">
@@ -45,7 +49,7 @@ const CustomSelect: React.FC<IProps> = ({
 				)}
 				{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
 			</div>
-			<Select value={value} onValueChange={onChange} name={name}>
+			<Select value={value} onValueChange={handleChange} name={name}>
 				<SelectTrigger
 					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(
