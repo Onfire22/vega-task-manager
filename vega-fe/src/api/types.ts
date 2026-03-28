@@ -13,6 +13,7 @@ import {
 	TaskResponseSchema,
 	TasksResponseSchema,
 	UpdateTaskResponseSchema,
+	UpdateUserResponseSchema,
 	UsersResponseSchema,
 } from '@/api/validation.ts';
 
@@ -109,6 +110,17 @@ export interface TUpdateTaskRequest {
 	uuid: string;
 }
 
+export interface IUpdateUserRequest {
+	name?: string;
+	secondName?: string;
+	userSpecialisationUuid?: string;
+}
+
+export interface IUpdatePasswordRequest {
+	currentPassword: string;
+	newPassword: string;
+}
+
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
 
 export type TSignUpResponse = z.infer<typeof SignUpUserResponseSchema>;
@@ -136,3 +148,5 @@ export type TTaskResponse = z.infer<typeof TaskResponseSchema>;
 export type UpdateTaskResponse = z.infer<typeof UpdateTaskResponseSchema>;
 
 export type TDictionary = z.infer<typeof DictionarySchema>;
+
+export type TUpdateUser = z.infer<typeof UpdateUserResponseSchema>;

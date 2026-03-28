@@ -154,11 +154,13 @@ export const ProjectResponseSchema = z.object({
 					label: z.string(),
 					key: z.string(),
 				}),
-				assignee: z.object({
-					id: z.string(),
-					name: z.string(),
-					secondName: z.string(),
-				}),
+				assignee: z
+					.object({
+						id: z.string(),
+						name: z.string(),
+						secondName: z.string(),
+					})
+					.nullable(),
 			}),
 		),
 		users: z.array(
@@ -258,11 +260,13 @@ export const TaskResponseSchema = z.object({
 			name: z.string(),
 			secondName: z.string(),
 		}),
-		assignee: z.object({
-			id: z.string(),
-			name: z.string(),
-			secondName: z.string(),
-		}),
+		assignee: z
+			.object({
+				id: z.string(),
+				name: z.string(),
+				secondName: z.string(),
+			})
+			.nullable(),
 		timeLogs: z.array(z.any()),
 		project: z.object({
 			id: z.string(),
@@ -293,6 +297,20 @@ export const UpdateTaskResponseSchema = z.object({
 		taskPriorityUuid: z.string(),
 		taskStatusUuid: z.string(),
 		taskStackUuid: z.string(),
+		createdAt: z.string(),
+		updatedAt: z.string(),
+	}),
+});
+
+export const UpdateUserResponseSchema = z.object({
+	newUser: z.object({
+		id: z.string(),
+		name: z.string(),
+		secondName: z.string(),
+		email: z.string(),
+		password: z.string(),
+		userName: z.string(),
+		userSpecialisationUuid: z.string(),
 		createdAt: z.string(),
 		updatedAt: z.string(),
 	}),

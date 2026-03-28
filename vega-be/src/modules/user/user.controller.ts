@@ -85,6 +85,10 @@ export const updateUser = async (req: Request<{}, {}, IUpdateUserBody>, res: Res
 		updateData.secondName = req.body.secondName;
 	}
 
+	if (req.body.userName) {
+		updateData.userName = req.body.userName;
+	}
+
 	if (req.body.userSpecialisationUuid) {
 		updateData.userSpecialisation = {
 			connect: { id: req.body.userSpecialisationUuid },

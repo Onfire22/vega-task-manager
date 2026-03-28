@@ -27,4 +27,5 @@ export interface IUpdateUserBody {
 	name: string;
 	secondName: string;
 	userSpecialisationUuid: string;
+	userName: string;
 }
