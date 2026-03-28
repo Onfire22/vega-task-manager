@@ -1,4 +1,6 @@
-export const getAvatarColor = (uuid: string) => {
+export const getAvatarColor = (uuid?: string) => {
+	if (!uuid) return '';
+
 	let hash = 0;
 	for (let i = 0; i < uuid.length; i++) {
 		hash = uuid.charCodeAt(i) + ((hash << 5) - hash);

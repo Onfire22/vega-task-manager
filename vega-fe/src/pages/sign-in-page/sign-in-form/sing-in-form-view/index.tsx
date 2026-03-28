@@ -4,22 +4,16 @@ import { AtSign, Lock } from 'lucide-react';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { CustomPasswordInput } from '@/components/common/forms/custom-password-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
+import { Controller, type UseFormReturn } from 'react-hook-form';
+import type { TSignInFormFormValues } from '@/pages/sign-in-page/types.ts';
 
 interface IProps {
-	formValues: {
-		email: string;
-		password: string;
-	};
-	formErrors: {
-		email?: string;
-		password?: string;
-	};
 	loginRef: React.RefObject<HTMLInputElement | null>;
-	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
+	form: UseFormReturn<TSignInFormFormValues>;
 }
 
-const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, onFieldChange, onFormSubmit }) => {
+const SignInFormView: React.FC<IProps> = ({ form, loginRef, onFormSubmit }) => {
 	return (
 		<div className="w-full h-screen flex-centered-line">
 			<div className="w-125">
@@ -29,32 +23,42 @@ const SignInFormView: React.FC<IProps> = ({ formValues, formErrors, loginRef, on
 				>
 					<h1 className="text-2xl">Вход</h1>
 					<div className="w-full">
-						<CustomInput
-							id="email"
-							type="text"
-							label="Электронная почта"
+						<Controller
 							name="email"
-							placeholder="username@host.com"
-							value={formValues.email}
-							error={formErrors.email}
-							onChange={onFieldChange}
-							leftIcon={<AtSign color="#D5D8DB" size={21} />}
-							ref={loginRef}
-							isRequired
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<CustomInput
+									id="email"
+									type="text"
+									label="Электронная почта"
+									placeholder="username@host.com"
+									value={field.value}
+									onChange={field.onChange}
+									error={fieldState.error?.message}
+									leftIcon={<AtSign color="#D5D8DB" size={21} />}
+									ref={loginRef}
+									isRequired
+								/>
+							)}
 						/>
 					</div>
 					<div className="w-full">
-						<CustomPasswordInput
-							id="password"
-							type="password"
-							label="Пароль"
+						<Controller
 							name="password"
-							placeholder="********"
-							value={formValues.password}
-							error={formErrors.password}
-							onChange={onFieldChange}
-							isRequired
-							leftIcon={<Lock color="#D5D8DB" size={21} />}
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<CustomPasswordInput
+									id="password"
+									type="password"
+									label="Пароль"
+									placeholder="********"
+									value={field.value}
+									onChange={field.onChange}
+									error={fieldState.error?.message}
+									isRequired
+									leftIcon={<Lock color="#D5D8DB" size={21} />}
+								/>
+							)}
 						/>
 					</div>
 					<div className="my-2.5 text-sm">

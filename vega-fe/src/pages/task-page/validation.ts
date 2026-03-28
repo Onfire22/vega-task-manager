@@ -1,6 +1,13 @@
-import * as yup from 'yup';
+import { z } from 'zod';
 
-export const LogTimeFormValidation = yup.object().shape({
-	estimate: yup.string().matches(/^\d+[hm]$/, 'Формат времени: 1h, 30m и т.д.'),
-	loggedTime: yup.string().matches(/^\d+[hm]$/, 'Формат времени: 1h, 30m и т.д.'),
+export const LogTimeFormValidation = z.object({
+	estimate: z
+		.string()
+		.regex(/^\d+[hm]$/, 'Формат времени: 1h, 30m и т.д.')
+		.optional(),
+	loggedTime: z
+		.string()
+		.regex(/^\d+[hm]$/, 'Формат времени: 1h, 30m и т.д.')
+		.optional(),
+	logComment: z.string().optional(),
 });

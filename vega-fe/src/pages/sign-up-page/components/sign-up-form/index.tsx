@@ -1,6 +1,6 @@
 import { SignUpFormView } from './sign-up-form-view';
 import { PASSWORD_REQUIREMENTS, RED_COLOR, TEAL_COLOR, YELLOW_COLOR } from '../../constants.ts';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
 import { useDictionariesOptions } from '../../../../api/hooks.ts';
 import { useSignUpForm } from '../../hooks.ts';
@@ -14,19 +14,13 @@ const SignUpForm = () => {
 
 	const { dictionariesOptions } = useDictionariesOptions(['USER_SPECIALISATION']);
 
-	const { handleNextStepClick, handlePrevStepClick, activeStep, formik } = useSignUpForm();
+	const { handleNextStepClick, handlePrevStepClick, activeStep, form, formValues } = useSignUpForm();
 
 	useEffect(() => {
 		if (emailRef?.current) {
 			emailRef.current.focus();
 		}
 	}, []);
-
-	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name } = e.target;
-		formik.setFieldError(name, '');
-		formik.handleChange(e);
-	};
 
 	const handlePopoverOpened = (value: boolean) => {
 		setPopoverOpened(value);
@@ -35,8 +29,8 @@ const SignUpForm = () => {
 	const handleGeneratePasswordClick = () => {
 		const randomPassword = generateRandomPassword();
 
-		formik.setValues({
-			...formik.values,
+		form.reset({
+			...formValues,
 			password: randomPassword,
 			passwordRepeat: randomPassword,
 		});
@@ -46,55 +40,48 @@ const SignUpForm = () => {
 		}
 	};
 
-	const handleSelectFieldChange = (name: string, value: string) => {
-		formik.setFieldError(name, '');
-		formik.setFieldValue(name, value);
-	};
-
 	const popoverData = useMemo(() => {
-		const strength = getPasswordStrength(formik.values.password, PASSWORD_REQUIREMENTS);
+		const strength = getPasswordStrength(formValues.password, PASSWORD_REQUIREMENTS);
 
 		return {
 			strength,
 			color: strength === 100 ? TEAL_COLOR : strength > 50 ? YELLOW_COLOR : RED_COLOR,
 		};
-	}, [formik.values.password]);
+	}, [formValues.password]);
 
 	const isNextButtonDisabled = useMemo(() => {
 		if (activeStep === 0) {
-			return !(formik.values.email && formik.values.password && formik.values.passwordRepeat);
+			return !(formValues.email && formValues.password && formValues.passwordRepeat);
 		}
 
 		if (activeStep === 1) {
-			return !(formik.values.name && formik.values.secondName && formik.values.userSpecialisationUuid);
+			return !(formValues.name && formValues.secondName && formValues.userSpecialisationUuid);
 		}
 
 		return false;
 	}, [
 		activeStep,
-		formik.values.email,
-		formik.values.password,
-		formik.values.passwordRepeat,
-		formik.values.name,
-		formik.values.secondName,
-		formik.values.userSpecialisationUuid,
+		formValues.email,
+		formValues.password,
+		formValues.passwordRepeat,
+		formValues.name,
+		formValues.secondName,
+		formValues.userSpecialisationUuid,
 	]);
 
 	return (
 		<SignUpFormView
+			form={form}
+			formValues={formValues}
 			activeStep={activeStep}
-			formValues={formik.values}
-			formErrors={formik.errors}
 			isPopoverOpened={isPopoverOpened}
 			popoverData={popoverData}
 			passwordRef={passwordRef}
 			emailRef={emailRef}
 			isNextButtonDisabled={isNextButtonDisabled}
 			stackOptions={dictionariesOptions?.userSpecialisation}
-			onFieldChange={handleFieldChange}
 			onPopoverOpened={handlePopoverOpened}
 			onGeneratePasswordClick={handleGeneratePasswordClick}
-			onSelectFieldChange={handleSelectFieldChange}
 			onNextStepClick={handleNextStepClick}
 			onPrevStepClick={handlePrevStepClick}
 		/>

@@ -66,7 +66,7 @@ const CustomInput: React.FC<IProps> = ({
 				/>
 				{rightIcon && <div className="pr-2 flex items-center">{rightIcon}</div>}
 			</div>
-			{error && <span className="text-(--color-danger) text-[12px] ml-3">{error}</span>}
+			{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 		</div>
 	);
 };

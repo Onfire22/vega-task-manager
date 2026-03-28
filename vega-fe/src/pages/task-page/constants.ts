@@ -1,4 +1,5 @@
 import type { TDictionariesTypes } from '../../api/types.ts';
+import type { TField } from '@/pages/task-page/types.ts';
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
@@ -13,7 +14,7 @@ export const LOG_TIME_INITIAL_VALUES = {
 	logComment: '',
 };
 
-export const INITIAL_FIELD_VALUES = {
+export const INITIAL_FIELD_VALUES: TField = {
 	fieldName: '',
 	value: '',
 };

@@ -1,5 +1,4 @@
-import { useFormik } from 'formik';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { SignInFormView } from './sing-in-form-view';
 import { SIGN_IN_DEFAULT_VALUES } from '../constants.ts';
 import { SignUpValidationSchema } from '../validation.ts';
@@ -8,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '../../../app/constants.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+import type { TSignInFormFormValues } from '@/pages/sign-in-page/types.ts';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
@@ -21,37 +23,25 @@ const SignUpForm = () => {
 		}
 	}, []);
 
-	const formik = useFormik({
-		initialValues: SIGN_IN_DEFAULT_VALUES,
-		validationSchema: SignUpValidationSchema,
-		validateOnChange: false,
-		onSubmit: async (values) => {
-			try {
-				await signInUser(values).unwrap();
-				navigate(FRONT_ROUTES.root);
-			} catch (e: unknown) {
-				const error = e as { data?: { message?: string } };
-				toast.error(error.data?.message ?? 'Something went wrong');
-			}
-		},
+	const form = useForm<TSignInFormFormValues>({
+		defaultValues: SIGN_IN_DEFAULT_VALUES,
+		resolver: zodResolver(SignUpValidationSchema),
 	});
 
-	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name } = e.target;
-		formik.setFieldError(name, '');
-		formik.handleChange(e);
-	};
+	const handleSubmitForm = form.handleSubmit(async (values) => {
+		try {
+			await signInUser(values).unwrap();
+			navigate(FRONT_ROUTES.root);
+		} catch (e: unknown) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
+	});
 
 	return (
 		<>
 			{isLoading && <CustomLoader isFull />}
-			<SignInFormView
-				formValues={formik.values}
-				formErrors={formik.errors}
-				loginRef={loginRef}
-				onFieldChange={handleFieldChange}
-				onFormSubmit={formik.handleSubmit}
-			/>
+			<SignInFormView form={form} loginRef={loginRef} onFormSubmit={handleSubmitForm} />
 		</>
 	);
 };

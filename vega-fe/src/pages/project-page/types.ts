@@ -15,7 +15,11 @@ export interface ITaskDictionary {
 }
 
 export interface IProjectTask {
-	assignee: string | null;
+	assignee: {
+		id: string;
+		name: string;
+		secondName: string;
+	} | null;
 	code: string | null;
 	createdAt: string;
 	id: string;
@@ -43,7 +47,7 @@ export interface IProject {
 }
 
 export interface IDictionary {
-	description: string;
+	description: string | null;
 	value: string;
 	label: string;
 	key: string;

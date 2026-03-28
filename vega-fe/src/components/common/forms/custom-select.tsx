@@ -13,12 +13,12 @@ interface IProps {
 	placeholder?: string;
 	value: string;
 	error?: string;
-	description?: string;
+	description?: string | null;
 	label?: string;
 	name?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
-	options: Array<{ value: string; label: string; description?: string; color?: string }>;
+	options: Array<{ value: string; label: string; description?: string | null; color?: string }>;
 }
 
 const CustomSelect: React.FC<IProps> = ({
@@ -34,6 +34,10 @@ const CustomSelect: React.FC<IProps> = ({
 }) => {
 	const chosenColor = options.find((option) => option.value === value)?.color;
 
+	const handleChange = (value: string) => {
+		if (value) onChange(value);
+	};
+
 	return (
 		<div>
 			<div className="flex flex-col ml-1 mb-1">
@@ -45,7 +49,7 @@ const CustomSelect: React.FC<IProps> = ({
 				)}
 				{description && <span className="text-[12px] items-center text-muted-foreground">{description}</span>}
 			</div>
-			<Select value={value} onValueChange={onChange} name={name}>
+			<Select value={value} onValueChange={handleChange} name={name}>
 				<SelectTrigger
 					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(

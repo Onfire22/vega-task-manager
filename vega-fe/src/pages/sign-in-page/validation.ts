@@ -1,6 +1,6 @@
-import * as yup from 'yup';
+import { z } from 'zod';
 
-export const SignUpValidationSchema = yup.object().shape({
-	email: yup.string().email('Некорректный email').required('Это обязательное поле'),
-	password: yup.string().required('Это обязательное поле'),
+export const SignUpValidationSchema = z.object({
+	email: z.email('Некорректный email'),
+	password: z.string().min(1, 'Это обязательное поле'),
 });

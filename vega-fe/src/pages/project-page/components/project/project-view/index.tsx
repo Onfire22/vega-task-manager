@@ -76,10 +76,7 @@ const ProjectView: React.FC<IProps> = ({
 						<CustomSelect
 							options={dictionariesOptions}
 							value={project.projectStatus.id}
-							onChange={(value) => {
-								if (!value) return;
-								onProjectFieldChange('projectStatusUuid', value);
-							}}
+							onChange={(value) => onProjectFieldChange('projectStatusUuid', value)}
 						/>
 					</div>
 					<div className="flex flex-col">

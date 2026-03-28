@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import type { SignUpSchema } from '@/pages/sign-up-page/validation.ts';
+
 export interface InitialState {
 	activeStep: number;
 }
@@ -18,16 +21,9 @@ export interface IFormValues {
 	userSpecialisationUuid: string;
 }
 
-export interface IFormErrors {
-	email?: string;
-	password?: string;
-	passwordRepeat?: string;
-	name?: string;
-	secondName?: string;
-	userSpecialisationUuid?: string;
-}
-
 export interface IOptions {
 	label: string;
 	value: string;
 }
+
+export type TSignUpFormValues = z.infer<typeof SignUpSchema>;

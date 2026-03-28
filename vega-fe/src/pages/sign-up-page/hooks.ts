@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
 import { useCheckIsEmailFreeMutation, useSignUpUserMutation } from '../../api/queries/auth.api.ts';
-import { useFormik } from 'formik';
 import { SIGNUP_DEFAULT_VALUES } from './constants.ts';
 import { AccountStepValidationSchema, ProfileStepValidationSchema } from './validation.ts';
 import { getActiveStepSelector } from './selectors.ts';
 import { setActiveStep } from './slice.ts';
 import { toast } from 'sonner';
+import { type Resolver, useForm, useWatch } from 'react-hook-form';
+import type { TSignUpFormValues } from '@/pages/sign-up-page/types.ts';
 
 export const useSignUpForm = () => {
 	const dispatch = useAppDispatch();
@@ -15,25 +16,49 @@ export const useSignUpForm = () => {
 
 	const activeStep = useAppSelector(getActiveStepSelector());
 
-	const formik = useFormik({
-		initialValues: SIGNUP_DEFAULT_VALUES,
-		validationSchema: activeStep === 0 ? AccountStepValidationSchema : ProfileStepValidationSchema,
-		validateOnChange: false,
-		onSubmit: async (values) => {
-			try {
-				await signUpUser(values).unwrap();
-			} catch (e) {
-				const error = e as { data?: { message?: string } };
-				toast.error(error.data?.message ?? 'Something went wrong');
-			}
-		},
+	const resolver: Resolver<TSignUpFormValues> = async (values) => {
+		const schema = activeStep === 0 ? AccountStepValidationSchema : ProfileStepValidationSchema;
+
+		const result = schema.safeParse(values);
+
+		if (result.success) {
+			return { values: result.data as TSignUpFormValues, errors: {} };
+		}
+
+		return {
+			values: {},
+			errors: result.error.issues.reduce(
+				(acc, issue) => {
+					const path = issue.path.join('.');
+					acc[path] = { message: issue.message, type: 'validation' };
+					return acc;
+				},
+				{} as Record<string, { message: string; type: string }>,
+			),
+		};
+	};
+
+	const form = useForm<TSignUpFormValues>({
+		defaultValues: SIGNUP_DEFAULT_VALUES,
+		resolver,
+	});
+
+	const handleSubmitForm = form.handleSubmit(async () => {
+		try {
+			const values = form.getValues();
+			await signUpUser(values).unwrap();
+		} catch (e) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
 	});
 
 	const handleEmailCheck = async () => {
-		if (!formik.values.email) return false;
+		const formValues = form.getValues();
+		if (!formValues.email) return false;
 
 		try {
-			const response = await checkIsEmailFree(formik.values.email).unwrap();
+			const response = await checkIsEmailFree(formValues.email).unwrap();
 			if (response?.success) {
 				return true;
 			}
@@ -52,14 +77,12 @@ export const useSignUpForm = () => {
 			if (!isEmailFree) return;
 		}
 
-		const validationResult = await formik.validateForm();
-
-		const isFormValid = !Object.keys(validationResult).length;
+		const isFormValid = await form.trigger();
 
 		if (!isFormValid) return;
 
 		if (activeStep === 1) {
-			formik.handleSubmit();
+			await handleSubmitForm();
 		}
 
 		dispatch(setActiveStep(activeStep < 1 ? activeStep + 1 : activeStep));
@@ -69,10 +92,17 @@ export const useSignUpForm = () => {
 		dispatch(setActiveStep(activeStep > 0 ? activeStep - 1 : activeStep));
 	};
 
+	const [email, password, passwordRepeat, name, secondName, userSpecialisationUuid] = useWatch({
+		control: form.control,
+		name: ['email', 'password', 'passwordRepeat', 'name', 'secondName', 'userSpecialisationUuid'],
+		defaultValue: SIGNUP_DEFAULT_VALUES,
+	});
+
 	return {
-		formik,
+		form,
 		activeStep,
 		isError,
+		formValues: { email, password, passwordRepeat, name, secondName, userSpecialisationUuid },
 		isSignUpLoading: isLoading,
 		handleNextStepClick,
 		handlePrevStepClick,

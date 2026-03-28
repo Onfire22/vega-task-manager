@@ -10,11 +10,15 @@ export const useTaskData = (uuid?: string) => {
 
 	if (!task) return { task: null, isTaskLoading };
 
-	const remainingPercents = task.remainingTimeInSecs ? (task.remainingTimeInSecs * 100) / task.estimateTimeInSecs : 0;
+	const remainingPercents =
+		task.remainingTimeInSecs && task?.estimateTimeInSecs
+			? (task.remainingTimeInSecs * 100) / task.estimateTimeInSecs
+			: 0;
 
-	const loggedPercents = task.totalLoggedTimeInSecs
-		? (task.totalLoggedTimeInSecs * 100) / task.estimateTimeInSecs
-		: 0;
+	const loggedPercents =
+		task.totalLoggedTimeInSecs && task.estimateTimeInSecs
+			? (task.totalLoggedTimeInSecs * 100) / task.estimateTimeInSecs
+			: 0;
 
 	const taskData = {
 		...task,
@@ -35,7 +39,7 @@ export const useTaskData = (uuid?: string) => {
 			task?.totalLoggedTime?.hours || task?.totalLoggedTime?.minutes
 				? `${task.totalLoggedTime.hours || ''} ${task.totalLoggedTime.minutes || ''}`
 				: '',
-		timeLogs: task.timeLogs.map((log) => {
+		timeLogs: task?.timeLogs?.map((log) => {
 			return {
 				...log,
 				loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`,

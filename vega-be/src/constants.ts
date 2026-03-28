@@ -32,6 +32,7 @@ export const ROUTES = {
 	createTaskLog: '/api/taskLogs/create',
 	comment: '/api/tasks/comments/:uuid',
 	comments: '/api/tasks/:uuid/comments',
+	currentUserPassword: '/api/users/current/password',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

@@ -10,12 +10,13 @@ import { setIsModalShown } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { toast } from 'sonner';
+import type { TField, TTaskFields } from '@/pages/task-page/types.ts';
 
 const Task = () => {
 	const params = useParams();
 	const dispatch = useAppDispatch();
 
-	const [field, setEditField] = useState(INITIAL_FIELD_VALUES);
+	const [field, setEditField] = useState<TField>(INITIAL_FIELD_VALUES);
 	const [activeTab, setActiveTab] = useState('comments');
 
 	const { dictionariesOptions } = useDictionariesWithColors();
@@ -35,7 +36,9 @@ const Task = () => {
 		}
 	};
 
-	const handleUpdateTask = async (fieldName: string, value: string) => {
+	const handleUpdateTask = async (fieldName: TTaskFields | '', value: string) => {
+		if (!params.uuid || !fieldName) return;
+
 		try {
 			await updateTask({ fieldName, value, uuid: params.uuid }).unwrap();
 			setEditField(INITIAL_FIELD_VALUES);
@@ -45,7 +48,7 @@ const Task = () => {
 		}
 	};
 
-	const handleSetFieldToEdit = (fieldName: string, value: string | null) => {
+	const handleSetFieldToEdit = (fieldName: TTaskFields | '', value: string | null) => {
 		const selection = window.getSelection();
 		if (selection && selection.toString().length > 0) return;
 
@@ -55,8 +58,8 @@ const Task = () => {
 	};
 
 	const handleFieldChange: {
-		(e: React.ChangeEvent<HTMLInputElement>, fieldName: string): void;
-		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName: string): void;
+		(e: React.ChangeEvent<HTMLInputElement>, fieldName: TTaskFields): void;
+		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName: TTaskFields): void;
 	} = (e, fieldName) => {
 		setEditField({ fieldName, value: e.target.value });
 	};

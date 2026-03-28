@@ -1,6 +1,4 @@
-import React from 'react';
 import { ProjectModalView } from './project-modal-view';
-import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { useCreateProjectMutation } from '../../../api/queries/projects.api.ts';
 import { getActiveModalSelector } from '../selectors.ts';
@@ -10,6 +8,9 @@ import { CreateProjectValidationSchema } from '../validation.ts';
 import { setActiveModal } from '../slice.ts';
 import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
 import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+import type { TProjectValues } from '@/modules/modals/types.ts';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
@@ -22,48 +23,34 @@ const ProjectModal = () => {
 		filters: { ...(data?.currentUser ? { withoutUser: data.currentUser.id } : {}) },
 	});
 
-	const formik = useFormik({
-		initialValues: PROJECT_FORM_INITIAL_VALUES,
-		validationSchema: CreateProjectValidationSchema,
-		validateOnChange: false,
-		onSubmit: async (values) => {
-			const response = await createProject(values);
-			if (response?.data?.project) {
-				toast.success('Проект успешно создан');
-				dispatch(setActiveModal(null));
-			}
-		},
+	const form = useForm<TProjectValues>({
+		defaultValues: PROJECT_FORM_INITIAL_VALUES,
+		resolver: zodResolver(CreateProjectValidationSchema),
 	});
 
-	const handleFieldChange: {
-		(e: React.ChangeEvent<HTMLInputElement>): void;
-		(e: React.ChangeEvent<HTMLTextAreaElement>): void;
-	} = (e) => {
-		const { name } = e.target;
-		formik.setFieldError(name, '');
-		formik.handleChange(e);
-	};
+	const handleSubmitForm = form.handleSubmit(async (values) => {
+		try {
+			await createProject(values).unwrap();
+			toast.success('Проект успешно создана');
+			dispatch(setActiveModal(null));
+		} catch (e) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
+	});
 
 	const handleModalClose = () => {
 		dispatch(setActiveModal(null));
 	};
 
-	const handleSelectFieldChange = (name: string, value: Array<string> | string | Date) => {
-		formik.setFieldError(name, '');
-		formik.setFieldValue(name, value);
-	};
-
 	return (
 		<ProjectModalView
-			formValues={formik.values}
-			formErrors={formik.errors}
+			form={form}
 			activeModal={activeModal}
 			userList={usersListOptions}
 			isLoading={isUsersLoading}
-			onFieldChange={handleFieldChange}
-			onFormSubmit={formik.handleSubmit}
+			onFormSubmit={handleSubmitForm}
 			onModalClose={handleModalClose}
-			onSelectFieldChange={handleSelectFieldChange}
 		/>
 	);
 };

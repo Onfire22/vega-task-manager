@@ -1,29 +1,27 @@
+import { z } from 'zod';
+import {
+	BaseResponseSchema,
+	CommentsResponseSchema,
+	CreateProjectResponseSchema,
+	CurrentUserResponseSchema,
+	DictionariesResponseSchema,
+	DictionarySchema,
+	ProjectResponseSchema,
+	ProjectsResponseSchema,
+	SigInUserResponseSchema,
+	SignUpUserResponseSchema,
+	TaskResponseSchema,
+	TasksResponseSchema,
+	UpdateTaskResponseSchema,
+	UsersResponseSchema,
+} from '@/api/validation.ts';
+
 export interface IUserData {
 	email: string;
 	password: string;
 	name: string;
 	secondName: string;
 	userSpecialisationUuid: string;
-}
-
-export interface ICurrentUser {
-	email: string;
-	id: string;
-	name: string;
-	secondName: string;
-}
-
-export interface IUserResponse {
-	currentUser: ICurrentUser;
-}
-
-export interface IAuthUserResponse {
-	user: {
-		email: string;
-		id: string;
-		name: string;
-		secondName: string;
-	};
 }
 
 export interface ISignInUserData {
@@ -46,52 +44,11 @@ export type TDictionariesTypes =
 	| 'TASK_TYPE'
 	| 'PROJECT_STATUS';
 
-type TDictionariesMapped =
-	| 'taskPriority'
-	| 'roleType'
-	| 'userSpecialisation'
-	| 'taskStatus'
-	| 'taskType'
-	| 'projectStatus';
-
-export interface IDictionary {
-	description: string;
-	id: string;
-	label: string;
-	key: string;
-}
-
-export type IDictionariesResponse = {
-	dictionaries: Partial<Record<TDictionariesMapped, IDictionary[]>>;
-};
-
-export interface IUsers {
-	usersList: Array<{
-		id: string;
-		name: string;
-		secondName: string;
-	}>;
-}
-
-export interface IProject {
-	code: string;
-	createdAt: Date;
-	id: string;
-	title: string;
-	projectStatus: IDictionary;
-	tasksCount: number;
-	projectProgress: number;
-	users: Array<{ id: string; name: string; secondName: string; role: IDictionary }>;
-}
-
 export interface IProjectCreate {
 	title: string;
 	description: string;
-	usersUuids: string[];
-}
-
-export interface IDefaultResponse {
-	success: boolean;
+	usersUuids?: string[];
+	deadlineDate?: Date;
 }
 
 export type TDirection = 'desc' | 'asc';
@@ -113,138 +70,6 @@ export interface IGetUserTasksRequest {
 	filters: IFilters;
 }
 
-export interface IExpDictData {
-	id: string;
-	label: string;
-	key: string;
-}
-
-export interface IExpUserDict {
-	id: string;
-	name: string;
-	secondName: string;
-}
-
-export interface ITimeLog {
-	description: string | null;
-	id: string;
-	loggedTime: Partial<{ minutes: string; hours: string }>;
-	createdAt: string;
-	updatedAt: string;
-	user: {
-		id: string;
-		name: string;
-		secondName: string;
-	};
-}
-
-export interface IExpTaskResponse {
-	id: string;
-	code: string | null;
-	title: string;
-	description: string;
-	estimateTimeInSecs: number;
-	remainingTimeInSecs: number;
-	totalLoggedTimeInSecs: number;
-	estimateTime: Partial<{ minutes: string; hours: string }> | null;
-	remainingTime: Partial<{ minutes: string; hours: string }> | null;
-	totalLoggedTime: Partial<{ minutes: string; hours: string }> | null;
-	project: {
-		code: string;
-		id: string;
-		title: string;
-		projectStatus: {
-			key: string;
-			label: string;
-		};
-	};
-	timeLogs: Array<ITimeLog>;
-	assignee: IExpUserDict | null;
-	reporter: IExpUserDict;
-	taskPriority: IExpDictData;
-	taskStack: IExpDictData;
-	taskStatus: IExpDictData;
-	createdAt: string;
-	updatedAt: string;
-}
-
-export interface ITaskList {
-	id: string;
-	code: string | null;
-	title: string;
-	estimateTime: Partial<{ minutes: string; hours: string }> | null;
-	timeLogs: Array<ITimeLog> | null;
-	description: string;
-	taskPriority: IExpDictData;
-	taskStack: IExpDictData;
-	taskStatus: IExpDictData;
-	createdAt: string;
-}
-
-export type TTaskList = { tasks: Array<ITaskList> };
-
-export interface IProjectUser {
-	id: string;
-	name: string;
-	secondName: string;
-	role: {
-		id: string;
-		label: string;
-		key: string;
-	};
-	userSpecialisation: {
-		label: string;
-	};
-}
-
-export interface ITaskDictionary {
-	id: string;
-	label: string;
-	key: string;
-}
-
-export interface IProjectTask {
-	assignee: string | null;
-	code: string | null;
-	createdAt: string;
-	id: string;
-	taskPriority: ITaskDictionary;
-	taskStack: ITaskDictionary;
-	taskStatus: ITaskDictionary;
-	title: string;
-}
-
-export interface IProjectResponse {
-	project: {
-		id: string;
-		title: string;
-		code: string;
-		description: string;
-		createdAt: string;
-		deadlineDate?: string;
-		tasks: Array<IProjectTask>;
-		users: Array<IProjectUser>;
-		projectStatus: {
-			description: string;
-			id: string;
-			label: string;
-			key: string;
-		};
-	};
-}
-
-export interface ICreateProjectResponse {
-	project: {
-		code: string;
-		createdAt: string;
-		description: string;
-		id: string;
-		projectStatusUuid: string;
-		title: string;
-		updatedAt: string;
-	};
-}
-
 export interface IProjectUpdateRequest {
 	uuid: string;
 	field: 'deadlineDate' | 'projectStatusUuid';
@@ -263,22 +88,6 @@ export interface ICommentCreateBody {
 	text: string;
 }
 
-export interface IComment {
-	id: string;
-	text: string;
-	createdAt: string;
-	updatedAt: string;
-	author: {
-		id: string;
-		name: string;
-		secondName: string;
-	};
-}
-
-export interface ICommentsResponse {
-	comments: Array<IComment>;
-}
-
 export interface IEditCommentPayload {
 	commentUuid: string;
 	text: string;
@@ -291,3 +100,39 @@ export interface IFiltersRequest {
 		withoutUser: string;
 	}>;
 }
+
+export type TUpdateTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+
+export interface TUpdateTaskRequest {
+	fieldName: TUpdateTaskFields;
+	value: string;
+	uuid: string;
+}
+
+export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
+
+export type TSignUpResponse = z.infer<typeof SignUpUserResponseSchema>;
+
+export type TSignInResponse = z.infer<typeof SigInUserResponseSchema>;
+
+export type TCurrentUserResponse = z.infer<typeof CurrentUserResponseSchema>;
+
+export type TDictionariesResponse = z.infer<typeof DictionariesResponseSchema>;
+
+export type TCommentsResponse = z.infer<typeof CommentsResponseSchema>;
+
+export type TProjectsResponse = z.infer<typeof ProjectsResponseSchema>;
+
+export type TCreateProjectResponse = z.infer<typeof CreateProjectResponseSchema>;
+
+export type TProjectResponse = z.infer<typeof ProjectResponseSchema>;
+
+export type TUsersResponse = z.infer<typeof UsersResponseSchema>;
+
+export type TTasksResponse = z.infer<typeof TasksResponseSchema>;
+
+export type TTaskResponse = z.infer<typeof TaskResponseSchema>;
+
+export type UpdateTaskResponse = z.infer<typeof UpdateTaskResponseSchema>;
+
+export type TDictionary = z.infer<typeof DictionarySchema>;

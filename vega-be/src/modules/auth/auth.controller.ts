@@ -108,7 +108,6 @@ export const getUserByEmail = async (req: Request, res: Response, next: NextFunc
 
 		res.status(200).json({ success: true });
 	} catch (e) {
-		console.log(e);
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}
 };

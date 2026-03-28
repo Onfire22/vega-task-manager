@@ -1,28 +1,35 @@
-import * as yup from 'yup';
-import { PASSWORD_REQUIREMENTS, VALIDATION_MESSAGES } from './constants.ts';
+import { z } from 'zod';
+import { PASSWORD_REQUIREMENTS } from './constants.ts';
 
-const passwordSchema = PASSWORD_REQUIREMENTS.reduce(
-	(schema, requirement) => schema.matches(requirement.regex, requirement.label),
-	yup.string().required(VALIDATION_MESSAGES.required).min(8, VALIDATION_MESSAGES.passwordLength),
+const PasswordSchema = PASSWORD_REQUIREMENTS.reduce(
+	(schema, requirement) => schema.refine((val) => requirement.regex.test(val), { message: requirement.label }),
+	z.string().min(1, 'Это обязательное поле').min(8, 'Минимальная длина пароля 8 символов'),
 );
 
-export const AccountStepValidationSchema = yup.object().shape({
-	email: yup.string().email(VALIDATION_MESSAGES.email).required(VALIDATION_MESSAGES.required),
-	password: passwordSchema,
-	passwordRepeat: yup
+export const AccountStepValidationSchema = z
+	.object({
+		email: z.email('Некорректный email'),
+		password: PasswordSchema,
+		passwordRepeat: z.string().min(1, 'Это обязательное поле'),
+	})
+	.refine((data) => data.password === data.passwordRepeat, {
+		message: 'Пароли должны совпадать',
+		path: ['passwordRepeat'],
+	});
+
+export const ProfileStepValidationSchema = z.object({
+	name: z
 		.string()
-		.oneOf([yup.ref('password'), undefined], VALIDATION_MESSAGES.passwordRepeat)
-		.required(VALIDATION_MESSAGES.required),
+		.min(1, 'Это обязательное поле')
+		.regex(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы'),
+	secondName: z
+		.string()
+		.min(1, 'Это обязательное поле')
+		.regex(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы'),
+	userSpecialisationUuid: z.string().min(1),
 });
 
-export const ProfileStepValidationSchema = yup.object().shape({
-	name: yup
-		.string()
-		.matches(/^[A-Za-zА-Яа-яЁё]+$/, VALIDATION_MESSAGES.lettersOnly)
-		.required(VALIDATION_MESSAGES.required),
-	secondName: yup
-		.string()
-		.matches(/^[A-Za-zА-Яа-яЁё]+$/, VALIDATION_MESSAGES.lettersOnly)
-		.required(VALIDATION_MESSAGES.required),
-	userSpecialisationUuid: yup.string().required(),
+export const SignUpSchema = z.object({
+	...AccountStepValidationSchema.shape,
+	...ProfileStepValidationSchema.shape,
 });

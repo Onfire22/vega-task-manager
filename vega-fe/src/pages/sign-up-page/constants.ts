@@ -7,16 +7,9 @@ export const SIGNUP_DEFAULT_VALUES = {
 	userSpecialisationUuid: '',
 };
 
-export const VALIDATION_MESSAGES = {
-	required: 'Это обязательное поле',
-	email: 'Некорректный email',
-	lettersOnly: 'Только русские или английские буквы',
-	passwordRepeat: 'Пароли должны совпадать',
-	passwordLength: 'Минимальная длина пароля 8 символов',
-};
-
 export const PASSWORD_REQUIREMENTS = [
 	{ regex: /[0-9]/, label: 'Должен содержать цифру' },
+	{ regex: /^.{8,}$/, label: 'Минимальная длина пароля 8 символов' },
 	{ regex: /[a-z]/, label: 'Должен содержать строчную букву' },
 	{ regex: /[A-Z]/, label: 'Должен содержать прописную букву' },
 	{ regex: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Хотя бы один спец. символ' },
@@ -27,7 +20,5 @@ export const RED_COLOR = 'bg-danger';
 export const TEAL_COLOR = 'bg-teal';
 
 export const YELLOW_COLOR = 'bg-amber';
-
-export const BLUE_COLOR = '#0369ff';
 
 export const MINIMAL_PASSWORD_LENGTH = 7;

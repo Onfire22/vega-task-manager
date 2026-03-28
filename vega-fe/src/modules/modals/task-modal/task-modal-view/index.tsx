@@ -1,41 +1,33 @@
 import React from 'react';
-import type { ISelectType, ITaskFormErrors, ITaskFormValues } from '../../types.ts';
+import type { ISelectType, TTaskFormValues } from '../../types.ts';
 import { CustomModal } from '@/components/common/ui/custom-modal.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { Controller, type UseFormReturn } from 'react-hook-form';
 
 interface IProps {
+	form: UseFormReturn<TTaskFormValues>;
 	onModalClose: () => void;
-	onFieldChange: {
-		(e: React.ChangeEvent<HTMLInputElement>, fieldName?: string): void;
-		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName?: string): void;
-	};
-	onSelectFieldChange: (name: string, value: string) => void;
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	stackListData: ISelectType[];
 	taskPrioritiesData: ISelectType[];
-	projectOptions: ISelectType[];
-	formValues: ITaskFormValues;
-	formErrors: ITaskFormErrors;
+	projectOptions: Array<{ label: string; value: string }>;
 	activeModal: 'project' | 'task' | null;
 	isDictionariesLoading: boolean;
 }
 
 const TaskModalView: React.FC<IProps> = ({
 	onModalClose,
-	onFieldChange,
-	onSelectFieldChange,
 	onFormSubmit,
 	activeModal,
 	stackListData,
 	taskPrioritiesData,
-	formValues,
-	formErrors,
 	projectOptions,
 	isDictionariesLoading,
+	form,
 }) => {
 	return isDictionariesLoading ? (
 		<CustomLoader />
@@ -43,78 +35,92 @@ const TaskModalView: React.FC<IProps> = ({
 		<CustomModal isOpen={activeModal === 'task'} onOpenChange={onModalClose} title="Создать задачу">
 			<form className="flex flex-col items-center gap-2.5" onSubmit={onFormSubmit}>
 				<div className="w-full">
-					<CustomInput
-						type="text"
-						label="Название"
-						placeholder="Исправить ошибку на странице..."
+					<Controller
 						name="title"
-						description="Краткое описание задачи"
-						value={formValues.title}
-						onChange={onFieldChange}
-						error={formErrors?.title}
-						isRequired
+						control={form.control}
+						render={({ field, fieldState }) => (
+							<CustomInput
+								type="text"
+								label="Название"
+								placeholder="Исправить ошибку на странице..."
+								description="Краткое описание задачи"
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+								isRequired
+							/>
+						)}
 					/>
 				</div>
 				<div className="w-full">
-					<CustomTextarea
-						label="Описание"
+					<Controller
 						name="description"
-						description="Подробное описание задачи"
-						value={formValues.description}
-						onChange={onFieldChange}
-						error={formErrors?.description}
-						isRequired
+						control={form.control}
+						render={({ field, fieldState }) => (
+							<CustomTextarea
+								label="Описание"
+								description="Подробное описание задачи"
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+								isRequired
+							/>
+						)}
 					/>
 				</div>
 				<div className="w-full">
-					<CustomSelect
-						label="Стек технологий"
-						placeholder="Выберите значение"
+					<Controller
 						name="taskStackUuid"
-						description="Для какой команды задача"
-						options={stackListData}
-						value={formValues.taskStackUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskStackUuid', value);
-							}
-						}}
-						error={formErrors?.taskStackUuid}
-						isRequired
+						control={form.control}
+						render={({ field, fieldState }) => (
+							<CustomSelect
+								label="Стек технологий"
+								placeholder="Выберите значение"
+								name="taskStackUuid"
+								description="Для какой команды задача"
+								options={stackListData}
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+								isRequired
+							/>
+						)}
 					/>
 				</div>
 				<div className="w-full">
-					<CustomSelect
-						label="Приоритет задачи"
-						placeholder="Выберите значение"
+					<Controller
 						name="taskPriorityUuid"
-						description="Критичность задачи"
-						options={taskPrioritiesData}
-						value={formValues.taskPriorityUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskPriorityUuid', value);
-							}
-						}}
-						error={formErrors?.taskPriorityUuid}
-						isRequired
+						control={form.control}
+						render={({ field, fieldState }) => (
+							<CustomSelect
+								label="Приоритет задачи"
+								placeholder="Выберите значение"
+								description="Критичность задачи"
+								options={taskPrioritiesData}
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+								isRequired
+							/>
+						)}
 					/>
 				</div>
 				<div className="w-full">
-					<CustomSelect
-						label="Проект"
-						placeholder="Выберите значение"
+					<Controller
 						name="taskProjectUuid"
-						description="Проект в котором будет выполняться задача"
-						options={projectOptions}
-						value={formValues.taskProjectUuid}
-						onChange={(value) => {
-							if (value) {
-								onSelectFieldChange('taskProjectUuid', value);
-							}
-						}}
-						error={formErrors?.taskProjectUuid}
-						isRequired
+						control={form.control}
+						render={({ field, fieldState }) => (
+							<CustomSelect
+								label="Проект"
+								placeholder="Выберите значение"
+								description="Проект в котором будет выполняться задача"
+								options={projectOptions}
+								value={field.value}
+								onChange={field.onChange}
+								error={fieldState.error?.message}
+								isRequired
+							/>
+						)}
 					/>
 				</div>
 				<Button variant="primary" type="submit">
