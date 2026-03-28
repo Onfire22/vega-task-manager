@@ -4,7 +4,7 @@ import { z } from 'zod';
 export interface IOption {
 	value: string;
 	label: string;
-	description?: string | undefined;
+	description?: string | null;
 	color?: string | undefined;
 }
 
