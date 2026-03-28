@@ -1,17 +1,11 @@
-export interface ICreateTaskBody {
-	title: string;
-	description: string;
-	taskStackUuid: string;
-	taskPriorityUuid: string;
-	taskProjectUuid: string;
-}
-
-export type TDirection = 'desc' | 'asc';
-
-export interface ISorting {
-	column: string;
-	direction: TDirection;
-}
+import {
+	CreateTaskBodySchema,
+	TaskParamsSchema,
+	UpdateTaskBodySchema,
+	UpdateTaskTimeBodySchema,
+	UserTasksBodySchema,
+} from './tasks.validation';
+import { z } from 'zod';
 
 export interface ITimeLog {
 	id: string;
@@ -24,18 +18,6 @@ export interface ITimeLog {
 	};
 	createdAt: Date;
 	updatedAt?: Date;
-}
-
-export interface IFilters {
-	taskPriority: Array<string>;
-	taskStatus: Array<string>;
-	taskType: Array<string>;
-}
-
-export interface IGetUserTasksBody {
-	isAssignee: false;
-	sorting: ISorting;
-	filters: IFilters;
 }
 
 export interface IExpDictData {
@@ -67,23 +49,6 @@ export interface ITask {
 	updatedAt: Date;
 }
 
-export interface IGetTaskParams {
-	uuid: string;
-}
-
-export type TUpdateTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
-
-export type TUpdateTask = {
-	fieldName: TUpdateTaskFields;
-	value: string;
-};
-
-export interface IEstimateTaskTimeBody {
-	estimateTime?: string;
-	loggedTime?: string;
-	description?: string;
-}
-
 export interface ITime {
 	hours: string;
 	minutes: string;
@@ -97,3 +62,13 @@ export type ITaskTransformed = Omit<ITask, 'estimateTime' | 'timeLogs'> & {
 		}
 	>;
 };
+
+export type TCreateTaskBody = z.infer<typeof CreateTaskBodySchema>;
+
+export type TUserTasksBody = z.infer<typeof UserTasksBodySchema>;
+
+export type TTaskParams = z.infer<typeof TaskParamsSchema>;
+
+export type TUpdateTaskBody = z.infer<typeof UpdateTaskBodySchema>;
+
+export type TUpdateTaskTimeBody = z.infer<typeof UpdateTaskTimeBodySchema>;

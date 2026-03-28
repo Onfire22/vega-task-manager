@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { IProjectsRequest } from './projects.types';
+import { TProjectParams } from './projects.types';
 
-export const checkIsOwnerMiddleware = async (req: Request<IProjectsRequest>, res: Response, next: NextFunction) => {
+export const checkIsOwnerMiddleware = async (req: Request<TProjectParams>, res: Response, next: NextFunction) => {
 	try {
 		const { userRoleUuid } = req.body;
 

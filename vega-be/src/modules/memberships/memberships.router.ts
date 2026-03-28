@@ -1,9 +1,18 @@
 import { Router } from 'express';
 import { ROUTES } from '../../constants';
 import { changeUserMembership } from './memberships.controller';
+import { validateMiddleware } from '../../common/middlewares';
+import { ChangeUserMembershipBodySchema, ChangeUserMembershipParamsSchema } from './memberships.validation';
 
 const membershipsRouter = Router();
 
-membershipsRouter.post(ROUTES.projectUsers, changeUserMembership);
+membershipsRouter.post(
+	ROUTES.projectUsers,
+	[
+		validateMiddleware(ChangeUserMembershipParamsSchema, 'params'),
+		validateMiddleware(ChangeUserMembershipBodySchema),
+	],
+	changeUserMembership,
+);
 
 export { membershipsRouter };

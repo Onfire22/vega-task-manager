@@ -1,8 +1,8 @@
-export interface ICommentCreateBody {
-	taskUuid: string;
-	text: string;
-}
+import { z } from 'zod';
+import { CreateCommentBodySchema, TaskCommentsParamsSchema, UpdateCommentBodySchema } from './comments.validation';
 
-export interface ICommentUpdateBody {
-	text: string;
-}
+export type TUuidParams = z.infer<typeof TaskCommentsParamsSchema>;
+
+export type TCreateCommentBody = z.infer<typeof CreateCommentBodySchema>;
+
+export type TUpdateCommentBody = z.infer<typeof UpdateCommentBodySchema>;

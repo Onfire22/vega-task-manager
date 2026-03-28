@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { ICommentCreateBody, ICommentUpdateBody } from './comments.types';
+import { TCreateCommentBody, TUpdateCommentBody, TUuidParams } from './comments.types';
 import { prismaAppClient } from '../../lib/prisma';
 
-export const getTaskComments = async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+export const getTaskComments = async (req: Request<TUuidParams>, res: Response, next: NextFunction) => {
 	try {
 		const comments = await prismaAppClient.comment.findMany({
 			where: { taskUuid: req.params.uuid },
@@ -29,7 +29,7 @@ export const getTaskComments = async (req: Request<{ uuid: string }>, res: Respo
 	}
 };
 
-export const createComment = async (req: Request<{}, {}, ICommentCreateBody>, res: Response, next: NextFunction) => {
+export const createComment = async (req: Request<{}, {}, TCreateCommentBody>, res: Response, next: NextFunction) => {
 	try {
 		const currentUserUuid = res.locals.user.id;
 
@@ -47,7 +47,7 @@ export const createComment = async (req: Request<{}, {}, ICommentCreateBody>, re
 };
 
 export const updateComment = async (
-	req: Request<{ uuid: string }, {}, ICommentUpdateBody>,
+	req: Request<TUuidParams, {}, TUpdateCommentBody>,
 	res: Response,
 	next: NextFunction,
 ) => {
@@ -63,7 +63,7 @@ export const updateComment = async (
 	}
 };
 
-export const deleteComment = async (req: Request<{ uuid: string }, {}, {}>, res: Response, next: NextFunction) => {
+export const deleteComment = async (req: Request<TUuidParams, {}, {}>, res: Response, next: NextFunction) => {
 	try {
 		await prismaAppClient.comment.delete({ where: { id: req.params.uuid } });
 

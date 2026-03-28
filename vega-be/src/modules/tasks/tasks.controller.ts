@@ -2,14 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
-import { ICreateTaskBody, IEstimateTaskTimeBody, IGetTaskParams, IGetUserTasksBody, TUpdateTask } from './tasks.types';
+import { TCreateTaskBody, TTaskParams, TUpdateTaskBody, TUpdateTaskTimeBody, TUserTasksBody } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { FIELDS_MAP } from './constants';
 import { getTaskWithTransformedTime, transformTimeToSeconds } from './utils';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 
 export const createTask = async (
-	req: Request<{}, {}, ICreateTaskBody>,
+	req: Request<{}, {}, TCreateTaskBody>,
 	res: Response<IDefaultResponse, ILocals>,
 	next: NextFunction,
 ) => {
@@ -66,7 +66,7 @@ export const createTask = async (
 	}
 };
 
-export const getUserTasks = async (req: Request<{}, {}, IGetUserTasksBody>, res: Response, next: NextFunction) => {
+export const getUserTasks = async (req: Request<{}, {}, TUserTasksBody>, res: Response, next: NextFunction) => {
 	try {
 		const { isAssignee, sorting, filters } = req.body;
 
@@ -125,7 +125,7 @@ export const getUserTasks = async (req: Request<{}, {}, IGetUserTasksBody>, res:
 	}
 };
 
-export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response, next: NextFunction) => {
+export const getTaskByUuid = async (req: Request<TTaskParams>, res: Response, next: NextFunction) => {
 	try {
 		const uuid = req.params.uuid;
 
@@ -196,11 +196,7 @@ export const getTaskByUuid = async (req: Request<IGetTaskParams>, res: Response,
 	}
 };
 
-export const updateTask = async (
-	req: Request<{ uuid: string }, {}, TUpdateTask>,
-	res: Response,
-	next: NextFunction,
-) => {
+export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>, res: Response, next: NextFunction) => {
 	try {
 		const { fieldName, value } = req.body;
 
@@ -218,7 +214,7 @@ export const updateTask = async (
 };
 
 export const updateTaskTime = async (
-	req: Request<{ uuid: string }, {}, IEstimateTaskTimeBody>,
+	req: Request<TTaskParams, {}, TUpdateTaskTimeBody>,
 	res: Response,
 	next: NextFunction,
 ) => {

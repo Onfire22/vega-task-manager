@@ -3,7 +3,13 @@ import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { ILocals } from '../../common/types';
-import { IGetUserListRequestBody, IGetUserListResponse, IUpdateUserBody, IUserResponse } from './user.types';
+import {
+	IGetUserListResponse,
+	IUserResponse,
+	TUpdateUserBody,
+	TUpdateUserPasswordBody,
+	TUserListBody,
+} from './user.types';
 import { Prisma } from '../../generated/prisma/client';
 import bcrypt from 'bcryptjs';
 
@@ -42,7 +48,7 @@ export const getCurrentUser = async (req: Request, res: Response<IUserResponse, 
 };
 
 export const getUserList = async (
-	req: Request<{}, {}, IGetUserListRequestBody>,
+	req: Request<{}, {}, TUserListBody>,
 	res: Response<IGetUserListResponse>,
 	next: NextFunction,
 ) => {
@@ -72,7 +78,7 @@ export const getUserList = async (
 	}
 };
 
-export const updateUser = async (req: Request<{}, {}, IUpdateUserBody>, res: Response, next: NextFunction) => {
+export const updateUser = async (req: Request<{}, {}, TUpdateUserBody>, res: Response, next: NextFunction) => {
 	const id = res.locals?.user?.id;
 
 	const updateData: Prisma.UserUpdateInput = {};
@@ -108,7 +114,7 @@ export const updateUser = async (req: Request<{}, {}, IUpdateUserBody>, res: Res
 };
 
 export const updateUserPassword = async (
-	req: Request<{}, {}, { currentPassword: string; newPassword: string }>,
+	req: Request<{}, {}, TUpdateUserPasswordBody>,
 	res: Response,
 	next: NextFunction,
 ) => {
