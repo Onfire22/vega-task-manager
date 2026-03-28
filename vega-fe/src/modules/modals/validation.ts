@@ -1,14 +1,16 @@
-import * as yup from 'yup';
+import { z } from 'zod';
 
-export const CreateTaskValidationSchema = yup.object().shape({
-	title: yup.string().min(5, 'Минимум 5 символов').required('Это обязательное поле'),
-	description: yup.string().min(5, 'Минимум 5 символов').required('Это обязательное поле'),
-	taskStackUuid: yup.string().required('Это обязательное поле'),
-	taskPriorityUuid: yup.string().required('Это обязательное поле'),
-	taskProjectUuid: yup.string().required('Это обязательное поле'),
+export const CreateTaskValidationSchema = z.object({
+	title: z.string().min(5, 'Минимум 5 символов'),
+	description: z.string().min(5, 'Минимум 5 символов'),
+	taskStackUuid: z.string().min(1, 'Это обязательное поле'),
+	taskPriorityUuid: z.string().min(1, 'Это обязательное поле'),
+	taskProjectUuid: z.string().min(1, 'Это обязательное поле'),
 });
 
-export const CreateProjectValidationSchema = yup.object().shape({
-	title: yup.string().min(5, 'Минимум 5 символов').required('Это обязательное поле'),
-	description: yup.string().min(5, 'Минимум 5 символов').required('Это обязательное поле'),
+export const CreateProjectValidationSchema = z.object({
+	title: z.string().min(5, 'Минимум 5 символов'),
+	description: z.string().min(5, 'Минимум 5 символов'),
+	deadlineDate: z.date().optional(),
+	usersUuids: z.array(z.string()).optional(),
 });

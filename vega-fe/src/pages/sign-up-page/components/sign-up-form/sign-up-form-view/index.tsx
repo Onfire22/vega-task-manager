@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import { AccountStep } from '../account-step';
 import { CustomStepper } from '../../stepper';
 import { ProfileStep } from '../profile-step';
-import type { IFormErrors, IFormValues, IOptions } from '../../../types.ts';
+import type { IFormValues, IOptions, TSignUpFormValues } from '../../../types.ts';
 import { FRONT_ROUTES } from '@/app/constants.ts';
+import type { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
+	form: UseFormReturn<TSignUpFormValues>;
 	activeStep: number;
 	formValues: IFormValues;
-	formErrors: IFormErrors;
 	isPopoverOpened: boolean;
 	isNextButtonDisabled: boolean;
 	stackOptions: Array<IOptions>;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
 	emailRef: React.RefObject<HTMLInputElement | null>;
 	popoverData: { strength: number; color: string };
-	onSelectFieldChange: (name: string, value: string) => void;
-	onFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onPopoverOpened: (value: boolean) => void;
 	onGeneratePasswordClick: () => void;
 	onNextStepClick: () => void;
@@ -27,19 +26,17 @@ interface IProps {
 const SignUpFormView: React.FC<IProps> = ({
 	activeStep,
 	formValues,
-	formErrors,
 	isPopoverOpened,
 	popoverData,
-	onFieldChange,
 	onPopoverOpened,
 	onGeneratePasswordClick,
 	passwordRef,
 	emailRef,
 	isNextButtonDisabled,
 	stackOptions,
-	onSelectFieldChange,
 	onPrevStepClick,
 	onNextStepClick,
+	form,
 }) => {
 	return (
 		<div className="w-full h-screen flex-centered-line">
@@ -49,26 +46,17 @@ const SignUpFormView: React.FC<IProps> = ({
 					<div className="w-full">
 						{activeStep === 0 && (
 							<AccountStep
+								form={form}
 								formValues={formValues}
-								formErrors={formErrors}
 								isPopoverOpened={isPopoverOpened}
 								passwordRef={passwordRef}
 								emailRef={emailRef}
 								onPopoverOpened={onPopoverOpened}
 								onGeneratePasswordClick={onGeneratePasswordClick}
 								popoverData={popoverData}
-								onFieldChange={onFieldChange}
 							/>
 						)}
-						{activeStep === 1 && (
-							<ProfileStep
-								formValues={formValues}
-								formErrors={formErrors}
-								onFieldChange={onFieldChange}
-								stackOptions={stackOptions}
-								onSelectFieldChange={onSelectFieldChange}
-							/>
-						)}
+						{activeStep === 1 && <ProfileStep form={form} stackOptions={stackOptions} />}
 					</div>
 					<CustomStepper
 						activeStep={activeStep}

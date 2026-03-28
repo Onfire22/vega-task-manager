@@ -1,18 +1,10 @@
+import { z } from 'zod';
+import { CreateProjectValidationSchema, CreateTaskValidationSchema } from '@/modules/modals/validation.ts';
+
 export interface IInitialState {
 	activeModal: TActiveModal;
 }
 
-export type TActiveModal = 'project' | 'task' | null;
-
-export type ITaskFormErrors = Partial<ITaskFormValues>;
-
-export interface ITaskFormValues {
-	title: string;
-	description: string;
-	taskStackUuid: string;
-	taskPriorityUuid: string;
-	taskProjectUuid: string;
-}
 export interface ISelectType {
 	value: string;
 	label: string;
@@ -20,15 +12,8 @@ export interface ISelectType {
 	color?: string;
 }
 
-export interface IProjectFormValues {
-	title: string;
-	description: string;
-	usersUuids: string[];
-	deadlineDate?: Date;
-}
+export type TActiveModal = 'project' | 'task' | null;
 
-export interface IProjectErrors {
-	title?: string;
-	description?: string;
-	usersUuids?: string | string[] | never[];
-}
+export type TTaskFormValues = z.infer<typeof CreateTaskValidationSchema>;
+
+export type TProjectValues = z.infer<typeof CreateProjectValidationSchema>;

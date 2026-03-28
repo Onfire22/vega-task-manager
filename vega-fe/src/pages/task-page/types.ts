@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import { LogTimeFormValidation } from '@/pages/task-page/validation.ts';
+
 export type DictionaryKey = 'taskPriority' | 'taskType' | 'taskStatus';
 
 export interface IInitialState {
@@ -69,3 +72,5 @@ export type TDictionariesWithColors = {
 	taskPriority: Array<TOption>;
 	taskStatus: Array<TOption>;
 };
+
+export type TFormOptions = z.infer<typeof LogTimeFormValidation>;
