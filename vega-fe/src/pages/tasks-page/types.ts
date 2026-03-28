@@ -23,7 +23,7 @@ export interface IExpDictData {
 
 export interface ITask {
 	id: string;
-	code: string | null;
+	code: string;
 	title: string;
 	description: string;
 	taskPriority: IExpDictData;

@@ -193,7 +193,7 @@ export const TasksResponseSchema = z.object({
 	tasks: z.array(
 		z.object({
 			id: z.string(),
-			code: z.string().nullable().optional(),
+			code: z.string(),
 			title: z.string(),
 			description: z.string(),
 			remainingTime: z.object({}).nullable().optional(),

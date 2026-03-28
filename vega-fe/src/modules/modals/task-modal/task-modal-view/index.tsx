@@ -14,7 +14,7 @@ interface IProps {
 	onFormSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
 	stackListData: ISelectType[];
 	taskPrioritiesData: ISelectType[];
-	projectOptions: ISelectType[];
+	projectOptions: Array<{ label: string; value: string }>;
 	activeModal: 'project' | 'task' | null;
 	isDictionariesLoading: boolean;
 }

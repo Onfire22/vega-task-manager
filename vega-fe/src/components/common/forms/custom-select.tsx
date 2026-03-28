@@ -13,12 +13,12 @@ interface IProps {
 	placeholder?: string;
 	value: string;
 	error?: string;
-	description?: string;
+	description?: string | null;
 	label?: string;
 	name?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
-	options: Array<{ value: string; label: string; description: string | null; color?: string }>;
+	options: Array<{ value: string; label: string; description?: string | null; color?: string }>;
 }
 
 const CustomSelect: React.FC<IProps> = ({

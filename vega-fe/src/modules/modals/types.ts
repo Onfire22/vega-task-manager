@@ -8,7 +8,7 @@ export interface IInitialState {
 export interface ISelectType {
 	value: string;
 	label: string;
-	description?: string;
+	description: string | null;
 	color?: string;
 }
 
