@@ -5,6 +5,7 @@ import {
 	CreateProjectResponseSchema,
 	CurrentUserResponseSchema,
 	DictionariesResponseSchema,
+	DictionarySchema,
 	ProjectResponseSchema,
 	ProjectsResponseSchema,
 	SigInUserResponseSchema,
@@ -42,13 +43,6 @@ export type TDictionariesTypes =
 	| 'TASK_STATUS'
 	| 'TASK_TYPE'
 	| 'PROJECT_STATUS';
-
-export interface IDictionary {
-	description: string;
-	id: string;
-	label: string;
-	key: string;
-}
 
 export interface IProjectCreate {
 	title: string;
@@ -140,3 +134,5 @@ export type TTasksResponse = z.infer<typeof TasksResponseSchema>;
 export type TTaskResponse = z.infer<typeof TaskResponseSchema>;
 
 export type UpdateTaskResponse = z.infer<typeof UpdateTaskResponseSchema>;
+
+export type TDictionary = z.infer<typeof DictionarySchema>;

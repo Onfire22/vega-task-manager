@@ -36,7 +36,7 @@ const tasksApi = baseApi.injectEndpoints({
 			providesTags: ['Tasks'],
 			extraOptions: { schema: TasksResponseSchema },
 		}),
-		getTask: builder.query<{ task: TTaskResponse }, string>({
+		getTask: builder.query<TTaskResponse, string>({
 			query: (uuid) => {
 				return {
 					url: `${ROUTES.getTask}${uuid}`,

@@ -40,7 +40,7 @@ export const CurrentUserResponseSchema = z.object({
 	}),
 });
 
-const DictionarySchema = z.array(
+export const DictionarySchema = z.array(
 	z.object({
 		id: z.string(),
 		label: z.string(),
@@ -215,7 +215,6 @@ export const TasksResponseSchema = z.object({
 			timeLogs: z.array(z.any()).optional(),
 			estimateTime: z.object({}).nullable().optional(),
 			createdAt: z.string(),
-			totalLoggedTimeInSecs: z.number().int(),
 			totalLoggedTime: z
 				.object({
 					minutes: z.string(),
@@ -223,6 +222,7 @@ export const TasksResponseSchema = z.object({
 				.optional(),
 			estimateTimeInSecs: z.number().int().nullable().optional(),
 			remainingTimeInSecs: z.number().int().nullable().optional(),
+			totalLoggedTimeInSecs: z.number().int().nullable().optional(),
 		}),
 	),
 });
@@ -233,8 +233,9 @@ export const TaskResponseSchema = z.object({
 		code: z.string(),
 		title: z.string(),
 		description: z.string(),
-		estimateTime: z.null().optional(),
-		remainingTime: z.null().optional(),
+		estimateTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
+		remainingTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
+		totalLoggedTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
 		createdAt: z.string(),
 		updatedAt: z.string(),
 		taskPriority: z.object({
@@ -262,7 +263,7 @@ export const TaskResponseSchema = z.object({
 			name: z.string(),
 			secondName: z.string(),
 		}),
-		timeLogs: z.array(z.any()).optional(),
+		timeLogs: z.array(z.any()),
 		project: z.object({
 			id: z.string(),
 			code: z.string(),
@@ -272,9 +273,9 @@ export const TaskResponseSchema = z.object({
 				label: z.string(),
 			}),
 		}),
-		totalLoggedTimeInSecs: z.number().int(),
-		estimateTimeInSecs: z.null().optional(),
-		remainingTimeInSecs: z.null().optional(),
+		totalLoggedTimeInSecs: z.number().int().nullable(),
+		estimateTimeInSecs: z.number().int().nullable(),
+		remainingTimeInSecs: z.number().int().nullable(),
 	}),
 });
 

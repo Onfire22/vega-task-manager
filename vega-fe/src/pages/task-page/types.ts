@@ -7,7 +7,7 @@ export interface IInitialState {
 	isModalShown: boolean;
 }
 
-export type TOption = { description?: string; key: string; label: string; value: string; color: string };
+export type TOption = { description: string | null; key: string; label: string; value: string; color: string };
 
 export interface IExpDictData {
 	id: string;
@@ -37,9 +37,9 @@ export interface ITask {
 	estimateTime: string;
 	remainingTime: string;
 	totalLoggedTime: string;
-	estimateTimeInSecs: number;
-	remainingPercents: number;
-	loggedPercents: number;
+	estimateTimeInSecs: number | null;
+	remainingPercents: number | null;
+	loggedPercents: number | null;
 	project: {
 		code: string;
 		id: string;
@@ -74,3 +74,10 @@ export type TDictionariesWithColors = {
 };
 
 export type TFormOptions = z.infer<typeof LogTimeFormValidation>;
+
+export type TTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+
+export interface TField {
+	fieldName: TTaskFields | '';
+	value: string;
+}

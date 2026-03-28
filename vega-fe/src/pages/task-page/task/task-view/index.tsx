@@ -1,7 +1,7 @@
 import React from 'react';
 import { TABS } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
-import type { ITask, TOption } from '../../types.ts';
+import type { ITask, TField, TOption, TTaskFields } from '../../types.ts';
 import { Comments } from '../../comments';
 import { TaskLogs } from '../../task-logs';
 import { Link } from 'react-router-dom';
@@ -18,14 +18,14 @@ interface IProps {
 	task: ITask | null;
 	currentUserId?: string;
 	activeTab: string;
-	field: { fieldName: string; value: string };
-	onSetFieldToEdit: (fieldName: string, value: string | null) => void;
+	field: TField;
+	onSetFieldToEdit: (fieldName: TTaskFields, value: string | null) => void;
 	onCancelChanges: () => void;
 	onLogWorkModalShown: () => void;
-	onUpdateTask: (fieldName: string, value: string) => void;
+	onUpdateTask: (fieldName: TTaskFields | '', value: string) => void;
 	onFieldChange: {
-		(e: React.ChangeEvent<HTMLInputElement>, fieldName: string): void;
-		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName: string): void;
+		(e: React.ChangeEvent<HTMLInputElement>, fieldName: TTaskFields): void;
+		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName: TTaskFields): void;
 	};
 	options: { taskType: Array<TOption>; taskPriority: Array<TOption>; taskStatus: Array<TOption> };
 	usersListOptions: Array<{ label: string; value: string }>;
@@ -248,15 +248,15 @@ const TaskView: React.FC<IProps> = ({
 									<span className="text-[12px]">{task.estimateTime}</span>
 								</div>
 								<CustomProgress
-									progress={task.loggedPercents}
+									progress={task.loggedPercents || 0}
 									label="Потрачено"
 									percents={task.totalLoggedTime}
 								/>
 								<CustomProgress
-									progress={task.remainingPercents}
+									progress={task.remainingPercents || 0}
 									label="Осталось"
 									percents={task.remainingTime}
-									color={task.remainingPercents >= 50 ? 'bg-teal' : 'bg-danger'}
+									color={(task?.remainingPercents ?? 0) >= 50 ? 'bg-teal' : 'bg-danger'}
 								/>
 							</div>
 						)}

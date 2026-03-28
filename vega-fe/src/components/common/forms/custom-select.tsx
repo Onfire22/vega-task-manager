@@ -18,7 +18,7 @@ interface IProps {
 	name?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
-	options: Array<{ value: string; label: string; description?: string; color?: string }>;
+	options: Array<{ value: string; label: string; description: string | null; color?: string }>;
 }
 
 const CustomSelect: React.FC<IProps> = ({
