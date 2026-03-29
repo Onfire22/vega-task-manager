@@ -9,7 +9,7 @@ export type ProjectWithDetails = ProjectGetPayload<{
 		createdAt: true;
 		memberships: {
 			select: {
-				userRole: { select: { id: true; label: true } };
+				userRole: { select: { id: true; label: true; key: true } };
 				user: { select: { id: true; name: true; secondName: true } };
 			};
 		};

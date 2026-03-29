@@ -36,6 +36,7 @@ const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setI
 				onEscapeKeyDown={() => handleOpen(false)}
 				align="start"
 				style={{ width }}
+				className="w-full"
 			>
 				{content}
 			</PopoverContent>

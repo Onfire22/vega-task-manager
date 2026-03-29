@@ -1,5 +1,5 @@
 import { ProjectView } from './project-view';
-import { useProjectData, useUpdateProject } from '../../hooks.ts';
+import { useProjectData, useProjectDictionaries, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
@@ -21,7 +21,9 @@ const Project = () => {
 		filters: { ...(params.uuid ? { withOutProject: params.uuid } : {}) },
 	});
 
-	const { project, isProjectLoading, options, projectProgress } = useProjectData(params.uuid);
+	const { project, isProjectLoading, projectProgress } = useProjectData(params.uuid);
+
+	const { roleTypeOptions, projectStatusOptions } = useProjectDictionaries();
 
 	const [updateUserRole] = useUpdateUserRoleMutation();
 
@@ -48,13 +50,16 @@ const Project = () => {
 		updateUserRole({ uuid: params.uuid, userUuid, userRole });
 	};
 
+	console.log(project);
+
 	return isProjectLoading ? (
 		<CustomLoader />
 	) : (
 		<ProjectView
 			project={project}
 			activeTab={activeTab}
-			dictionariesOptions={options}
+			dictionariesOptions={projectStatusOptions}
+			roleTypeOptions={roleTypeOptions}
 			projectProgress={projectProgress}
 			usersListOptions={usersListOptions}
 			activeField={activeField}

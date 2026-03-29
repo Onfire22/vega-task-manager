@@ -126,6 +126,7 @@ export const ProjectResponseSchema = z.object({
 		description: z.string(),
 		createdAt: z.string(),
 		code: z.string(),
+		canEdit: z.boolean(),
 		deadlineDate: z.string(),
 		projectStatus: z.object({
 			label: z.string(),

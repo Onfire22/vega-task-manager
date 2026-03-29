@@ -1,8 +1,8 @@
-import type { IDictionary, IProject } from '../../../types.ts';
+import type { IDictionaryWithColor, IProject } from '../../../types.ts';
 import React from 'react';
 import { ROLES_COLORS, TABS } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
-import { UserPlus, UserRoundCheck, UserStar } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { getAvatarColor, parseDate } from '../../../../../app/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { cn } from '@/lib/utils.ts';
@@ -11,7 +11,6 @@ import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { CustomCalendar } from '@/components/common/shared/custom-calendar.tsx';
 
 interface IProps {
@@ -19,7 +18,8 @@ interface IProps {
 	activeTab: string;
 	projectProgress: number;
 	usersListOptions: Array<{ label: string; value: string }>;
-	dictionariesOptions: Array<IDictionary>;
+	dictionariesOptions: Array<IDictionaryWithColor>;
+	roleTypeOptions: Array<IDictionaryWithColor>;
 	onTabClick: (tab: string | null) => void;
 	activeField: { fieldName: string; value: string | null };
 	onSetActiveFiled: (fieldName: string, value: string | null) => void;
@@ -38,6 +38,7 @@ const ProjectView: React.FC<IProps> = ({
 	onSetActiveFiled,
 	onProjectFieldChange,
 	onUpdateUserRole,
+	roleTypeOptions,
 }) => {
 	if (!project) return null;
 	return (
@@ -148,47 +149,14 @@ const ProjectView: React.FC<IProps> = ({
 										{usersListOptions.map((user) => {
 											return (
 												<li
-													className="p-1.25 text-sm flex items-center justify-between"
+													className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
 													key={user.value}
 												>
 													<span>{user.label}</span>
 													<div className="flex items-center gap-1.75">
-														<CustomTooltip
-															content="Пригласить"
-															position="top"
-															trigger={
-																<UserPlus
-																	size={25}
-																	onClick={() =>
-																		onUpdateUserRole(user.value, 'viewer')
-																	}
-																/>
-															}
-														/>
-														<CustomTooltip
-															content="Сделать участником"
-															position="top"
-															trigger={
-																<UserRoundCheck
-																	size={25}
-																	onClick={() =>
-																		onUpdateUserRole(user.value, 'member')
-																	}
-																/>
-															}
-														/>
-														<CustomTooltip
-															content="Сделать владельцем"
-															position="top"
-															trigger={
-																<UserStar
-																	size={25}
-																	onClick={() =>
-																		onUpdateUserRole(user.value, 'owner')
-																	}
-																/>
-															}
-														/>
+														<Button onClick={() => onUpdateUserRole(user.value, 'member')}>
+															+ Пригласить
+														</Button>
 													</div>
 												</li>
 											);
@@ -211,14 +179,31 @@ const ProjectView: React.FC<IProps> = ({
 									<div className="w-full text-[11px] text-muted-foreground">
 										<div className="flex items-center justify-between">
 											<div className="text-[12px] text-foreground">{user.userName}</div>
-											<div
-												className="text-[12px]"
-												style={{
-													color: ROLES_COLORS[user.userRole.key as keyof typeof ROLES_COLORS],
-												}}
-											>
-												{user.userRole.label}
-											</div>
+											<CustomPopover
+												trigger={
+													<div
+														className={cn(
+															'text-[14px] flex items-center cursor-pointer',
+															!project.canEdit && 'opacity-80',
+														)}
+														style={{
+															color: ROLES_COLORS[
+																user.userRole.key as keyof typeof ROLES_COLORS
+															],
+														}}
+													>
+														{user.userRole.label}
+														<ChevronDown size={14} color="#fff" />
+													</div>
+												}
+												content={
+													<CustomSelect
+														options={roleTypeOptions}
+														value={user.userRole.id}
+														onChange={() => {}}
+													/>
+												}
+											/>
 										</div>
 										<div>{user.userSpecialisation}</div>
 									</div>

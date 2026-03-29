@@ -6,6 +6,7 @@ export interface IProjectUser {
 	userRole: {
 		label: string;
 		key: string;
+		id: string;
 	};
 }
 
@@ -33,6 +34,7 @@ export interface IProject {
 	id: string;
 	title: string;
 	code: string;
+	canEdit: boolean;
 	description: string;
 	createdAt: string;
 	deadlineDate: string | null;
@@ -51,4 +53,8 @@ export interface IDictionary {
 	value: string;
 	label: string;
 	key: string;
+}
+
+export interface IDictionaryWithColor extends IDictionary {
+	color: string;
 }

@@ -9,10 +9,14 @@ export const getProjectProgress = (tasks: Array<TProjectTasks>) => {
 	return (completedTasks / allTasks) * 100;
 };
 
-export const normalizeProject = (project: ProjectWithDetails) => {
+export const normalizeProject = (project: ProjectWithDetails, userId?: string) => {
 	const { memberships, ...rest } = project;
+
+	const canEdit = memberships.find((role) => role.user.id === userId)?.userRole?.key === 'owner';
+
 	return {
 		...rest,
+		canEdit,
 		users: memberships.map((item) => {
 			return {
 				...item.user,

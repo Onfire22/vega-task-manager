@@ -127,6 +127,8 @@ export const getProjectByUuid = async (req: Request<TProjectParams>, res: Respon
 	try {
 		const projectUuid = req.params.uuid;
 
+		const userId = res.locals.user.id;
+
 		if (!projectUuid) {
 			return next(new AppError('missing project uuid', RESPONSE_STATUSES.iternalError));
 		}
@@ -197,7 +199,7 @@ export const getProjectByUuid = async (req: Request<TProjectParams>, res: Respon
 			},
 		});
 
-		const mappedProject = normalizeProject(project);
+		const mappedProject = normalizeProject(project, userId);
 
 		res.status(RESPONSE_STATUSES.success).json({ project: mappedProject });
 	} catch (e) {
