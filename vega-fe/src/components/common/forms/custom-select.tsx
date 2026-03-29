@@ -53,7 +53,8 @@ const CustomSelect: React.FC<IProps> = ({
 				<SelectTrigger
 					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(
-						'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full text-white cursor-pointer',
+						'focus:outline-none focus-visible:ring-0 focus-visible:border-input w-full text-white cursor-pointer',
+						'[&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:text-white',
 						error && 'border-(--color-danger)',
 					)}
 				>

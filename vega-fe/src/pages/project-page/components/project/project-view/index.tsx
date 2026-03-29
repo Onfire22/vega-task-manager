@@ -1,8 +1,7 @@
 import type { IDictionaryWithColor, IProject } from '../../../types.ts';
 import React from 'react';
-import { ROLES_COLORS, TABS } from '../../../constants.ts';
+import { TABS } from '../../../constants.ts';
 import { TasksTable } from '../../tasks-table';
-import { ChevronDown } from 'lucide-react';
 import { getAvatarColor, parseDate } from '../../../../../app/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { cn } from '@/lib/utils.ts';
@@ -177,35 +176,21 @@ const ProjectView: React.FC<IProps> = ({
 										{user.userInitials}
 									</div>
 									<div className="w-full text-[11px] text-muted-foreground">
-										<div className="flex items-center justify-between">
-											<div className="text-[12px] text-foreground">{user.userName}</div>
-											<CustomPopover
-												trigger={
-													<div
-														className={cn(
-															'text-[14px] flex items-center cursor-pointer',
-															!project.canEdit && 'opacity-80',
-														)}
-														style={{
-															color: ROLES_COLORS[
-																user.userRole.key as keyof typeof ROLES_COLORS
-															],
-														}}
-													>
-														{user.userRole.label}
-														<ChevronDown size={14} color="#fff" />
-													</div>
-												}
-												content={
-													<CustomSelect
-														options={roleTypeOptions}
-														value={user.userRole.id}
-														onChange={() => {}}
-													/>
-												}
-											/>
+										<div className="flex items-center justify-between gap-1">
+											<div className="flex flex-col flex-1 min-w-0">
+												<div className="text-[12px] text-foreground truncate">
+													{user.userName}
+												</div>
+												<div className="truncate">{user.userSpecialisation}</div>
+											</div>
+											<div className="w-35 shrink-0">
+												<CustomSelect
+													options={roleTypeOptions}
+													value={user.userRole.id}
+													onChange={() => {}}
+												/>
+											</div>
 										</div>
-										<div>{user.userSpecialisation}</div>
 									</div>
 								</li>
 							);
