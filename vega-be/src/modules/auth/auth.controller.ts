@@ -4,10 +4,10 @@ import { generateToken } from './auth.service';
 import { HOUR_IN_MS, RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import bcrypt from 'bcryptjs';
-import { ISignInReqBody, IAuthRes, ISignUpReqBody } from './auth.types';
+import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody } from './auth.types';
 import { generateName } from './utils';
 
-export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Response<IAuthRes>, next: NextFunction) => {
+export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
 		const userData = req.body;
 
@@ -52,7 +52,7 @@ export const signupUser = async (req: Request<{}, {}, ISignUpReqBody>, res: Resp
 	}
 };
 
-export const signInUser = async (req: Request<{}, {}, ISignInReqBody>, res: Response<IAuthRes>, next: NextFunction) => {
+export const signInUser = async (req: Request<{}, {}, TSignInBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
 		const { email, password } = req.body;
 
@@ -94,7 +94,7 @@ export const signInUser = async (req: Request<{}, {}, ISignInReqBody>, res: Resp
 	}
 };
 
-export const getUserByEmail = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserByEmail = async (req: Request<{}, {}, TUserByEmailBody>, res: Response, next: NextFunction) => {
 	try {
 		const { email } = req.body;
 

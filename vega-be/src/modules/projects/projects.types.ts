@@ -1,53 +1,6 @@
-import { Project } from '../../generated/prisma/client';
-import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { ProjectGetPayload } from '../../generated/prisma/models/Project';
-
-export interface IAssignee {
-	id: string;
-	name: string;
-	secondName: string;
-}
-
-export interface IDictionary {
-	color: string;
-	id: string;
-	name: string;
-}
-
-export interface ITask {
-	id: string;
-	code: string | null;
-	title: string;
-	assignee: IAssignee | null;
-	taskPriority: IDictionary;
-	taskStatus: IDictionary;
-	taskStack: IDictionary;
-}
-
-export interface IMemberShops {
-	userRole: {
-		id: string;
-		name: string;
-	};
-	user: {
-		id: string;
-		name: string;
-		secondName: string;
-	};
-}
-
-export interface IProjectDB {
-	id: string;
-	title: string;
-	description: string;
-	createdAt: Date;
-	tasks: Array<ITask>;
-	memberships: Array<IMemberShops>;
-}
-
-export interface IProjectsResponse {
-	projects: Array<Omit<Project, 'memberships' | 'tasks' | 'description'>>;
-}
+import { CreateProjectBodySchema, EditProjectBodySchema, ProjectParamsSchema } from './projects.validation';
+import { z } from 'zod';
 
 export type ProjectWithDetails = ProjectGetPayload<{
 	select: {
@@ -72,43 +25,8 @@ export type ProjectWithDetails = ProjectGetPayload<{
 
 export type TProjectTasks = ProjectWithDetails['tasks'][number];
 
-export interface ICreateProjectRequestBody {
-	title: string;
-	description: string;
-	deadlineDate: Date;
-	usersUuids: Array<string>;
-}
+export type TCreateProjectBody = z.infer<typeof CreateProjectBodySchema>;
 
-export interface IProjectsRequest {
-	uuid: string;
-}
+export type TProjectParams = z.infer<typeof ProjectParamsSchema>;
 
-export interface IMappedMembership {
-	user: {
-		id: string;
-		name: string;
-		secondName: string;
-		role: {
-			id: string;
-			name: string;
-		};
-	};
-}
-
-export interface IProjectResponse {
-	project: {
-		id: string;
-		title: string;
-		description: string;
-		createdAt: Date;
-		tasks: Array<ITask>;
-		memberships: Array<IMappedMembership>;
-	};
-}
-
-export interface IEditProjectResponse {
-	projectUuid: string;
-	field: 'deadlineDate' | 'projectStatusUuid';
-	value: string;
-	userRoleUuid: string;
-}
+export type TEditProjectBody = z.infer<typeof EditProjectBodySchema>;

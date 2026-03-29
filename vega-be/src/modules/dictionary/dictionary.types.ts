@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import { DictionariesQuerySchema } from './dictionary.validation';
+
 export interface IDictionary {
 	id: string;
 	label: string;
@@ -22,3 +25,5 @@ export type TPayload = Record<TDictionariesTypes, Array<IDictionary>>;
 export interface IDictionaryResponse {
 	dictionaries: Partial<Record<'taskPriority' | 'roleType' | 'stackType' | 'taskStatus', IDictionary[]>>;
 }
+
+export type TDictionaries = z.infer<typeof DictionariesQuerySchema>;

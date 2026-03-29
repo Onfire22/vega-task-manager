@@ -2,10 +2,10 @@ import { prismaAppClient } from '../../lib/prisma';
 import { RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import { NextFunction, Request, Response } from 'express';
-import { IChangeUserMembershipRoleBody, IChangeUserMembershipRoleParams } from './memberships.types';
+import { TChangeUserMembershipBody, TChangeUserMembershipParams } from './memberships.types';
 
 export const changeUserMembership = async (
-	req: Request<IChangeUserMembershipRoleParams, {}, IChangeUserMembershipRoleBody>,
+	req: Request<TChangeUserMembershipParams, {}, TChangeUserMembershipBody>,
 	res: Response,
 	next: NextFunction,
 ) => {

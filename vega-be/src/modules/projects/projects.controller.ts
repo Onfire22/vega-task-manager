@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
-import { ICreateProjectRequestBody, IEditProjectResponse, IProjectsRequest } from './projects.types';
+import { TCreateProjectBody, TEditProjectBody, TProjectParams } from './projects.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
@@ -43,11 +43,7 @@ export const getProjects = async (req: Request, res: Response, next: NextFunctio
 	}
 };
 
-export const createProject = async (
-	req: Request<{}, {}, ICreateProjectRequestBody>,
-	res: Response,
-	next: NextFunction,
-) => {
+export const createProject = async (req: Request<{}, {}, TCreateProjectBody>, res: Response, next: NextFunction) => {
 	try {
 		const { usersUuids, title, description, deadlineDate } = req.body;
 
@@ -127,7 +123,7 @@ export const createProject = async (
 	}
 };
 
-export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Response, next: NextFunction) => {
+export const getProjectByUuid = async (req: Request<TProjectParams>, res: Response, next: NextFunction) => {
 	try {
 		const projectUuid = req.params.uuid;
 
@@ -210,7 +206,7 @@ export const getProjectByUuid = async (req: Request<IProjectsRequest>, res: Resp
 };
 
 export const updateProject = async (
-	req: Request<{ uuid: string }, {}, IEditProjectResponse>,
+	req: Request<TProjectParams, {}, TEditProjectBody>,
 	res: Response,
 	next: NextFunction,
 ) => {

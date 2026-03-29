@@ -1,8 +1,6 @@
-export interface IChangeUserMembershipRoleBody {
-	userUuid: string;
-	userRole: 'viewer' | 'member' | 'owner';
-}
+import { ChangeUserMembershipBodySchema, ChangeUserMembershipParamsSchema } from './memberships.validation';
+import { z } from 'zod';
 
-export interface IChangeUserMembershipRoleParams {
-	uuid: string;
-}
+export type TChangeUserMembershipParams = z.infer<typeof ChangeUserMembershipParamsSchema>;
+
+export type TChangeUserMembershipBody = z.infer<typeof ChangeUserMembershipBodySchema>;

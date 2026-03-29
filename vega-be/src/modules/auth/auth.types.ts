@@ -1,15 +1,5 @@
-export interface ISignInReqBody {
-	email: string;
-	password: string;
-}
-
-export interface ISignUpReqBody {
-	email: string;
-	name: string;
-	password: string;
-	secondName: string;
-	userSpecialisationUuid: string;
-}
+import { SignInBodySchema, SignUpBodySchema, UserByEmailBodySchema } from './auth.validation';
+import { z } from 'zod';
 
 export interface IAuthRes {
 	user: {
@@ -23,3 +13,9 @@ export interface IAuthRes {
 export interface ICookie {
 	token: string;
 }
+
+export type TSignUpBody = z.infer<typeof SignUpBodySchema>;
+
+export type TSignInBody = z.infer<typeof SignInBodySchema>;
+
+export type TUserByEmailBody = z.infer<typeof UserByEmailBodySchema>;

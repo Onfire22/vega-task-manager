@@ -3,10 +3,10 @@ import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { Type } from '../../generated/prisma/enums';
-import { IDictionaryReqQuery, IDictionaryResponse, TDictionariesTypes, TPayload } from './dictionary.types';
+import { IDictionaryResponse, TDictionaries, TDictionariesTypes, TPayload } from './dictionary.types';
 
 export const getDictionaries = async (
-	req: Request<{}, {}, {}, IDictionaryReqQuery>,
+	req: Request<{}, {}, {}, TDictionaries>,
 	res: Response<IDictionaryResponse>,
 	next: NextFunction,
 ) => {
