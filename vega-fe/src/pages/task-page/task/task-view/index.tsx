@@ -8,11 +8,14 @@ import { Link } from 'react-router-dom';
 import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { Textarea } from '@/components/ui/textarea.tsx';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
+import { MarkdownEditor } from '@/components/common/forms/markdown-editor.tsx';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 
 interface IProps {
 	task: ITask | null;
@@ -129,7 +132,7 @@ const TaskView: React.FC<IProps> = ({
 					<div className="pl-6.25 text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>
 					{field.fieldName === 'description' ? (
 						<div className="px-6.25 mb-5">
-							<Textarea
+							<MarkdownEditor
 								value={field.value}
 								onChange={(e) => {
 									onFieldChange(e, 'description');
@@ -158,7 +161,18 @@ const TaskView: React.FC<IProps> = ({
 									onSetFieldToEdit('description', task.description);
 								}}
 							>
-								{task.description}
+								<div
+									className="prose prose-invert max-w-none"
+									style={{
+										overflowWrap: 'break-word',
+										wordBreak: 'break-word',
+										overflow: 'hidden',
+									}}
+								>
+									<ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+										{task.description}
+									</ReactMarkdown>
+								</div>
 							</div>
 						</div>
 					)}
