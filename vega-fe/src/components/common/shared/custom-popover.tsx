@@ -6,10 +6,11 @@ interface IProps {
 	content: ReactNode;
 	width?: string;
 	isOpen?: boolean;
+	align?: 'center' | 'end' | 'start';
 	setIsOpened?: (value: boolean) => void;
 }
 
-const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setIsOpened }) => {
+const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setIsOpened, align }) => {
 	const triggerRef = useRef<HTMLDivElement>(null);
 
 	const isOpened = isOpen !== undefined ? { open: isOpen } : {};
@@ -34,9 +35,9 @@ const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setI
 					handleOpen(false);
 				}}
 				onEscapeKeyDown={() => handleOpen(false)}
-				align="start"
+				align={align}
 				style={{ width }}
-				className="w-full"
+				className="min-w-full"
 			>
 				{content}
 			</PopoverContent>

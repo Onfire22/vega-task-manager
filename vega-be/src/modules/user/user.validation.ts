@@ -5,6 +5,7 @@ export const UserListBodySchema = z.object({
 		withOutProject: z.string().optional(),
 		withProject: z.string().optional(),
 		withoutUser: z.string().optional(),
+		search: z.string().optional(),
 	}),
 });
 

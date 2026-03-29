@@ -186,7 +186,7 @@ const TaskView: React.FC<IProps> = ({
 					{activeTab === 'logs' && <TaskLogs logs={task.timeLogs} />}
 				</div>
 			</div>
-			<aside className="w-[30%] h-full border-l">
+			<aside className="w-[40%] min-h-[calc(100vh-53px)] border-l">
 				<div className="border-b">
 					<div className="p-3.75">
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>

@@ -163,3 +163,23 @@
         @apply flex flex-col items-center justify-center
     }
 }
+
+@layer utilities {
+    .scrollbar-custom {
+        scrollbar-width: thin;
+        scrollbar-color: #9ca3af transparent;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+        background-color: #9ca3af;
+        border-radius: 9999px;
+    }
+}

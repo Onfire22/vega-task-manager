@@ -18,6 +18,7 @@ interface IProps {
 	name?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
+	size?: 'sm' | 'default';
 	options: Array<{ value: string; label: string; description?: string | null; color?: string }>;
 }
 
@@ -31,6 +32,7 @@ const CustomSelect: React.FC<IProps> = ({
 	isRequired,
 	description,
 	name,
+	size = 'default',
 }) => {
 	const chosenColor = options.find((option) => option.value === value)?.color;
 
@@ -51,6 +53,7 @@ const CustomSelect: React.FC<IProps> = ({
 			</div>
 			<Select value={value} onValueChange={handleChange} name={name}>
 				<SelectTrigger
+					size={size}
 					style={{ backgroundColor: chosenColor + '50', borderColor: chosenColor }}
 					className={cn(
 						'focus:outline-none focus-visible:ring-0 focus-visible:border-input w-full text-white cursor-pointer',

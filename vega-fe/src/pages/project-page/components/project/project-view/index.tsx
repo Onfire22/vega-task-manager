@@ -15,6 +15,7 @@ import { CustomCalendar } from '@/components/common/shared/custom-calendar.tsx';
 interface IProps {
 	project: IProject | null;
 	activeTab: string;
+	searchValue: string;
 	projectProgress: number;
 	usersListOptions: Array<{ label: string; value: string }>;
 	dictionariesOptions: Array<IDictionaryWithColor>;
@@ -23,6 +24,7 @@ interface IProps {
 	activeField: { fieldName: string; value: string | null };
 	onSetActiveFiled: (fieldName: string, value: string | null) => void;
 	onUpdateUserRole: (userUuid: string, userRole: string) => void;
+	onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onProjectFieldChange: (fieldName: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => void;
 }
 
@@ -38,6 +40,8 @@ const ProjectView: React.FC<IProps> = ({
 	onProjectFieldChange,
 	onUpdateUserRole,
 	roleTypeOptions,
+	searchValue,
+	onSearchChange,
 }) => {
 	if (!project) return null;
 	return (
@@ -67,7 +71,7 @@ const ProjectView: React.FC<IProps> = ({
 					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
-			<aside className="w-[30%] h-full p-3.75 border flex flex-col gap-5">
+			<aside className="w-[30%] min-h-[calc(100vh-53px)] p-3.75 border flex flex-col gap-5">
 				<div className="flex flex-col gap-5">
 					<div className="flex flex-col">
 						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
@@ -136,6 +140,7 @@ const ProjectView: React.FC<IProps> = ({
 							Участники проекта
 						</span>
 						<CustomPopover
+							align="end"
 							trigger={
 								<Button size="xs" className="p-0 w-7.5 h-5 text-white">
 									+
@@ -143,24 +148,35 @@ const ProjectView: React.FC<IProps> = ({
 							}
 							content={
 								<>
-									<CustomInput placeholder="Поиск" value="123" onChange={() => {}} type="text" />
-									<ul className="mt-2.5">
-										{usersListOptions.map((user) => {
-											return (
-												<li
-													className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
-													key={user.value}
-												>
-													<span>{user.label}</span>
-													<div className="flex items-center gap-1.75">
-														<Button onClick={() => onUpdateUserRole(user.value, 'member')}>
-															+ Пригласить
-														</Button>
-													</div>
-												</li>
-											);
-										})}
-									</ul>
+									<CustomInput
+										placeholder="Поиск"
+										value={searchValue}
+										onChange={onSearchChange}
+										type="text"
+									/>
+									{!usersListOptions.length ? (
+										<div className="text-center">Ничего не найдено</div>
+									) : (
+										<ul className="mt-2.5">
+											{usersListOptions.map((user) => {
+												return (
+													<li
+														className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
+														key={user.value}
+													>
+														<span>{user.label}</span>
+														<div className="flex items-center gap-1.75">
+															<Button
+																onClick={() => onUpdateUserRole(user.value, 'member')}
+															>
+																+ Пригласить
+															</Button>
+														</div>
+													</li>
+												);
+											})}
+										</ul>
+									)}
 								</>
 							}
 						/>
@@ -188,6 +204,7 @@ const ProjectView: React.FC<IProps> = ({
 													options={roleTypeOptions}
 													value={user.userRole.id}
 													onChange={() => {}}
+													size="sm"
 												/>
 											</div>
 										</div>

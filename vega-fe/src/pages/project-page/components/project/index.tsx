@@ -1,10 +1,11 @@
 import { ProjectView } from './project-view';
 import { useProjectData, useProjectDictionaries, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { useDebounce } from '@/app/utils.ts';
 
 const Project = () => {
 	const params = useParams();
@@ -17,8 +18,15 @@ const Project = () => {
 
 	const [activeTab, setActiveTab] = useState(location.state?.from ? 'tasks' : 'description');
 
+	const [searchValue, setSearchValue] = useState('');
+
+	const debauncedValue = useDebounce(searchValue, 1000);
+
 	const { usersListOptions } = useUsersOptions({
-		filters: { ...(params.uuid ? { withOutProject: params.uuid } : {}) },
+		filters: {
+			...(params.uuid ? { withOutProject: params.uuid } : {}),
+			...(searchValue ? { search: debauncedValue } : {}),
+		},
 	});
 
 	const { project, isProjectLoading, projectProgress } = useProjectData(params.uuid);
@@ -50,7 +58,9 @@ const Project = () => {
 		updateUserRole({ uuid: params.uuid, userUuid, userRole });
 	};
 
-	console.log(project);
+	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
+	};
 
 	return isProjectLoading ? (
 		<CustomLoader />
@@ -63,7 +73,9 @@ const Project = () => {
 			projectProgress={projectProgress}
 			usersListOptions={usersListOptions}
 			activeField={activeField}
+			searchValue={searchValue}
 			onTabClick={handleTabClick}
+			onSearchChange={handleSearchChange}
 			onSetActiveFiled={handleSetActiveFiled}
 			onProjectFieldChange={handleProjectFieldChange}
 			onUpdateUserRole={handleUpdateUserRole}

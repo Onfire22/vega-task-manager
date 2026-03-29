@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 export const getAvatarColor = (uuid?: string) => {
 	if (!uuid) return '';
 
@@ -20,4 +22,15 @@ export const parseDate = (date: string | null) => {
 
 	const [day, month, year] = date.split('.');
 	return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
+export const useDebounce = <T>(value: T, delay: number): T => {
+	const [debounced, setDebounced] = useState<T>(value);
+
+	useEffect(() => {
+		const handler = setTimeout(() => setDebounced(value), delay);
+		return () => clearTimeout(handler);
+	}, [value, delay]);
+
+	return debounced;
 };

@@ -55,13 +55,20 @@ export const getUserList = async (
 	try {
 		const filters = req.body?.filters;
 
-		const filterData = {
+		const filterData: Prisma.UserWhereInput = {
 			...(filters?.withoutUser ? { id: { not: filters.withoutUser } } : {}),
 			memberships: {
 				...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
 				...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
 			},
 		};
+
+		if (filters.search) {
+			filterData.OR = [
+				{ name: { contains: filters.search, mode: 'insensitive' } },
+				{ secondName: { contains: filters.search, mode: 'insensitive' } },
+			];
+		}
 
 		const usersList = await prismaAppClient.user.findMany({
 			...(filters ? { where: filterData } : {}),
