@@ -1,10 +1,19 @@
 import jwt from 'jsonwebtoken';
-import { HOUR } from '../../constants';
+import { ACCESS_TTL, REFRESH_TTL } from '../../constants';
+import { setToRedis } from '../../lib/redis/utils';
 
-export const generateToken = (id: string = ''): string => {
-	if (!id) return '';
+export const generateToken = async (id: string = '') => {
+	if (!id) return null;
 
-	return jwt.sign({ id }, process.env.JWT_SECRET as string, {
-		expiresIn: HOUR,
+	const accessToken = jwt.sign({ id }, process.env.JWT_SECRET as string, {
+		expiresIn: ACCESS_TTL,
 	});
+
+	const refreshToken = jwt.sign({ id }, process.env.JWT_REFRESH_SECRET as string, {
+		expiresIn: REFRESH_TTL,
+	});
+
+	await setToRedis(`refresh:${id}`, refreshToken, REFRESH_TTL);
+
+	return { accessToken, refreshToken };
 };

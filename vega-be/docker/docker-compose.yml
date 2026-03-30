@@ -10,6 +10,18 @@ services:
     volumes:
       - vega-database:/var/lib/postgresql
 
+  vega-redis:
+    image: redis:7-alpine
+    container_name: vega-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - vega-redis:/data
+    command: redis-server --appendonly yes
+
 volumes:
   vega-database:
     name: vega-database
+  vega-redis:
+    name: vega-redis

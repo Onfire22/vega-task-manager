@@ -1,6 +1,6 @@
-export const HOUR = '1h';
+export const REFRESH_TTL = 7 * 24 * 3600;
 
-export const HOUR_IN_MS = 1000 * 60 * 60;
+export const ACCESS_TTL = 15 * 60;
 
 export const RESPONSE_STATUSES = {
 	success: 200,
@@ -17,6 +17,7 @@ export const ROUTES = {
 	signIn: '/api/sign-in',
 	signUp: '/api/sign-up',
 	logout: '/api/logout',
+	refresh: '/api/refresh',
 	users: '/api/users',
 	currentUser: '/api/users/current',
 	userByEmail: '/api/users/email',

@@ -7,6 +7,8 @@ import { setActiveStep } from './slice.ts';
 import { toast } from 'sonner';
 import { type Resolver, useForm, useWatch } from 'react-hook-form';
 import type { TSignUpFormValues } from '@/pages/sign-up-page/types.ts';
+import { setToken } from '@/store/authSlice.ts';
+import { baseApi } from '@/api';
 
 export const useSignUpForm = () => {
 	const dispatch = useAppDispatch();
@@ -46,7 +48,9 @@ export const useSignUpForm = () => {
 	const handleSubmitForm = form.handleSubmit(async () => {
 		try {
 			const values = form.getValues();
-			await signUpUser(values).unwrap();
+			const token = await signUpUser(values).unwrap();
+			dispatch(setToken(token.accessToken));
+			dispatch(baseApi.util.invalidateTags(['CurrentUser']));
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

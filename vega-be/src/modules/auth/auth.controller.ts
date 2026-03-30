@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import { prismaAppClient } from '../../lib/prisma';
 import { generateToken } from './auth.service';
-import { HOUR_IN_MS, RESPONSE_STATUSES } from '../../constants';
+import { REFRESH_TTL, RESPONSE_STATUSES } from '../../constants';
 import { AppError } from '../../errors/errors';
 import bcrypt from 'bcryptjs';
-import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody } from './auth.types';
+import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody, TokenPayload } from './auth.types';
 import { generateName } from './utils';
+import jwt from 'jsonwebtoken';
+import { getFromRedis } from '../../lib/redis/utils';
 
 export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
@@ -39,14 +41,18 @@ export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Respons
 			});
 		});
 
-		const token = generateToken(newUser.id);
+		const token = await generateToken(newUser.id);
+
+		if (!token) {
+			return new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);
+		}
 
 		res.status(RESPONSE_STATUSES.authorised)
-			.cookie('token', token, {
+			.cookie('refreshToken', token.refreshToken, {
 				httpOnly: true,
-				maxAge: HOUR_IN_MS,
+				maxAge: REFRESH_TTL,
 			})
-			.json({ user: newUser });
+			.json({ accessToken: token.accessToken });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
 	}
@@ -79,16 +85,18 @@ export const signInUser = async (req: Request<{}, {}, TSignInBody>, res: Respons
 			return;
 		}
 
-		const token = generateToken(user.id);
+		const token = await generateToken(user.id);
+
+		if (!token) {
+			return new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);
+		}
 
 		res.status(RESPONSE_STATUSES.authorised)
-			.cookie('token', token, {
+			.cookie('refreshToken', token.refreshToken, {
 				httpOnly: true,
-				maxAge: HOUR_IN_MS,
+				maxAge: REFRESH_TTL,
 			})
-			.json({
-				user: { email: user.email, id: user.id, name: user.name, secondName: user.secondName },
-			});
+			.json({ accessToken: token.accessToken });
 	} catch (e) {
 		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
 	}
@@ -112,8 +120,43 @@ export const getUserByEmail = async (req: Request<{}, {}, TUserByEmailBody>, res
 	}
 };
 
+export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { refreshToken } = req.cookies;
+
+		if (!refreshToken) {
+			return res.status(401).json({ message: 'No refresh token' });
+		}
+
+		let payload: TokenPayload;
+		try {
+			payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET as string) as TokenPayload;
+		} catch {
+			return res.status(401).json({ message: 'Invalid refresh token' });
+		}
+
+		const stored = await getFromRedis(`refresh:${payload.id}`);
+		if (stored !== refreshToken) {
+			return res.status(401).json({ message: 'Refresh token revoked' });
+		}
+
+		const token = await generateToken(payload.id);
+
+		res.cookie('refreshToken', token?.refreshToken, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+			sameSite: 'strict',
+			maxAge: REFRESH_TTL,
+		});
+
+		res.json({ accessToken: token?.accessToken });
+	} catch (e) {
+		next(new AppError('Iternal server Error', RESPONSE_STATUSES.notAuthorised));
+	}
+};
+
 export const logOutUser = async (req: Request, res: Response, next: NextFunction) => {
-	res.clearCookie('token', {
+	res.clearCookie('refreshToken', {
 		httpOnly: true,
 	}).json({ success: true });
 };

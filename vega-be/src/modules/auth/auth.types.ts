@@ -1,17 +1,13 @@
 import { SignInBodySchema, SignUpBodySchema, UserByEmailBodySchema } from './auth.validation';
 import { z } from 'zod';
+import type { JwtPayload } from 'jsonwebtoken';
 
 export interface IAuthRes {
-	user: {
-		email: string;
-		id: string;
-		name: string;
-		secondName: string | null;
-	};
+	accessToken: string;
 }
 
-export interface ICookie {
-	token: string;
+export interface TokenPayload extends JwtPayload {
+	id: string;
 }
 
 export type TSignUpBody = z.infer<typeof SignUpBodySchema>;

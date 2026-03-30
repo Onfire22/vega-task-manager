@@ -7,6 +7,7 @@ import { authMiddleware } from './modules/auth/auth.middleware';
 import cors from 'cors';
 import { errorMiddleware } from './errors/middleware';
 import { dictionaryRouter } from './modules/dictionary/dictionary.router';
+import { initRedis } from './lib/redis/redis';
 
 const port = process.env.PORT;
 
@@ -34,6 +35,7 @@ app.use(errorMiddleware);
 
 const main = async () => {
 	try {
+		await initRedis();
 		app.listen(port, () => {
 			console.log('\x1b[42m%s\x1b[0m', `Server running at port: ${port}`);
 		});

@@ -6,23 +6,11 @@ export const BaseResponseSchema = z.object({
 });
 
 export const SignUpUserResponseSchema = z.object({
-	user: z.object({
-		email: z.string(),
-		id: z.string(),
-		name: z.string(),
-		secondName: z.string(),
-		userSpecialisationUuid: z.string(),
-		userName: z.string(),
-	}),
+	accessToken: z.string().nullable(),
 });
 
 export const SigInUserResponseSchema = z.object({
-	user: z.object({
-		email: z.string(),
-		id: z.string(),
-		name: z.string(),
-		secondName: z.string(),
-	}),
+	accessToken: z.string().nullable(),
 });
 
 export const CurrentUserResponseSchema = z.object({
