@@ -118,7 +118,10 @@ const ProjectView: React.FC<IProps> = ({
 								</span>
 								<span className={cn('font-medium text-[14px]', project.deadlineDate && 'text-danger')}>
 									{project.deadlineDate ?? (
-										<a onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}>
+										<a
+											className="link-styled"
+											onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}
+										>
 											+ установить
 										</a>
 									)}

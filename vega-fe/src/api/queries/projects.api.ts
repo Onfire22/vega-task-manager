@@ -58,7 +58,7 @@ const projectsApi = baseApi.injectEndpoints({
 				method: METHODS.post,
 				body: userData,
 			}),
-			invalidatesTags: ['Project'],
+			invalidatesTags: ['Project', 'Users'],
 			extraOptions: { schema: BaseResponseSchema },
 		}),
 	}),

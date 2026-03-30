@@ -18,6 +18,7 @@ const usersApi = baseApi.injectEndpoints({
 				method: METHODS.post,
 				body: filters,
 			}),
+			providesTags: ['Users'],
 			extraOptions: { schema: UsersResponseSchema },
 		}),
 		updateUser: builder.mutation<TUpdateUser, IUpdateUserRequest>({
