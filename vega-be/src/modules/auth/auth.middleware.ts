@@ -2,17 +2,16 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
 import jwt from 'jsonwebtoken';
 import { RESPONSE_STATUSES } from '../../constants';
-import { ICookie } from './auth.types';
 
-export const authMiddleware = (req: Request & { cookies: ICookie }, res: Response<{}>, next: NextFunction) => {
-	const token = req.cookies.token;
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+	const token = req.headers.authorization?.split(' ')[1];
+
 	if (!token) {
-		next(new AppError('Not authorised', RESPONSE_STATUSES.notAuthorised));
-		return;
+		return next(new AppError('Not authorised', RESPONSE_STATUSES.notAuthorised));
 	}
 
 	try {
-		const jwtSecret = process.env.JWT_SECRET as string;
+		const jwtSecret = process.env.JWT_ACCESS_SECRET as string;
 		res.locals.user = jwt.verify(token, jwtSecret);
 		next();
 	} catch (e) {

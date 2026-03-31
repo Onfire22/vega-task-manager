@@ -12,6 +12,7 @@ export const ROUTES = {
 	signUp: '/api/sign-up',
 	signIn: '/api/sign-in',
 	logout: '/api/logout',
+	refresh: '/api/refresh',
 	currentUser: '/api/users/current',
 	createTask: '/api/tasks/create',
 	getTask: '/api/task/',

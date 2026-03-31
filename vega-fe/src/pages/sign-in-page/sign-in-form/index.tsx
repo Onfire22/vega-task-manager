@@ -10,10 +10,14 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import type { TSignInFormFormValues } from '@/pages/sign-in-page/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch } from '@/store/hooks.ts';
+import { setToken } from '@/store/authSlice.ts';
+import { baseApi } from '@/api';
 
 const SignUpForm = () => {
 	const loginRef = useRef<HTMLInputElement>(null);
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const [signInUser, { isLoading }] = useSignInUserMutation();
 
@@ -30,7 +34,9 @@ const SignUpForm = () => {
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
 		try {
-			await signInUser(values).unwrap();
+			const token = await signInUser(values).unwrap();
+			dispatch(setToken(token.accessToken));
+			dispatch(baseApi.util.invalidateTags(['CurrentUser']));
 			navigate(FRONT_ROUTES.root);
 		} catch (e: unknown) {
 			const error = e as { data?: { message?: string } };
