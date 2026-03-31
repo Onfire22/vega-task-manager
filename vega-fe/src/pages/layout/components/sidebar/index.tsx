@@ -1,11 +1,14 @@
 import { SidebarView } from './sidebar-view';
 import { useLocation } from 'react-router-dom';
 import { useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
-import { useAppSelector } from '../../../../store/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { getIsSidebarOpenedSelector } from '../../selectors.ts';
+import { setToken } from '@/store/authSlice.ts';
+import { baseApi } from '@/api';
 
 const Sidebar = () => {
 	const location = useLocation();
+	const dispatch = useAppDispatch();
 
 	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
@@ -13,6 +16,8 @@ const Sidebar = () => {
 
 	const handleLogOutClick = async () => {
 		await logOutUser();
+		dispatch(setToken(null));
+		dispatch(baseApi.util.resetApiState());
 	};
 
 	return (

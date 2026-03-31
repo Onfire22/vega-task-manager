@@ -5,7 +5,7 @@ import { setToRedis } from '../../lib/redis/utils';
 export const generateToken = async (id: string = '') => {
 	if (!id) return null;
 
-	const accessToken = jwt.sign({ id }, process.env.JWT_SECRET as string, {
+	const accessToken = jwt.sign({ id }, process.env.JWT_ACCESS_SECRET as string, {
 		expiresIn: ACCESS_TTL,
 	});
 

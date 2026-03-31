@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs';
 import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody, TokenPayload } from './auth.types';
 import { generateName } from './utils';
 import jwt from 'jsonwebtoken';
-import { getFromRedis } from '../../lib/redis/utils';
+import { deleteFromRedis, getFromRedis } from '../../lib/redis/utils';
 
 export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Response<IAuthRes>, next: NextFunction) => {
 	try {
@@ -156,7 +156,12 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
 };
 
 export const logOutUser = async (req: Request, res: Response, next: NextFunction) => {
-	res.clearCookie('refreshToken', {
-		httpOnly: true,
-	}).json({ success: true });
+	const { refreshToken } = req.cookies;
+
+	if (refreshToken) {
+		const payload = jwt.decode(refreshToken) as TokenPayload;
+		await deleteFromRedis(`refresh:${payload.id}`);
+	}
+
+	res.clearCookie('refreshToken').json({ success: true });
 };

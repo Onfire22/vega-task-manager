@@ -11,7 +11,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 	}
 
 	try {
-		const jwtSecret = process.env.JWT_SECRET as string;
+		const jwtSecret = process.env.JWT_ACCESS_SECRET as string;
 		res.locals.user = jwt.verify(token, jwtSecret);
 		next();
 	} catch (e) {
