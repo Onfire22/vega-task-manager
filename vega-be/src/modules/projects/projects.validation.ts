@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const CreateProjectBodySchema = z.object({
 	title: z.string(),
 	description: z.string(),
-	deadlineDate: z.date(),
+	deadlineDate: z.string(),
 	usersUuids: z.array(z.string()),
 });
 

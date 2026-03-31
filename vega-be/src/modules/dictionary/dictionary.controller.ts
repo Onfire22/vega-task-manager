@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { Type } from '../../generated/prisma/enums';
-import { IDictionaryResponse, TDictionaries, TDictionariesTypes, TPayload } from './dictionary.types';
+import { IDictionaryResponse, TDictionaries } from './dictionary.types';
+import { dictionariesService } from './dictionary.service';
 
 export const getDictionaries = async (
 	req: Request<{}, {}, {}, TDictionaries>,
@@ -16,40 +15,10 @@ export const getDictionaries = async (
 			return;
 		}
 
-		const filters = req.query.filters.split(',');
+		const dictionaries = await dictionariesService.getDictionaries(req.query.filters);
 
-		type TypeKey = keyof typeof Type;
-
-		const validFilters: TypeKey[] = filters.filter((f): f is TypeKey => Object.keys(Type).includes(f));
-
-		const dictionaries = await prismaAppClient.dictionary.findMany({
-			where: { type: { in: validFilters } },
-			select: { id: true, label: true, type: true, key: true, description: true },
-		});
-
-		const dictionariesData = dictionaries.reduce((acc, item) => {
-			const dictionaryType = item.type.toLowerCase();
-			if (!acc[dictionaryType as TDictionariesTypes]) {
-				acc[dictionaryType as TDictionariesTypes] = [];
-			}
-			const { type, ...rest } = item;
-			acc[dictionaryType as TDictionariesTypes].push(rest);
-
-			return acc;
-		}, {} as TPayload);
-
-		const payload = {
-			taskPriority: dictionariesData.task_priority,
-			roleType: dictionariesData.role_type,
-			taskStatus: dictionariesData.task_status,
-			userSpecialisation: dictionariesData.user_specialisation,
-			taskType: dictionariesData.task_type,
-			projectStatus: dictionariesData.project_status,
-			projectType: dictionariesData.project_type,
-		};
-
-		res.status(RESPONSE_STATUSES.success).json({ dictionaries: payload });
+		res.status(RESPONSE_STATUSES.success).json({ dictionaries });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };

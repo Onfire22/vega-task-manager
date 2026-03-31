@@ -1,19 +1,114 @@
+import bcrypt from 'bcryptjs';
+import { prismaAppClient } from '../../lib/prisma';
+import { generateName, generateToken } from './auth.utils';
+import { AppError } from '../../errors/errors';
+import { RESPONSE_STATUSES } from '../../constants';
+import { TokenPayload, TSignInBody, TSignUpBody } from './auth.types';
 import jwt from 'jsonwebtoken';
-import { ACCESS_TTL, REFRESH_TTL } from '../../constants';
-import { setToRedis } from '../../lib/redis/utils';
+import { deleteFromRedis, getFromRedis } from '../../lib/redis/utils';
 
-export const generateToken = async (id: string = '') => {
-	if (!id) return null;
+const signupUser = async (userData: TSignUpBody) => {
+	const salt = await bcrypt.genSalt(10);
 
-	const accessToken = jwt.sign({ id }, process.env.JWT_ACCESS_SECRET as string, {
-		expiresIn: ACCESS_TTL,
+	userData.password = await bcrypt.hash(userData.password, salt);
+
+	const users = await prismaAppClient.user.findMany({
+		select: {
+			userName: true,
+		},
 	});
 
-	const refreshToken = jwt.sign({ id }, process.env.JWT_REFRESH_SECRET as string, {
-		expiresIn: REFRESH_TTL,
+	const userNames = users.map((user) => user.userName);
+
+	const userName = generateName(userData.name, userData.secondName, userNames);
+
+	const newUser = await prismaAppClient.user.create({
+		data: { ...userData, userName },
+		select: {
+			email: true,
+			id: true,
+			name: true,
+			secondName: true,
+			userSpecialisationUuid: true,
+			userName: true,
+		},
 	});
 
-	await setToRedis(`refresh:${id}`, refreshToken, REFRESH_TTL);
+	const tokens = await generateToken(newUser.id);
 
-	return { accessToken, refreshToken };
+	if (!tokens) {
+		throw new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	return tokens;
 };
+
+const signInUser = async ({ email, password }: TSignInBody) => {
+	const user = await prismaAppClient.user.findUnique({
+		where: { email },
+		select: {
+			email: true,
+			id: true,
+			name: true,
+			secondName: true,
+			password: true,
+		},
+	});
+
+	if (!user) {
+		throw new AppError('Email не найден', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+	if (!isPasswordMatch) {
+		throw new AppError('Неправильный пароль', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	const tokens = await generateToken(user.id);
+
+	if (!tokens) {
+		throw new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	return tokens;
+};
+
+const getUserByEmail = async (email: string) => {
+	const user = await prismaAppClient.user.findUnique({
+		where: { email },
+	});
+
+	if (user) {
+		throw new AppError('Пользователь с таким email уже существует', RESPONSE_STATUSES.iternalError);
+	}
+};
+
+const refreshUserToken = async (refreshToken: string) => {
+	if (!refreshToken) {
+		throw new AppError('No refresh token', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	let payload: TokenPayload;
+	try {
+		payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET as string) as TokenPayload;
+	} catch {
+		throw new AppError('Invalid refresh token', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	const stored = await getFromRedis(`refresh:${payload.id}`);
+	if (stored !== refreshToken) {
+		throw new AppError('Refresh token revoked', RESPONSE_STATUSES.notAuthorised);
+	}
+
+	return await generateToken(payload.id);
+};
+
+const logOutUser = async (refreshToken: string) => {
+	if (refreshToken) {
+		const payload = jwt.decode(refreshToken) as TokenPayload;
+		await deleteFromRedis(`refresh:${payload.id}`);
+	}
+};
+
+export const authService = { signupUser, signInUser, getUserByEmail, refreshUserToken, logOutUser };

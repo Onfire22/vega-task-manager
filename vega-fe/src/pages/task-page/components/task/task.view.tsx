@@ -111,19 +111,19 @@ const TaskView: React.FC<IProps> = ({
 					<CustomSelect
 						options={options?.taskStatus}
 						value={task.taskStatus.id}
-						onChange={(value) => onUpdateTask('taskStatus', value)}
+						onChange={(value) => onUpdateTask('taskStatusUuid', value)}
 						label="Статус"
 					/>
 					<CustomSelect
 						options={options.taskType}
 						value={task.taskStack.id}
-						onChange={(value) => onUpdateTask('taskStack', value)}
+						onChange={(value) => onUpdateTask('taskStackUuid', value)}
 						label="Тип"
 					/>
 					<CustomSelect
 						options={options.taskPriority}
 						value={task.taskPriority.id}
-						onChange={(value) => onUpdateTask('taskPriority', value)}
+						onChange={(value) => onUpdateTask('taskPriorityUuid', value)}
 						label="Приоритет"
 					/>
 				</div>
@@ -200,7 +200,10 @@ const TaskView: React.FC<IProps> = ({
 								{task.assignee ? (
 									<span>{task.assignee}</span>
 								) : (
-									<a className="link-styled" onClick={() => onUpdateTask('assignee', currentUserId!)}>
+									<a
+										className="link-styled"
+										onClick={() => onUpdateTask('assigneeUuid', currentUserId!)}
+									>
 										+ назначить меня
 									</a>
 								)}
@@ -225,7 +228,7 @@ const TaskView: React.FC<IProps> = ({
 														<li
 															className="cursor-pointer text-[14px] p-1.25 hover:bg-secondary rounded-[5px]"
 															key={user.value}
-															onClick={() => onUpdateTask('assignee', user.value)}
+															onClick={() => onUpdateTask('assigneeUuid', user.value)}
 														>
 															{user.label}
 														</li>

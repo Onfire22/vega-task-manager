@@ -1,6 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { prismaAppClient } from '../../lib/prisma';
-import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { ILocals } from '../../common/types';
 import {
@@ -10,38 +8,13 @@ import {
 	TUpdateUserPasswordBody,
 	TUserListBody,
 } from './user.types';
-import { Prisma } from '../../generated/prisma/client';
-import bcrypt from 'bcryptjs';
+import { userService } from './user.service';
 
 export const getCurrentUser = async (req: Request, res: Response<IUserResponse, ILocals>, next: NextFunction) => {
 	try {
-		const id = res.locals?.user?.id;
+		const currentUser = await userService.getCurrentUser(res.locals.user.id);
 
-		if (id) {
-			const currentUser = await prismaAppClient.user.findUnique({
-				where: { id },
-				select: {
-					id: true,
-					email: true,
-					name: true,
-					secondName: true,
-					userName: true,
-					userSpecialisation: {
-						select: {
-							id: true,
-							label: true,
-							key: true,
-						},
-					},
-				},
-			});
-
-			if (!currentUser) {
-				return next(new AppError('User not found', RESPONSE_STATUSES.notFound));
-			}
-
-			res.status(RESPONSE_STATUSES.success).json({ currentUser });
-		}
+		res.status(RESPONSE_STATUSES.success).json({ currentUser });
 	} catch (e) {
 		next(e);
 	}
@@ -53,70 +26,21 @@ export const getUserList = async (
 	next: NextFunction,
 ) => {
 	try {
-		const filters = req.body?.filters;
-
-		const filterData: Prisma.UserWhereInput = {
-			...(filters?.withoutUser ? { id: { not: filters.withoutUser } } : {}),
-			memberships: {
-				...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
-				...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
-			},
-		};
-
-		if (filters.search) {
-			filterData.OR = [
-				{ name: { contains: filters.search, mode: 'insensitive' } },
-				{ secondName: { contains: filters.search, mode: 'insensitive' } },
-			];
-		}
-
-		const usersList = await prismaAppClient.user.findMany({
-			...(filters ? { where: filterData } : {}),
-			select: {
-				id: true,
-				name: true,
-				secondName: true,
-			},
-		});
+		const usersList = await userService.getUserList(req.body);
 
 		res.status(RESPONSE_STATUSES.success).json({ usersList });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
 
 export const updateUser = async (req: Request<{}, {}, TUpdateUserBody>, res: Response, next: NextFunction) => {
-	const id = res.locals?.user?.id;
-
-	const updateData: Prisma.UserUpdateInput = {};
-
-	if (req.body.name) {
-		updateData.name = req.body.name;
-	}
-
-	if (req.body.secondName) {
-		updateData.secondName = req.body.secondName;
-	}
-
-	if (req.body.userName) {
-		updateData.userName = req.body.userName;
-	}
-
-	if (req.body.userSpecialisationUuid) {
-		updateData.userSpecialisation = {
-			connect: { id: req.body.userSpecialisationUuid },
-		};
-	}
-
 	try {
-		const newUser = await prismaAppClient.user.update({
-			where: { id },
-			data: updateData,
-		});
+		const newUser = await userService.updateUser(req.body, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ newUser });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
 
@@ -126,36 +50,10 @@ export const updateUserPassword = async (
 	next: NextFunction,
 ) => {
 	try {
-		const currentUserId = res.locals?.user?.id;
-
-		const { currentPassword, newPassword } = req.body;
-
-		const user = await prismaAppClient.user.findUnique({
-			where: { id: currentUserId },
-			select: { password: true },
-		});
-
-		if (!user) {
-			return next(new AppError('User not found', RESPONSE_STATUSES.notFound));
-		}
-
-		const isPasswordMatch = await bcrypt.compare(currentPassword, user.password);
-
-		if (!isPasswordMatch) {
-			return next(new AppError('Вы ввели неправильный пароль', RESPONSE_STATUSES.badRequest));
-		}
-
-		const salt = await bcrypt.genSalt(10);
-
-		const cryptedPassword = await bcrypt.hash(newPassword, salt);
-
-		await prismaAppClient.user.update({
-			where: { id: currentUserId },
-			data: { password: cryptedPassword },
-		});
+		await userService.updateUserPassword(req.body, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
