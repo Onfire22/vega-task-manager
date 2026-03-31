@@ -1,19 +1,34 @@
 import { FiltersMenuView } from './filters-menu-view';
-import React, { type ReactNode } from 'react';
+import React, { useMemo } from 'react';
 import type { IOptionType, TFilter } from '../types.ts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
 import { setFilters } from '../slice.ts';
-import { getFiltersStateSelector } from '../selectors.ts';
+import { getActiveFilters, getFiltersStateSelector } from '../selectors.ts';
+import { FILTERS_COLORS } from '@/pages/tasks-page/constants.ts';
 
 interface IProps {
 	options: Array<IOptionType>;
 	filter: TFilter;
-	component: ReactNode;
+	text: string;
 }
 
-const FiltersMenu: React.FC<IProps> = ({ component, options, filter }) => {
+const FiltersMenu: React.FC<IProps> = ({ options, filter, text }) => {
 	const dispatch = useAppDispatch();
+
 	const filters = useAppSelector(getFiltersStateSelector());
+	const activeFilters = useAppSelector(getActiveFilters());
+
+	const filtersCount = useMemo(() => activeFilters[filter].length, [activeFilters, filter]);
+
+	const activeFilterColor = useMemo(() => {
+		const activeFilter = activeFilters[filter];
+
+		if (activeFilter.length > 0) {
+			return `${FILTERS_COLORS[filter as keyof typeof FILTERS_COLORS]}80`;
+		}
+
+		return '';
+	}, [filter, activeFilters]);
 
 	const handleCheckboxClick = (value: string) => {
 		const currentValue = filters[filter][value];
@@ -40,10 +55,12 @@ const FiltersMenu: React.FC<IProps> = ({ component, options, filter }) => {
 
 	return (
 		<FiltersMenuView
-			component={component}
 			options={options}
 			filters={filters}
 			filter={filter}
+			text={text}
+			filtersCount={filtersCount}
+			activeFilterColor={activeFilterColor}
 			onCheckboxClick={handleCheckboxClick}
 			onResetFilters={handleResetFilters}
 		/>

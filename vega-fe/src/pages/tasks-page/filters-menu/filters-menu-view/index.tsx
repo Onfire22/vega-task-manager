@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import type { IFilters, IOptionType, TFilter } from '../../types.ts';
 import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field.tsx';
@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
 	options: Array<IOptionType>;
-	activeFilterColor?: string;
+	activeFilterColor: string;
+	text: string;
 	filtersCount?: number;
 	filters: IFilters;
 	filter: TFilter;
-	component: ReactNode;
 	onCheckboxClick: (value: string) => void;
 	onResetFilters: () => void;
 }
@@ -23,12 +23,23 @@ const FiltersMenuView: React.FC<IProps> = ({
 	filter,
 	filtersCount,
 	onResetFilters,
-	component,
+	activeFilterColor,
+	text,
 }) => {
 	return (
 		<CustomPopover
 			width="200px"
-			trigger={component}
+			trigger={
+				<Button>
+					<span
+						className="text-[11px] w-3.75 h-3.75 rounded-full"
+						style={{ backgroundColor: activeFilterColor }}
+					>
+						{filtersCount}
+					</span>
+					<span>{text}</span>
+				</Button>
+			}
 			content={
 				<div className="flex flex-col gap-2">
 					<FieldGroup className="gap-3">

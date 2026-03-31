@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { FiltersTrigger } from '../../filters-trigger/index.tsx';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { Switch } from '@/components/ui/switch.tsx';
 
@@ -44,20 +43,16 @@ const TableControlsView: React.FC<IProps> = ({
 					) : (
 						<>
 							<FiltersMenu
-								component={<FiltersTrigger filter="taskPriorityUuid" text="Приоритет" />}
 								options={dictionariesOptions.taskPriority}
 								filter="taskPriorityUuid"
+								text="Приоритет"
 							/>
 							<FiltersMenu
-								component={<FiltersTrigger filter="taskStatusUuid" text="Статус" />}
 								options={dictionariesOptions.taskStatus}
 								filter="taskStatusUuid"
+								text="Статус"
 							/>
-							<FiltersMenu
-								component={<FiltersTrigger filter="taskStackUuid" text="Тег" />}
-								options={dictionariesOptions.taskType}
-								filter="taskStackUuid"
-							/>
+							<FiltersMenu options={dictionariesOptions.taskType} filter="taskStackUuid" text="Тег" />
 							<CustomTooltip
 								content="Сбросить фильтры"
 								position="top"
