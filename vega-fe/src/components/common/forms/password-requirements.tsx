@@ -1,5 +1,5 @@
 import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
-import { PasswordRequirement } from '@/pages/sign-up-page/components/password-requirement';
+import { PasswordRequirement } from '@/pages/sign-up-page/components/password-requirement/password-requirement.tsx';
 import React from 'react';
 
 interface IProps {

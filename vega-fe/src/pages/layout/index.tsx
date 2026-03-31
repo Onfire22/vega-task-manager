@@ -1,4 +1,4 @@
-import { LayoutView } from './components/layout-view';
+import { LayoutView } from './components/layout-view/layout.view.tsx';
 
 const Layout = () => {
 	return <LayoutView />;
