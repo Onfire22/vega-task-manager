@@ -1,4 +1,4 @@
-import { CustomTableHeaderCell } from './custom-table-header-cell';
+import { CustomTableHeaderCell } from '@/pages/tasks-page/components/custom-table-header-cell/custom-table-header-cell.tsx';
 import { CustomTableCell } from '../../components/common/shared/custom-table-cell.tsx';
 
 export const TABLE_HEADER = [

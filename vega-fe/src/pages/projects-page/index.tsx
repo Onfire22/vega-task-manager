@@ -1,4 +1,4 @@
-import { Projects } from './components/projects';
+import { Projects } from './components/projects/projects.tsx';
 
 const ProjectsPage = () => {
 	return <Projects />;

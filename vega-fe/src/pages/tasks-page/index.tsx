@@ -1,4 +1,4 @@
-import { Tasks } from './tasks';
+import { Tasks } from '@/pages/tasks-page/components/tasks/tasks.tsx';
 
 const TasksPage = () => {
 	return <Tasks />;
