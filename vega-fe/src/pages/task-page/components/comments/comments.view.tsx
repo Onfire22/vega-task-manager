@@ -1,7 +1,6 @@
 import type { IComment } from '../../types.ts';
 import React from 'react';
 import { CornerRightUp, Pencil, Trash2, XIcon } from 'lucide-react';
-import { getAvatarColor } from '../../../../app/utils.ts';
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Button } from '@/components/ui/button.tsx';
 
@@ -56,14 +55,17 @@ const CommentsView: React.FC<IProps> = ({
 						<li className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary" key={item.id}>
 							<div
 								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
-								style={{ backgroundColor: getAvatarColor(item.user.userUuid) }}
+								style={{ backgroundColor: item.user.avatar.color }}
 							>
-								{item.user.name.substring(0, 2)}
+								{item.user.avatar.initials}
 							</div>
 							<div>
 								<div className="flex items-center gap-2.5">
 									<div>{item.user.name}</div>
-									<div className="text-[12px] text-muted-foreground">{item.commentDate}</div>
+									<div className="text-[12px] flex items-center gap-1.25">
+										<div className="text-muted-foreground">{item.commentDate}</div>
+										<div className="text-danger">{item.commentEditedTime}</div>
+									</div>
 									{currentUserUuid === item.user.userUuid && (
 										<div className="flex items-center gap-1.25">
 											<Pencil

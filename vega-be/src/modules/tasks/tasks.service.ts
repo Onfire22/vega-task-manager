@@ -1,9 +1,9 @@
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
-import { TCreateTaskBody, TUpdateTaskBody, TUpdateTaskTimeBody, TUserTasksBody } from './tasks.types';
+import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
-import { getTaskWithTransformedTime, transformTimeToSeconds } from './utils';
+import { getTaskWithTransformedTime, transformTimeToSeconds } from './tasks.utils';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
@@ -172,82 +172,4 @@ const updateTask = (taskData: TUpdateTaskBody, taskUuid: string) => {
 	});
 };
 
-const updateTaskTime = async (formData: TUpdateTaskTimeBody, taskUuid: string, userId: string) => {
-	const estimate = transformTimeToSeconds(formData?.estimateTime);
-
-	const loggedTime = transformTimeToSeconds(formData?.loggedTime);
-
-	//только estimate
-	if (formData.estimateTime && !formData.loggedTime) {
-		return prismaAppClient.task.update({
-			where: { id: taskUuid },
-			data: {
-				estimateTime: estimate,
-				remainingTime: estimate,
-			},
-		});
-	}
-
-	//только log
-	if (!formData.estimateTime && formData.loggedTime) {
-		return prismaAppClient.$transaction(async (tx) => {
-			const task = await prismaAppClient.task.findUnique({
-				where: { id: taskUuid },
-				select: { estimateTime: true },
-			});
-
-			if (!task?.estimateTime) {
-				throw new AppError('Нельзя логать время в задачу без оценки', RESPONSE_STATUSES.badRequest);
-			}
-
-			const remainingTime = task.estimateTime - loggedTime;
-
-			await tx.timeLog.create({
-				data: {
-					loggedTime,
-					description: formData?.description,
-					user: {
-						connect: { id: userId },
-					},
-					task: {
-						connect: { id: taskUuid },
-					},
-				},
-			});
-
-			await tx.task.update({
-				where: { id: taskUuid },
-				data: { remainingTime },
-			});
-		});
-	}
-
-	//сразу лог и estimate
-	if (formData.estimateTime && formData.loggedTime) {
-		return prismaAppClient.$transaction(async (tx) => {
-			const remainingTime = estimate - loggedTime;
-
-			await tx.task.update({
-				where: { id: taskUuid },
-				data: { estimateTime: estimate, remainingTime },
-			});
-
-			await tx.timeLog.create({
-				data: {
-					loggedTime,
-					description: formData?.description,
-					user: {
-						connect: { id: userId },
-					},
-					task: {
-						connect: { id: taskUuid },
-					},
-				},
-			});
-		});
-	}
-
-	throw new AppError('Invalid request data', RESPONSE_STATUSES.badRequest);
-};
-
-export const tasksService = { createTask, getUserTasks, getTaskByUuid, updateTask, updateTaskTime };
+export const tasksService = { createTask, getUserTasks, getTaskByUuid, updateTask };

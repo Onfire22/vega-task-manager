@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// email, logout, RUD comment, upd user role, upd project, createTask
 export const BaseResponseSchema = z.object({
 	success: z.boolean(),
 });
@@ -54,7 +53,7 @@ export const CommentsResponseSchema = z.object({
 			id: z.string(),
 			text: z.string(),
 			createdAt: z.string(),
-			updatedAt: z.string(),
+			updatedAt: z.string().optional(),
 			author: z.object({
 				id: z.string(),
 				name: z.string(),
@@ -224,9 +223,6 @@ export const TaskResponseSchema = z.object({
 		code: z.string(),
 		title: z.string(),
 		description: z.string(),
-		estimateTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
-		remainingTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
-		totalLoggedTime: z.object({ hours: z.string(), minutes: z.string() }).nullable(),
 		createdAt: z.string(),
 		updatedAt: z.string(),
 		taskPriority: z.object({
@@ -256,7 +252,23 @@ export const TaskResponseSchema = z.object({
 				secondName: z.string(),
 			})
 			.nullable(),
-		timeLogs: z.array(z.any()),
+		timeLogs: z.array(
+			z.object({
+				id: z.string(),
+				loggedTime: z.object({
+					minutes: z.string().optional(),
+					hours: z.string().optional(),
+				}),
+				description: z.string().nullable().optional(),
+				user: z.object({
+					name: z.string(),
+					secondName: z.string(),
+					id: z.string(),
+				}),
+				createdAt: z.string(),
+				loggedTimeInSecs: z.number().int(),
+			}),
+		),
 		project: z.object({
 			id: z.string(),
 			code: z.string(),
@@ -266,9 +278,35 @@ export const TaskResponseSchema = z.object({
 				label: z.string(),
 			}),
 		}),
-		totalLoggedTimeInSecs: z.number().int().nullable(),
-		estimateTimeInSecs: z.number().int().nullable(),
-		remainingTimeInSecs: z.number().int().nullable(),
+		logInfo: z.object({
+			estimateTime: z
+				.object({
+					time: z.object({
+						hours: z.string().optional(),
+						minutes: z.string().optional(),
+					}),
+					timeInPercents: z.number().int(),
+				})
+				.nullable(),
+			remainingTime: z
+				.object({
+					time: z.object({
+						hours: z.string().optional(),
+						minutes: z.string().optional(),
+					}),
+					timeInPercents: z.number().int(),
+				})
+				.nullable(),
+			totalLoggedTime: z
+				.object({
+					time: z.object({
+						hours: z.string().optional(),
+						minutes: z.string().optional(),
+					}),
+					timeInPercents: z.number().int(),
+				})
+				.nullable(),
+		}),
 	}),
 });
 

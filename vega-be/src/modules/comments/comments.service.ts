@@ -1,8 +1,8 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { TCreateCommentBody } from './comments.types';
 
-const getComments = (taskUuid: string) => {
-	return prismaAppClient.comment.findMany({
+const getComments = async (taskUuid: string) => {
+	const comments = await prismaAppClient.comment.findMany({
 		where: { taskUuid },
 		select: {
 			id: true,
@@ -17,6 +17,15 @@ const getComments = (taskUuid: string) => {
 				},
 			},
 		},
+	});
+
+	return comments.map((comment) => {
+		const { updatedAt, ...rest } = comment;
+
+		return {
+			...rest,
+			...(comment.createdAt.getTime() !== updatedAt.getTime() ? { updatedAt: updatedAt } : {}),
+		};
 	});
 };
 

@@ -3,6 +3,7 @@ export interface IProjectUser {
 	userName: string;
 	userSpecialisation: string;
 	userInitials: string;
+	color: string;
 	userRole: {
 		label: string;
 		key: string;
@@ -46,6 +47,7 @@ export interface IProject {
 		label: string;
 		key: string;
 	};
+	avatar: { letters: string; color: string };
 }
 
 export interface IDictionary {

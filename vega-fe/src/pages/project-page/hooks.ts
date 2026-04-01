@@ -4,7 +4,7 @@ import { DATE_FORMAT, ROLES_COLORS, STATUSES } from './constants.ts';
 import { useMemo } from 'react';
 import { useGetCurrentUserQuery } from '../../api/queries/auth.api.ts';
 import { useUpdateProjectMutation } from '../../api/queries/projects.api.ts';
-import { typedEntries } from '@/app/utils.ts';
+import { getAvatarColor, typedEntries } from '@/app/utils.ts';
 import type { IDictionaryWithColor } from '@/pages/project-page/types.ts';
 
 export const useProjectDictionaries = () => {
@@ -46,6 +46,7 @@ export const useProjectData = (uuid?: string) => {
 						userName: `${user.name} ${user.secondName}`,
 						userSpecialisation: user.userSpecialisation.label,
 						userInitials: `${user.name[0]} ${user.secondName[0]}`,
+						color: getAvatarColor(user.id),
 						userRole: {
 							label: user.role.label,
 							key: user.role.key,
@@ -53,6 +54,10 @@ export const useProjectData = (uuid?: string) => {
 						},
 					};
 				}),
+				avatar: {
+					letters: project.code.substring(1, 3),
+					color: getAvatarColor(project.id),
+				},
 				createdAt: project?.createdAt ? format(project.createdAt, DATE_FORMAT) : '-',
 				deadlineDate: project?.deadlineDate ? format(project.deadlineDate, DATE_FORMAT) : null,
 			}

@@ -27,6 +27,10 @@ const baseQuery: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError, {
 	if (result.error?.status === 401) {
 		const refreshResult = await rawBaseQuery({ url: ROUTES.refresh, method: METHODS.post }, api, extraOptions);
 
+		if (refreshResult.error) {
+			console.log('Refresh error:', refreshResult.error);
+		}
+
 		if (refreshResult.data) {
 			const { accessToken } = refreshResult.data as { accessToken: string };
 			api.dispatch(setToken(accessToken));

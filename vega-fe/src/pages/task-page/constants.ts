@@ -53,3 +53,9 @@ export const TABS = [
 		value: 'logs',
 	},
 ];
+
+export const TEAL_COLOR = 'bg-teal';
+
+export const BLUE_COLOR = 'bg-indigo-brand';
+
+export const RED_COLOR = 'bg-danger';

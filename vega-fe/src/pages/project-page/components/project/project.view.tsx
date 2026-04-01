@@ -2,7 +2,7 @@ import type { IDictionaryWithColor, IProject } from '../../types.ts';
 import React from 'react';
 import { TABS } from '../../constants.ts';
 import { TasksTable } from '../tasks-table/tasks-table.tsx';
-import { getAvatarColor, parseDate } from '../../../../app/utils.ts';
+import { parseDate } from '../../../../app/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { cn } from '@/lib/utils.ts';
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
@@ -51,10 +51,10 @@ const ProjectView: React.FC<IProps> = ({
 					<div
 						className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[18px]"
 						style={{
-							backgroundColor: getAvatarColor(project.id),
+							backgroundColor: project.avatar.color,
 						}}
 					>
-						{project.code.substring(1, 3)}
+						{project.avatar.letters}
 					</div>
 					<div>
 						<div className="text-[20px] text-white">{project.title}</div>
@@ -190,7 +190,7 @@ const ProjectView: React.FC<IProps> = ({
 								<li className="p-1.25 text-sm flex items-center gap-2.5" key={user.id}>
 									<div
 										className="w-7.5 h-6.25 text-[11px] text-white flex items-center justify-center rounded-full"
-										style={{ backgroundColor: getAvatarColor(user.id) }}
+										style={{ backgroundColor: user.color }}
 									>
 										{user.userInitials}
 									</div>

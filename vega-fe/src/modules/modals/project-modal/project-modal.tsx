@@ -32,6 +32,7 @@ const ProjectModal = () => {
 		try {
 			await createProject(values).unwrap();
 			toast.success('Проект успешно создана');
+			form.reset();
 			dispatch(setActiveModal(null));
 		} catch (e) {
 			const error = e as { data?: { message?: string } };

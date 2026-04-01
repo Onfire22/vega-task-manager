@@ -1,8 +1,6 @@
 import { z } from 'zod';
 import { LogTimeFormValidation } from '@/pages/task-page/validation.ts';
 
-export type DictionaryKey = 'taskPriority' | 'taskType' | 'taskStatus';
-
 export interface IInitialState {
 	isModalShown: boolean;
 }
@@ -16,11 +14,10 @@ export interface IExpDictData {
 }
 
 export interface ITimeLog {
-	description: string | null;
+	description?: string | null;
 	id: string;
 	loggedTime: string;
 	createdAt: string;
-	updatedAt: string;
 	user: {
 		id: string;
 		name: string;
@@ -34,12 +31,6 @@ export interface ITask {
 	title: string;
 	assignee: string | null;
 	description: string;
-	estimateTime: string;
-	remainingTime: string;
-	totalLoggedTime: string;
-	estimateTimeInSecs: number | null;
-	remainingPercents: number | null;
-	loggedPercents: number | null;
 	project: {
 		code: string;
 		id: string;
@@ -48,6 +39,12 @@ export interface ITask {
 			label: string;
 		};
 	};
+	remainingTime: string;
+	estimateTime: string;
+	totalLoggedTime: string;
+	estimateTimePercents: number | null;
+	remainingTimePercents: number | null;
+	totalLoggedTimePercents: number | null;
 	timeLogs: Array<ITimeLog>;
 	reporter: string;
 	taskPriority: IExpDictData;
@@ -62,9 +59,14 @@ export interface IComment {
 	user: {
 		name: string;
 		userUuid: string;
+		avatar: {
+			color: string;
+			initials: string;
+		};
 	};
 	text: string;
 	commentDate: string;
+	commentEditedTime?: string;
 }
 
 export type TDictionariesWithColors = {

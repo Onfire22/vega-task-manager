@@ -1,5 +1,5 @@
 import { TIME_COEFFICIENTS } from '../../constants';
-import { ITask, ITime, ITimeLog } from './tasks.types';
+import { ITaskLog, ITime, TaskListItem, TPrismaTask } from './tasks.types';
 
 export const isDateEquals = (createdDate: Date, updatedDate?: Date) => {
 	if (!updatedDate) return false;
@@ -37,12 +37,9 @@ export const transformSecondsToTime = (seconds: number) => {
 	return result;
 };
 
-export const getTaskWithTransformedTime = <T extends Pick<ITask, 'estimateTime' | 'timeLogs' | 'remainingTime'>>(
-	task: T,
-): Omit<T, 'estimateTime' | 'timeLogs'> & {
-	estimateTime: Partial<ITime> | null;
-	timeLogs: Array<Omit<ITimeLog, 'loggedTime'> & { loggedTime: Partial<ITime> | null }>;
-} => {
+export const getTaskWithTransformedTime = (task: TPrismaTask | TaskListItem) => {
+	const { estimateTime, remainingTime, ...rest } = task;
+
 	const totalLoggedTimeInSecs = task.timeLogs.reduce((acc, log) => {
 		if (log.loggedTime) {
 			acc += log.loggedTime;
@@ -51,14 +48,42 @@ export const getTaskWithTransformedTime = <T extends Pick<ITask, 'estimateTime' 
 		return acc;
 	}, 0);
 
+	const remainingPercents =
+		task.remainingTime && task?.estimateTime ? (task.remainingTime * 100) / task.estimateTime : 0;
+
+	const loggedPercents =
+		totalLoggedTimeInSecs && task.estimateTime ? (totalLoggedTimeInSecs * 100) / task.estimateTime : 0;
+
+	const logInfo: ITaskLog = {
+		estimateTime: null,
+		remainingTime: null,
+		totalLoggedTime: null,
+	};
+
+	if (task.estimateTime) {
+		logInfo.estimateTime = {
+			time: transformSecondsToTime(task.estimateTime),
+			timeInPercents: 100,
+		};
+	}
+
+	if (task.remainingTime) {
+		logInfo.remainingTime = {
+			time: transformSecondsToTime(task.remainingTime),
+			timeInPercents: remainingPercents,
+		};
+	}
+
+	if (totalLoggedTimeInSecs) {
+		logInfo.totalLoggedTime = {
+			time: transformSecondsToTime(totalLoggedTimeInSecs),
+			timeInPercents: loggedPercents,
+		};
+	}
+
 	return {
-		...task,
-		totalLoggedTimeInSecs,
-		...(totalLoggedTimeInSecs > 0 ? { totalLoggedTime: transformSecondsToTime(totalLoggedTimeInSecs) } : {}),
-		estimateTime: task.estimateTime ? transformSecondsToTime(task.estimateTime) : null,
-		estimateTimeInSecs: task.estimateTime,
-		remainingTime: task.remainingTime ? transformSecondsToTime(task.remainingTime) : null,
-		remainingTimeInSecs: task.remainingTime,
+		...rest,
+		logInfo,
 		timeLogs:
 			task.timeLogs.length > 0
 				? task.timeLogs.map((log) => {

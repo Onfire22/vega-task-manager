@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import type { TFormOptions } from '@/pages/task-page/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 
 const ModalWindow = () => {
 	const dispatch = useAppDispatch();
@@ -30,6 +31,12 @@ const ModalWindow = () => {
 	const handleLogWorkModalShown = () => {
 		dispatch(setIsModalShown(false));
 	};
+
+	useEffect(() => {
+		if (task?.estimateTime) {
+			form.setValue('estimate', task?.estimateTime);
+		}
+	}, [task?.estimateTime, form]);
 
 	return (
 		<ModalWindowView

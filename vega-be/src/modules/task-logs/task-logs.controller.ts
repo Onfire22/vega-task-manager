@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { prismaAppClient } from '../../lib/prisma';
+import { TTaskParams } from '../tasks/tasks.types';
+import { taskLogsSService } from './task-logs.service';
+import { TUpdateTaskTimeBody } from './task-logs.types';
 
-export const createTaskLog = async (req: Request, res: Response, next: NextFunction) => {
+export const updateTaskTime = async (
+	req: Request<TTaskParams, {}, TUpdateTaskTimeBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
-		const taskLog = prismaAppClient.timeLog.create({
-			data: req.body,
-		});
+		const result = await taskLogsSService.upsertTaskLog(req.body, req.params.uuid, res.locals.user.id);
 
-		res.status(RESPONSE_STATUSES.success).json({ success: true });
+		res.status(RESPONSE_STATUSES.success).json(result ?? { success: true });
 	} catch (e) {
-		next(next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError)));
+		next(e);
 	}
 };

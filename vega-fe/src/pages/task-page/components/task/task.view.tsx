@@ -1,5 +1,5 @@
 import React from 'react';
-import { TABS } from '../../constants.ts';
+import { BLUE_COLOR, RED_COLOR, TABS, TEAL_COLOR } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
 import type { ITask, TField, TOption, TTaskFields } from '../../types.ts';
 import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
@@ -260,20 +260,25 @@ const TaskView: React.FC<IProps> = ({
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Учёт времени</div>
 						{(task.estimateTime || task.totalLoggedTime) && (
 							<div className="flex flex-col gap-2.5 mb-3.75">
-								<div className="flex items-center justify-between">
-									<span className="text-[12px]">Оценка</span>
-									<span className="text-[12px]">{task.estimateTime}</span>
-								</div>
 								<CustomProgress
-									progress={task.loggedPercents || 0}
-									label="Потрачено"
-									percents={task.totalLoggedTime}
+									progress={task.estimateTimePercents || 0}
+									label="Оценка"
+									percents={task.estimateTime}
+									color={BLUE_COLOR}
+									size="h-2"
 								/>
 								<CustomProgress
-									progress={task.remainingPercents || 0}
+									progress={task.totalLoggedTimePercents || 0}
+									label="Потрачено"
+									percents={task.totalLoggedTime}
+									size="h-2"
+								/>
+								<CustomProgress
+									progress={task.remainingTimePercents || 0}
 									label="Осталось"
 									percents={task.remainingTime}
-									color={(task?.remainingPercents ?? 0) >= 50 ? 'bg-teal' : 'bg-danger'}
+									color={(task?.remainingTimePercents ?? 0) >= 50 ? TEAL_COLOR : RED_COLOR}
+									size="h-2"
 								/>
 							</div>
 						)}

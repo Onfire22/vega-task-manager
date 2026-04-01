@@ -30,6 +30,7 @@ const TaskModal = () => {
 		try {
 			await createTask(values).unwrap();
 			toast.success('Задача успешно создана');
+			form.reset();
 			dispatch(setActiveModal(null));
 		} catch (e) {
 			const error = e as { data?: { message?: string } };

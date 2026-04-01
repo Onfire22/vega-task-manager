@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { RESPONSE_STATUSES } from '../../constants';
-import { TCreateTaskBody, TTaskParams, TUpdateTaskBody, TUpdateTaskTimeBody, TUserTasksBody } from './tasks.types';
+import { TCreateTaskBody, TTaskParams, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
 import { IDefaultResponse, ILocals } from '../../common/types';
 import { tasksService } from './tasks.service';
 
@@ -48,16 +48,16 @@ export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>,
 	}
 };
 
-export const updateTaskTime = async (
-	req: Request<TTaskParams, {}, TUpdateTaskTimeBody>,
-	res: Response,
-	next: NextFunction,
-) => {
-	try {
-		const result = await tasksService.updateTaskTime(req.body, req.params.uuid, res.locals.user.id);
-
-		res.status(RESPONSE_STATUSES.success).json(result ?? { success: true });
-	} catch (e) {
-		next(e);
-	}
-};
+// export const updateTaskTime = async (
+// 	req: Request<TTaskParams, {}, TUpdateTaskTimeBody>,
+// 	res: Response,
+// 	next: NextFunction,
+// ) => {
+// 	try {
+// 		const result = await tasksService.updateTaskTime(req.body, req.params.uuid, res.locals.user.id);
+//
+// 		res.status(RESPONSE_STATUSES.success).json(result ?? { success: true });
+// 	} catch (e) {
+// 		next(e);
+// 	}
+// };
