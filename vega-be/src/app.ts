@@ -5,7 +5,7 @@ import { protectedRouter } from './router';
 import { authRouter } from './modules/auth/auth.router';
 import { authMiddleware } from './modules/auth/auth.middleware';
 import cors from 'cors';
-import { errorMiddleware } from './errors/middleware';
+import { errorMiddleware } from './errors/errors.middleware';
 import { dictionaryRouter } from './modules/dictionary/dictionary.router';
 import { initRedis } from './lib/redis/redis';
 

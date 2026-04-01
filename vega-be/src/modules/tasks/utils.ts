@@ -1,5 +1,5 @@
 import { TIME_COEFFICIENTS } from '../../constants';
-import { ITask, ITaskTransformed, ITime, ITimeLog } from './tasks.types';
+import { ITask, ITime, ITimeLog } from './tasks.types';
 
 export const isDateEquals = (createdDate: Date, updatedDate?: Date) => {
 	if (!updatedDate) return false;

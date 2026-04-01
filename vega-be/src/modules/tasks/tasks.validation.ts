@@ -27,7 +27,7 @@ export const TaskParamsSchema = z.object({
 
 export const UpdateTaskBodySchema = z.object({
 	value: z.string(),
-	fieldName: z.enum(['title', 'taskStack', 'taskPriority', 'taskStatus', 'assignee', 'description']),
+	fieldName: z.enum(['title', 'taskStackUuid', 'taskPriorityUuid', 'taskStatusUuid', 'assigneeUuid', 'description']),
 });
 
 export const UpdateTaskTimeBodySchema = z.object({

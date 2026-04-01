@@ -1,48 +1,25 @@
 import { NextFunction, Request, Response } from 'express';
-import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
 import { TCreateCommentBody, TUpdateCommentBody, TUuidParams } from './comments.types';
-import { prismaAppClient } from '../../lib/prisma';
+import { commentsService } from './comments.service';
 
 export const getTaskComments = async (req: Request<TUuidParams>, res: Response, next: NextFunction) => {
 	try {
-		const comments = await prismaAppClient.comment.findMany({
-			where: { taskUuid: req.params.uuid },
-			select: {
-				id: true,
-				text: true,
-				createdAt: true,
-				updatedAt: true,
-				author: {
-					select: {
-						id: true,
-						name: true,
-						secondName: true,
-					},
-				},
-			},
-		});
+		const comments = await commentsService.getComments(req.params.uuid);
 
 		res.status(RESPONSE_STATUSES.success).json({ comments });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
 
 export const createComment = async (req: Request<{}, {}, TCreateCommentBody>, res: Response, next: NextFunction) => {
 	try {
-		const currentUserUuid = res.locals.user.id;
-
-		await prismaAppClient.comment.create({
-			data: {
-				...req.body,
-				authorUuid: currentUserUuid,
-			},
-		});
+		await commentsService.createComment(res.locals.user.id, req.body);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
 
@@ -52,23 +29,20 @@ export const updateComment = async (
 	next: NextFunction,
 ) => {
 	try {
-		await prismaAppClient.comment.update({
-			where: { id: req.params.uuid },
-			data: { text: req.body.text },
-		});
+		await commentsService.updateComment(req.params.uuid, req.body.text);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };
 
 export const deleteComment = async (req: Request<TUuidParams, {}, {}>, res: Response, next: NextFunction) => {
 	try {
-		await prismaAppClient.comment.delete({ where: { id: req.params.uuid } });
+		await commentsService.deleteComment(req.params.uuid);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
-		next(new AppError('Iternal server Error', RESPONSE_STATUSES.iternalError));
+		next(e);
 	}
 };

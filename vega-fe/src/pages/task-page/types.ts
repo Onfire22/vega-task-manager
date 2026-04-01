@@ -75,7 +75,13 @@ export type TDictionariesWithColors = {
 
 export type TFormOptions = z.infer<typeof LogTimeFormValidation>;
 
-export type TTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+export type TTaskFields =
+	| 'title'
+	| 'taskStackUuid'
+	| 'taskPriorityUuid'
+	| 'taskStatusUuid'
+	| 'assigneeUuid'
+	| 'description';
 
 export interface TField {
 	fieldName: TTaskFields | '';

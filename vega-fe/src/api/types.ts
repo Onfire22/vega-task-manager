@@ -102,7 +102,13 @@ export interface IFiltersRequest {
 	}>;
 }
 
-export type TUpdateTaskFields = 'title' | 'taskStack' | 'taskPriority' | 'taskStatus' | 'assignee' | 'description';
+export type TUpdateTaskFields =
+	| 'title'
+	| 'taskStackUuid'
+	| 'taskPriorityUuid'
+	| 'taskStatusUuid'
+	| 'assigneeUuid'
+	| 'description';
 
 export interface TUpdateTaskRequest {
 	fieldName: TUpdateTaskFields;

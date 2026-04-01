@@ -7,10 +7,7 @@ export const validateMiddleware =
 		const result = schema.safeParse(req[type]);
 
 		if (!result.success) {
-			return res.status(400).json({
-				error: 'Validation failed',
-				details: result.error.flatten((issue) => issue.message),
-			});
+			return next(result.error);
 		}
 
 		next();
