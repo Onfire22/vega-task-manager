@@ -11,9 +11,11 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import type { TProjectValues } from '@/modules/modals/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const activeModal = useAppSelector(getActiveModalSelector());
 
@@ -30,10 +32,11 @@ const ProjectModal = () => {
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
 		try {
-			await createProject(values).unwrap();
+			const response = await createProject(values).unwrap();
 			toast.success('Проект успешно создана');
 			form.reset();
 			dispatch(setActiveModal(null));
+			navigate(`project/${response.id}`);
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

@@ -25,6 +25,10 @@ export const TaskParamsSchema = z.object({
 	uuid: z.string(),
 });
 
+export const UpdateTaskEstimateSchema = z.object({
+	value: z.string(),
+});
+
 export const UpdateTaskBodySchema = z.object({
 	value: z.string(),
 	fieldName: z.enum(['title', 'taskStackUuid', 'taskPriorityUuid', 'taskStatusUuid', 'assigneeUuid', 'description']),

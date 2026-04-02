@@ -19,10 +19,12 @@ export const useTaskData = (uuid?: string) => {
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
 		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
 		assigneeUuid: task.assignee ? task.assignee.id : undefined,
-		remainingTime: remainingTime ? `${remainingTime.time.hours || ''}${remainingTime.time.minutes || ' '}` : '',
-		estimateTime: estimateTime ? `${estimateTime.time.hours || ''}${estimateTime.time.minutes || ' '}` : '',
+		remainingTime: remainingTime
+			? `${remainingTime.time.hours || ''} ${remainingTime.time.minutes || ''}`.trim()
+			: '',
+		estimateTime: estimateTime ? `${estimateTime.time.hours || ''} ${estimateTime.time.minutes || ''}`.trim() : '',
 		totalLoggedTime: totalLoggedTime
-			? `${totalLoggedTime.time.hours || ''}${totalLoggedTime.time.minutes || ' '}`
+			? `${totalLoggedTime.time.hours || ''} ${totalLoggedTime.time.minutes || ''}`.trim()
 			: '',
 		estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
 		remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,

@@ -1,4 +1,10 @@
-import { CreateTaskBodySchema, TaskParamsSchema, UpdateTaskBodySchema, UserTasksBodySchema } from './tasks.validation';
+import {
+	CreateTaskBodySchema,
+	TaskParamsSchema,
+	UpdateTaskBodySchema,
+	UpdateTaskEstimateSchema,
+	UserTasksBodySchema,
+} from './tasks.validation';
 import { z } from 'zod';
 import { Prisma } from '../../generated/prisma/client';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
@@ -103,3 +109,5 @@ export type TUserTasksBody = z.infer<typeof UserTasksBodySchema>;
 export type TTaskParams = z.infer<typeof TaskParamsSchema>;
 
 export type TUpdateTaskBody = z.infer<typeof UpdateTaskBodySchema>;
+
+export type TUpdateTaskEstimate = z.infer<typeof UpdateTaskEstimateSchema>;

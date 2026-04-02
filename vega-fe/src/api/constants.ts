@@ -18,6 +18,8 @@ export const ROUTES = {
 	getTask: '/api/task/',
 	getTasks: '/api/tasks',
 	updateTask: '/api/task/',
+	createTaskLog: '/api/taskLogs/',
+	updateTaskEstimate: '/api/tasks/',
 	dictionaries: '/api/dictionaries',
 	getUsers: '/api/users',
 	userByEmail: '/api/users/email',
@@ -29,4 +31,4 @@ export const ROUTES = {
 	currentUserPassword: '/api/users/current/password',
 };
 
-export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments'];
+export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments', 'TaskLogs'];

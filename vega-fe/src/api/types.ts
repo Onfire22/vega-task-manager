@@ -3,6 +3,7 @@ import {
 	BaseResponseSchema,
 	CommentsResponseSchema,
 	CreateProjectResponseSchema,
+	CreateTaskResponseSchema,
 	CurrentUserResponseSchema,
 	DictionariesResponseSchema,
 	DictionarySchema,
@@ -127,6 +128,11 @@ export interface IUpdatePasswordRequest {
 	newPassword: string;
 }
 
+export interface IUpdateTaskEstimate {
+	value: string;
+	uuid: string;
+}
+
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
 
 export type TSignUpResponse = z.infer<typeof SignUpUserResponseSchema>;
@@ -156,3 +162,5 @@ export type UpdateTaskResponse = z.infer<typeof UpdateTaskResponseSchema>;
 export type TDictionary = z.infer<typeof DictionarySchema>;
 
 export type TUpdateUser = z.infer<typeof UpdateUserResponseSchema>;
+
+export type TCreateTaskResponse = z.infer<typeof CreateTaskResponseSchema>;

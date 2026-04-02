@@ -3,7 +3,7 @@ import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
 import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
-import { getTaskWithTransformedTime, transformTimeToSeconds } from './tasks.utils';
+import { getTaskWithTransformedTime } from './tasks.utils';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
@@ -48,6 +48,8 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 		if (!newTask) {
 			throw new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError);
 		}
+
+		return newTask;
 	});
 };
 
@@ -172,4 +174,14 @@ const updateTask = (taskData: TUpdateTaskBody, taskUuid: string) => {
 	});
 };
 
-export const tasksService = { createTask, getUserTasks, getTaskByUuid, updateTask };
+const updateTaskEstimate = (value: number, taskUuid: string) => {
+	return prismaAppClient.task.update({
+		where: { id: taskUuid },
+		data: {
+			estimateTime: value,
+			remainingTime: value,
+		},
+	});
+};
+
+export const tasksService = { createTask, getUserTasks, getTaskByUuid, updateTask, updateTaskEstimate };

@@ -1,6 +1,4 @@
 import { z } from 'zod';
-import { TaskParamsSchema, UpdateTaskTimeBodySchema } from './task-logs.validation';
+import { CreateTaskTimeBodySchema } from './task-logs.validation';
 
-export type TUpdateTaskTimeBody = z.infer<typeof UpdateTaskTimeBodySchema>;
-
-export type TTaskParams = z.infer<typeof TaskParamsSchema>;
+export type TCreateTaskTimeBody = z.infer<typeof CreateTaskTimeBodySchema>;

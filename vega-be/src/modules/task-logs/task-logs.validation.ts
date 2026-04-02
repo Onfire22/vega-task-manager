@@ -1,11 +1,8 @@
 import { z } from 'zod';
 
-export const UpdateTaskTimeBodySchema = z.object({
+export const CreateTaskTimeBodySchema = z.object({
 	estimateTime: z.string().optional(),
-	loggedTime: z.string().optional(),
+	loggedTime: z.string(),
 	description: z.string().optional(),
-});
-
-export const TaskParamsSchema = z.object({
-	uuid: z.string(),
+	taskUuid: z.string(),
 });

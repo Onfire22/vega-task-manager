@@ -11,7 +11,7 @@ export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'T
 
 export const LOG_TIME_INITIAL_VALUES = {
 	loggedTime: '',
-	logComment: '',
+	description: '',
 };
 
 export const INITIAL_FIELD_VALUES: TField = {

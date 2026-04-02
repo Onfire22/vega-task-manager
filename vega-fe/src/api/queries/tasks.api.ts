@@ -3,7 +3,9 @@ import { METHODS, ROUTES } from '../constants.ts';
 import type {
 	ICreateTask,
 	IGetUserTasksRequest,
+	IUpdateTaskEstimate,
 	TBaseResponse,
+	TCreateTaskResponse,
 	TTaskResponse,
 	TTasksResponse,
 	TUpdateTaskRequest,
@@ -18,7 +20,7 @@ import {
 
 const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		createTask: builder.mutation<TBaseResponse, ICreateTask>({
+		createTask: builder.mutation<TCreateTaskResponse, ICreateTask>({
 			query: (taskData) => ({
 				url: ROUTES.createTask,
 				method: METHODS.post,
@@ -55,7 +57,21 @@ const tasksApi = baseApi.injectEndpoints({
 			invalidatesTags: ['Task'],
 			extraOptions: { schema: UpdateTaskResponseSchema },
 		}),
+		updateTaskEstimate: builder.mutation<TBaseResponse, IUpdateTaskEstimate>({
+			query: (data) => ({
+				url: `${ROUTES.updateTaskEstimate}${data.uuid}/estimate`,
+				method: METHODS.post,
+				body: data,
+			}),
+			invalidatesTags: ['Task'],
+		}),
 	}),
 });
 
-export const { useCreateTaskMutation, useGetTasksQuery, useGetTaskQuery, useUpdateTaskMutation } = tasksApi;
+export const {
+	useCreateTaskMutation,
+	useGetTasksQuery,
+	useGetTaskQuery,
+	useUpdateTaskMutation,
+	useUpdateTaskEstimateMutation,
+} = tasksApi;

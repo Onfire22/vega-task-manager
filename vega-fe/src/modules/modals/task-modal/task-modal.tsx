@@ -10,9 +10,11 @@ import { useForm } from 'react-hook-form';
 import type { TTaskFormValues } from '@/modules/modals/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateTaskValidationSchema } from '@/modules/modals/validation.ts';
+import { useNavigate } from 'react-router-dom';
 
 const TaskModal = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const [createTask] = useCreateTaskMutation();
 
@@ -28,10 +30,11 @@ const TaskModal = () => {
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
 		try {
-			await createTask(values).unwrap();
+			const response = await createTask(values).unwrap();
 			toast.success('Задача успешно создана');
 			form.reset();
 			dispatch(setActiveModal(null));
+			navigate(`task/${response.id}`);
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

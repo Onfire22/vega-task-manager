@@ -94,16 +94,7 @@ export const ProjectsResponseSchema = z.object({
 });
 
 export const CreateProjectResponseSchema = z.object({
-	project: z.object({
-		id: z.string(),
-		title: z.string(),
-		description: z.string(),
-		code: z.string(),
-		projectStatusUuid: z.string(),
-		deadlineDate: z.string(),
-		createdAt: z.string(),
-		updatedAt: z.string(),
-	}),
+	id: z.string(),
 });
 
 export const ProjectResponseSchema = z.object({
@@ -341,4 +332,8 @@ export const UpdateUserResponseSchema = z.object({
 		createdAt: z.string(),
 		updatedAt: z.string(),
 	}),
+});
+
+export const CreateTaskResponseSchema = z.object({
+	id: z.string(),
 });
