@@ -242,23 +242,6 @@ export const TaskResponseSchema = z.object({
 				secondName: z.string(),
 			})
 			.nullable(),
-		timeLogs: z.array(
-			z.object({
-				id: z.string(),
-				loggedTime: z.object({
-					minutes: z.string().optional(),
-					hours: z.string().optional(),
-				}),
-				description: z.string().nullable().optional(),
-				user: z.object({
-					name: z.string(),
-					secondName: z.string(),
-					id: z.string(),
-				}),
-				createdAt: z.string(),
-				loggedTimeInSecs: z.number().int(),
-			}),
-		),
 		project: z.object({
 			id: z.string(),
 			code: z.string(),
@@ -275,7 +258,7 @@ export const TaskResponseSchema = z.object({
 						hours: z.string().optional(),
 						minutes: z.string().optional(),
 					}),
-					timeInPercents: z.number().int(),
+					timeInPercents: z.number(),
 				})
 				.nullable(),
 			remainingTime: z
@@ -284,7 +267,7 @@ export const TaskResponseSchema = z.object({
 						hours: z.string().optional(),
 						minutes: z.string().optional(),
 					}),
-					timeInPercents: z.number().int(),
+					timeInPercents: z.number(),
 				})
 				.nullable(),
 			totalLoggedTime: z
@@ -293,7 +276,7 @@ export const TaskResponseSchema = z.object({
 						hours: z.string().optional(),
 						minutes: z.string().optional(),
 					}),
-					timeInPercents: z.number().int(),
+					timeInPercents: z.number(),
 				})
 				.nullable(),
 		}),
