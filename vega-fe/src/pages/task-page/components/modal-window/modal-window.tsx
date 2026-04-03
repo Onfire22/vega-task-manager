@@ -32,15 +32,15 @@ const ModalWindow = () => {
 	const handleSubmitForm = form.handleSubmit(async (values) => {
 		if (!values.estimate) return;
 		try {
-			const isLogValue = values.loggedTime && values.estimate === task?.estimateTime;
-
-			if (isLogValue) {
+			if (task?.estimateTime) {
 				await createTaskLog({ ...values, taskUuid: params.uuid! }).unwrap();
 			} else {
 				await updateTaskEstimate({ value: values.estimate, uuid: params.uuid! }).unwrap();
+				await createTaskLog({ ...values, taskUuid: params.uuid! }).unwrap();
 			}
+
 			dispatch(setIsModalShown(false));
-			toast.success(isLogValue ? 'Время успешно записано' : 'Задача успешно оценена');
+			toast.success(task?.estimateTime ? 'Время успешно записано' : 'Задача успешно оценена');
 		} catch (e: unknown) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

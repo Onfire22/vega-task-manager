@@ -55,7 +55,7 @@ const ModalWindowView: React.FC<IProps> = ({ onLogWorkModalShown, isModalShown, 
 				</div>
 				<div className="w-full">
 					<Controller
-						name="logComment"
+						name="description"
 						control={form.control}
 						render={({ field, fieldState }) => (
 							<CustomTextarea
