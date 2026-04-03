@@ -3,7 +3,7 @@ import { useDictionariesOptions, useTask } from '../../api/hooks.ts';
 import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
 import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
-import type { TDictionariesWithColors } from '@/pages/task-page/types.ts';
+import type { TDictionariesWithColors, TTPayload } from '@/pages/task-page/types.ts';
 import { useGetTaskLogsQuery } from '@/api/queries/task-logs.ts';
 
 export const useTaskData = (uuid?: string) => {
@@ -114,6 +114,7 @@ export const useTimeLogs = (uuid: string) => {
 				...log,
 				description: log.description || 'No description',
 				user: {
+					id: log.user.id,
 					name: `${log.user.name} ${log.user.secondName}`,
 					avatar: {
 						color: getAvatarColor(log.user.id),
@@ -126,4 +127,33 @@ export const useTimeLogs = (uuid: string) => {
 		}) ?? [];
 
 	return { logs, isLoading };
+};
+
+export const useTaskPayload = (uuid: string) => {
+	const { logs, isLoading } = useTimeLogs(uuid);
+
+	if (!logs.length) return { chartData: null, isLoading };
+
+	const data = logs.reduce<TTPayload>((acc, item) => {
+		if (!acc[item.user.id]) {
+			acc[item.user.id] = {
+				value: item.loggedTimeInSecs,
+				name: item.user.name,
+			};
+		} else {
+			acc[item.user.id].value += item.loggedTimeInSecs;
+		}
+
+		return acc;
+	}, {});
+
+	const chartData = Object.values(data).map((log, index) => {
+		return {
+			value: log.value,
+			name: log.name,
+			fill: `var(--chart-${index})`,
+		};
+	});
+
+	return { chartData, isLoading };
 };
