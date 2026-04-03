@@ -183,7 +183,7 @@ const TaskView: React.FC<IProps> = ({
 				</div>
 				<div className="p-6.25">
 					{activeTab === 'comments' && <Comments />}
-					{activeTab === 'logs' && <TaskLogs logs={task.timeLogs} />}
+					{activeTab === 'logs' && <TaskLogs />}
 				</div>
 			</div>
 			<aside className="w-[40%] min-h-[calc(100vh-53px)] border-l">

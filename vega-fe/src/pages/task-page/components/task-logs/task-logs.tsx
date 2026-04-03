@@ -1,12 +1,12 @@
 import { TaskLogsView } from './task-logs.view.tsx';
-import type { ITimeLog } from '../../types.ts';
-import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useTimeLogs } from '@/pages/task-page/hooks.ts';
 
-interface IProps {
-	logs: Array<ITimeLog>;
-}
+const TaskLogs = () => {
+	const params = useParams();
 
-const TaskLogs: React.FC<IProps> = ({ logs }) => {
+	const { logs } = useTimeLogs(params.uuid!);
+
 	return <TaskLogsView logs={logs} />;
 };
 

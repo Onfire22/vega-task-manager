@@ -7,29 +7,31 @@ interface IProps {
 
 const TaskLogsView: React.FC<IProps> = ({ logs }) => {
 	return (
-		<div className="flex flex-column gap-2.5 text-[14px]">
+		<ul className="flex flex-col gap-2.5 text-[14px]">
 			{logs.map((log) => {
 				return (
-					<div className="p-2.5 hover:bg-background" key={log.id}>
-						<div className="mb-2.5 flex items-center justify-between">
-							<div className="flex items-center gap-1.25">
-								<a>{`${log.user.name} ${log.user.secondName}`}</a>
-								<span>logged</span>
-								<div>{log.createdAt}</div>
+					<li className="p-1.25 rounded-[5px] flex flex-col gap-1.25 hover:bg-secondary" key={log.id}>
+						<div className="flex gap-2.5 items-start">
+							<div
+								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
+								style={{ backgroundColor: log.user.avatar.color }}
+							>
+								{log.user.avatar.initials}
+							</div>
+							<div className="flex flex-col">
+								<span>{log.user.name}</span>
+								<div className="flex items-center gap-2">
+									<span>залогал</span>
+									<span>{log.loggedTime}</span>
+									<span className="text-muted-foreground text-[12px]">{log.createdAt}</span>
+								</div>
 							</div>
 						</div>
-						<div className="flex items-center gap-1.25 mb-1.25">
-							<div>Time:</div>
-							<div>{log.loggedTime}</div>
-						</div>
-						<div className="flex items-center gap-1.25 mb-1.25">
-							<div>Work log:</div>
-							<div>{`${log.description}`}</div>
-						</div>
-					</div>
+						<div>{log.description}</div>
+					</li>
 				);
 			})}
-		</div>
+		</ul>
 	);
 };
 

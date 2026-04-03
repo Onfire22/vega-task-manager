@@ -1,35 +1,10 @@
-import { ITaskLog, ITime, TaskListItem, TPrismaTask } from './tasks.types';
-
-export const isDateEquals = (createdDate: Date, updatedDate?: Date) => {
-	if (!updatedDate) return false;
-
-	const date1 = new Date(createdDate);
-	const date2 = new Date(updatedDate);
-
-	return date1.getTime() === date2.getTime();
-};
-
-export const transformSecondsToTime = (seconds: number) => {
-	const hours = Math.floor(seconds / 3600);
-	const minutes = Math.floor((seconds % 3600) / 60);
-
-	const result: Partial<ITime> = {};
-
-	if (hours) {
-		result.hours = `${hours}h`;
-	}
-
-	if (minutes) {
-		result.minutes = `${minutes}m`;
-	}
-
-	return result;
-};
+import { ITaskLog, TaskListItem, TPrismaTask } from './tasks.types';
+import { transformSecondsToTime } from '../../common/utils';
 
 export const getTaskWithTransformedTime = (task: TPrismaTask | TaskListItem) => {
-	const { estimateTime, remainingTime, ...rest } = task;
+	const { estimateTime, remainingTime, timeLogs, ...rest } = task;
 
-	const totalLoggedTimeInSecs = task.timeLogs.reduce((acc, log) => {
+	const totalLoggedTimeInSecs = timeLogs.reduce((acc, log) => {
 		if (log.loggedTime) {
 			acc += log.loggedTime;
 		}
@@ -70,21 +45,5 @@ export const getTaskWithTransformedTime = (task: TPrismaTask | TaskListItem) => 
 		};
 	}
 
-	return {
-		...rest,
-		logInfo,
-		timeLogs:
-			task.timeLogs.length > 0
-				? task.timeLogs.map((log) => {
-						const { updatedAt, ...rest } = log;
-
-						return {
-							...rest,
-							...(isDateEquals(log.createdAt, updatedAt) ? {} : { updatedAt: log.updatedAt }),
-							loggedTime: log.loggedTime ? transformSecondsToTime(log.loggedTime) : null,
-							loggedTimeInSecs: log.loggedTime,
-						};
-					})
-				: [],
-	};
+	return { ...rest, logInfo };
 };

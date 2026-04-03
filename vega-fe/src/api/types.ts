@@ -7,6 +7,7 @@ import {
 	CurrentUserResponseSchema,
 	DictionariesResponseSchema,
 	DictionarySchema,
+	GetTaskLogsResponseSchema,
 	ProjectResponseSchema,
 	ProjectsResponseSchema,
 	SigInUserResponseSchema,
@@ -164,3 +165,5 @@ export type TDictionary = z.infer<typeof DictionarySchema>;
 export type TUpdateUser = z.infer<typeof UpdateUserResponseSchema>;
 
 export type TCreateTaskResponse = z.infer<typeof CreateTaskResponseSchema>;
+
+export type TGetTaskLogsResponse = z.infer<typeof GetTaskLogsResponseSchema>;

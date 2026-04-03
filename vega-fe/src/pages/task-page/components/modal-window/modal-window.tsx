@@ -30,7 +30,6 @@ const ModalWindow = () => {
 	});
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
-		console.log(values);
 		if (!values.estimate) return;
 		try {
 			const isLogValue = values.loggedTime && values.estimate === task?.estimateTime;
@@ -57,9 +56,6 @@ const ModalWindow = () => {
 			form.setValue('estimate', task?.estimateTime);
 		}
 	}, [task?.estimateTime, form]);
-
-	console.log(form.getValues());
-	console.log(task);
 
 	return (
 		<ModalWindowView

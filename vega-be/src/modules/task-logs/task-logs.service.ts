@@ -1,10 +1,10 @@
-import { transformTimeToSeconds } from '../../common/utils';
+import { isDateEquals, transformSecondsToTime, transformTimeToSeconds } from '../../common/utils';
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { TUpdateTaskTimeBody } from './task-logs.types';
+import { TCreateTaskTimeBody } from './task-logs.types';
 
-const createTaskLog = async (formData: TUpdateTaskTimeBody, userId: string) => {
+const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
 	const loggedTime = transformTimeToSeconds(formData?.loggedTime);
 
 	const estimate = transformTimeToSeconds(formData?.estimateTime);
@@ -69,4 +69,37 @@ const createTaskLog = async (formData: TUpdateTaskTimeBody, userId: string) => {
 	});
 };
 
-export const taskLogsSService = { createTaskLog };
+const getTaskLogs = async (taskUuid: string) => {
+	const taskLogs = await prismaAppClient.timeLog.findMany({
+		where: {
+			taskUuid,
+		},
+		select: {
+			id: true,
+			loggedTime: true,
+			description: true,
+			createdAt: true,
+			updatedAt: true,
+			user: {
+				select: {
+					id: true,
+					name: true,
+					secondName: true,
+					userName: true,
+				},
+			},
+		},
+	});
+
+	return taskLogs.map((log) => {
+		const { updatedAt, ...rest } = log;
+		return {
+			...rest,
+			...(!isDateEquals(log.createdAt, updatedAt) ? {} : { updatedAt: log.updatedAt }),
+			loggedTime: log.loggedTime ? transformSecondsToTime(log.loggedTime) : null,
+			loggedTimeInSecs: log.loggedTime,
+		};
+	});
+};
+
+export const taskLogsSService = { createTaskLog, getTaskLogs };

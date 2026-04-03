@@ -1,5 +1,6 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { TCreateCommentBody } from './comments.types';
+import { isDateEquals } from '../../common/utils';
 
 const getComments = async (taskUuid: string) => {
 	const comments = await prismaAppClient.comment.findMany({
@@ -24,7 +25,7 @@ const getComments = async (taskUuid: string) => {
 
 		return {
 			...rest,
-			...(comment.createdAt.getTime() !== updatedAt.getTime() ? { updatedAt: updatedAt } : {}),
+			...(!isDateEquals(comment.createdAt, updatedAt) ? { updatedAt } : {}),
 		};
 	});
 };

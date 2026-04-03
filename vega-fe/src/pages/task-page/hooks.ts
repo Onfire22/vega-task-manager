@@ -4,6 +4,7 @@ import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FOR
 import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
 import type { TDictionariesWithColors } from '@/pages/task-page/types.ts';
+import { useGetTaskLogsQuery } from '@/api/queries/task-logs.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
@@ -29,13 +30,13 @@ export const useTaskData = (uuid?: string) => {
 		estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
 		remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
 		totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
-		timeLogs: task.timeLogs.map((log) => {
-			return {
-				...log,
-				loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`,
-				createdAt: format(log.createdAt, DATE_TIME_FORMAT),
-			};
-		}),
+		// timeLogs: task.timeLogs.map((log) => {
+		// 	return {
+		// 		...log,
+		// 		loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`,
+		// 		createdAt: format(log.createdAt, DATE_TIME_FORMAT),
+		// 	};
+		// }),
 		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
 		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
 	};
@@ -100,4 +101,29 @@ export const useDictionariesWithColors = () => {
 	}, {} as TDictionariesWithColors);
 
 	return { dictionariesOptions: options };
+};
+
+export const useTimeLogs = (uuid: string) => {
+	const { data, isLoading } = useGetTaskLogsQuery(uuid);
+
+	if (isLoading) return { logs: [], isLoading };
+
+	const logs =
+		data?.timeLogs.map((log) => {
+			return {
+				...log,
+				description: log.description || 'No description',
+				user: {
+					name: `${log.user.name} ${log.user.secondName}`,
+					avatar: {
+						color: getAvatarColor(log.user.id),
+						initials: log.user.name.substring(0, 2),
+					},
+				},
+				loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`.trim(),
+				createdAt: format(log.createdAt, DATE_TIME_FORMAT),
+			};
+		}) ?? [];
+
+	return { logs, isLoading };
 };

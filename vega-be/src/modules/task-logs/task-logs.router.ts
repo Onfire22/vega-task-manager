@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import { ROUTES } from '../../constants';
-import { createTaskLog } from './task-logs.controller';
+import { createTaskLog, getTaskLogs } from './task-logs.controller';
 import { validateMiddleware } from '../../common/middlewares';
-import { CreateTaskTimeBodySchema } from './task-logs.validation';
+import { CreateTaskTimeBodySchema, getTaskLogsPramsSchema } from './task-logs.validation';
 
 const taskLogsRouter = Router();
 
 taskLogsRouter.post(ROUTES.createTaskLog, validateMiddleware(CreateTaskTimeBodySchema), createTaskLog);
+taskLogsRouter.get(ROUTES.getTaskLogs, validateMiddleware(getTaskLogsPramsSchema, 'params'), getTaskLogs);
 
 export { taskLogsRouter };

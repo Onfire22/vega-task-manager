@@ -6,3 +6,7 @@ export const CreateTaskTimeBodySchema = z.object({
 	description: z.string().optional(),
 	taskUuid: z.string(),
 });
+
+export const getTaskLogsPramsSchema = z.object({
+	uuid: z.string(),
+});

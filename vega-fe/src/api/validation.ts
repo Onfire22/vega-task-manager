@@ -193,7 +193,6 @@ export const TasksResponseSchema = z.object({
 				label: z.string(),
 				key: z.string(),
 			}),
-			timeLogs: z.array(z.any()).optional(),
 			estimateTime: z.object({}).nullable().optional(),
 			createdAt: z.string(),
 			totalLoggedTime: z
@@ -336,4 +335,26 @@ export const UpdateUserResponseSchema = z.object({
 
 export const CreateTaskResponseSchema = z.object({
 	id: z.string(),
+});
+
+export const GetTaskLogsResponseSchema = z.object({
+	timeLogs: z.array(
+		z.object({
+			id: z.string(),
+			loggedTime: z.object({
+				minutes: z.string().optional(),
+				hours: z.string().optional(),
+			}),
+			description: z.string().optional(),
+			createdAt: z.string(),
+			updatedAt: z.string().optional(),
+			user: z.object({
+				id: z.string(),
+				name: z.string(),
+				secondName: z.string(),
+				userName: z.string(),
+			}),
+			loggedTimeInSecs: z.number().int(),
+		}),
+	),
 });
