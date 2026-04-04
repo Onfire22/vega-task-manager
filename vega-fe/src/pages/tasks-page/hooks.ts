@@ -5,12 +5,21 @@ import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
 import { useDictionaries } from '../../api/hooks.ts';
 import { useMemo } from 'react';
+import { getPaginationPages } from '@/app/utils.ts';
 
 export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());
+
 	const { data, isSuccess, isLoading } = useGetTasksQuery(filters);
 
-	if (!isSuccess) return { userTasks: [], isTasksLoading: isLoading };
+	if (!isSuccess)
+		return {
+			userTasks: [],
+			pagination: { pages: [], activePage: 1, totalPages: 0, hasNext: false, hasPrev: false },
+			isTasksLoading: isLoading,
+		};
+
+	const paginationPages = getPaginationPages(data.meta.page, data.meta.totalPages);
 
 	const tasks = data.tasks.map((item) => {
 		return {
@@ -19,7 +28,15 @@ export const useUserTasks = () => {
 		};
 	});
 
-	return { userTasks: tasks, isTasksLoading: isLoading };
+	const pagination = {
+		pages: paginationPages,
+		activePage: data.meta.page,
+		totalPages: data.meta.totalPages,
+		hasNext: data.meta.hasNext,
+		hasPrev: data.meta.hasPrev,
+	};
+
+	return { userTasks: tasks, pagination, isTasksLoading: isLoading };
 };
 
 export const useKanbanTasks = () => {

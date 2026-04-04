@@ -1,41 +1,64 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../constants';
-import { TCreateProjectBody, TEditProjectBody } from './projects.types';
+import { IPagination, TCreateProjectBody, TEditProjectBody } from './projects.types';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
-const getProjects = async () => {
-	const projects = await prismaAppClient.project.findMany({
-		select: {
-			id: true,
-			code: true,
-			title: true,
-			createdAt: true,
-			projectStatus: {
-				select: {
-					id: true,
-					key: true,
-					label: true,
+const getProjects = async (pagination: IPagination) => {
+	const { page, pageLimit } = pagination;
+
+	const { projects, total } = await prismaAppClient.$transaction(async (tx) => {
+		const projectsData = await tx.project.findMany({
+			skip: (page - 1) * pageLimit,
+			take: pageLimit,
+			select: {
+				id: true,
+				code: true,
+				title: true,
+				createdAt: true,
+				projectStatus: {
+					select: {
+						id: true,
+						key: true,
+						label: true,
+					},
 				},
-			},
-			memberships: {
-				select: {
-					userRole: { select: { id: true, label: true, key: true } },
-					user: { select: { id: true, name: true, secondName: true } },
+				memberships: {
+					select: {
+						userRole: { select: { id: true, label: true, key: true } },
+						user: { select: { id: true, name: true, secondName: true } },
+					},
 				},
-			},
-			tasks: {
-				select: {
-					taskStatus: {
-						select: { id: true, label: true, key: true },
+				tasks: {
+					select: {
+						taskStatus: {
+							select: { id: true, label: true, key: true },
+						},
 					},
 				},
 			},
-		},
+		});
+
+		const total = await tx.project.count();
+
+		return {
+			projects: normalizeProjectsList(projectsData),
+			total,
+		};
 	});
 
-	return normalizeProjectsList(projects);
+	return {
+		projects,
+		meta: {
+			total,
+			page,
+			pageLimit,
+			hasPrev: page > 1,
+			hasNext: page * pageLimit < total,
+			totalPages: Math.ceil(total / pageLimit),
+		},
+	};
 };
 
 const createProject = async (projectData: TCreateProjectBody, userId: string) => {
@@ -91,7 +114,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			data: {
 				title,
 				description,
-				deadlineDate: new Date(deadlineDate).toISOString(),
+				...(deadlineDate ? { deadlineDate: new Date(deadlineDate).toISOString() } : {}),
 				projectStatusUuid: p_backlog.id,
 				memberships: {
 					create: usersData,

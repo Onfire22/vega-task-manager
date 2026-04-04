@@ -1,6 +1,6 @@
 import { useGetDictionariesQuery } from './queries/dictionaries.api.ts';
 import { CACHING_SETTINGS } from '../app/constants.ts';
-import type { IFiltersRequest, TDictionariesTypes } from './types.ts';
+import type { IFiltersRequest, IProjectsMeta, TDictionariesTypes } from './types.ts';
 import { useGetUsersQuery } from './queries/users.api.ts';
 import { useGetProjectByUuidQuery, useGetProjectsQuery } from './queries/projects.api.ts';
 import { useGetTaskQuery } from './queries/tasks.api.ts';
@@ -55,16 +55,16 @@ export const useUsersOptions = (filters: IFiltersRequest, skip = false) => {
 	return { usersListOptions, isUsersLoading };
 };
 
-export const useProjects = () => {
-	const { data, isLoading, isSuccess } = useGetProjectsQuery();
+export const useProjects = (meta: IProjectsMeta) => {
+	const { data, isLoading, isSuccess } = useGetProjectsQuery(meta);
 
 	const projectsList = isSuccess ? data.projects : [];
 
-	return { projectsList, isProjectsLoading: isLoading };
+	return { projectsList, meta: data?.meta, isProjectsLoading: isLoading };
 };
 
-export const useProjectsOptions = () => {
-	const { projectsList, isProjectsLoading } = useProjects();
+export const useProjectsOptions = (meta: IProjectsMeta) => {
+	const { projectsList, isProjectsLoading } = useProjects(meta);
 
 	const projectOptions = projectsList.map((project) => ({
 		label: project.title,

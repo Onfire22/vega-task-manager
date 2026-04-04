@@ -12,3 +12,13 @@ export const TABS = [
 	{ text: 'Таблица', value: 'table', icon: TableOfContents },
 	{ text: 'Карточки', value: 'cards', icon: Grid2x2 },
 ];
+
+export const TABLE_PAGINATION = {
+	pageLimit: 15,
+	page: 1,
+};
+
+export const CARDS_PAGINATION = {
+	pageLimit: 10000,
+	page: 1,
+};

@@ -91,6 +91,14 @@ export const ProjectsResponseSchema = z.object({
 			tasksCount: z.number().int(),
 		}),
 	),
+	meta: z.object({
+		total: z.number().int(),
+		page: z.number().int(),
+		pageLimit: z.number().int(),
+		hasPrev: z.boolean(),
+		hasNext: z.boolean(),
+		totalPages: z.number().int(),
+	}),
 });
 
 export const CreateProjectResponseSchema = z.object({
@@ -205,6 +213,14 @@ export const TasksResponseSchema = z.object({
 			totalLoggedTimeInSecs: z.number().int().nullable().optional(),
 		}),
 	),
+	meta: z.object({
+		total: z.number().int(),
+		page: z.number().int(),
+		pageLimit: z.number().int(),
+		hasPrev: z.boolean(),
+		hasNext: z.boolean(),
+		totalPages: z.number().int(),
+	}),
 });
 
 export const TaskResponseSchema = z.object({

@@ -18,7 +18,7 @@ const TaskModal = () => {
 
 	const [createTask] = useCreateTaskMutation();
 
-	const { projectOptions } = useProjectsOptions();
+	const { projectOptions } = useProjectsOptions({ meta: { pagination: { page: 1, pageLimit: 100000 } } });
 	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(BASE_DICTIONARIES_META);
 
 	const activeModal = useAppSelector(getActiveModalSelector());

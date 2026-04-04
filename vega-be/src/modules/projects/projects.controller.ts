@@ -1,13 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 import { RESPONSE_STATUSES } from '../../constants';
-import { TCreateProjectBody, TEditProjectBody, TProjectParams } from './projects.types';
+import { TCreateProjectBody, TEditProjectBody, TGetProjectsBody, TProjectParams } from './projects.types';
 import { projectsService } from './projects.service';
 
-export const getProjects = async (req: Request, res: Response, next: NextFunction) => {
+export const getProjects = async (req: Request<{}, {}, TGetProjectsBody>, res: Response, next: NextFunction) => {
+	console.log(req.body);
 	try {
-		const projects = await projectsService.getProjects();
+		const {
+			meta: { pagination },
+		} = req.body;
 
-		res.status(200).json({ projects });
+		const projects = await projectsService.getProjects(pagination);
+
+		res.status(200).json(projects);
 	} catch (e) {
 		next(e);
 	}

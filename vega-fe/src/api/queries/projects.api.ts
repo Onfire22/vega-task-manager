@@ -2,6 +2,7 @@ import { baseApi } from '../index.ts';
 import { METHODS, ROUTES } from '../constants.ts';
 import type {
 	IProjectCreate,
+	IProjectsMeta,
 	IProjectUpdateRequest,
 	IUpdateUserRole,
 	TBaseResponse,
@@ -18,10 +19,11 @@ import {
 
 const projectsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		getProjects: builder.query<TProjectsResponse, void>({
-			query: () => ({
+		getProjects: builder.query<TProjectsResponse, IProjectsMeta>({
+			query: (meta) => ({
 				url: ROUTES.projects,
-				method: METHODS.get,
+				method: METHODS.post,
+				body: meta,
 			}),
 			providesTags: ['Projects'],
 			extraOptions: { schema: ProjectsResponseSchema },

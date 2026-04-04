@@ -8,8 +8,6 @@ export const createTask = async (req: Request<{}, {}, TCreateTaskBody>, res: Res
 	try {
 		const task = await tasksService.createTask(req.body, res.locals.user.id);
 
-		console.log(task);
-
 		res.status(RESPONSE_STATUSES.success).json({ id: task.id });
 	} catch (e) {
 		next(e);
@@ -20,7 +18,7 @@ export const getUserTasks = async (req: Request<{}, {}, TUserTasksBody>, res: Re
 	try {
 		const tasks = await tasksService.getUserTasks(req.body, res.locals.user.id);
 
-		res.status(200).json({ tasks });
+		res.status(200).json(tasks);
 	} catch (e) {
 		next(e);
 	}
