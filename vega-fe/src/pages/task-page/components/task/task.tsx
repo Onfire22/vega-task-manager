@@ -2,7 +2,7 @@ import { TaskView } from './task.view.tsx';
 import { useUsersOptions } from '../../../../api/hooks.ts';
 import { INITIAL_FIELD_VALUES } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
-import { useDictionariesWithColors, useTaskData } from '../../hooks.ts';
+import { useDictionariesWithColors, useTaskData, useTaskPayload } from '../../hooks.ts';
 import { useUpdateTaskMutation } from '../../../../api/queries/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../../store/hooks.ts';
@@ -11,6 +11,13 @@ import { useGetCurrentUserQuery } from '../../../../api/queries/auth.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { toast } from 'sonner';
 import type { TField, TTaskFields } from '@/pages/task-page/types.ts';
+import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
+import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
+
+const activityComponents = {
+	comments: Comments,
+	logs: TaskLogs,
+};
 
 const Task = () => {
 	const params = useParams();
@@ -29,6 +36,7 @@ const Task = () => {
 	);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
+	const { chartData } = useTaskPayload(params.uuid!);
 
 	const handleSetActiveTab = (value: string) => {
 		if (value) {
@@ -72,6 +80,8 @@ const Task = () => {
 		dispatch(setIsModalShown(true));
 	};
 
+	const component = activityComponents[activeTab as keyof typeof activityComponents];
+
 	return isTaskLoading ? (
 		<CustomLoader />
 	) : (
@@ -82,6 +92,8 @@ const Task = () => {
 			usersListOptions={usersListOptions}
 			options={dictionariesOptions ?? { taskType: [], taskPriority: [], taskStatus: [] }}
 			currentUserId={data?.currentUser.id}
+			component={component}
+			chartData={chartData}
 			onSetFieldToEdit={handleSetFieldToEdit}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}

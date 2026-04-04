@@ -1,9 +1,7 @@
 import React from 'react';
 import { BLUE_COLOR, RED_COLOR, TABS, TEAL_COLOR } from '../../constants.ts';
 import { ArrowBigRight, Plus } from 'lucide-react';
-import type { ITask, TField, TOption, TTaskFields } from '../../types.ts';
-import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
-import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
+import type { IChartData, ITask, TField, TOption, TTaskFields } from '../../types.ts';
 import { Link } from 'react-router-dom';
 import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
@@ -16,6 +14,7 @@ import { MarkdownEditor } from '@/components/common/forms/markdown-editor.tsx';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+import { CustomChart } from '@/components/common/ui/custom-chart.tsx';
 
 interface IProps {
 	task: ITask | null;
@@ -33,6 +32,8 @@ interface IProps {
 	options: { taskType: Array<TOption>; taskPriority: Array<TOption>; taskStatus: Array<TOption> };
 	usersListOptions: Array<{ label: string; value: string }>;
 	onSetActiveTab: (value: string) => void;
+	component: React.ComponentType;
+	chartData: Array<IChartData> | null;
 }
 
 const TaskView: React.FC<IProps> = ({
@@ -48,6 +49,8 @@ const TaskView: React.FC<IProps> = ({
 	currentUserId,
 	onSetActiveTab,
 	activeTab,
+	chartData,
+	component: Component,
 }) => {
 	if (!task) return null;
 	return (
@@ -182,8 +185,7 @@ const TaskView: React.FC<IProps> = ({
 					<CustomTabs variant="line" triggers={TABS} activeTab={activeTab} onChange={onSetActiveTab} />
 				</div>
 				<div className="p-6.25">
-					{activeTab === 'comments' && <Comments />}
-					{activeTab === 'logs' && <TaskLogs />}
+					<Component />
 				</div>
 			</div>
 			<aside className="w-[40%] min-h-[calc(100vh-53px)] border-l">
@@ -290,6 +292,16 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				</div>
+				{chartData && (
+					<div className="border-b">
+						<div className="p-3.75">
+							<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Вклад в задачу</div>
+							<div className="flex items-center justify-center">
+								<CustomChart data={chartData} />
+							</div>
+						</div>
+					</div>
+				)}
 				<div className="border-b">
 					<div className="p-3.75">
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Проект</div>

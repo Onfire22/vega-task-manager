@@ -91,3 +91,12 @@ export interface TField {
 	fieldName: TTaskFields | '';
 	value: string;
 }
+
+export type TTPayload = Record<string, { value: number; name: string }>;
+
+export interface IChartData {
+	value: number;
+	name: string;
+	fill: string;
+	custom?: string;
+}
