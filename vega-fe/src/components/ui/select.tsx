@@ -89,7 +89,12 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
 	);
 }
 
-function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+function SelectItem({
+	className,
+	children,
+	textValue,
+	...props
+}: React.ComponentProps<typeof SelectPrimitive.Item> & { textValue?: string }) {
 	return (
 		<SelectPrimitive.Item
 			data-slot="select-item"
@@ -97,6 +102,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
 				"relative flex w-full cursor-default gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:gap-2",
 				className,
 			)}
+			textValue={textValue}
 			{...props}
 		>
 			<span className="pointer-events-none absolute right-2 flex size-4 justify-center">
@@ -104,7 +110,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
 					<CheckIcon className="pointer-events-none" />
 				</SelectPrimitive.ItemIndicator>
 			</span>
-			{children}
+			{textValue ? children : <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>}
 		</SelectPrimitive.Item>
 	);
 }

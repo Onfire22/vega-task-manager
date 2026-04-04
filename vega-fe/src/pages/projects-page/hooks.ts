@@ -1,19 +1,27 @@
 import { useDictionaries, useProjects } from '../../api/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
+import { useAppSelector } from '@/store/hooks.ts';
+import { getProjectsMetaSelector } from '@/pages/projects-page/selectors.ts';
+import { getPaginationPages } from '@/app/utils.ts';
 
 export const useProjectsTableData = () => {
+	const meta = useAppSelector(getProjectsMetaSelector());
+
 	const { dictionaries, isDictionariesLoading } = useDictionaries(['ROLE_TYPE']);
-	const { projectsList, isProjectsLoading } = useProjects();
+	const { projectsList, meta: paginationData, isProjectsLoading } = useProjects(meta);
 
 	const isProjectDataLoading = isDictionariesLoading || isProjectsLoading;
 
-	if (isProjectDataLoading) {
+	if (isProjectDataLoading || !projectsList || !paginationData) {
 		return {
 			projects: [],
-			isLoading: true,
+			pagination: { pages: [], activePage: 1, totalPages: 0, hasNext: false, hasPrev: false },
+			isLoading: isProjectDataLoading,
 		};
 	}
+
+	const paginationPages = getPaginationPages(paginationData.page, paginationData.totalPages);
 
 	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.key === 'owner')?.id;
 
@@ -27,5 +35,13 @@ export const useProjectsTableData = () => {
 		};
 	});
 
-	return { projects, isLoading: false };
+	const pagination = {
+		pages: paginationPages,
+		activePage: paginationData.page,
+		totalPages: paginationData.totalPages,
+		hasNext: paginationData.hasNext,
+		hasPrev: paginationData.hasPrev,
+	};
+
+	return { projects, pagination, isLoading: false };
 };

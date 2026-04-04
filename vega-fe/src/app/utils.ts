@@ -34,3 +34,26 @@ export const useDebounce = <T>(value: T, delay: number): T => {
 
 	return debounced;
 };
+
+export const getPaginationPages = (currentPage: number, totalPages: number) => {
+	if (totalPages <= 5) {
+		return Array.from({ length: totalPages }, (_, i) => i + 1);
+	}
+
+	const first = [1, 2];
+	const last = [totalPages - 1, totalPages];
+
+	const middle = [currentPage - 1, currentPage, currentPage + 1].filter((p) => p > 2 && p < totalPages - 1);
+
+	const pages = [...new Set([...first, ...middle, ...last])].sort((a, b) => a - b);
+
+	const result: (number | null)[] = [];
+	pages.forEach((p, i) => {
+		if (i > 0 && p - pages[i - 1] > 1) {
+			result.push(null);
+		}
+		result.push(p);
+	});
+
+	return result;
+};

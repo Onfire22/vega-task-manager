@@ -6,6 +6,7 @@ export interface IInitialState {
 		direction: 'asc' | 'desc';
 	};
 	filters: IFilters;
+	pagination: { pageLimit: number; page: number };
 }
 
 export interface IFilters {
@@ -47,4 +48,12 @@ export interface IDictionaries {
 	taskPriority: Array<IOptionType>;
 	taskStatus: Array<IOptionType>;
 	taskType: Array<IOptionType>;
+}
+
+export interface IPagination {
+	pages: Array<number | null>;
+	activePage: number;
+	hasNext: boolean;
+	hasPrev: boolean;
+	totalPages: number;
 }

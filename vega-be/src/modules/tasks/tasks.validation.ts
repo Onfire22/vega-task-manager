@@ -19,6 +19,12 @@ export const UserTasksBodySchema = z.object({
 		taskStatus: z.array(z.string()).optional(),
 		taskType: z.array(z.string()).optional(),
 	}),
+	meta: z.object({
+		pagination: z.object({
+			page: z.number(),
+			pageLimit: z.number(),
+		}),
+	}),
 });
 
 export const TaskParamsSchema = z.object({

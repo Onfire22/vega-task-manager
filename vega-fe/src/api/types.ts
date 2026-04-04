@@ -134,6 +134,12 @@ export interface IUpdateTaskEstimate {
 	uuid: string;
 }
 
+export interface IProjectsMeta {
+	meta: {
+		pagination: { pageLimit: number; page: number };
+	};
+}
+
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
 
 export type TSignUpResponse = z.infer<typeof SignUpUserResponseSchema>;

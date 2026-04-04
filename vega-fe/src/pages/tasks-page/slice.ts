@@ -13,6 +13,10 @@ export const initialState: IInitialState = {
 		taskStatusUuid: {},
 		taskStackUuid: {},
 	},
+	pagination: {
+		pageLimit: 15,
+		page: 1,
+	},
 };
 
 const tasksSlice = createSlice({
@@ -31,9 +35,12 @@ const tasksSlice = createSlice({
 		setFilters: (state, action: PayloadAction<IFilters>) => {
 			state.filters = action.payload;
 		},
+		setPagination: (state, action: PayloadAction<{ pageLimit: number; page: number }>) => {
+			state.pagination = action.payload;
+		},
 	},
 });
 
-export const { setActiveTab, setIsAssignee, setSorting, setFilters } = tasksSlice.actions;
+export const { setActiveTab, setIsAssignee, setSorting, setFilters, setPagination } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

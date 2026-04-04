@@ -7,7 +7,7 @@ import { CreateProjectBodySchema, EditProjectBodySchema, ProjectParamsSchema } f
 
 const projectsRouter = Router();
 
-projectsRouter.get(ROUTES.projects, getProjects);
+projectsRouter.post(ROUTES.projects, getProjects);
 projectsRouter.post(ROUTES.projectsCreate, validateMiddleware(CreateProjectBodySchema), createProject);
 projectsRouter.get(ROUTES.project, validateMiddleware(ProjectParamsSchema, 'params'), getProjectByUuid);
 projectsRouter.post(

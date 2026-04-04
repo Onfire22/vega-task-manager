@@ -11,6 +11,9 @@ export const getSortingSelector = () => (state: RootState) => state.tasksReducer
 
 export const getFiltersStateSelector = () => (state: RootState) => state.tasksReducer?.filters || initialState.filters;
 
+export const getPaginationSelector = () => (state: RootState) =>
+	state.tasksReducer?.pagination || initialState.pagination;
+
 export const getActiveFilters = () =>
 	createSelector(getFiltersStateSelector(), (filters) => {
 		return Object.entries(filters).reduce<Record<string, Array<string>>>((acc, [key, value]) => {
@@ -31,7 +34,8 @@ export const getFiltersSelector = () =>
 		getSortingSelector(),
 		getIsAssigneeSelector(),
 		getActiveFilters(),
-		(sorting, isAssignee, filters) => {
+		getPaginationSelector(),
+		(sorting, isAssignee, filters, pagination) => {
 			const activeFilters = Object.entries(filters).reduce<Record<string, Array<string>>>((acc, [key, value]) => {
 				if (value?.length > 0) {
 					acc[key] = value;
@@ -44,6 +48,7 @@ export const getFiltersSelector = () =>
 				sorting,
 				isAssignee,
 				filters: activeFilters,
+				meta: { pagination },
 			};
 		},
 	);

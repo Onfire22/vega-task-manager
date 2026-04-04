@@ -54,7 +54,14 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 };
 
 const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
-	const { isAssignee, sorting, filters } = taskData;
+	const {
+		isAssignee,
+		sorting,
+		filters,
+		meta: { pagination },
+	} = taskData;
+
+	const { page, pageLimit } = pagination;
 
 	const filtersData = Object.keys(filters).length > 0 ? filters : null;
 
@@ -62,45 +69,71 @@ const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
 		? Object.fromEntries(Object.entries(filtersData).map(([key, value]) => [key, { in: value }]))
 		: {};
 
-	const tasks = await prismaAppClient.task.findMany({
-		where: {
-			...where,
-			...(isAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
-		},
-		orderBy: {
-			[sorting.column]: sorting.direction,
-		},
-		select: {
-			id: true,
-			code: true,
-			title: true,
-			description: true,
-			remainingTime: true,
-			taskPriority: {
-				select: DICTIONARY_SELECT,
+	const { tasks, total } = await prismaAppClient.$transaction(async (tx) => {
+		const tasksData = await tx.task.findMany({
+			where: {
+				...where,
+				...(isAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
 			},
-			taskStatus: {
-				select: DICTIONARY_SELECT,
+			orderBy: {
+				[sorting.column]: sorting.direction,
 			},
-			taskStack: {
-				select: DICTIONARY_SELECT,
-			},
-			timeLogs: {
-				select: {
-					id: true,
-					loggedTime: true,
-					description: true,
-					user: true,
-					createdAt: true,
-					updatedAt: true,
+			skip: (page - 1) * pageLimit,
+			take: pageLimit,
+			select: {
+				id: true,
+				code: true,
+				title: true,
+				description: true,
+				remainingTime: true,
+				taskPriority: {
+					select: DICTIONARY_SELECT,
 				},
+				taskStatus: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStack: {
+					select: DICTIONARY_SELECT,
+				},
+				timeLogs: {
+					select: {
+						id: true,
+						loggedTime: true,
+						description: true,
+						user: true,
+						createdAt: true,
+						updatedAt: true,
+					},
+				},
+				estimateTime: true,
+				createdAt: true,
 			},
-			estimateTime: true,
-			createdAt: true,
-		},
+		});
+
+		const total = await tx.task.count({
+			where: {
+				...where,
+				...(isAssignee ? { assigneeUuid: userId } : { reporterUuid: userId }),
+			},
+			orderBy: {
+				[sorting.column]: sorting.direction,
+			},
+		});
+
+		return { tasks: tasksData.map((task) => getTaskWithTransformedTime(task)), total };
 	});
 
-	return tasks.map((task) => getTaskWithTransformedTime(task));
+	return {
+		tasks,
+		meta: {
+			total,
+			page,
+			pageLimit,
+			hasPrev: page > 1,
+			hasNext: page * pageLimit < total,
+			totalPages: Math.ceil(total / pageLimit),
+		},
+	};
 };
 
 const getTaskByUuid = async (taskUuid: string) => {

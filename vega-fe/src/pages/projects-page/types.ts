@@ -26,3 +26,11 @@ export interface PluralOptions {
 	few: string;
 	many: string;
 }
+
+export interface IPagination {
+	pages: Array<number | null>;
+	activePage: number;
+	hasNext: boolean;
+	hasPrev: boolean;
+	totalPages: number;
+}

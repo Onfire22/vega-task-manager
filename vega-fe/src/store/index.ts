@@ -5,6 +5,7 @@ import signUpReducer from '../pages/sign-up-page/slice';
 import modalsReducer from '../modules/modals/slice';
 import layoutReducer from '../pages/layout/slice';
 import taskSlice from '../pages/task-page/slice';
+import projectsReducer from '../pages/projects-page/slice';
 import authSlice from '@/store/authSlice.ts';
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
 	modalsReducer,
 	taskSlice,
 	authSlice,
+	projectsReducer,
 	[baseApi.reducerPath]: baseApi.reducer,
 });
