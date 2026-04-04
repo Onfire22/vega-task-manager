@@ -1,13 +1,13 @@
 import { TasksTableView } from './tasks-table.view.tsx';
 import { useUserTasks } from '../../hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { useAppSelector } from '@/store/hooks.ts';
 import { setPagination } from '@/pages/tasks-page/slice.ts';
 import { getPaginationSelector } from '@/pages/tasks-page/selectors.ts';
+import { usePaginationHandlers } from '@/components/common/ui/custom-pagination.tsx';
 
 const TasksTable = () => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 
 	const paginationState = useAppSelector(getPaginationSelector());
 
@@ -17,48 +17,19 @@ const TasksTable = () => {
 		navigate(`/task/${uuid}`);
 	};
 
-	const handlePaginationPageClick = (page: number) => {
-		dispatch(
-			setPagination({
-				...paginationState,
-				page,
-			}),
-		);
-	};
-
-	const handlePaginationSideButtonsClick = (side: 'next' | 'prev') => {
-		let page = pagination.activePage;
-		switch (side) {
-			case 'next':
-				page += 1;
-				break;
-			case 'prev':
-				page -= 1;
-				break;
-			default:
-				break;
-		}
-
-		handlePaginationPageClick(page);
-	};
-
-	const handlePageLimitChange = (pageLimit: number) => {
-		dispatch(
-			setPagination({
-				page: 1,
-				pageLimit,
-			}),
-		);
-	};
+	const { handlePageClick, handleSideButtonClick, handlePageLimitChange } = usePaginationHandlers(
+		paginationState,
+		setPagination,
+	);
 
 	return (
 		<TasksTableView
 			tableData={userTasks}
 			pagination={pagination}
 			onRowDoubleClick={handleRowDoubleClick}
-			onPaginationPageClick={handlePaginationPageClick}
+			onPageClick={handlePageClick}
 			onPageLimitChange={handlePageLimitChange}
-			onPaginationSideButtonsClick={handlePaginationSideButtonsClick}
+			onSideButtonClick={handleSideButtonClick}
 		/>
 	);
 };

@@ -10,9 +10,9 @@ interface IProps {
 	isLoading: boolean;
 	pagination: IPagination;
 	onRowDoubleClick: (uuid: string) => void;
-	onPaginationPageClick: (page: number) => void;
+	onPageClick: (page: number) => void;
 	onPageLimitChange: (page: number) => void;
-	onPaginationSideButtonsClick: (side: 'next' | 'prev') => void;
+	onSideButtonClick: (side: 'next' | 'prev') => void;
 }
 
 const ProjectsTableView: React.FC<IProps> = ({
@@ -20,9 +20,9 @@ const ProjectsTableView: React.FC<IProps> = ({
 	isLoading,
 	onRowDoubleClick,
 	pagination,
-	onPaginationPageClick,
+	onPageClick,
 	onPageLimitChange,
-	onPaginationSideButtonsClick,
+	onSideButtonClick,
 }) => {
 	return (
 		<div className="w-full">
@@ -36,9 +36,9 @@ const ProjectsTableView: React.FC<IProps> = ({
 			<div className="py-5">
 				<CustomPagination
 					pagination={pagination}
-					onPageClick={onPaginationPageClick}
+					onPageClick={onPageClick}
 					onPageLimitChange={onPageLimitChange}
-					onPaginationSideButtonsClick={onPaginationSideButtonsClick}
+					onSideButtonClick={onSideButtonClick}
 				/>
 			</div>
 		</div>

@@ -1,13 +1,13 @@
 import { ProjectsTableView } from './projects-table.view.tsx';
 import { useProjectsTableData } from '../../hooks.ts';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { useAppSelector } from '@/store/hooks.ts';
 import { getPaginationSelector } from '@/pages/projects-page/selectors.ts';
 import { setPagination } from '@/pages/projects-page/slice.ts';
+import { usePaginationHandlers } from '@/components/common/ui/custom-pagination.tsx';
 
 const ProjectsTable = () => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 
 	const { projects, pagination, isLoading } = useProjectsTableData();
 
@@ -17,39 +17,10 @@ const ProjectsTable = () => {
 		navigate(`/project/${uuid}`);
 	};
 
-	const handlePaginationPageClick = (page: number) => {
-		dispatch(
-			setPagination({
-				...paginationState,
-				page,
-			}),
-		);
-	};
-
-	const handlePaginationSideButtonsClick = (side: 'next' | 'prev') => {
-		let page = pagination.activePage;
-		switch (side) {
-			case 'next':
-				page += 1;
-				break;
-			case 'prev':
-				page -= 1;
-				break;
-			default:
-				break;
-		}
-
-		handlePaginationPageClick(page);
-	};
-
-	const handlePageLimitChange = (pageLimit: number) => {
-		dispatch(
-			setPagination({
-				page: 1,
-				pageLimit,
-			}),
-		);
-	};
+	const { handlePageClick, handleSideButtonClick, handlePageLimitChange } = usePaginationHandlers(
+		paginationState,
+		setPagination,
+	);
 
 	return (
 		<ProjectsTableView
@@ -57,9 +28,9 @@ const ProjectsTable = () => {
 			isLoading={isLoading}
 			pagination={pagination}
 			onRowDoubleClick={handleRowDoubleClick}
-			onPaginationPageClick={handlePaginationPageClick}
+			onPageClick={handlePageClick}
 			onPageLimitChange={handlePageLimitChange}
-			onPaginationSideButtonsClick={handlePaginationSideButtonsClick}
+			onSideButtonClick={handleSideButtonClick}
 		/>
 	);
 };

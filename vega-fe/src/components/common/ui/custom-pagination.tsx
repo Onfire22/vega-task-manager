@@ -10,6 +10,8 @@ import {
 import { Field, FieldLabel } from '@/components/ui/field.tsx';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.tsx';
 import React from 'react';
+import type { Action } from '@reduxjs/toolkit';
+import { useAppDispatch } from '@/store/hooks.ts';
 
 const options = [
 	{ value: '15', label: '15' },
@@ -27,15 +29,10 @@ interface IProps {
 	};
 	onPageClick: (page: number) => void;
 	onPageLimitChange: (page: number) => void;
-	onPaginationSideButtonsClick: (side: 'next' | 'prev') => void;
+	onSideButtonClick: (side: 'next' | 'prev') => void;
 }
 
-const CustomPagination: React.FC<IProps> = ({
-	pagination,
-	onPageClick,
-	onPageLimitChange,
-	onPaginationSideButtonsClick,
-}) => {
+const CustomPagination: React.FC<IProps> = ({ pagination, onPageClick, onPageLimitChange, onSideButtonClick }) => {
 	return (
 		<div className="flex items-center gap-4">
 			<Field orientation="horizontal" className="w-fit">
@@ -61,10 +58,7 @@ const CustomPagination: React.FC<IProps> = ({
 				<Pagination>
 					<PaginationContent>
 						<PaginationItem>
-							<PaginationNext
-								onClick={() => onPaginationSideButtonsClick('next')}
-								disabled={!pagination.hasNext}
-							/>
+							<PaginationNext onClick={() => onSideButtonClick('next')} disabled={!pagination.hasNext} />
 						</PaginationItem>
 						{pagination.pages.map((page, index) => {
 							return page ? (
@@ -84,7 +78,7 @@ const CustomPagination: React.FC<IProps> = ({
 						})}
 						<PaginationItem>
 							<PaginationPrevious
-								onClick={() => onPaginationSideButtonsClick('prev')}
+								onClick={() => onSideButtonClick('prev')}
 								disabled={!pagination.hasPrev}
 							/>
 						</PaginationItem>
@@ -95,4 +89,26 @@ const CustomPagination: React.FC<IProps> = ({
 	);
 };
 
-export { CustomPagination };
+const usePaginationHandlers = (
+	paginationState: { page: number; pageLimit: number },
+	setPagination: (state: { page: number; pageLimit: number }) => Action,
+) => {
+	const dispatch = useAppDispatch();
+	const handlePageClick = (page: number) => {
+		dispatch(setPagination({ ...paginationState, page }));
+	};
+
+	const handleSideButtonClick = (side: 'next' | 'prev') => {
+		const page = side === 'next' ? paginationState.page + 1 : paginationState.page - 1;
+		handlePageClick(page);
+	};
+
+	const handlePageLimitChange = (pageLimit: number) => {
+		dispatch(setPagination({ page: 1, pageLimit }));
+	};
+
+	return { handlePageClick, handleSideButtonClick, handlePageLimitChange };
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export { CustomPagination, usePaginationHandlers };
