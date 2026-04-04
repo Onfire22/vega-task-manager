@@ -3,7 +3,7 @@ import { Pie, PieChart } from 'recharts';
 import React from 'react';
 
 interface IProps {
-	data: Array<{ name: string; value: number; fill: string }>;
+	data: Array<{ name: string; value: number; fill: string; custom?: string }>;
 	config?: {
 		[key: string]: { label: string };
 	};

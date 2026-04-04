@@ -98,4 +98,5 @@ export interface IChartData {
 	value: number;
 	name: string;
 	fill: string;
+	custom?: string;
 }

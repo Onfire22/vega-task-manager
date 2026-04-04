@@ -5,6 +5,7 @@ import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
 import type { TDictionariesWithColors, TTPayload } from '@/pages/task-page/types.ts';
 import { useGetTaskLogsQuery } from '@/api/queries/task-logs.ts';
+import { transformSecondsToTime } from '@/pages/task-page/utils.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
@@ -151,6 +152,7 @@ export const useTaskPayload = (uuid: string) => {
 		return {
 			value: log.value,
 			name: log.name,
+			custom: transformSecondsToTime(log.value),
 			fill: `var(--chart-${index})`,
 		};
 	});
