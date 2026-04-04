@@ -201,16 +201,27 @@ export const TasksResponseSchema = z.object({
 				label: z.string(),
 				key: z.string(),
 			}),
-			estimateTime: z.object({}).nullable().optional(),
 			createdAt: z.string(),
-			totalLoggedTime: z
-				.object({
-					minutes: z.string(),
-				})
-				.optional(),
-			estimateTimeInSecs: z.number().int().nullable().optional(),
-			remainingTimeInSecs: z.number().int().nullable().optional(),
-			totalLoggedTimeInSecs: z.number().int().nullable().optional(),
+			logInfo: z.object({
+				estimateTime: z
+					.object({
+						time: z.string().optional(),
+						timeInPercents: z.number(),
+					})
+					.nullable(),
+				remainingTime: z
+					.object({
+						time: z.string().optional(),
+						timeInPercents: z.number(),
+					})
+					.nullable(),
+				totalLoggedTime: z
+					.object({
+						time: z.string().optional(),
+						timeInPercents: z.number(),
+					})
+					.nullable(),
+			}),
 		}),
 	),
 	meta: z.object({

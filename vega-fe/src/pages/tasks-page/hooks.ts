@@ -24,6 +24,8 @@ export const useUserTasks = () => {
 	const tasks = data.tasks.map((item) => {
 		return {
 			...item,
+			estimatedTime: item.logInfo?.estimateTime?.time || '-',
+			loggedTime: item.logInfo?.totalLoggedTime?.time || '-',
 			createdAt: format(item.createdAt, DATE_FORMAT),
 		};
 	});
