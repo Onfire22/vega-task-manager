@@ -24,14 +24,14 @@ export const transformSecondsToTime = (seconds: number) => {
 	const hours = Math.floor(seconds / 3600);
 	const minutes = Math.floor((seconds % 3600) / 60);
 
-	const result: Partial<ITime> = {};
+	let result = '';
 
 	if (hours) {
-		result.hours = `${hours}h`;
+		result += `${hours}h`;
 	}
 
 	if (minutes) {
-		result.minutes = `${minutes}m`;
+		result += ` ${minutes}m`;
 	}
 
 	return result;

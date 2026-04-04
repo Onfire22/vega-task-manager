@@ -4,7 +4,6 @@ import { TCreateProjectBody, TEditProjectBody, TGetProjectsBody, TProjectParams 
 import { projectsService } from './projects.service';
 
 export const getProjects = async (req: Request<{}, {}, TGetProjectsBody>, res: Response, next: NextFunction) => {
-	console.log(req.body);
 	try {
 		const {
 			meta: { pagination },

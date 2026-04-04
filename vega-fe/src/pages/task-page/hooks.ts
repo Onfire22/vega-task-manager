@@ -21,23 +21,12 @@ export const useTaskData = (uuid?: string) => {
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
 		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
 		assigneeUuid: task.assignee ? task.assignee.id : undefined,
-		remainingTime: remainingTime
-			? `${remainingTime.time.hours || ''} ${remainingTime.time.minutes || ''}`.trim()
-			: '',
-		estimateTime: estimateTime ? `${estimateTime.time.hours || ''} ${estimateTime.time.minutes || ''}`.trim() : '',
-		totalLoggedTime: totalLoggedTime
-			? `${totalLoggedTime.time.hours || ''} ${totalLoggedTime.time.minutes || ''}`.trim()
-			: '',
+		remainingTime: remainingTime?.time,
+		estimateTime: estimateTime?.time,
+		totalLoggedTime: totalLoggedTime?.time,
 		estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
 		remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
 		totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
-		// timeLogs: task.timeLogs.map((log) => {
-		// 	return {
-		// 		...log,
-		// 		loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`,
-		// 		createdAt: format(log.createdAt, DATE_TIME_FORMAT),
-		// 	};
-		// }),
 		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
 		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
 	};
@@ -122,7 +111,6 @@ export const useTimeLogs = (uuid: string) => {
 						initials: log.user.name.substring(0, 2),
 					},
 				},
-				loggedTime: `${log.loggedTime.hours || ''} ${log.loggedTime.minutes || ''}`.trim(),
 				createdAt: format(log.createdAt, DATE_TIME_FORMAT),
 			};
 		}) ?? [];

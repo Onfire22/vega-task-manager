@@ -270,28 +270,19 @@ export const TaskResponseSchema = z.object({
 		logInfo: z.object({
 			estimateTime: z
 				.object({
-					time: z.object({
-						hours: z.string().optional(),
-						minutes: z.string().optional(),
-					}),
+					time: z.string().optional(),
 					timeInPercents: z.number(),
 				})
 				.nullable(),
 			remainingTime: z
 				.object({
-					time: z.object({
-						hours: z.string().optional(),
-						minutes: z.string().optional(),
-					}),
+					time: z.string().optional(),
 					timeInPercents: z.number(),
 				})
 				.nullable(),
 			totalLoggedTime: z
 				.object({
-					time: z.object({
-						hours: z.string().optional(),
-						minutes: z.string().optional(),
-					}),
+					time: z.string().optional(),
 					timeInPercents: z.number(),
 				})
 				.nullable(),
@@ -340,10 +331,7 @@ export const GetTaskLogsResponseSchema = z.object({
 	timeLogs: z.array(
 		z.object({
 			id: z.string(),
-			loggedTime: z.object({
-				minutes: z.string().optional(),
-				hours: z.string().optional(),
-			}),
+			loggedTime: z.string().optional(),
 			description: z.string().optional(),
 			createdAt: z.string(),
 			updatedAt: z.string().optional(),
