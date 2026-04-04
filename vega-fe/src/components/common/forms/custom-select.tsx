@@ -90,7 +90,7 @@ const CustomSelect: React.FC<IProps> = ({
 						);
 					})}
 				</SelectContent>
-				{error && <span className="text-(--color-danger) text-[12px] ml-3">{error}</span>}
+				{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 			</Select>
 		</div>
 	);

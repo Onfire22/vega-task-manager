@@ -44,7 +44,7 @@ const CustomTextarea: React.FC<IProps> = ({
 				name={name}
 				id={id}
 			/>
-			{error && <span className="text-(--color-danger) text-[12px] ml-3">{error}</span>}
+			{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 		</div>
 	);
 };

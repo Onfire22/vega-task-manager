@@ -119,7 +119,7 @@ export const CustomMultiSelect: React.FC<IProps> = ({
 					</Command>
 				</PopoverContent>
 			</Popover>
-			{error && <span className="text-(--color-danger) text-[12px] ml-3">{error}</span>}
+			{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 		</div>
 	);
 };
