@@ -16,7 +16,7 @@ export interface IExpDictData {
 export interface ITimeLog {
 	description: string;
 	id: string;
-	loggedTime: string;
+	loggedTime?: string;
 	createdAt: string;
 	updatedAt?: string;
 	user: {
@@ -42,9 +42,9 @@ export interface ITask {
 			label: string;
 		};
 	};
-	remainingTime: string;
-	estimateTime: string;
-	totalLoggedTime: string;
+	remainingTime?: string;
+	estimateTime?: string;
+	totalLoggedTime?: string;
 	estimateTimePercents: number | null;
 	remainingTimePercents: number | null;
 	totalLoggedTimePercents: number | null;
