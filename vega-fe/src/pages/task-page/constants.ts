@@ -1,5 +1,5 @@
-import type { TDictionariesTypes } from '../../api/types.ts';
 import type { TField } from '@/pages/task-page/types.ts';
+import type { TDictionariesTypes } from '@/api/dictionaries/dictionaries.types.ts';
 
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
