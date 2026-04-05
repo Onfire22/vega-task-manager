@@ -1,4 +1,4 @@
-import type { TDictionariesTypes } from '../../api/types.ts';
+import type { TDictionariesRequest } from '@/api/dictionaries/dictionaries.types.ts';
 
 export const TASK_FORM_INITIAL_VALUES = {
 	title: '',
@@ -15,4 +15,4 @@ export const PROJECT_FORM_INITIAL_VALUES = {
 	deadlineDate: undefined,
 };
 
-export const BASE_DICTIONARIES_META: TDictionariesTypes[] = ['TASK_PRIORITY', 'TASK_TYPE', 'TASK_STATUS'];
+export const BASE_DICTIONARIES_META: TDictionariesRequest = ['TASK_PRIORITY', 'TASK_TYPE', 'TASK_STATUS'];

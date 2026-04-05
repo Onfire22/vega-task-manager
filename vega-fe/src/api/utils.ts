@@ -1,4 +1,4 @@
-import type { TDictionary } from './types.ts';
+import type { TDictionary } from '@/api/dictionaries/dictionaries.types.ts';
 
 export const transformDictionaries = (dictionary: TDictionary) => {
 	return dictionary.map((item) => {

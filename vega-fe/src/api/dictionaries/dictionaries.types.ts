@@ -9,6 +9,8 @@ export type TDictionariesTypes =
 	| 'TASK_TYPE'
 	| 'PROJECT_STATUS';
 
+export type TDictionary = Array<{ label: string; id: string; key: string; description: string }>;
+
 export type TDictionariesRequest = Array<TDictionariesTypes>;
 
 export type TDictionariesResponse = z.infer<typeof DictionariesResponseSchema>;
