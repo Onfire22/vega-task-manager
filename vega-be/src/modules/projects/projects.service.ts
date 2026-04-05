@@ -4,13 +4,20 @@ import { IPagination, TCreateProjectBody, TEditProjectBody } from './projects.ty
 import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
-const getProjects = async (pagination: IPagination) => {
+const getProjects = async (pagination: IPagination, userUuid: string) => {
 	const { page, pageLimit } = pagination;
 
 	const { projects, total } = await prismaAppClient.$transaction(async (tx) => {
 		const projectsData = await tx.project.findMany({
 			skip: (page - 1) * pageLimit,
 			take: pageLimit,
+			where: {
+				memberships: {
+					some: {
+						userUuid,
+					},
+				},
+			},
 			select: {
 				id: true,
 				code: true,

@@ -9,7 +9,9 @@ export const getProjects = async (req: Request<{}, {}, TGetProjectsBody>, res: R
 			meta: { pagination },
 		} = req.body;
 
-		const projects = await projectsService.getProjects(pagination);
+		const userUuid = res.locals.user.id;
+
+		const projects = await projectsService.getProjects(pagination, userUuid);
 
 		res.status(200).json(projects);
 	} catch (e) {
