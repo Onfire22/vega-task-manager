@@ -1,8 +1,7 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
 import { IPagination, TCreateProjectBody, TEditProjectBody } from './projects.types';
-import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
+import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
 
 const getProjects = async (pagination: IPagination) => {
@@ -95,7 +94,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 	);
 
 	if (!owner || !member) {
-		throw new AppError('Справочник не найден', RESPONSE_STATUSES.iternalError);
+		throw new AppError('Справочник не найден', RESPONSE_STATUSES.internalError);
 	}
 
 	const usersData = userUUids.map((uuid) => {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { getDictionaries } from './dictionary.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import { DictionariesQuerySchema } from './dictionary.validation';

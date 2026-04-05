@@ -14,7 +14,6 @@ export const ProjectParamsSchema = z.object({
 export const EditProjectBodySchema = z.object({
 	field: z.enum(['deadlineDate', 'projectStatusUuid']),
 	value: z.string(),
-	userRoleUuid: z.string(),
 });
 
 export const GetProjectsResponseSchema = z.object({

@@ -1,7 +1,7 @@
 import { isDateEquals, transformSecondsToTime, transformTimeToSeconds } from '../../common/utils';
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { TCreateTaskTimeBody } from './task-logs.types';
 
 const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
@@ -102,4 +102,4 @@ const getTaskLogs = async (taskUuid: string) => {
 	});
 };
 
-export const taskLogsSService = { createTaskLog, getTaskLogs };
+export const taskLogsService = { createTaskLog, getTaskLogs };

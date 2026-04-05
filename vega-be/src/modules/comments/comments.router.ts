@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { createComment, deleteComment, getTaskComments, updateComment } from './comments.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import {

@@ -2,7 +2,7 @@ import { prismaAppClient } from '../../lib/prisma';
 import { Prisma } from '../../generated/prisma/client';
 import { TUpdateUserBody, TUpdateUserPasswordBody, TUserListBody } from './user.types';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
 
 const getCurrentUser = async (userUuid: string) => {
@@ -81,6 +81,14 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 	return prismaAppClient.user.update({
 		where: { id: userUuid },
 		data: updateData,
+		select: {
+			email: true,
+			id: true,
+			name: true,
+			secondName: true,
+			userName: true,
+			userSpecialisationUuid: true,
+		},
 	});
 };
 

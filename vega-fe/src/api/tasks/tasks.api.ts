@@ -1,4 +1,4 @@
-import { baseApi } from '../index.ts';
+import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
 import type {
 	ICreateTask,
@@ -10,13 +10,13 @@ import type {
 	TTasksResponse,
 	TUpdateTaskRequest,
 	UpdateTaskResponse,
-} from '../types.ts';
+} from './tasks.types';
 import {
 	BaseResponseSchema,
 	TaskResponseSchema,
 	TasksResponseSchema,
 	UpdateTaskResponseSchema,
-} from '@/api/validation.ts';
+} from './tasks.validation';
 
 const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

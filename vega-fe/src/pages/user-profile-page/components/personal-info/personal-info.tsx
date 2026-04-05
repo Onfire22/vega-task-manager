@@ -6,7 +6,7 @@ import { usePersonalData } from '@/pages/user-profile-page/hooks.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PersonalSchema } from '@/pages/user-profile-page/validation.ts';
 import type { IPersonalForm } from '@/pages/user-profile-page/types.ts';
-import { useUpdateUserMutation } from '@/api/queries/users.api.ts';
+import { useUpdateUserMutation } from '@/api/users/users.api.ts';
 import { toast } from 'sonner';
 
 const PersonalInfo = () => {

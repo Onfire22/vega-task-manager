@@ -4,7 +4,7 @@ import type { IPasswordForm } from '@/pages/user-profile-page/types.ts';
 import { PASSWORD_INITIAL_VALUES } from '@/pages/user-profile-page/constants.ts';
 import { PasswordSchema } from '@/pages/user-profile-page/validation.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useUpdateUserPasswordMutation } from '@/api/queries/users.api.ts';
+import { useUpdateUserPasswordMutation } from '@/api/users/users.api.ts';
 import { toast } from 'sonner';
 
 const PasswordInfo = () => {

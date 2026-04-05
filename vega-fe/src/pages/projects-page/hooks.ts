@@ -1,9 +1,10 @@
-import { useDictionaries, useProjects } from '../../api/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
 import { useAppSelector } from '@/store/hooks.ts';
 import { getProjectsMetaSelector } from '@/pages/projects-page/selectors.ts';
 import { getPaginationPages } from '@/app/utils.ts';
+import { useDictionaries } from '@/api/dictionaries/dictionaries.hooks.ts';
+import { useProjects } from '@/api/projects/projects.hooks.ts';
 
 export const useProjectsTableData = () => {
 	const meta = useAppSelector(getProjectsMetaSelector());

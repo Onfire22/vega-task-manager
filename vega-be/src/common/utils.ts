@@ -1,5 +1,4 @@
-import { TIME_COEFFICIENTS } from '../constants';
-import { ITime } from './types';
+import { TIME_COEFFICIENTS } from './constants';
 
 export const transformTimeToSeconds = (time?: string) => {
 	if (!time) return 0;

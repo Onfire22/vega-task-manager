@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getCurrentUser, getUserList, updateUser, updateUserPassword } from './user.controller';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { validateMiddleware } from '../../common/middlewares';
 import { UpdateUserBodySchema, UpdateUserPasswordBodySchema, UserListBodySchema } from './user.validation';
 

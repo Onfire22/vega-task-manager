@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { changeUserMembership } from './memberships.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import { ChangeUserMembershipBodySchema, ChangeUserMembershipParamsSchema } from './memberships.validation';

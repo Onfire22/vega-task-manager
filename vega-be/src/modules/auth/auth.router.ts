@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getUserByEmail, logOutUser, refreshToken, signInUser, signupUser } from './auth.controller';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { validateMiddleware } from '../../common/middlewares';
 import { SignInBodySchema, SignUpBodySchema, UserByEmailBodySchema } from './auth.validation';
 

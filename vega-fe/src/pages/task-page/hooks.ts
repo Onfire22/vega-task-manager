@@ -1,11 +1,12 @@
 import { format } from 'date-fns';
-import { useDictionariesOptions, useTask } from '../../api/hooks.ts';
 import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
-import { useGetTaskCommentsQuery } from '../../api/queries/comments.ts';
+import { useGetTaskCommentsQuery } from '@/api/comments/comments.api.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
-import type { TDictionariesWithColors, TTPayload } from '@/pages/task-page/types.ts';
-import { useGetTaskLogsQuery } from '@/api/queries/task-logs.ts';
+import type { TDictionariesWithColors, TOption, TTPayload } from '@/pages/task-page/types.ts';
+import { useGetTaskLogsQuery } from '@/api/task-logs/task-logs.api.ts';
 import { transformSecondsToTime } from '@/pages/task-page/utils.ts';
+import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
+import { useTask } from '@/api/tasks/tasks.hooks.ts';
 
 export const useTaskData = (uuid?: string) => {
 	const { task, isTaskLoading } = useTask(uuid);
@@ -80,7 +81,7 @@ export const useDictionariesWithColors = () => {
 	if (!dictionariesOptions) return {};
 
 	const options = typedEntries(dictionariesOptions).reduce((acc, [key, options]) => {
-		acc[key as keyof TDictionariesWithColors] = options.map((option) => {
+		acc[key as keyof TDictionariesWithColors] = options.map((option: TOption) => {
 			return {
 				...option,
 				color: COLORS[option.key as keyof typeof COLORS],

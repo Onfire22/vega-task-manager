@@ -1,7 +1,7 @@
 import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '@/api/constants.ts';
-import type { TGetTaskLogsResponse } from '@/api/types.ts';
-import { GetTaskLogsResponseSchema } from '@/api/validation.ts';
+import type { TGetTaskLogsResponse } from './task-logs.types';
+import { GetTaskLogsResponseSchema } from './task-logs.validation';
 
 const taskLogsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

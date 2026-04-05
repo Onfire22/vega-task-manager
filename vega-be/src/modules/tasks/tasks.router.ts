@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { createTask, getTaskByUuid, getUserTasks, updateTask, updateTaskEstimate } from './tasks.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import {

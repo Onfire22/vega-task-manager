@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { RESPONSE_STATUSES } from '../../constants';
 import { TCreateTaskBody, TTaskParams, TUpdateTaskBody, TUpdateTaskEstimate, TUserTasksBody } from './tasks.types';
 import { tasksService } from './tasks.service';
 import { transformTimeToSeconds } from '../../common/utils';
+import { RESPONSE_STATUSES } from '../../common/constants';
 
 export const createTask = async (req: Request<{}, {}, TCreateTaskBody>, res: Response, next: NextFunction) => {
 	try {

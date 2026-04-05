@@ -1,11 +1,11 @@
-import { useGetTasksQuery } from '../../api/queries/tasks.api.ts';
+import { useGetTasksQuery } from '@/api/tasks/tasks.api.ts';
 import { getFiltersSelector } from './selectors.ts';
-import { useAppSelector } from '../../store/hooks.ts';
+import { useAppSelector } from '@/store/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
-import { useDictionaries } from '../../api/hooks.ts';
 import { useMemo } from 'react';
 import { getPaginationPages } from '@/app/utils.ts';
+import { useDictionaries } from '@/api/dictionaries/dictionaries.hooks.ts';
 
 export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());

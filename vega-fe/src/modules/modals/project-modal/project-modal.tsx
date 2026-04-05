@@ -1,17 +1,17 @@
 import { ProjectModalView } from './project-modal.view.tsx';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
-import { useCreateProjectMutation } from '../../../api/queries/projects.api.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { useCreateProjectMutation } from '@/api/projects/projects.api.ts';
 import { getActiveModalSelector } from '../selectors.ts';
-import { useUsersOptions } from '../../../api/hooks.ts';
 import { PROJECT_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { CreateProjectValidationSchema } from '../validation.ts';
 import { setActiveModal } from '../slice.ts';
-import { useGetCurrentUserQuery } from '../../../api/queries/auth.api.ts';
+import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import type { TProjectValues } from '@/modules/modals/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
+import { useUsersOptions } from '@/api/users/users.hooks.ts';
 
 const ProjectModal = () => {
 	const dispatch = useAppDispatch();

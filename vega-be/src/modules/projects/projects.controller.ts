@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { TCreateProjectBody, TEditProjectBody, TGetProjectsBody, TProjectParams } from './projects.types';
 import { projectsService } from './projects.service';
 

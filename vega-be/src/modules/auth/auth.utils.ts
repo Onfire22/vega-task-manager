@@ -1,6 +1,6 @@
 import { transliterate } from 'transliteration';
 import jwt from 'jsonwebtoken';
-import { ACCESS_TTL, REFRESH_TTL } from '../../constants';
+import { ACCESS_TTL, REFRESH_TTL } from '../../common/constants';
 import { setToRedis } from '../../lib/redis/utils';
 
 export const generateName = (name: string, secondName: string, nickNames: Array<string>, step = 1): string => {

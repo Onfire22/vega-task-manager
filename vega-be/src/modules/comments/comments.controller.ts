@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { TCreateCommentBody, TUpdateCommentBody, TUuidParams } from './comments.types';
 import { commentsService } from './comments.service';
 

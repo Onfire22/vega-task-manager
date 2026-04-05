@@ -10,7 +10,7 @@ import { UserProfilePage } from '../pages/user-profile-page';
 import { ProjectsPage } from '../pages/projects-page';
 import { Layout } from '../pages/layout';
 import { ProjectPage } from '../pages/project-page';
-import { useGetCurrentUserQuery } from '../api/queries/auth.api.ts';
+import { useGetCurrentUserQuery } from '../api/auth/auth.api.ts';
 import { FRONT_ROUTES } from '../app/constants.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 

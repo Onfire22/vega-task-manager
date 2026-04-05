@@ -1,6 +1,6 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 
 const changeUserRole = async (userUuid: string, userRole: string, projectUuid: string) => {
 	const memberRole = await prismaAppClient.dictionary.findUnique({

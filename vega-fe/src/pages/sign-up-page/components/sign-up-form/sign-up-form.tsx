@@ -2,7 +2,7 @@ import { SignUpFormView } from './sign-up-form.view.tsx';
 import { PASSWORD_REQUIREMENTS, RED_COLOR, TEAL_COLOR, YELLOW_COLOR } from '../../constants.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { generateRandomPassword, getPasswordStrength } from '../../utils.ts';
-import { useDictionariesOptions } from '../../../../api/hooks.ts';
+import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 import { useSignUpForm } from '../../hooks.ts';
 
 const SignUpForm = () => {

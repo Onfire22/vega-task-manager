@@ -1,6 +1,6 @@
 import { SidebarView } from './sidebar.view.tsx';
 import { useLocation } from 'react-router-dom';
-import { useLogOutUserMutation } from '../../../../api/queries/auth.api.ts';
+import { useLogOutUserMutation } from '../../../../api/auth/auth.api.ts';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
 import { getIsSidebarOpenedSelector } from '../../selectors.ts';
 import { setToken } from '@/store/authSlice.ts';

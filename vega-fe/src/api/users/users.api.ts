@@ -1,4 +1,4 @@
-import { baseApi } from '../index.ts';
+import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
 import type {
 	IFiltersRequest,
@@ -7,8 +7,8 @@ import type {
 	TBaseResponse,
 	TUpdateUser,
 	TUsersResponse,
-} from '../types.ts';
-import { BaseResponseSchema, UpdateUserResponseSchema, UsersResponseSchema } from '@/api/validation.ts';
+} from './users.types';
+import { BaseResponseSchema, UpdateUserResponseSchema, UsersResponseSchema } from './users.validation';
 
 const usersApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

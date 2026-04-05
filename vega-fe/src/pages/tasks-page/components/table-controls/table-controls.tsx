@@ -1,10 +1,10 @@
 import { TableControlsView } from './table-controls.view.tsx';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setActiveTab, setFilters, setIsAssignee } from '../../slice.ts';
 import { getActiveTabSelector, getIsAssigneeSelector, isAllFiltersButtonDisabled } from '../../selectors.ts';
-import { useDictionariesOptions } from '../../../../api/hooks.ts';
 import { BASE_DICTIONARIES_META, FILTERS_INITIAL_VALUES } from '../../constants.ts';
 import { useEffect } from 'react';
+import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 
 const TableControls = () => {
 	const isAssignee = useAppSelector(getIsAssigneeSelector());

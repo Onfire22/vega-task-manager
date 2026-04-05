@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks.ts';
-import { useCheckIsEmailFreeMutation, useSignUpUserMutation } from '../../api/queries/auth.api.ts';
+import { useCheckIsEmailFreeMutation, useSignUpUserMutation } from '../../api/auth/auth.api.ts';
 import { SIGNUP_DEFAULT_VALUES } from './constants.ts';
 import { AccountStepValidationSchema, ProfileStepValidationSchema } from './validation.ts';
 import { getActiveStepSelector } from './selectors.ts';

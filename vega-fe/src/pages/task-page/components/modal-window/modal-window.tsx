@@ -10,9 +10,9 @@ import { useForm } from 'react-hook-form';
 import type { TFormOptions } from '@/pages/task-page/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
-import { useUpdateTaskEstimateMutation } from '@/api/queries/tasks.api.ts';
+import { useUpdateTaskEstimateMutation } from '@/api/tasks/tasks.api.ts';
 import { toast } from 'sonner';
-import { useCreateTaskLogMutation } from '@/api/queries/task-logs.ts';
+import { useCreateTaskLogMutation } from '@/api/task-logs/task-logs.api.ts';
 
 const ModalWindow = () => {
 	const dispatch = useAppDispatch();

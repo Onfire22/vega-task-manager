@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { userRouter } from '../modules/user/user.router';
-import { ROUTES } from '../constants';
+import { ROUTES } from '../common/constants';
 import { tasksRouter } from '../modules/tasks/tasks.router';
 import { projectsRouter } from '../modules/projects/projects.router';
 import { taskLogsRouter } from '../modules/task-logs/task-logs.router';

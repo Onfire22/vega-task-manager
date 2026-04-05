@@ -1,7 +1,7 @@
-import { baseApi } from '../index.ts';
+import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { ICommentCreateBody, IEditCommentPayload, TBaseResponse, TCommentsResponse } from '../types.ts';
-import { BaseResponseSchema, CommentsResponseSchema } from '@/api/validation.ts';
+import type { ICommentCreateBody, IEditCommentPayload, TBaseResponse, TCommentsResponse } from './comments.types';
+import { BaseResponseSchema, CommentsResponseSchema } from './comments.validation';
 
 const commentsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

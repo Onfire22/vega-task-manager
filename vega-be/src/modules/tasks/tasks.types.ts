@@ -9,15 +9,10 @@ import { z } from 'zod';
 import { Prisma } from '../../generated/prisma/client';
 import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
 
-export interface ITime {
-	hours: string;
-	minutes: string;
-}
-
 export interface ITaskLog {
-	estimateTime: { time: Partial<ITime>; timeInPercents: number } | null;
-	remainingTime: { time: Partial<ITime>; timeInPercents: number } | null;
-	totalLoggedTime: { time: Partial<ITime>; timeInPercents: number } | null;
+	estimateTime: { time: string; timeInPercents: number } | null;
+	remainingTime: { time: string; timeInPercents: number } | null;
+	totalLoggedTime: { time: string; timeInPercents: number } | null;
 }
 
 export type TPrismaTask = Prisma.TaskGetPayload<{

@@ -6,14 +6,14 @@ import type {
 	TSignInResponse,
 	TCurrentUserResponse,
 	TBaseResponse,
-} from '../types.ts';
+} from './auth.types.ts';
 import { baseApi } from '@/api';
 import {
 	BaseResponseSchema,
 	CurrentUserResponseSchema,
 	SigInUserResponseSchema,
 	SignUpUserResponseSchema,
-} from '@/api/validation.ts';
+} from './auth.validatioin';
 
 const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

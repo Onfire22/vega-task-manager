@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { IDictionaryResponse, TDictionaries } from './dictionary.types';
 import { dictionariesService } from './dictionary.service';
 

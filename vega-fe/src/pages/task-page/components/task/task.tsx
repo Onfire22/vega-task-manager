@@ -1,18 +1,18 @@
 import { TaskView } from './task.view.tsx';
-import { useUsersOptions } from '../../../../api/hooks.ts';
 import { INITIAL_FIELD_VALUES } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
 import { useDictionariesWithColors, useTaskData, useTaskPayload } from '../../hooks.ts';
-import { useUpdateTaskMutation } from '../../../../api/queries/tasks.api.ts';
+import { useUpdateTaskMutation } from '../../../../api/tasks/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../../store/hooks.ts';
 import { setIsModalShown } from '../../slice.ts';
-import { useGetCurrentUserQuery } from '../../../../api/queries/auth.api.ts';
+import { useGetCurrentUserQuery } from '../../../../api/auth/auth.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { toast } from 'sonner';
 import type { TField, TTaskFields } from '@/pages/task-page/types.ts';
 import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
 import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
+import { useUsersOptions } from '@/api/users/users.hooks.ts';
 
 const activityComponents = {
 	comments: Comments,

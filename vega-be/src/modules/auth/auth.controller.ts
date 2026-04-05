@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { REFRESH_TTL, RESPONSE_STATUSES } from '../../constants';
 import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody } from './auth.types';
+import { REFRESH_TTL, RESPONSE_STATUSES } from '../../common/constants';
 import { authService } from './auth.service';
 
 export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Response<IAuthRes>, next: NextFunction) => {

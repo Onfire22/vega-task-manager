@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { ILocals } from '../../common/types';
 import {
 	IGetUserListResponse,

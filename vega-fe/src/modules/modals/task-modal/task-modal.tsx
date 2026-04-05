@@ -1,7 +1,6 @@
 import { TaskModalView } from './task-modal.view.tsx';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks.ts';
-import { useCreateTaskMutation } from '../../../api/queries/tasks.api.ts';
-import { useDictionariesOptions, useProjectsOptions } from '../../../api/hooks.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { useCreateTaskMutation } from '@/api/tasks/tasks.api.ts';
 import { BASE_DICTIONARIES_META, TASK_FORM_INITIAL_VALUES } from '../contsants.ts';
 import { getActiveModalSelector } from '../selectors.ts';
 import { setActiveModal } from '../slice.ts';
@@ -11,6 +10,8 @@ import type { TTaskFormValues } from '@/modules/modals/types.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateTaskValidationSchema } from '@/modules/modals/validation.ts';
 import { useNavigate } from 'react-router-dom';
+import { useProjectsOptions } from '@/api/projects/projects.hooks.ts';
+import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 
 const TaskModal = () => {
 	const dispatch = useAppDispatch();

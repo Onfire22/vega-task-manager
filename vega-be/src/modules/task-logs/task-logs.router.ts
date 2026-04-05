@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { createTaskLog, getTaskLogs } from './task-logs.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import { CreateTaskTimeBodySchema, getTaskLogsPramsSchema } from './task-logs.validation';

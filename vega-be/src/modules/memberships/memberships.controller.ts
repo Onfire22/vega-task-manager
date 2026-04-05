@@ -1,4 +1,4 @@
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { NextFunction, Request, Response } from 'express';
 import { TChangeUserMembershipBody, TChangeUserMembershipParams } from './memberships.types';
 import { membershipsService } from './memberships.service';

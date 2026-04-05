@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { useGetCurrentUserQuery } from '@/api/queries/auth.api.ts';
-import { useDictionariesOptions } from '@/api/hooks.ts';
+import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { getAvatarColor } from '@/app/utils.ts';
+import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 
 export const usePersonalData = () => {
 	const { currentData, isLoading } = useGetCurrentUserQuery();

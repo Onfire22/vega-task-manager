@@ -1,11 +1,11 @@
-import { baseApi } from '../index.ts';
+import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
-import type { TDictionariesResponse, TDictionariesTypes } from '../types.ts';
-import { DictionariesResponseSchema } from '@/api/validation.ts';
+import { DictionariesResponseSchema } from './dictionaries.validation';
+import type { TDictionariesRequest, TDictionariesResponse } from './dictionaries.types.ts';
 
 const dictionariesApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		getDictionaries: builder.query<TDictionariesResponse, TDictionariesTypes[]>({
+		getDictionaries: builder.query<TDictionariesResponse, TDictionariesRequest>({
 			query: (filters) => ({
 				method: METHODS.get,
 				url: ROUTES.dictionaries,

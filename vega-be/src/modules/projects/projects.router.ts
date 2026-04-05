@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { createProject, getProjectByUuid, getProjects, updateProject } from './projects.controller';
-import { ROUTES } from '../../constants';
+import { ROUTES } from '../../common/constants';
 import { checkIsOwnerMiddleware } from './projects.middleware';
 import { validateMiddleware } from '../../common/middlewares';
 import { CreateProjectBodySchema, EditProjectBodySchema, ProjectParamsSchema } from './projects.validation';

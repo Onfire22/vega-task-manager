@@ -2,10 +2,10 @@ import { ProjectView } from './project.view.tsx';
 import { useProjectData, useProjectDictionaries, useUpdateProject } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useUsersOptions } from '../../../../api/hooks.ts';
-import { useUpdateUserRoleMutation } from '../../../../api/queries/projects.api.ts';
+import { useUpdateUserRoleMutation } from '@/api/projects/projects.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { useDebounce } from '@/app/utils.ts';
+import { useUsersOptions } from '@/api/users/users.hooks.ts';
 
 const Project = () => {
 	const params = useParams();

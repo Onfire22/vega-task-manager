@@ -1,15 +1,14 @@
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
 import { prismaAppClient } from '../../lib/prisma';
 import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
-import { DICTIONARY_SELECT, USER_SELECT } from '../../common/constants';
+import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { getTaskWithTransformedTime } from './tasks.utils';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
 
 	if (!taskProjectUuid) {
-		throw new AppError('Задачу можно создать только в проекте', RESPONSE_STATUSES.iternalError);
+		throw new AppError('Задачу можно создать только в проекте', RESPONSE_STATUSES.internalError);
 	}
 
 	const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
@@ -18,20 +17,20 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	});
 
 	if (!baseTaskStatusUuid) {
-		throw new AppError('Статус не найден', RESPONSE_STATUSES.iternalError);
+		throw new AppError('Статус не найден', RESPONSE_STATUSES.internalError);
 	}
 
 	return prismaAppClient.$transaction(async (tx) => {
 		const project = await tx.project.findUnique({
 			where: { id: taskProjectUuid },
-			select: { code: true, tasks: true },
+			select: { code: true, _count: { select: { tasks: true } } },
 		});
 
 		if (!project) {
-			throw new AppError('Проект не найден', RESPONSE_STATUSES.iternalError);
+			throw new AppError('Проект не найден', RESPONSE_STATUSES.internalError);
 		}
 
-		const tasksCount = String(project.tasks.length + 1).padStart(3, '0');
+		const tasksCount = String(project._count).padStart(3, '0');
 
 		const taskCode = `${project.code}-${tasksCount}`;
 
@@ -46,7 +45,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 		});
 
 		if (!newTask) {
-			throw new AppError('Задача не была создана', RESPONSE_STATUSES.iternalError);
+			throw new AppError('Задача не была создана', RESPONSE_STATUSES.internalError);
 		}
 
 		return newTask;

@@ -1,4 +1,4 @@
-import { baseApi } from '../index.ts';
+import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
 import type {
 	IProjectCreate,
@@ -9,13 +9,13 @@ import type {
 	TCreateProjectResponse,
 	TProjectResponse,
 	TProjectsResponse,
-} from '../types.ts';
+} from './projects.types';
 import {
 	BaseResponseSchema,
 	CreateProjectResponseSchema,
 	ProjectResponseSchema,
 	ProjectsResponseSchema,
-} from '@/api/validation.ts';
+} from './projects.validation';
 
 const projectsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({

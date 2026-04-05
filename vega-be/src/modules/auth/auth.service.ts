@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { prismaAppClient } from '../../lib/prisma';
 import { generateName, generateToken } from './auth.utils';
 import { AppError } from '../../errors/errors';
-import { RESPONSE_STATUSES } from '../../constants';
+import { RESPONSE_STATUSES } from '../../common/constants';
 import { TokenPayload, TSignInBody, TSignUpBody } from './auth.types';
 import jwt from 'jsonwebtoken';
 import { deleteFromRedis, getFromRedis } from '../../lib/redis/utils';
@@ -80,7 +80,7 @@ const getUserByEmail = async (email: string) => {
 	});
 
 	if (user) {
-		throw new AppError('Пользователь с таким email уже существует', RESPONSE_STATUSES.iternalError);
+		throw new AppError('Пользователь с таким email уже существует', RESPONSE_STATUSES.internalError);
 	}
 };
 
