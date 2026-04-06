@@ -9,6 +9,8 @@ model Membership {
   userRoleUuid String     @map("user_role_uuid")
   userRole     Dictionary @relation(fields: [userRoleUuid], references: [id])
 
+  notifications Notification[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

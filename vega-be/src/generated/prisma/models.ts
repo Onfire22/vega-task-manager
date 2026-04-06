@@ -11,6 +11,7 @@
 export type * from './models/Comment.js'
 export type * from './models/Dictionary.js'
 export type * from './models/Membership.js'
+export type * from './models/Notification.js'
 export type * from './models/Project.js'
 export type * from './models/Task.js'
 export type * from './models/TimeLog.js'

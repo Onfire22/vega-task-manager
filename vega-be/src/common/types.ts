@@ -6,11 +6,10 @@ export interface ILocals {
 	};
 }
 
-export interface IDefaultResponse {
-	success: boolean;
-}
-
-export interface ITime {
-	hours: string;
-	minutes: string;
+declare module 'socket.io' {
+	interface Socket {
+		user: {
+			id: string;
+		};
+	}
 }

@@ -10,6 +10,7 @@ export const createTask = async (req: Request<{}, {}, TCreateTaskBody>, res: Res
 
 		res.status(RESPONSE_STATUSES.success).json({ id: task.id });
 	} catch (e) {
+		console.log(e);
 		next(e);
 	}
 };
@@ -36,9 +37,9 @@ export const getTaskByUuid = async (req: Request<TTaskParams>, res: Response, ne
 
 export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>, res: Response, next: NextFunction) => {
 	try {
-		const task = await tasksService.updateTask(req.body, req.params.uuid);
+		const task = await tasksService.updateTask(req.body, req.params.uuid, res.locals.user.id);
 
-		res.status(200).json({ task });
+		res.status(200).json({ task: task.id });
 	} catch (e) {
 		next(e);
 	}

@@ -54,6 +54,7 @@ export const ModelName = {
   Comment: 'Comment',
   Dictionary: 'Dictionary',
   Membership: 'Membership',
+  Notification: 'Notification',
   Project: 'Project',
   Task: 'Task',
   TimeLog: 'TimeLog',
@@ -111,6 +112,20 @@ export const MembershipScalarFieldEnum = {
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  isReaded: 'isReaded',
+  entityType: 'entityType',
+  userUuid: 'userUuid',
+  taskUuid: 'taskUuid',
+  memberShipsUuid: 'memberShipsUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const ProjectScalarFieldEnum = {

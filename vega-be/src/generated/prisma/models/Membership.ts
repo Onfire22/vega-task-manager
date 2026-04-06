@@ -193,6 +193,7 @@ export type MembershipWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type MembershipOrderByWithRelationInput = {
@@ -205,6 +206,7 @@ export type MembershipOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   project?: Prisma.ProjectOrderByWithRelationInput
   userRole?: Prisma.DictionaryOrderByWithRelationInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -221,6 +223,7 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "user_project">
 
 export type MembershipOrderByWithAggregationInput = {
@@ -254,6 +257,7 @@ export type MembershipCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
   project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
   userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateInput = {
@@ -263,6 +267,7 @@ export type MembershipUncheckedCreateInput = {
   userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipUpdateInput = {
@@ -272,6 +277,7 @@ export type MembershipUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
   project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateInput = {
@@ -281,6 +287,7 @@ export type MembershipUncheckedUpdateInput = {
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipCreateManyInput = {
@@ -349,6 +356,11 @@ export type MembershipMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type MembershipNullableScalarRelationFilter = {
+  is?: Prisma.MembershipWhereInput | null
+  isNot?: Prisma.MembershipWhereInput | null
+}
+
 export type MembershipCreateNestedManyWithoutUserRoleInput = {
   create?: Prisma.XOR<Prisma.MembershipCreateWithoutUserRoleInput, Prisma.MembershipUncheckedCreateWithoutUserRoleInput> | Prisma.MembershipCreateWithoutUserRoleInput[] | Prisma.MembershipUncheckedCreateWithoutUserRoleInput[]
   connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutUserRoleInput | Prisma.MembershipCreateOrConnectWithoutUserRoleInput[]
@@ -389,6 +401,22 @@ export type MembershipUncheckedUpdateManyWithoutUserRoleNestedInput = {
   update?: Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput | Prisma.MembershipUpdateWithWhereUniqueWithoutUserRoleInput[]
   updateMany?: Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput | Prisma.MembershipUpdateManyWithWhereWithoutUserRoleInput[]
   deleteMany?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
+}
+
+export type MembershipCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutNotificationsInput, Prisma.MembershipUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.MembershipWhereUniqueInput
+}
+
+export type MembershipUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.MembershipCreateWithoutNotificationsInput, Prisma.MembershipUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MembershipCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.MembershipUpsertWithoutNotificationsInput
+  disconnect?: Prisma.MembershipWhereInput | boolean
+  delete?: Prisma.MembershipWhereInput | boolean
+  connect?: Prisma.MembershipWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MembershipUpdateToOneWithWhereWithoutNotificationsInput, Prisma.MembershipUpdateWithoutNotificationsInput>, Prisma.MembershipUncheckedUpdateWithoutNotificationsInput>
 }
 
 export type MembershipCreateNestedManyWithoutProjectInput = {
@@ -481,6 +509,7 @@ export type MembershipCreateWithoutUserRoleInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
   project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutUserRoleInput = {
@@ -489,6 +518,7 @@ export type MembershipUncheckedCreateWithoutUserRoleInput = {
   projectUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipCreateOrConnectWithoutUserRoleInput = {
@@ -529,12 +559,65 @@ export type MembershipScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
 }
 
+export type MembershipCreateWithoutNotificationsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
+  project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
+  userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
+}
+
+export type MembershipUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  userUuid: string
+  projectUuid: string
+  userRoleUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MembershipCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.MembershipWhereUniqueInput
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutNotificationsInput, Prisma.MembershipUncheckedCreateWithoutNotificationsInput>
+}
+
+export type MembershipUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.MembershipUpdateWithoutNotificationsInput, Prisma.MembershipUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.MembershipCreateWithoutNotificationsInput, Prisma.MembershipUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.MembershipWhereInput
+}
+
+export type MembershipUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.MembershipWhereInput
+  data: Prisma.XOR<Prisma.MembershipUpdateWithoutNotificationsInput, Prisma.MembershipUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type MembershipUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
+  project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
+  userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
+}
+
+export type MembershipUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type MembershipCreateWithoutProjectInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
   userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutProjectInput = {
@@ -543,6 +626,7 @@ export type MembershipUncheckedCreateWithoutProjectInput = {
   userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipCreateOrConnectWithoutProjectInput = {
@@ -577,6 +661,7 @@ export type MembershipCreateWithoutUserInput = {
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
   userRole: Prisma.DictionaryCreateNestedOneWithoutMembershipsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipUncheckedCreateWithoutUserInput = {
@@ -585,6 +670,7 @@ export type MembershipUncheckedCreateWithoutUserInput = {
   userRoleUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMembershipsInput
 }
 
 export type MembershipCreateOrConnectWithoutUserInput = {
@@ -627,6 +713,7 @@ export type MembershipUpdateWithoutUserRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
   project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserRoleInput = {
@@ -635,6 +722,7 @@ export type MembershipUncheckedUpdateWithoutUserRoleInput = {
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserRoleInput = {
@@ -659,6 +747,7 @@ export type MembershipUpdateWithoutProjectInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutProjectInput = {
@@ -667,6 +756,7 @@ export type MembershipUncheckedUpdateWithoutProjectInput = {
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutProjectInput = {
@@ -691,6 +781,7 @@ export type MembershipUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutMembershipsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateWithoutUserInput = {
@@ -699,6 +790,7 @@ export type MembershipUncheckedUpdateWithoutUserInput = {
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMembershipsNestedInput
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserInput = {
@@ -709,6 +801,35 @@ export type MembershipUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type MembershipCountOutputType
+ */
+
+export type MembershipCountOutputType = {
+  notifications: number
+}
+
+export type MembershipCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  notifications?: boolean | MembershipCountOutputTypeCountNotificationsArgs
+}
+
+/**
+ * MembershipCountOutputType without action
+ */
+export type MembershipCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MembershipCountOutputType
+   */
+  select?: Prisma.MembershipCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * MembershipCountOutputType without action
+ */
+export type MembershipCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
 
 
 export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -721,6 +842,8 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  notifications?: boolean | Prisma.Membership$notificationsArgs<ExtArgs>
+  _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -761,6 +884,8 @@ export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  notifications?: boolean | Prisma.Membership$notificationsArgs<ExtArgs>
+  _count?: boolean | Prisma.MembershipCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -779,6 +904,7 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
     user: Prisma.$UserPayload<ExtArgs>
     project: Prisma.$ProjectPayload<ExtArgs>
     userRole: Prisma.$DictionaryPayload<ExtArgs>
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1184,6 +1310,7 @@ export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runti
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   userRole<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  notifications<T extends Prisma.Membership$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Membership$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1612,6 +1739,30 @@ export type MembershipDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Memberships to delete.
    */
   limit?: number
+}
+
+/**
+ * Membership.notifications
+ */
+export type Membership$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

@@ -3,6 +3,7 @@ import { prismaAppClient } from '../../lib/prisma';
 import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
 import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { getTaskWithTransformedTime } from './tasks.utils';
+import { io } from '../../websocket';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
@@ -30,7 +31,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 			throw new AppError('Проект не найден', RESPONSE_STATUSES.internalError);
 		}
 
-		const tasksCount = String(project._count).padStart(3, '0');
+		const tasksCount = String(project._count.tasks).padStart(3, '0');
 
 		const taskCode = `${project.code}-${tasksCount}`;
 
@@ -195,14 +196,63 @@ const getTaskByUuid = async (taskUuid: string) => {
 	return getTaskWithTransformedTime(task);
 };
 
-const updateTask = (taskData: TUpdateTaskBody, taskUuid: string) => {
-	const { fieldName, value } = taskData;
+const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid: string) => {
+	const { fieldName, value } = taskBody;
 
-	return prismaAppClient.task.update({
-		where: { id: taskUuid },
-		data: {
-			[fieldName]: value,
-		},
+	return prismaAppClient.$transaction(async (tx) => {
+		const taskData = await tx.task.update({
+			where: { id: taskUuid },
+			data: {
+				[fieldName]: value,
+			},
+			select: {
+				id: true,
+				reporterUuid: true,
+				code: true,
+				taskPriority: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStatus: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStack: {
+					select: DICTIONARY_SELECT,
+				},
+				assignee: {
+					select: USER_SELECT,
+				},
+			},
+		});
+
+		if (fieldName === 'assigneeUuid') {
+			const notification = await prismaAppClient.notification.create({
+				data: {
+					userUuid,
+					taskUuid: taskData.id,
+					entityType: 'TASK',
+				},
+				select: {
+					id: true,
+					user: {
+						select: {
+							userName: true,
+						},
+					},
+				},
+			});
+
+			io.to(`user:${taskData?.assignee?.id}`).emit('task:updated', {
+				id: notification.id,
+				entity: { uuid: taskData.id, type: 'task', code: taskData.code },
+				user: {
+					uuid: userUuid,
+					userName: notification.user.userName,
+				},
+				isReaded: false,
+			});
+		}
+
+		return taskData;
 	});
 };
 
