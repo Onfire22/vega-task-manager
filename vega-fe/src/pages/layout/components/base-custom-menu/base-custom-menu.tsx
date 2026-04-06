@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FRONT_ROUTES } from '../../../../app/constants.ts';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
+import { FRONT_ROUTES } from '@/app/constants.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu.view.tsx';
-import { setActiveModal } from '../../../../modules/modals/slice.ts';
+import { setActiveModal } from '@/modules/modals/slice.ts';
 import { getIsSidebarOpenedSelector } from '../../selectors.ts';
 import { setIsSidebarOpened } from '../../slice.ts';
 

@@ -3,6 +3,7 @@ import { baseApi } from '../api';
 import tasksReducer from '../pages/tasks-page/slice';
 import signUpReducer from '../pages/sign-up-page/slice';
 import modalsReducer from '../modules/modals/slice';
+import notificationsSlice from '../modules/notifications/slice';
 import layoutReducer from '../pages/layout/slice';
 import taskSlice from '../pages/task-page/slice';
 import projectsReducer from '../pages/projects-page/slice';
@@ -16,5 +17,6 @@ export default combineReducers({
 	taskSlice,
 	authSlice,
 	projectsReducer,
+	notificationsSlice,
 	[baseApi.reducerPath]: baseApi.reducer,
 });
