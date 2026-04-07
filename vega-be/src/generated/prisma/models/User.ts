@@ -220,7 +220,8 @@ export type UserWhereInput = {
   memberships?: Prisma.MembershipListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   timeLogs?: Prisma.TimeLogListRelationFilter
-  notifications?: Prisma.NotificationListRelationFilter
+  notificationsFrom?: Prisma.NotificationListRelationFilter
+  notificationsTo?: Prisma.NotificationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -239,7 +240,8 @@ export type UserOrderByWithRelationInput = {
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   timeLogs?: Prisma.TimeLogOrderByRelationAggregateInput
-  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  notificationsFrom?: Prisma.NotificationOrderByRelationAggregateInput
+  notificationsTo?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -261,7 +263,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   memberships?: Prisma.MembershipListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   timeLogs?: Prisma.TimeLogListRelationFilter
-  notifications?: Prisma.NotificationListRelationFilter
+  notificationsFrom?: Prisma.NotificationListRelationFilter
+  notificationsTo?: Prisma.NotificationListRelationFilter
 }, "id" | "email" | "userName">
 
 export type UserOrderByWithAggregationInput = {
@@ -309,7 +312,8 @@ export type UserCreateInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -327,7 +331,8 @@ export type UserUncheckedCreateInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserUpdateInput = {
@@ -345,7 +350,8 @@ export type UserUpdateInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -363,7 +369,8 @@ export type UserUncheckedUpdateInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -527,18 +534,32 @@ export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMembershipsInput, Prisma.UserUpdateWithoutMembershipsInput>, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
 }
 
-export type UserCreateNestedOneWithoutNotificationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+export type UserCreateNestedOneWithoutNotificationsFromInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsFromInput, Prisma.UserUncheckedCreateWithoutNotificationsFromInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsFromInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
-  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+export type UserCreateNestedOneWithoutNotificationsToInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsToInput, Prisma.UserUncheckedCreateWithoutNotificationsToInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsToInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsFromNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsFromInput, Prisma.UserUncheckedCreateWithoutNotificationsFromInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsFromInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsFromInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsFromInput, Prisma.UserUpdateWithoutNotificationsFromInput>, Prisma.UserUncheckedUpdateWithoutNotificationsFromInput>
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsToNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsToInput, Prisma.UserUncheckedCreateWithoutNotificationsToInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsToInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsToInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsToInput, Prisma.UserUpdateWithoutNotificationsToInput>, Prisma.UserUncheckedUpdateWithoutNotificationsToInput>
 }
 
 export type UserCreateNestedOneWithoutAssignedTasksInput = {
@@ -599,7 +620,8 @@ export type UserCreateWithoutCommentsInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -616,7 +638,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -649,7 +672,8 @@ export type UserUpdateWithoutCommentsInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -666,7 +690,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutUserSpecialisationInput = {
@@ -683,7 +708,8 @@ export type UserCreateWithoutUserSpecialisationInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutUserSpecialisationInput = {
@@ -700,7 +726,8 @@ export type UserUncheckedCreateWithoutUserSpecialisationInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutUserSpecialisationInput = {
@@ -758,7 +785,8 @@ export type UserCreateWithoutMembershipsInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -775,7 +803,8 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -808,7 +837,8 @@ export type UserUpdateWithoutMembershipsInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -825,10 +855,11 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
-export type UserCreateWithoutNotificationsInput = {
+export type UserCreateWithoutNotificationsFromInput = {
   id?: string
   name: string
   secondName: string
@@ -843,9 +874,10 @@ export type UserCreateWithoutNotificationsInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
-export type UserUncheckedCreateWithoutNotificationsInput = {
+export type UserUncheckedCreateWithoutNotificationsFromInput = {
   id?: string
   name: string
   secondName: string
@@ -860,25 +892,67 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
-export type UserCreateOrConnectWithoutNotificationsInput = {
+export type UserCreateOrConnectWithoutNotificationsFromInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsFromInput, Prisma.UserUncheckedCreateWithoutNotificationsFromInput>
 }
 
-export type UserUpsertWithoutNotificationsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+export type UserCreateWithoutNotificationsToInput = {
+  id?: string
+  name: string
+  secondName: string
+  email: string
+  password: string
+  userName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsToInput = {
+  id?: string
+  name: string
+  secondName: string
+  email: string
+  password: string
+  userName: string
+  userSpecialisationUuid: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
+  reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsToInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsToInput, Prisma.UserUncheckedCreateWithoutNotificationsToInput>
+}
+
+export type UserUpsertWithoutNotificationsFromInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsFromInput, Prisma.UserUncheckedUpdateWithoutNotificationsFromInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsFromInput, Prisma.UserUncheckedCreateWithoutNotificationsFromInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+export type UserUpdateToOneWithWhereWithoutNotificationsFromInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsFromInput, Prisma.UserUncheckedUpdateWithoutNotificationsFromInput>
 }
 
-export type UserUpdateWithoutNotificationsInput = {
+export type UserUpdateWithoutNotificationsFromInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   secondName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -893,9 +967,10 @@ export type UserUpdateWithoutNotificationsInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutNotificationsInput = {
+export type UserUncheckedUpdateWithoutNotificationsFromInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   secondName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -910,6 +985,54 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
+}
+
+export type UserUpsertWithoutNotificationsToInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsToInput, Prisma.UserUncheckedUpdateWithoutNotificationsToInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsToInput, Prisma.UserUncheckedCreateWithoutNotificationsToInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsToInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsToInput, Prisma.UserUncheckedUpdateWithoutNotificationsToInput>
+}
+
+export type UserUpdateWithoutNotificationsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  secondName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
 }
 
 export type UserCreateWithoutAssignedTasksInput = {
@@ -926,7 +1049,8 @@ export type UserCreateWithoutAssignedTasksInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -943,7 +1067,8 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -965,7 +1090,8 @@ export type UserCreateWithoutReportedTasksInput = {
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutReportedTasksInput = {
@@ -982,7 +1108,8 @@ export type UserUncheckedCreateWithoutReportedTasksInput = {
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   timeLogs?: Prisma.TimeLogUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutReportedTasksInput = {
@@ -1015,7 +1142,8 @@ export type UserUpdateWithoutAssignedTasksInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -1032,7 +1160,8 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUpsertWithoutReportedTasksInput = {
@@ -1060,7 +1189,8 @@ export type UserUpdateWithoutReportedTasksInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportedTasksInput = {
@@ -1077,7 +1207,8 @@ export type UserUncheckedUpdateWithoutReportedTasksInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutTimeLogsInput = {
@@ -1094,7 +1225,8 @@ export type UserCreateWithoutTimeLogsInput = {
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutTimeLogsInput = {
@@ -1111,7 +1243,8 @@ export type UserUncheckedCreateWithoutTimeLogsInput = {
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationsFrom?: Prisma.NotificationUncheckedCreateNestedManyWithoutFromUserInput
+  notificationsTo?: Prisma.NotificationUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutTimeLogsInput = {
@@ -1144,7 +1277,8 @@ export type UserUpdateWithoutTimeLogsInput = {
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTimeLogsInput = {
@@ -1161,7 +1295,8 @@ export type UserUncheckedUpdateWithoutTimeLogsInput = {
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateManyUserSpecialisationInput = {
@@ -1189,7 +1324,8 @@ export type UserUpdateWithoutUserSpecialisationInput = {
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSpecialisationInput = {
@@ -1206,7 +1342,8 @@ export type UserUncheckedUpdateWithoutUserSpecialisationInput = {
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   timeLogs?: Prisma.TimeLogUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationsFrom?: Prisma.NotificationUncheckedUpdateManyWithoutFromUserNestedInput
+  notificationsTo?: Prisma.NotificationUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutUserSpecialisationInput = {
@@ -1231,7 +1368,8 @@ export type UserCountOutputType = {
   memberships: number
   comments: number
   timeLogs: number
-  notifications: number
+  notificationsFrom: number
+  notificationsTo: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1240,7 +1378,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
   timeLogs?: boolean | UserCountOutputTypeCountTimeLogsArgs
-  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  notificationsFrom?: boolean | UserCountOutputTypeCountNotificationsFromArgs
+  notificationsTo?: boolean | UserCountOutputTypeCountNotificationsToArgs
 }
 
 /**
@@ -1291,7 +1430,14 @@ export type UserCountOutputTypeCountTimeLogsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountNotificationsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
 }
 
@@ -1312,7 +1458,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   timeLogs?: boolean | Prisma.User$timeLogsArgs<ExtArgs>
-  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  notificationsFrom?: boolean | Prisma.User$notificationsFromArgs<ExtArgs>
+  notificationsTo?: boolean | Prisma.User$notificationsToArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1362,7 +1509,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   timeLogs?: boolean | Prisma.User$timeLogsArgs<ExtArgs>
-  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  notificationsFrom?: boolean | Prisma.User$notificationsFromArgs<ExtArgs>
+  notificationsTo?: boolean | Prisma.User$notificationsToArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1381,7 +1529,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
     timeLogs: Prisma.$TimeLogPayload<ExtArgs>[]
-    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    notificationsFrom: Prisma.$NotificationPayload<ExtArgs>[]
+    notificationsTo: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1793,7 +1942,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timeLogs<T extends Prisma.User$timeLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$timeLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsFrom<T extends Prisma.User$notificationsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsTo<T extends Prisma.User$notificationsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2348,9 +2498,33 @@ export type User$timeLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.notifications
+ * User.notificationsFrom
  */
-export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$notificationsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.notificationsTo
+ */
+export type User$notificationsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Notification
    */

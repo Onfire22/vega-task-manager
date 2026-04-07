@@ -35,6 +35,7 @@ export const ROUTES = {
 	comment: '/api/tasks/comments/:uuid',
 	comments: '/api/tasks/:uuid/comments',
 	currentUserPassword: '/api/users/current/password',
+	notifications: '/api/notifications',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

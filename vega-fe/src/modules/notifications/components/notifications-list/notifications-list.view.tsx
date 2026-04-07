@@ -11,13 +11,14 @@ const NotificationsListView: React.FC<IProps> = ({ notificationsList }) => {
 		<div className="min-h-75 max-h-175 overflow-auto scrollbar-custom">
 			{notificationsList.length > 0 ? (
 				notificationsList.map((item) => {
-					if (item.entity.type === 'task') {
+					if (item.entity.type === 'TASK') {
 						return (
 							<div className="p-2 hover:bg-accent rounded-[5px]" key={item.id}>
+								<div className="text-muted-foreground text-[12px]">{item.createdAt}</div>
 								<span>
 									Пользователь{' '}
 									<Link className="link-styled" to="#">
-										{item.user.userName}
+										{`@${item.user.userName}`}
 									</Link>{' '}
 									назначил вас исполнителем в задчу{' '}
 									<Link className="link-styled" to={`task/${item.entity.uuid}`}>

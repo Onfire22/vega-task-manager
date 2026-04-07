@@ -1,5 +1,7 @@
 export interface INotification {
 	id: string;
+	isReaded: boolean;
+	createdAt: string;
 	entity: {
 		uuid: string;
 		type: string;
@@ -8,7 +10,6 @@ export interface INotification {
 	user: {
 		userName: string;
 	};
-	isReaded: boolean;
 }
 
 export interface IInitialState {

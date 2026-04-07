@@ -9,8 +9,10 @@ model Notification {
   isReaded   Boolean    @default(false) @map("is_readed")
   entityType EntityType
 
-  userUuid        String      @map("user_uuid")
-  user            User        @relation(fields: [userUuid], references: [id])
+  fromUserUuid    String      @map("from_user_uuid")
+  fromUser        User        @relation("FromUser", fields: [fromUserUuid], references: [id])
+  toUserUuid      String      @map("to_user_uuid")
+  toUser          User        @relation("ToUser", fields: [toUserUuid], references: [id])
   taskUuid        String?     @map("task_uuid")
   task            Task?       @relation(fields: [taskUuid], references: [id])
   memberShipsUuid String?     @map("memberships_uuid")

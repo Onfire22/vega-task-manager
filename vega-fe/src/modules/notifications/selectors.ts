@@ -7,5 +7,5 @@ export const getNotificationsSelector = () => (state: RootState) =>
 
 export const getNotificationsCountSelector = () =>
 	createSelector(getNotificationsSelector(), (notifications) => {
-		return notifications.length;
+		return notifications.filter((item) => !item.isReaded).length;
 	});

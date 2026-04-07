@@ -14,7 +14,8 @@ model User {
   memberships            Membership[]
   comments               Comment[]
   timeLogs               TimeLog[]
-  notifications          Notification[]
+  notificationsFrom      Notification[] @relation("FromUser")
+  notificationsTo        Notification[] @relation("ToUser")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

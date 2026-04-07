@@ -225,16 +225,19 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 		});
 
 		if (fieldName === 'assigneeUuid') {
-			const notification = await prismaAppClient.notification.create({
+			const notification = await tx.notification.create({
 				data: {
-					userUuid,
+					fromUserUuid: userUuid,
+					toUserUuid: taskData?.assignee?.id!,
 					taskUuid: taskData.id,
 					entityType: 'TASK',
 				},
 				select: {
 					id: true,
-					user: {
+					createdAt: true,
+					fromUser: {
 						select: {
+							id: true,
 							userName: true,
 						},
 					},
@@ -243,10 +246,11 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 
 			io.to(`user:${taskData?.assignee?.id}`).emit('task:updated', {
 				id: notification.id,
-				entity: { uuid: taskData.id, type: 'task', code: taskData.code },
+				createdAt: notification.createdAt,
+				entity: { uuid: taskData.id, type: 'TASK', code: taskData.code },
 				user: {
-					uuid: userUuid,
-					userName: notification.user.userName,
+					uuid: notification.fromUser.id,
+					userName: notification.fromUser.userName,
 				},
 				isReaded: false,
 			});

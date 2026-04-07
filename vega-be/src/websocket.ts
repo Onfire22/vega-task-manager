@@ -31,7 +31,6 @@ export const initSocket = (server: HttpServer) => {
 
 	io.on('connection', (socket) => {
 		const userId = socket.user.id;
-		console.log(userId, 'userId');
 
 		socket.join(`user:${userId}`);
 
