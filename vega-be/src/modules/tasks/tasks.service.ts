@@ -4,6 +4,7 @@ import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types'
 import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { getTaskWithTransformedTime } from './tasks.utils';
 import { io } from '../../websocket';
+import { WEBSOCKET_TRIGGERS } from './tasks.constants';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
@@ -224,13 +225,14 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 			},
 		});
 
-		if (fieldName === 'assigneeUuid') {
+		if (WEBSOCKET_TRIGGERS.includes(fieldName) && userUuid !== taskData?.assignee?.id) {
 			const notification = await tx.notification.create({
 				data: {
 					fromUserUuid: userUuid,
 					toUserUuid: taskData?.assignee?.id!,
 					taskUuid: taskData.id,
-					entityType: 'TASK',
+					entityType: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
+					extraData: taskData.taskStatus.label,
 				},
 				select: {
 					id: true,
@@ -247,12 +249,17 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 			io.to(`user:${taskData?.assignee?.id}`).emit('task:updated', {
 				id: notification.id,
 				createdAt: notification.createdAt,
-				entity: { uuid: taskData.id, type: 'TASK', code: taskData.code },
+				isReaded: false,
+				...(fieldName === 'taskStatusUuid' ? { extraData: taskData.taskStatus.label } : {}),
+				entity: {
+					uuid: taskData.id,
+					type: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
+					code: taskData.code,
+				},
 				user: {
 					uuid: notification.fromUser.id,
 					userName: notification.fromUser.userName,
 				},
-				isReaded: false,
 			});
 		}
 

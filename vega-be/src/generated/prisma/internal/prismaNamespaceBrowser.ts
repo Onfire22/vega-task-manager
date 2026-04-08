@@ -117,6 +117,7 @@ export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof
 export const NotificationScalarFieldEnum = {
   id: 'id',
   isReaded: 'isReaded',
+  extraData: 'extraData',
   entityType: 'entityType',
   fromUserUuid: 'fromUserUuid',
   toUserUuid: 'toUserUuid',

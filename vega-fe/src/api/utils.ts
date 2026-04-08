@@ -11,11 +11,13 @@ export const transformDictionaries = (dictionary: TDictionary) => {
 
 export const transformNotifications = (notifications: TNotificationsList) => {
 	return notifications.map((item) => {
+		const entityType = item.entityType === 'PROJECT' ? 'project' : 'task';
 		return {
 			id: item.id,
 			isReaded: item.isReaded,
+			...(item.extraData ? { extraData: item.extraData } : {}),
 			createdAt: format(item.createdAt, DATE_TIME_FORMAT),
-			entity: { uuid: item.task.id, type: item.entityType, code: item.task.code },
+			entity: { uuid: item[entityType]?.id, type: item.entityType, code: item[entityType]?.code },
 			user: { uuid: item.fromUser.id, userName: item.fromUser.userName },
 		};
 	});

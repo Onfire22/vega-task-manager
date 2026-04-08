@@ -13,7 +13,7 @@ export const changeUserMembership = async (
 
 		const { userUuid, userRole } = req.body;
 
-		await membershipsService.changeUserRole(userUuid, userRole, uuid);
+		await membershipsService.changeUserRole(userUuid, userRole, uuid, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {

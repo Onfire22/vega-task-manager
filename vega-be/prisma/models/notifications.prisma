@@ -1,5 +1,6 @@
 enum EntityType {
   TASK
+  TASK_STATUS
   PROJECT
 }
 
@@ -7,6 +8,7 @@ model Notification {
   id String @id @default(uuid())
 
   isReaded   Boolean    @default(false) @map("is_readed")
+  extraData  String?    @map("extra_data")
   entityType EntityType
 
   fromUserUuid    String      @map("from_user_uuid")

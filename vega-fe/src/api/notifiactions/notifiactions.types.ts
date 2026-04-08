@@ -7,10 +7,11 @@ export interface INotification {
 	id: string;
 	isReaded: boolean;
 	createdAt: string;
+	extraData?: string;
 	entity: {
-		uuid: string;
-		type: string;
-		code: string;
+		uuid?: string;
+		type: 'TASK' | 'TASK_STATUS' | 'PROJECT';
+		code?: string;
 	};
 	user: {
 		uuid: string;
