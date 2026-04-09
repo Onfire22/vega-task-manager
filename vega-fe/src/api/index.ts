@@ -4,6 +4,7 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { type ZodType } from 'zod';
 import type { RootState } from '@/store/reducer.ts';
 import { setToken } from '@/store/authSlice.ts';
+import { initSocket, socket } from '@/api/websocket.ts';
 
 const rawBaseQuery = fetchBaseQuery({
 	baseUrl: BASE_URL,
@@ -34,6 +35,11 @@ const baseQuery: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError, {
 		if (refreshResult.data) {
 			const { accessToken } = refreshResult.data as { accessToken: string };
 			api.dispatch(setToken(accessToken));
+			initSocket(accessToken);
+
+			socket.auth = { token: accessToken };
+			socket.disconnect().connect();
+
 			result = await rawBaseQuery(args, api, extraOptions);
 		}
 	}

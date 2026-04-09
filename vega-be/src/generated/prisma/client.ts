@@ -55,6 +55,11 @@ export type Dictionary = Prisma.DictionaryModel
  */
 export type Membership = Prisma.MembershipModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Project
  * 
  */

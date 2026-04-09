@@ -29,6 +29,9 @@ export const ROUTES = {
 	project: '/api/projects',
 	comments: '/api/tasks/comments',
 	currentUserPassword: '/api/users/current/password',
+	notifications: '/api/notifications',
 };
 
 export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments', 'TaskLogs'];
+
+export const DATE_TIME_FORMAT = 'dd.MM.yyyy HH:mm';

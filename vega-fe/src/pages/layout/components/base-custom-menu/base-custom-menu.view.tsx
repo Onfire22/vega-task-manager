@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils.ts';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { Notifications } from '@/modules/notifications';
 
 interface IProps {
 	onSearchChange: (value: string) => void;
@@ -52,6 +53,7 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				/>
 			</div>
 			<div className="flex items-center gap-2.5">
+				<Notifications />
 				<CustomPopover
 					width="150px"
 					trigger={

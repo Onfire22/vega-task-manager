@@ -8,6 +8,8 @@ import cors from 'cors';
 import { errorMiddleware } from './errors/errors.middleware';
 import { dictionaryRouter } from './modules/dictionary/dictionary.router';
 import { initRedis } from './lib/redis/redis';
+import http from 'http';
+import { initSocket } from './websocket';
 
 const port = process.env.PORT;
 
@@ -34,10 +36,14 @@ app.use(protectedRouter);
 
 app.use(errorMiddleware);
 
+const server = http.createServer(app);
+
+initSocket(server);
+
 const main = async () => {
 	try {
 		await initRedis();
-		app.listen(port, () => {
+		server.listen(port, () => {
 			console.log('\x1b[42m%s\x1b[0m', `Server running at port: ${port}`);
 		});
 	} catch (e) {

@@ -19,3 +19,12 @@ export const Type = {
 } as const
 
 export type Type = (typeof Type)[keyof typeof Type]
+
+
+export const EntityType = {
+  TASK: 'TASK',
+  TASK_STATUS: 'TASK_STATUS',
+  PROJECT: 'PROJECT'
+} as const
+
+export type EntityType = (typeof EntityType)[keyof typeof EntityType]

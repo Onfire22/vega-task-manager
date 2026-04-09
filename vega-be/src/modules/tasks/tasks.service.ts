@@ -3,6 +3,8 @@ import { prismaAppClient } from '../../lib/prisma';
 import { TCreateTaskBody, TUpdateTaskBody, TUserTasksBody } from './tasks.types';
 import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { getTaskWithTransformedTime } from './tasks.utils';
+import { io } from '../../websocket';
+import { WEBSOCKET_TRIGGERS } from './tasks.constants';
 
 const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 	const { taskProjectUuid, ...task } = taskData;
@@ -30,7 +32,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 			throw new AppError('Проект не найден', RESPONSE_STATUSES.internalError);
 		}
 
-		const tasksCount = String(project._count).padStart(3, '0');
+		const tasksCount = String(project._count.tasks).padStart(3, '0');
 
 		const taskCode = `${project.code}-${tasksCount}`;
 
@@ -195,14 +197,73 @@ const getTaskByUuid = async (taskUuid: string) => {
 	return getTaskWithTransformedTime(task);
 };
 
-const updateTask = (taskData: TUpdateTaskBody, taskUuid: string) => {
-	const { fieldName, value } = taskData;
+const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid: string) => {
+	const { fieldName, value } = taskBody;
 
-	return prismaAppClient.task.update({
-		where: { id: taskUuid },
-		data: {
-			[fieldName]: value,
-		},
+	return prismaAppClient.$transaction(async (tx) => {
+		const taskData = await tx.task.update({
+			where: { id: taskUuid },
+			data: {
+				[fieldName]: value,
+			},
+			select: {
+				id: true,
+				reporterUuid: true,
+				code: true,
+				taskPriority: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStatus: {
+					select: DICTIONARY_SELECT,
+				},
+				taskStack: {
+					select: DICTIONARY_SELECT,
+				},
+				assignee: {
+					select: USER_SELECT,
+				},
+			},
+		});
+
+		if (WEBSOCKET_TRIGGERS.includes(fieldName) && userUuid !== taskData?.assignee?.id) {
+			const notification = await tx.notification.create({
+				data: {
+					fromUserUuid: userUuid,
+					toUserUuid: taskData?.assignee?.id!,
+					taskUuid: taskData.id,
+					entityType: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
+					extraData: taskData.taskStatus.label,
+				},
+				select: {
+					id: true,
+					createdAt: true,
+					fromUser: {
+						select: {
+							id: true,
+							userName: true,
+						},
+					},
+				},
+			});
+
+			io.to(`user:${taskData?.assignee?.id}`).emit('task:updated', {
+				id: notification.id,
+				createdAt: notification.createdAt,
+				isReaded: false,
+				...(fieldName === 'taskStatusUuid' ? { extraData: taskData.taskStatus.label } : {}),
+				entity: {
+					uuid: taskData.id,
+					type: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
+					code: taskData.code,
+				},
+				user: {
+					uuid: notification.fromUser.id,
+					userName: notification.fromUser.userName,
+				},
+			});
+		}
+
+		return taskData;
 	});
 };
 
