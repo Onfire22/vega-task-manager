@@ -33,6 +33,12 @@ export interface IPagination {
 	page: number;
 }
 
+export interface INotification {
+	fromUserUuid: string;
+	entityType: 'PROJECT';
+	extraData: string;
+}
+
 export type TProjectTasks = ProjectWithDetails['tasks'][number];
 
 export type TCreateProjectBody = z.infer<typeof CreateProjectBodySchema>;

@@ -1,8 +1,9 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { AppError } from '../../errors/errors';
-import { IPagination, TCreateProjectBody, TEditProjectBody } from './projects.types';
+import { INotification, IPagination, TCreateProjectBody, TEditProjectBody } from './projects.types';
 import { DICTIONARY_SELECT, RESPONSE_STATUSES, USER_SELECT } from '../../common/constants';
 import { normalizeProject, normalizeProjectsList } from './projects.mappers';
+import { io } from '../../websocket';
 
 const getProjects = async (pagination: IPagination, userUuid: string) => {
 	const { page, pageLimit } = pagination;
@@ -126,8 +127,57 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 					create: usersData,
 				},
 			},
-			select: { id: true },
+			select: {
+				id: true,
+				code: true,
+				memberships: {
+					select: {
+						id: true,
+						user: {
+							select: {
+								id: true,
+							},
+						},
+					},
+				},
+			},
 		});
+
+		const notificationData: INotification = {
+			fromUserUuid: userId,
+			entityType: 'PROJECT',
+			extraData: 'Участник',
+		};
+
+		const data = usersUuids.map((userUuid) => {
+			return {
+				...notificationData,
+				toUserUuid: userUuid,
+				memberShipsUuid: project.memberships.find((membership) => membership.user.id === userUuid)?.id,
+			};
+		});
+
+		const userFrom = await tx.user.findUnique({ where: { id: userId }, select: { userName: true } });
+
+		const notifications = await tx.notification.createMany({
+			data,
+		});
+
+		usersUuids.forEach((uuid) => {
+			io.to(`user:${uuid}`).emit('project:updated', {
+				id: uuid,
+				createdAt: new Date().toISOString(),
+				entity: { uuid: project.id, type: 'PROJECT', code: project.code },
+				extraData: 'Участник',
+				user: {
+					uuid: userId,
+					userName: userFrom?.userName,
+				},
+				isReaded: false,
+			});
+		});
+
+		console.dir(notifications, { depth: null });
 
 		const code = `#${project.id.slice(0, 4).toUpperCase()}`;
 

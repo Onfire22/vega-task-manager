@@ -4,6 +4,9 @@ import { normalizeNotifications } from './notifications.utils';
 const getNotifications = async (userUuid: string) => {
 	const notifications = await prismaAppClient.notification.findMany({
 		where: { toUserUuid: userUuid },
+		orderBy: {
+			createdAt: 'desc',
+		},
 		select: {
 			createdAt: true,
 			id: true,
@@ -48,6 +51,9 @@ const setNotificationsRead = async (userUuid: string) => {
 		return tx.notification.findMany({
 			where: {
 				toUserUuid: userUuid,
+			},
+			orderBy: {
+				createdAt: 'desc',
 			},
 			select: {
 				createdAt: true,

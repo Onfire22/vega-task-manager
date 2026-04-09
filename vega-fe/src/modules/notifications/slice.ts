@@ -11,7 +11,7 @@ const notificationsSlice = createSlice({
 	initialState,
 	reducers: {
 		setNotifications: (state, action: PayloadAction<Array<INotification>>) => {
-			state.notifications = [...state.notifications, action.payload] as Array<INotification>;
+			state.notifications = [action.payload, ...state.notifications] as Array<INotification>;
 		},
 	},
 	extraReducers: (builder) => {
