@@ -33,6 +33,7 @@ export interface ITask {
 	code: string | null;
 	title: string;
 	assignee: string | null;
+	assigneeUuid?: string | null;
 	description: string;
 	project: {
 		code: string;

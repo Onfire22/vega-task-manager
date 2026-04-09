@@ -159,7 +159,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 
 		const userFrom = await tx.user.findUnique({ where: { id: userId }, select: { userName: true } });
 
-		const notifications = await tx.notification.createMany({
+		await tx.notification.createMany({
 			data,
 		});
 
@@ -176,8 +176,6 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 				isReaded: false,
 			});
 		});
-
-		console.dir(notifications, { depth: null });
 
 		const code = `#${project.id.slice(0, 4).toUpperCase()}`;
 
@@ -209,6 +207,9 @@ const getProject = async (projectUuid: string, userId: string) => {
 				},
 			},
 			memberships: {
+				orderBy: {
+					user: { secondName: 'desc' },
+				},
 				where: {
 					projectUuid,
 				},

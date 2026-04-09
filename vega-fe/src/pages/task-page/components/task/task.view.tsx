@@ -15,11 +15,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { CustomChart } from '@/components/common/ui/custom-chart.tsx';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
 interface IProps {
 	task: ITask | null;
 	currentUserId?: string;
 	activeTab: string;
+	searchValue: string;
+	isUsersLoading: boolean;
 	field: TField;
 	onSetFieldToEdit: (fieldName: TTaskFields, value: string | null) => void;
 	onCancelChanges: () => void;
@@ -34,6 +37,7 @@ interface IProps {
 	onSetActiveTab: (value: string) => void;
 	component: React.ComponentType;
 	chartData: Array<IChartData> | null;
+	onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TaskView: React.FC<IProps> = ({
@@ -50,6 +54,9 @@ const TaskView: React.FC<IProps> = ({
 	onSetActiveTab,
 	activeTab,
 	chartData,
+	onSearchChange,
+	searchValue,
+	isUsersLoading,
 	component: Component,
 }) => {
 	if (!task) return null;
@@ -221,9 +228,10 @@ const TaskView: React.FC<IProps> = ({
 											<CustomInput
 												placeholder="Поиск"
 												type="text"
-												value="123"
-												onChange={() => {}}
+												value={searchValue}
+												onChange={onSearchChange}
 											/>
+											{isUsersLoading && <CustomLoader />}
 											<ul className="mt-2.5">
 												{usersListOptions.map((user) => {
 													return (

@@ -1,15 +1,18 @@
 import { ProjectView } from './project.view.tsx';
-import { useProjectData, useProjectDictionaries, useUpdateProject } from '../../hooks.ts';
+import { useProjectData, useProjectDictionaries, useUpdateProject, useUsersWithFilters } from '../../hooks.ts';
 import { useLocation, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useUpdateUserRoleMutation } from '@/api/projects/projects.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { useDebounce } from '@/app/utils.ts';
-import { useUsersOptions } from '@/api/users/users.hooks.ts';
+import { OWNER_ROLE_UUID } from '@/pages/project-page/constants.ts';
+import { useAppDispatch } from '@/store/hooks.ts';
+import { setModalInfo } from '@/pages/project-page/slice.ts';
 
 const Project = () => {
 	const params = useParams();
 	const location = useLocation();
+	const dispatch = useAppDispatch();
 
 	const [activeField, setActiveField] = useState<{ fieldName: string; value: string | null }>({
 		fieldName: '',
@@ -22,12 +25,7 @@ const Project = () => {
 
 	const debauncedValue = useDebounce(searchValue, 1000);
 
-	const { usersListOptions } = useUsersOptions({
-		filters: {
-			...(params.uuid ? { withOutProject: params.uuid } : {}),
-			...(searchValue ? { search: debauncedValue } : {}),
-		},
-	});
+	const { usersListOptions } = useUsersWithFilters(debauncedValue, params.uuid);
 
 	const { project, isProjectLoading, projectProgress } = useProjectData(params.uuid);
 
@@ -52,10 +50,18 @@ const Project = () => {
 		setActiveField({ fieldName: '', value: '' });
 	};
 
-	const handleUpdateUserRole = (userUuid: string, userRole: string) => {
+	const handleUpdateUserRole = (userUuid: string, userRoleUuid: string) => {
 		if (!params.uuid) return;
+		if (userRoleUuid === OWNER_ROLE_UUID) {
+			const userName = project?.users.find((item) => item.id === userUuid)?.userName;
+			if (userName) {
+				dispatch(setModalInfo({ userUuid, userRoleUuid, userName }));
+			}
 
-		updateUserRole({ uuid: params.uuid, userUuid, userRole });
+			return;
+		}
+
+		updateUserRole({ uuid: params.uuid, userUuid, userRoleUuid });
 	};
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {

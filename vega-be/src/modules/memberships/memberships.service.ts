@@ -3,10 +3,10 @@ import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import { io } from '../../websocket';
 
-const changeUserRole = async (userUuid: string, userRole: string, projectUuid: string, fromUserUuid: string) => {
+const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUuid: string, fromUserUuid: string) => {
 	const memberRole = await prismaAppClient.dictionary.findUnique({
-		where: { key_type: { key: userRole, type: 'ROLE_TYPE' } },
-		select: { id: true, label: true },
+		where: { id: userRoleUuid },
+		select: { id: true, label: true, key: true },
 	});
 
 	if (!memberRole) {
@@ -34,6 +34,24 @@ const changeUserRole = async (userUuid: string, userRole: string, projectUuid: s
 				},
 			},
 		});
+
+		if (memberRole.key === 'owner') {
+			const roleForOldOwner = await tx.dictionary.findUnique({
+				where: { key_type: { key: 'member', type: 'ROLE_TYPE' } },
+				select: { id: true },
+			});
+
+			if (!roleForOldOwner) {
+				throw new AppError('Роль не найдена', RESPONSE_STATUSES.notFound);
+			}
+
+			await tx.membership.update({
+				where: { user_project: { projectUuid, userUuid: fromUserUuid } },
+				data: {
+					userRoleUuid: roleForOldOwner.id,
+				},
+			});
+		}
 
 		const notification = await tx.notification.create({
 			data: {

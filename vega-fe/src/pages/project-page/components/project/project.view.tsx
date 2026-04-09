@@ -1,8 +1,8 @@
 import type { IDictionaryWithColor, IProject } from '../../types.ts';
 import React from 'react';
-import { TABS } from '../../constants.ts';
+import { TABS, VIEWER_ROLE_UUID } from '../../constants.ts';
 import { TasksTable } from '../tasks-table/tasks-table.tsx';
-import { parseDate } from '../../../../app/utils.ts';
+import { parseDate } from '@/app/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { cn } from '@/lib/utils.ts';
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
@@ -77,11 +77,15 @@ const ProjectView: React.FC<IProps> = ({
 						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
 							Статус
 						</span>
-						<CustomSelect
-							options={dictionariesOptions}
-							value={project.projectStatus.id}
-							onChange={(value) => onProjectFieldChange('projectStatusUuid', value)}
-						/>
+						{project.canEdit ? (
+							<CustomSelect
+								options={dictionariesOptions}
+								value={project.projectStatus.id}
+								onChange={(value) => onProjectFieldChange('projectStatusUuid', value)}
+							/>
+						) : (
+							<div>{project.projectStatus.label}</div>
+						)}
 					</div>
 					<div className="flex flex-col">
 						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
@@ -107,7 +111,7 @@ const ProjectView: React.FC<IProps> = ({
 							<>
 								<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
 									<span>Дедлайн</span>
-									{project.deadlineDate ? (
+									{project.deadlineDate && project.canEdit ? (
 										<a
 											className="link-styled"
 											onClick={() => onSetActiveFiled('deadlineDate', project.deadlineDate)}
@@ -170,7 +174,9 @@ const ProjectView: React.FC<IProps> = ({
 														<span>{user.label}</span>
 														<div className="flex items-center gap-1.75">
 															<Button
-																onClick={() => onUpdateUserRole(user.value, 'member')}
+																onClick={() =>
+																	onUpdateUserRole(user.value, VIEWER_ROLE_UUID)
+																}
 															>
 																+ Пригласить
 															</Button>
@@ -202,14 +208,18 @@ const ProjectView: React.FC<IProps> = ({
 												</div>
 												<div className="truncate">{user.userSpecialisation}</div>
 											</div>
-											<div className="w-35 shrink-0">
-												<CustomSelect
-													options={roleTypeOptions}
-													value={user.userRole.id}
-													onChange={() => {}}
-													size="sm"
-												/>
-											</div>
+											{project.canEdit && (
+												<div className="w-35 shrink-0">
+													<CustomSelect
+														options={roleTypeOptions}
+														value={user.userRole.id}
+														onChange={(value) => {
+															onUpdateUserRole(user.id, value);
+														}}
+														size="sm"
+													/>
+												</div>
+											)}
 										</div>
 									</div>
 								</li>

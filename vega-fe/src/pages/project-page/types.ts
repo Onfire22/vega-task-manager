@@ -60,3 +60,13 @@ export interface IDictionary {
 export interface IDictionaryWithColor extends IDictionary {
 	color: string;
 }
+
+export interface IUserModalInfo {
+	userName: string;
+	userUuid: string;
+	userRoleUuid: string;
+}
+
+export interface IInitialState {
+	modalInfo: IUserModalInfo | null;
+}

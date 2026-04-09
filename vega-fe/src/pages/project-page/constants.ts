@@ -19,3 +19,7 @@ export const TABS = [
 	{ text: 'Файлы', value: 'files' },
 	{ text: 'Активность', value: 'activity' },
 ];
+
+export const VIEWER_ROLE_UUID = 'a2a334cd-a495-4849-8bcb-e5e76a4e5f26';
+
+export const OWNER_ROLE_UUID = '32320ee5-a7aa-40af-8a8c-bfaec404c505';

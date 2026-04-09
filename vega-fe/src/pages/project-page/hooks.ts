@@ -6,6 +6,7 @@ import { getAvatarColor, typedEntries } from '@/app/utils.ts';
 import type { IDictionary, IDictionaryWithColor } from '@/pages/project-page/types.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 import { useProject } from '@/api/projects/projects.hooks.ts';
+import { useUsersOptions } from '@/api/users/users.hooks.ts';
 
 export const useProjectDictionaries = () => {
 	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(['PROJECT_STATUS', 'ROLE_TYPE']);
@@ -113,4 +114,17 @@ export const useUpdateProject = (uuid?: string) => {
 		isLoading,
 		isSuccess,
 	};
+};
+
+export const useUsersWithFilters = (searchValue: string, projectUuid?: string) => {
+	const meta = {
+		filters: {
+			...(projectUuid ? { withOutProject: projectUuid } : {}),
+			...(searchValue ? { search: searchValue } : {}),
+		},
+	};
+
+	const { usersListOptions } = useUsersOptions(meta);
+
+	return { usersListOptions };
 };

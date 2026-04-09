@@ -1,7 +1,7 @@
 import { TaskView } from './task.view.tsx';
 import { INITIAL_FIELD_VALUES } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
-import { useDictionariesWithColors, useTaskData, useTaskPayload } from '../../hooks.ts';
+import { useDictionariesWithColors, useTaskData, useTaskPayload, useUsersWithFilters } from '../../hooks.ts';
 import { useUpdateTaskMutation } from '@/api/tasks/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '@/store/hooks.ts';
@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import type { TField, TTaskFields } from '@/pages/task-page/types.ts';
 import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
 import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
-import { useUsersOptions } from '@/api/users/users.hooks.ts';
+import { useDebounce } from '@/app/utils.ts';
 
 const activityComponents = {
 	comments: Comments,
@@ -25,15 +25,12 @@ const Task = () => {
 
 	const [field, setEditField] = useState<TField>(INITIAL_FIELD_VALUES);
 	const [activeTab, setActiveTab] = useState('comments');
+	const [searchValue, setSearchValue] = useState('');
 
+	const debauncedValue = useDebounce(searchValue, 1000);
 	const { dictionariesOptions } = useDictionariesWithColors();
 	const { isTaskLoading, task } = useTaskData(params.uuid);
-	const { usersListOptions } = useUsersOptions(
-		{
-			filters: { withProject: task?.project.id, withoutUser: task?.assigneeUuid },
-		},
-		Boolean(!task),
-	);
+	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, debauncedValue);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 	const { chartData } = useTaskPayload(params.uuid!);
@@ -80,6 +77,10 @@ const Task = () => {
 		dispatch(setIsModalShown(true));
 	};
 
+	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
+	};
+
 	const component = activityComponents[activeTab as keyof typeof activityComponents];
 
 	return isTaskLoading ? (
@@ -94,12 +95,15 @@ const Task = () => {
 			currentUserId={data?.currentUser.id}
 			component={component}
 			chartData={chartData}
+			searchValue={searchValue}
+			isUsersLoading={isUsersLoading}
 			onSetFieldToEdit={handleSetFieldToEdit}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
 			onLogWorkModalShown={handleLogWorkModalShown}
 			onUpdateTask={handleUpdateTask}
 			onSetActiveTab={handleSetActiveTab}
+			onSearchChange={handleSearchChange}
 		/>
 	);
 };

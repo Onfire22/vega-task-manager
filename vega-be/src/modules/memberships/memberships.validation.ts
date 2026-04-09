@@ -6,5 +6,5 @@ export const ChangeUserMembershipParamsSchema = z.object({
 
 export const ChangeUserMembershipBodySchema = z.object({
 	userUuid: z.string(),
-	userRole: z.enum(['viewer', 'member', 'owner']),
+	userRoleUuid: z.string(),
 });

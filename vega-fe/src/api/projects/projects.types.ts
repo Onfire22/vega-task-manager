@@ -28,7 +28,7 @@ export interface IProjectUpdateRequest {
 export interface IUpdateUserRole {
 	uuid: string;
 	userUuid: string;
-	userRole: string;
+	userRoleUuid: string;
 }
 
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
