@@ -10,6 +10,7 @@ export interface INotification {
 	};
 	user: {
 		userName: string;
+		uuid: string;
 	};
 }
 

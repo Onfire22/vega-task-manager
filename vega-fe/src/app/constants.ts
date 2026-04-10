@@ -7,6 +7,8 @@ export const FRONT_ROUTES = {
 	task: '/task/:uuid',
 	projects: '/projects',
 	project: '/project/:uuid',
+	user: '/user/:uuid',
+	chat: '/chat',
 	all: '*',
 };
 

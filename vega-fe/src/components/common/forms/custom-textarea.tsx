@@ -1,5 +1,5 @@
 import { Textarea } from '@/components/ui/textarea.tsx';
-import React, { type ChangeEvent } from 'react';
+import React, { type ChangeEvent, type ReactNode } from 'react';
 import { cn } from '@/lib/utils.ts';
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
 	description?: string;
 	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 	isRequired?: boolean;
+	leftIcon?: ReactNode;
 }
 
 const CustomTextarea: React.FC<IProps> = ({
@@ -24,6 +25,7 @@ const CustomTextarea: React.FC<IProps> = ({
 	onChange,
 	isRequired,
 	description,
+	leftIcon,
 }) => {
 	return (
 		<div className="w-full">
@@ -36,14 +38,22 @@ const CustomTextarea: React.FC<IProps> = ({
 				)}
 				<span className="text-[12px] items-center text-muted-foreground">{description}</span>
 			</div>
-			<Textarea
-				className={cn(error && 'border-(--color-danger)')}
-				placeholder={placeholder}
-				value={value}
-				onChange={onChange}
-				name={name}
-				id={id}
-			/>
+			<div
+				className={cn(
+					'border border-input rounded-lg flex items-start justify-between focus-within:border-primary min-w-full overflow-hidden',
+					error && 'border-(--color-danger)',
+				)}
+			>
+				{leftIcon && <div className="p-2 flex items-center">{leftIcon}</div>}
+				<Textarea
+					className="border-none shadow-none focus-visible:ring-0"
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					name={name}
+					id={id}
+				/>
+			</div>
 			{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 		</div>
 	);

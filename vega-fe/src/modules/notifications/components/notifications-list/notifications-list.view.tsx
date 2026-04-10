@@ -16,7 +16,7 @@ const NotificationsListView: React.FC<IProps> = ({ notificationsList }) => {
 							<div className="text-muted-foreground text-[12px]">{item.createdAt}</div>
 							<span>
 								Пользователь{' '}
-								<Link className="link-styled" to="#">
+								<Link className="link-styled" to={`user/${item.user.uuid}`}>
 									{`@${item.user.userName}`}
 								</Link>{' '}
 								{item.entity.type === 'TASK' && (
