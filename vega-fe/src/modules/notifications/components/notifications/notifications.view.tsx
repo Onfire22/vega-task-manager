@@ -5,7 +5,9 @@ import { NotificationsList } from '@/modules/notifications/components/notificati
 const NotificationsView = () => {
 	return (
 		<div>
-			<CustomPopover trigger={<NotificationsTrigger />} content={<NotificationsList />} align="end" />
+			<CustomPopover trigger={<NotificationsTrigger />} align="end">
+				<NotificationsList />
+			</CustomPopover>
 		</div>
 	);
 };

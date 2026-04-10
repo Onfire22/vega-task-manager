@@ -3,14 +3,14 @@ import React, { type ReactNode, useRef } from 'react';
 
 interface IProps {
 	trigger: ReactNode;
-	content: ReactNode;
+	children: ReactNode;
 	width?: string;
 	isOpen?: boolean;
 	align?: 'center' | 'end' | 'start';
 	setIsOpened?: (value: boolean) => void;
 }
 
-const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setIsOpened, align }) => {
+const CustomPopover: React.FC<IProps> = ({ trigger, children, width, isOpen, setIsOpened, align }) => {
 	const triggerRef = useRef<HTMLDivElement>(null);
 
 	const isOpened = isOpen !== undefined ? { open: isOpen } : {};
@@ -39,7 +39,7 @@ const CustomPopover: React.FC<IProps> = ({ trigger, content, width, isOpen, setI
 				style={{ width }}
 				className="min-w-full"
 			>
-				{content}
+				{children}
 			</PopoverContent>
 		</Popover>
 	);

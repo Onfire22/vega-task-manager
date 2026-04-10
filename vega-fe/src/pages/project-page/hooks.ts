@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { DATE_FORMAT, ROLES_COLORS, STATUSES } from './constants.ts';
 import { useMemo } from 'react';
-import { useUpdateProjectMutation } from '../../api/projects/projects.api.ts';
+import { useUpdateProjectMutation } from '@/api/projects/projects.api.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
 import type { IDictionary, IDictionaryWithColor } from '@/pages/project-page/types.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';

@@ -153,42 +153,37 @@ const ProjectView: React.FC<IProps> = ({
 									+
 								</Button>
 							}
-							content={
-								<>
-									<CustomInput
-										placeholder="Поиск"
-										value={searchValue}
-										onChange={onSearchChange}
-										type="text"
-									/>
-									{!usersListOptions.length ? (
-										<div className="text-center">Ничего не найдено</div>
-									) : (
-										<ul className="mt-2.5">
-											{usersListOptions.map((user) => {
-												return (
-													<li
-														className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
-														key={user.value}
+						>
+							<CustomInput
+								placeholder="Поиск"
+								value={searchValue}
+								onChange={onSearchChange}
+								type="text"
+							/>
+							{!usersListOptions.length ? (
+								<div className="text-center">Ничего не найдено</div>
+							) : (
+								<ul className="mt-2.5">
+									{usersListOptions.map((user) => {
+										return (
+											<li
+												className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
+												key={user.value}
+											>
+												<span>{user.label}</span>
+												<div className="flex items-center gap-1.75">
+													<Button
+														onClick={() => onUpdateUserRole(user.value, VIEWER_ROLE_UUID)}
 													>
-														<span>{user.label}</span>
-														<div className="flex items-center gap-1.75">
-															<Button
-																onClick={() =>
-																	onUpdateUserRole(user.value, VIEWER_ROLE_UUID)
-																}
-															>
-																+ Пригласить
-															</Button>
-														</div>
-													</li>
-												);
-											})}
-										</ul>
-									)}
-								</>
-							}
-						/>
+														+ Пригласить
+													</Button>
+												</div>
+											</li>
+										);
+									})}
+								</ul>
+							)}
+						</CustomPopover>
 					</div>
 					<ul className="mt-2.5">
 						{project.users.map((user) => {

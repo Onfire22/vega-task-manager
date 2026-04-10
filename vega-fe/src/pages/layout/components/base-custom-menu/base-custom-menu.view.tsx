@@ -62,25 +62,24 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 							Создать
 						</Button>
 					}
-					content={
-						<ul className="flex flex-col gap-2.5">
-							<li
-								className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
-								onClick={() => onModalOpen('project')}
-							>
-								<FolderKanban size={17} />
-								<span>Проект</span>
-							</li>
-							<li
-								className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
-								onClick={() => onModalOpen('task')}
-							>
-								<Briefcase size={17} />
-								<span>Задачу</span>
-							</li>
-						</ul>
-					}
-				/>
+				>
+					<ul className="flex flex-col gap-2.5">
+						<li
+							className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+							onClick={() => onModalOpen('project')}
+						>
+							<FolderKanban size={17} />
+							<span>Проект</span>
+						</li>
+						<li
+							className="flex items-center gap-1.25 hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+							onClick={() => onModalOpen('task')}
+						>
+							<Briefcase size={17} />
+							<span>Задачу</span>
+						</li>
+					</ul>
+				</CustomPopover>
 				{path !== '/dashboard' && (
 					<Button onClick={onGoBack}>
 						<Undo2 size={18} />

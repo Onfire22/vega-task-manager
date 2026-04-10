@@ -40,30 +40,29 @@ const FiltersMenuView: React.FC<IProps> = ({
 					<span>{text}</span>
 				</Button>
 			}
-			content={
-				<div className="flex flex-col gap-2">
-					<FieldGroup className="gap-3">
-						{options.map((option) => {
-							return (
-								<Field key={option.value} orientation="horizontal">
-									<Checkbox
-										id={option.label}
-										checked={Boolean(filters[filter][option.value])}
-										onCheckedChange={() => onCheckboxClick(option.value)}
-									/>
-									<FieldLabel htmlFor={option.label} className="font-normal">
-										{option.label}
-									</FieldLabel>
-								</Field>
-							);
-						})}
-					</FieldGroup>
-					<Button size="xs" disabled={filtersCount === 0} onClick={onResetFilters}>
-						Сбросить
-					</Button>
-				</div>
-			}
-		/>
+		>
+			<div className="flex flex-col gap-2">
+				<FieldGroup className="gap-3">
+					{options.map((option) => {
+						return (
+							<Field key={option.value} orientation="horizontal">
+								<Checkbox
+									id={option.label}
+									checked={Boolean(filters[filter][option.value])}
+									onCheckedChange={() => onCheckboxClick(option.value)}
+								/>
+								<FieldLabel htmlFor={option.label} className="font-normal">
+									{option.label}
+								</FieldLabel>
+							</Field>
+						);
+					})}
+				</FieldGroup>
+				<Button size="xs" disabled={filtersCount === 0} onClick={onResetFilters}>
+					Сбросить
+				</Button>
+			</div>
+		</CustomPopover>
 	);
 };
 

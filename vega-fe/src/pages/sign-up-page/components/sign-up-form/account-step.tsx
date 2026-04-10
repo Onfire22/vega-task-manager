@@ -79,15 +79,14 @@ const AccountStep: React.FC<IProps> = ({
 							)}
 						/>
 					}
-					content={
-						<PasswordRequirements
-							requirements={PASSWORD_REQUIREMENTS}
-							password={formValues.password}
-							strength={popoverData.strength}
-							color={popoverData.color}
-						/>
-					}
-				/>
+				>
+					<PasswordRequirements
+						requirements={PASSWORD_REQUIREMENTS}
+						password={formValues.password}
+						strength={popoverData.strength}
+						color={popoverData.color}
+					/>
+				</CustomPopover>
 			</div>
 			<div className="relative min-h-16.5 mb-2.5">
 				<Controller
