@@ -221,33 +221,28 @@ const TaskView: React.FC<IProps> = ({
 						<div className="flex items-center justify-between">
 							<div className="text-[12px]" />
 							<div className="text-[14px]">
-								<CustomPopover
-									trigger={<a className="link-styled">+ назначить</a>}
-									content={
-										<>
-											<CustomInput
-												placeholder="Поиск"
-												type="text"
-												value={searchValue}
-												onChange={onSearchChange}
-											/>
-											{isUsersLoading && <CustomLoader />}
-											<ul className="mt-2.5">
-												{usersListOptions.map((user) => {
-													return (
-														<li
-															className="cursor-pointer text-[14px] p-1.25 hover:bg-secondary rounded-[5px]"
-															key={user.value}
-															onClick={() => onUpdateTask('assigneeUuid', user.value)}
-														>
-															{user.label}
-														</li>
-													);
-												})}
-											</ul>
-										</>
-									}
-								/>
+								<CustomPopover trigger={<a className="link-styled">+ назначить</a>}>
+									<CustomInput
+										placeholder="Поиск"
+										type="text"
+										value={searchValue}
+										onChange={onSearchChange}
+									/>
+									{isUsersLoading && <CustomLoader />}
+									<ul className="mt-2.5">
+										{usersListOptions.map((user) => {
+											return (
+												<li
+													className="cursor-pointer text-[14px] p-1.25 hover:bg-secondary rounded-[5px]"
+													key={user.value}
+													onClick={() => onUpdateTask('assigneeUuid', user.value)}
+												>
+													{user.label}
+												</li>
+											);
+										})}
+									</ul>
+								</CustomPopover>
 							</div>
 						</div>
 					</div>
