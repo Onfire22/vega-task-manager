@@ -1,6 +1,6 @@
 import type { IDictionaryWithColor, IProject } from '../../types.ts';
 import React from 'react';
-import { TABS, VIEWER_ROLE_UUID } from '../../constants.ts';
+import { ROLES_COLORS, TABS, VIEWER_ROLE_UUID } from '../../constants.ts';
 import { TasksTable } from '../tasks-table/tasks-table.tsx';
 import { parseDate } from '@/app/utils.ts';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
@@ -203,7 +203,7 @@ const ProjectView: React.FC<IProps> = ({
 												</div>
 												<div className="truncate">{user.userSpecialisation}</div>
 											</div>
-											{project.canEdit && (
+											{project.canEdit ? (
 												<div className="w-35 shrink-0">
 													<CustomSelect
 														options={roleTypeOptions}
@@ -214,6 +214,16 @@ const ProjectView: React.FC<IProps> = ({
 														size="sm"
 													/>
 												</div>
+											) : (
+												<span
+													style={{
+														color: ROLES_COLORS[
+															user.userRole.key as keyof typeof ROLES_COLORS
+														],
+													}}
+												>
+													{user.userRole.label}
+												</span>
 											)}
 										</div>
 									</div>

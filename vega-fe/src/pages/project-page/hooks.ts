@@ -3,7 +3,7 @@ import { DATE_FORMAT, ROLES_COLORS, STATUSES } from './constants.ts';
 import { useMemo } from 'react';
 import { useUpdateProjectMutation } from '@/api/projects/projects.api.ts';
 import { getAvatarColor, typedEntries } from '@/app/utils.ts';
-import type { IDictionary, IDictionaryWithColor } from '@/pages/project-page/types.ts';
+import type { IDictionary, IDictionaryWithColor, IProjectUser } from '@/pages/project-page/types.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 import { useProject } from '@/api/projects/projects.hooks.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
@@ -38,23 +38,36 @@ export const useProjectDictionaries = () => {
 export const useProjectData = (uuid?: string) => {
 	const { project, isProjectLoading } = useProject(uuid);
 
+	const usersData = project?.users.reduce<{ owner: IProjectUser | object; users: Array<IProjectUser> }>(
+		(acc, user) => {
+			const normalizedUser = {
+				id: user.id,
+				userName: `${user.name} ${user.secondName}`,
+				userSpecialisation: user.userSpecialisation.label,
+				userInitials: `${user.name[0]} ${user.secondName[0]}`,
+				color: getAvatarColor(user.id),
+				userRole: {
+					label: user.role.label,
+					key: user.role.key,
+					id: user.role.id,
+				},
+			};
+
+			if (user.role.key === 'owner') {
+				acc.owner = normalizedUser;
+			} else {
+				acc.users.push(normalizedUser);
+			}
+
+			return acc;
+		},
+		{ owner: {}, users: [] },
+	);
+
 	const projectData = project
 		? {
 				...project,
-				users: project?.users.map((user) => {
-					return {
-						id: user.id,
-						userName: `${user.name} ${user.secondName}`,
-						userSpecialisation: user.userSpecialisation.label,
-						userInitials: `${user.name[0]} ${user.secondName[0]}`,
-						color: getAvatarColor(user.id),
-						userRole: {
-							label: user.role.label,
-							key: user.role.key,
-							id: user.role.id,
-						},
-					};
-				}),
+				users: [usersData?.owner, ...(usersData?.users ?? [])],
 				avatar: {
 					letters: project.code.substring(1, 3),
 					color: getAvatarColor(project.id),
