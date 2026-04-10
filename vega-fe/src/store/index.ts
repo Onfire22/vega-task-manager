@@ -8,7 +8,6 @@ import layoutReducer from '../pages/layout/slice';
 import taskSlice from '../pages/task-page/slice';
 import projectsReducer from '../pages/projects-page/slice';
 import projectReducer from '../pages/project-page/slice';
-import chatSlice from '../pages/chat/slice';
 import authSlice from '@/store/authSlice.ts';
 
 export default combineReducers({
@@ -21,6 +20,5 @@ export default combineReducers({
 	projectsReducer,
 	notificationsSlice,
 	projectReducer,
-	chatSlice,
 	[baseApi.reducerPath]: baseApi.reducer,
 });
