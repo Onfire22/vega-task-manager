@@ -38,9 +38,10 @@ export const useProjectDictionaries = () => {
 export const useProjectData = (uuid?: string) => {
 	const { project, isProjectLoading } = useProject(uuid);
 
-	const usersData = project?.users.reduce<{ owner: IProjectUser | object; users: Array<IProjectUser> }>(
+	const userList = project?.users.reduce<{ owner: Array<IProjectUser>; users: Array<IProjectUser> }>(
 		(acc, user) => {
-			const normalizedUser = {
+			const accKey = user.role.key === 'owner' ? 'owner' : 'users';
+			acc[accKey].push({
 				id: user.id,
 				userName: `${user.name} ${user.secondName}`,
 				userSpecialisation: user.userSpecialisation.label,
@@ -51,23 +52,17 @@ export const useProjectData = (uuid?: string) => {
 					key: user.role.key,
 					id: user.role.id,
 				},
-			};
-
-			if (user.role.key === 'owner') {
-				acc.owner = normalizedUser;
-			} else {
-				acc.users.push(normalizedUser);
-			}
+			});
 
 			return acc;
 		},
-		{ owner: {}, users: [] },
+		{ owner: [], users: [] },
 	);
 
 	const projectData = project
 		? {
 				...project,
-				users: [usersData?.owner, ...(usersData?.users ?? [])],
+				users: [...(userList?.owner ?? []), ...(userList?.users ?? [])],
 				avatar: {
 					letters: project.code.substring(1, 3),
 					color: getAvatarColor(project.id),
