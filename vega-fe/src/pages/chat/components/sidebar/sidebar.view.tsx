@@ -1,126 +1,38 @@
 import { Button } from '@/components/ui/button.tsx';
-import { Plus, Search } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion.tsx';
+import { Plus } from 'lucide-react';
+import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 
 const SidebarView = () => {
 	return (
 		<div className="w-[23%]">
-			<div className="max-h-[calc(100vh-75px)] overflow-auto scrollbar-custom p-3">
-				<div className="flex items-center gap-2">
-					<Button className="flex-1" size="lg">
+			<div className="max-h-[calc(100vh-75px)] overflow-auto scrollbar-custom">
+				<div className="flex items-center justify-between border-b px-3 py-2">
+					<span>Чат</span>
+					<Button>
 						<Plus />
-						<span>Новый чат</span>
-					</Button>
-					<Button size="lg">
-						<Search />
 					</Button>
 				</div>
-				<div>
-					<Accordion type="multiple" className="max-w-lg" defaultValue={['notifications']}>
-						<AccordionItem value="1">
-							<AccordionTrigger>Проекты</AccordionTrigger>
-							<AccordionContent>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent cursor-default">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 2</div>
-									</div>
-									<div className="px-[6px] text-white bg-violet rounded-full">10</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
-					<Accordion type="multiple" className="max-w-lg" defaultValue={['notifications']}>
-						<AccordionItem value="1">
-							<AccordionTrigger>Каналы</AccordionTrigger>
-							<AccordionContent>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
-					<Accordion type="multiple" className="max-w-lg" defaultValue={['notifications']}>
-						<AccordionItem value="1">
-							<AccordionTrigger>Личные сообщения</AccordionTrigger>
-							<AccordionContent>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-								<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent">
-									<div className="flex items-center gap-2">
-										<div className="bg-white w-[30px] h-[30px] rounded-full" />
-										<div>Проект 1</div>
-									</div>
-									<div>1</div>
-								</div>
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
+				<div className="px-3 py-2 border-b">
+					<CustomInput type="text" value="" onChange={() => {}} placeholder="Поиск каналов" />
+				</div>
+				<div className="px-3 py-2">
+					<div className="mb-2">
+						<div className="text-muted-foreground text-[12px] uppercase">Каналы</div>
+						<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer">
+							<div>#Проект 2</div>
+							<div className="px-[6px] text-white bg-violet rounded-full">10</div>
+						</div>
+					</div>
+					<div>
+						<div className="text-muted-foreground text-[12px] uppercase">Личные сообщения</div>
+						<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer">
+							<div className="flex items-center gap-2">
+								<div className="w-[25px] h-[25px] bg-white rounded-full" />
+								<div>Иванов Иван</div>
+							</div>
+							<div className="px-[6px] text-white bg-violet rounded-full">10</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

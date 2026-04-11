@@ -1,8 +1,14 @@
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Search, User } from 'lucide-react';
-import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import React from 'react';
+import { Button } from '@/components/ui/button.tsx';
 
-const HeaderView = () => {
+interface IProps {
+	isUsersControlsOpen: boolean;
+	onUserControlsToggle: () => void;
+}
+
+const HeaderView: React.FC<IProps> = ({ onUserControlsToggle, isUsersControlsOpen }) => {
 	return (
 		<div className="p-3 w-full border-b">
 			<div className="flex items-center justify-between">
@@ -12,10 +18,16 @@ const HeaderView = () => {
 					<span className="text-muted-foreground text-[12px]">7 участников</span>
 				</div>
 				<div className="flex items-center gap-2">
-					<CustomPopover trigger={<User />} align="end">
-						123
-					</CustomPopover>
-					<CustomInput type="text" value="" onChange={() => {}} placeholder="Поиск" leftIcon={<Search />} />
+					<CustomInput
+						type="text"
+						value=""
+						onChange={() => {}}
+						placeholder="Поиск в канале"
+						leftIcon={<Search />}
+					/>
+					<Button variant={isUsersControlsOpen ? 'primary' : 'default'} onClick={onUserControlsToggle}>
+						<User className="cursor-pointer" />
+					</Button>
 				</div>
 			</div>
 		</div>
