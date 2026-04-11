@@ -1,11 +1,14 @@
 import { Header } from '../header/header.tsx';
 import { BaseCustomMenu } from '../base-custom-menu/base-custom-menu.tsx';
 import { Sidebar } from '../sidebar/sidebar.tsx';
-import { PageContentWrapper } from '../../../../components/common/shared/page-content-wrapper.tsx';
+import { PageContentWrapper } from '@/components/common/shared/page-content-wrapper.tsx';
 import { Outlet } from 'react-router-dom';
 import { ProjectModal, TaskModal } from '@/modules/modals';
+import { useChatSocket } from '@/pages/chat/hooks.ts';
 
 const LayoutView = () => {
+	useChatSocket();
+
 	return (
 		<div>
 			<Header menu={<BaseCustomMenu />} />

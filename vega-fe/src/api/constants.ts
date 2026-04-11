@@ -30,6 +30,7 @@ export const ROUTES = {
 	comments: '/api/tasks/comments',
 	currentUserPassword: '/api/users/current/password',
 	notifications: '/api/notifications',
+	channels: '/api/channels',
 };
 
 export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments', 'TaskLogs'];
