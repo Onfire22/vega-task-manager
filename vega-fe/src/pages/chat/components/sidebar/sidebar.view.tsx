@@ -20,7 +20,7 @@ const SidebarView = () => {
 						<div className="text-muted-foreground text-[12px] uppercase">Каналы</div>
 						<div className="py-[10px] px-[5px] flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer">
 							<div>#Проект 2</div>
-							<div className="px-[6px] text-white bg-violet rounded-full">10</div>
+							<div className="px-[6px] text-white bg-violet rounded-full text-[12px]">10</div>
 						</div>
 					</div>
 					<div>
@@ -30,7 +30,7 @@ const SidebarView = () => {
 								<div className="w-[25px] h-[25px] bg-white rounded-full" />
 								<div>Иванов Иван</div>
 							</div>
-							<div className="px-[6px] text-white bg-violet rounded-full">10</div>
+							<div className="px-[6px] text-white bg-violet rounded-full text-[12px]">13</div>
 						</div>
 					</div>
 				</div>

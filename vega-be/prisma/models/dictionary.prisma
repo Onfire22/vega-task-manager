@@ -5,6 +5,7 @@ enum Type {
   TASK_STATUS
   TASK_TYPE
   PROJECT_STATUS
+  CHAT_ROLE
 }
 
 model Dictionary {
@@ -15,12 +16,13 @@ model Dictionary {
   type        Type
   description String?
 
-  users          User[]
-  memberships    Membership[]
-  taskPriorities Task[]       @relation("TaskPriority")
-  taskStatuses   Task[]       @relation("TaskStatus")
-  taskStacks     Task[]       @relation("TaskStack")
-  projectStatus  Project[]
+  users           User[]
+  memberships     Membership[]
+  taskPriorities  Task[]            @relation("TaskPriority")
+  taskStatuses    Task[]            @relation("TaskStatus")
+  taskStacks      Task[]            @relation("TaskStack")
+  projectStatus   Project[]
+  chatMemberships ChatMemberships[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

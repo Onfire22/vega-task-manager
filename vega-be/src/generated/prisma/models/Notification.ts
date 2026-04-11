@@ -475,10 +475,6 @@ export type NotificationUncheckedUpdateManyWithoutMembershipsNestedInput = {
   deleteMany?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type EnumEntityTypeFieldUpdateOperationsInput = {
   set?: $Enums.EntityType
 }

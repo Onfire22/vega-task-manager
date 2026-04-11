@@ -204,6 +204,7 @@ export type DictionaryWhereInput = {
   taskStatuses?: Prisma.TaskListRelationFilter
   taskStacks?: Prisma.TaskListRelationFilter
   projectStatus?: Prisma.ProjectListRelationFilter
+  chatMemberships?: Prisma.ChatMembershipsListRelationFilter
 }
 
 export type DictionaryOrderByWithRelationInput = {
@@ -220,6 +221,7 @@ export type DictionaryOrderByWithRelationInput = {
   taskStatuses?: Prisma.TaskOrderByRelationAggregateInput
   taskStacks?: Prisma.TaskOrderByRelationAggregateInput
   projectStatus?: Prisma.ProjectOrderByRelationAggregateInput
+  chatMemberships?: Prisma.ChatMembershipsOrderByRelationAggregateInput
 }
 
 export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
@@ -240,6 +242,7 @@ export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   taskStatuses?: Prisma.TaskListRelationFilter
   taskStacks?: Prisma.TaskListRelationFilter
   projectStatus?: Prisma.ProjectListRelationFilter
+  chatMemberships?: Prisma.ChatMembershipsListRelationFilter
 }, "id" | "key_type">
 
 export type DictionaryOrderByWithAggregationInput = {
@@ -282,6 +285,7 @@ export type DictionaryCreateInput = {
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateInput = {
@@ -298,6 +302,7 @@ export type DictionaryUncheckedCreateInput = {
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUpdateInput = {
@@ -314,6 +319,7 @@ export type DictionaryUpdateInput = {
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateInput = {
@@ -330,6 +336,7 @@ export type DictionaryUncheckedUpdateInput = {
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryCreateManyInput = {
@@ -360,6 +367,11 @@ export type DictionaryUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DictionaryScalarRelationFilter = {
+  is?: Prisma.DictionaryWhereInput
+  isNot?: Prisma.DictionaryWhereInput
 }
 
 export type DictionaryKeyTypeCompoundUniqueInput = {
@@ -397,17 +409,22 @@ export type DictionaryMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type DictionaryScalarRelationFilter = {
-  is?: Prisma.DictionaryWhereInput
-  isNot?: Prisma.DictionaryWhereInput
+export type DictionaryCreateNestedOneWithoutChatMembershipsInput = {
+  create?: Prisma.XOR<Prisma.DictionaryCreateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedCreateWithoutChatMembershipsInput>
+  connectOrCreate?: Prisma.DictionaryCreateOrConnectWithoutChatMembershipsInput
+  connect?: Prisma.DictionaryWhereUniqueInput
+}
+
+export type DictionaryUpdateOneRequiredWithoutChatMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.DictionaryCreateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedCreateWithoutChatMembershipsInput>
+  connectOrCreate?: Prisma.DictionaryCreateOrConnectWithoutChatMembershipsInput
+  upsert?: Prisma.DictionaryUpsertWithoutChatMembershipsInput
+  connect?: Prisma.DictionaryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DictionaryUpdateToOneWithWhereWithoutChatMembershipsInput, Prisma.DictionaryUpdateWithoutChatMembershipsInput>, Prisma.DictionaryUncheckedUpdateWithoutChatMembershipsInput>
 }
 
 export type EnumTypeFieldUpdateOperationsInput = {
   set?: $Enums.Type
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type DictionaryCreateNestedOneWithoutMembershipsInput = {
@@ -494,6 +511,86 @@ export type DictionaryUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DictionaryUpdateToOneWithWhereWithoutUsersInput, Prisma.DictionaryUpdateWithoutUsersInput>, Prisma.DictionaryUncheckedUpdateWithoutUsersInput>
 }
 
+export type DictionaryCreateWithoutChatMembershipsInput = {
+  id?: string
+  label: string
+  key: string
+  type: $Enums.Type
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+}
+
+export type DictionaryUncheckedCreateWithoutChatMembershipsInput = {
+  id?: string
+  label: string
+  key: string
+  type: $Enums.Type
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
+  taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
+  taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
+  taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+}
+
+export type DictionaryCreateOrConnectWithoutChatMembershipsInput = {
+  where: Prisma.DictionaryWhereUniqueInput
+  create: Prisma.XOR<Prisma.DictionaryCreateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedCreateWithoutChatMembershipsInput>
+}
+
+export type DictionaryUpsertWithoutChatMembershipsInput = {
+  update: Prisma.XOR<Prisma.DictionaryUpdateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedUpdateWithoutChatMembershipsInput>
+  create: Prisma.XOR<Prisma.DictionaryCreateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedCreateWithoutChatMembershipsInput>
+  where?: Prisma.DictionaryWhereInput
+}
+
+export type DictionaryUpdateToOneWithWhereWithoutChatMembershipsInput = {
+  where?: Prisma.DictionaryWhereInput
+  data: Prisma.XOR<Prisma.DictionaryUpdateWithoutChatMembershipsInput, Prisma.DictionaryUncheckedUpdateWithoutChatMembershipsInput>
+}
+
+export type DictionaryUpdateWithoutChatMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+}
+
+export type DictionaryUncheckedUpdateWithoutChatMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
+  taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
+  taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
+  taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+}
+
 export type DictionaryCreateWithoutMembershipsInput = {
   id?: string
   label: string
@@ -507,6 +604,7 @@ export type DictionaryCreateWithoutMembershipsInput = {
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutMembershipsInput = {
@@ -522,6 +620,7 @@ export type DictionaryUncheckedCreateWithoutMembershipsInput = {
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutMembershipsInput = {
@@ -553,6 +652,7 @@ export type DictionaryUpdateWithoutMembershipsInput = {
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
@@ -568,6 +668,7 @@ export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryCreateWithoutProjectStatusInput = {
@@ -583,6 +684,7 @@ export type DictionaryCreateWithoutProjectStatusInput = {
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutProjectStatusInput = {
@@ -598,6 +700,7 @@ export type DictionaryUncheckedCreateWithoutProjectStatusInput = {
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutProjectStatusInput = {
@@ -629,6 +732,7 @@ export type DictionaryUpdateWithoutProjectStatusInput = {
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
@@ -644,6 +748,7 @@ export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryCreateWithoutTaskPrioritiesInput = {
@@ -659,6 +764,7 @@ export type DictionaryCreateWithoutTaskPrioritiesInput = {
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskPrioritiesInput = {
@@ -674,6 +780,7 @@ export type DictionaryUncheckedCreateWithoutTaskPrioritiesInput = {
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskPrioritiesInput = {
@@ -694,6 +801,7 @@ export type DictionaryCreateWithoutTaskStatusesInput = {
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStatusesInput = {
@@ -709,6 +817,7 @@ export type DictionaryUncheckedCreateWithoutTaskStatusesInput = {
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskStatusesInput = {
@@ -729,6 +838,7 @@ export type DictionaryCreateWithoutTaskStacksInput = {
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStacksInput = {
@@ -744,6 +854,7 @@ export type DictionaryUncheckedCreateWithoutTaskStacksInput = {
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutTaskStacksInput = {
@@ -775,6 +886,7 @@ export type DictionaryUpdateWithoutTaskPrioritiesInput = {
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskPrioritiesInput = {
@@ -790,6 +902,7 @@ export type DictionaryUncheckedUpdateWithoutTaskPrioritiesInput = {
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUpsertWithoutTaskStatusesInput = {
@@ -816,6 +929,7 @@ export type DictionaryUpdateWithoutTaskStatusesInput = {
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStatusesInput = {
@@ -831,6 +945,7 @@ export type DictionaryUncheckedUpdateWithoutTaskStatusesInput = {
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUpsertWithoutTaskStacksInput = {
@@ -857,6 +972,7 @@ export type DictionaryUpdateWithoutTaskStacksInput = {
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
@@ -872,6 +988,7 @@ export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryCreateWithoutUsersInput = {
@@ -887,6 +1004,7 @@ export type DictionaryCreateWithoutUsersInput = {
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryUncheckedCreateWithoutUsersInput = {
@@ -902,6 +1020,7 @@ export type DictionaryUncheckedCreateWithoutUsersInput = {
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
   projectStatus?: Prisma.ProjectUncheckedCreateNestedManyWithoutProjectStatusInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedCreateNestedManyWithoutUserRoleInput
 }
 
 export type DictionaryCreateOrConnectWithoutUsersInput = {
@@ -933,6 +1052,7 @@ export type DictionaryUpdateWithoutUsersInput = {
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserRoleNestedInput
 }
 
 export type DictionaryUncheckedUpdateWithoutUsersInput = {
@@ -948,6 +1068,7 @@ export type DictionaryUncheckedUpdateWithoutUsersInput = {
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
   projectStatus?: Prisma.ProjectUncheckedUpdateManyWithoutProjectStatusNestedInput
+  chatMemberships?: Prisma.ChatMembershipsUncheckedUpdateManyWithoutUserRoleNestedInput
 }
 
 
@@ -962,6 +1083,7 @@ export type DictionaryCountOutputType = {
   taskStatuses: number
   taskStacks: number
   projectStatus: number
+  chatMemberships: number
 }
 
 export type DictionaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -971,6 +1093,7 @@ export type DictionaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   taskStatuses?: boolean | DictionaryCountOutputTypeCountTaskStatusesArgs
   taskStacks?: boolean | DictionaryCountOutputTypeCountTaskStacksArgs
   projectStatus?: boolean | DictionaryCountOutputTypeCountProjectStatusArgs
+  chatMemberships?: boolean | DictionaryCountOutputTypeCountChatMembershipsArgs
 }
 
 /**
@@ -1025,6 +1148,13 @@ export type DictionaryCountOutputTypeCountProjectStatusArgs<ExtArgs extends runt
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * DictionaryCountOutputType without action
+ */
+export type DictionaryCountOutputTypeCountChatMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatMembershipsWhereInput
+}
+
 
 export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1040,6 +1170,7 @@ export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   taskStatuses?: boolean | Prisma.Dictionary$taskStatusesArgs<ExtArgs>
   taskStacks?: boolean | Prisma.Dictionary$taskStacksArgs<ExtArgs>
   projectStatus?: boolean | Prisma.Dictionary$projectStatusArgs<ExtArgs>
+  chatMemberships?: boolean | Prisma.Dictionary$chatMembershipsArgs<ExtArgs>
   _count?: boolean | Prisma.DictionaryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dictionary"]>
 
@@ -1081,6 +1212,7 @@ export type DictionaryInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   taskStatuses?: boolean | Prisma.Dictionary$taskStatusesArgs<ExtArgs>
   taskStacks?: boolean | Prisma.Dictionary$taskStacksArgs<ExtArgs>
   projectStatus?: boolean | Prisma.Dictionary$projectStatusArgs<ExtArgs>
+  chatMemberships?: boolean | Prisma.Dictionary$chatMembershipsArgs<ExtArgs>
   _count?: boolean | Prisma.DictionaryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DictionaryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1095,6 +1227,7 @@ export type $DictionaryPayload<ExtArgs extends runtime.Types.Extensions.Internal
     taskStatuses: Prisma.$TaskPayload<ExtArgs>[]
     taskStacks: Prisma.$TaskPayload<ExtArgs>[]
     projectStatus: Prisma.$ProjectPayload<ExtArgs>[]
+    chatMemberships: Prisma.$ChatMembershipsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1504,6 +1637,7 @@ export interface Prisma__DictionaryClient<T, Null = never, ExtArgs extends runti
   taskStatuses<T extends Prisma.Dictionary$taskStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$taskStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taskStacks<T extends Prisma.Dictionary$taskStacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$taskStacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectStatus<T extends Prisma.Dictionary$projectStatusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$projectStatusArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatMemberships<T extends Prisma.Dictionary$chatMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Dictionary$chatMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMembershipsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2069,6 +2203,30 @@ export type Dictionary$projectStatusArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * Dictionary.chatMemberships
+ */
+export type Dictionary$chatMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatMemberships
+   */
+  select?: Prisma.ChatMembershipsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatMemberships
+   */
+  omit?: Prisma.ChatMembershipsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatMembershipsInclude<ExtArgs> | null
+  where?: Prisma.ChatMembershipsWhereInput
+  orderBy?: Prisma.ChatMembershipsOrderByWithRelationInput | Prisma.ChatMembershipsOrderByWithRelationInput[]
+  cursor?: Prisma.ChatMembershipsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatMembershipsScalarFieldEnum | Prisma.ChatMembershipsScalarFieldEnum[]
 }
 
 /**

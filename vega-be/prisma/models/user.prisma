@@ -7,15 +7,17 @@ model User {
   password   String
   userName   String @unique @map("user_name")
 
-  userSpecialisationUuid String         @map("user_specialisation_uuid")
-  userSpecialisation     Dictionary     @relation(fields: [userSpecialisationUuid], references: [id])
-  assignedTasks          Task[]         @relation("AssignedTasks")
-  reportedTasks          Task[]         @relation("ReportedTasks")
+  userSpecialisationUuid String            @map("user_specialisation_uuid")
+  userSpecialisation     Dictionary        @relation(fields: [userSpecialisationUuid], references: [id])
+  assignedTasks          Task[]            @relation("AssignedTasks")
+  reportedTasks          Task[]            @relation("ReportedTasks")
   memberships            Membership[]
   comments               Comment[]
   timeLogs               TimeLog[]
-  notificationsFrom      Notification[] @relation("FromUser")
-  notificationsTo        Notification[] @relation("ToUser")
+  notificationsFrom      Notification[]    @relation("FromUser")
+  notificationsTo        Notification[]    @relation("ToUser")
+  chatMemberships        ChatMemberships[]
+  chatMessages           ChatMessages[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

@@ -1,0 +1,15 @@
+model ChatMemberships {
+  id String @id @default(uuid())
+
+  userRoleUuid String       @map("user_role_uuid")
+  userRole     Dictionary   @relation(fields: [userRoleUuid], references: [id])
+  userUuid     String
+  user         User         @relation(fields: [userUuid], references: [id])
+  channelUuid  String       @map("channel_uuid")
+  channel      ChatChannels @relation(fields: [channelUuid], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("chat_memberships")
+}

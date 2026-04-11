@@ -9,13 +9,30 @@
 * 🟢 You can import this file directly.
 */
 
+export const ChannelType = {
+  PM: 'PM',
+  CHANNEL: 'CHANNEL'
+} as const
+
+export type ChannelType = (typeof ChannelType)[keyof typeof ChannelType]
+
+
+export const ChannelVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type ChannelVisibility = (typeof ChannelVisibility)[keyof typeof ChannelVisibility]
+
+
 export const Type = {
   TASK_PRIORITY: 'TASK_PRIORITY',
   ROLE_TYPE: 'ROLE_TYPE',
   USER_SPECIALISATION: 'USER_SPECIALISATION',
   TASK_STATUS: 'TASK_STATUS',
   TASK_TYPE: 'TASK_TYPE',
-  PROJECT_STATUS: 'PROJECT_STATUS'
+  PROJECT_STATUS: 'PROJECT_STATUS',
+  CHAT_ROLE: 'CHAT_ROLE'
 } as const
 
 export type Type = (typeof Type)[keyof typeof Type]
