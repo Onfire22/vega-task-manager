@@ -27,13 +27,7 @@ export interface IMappedUser {
 	role: IRole;
 }
 
-export interface IMappedChannel {
-	id: string;
-	title: string;
-	channelType: TChannelType;
-	channelVisibility: TChannelVisibility;
-	users: Array<IMappedUser>;
-}
+export type IMappedChannel = Omit<IChannel, 'users'> & { users: Array<IMappedUser> };
 
 export interface IInitialState {
 	isUsersControlsOpen: boolean;

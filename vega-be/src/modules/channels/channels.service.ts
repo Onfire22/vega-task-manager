@@ -54,18 +54,7 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 					create: userData,
 				},
 			},
-			select: {
-				id: true,
-				channelType: true,
-				channelVisibility: true,
-				title: true,
-				chatMemberships: {
-					select: {
-						userUuid: true,
-						userRoleUuid: true,
-					},
-				},
-			},
+			select: channelsSelect,
 		});
 	});
 };

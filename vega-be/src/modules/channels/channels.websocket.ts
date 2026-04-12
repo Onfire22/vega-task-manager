@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 import { channelsService } from './channels.service';
-import { IChannel } from './channels.types';
+import { IChannel, IChannelEdit } from './channels.types';
 import { io } from '../../websocket';
 import { Prisma } from '../../generated/prisma/client';
 
@@ -43,5 +43,20 @@ export const createChannel = async (socket: Socket) => {
 				});
 			}
 		}
+	}
+};
+
+export const editChannel = async (socket: Socket) => {
+	try {
+		socket.on('channel:edit', async (channelData: IChannelEdit) => {
+			const channel = await channelsService.editChannel(channelData);
+
+			io.to(`channel:${channel.id}`).emit('channel:edited', { success: true, channelData });
+		});
+	} catch (e) {
+		socket.emit('channel:error', {
+			success: false,
+			message: 'Внутренняя ошибка',
+		});
 	}
 };
