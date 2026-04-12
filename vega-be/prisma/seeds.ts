@@ -34,6 +34,8 @@ const makeSeed = async () => {
 			{ type: 'PROJECT_STATUS', label: 'В работе', description: 'Активная разработка', key: 'p_in_progress' },
 			{ type: 'PROJECT_STATUS', label: 'Завершен', description: 'Закрыт и сдан', key: 'p_closed' },
 			{ type: 'PROJECT_STATUS', label: 'На паузе', description: 'Временно приостановлен', key: 'p_stopped' },
+			{ type: 'CHAT_ROLE', label: 'Администратор', key: 'chat_admin' },
+			{ type: 'CHAT_ROLE', label: 'Участник', key: 'chat_member' },
 		],
 		skipDuplicates: true,
 	});

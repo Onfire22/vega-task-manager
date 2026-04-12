@@ -1,8 +1,7 @@
 import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
-import { tasksHandler } from './modules/tasks/tasks.socket';
 import jwt from 'jsonwebtoken';
-import { channelsWs } from './modules/channels/channels.ws';
+import { createChannel } from './modules/channels/channels.websocket';
 
 let io: Server;
 
@@ -30,14 +29,11 @@ export const initSocket = (server: HttpServer) => {
 		}
 	});
 
-	io.on('connection', (socket) => {
+	io.on('connection', async (socket) => {
 		const userId = socket.user.id;
 
 		socket.join(`user:${userId}`);
-
-		channelsWs(socket);
-
-		// tasksHandler(socket);
+		await createChannel(socket);
 	});
 };
 

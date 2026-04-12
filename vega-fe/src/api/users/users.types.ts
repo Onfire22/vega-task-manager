@@ -10,6 +10,7 @@ export interface IFiltersRequest {
 		withOutProject: string;
 		withProject: string;
 		withoutUser: string;
+		search: string;
 	}>;
 }
 

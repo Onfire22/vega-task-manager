@@ -10,7 +10,7 @@ import type {
 } from './users.types';
 import { BaseResponseSchema, UpdateUserResponseSchema, UsersResponseSchema } from './users.validation';
 
-const usersApi = baseApi.injectEndpoints({
+export const usersApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getUsers: builder.query<TUsersResponse, IFiltersRequest>({
 			query: (filters) => ({

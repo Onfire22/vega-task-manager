@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button.tsx';
 
 interface IProps {
 	isUsersControlsOpen: boolean;
+	isButtonDisabled: boolean;
 	onUserControlsToggle: () => void;
 }
 
-const HeaderView: React.FC<IProps> = ({ onUserControlsToggle, isUsersControlsOpen }) => {
+const HeaderView: React.FC<IProps> = ({ onUserControlsToggle, isUsersControlsOpen, isButtonDisabled }) => {
 	return (
 		<div className="p-3 w-full border-b">
 			<div className="flex items-center justify-between">
@@ -25,7 +26,11 @@ const HeaderView: React.FC<IProps> = ({ onUserControlsToggle, isUsersControlsOpe
 						placeholder="Поиск в канале"
 						leftIcon={<Search />}
 					/>
-					<Button variant={isUsersControlsOpen ? 'primary' : 'default'} onClick={onUserControlsToggle}>
+					<Button
+						variant={isUsersControlsOpen ? 'primary' : 'default'}
+						onClick={onUserControlsToggle}
+						disabled={isButtonDisabled}
+					>
 						<User className="cursor-pointer" />
 					</Button>
 				</div>
