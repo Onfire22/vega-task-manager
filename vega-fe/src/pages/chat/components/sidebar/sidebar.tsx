@@ -9,7 +9,7 @@ const Sidebar = () => {
 	useGetChannelsQuery();
 	const dispatch = useAppDispatch();
 
-	const channels = useAppSelector(getChannelsGroupsSelector());
+	const channelGroups = useAppSelector(getChannelsGroupsSelector());
 	const activeChannel = useAppSelector(getActiveChannelSelector());
 
 	const handleOpenModal = (modalType: TNewChatModal) => {
@@ -21,11 +21,13 @@ const Sidebar = () => {
 		localStorage.setItem('activeChannelUuid', channel.id);
 	};
 
+	console.log(channelGroups);
+
 	return (
 		<SidebarView
 			onOpenModal={handleOpenModal}
 			onSetActiveChannel={handleSetActiveChannel}
-			channels={channels}
+			channels={channelGroups}
 			activeChannelUuid={activeChannel?.id}
 		/>
 	);

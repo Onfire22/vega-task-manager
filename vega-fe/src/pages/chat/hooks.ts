@@ -13,6 +13,7 @@ export const useChatSocket = () => {
 	useEffect(() => {
 		socket.on('channel:created', (data) => {
 			if (data.success) {
+				console.log(data);
 				dispatch(setChannels([data.channel, ...currentChannels]));
 				toast.success('Канал успешно создан');
 			}

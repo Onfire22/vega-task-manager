@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { CreateChannelValidationSchema } from '@/pages/chat/validation.ts';
 
-export type TChannelType = 'PM' | 'CHANNEL';
+export type TChannelType = 'pm' | 'channel';
 
-export type TChannelVisibility = 'PUBLIC' | 'PRIVATE';
+export type TChannelVisibility = 'public' | 'private';
 
 export type TNewChatModal = TChannelType | null;
 
@@ -27,7 +27,13 @@ export interface IMappedUser {
 	role: IRole;
 }
 
-export type IMappedChannel = Omit<IChannel, 'users'> & { users: Array<IMappedUser> };
+export type IMappedChannel = Omit<IChannel, 'users'> & {
+	users: Array<IMappedUser>;
+	channelAvatar?: {
+		color: string;
+		initials: string;
+	};
+};
 
 export interface IInitialState {
 	isUsersControlsOpen: boolean;
@@ -40,6 +46,8 @@ export interface IChannelsGroups {
 	channel: Array<IMappedChannel>;
 	pm: Array<IMappedChannel>;
 }
+
+export type TChannelsGroups = Record<TChannelType, Array<IMappedChannel>>;
 
 export interface IUserOption {
 	label: string;
@@ -58,6 +66,12 @@ export interface IUser {
 	secondName: string;
 	userName: string;
 	role: IRole;
+}
+
+export interface IChannelHeaderData {
+	membersCount: number;
+	channelTitle: string;
+	channelVisibility?: string;
 }
 
 export type TCreateChannel = z.infer<typeof CreateChannelValidationSchema>;

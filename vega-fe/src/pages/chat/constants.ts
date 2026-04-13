@@ -19,3 +19,19 @@ export const USER_COlORS = {
 	chat_admin: '#34d399',
 	chat_member: '#818cf8',
 };
+
+export const CHANNELS_TYPES = {
+	pm: 'Личные сообщения',
+	channel: 'Каналы',
+};
+
+export const CHANNEL_HEADER_VISIBILITY = {
+	public: 'Публичный',
+	private: 'Приватный',
+};
+
+export const PLURAL_OPTIONS = {
+	one: 'участник',
+	few: 'участника',
+	many: 'участников',
+};

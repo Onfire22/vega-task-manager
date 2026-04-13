@@ -32,7 +32,7 @@ const NewChatModal = () => {
 	const handleSubmitForm = form.handleSubmit((values) => {
 		socket.emit('channel:create', {
 			...values,
-			channelType: modalType,
+			channelType: modalType?.toUpperCase(),
 		});
 		dispatch(setNewChatModal(null));
 		form.reset();
@@ -51,7 +51,7 @@ const NewChatModal = () => {
 
 	const handlePmChatStart = (user: IUserOption) => {
 		socket.emit('channel:create', {
-			channelType: modalType,
+			channelType: modalType?.toUpperCase(),
 			title: user.label,
 			channelVisibility: 'PRIVATE',
 			usersList: [user.value],

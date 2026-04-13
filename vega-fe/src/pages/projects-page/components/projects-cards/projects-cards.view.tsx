@@ -1,8 +1,7 @@
 import type { IProject } from '../../types.ts';
 import React from 'react';
-import { pluralValue } from '../../utils.ts';
 import { PLURAL_OPTIONS } from '../../constants.ts';
-import { getAvatarColor } from '../../../../app/utils.ts';
+import { getAvatarColor, pluralValue } from '@/app/utils.ts';
 import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
 import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 

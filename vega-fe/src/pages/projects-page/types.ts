@@ -20,17 +20,3 @@ export interface IProject {
 		role: IDictionary;
 	}>;
 }
-
-export interface PluralOptions {
-	one: string;
-	few: string;
-	many: string;
-}
-
-export interface IPagination {
-	pages: Array<number | null>;
-	activePage: number;
-	hasNext: boolean;
-	hasPrev: boolean;
-	totalPages: number;
-}

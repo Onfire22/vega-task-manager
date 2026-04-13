@@ -57,3 +57,14 @@ export const getPaginationPages = (currentPage: number, totalPages: number) => {
 
 	return result;
 };
+
+interface PluralOptions {
+	one: string;
+	few: string;
+	many: string;
+}
+
+export const pluralValue = (value: number, variants: PluralOptions, locale = 'ru-RU') => {
+	const key = new Intl.PluralRules(locale).select(value);
+	return variants[key as keyof typeof variants] || '';
+};

@@ -5,8 +5,8 @@ export const ChannelsResponseSchema = z.object({
 		z.object({
 			id: z.string(),
 			title: z.string(),
-			channelType: z.enum(['CHANNEL', 'PM']),
-			channelVisibility: z.enum(['PUBLIC', 'PRIVATE']),
+			channelType: z.enum(['channel', 'pm']),
+			channelVisibility: z.enum(['public', 'private']),
 			users: z.array(
 				z.object({
 					id: z.string(),

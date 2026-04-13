@@ -3,31 +3,32 @@ import { channelsService } from './channels.service';
 import { IChannel, IChannelEdit } from './channels.types';
 import { io } from '../../websocket';
 import { Prisma } from '../../generated/prisma/client';
+import { normalizeChannel } from './channels.mappers';
 
 export const createChannel = async (socket: Socket) => {
 	try {
 		socket.on('channel:create', async (channelData: IChannel) => {
-			const channel = await channelsService.createChannel(channelData, socket.user.id);
+			const createdChannel = await channelsService.createChannel(channelData, socket.user.id);
+			const channel = normalizeChannel(createdChannel);
 
-			socket.join(`channel:${channel.id}`);
+			socket.join(`channel:${createdChannel.id}`);
 
-			if (channelData.channelType === 'CHANNEL') {
-				if (channelData.usersList.length > 0) {
-					const recipientSockets = await io.in(`user:${channelData.usersList}`).fetchSockets();
+			if (channelData.usersList.length > 0) {
+				const recipientSockets = await io.in(`user:${channelData.usersList}`).fetchSockets();
 
-					recipientSockets.forEach((s) => s.join(`channel:${channel.id}`));
-				}
+				recipientSockets.forEach((s) => s.join(`channel:${createdChannel.id}`));
 
-				if (channelData.channelVisibility === 'PRIVATE') {
-					[socket.user.id, ...channelData.usersList].forEach((uuid) =>
+				if (channelData.channelType === 'CHANNEL') {
+					channelData.usersList.forEach((uuid) =>
 						io.to(`user:${uuid}`).emit('channel:created', { success: true, channel }),
 					);
-				} else {
-					io.emit('channel:created', { success: true, channel });
 				}
-			} else {
-				io.to(`user:${socket.user.id}`).emit('channel:created', { success: true, channel });
 			}
+
+			io.to(`user:${socket.user.id}`).emit('channel:created', {
+				success: true,
+				channel,
+			});
 		});
 	} catch (e) {
 		if (e instanceof Prisma.PrismaClientKnownRequestError) {

@@ -2,18 +2,20 @@ import { prismaAppClient } from '../../lib/prisma';
 import { IChannel, IChannelEdit } from './channels.types';
 import { Socket } from 'socket.io';
 import { channelsSelect } from './channels.selects';
-import { normalizeChannels } from './channels.mappers';
+import { normalizeChannel } from './channels.mappers';
 
 const getChannels = async () => {
 	const channels = await prismaAppClient.chatChannels.findMany({
 		select: channelsSelect,
 	});
 
-	return normalizeChannels(channels);
+	return channels.map((channel) => normalizeChannel(channel));
 };
 
 const createChannel = (channelData: IChannel, adminUuid: string) => {
-	const { usersList, ...rest } = channelData;
+	const { usersList, title, ...rest } = channelData;
+
+	const channelTitle = channelData.channelType === 'CHANNEL' ? `#${title}` : title;
 
 	return prismaAppClient.$transaction(async (tx) => {
 		const userUuids = [...channelData.usersList, adminUuid];
@@ -50,6 +52,7 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 		return tx.chatChannels.create({
 			data: {
 				...rest,
+				title: channelTitle,
 				chatMemberships: {
 					create: userData,
 				},

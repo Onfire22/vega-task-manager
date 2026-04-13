@@ -26,7 +26,7 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 					<div className="mb-2">
 						<div className="text-muted-foreground text-[12px] uppercase flex items-center justify-between mb-2">
 							<span>Каналы</span>
-							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('CHANNEL')}>
+							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('channel')}>
 								+
 							</Button>
 						</div>
@@ -42,7 +42,7 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 										onClick={() => onSetActiveChannel(item)}
 									>
 										<div className="flex items-center gap-1.5">
-											{item.channelVisibility === 'PRIVATE' && <Lock size={15} color="white" />}
+											{item.channelVisibility === 'private' && <Lock size={15} color="white" />}
 											<div>{`#${item.title}`}</div>
 										</div>
 										<div className="px-1.5 text-white bg-violet rounded-full text-[12px]">10</div>
@@ -56,7 +56,7 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 					<div>
 						<div className="text-muted-foreground text-[12px] uppercase flex items-center justify-between mb-2">
 							<span>Личные сообщения</span>
-							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('PM')}>
+							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('pm')}>
 								+
 							</Button>
 						</div>
@@ -80,7 +80,7 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 								);
 							})
 						) : (
-							<div className="text-muted-foreground text-[14px] text-center">Чатов пока нет</div>
+							<div className="text-muted-foreground text-[14px] text-center">Каналов пока нет</div>
 						)}
 					</div>
 				</div>

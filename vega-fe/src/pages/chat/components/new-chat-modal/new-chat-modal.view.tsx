@@ -35,9 +35,9 @@ const NewChatModalView: React.FC<IProps> = ({
 			size="sm"
 			isOpen={Boolean(modalType)}
 			onOpenChange={onCloseModal}
-			title={modalType === 'CHANNEL' ? 'Создать канал' : 'Открыть личный чат'}
+			title={modalType === 'channel' ? 'Создать канал' : 'Открыть личный чат'}
 		>
-			{modalType === 'CHANNEL' && (
+			{modalType === 'channel' && (
 				<form className="flex flex-col gap-3" onSubmit={onSubmitForm}>
 					<Controller
 						name="title"
@@ -90,7 +90,7 @@ const NewChatModalView: React.FC<IProps> = ({
 					</div>
 				</form>
 			)}
-			{modalType === 'PM' && (
+			{modalType === 'pm' && (
 				<div>
 					<CustomInput value={value} onChange={onSearchChange} placeholder="Поиск пользователя" />
 					<ul className="p-3 flex flex-col gap-2 max-h-125 overflow-auto scrollbar-custom">
