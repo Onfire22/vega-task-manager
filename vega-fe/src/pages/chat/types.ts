@@ -37,9 +37,10 @@ export type IMappedChannel = Omit<IChannel, 'users'> & {
 
 export interface IInitialState {
 	isUsersControlsOpen: boolean;
-	activeChannel: IMappedChannel | null;
+	activeChannelUuid: string | null;
 	newChatModal: TNewChatModal;
 	channels: Array<IChannel>;
+	messages: Array<IMessage>;
 }
 
 export interface IChannelsGroups {
@@ -73,5 +74,27 @@ export interface IChannelHeaderData {
 	channelTitle: string;
 	channelVisibility?: string;
 }
+
+export interface IMessage {
+	id: string;
+	text: string;
+	channelUuid: string;
+	isPinned: false;
+	createdAt: string;
+	updatedAt?: string;
+	replyToUuid: string | null;
+	author: {
+		id: string;
+		name: string;
+		secondName: string;
+	};
+}
+
+export type IMappedMessage = Omit<IMessage, 'author'> & {
+	author: {
+		name: string;
+		avatar: IAvatar;
+	};
+};
 
 export type TCreateChannel = z.infer<typeof CreateChannelValidationSchema>;

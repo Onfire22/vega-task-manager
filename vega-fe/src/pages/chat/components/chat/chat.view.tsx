@@ -1,146 +1,60 @@
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
+import React from 'react';
+import type { IMappedMessage } from '@/pages/chat/types.ts';
+import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 
-const ChatView = () => {
+interface IProps {
+	value: string;
+	isLoading: boolean;
+	onCreateMessage: () => void;
+	onValueChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	messages: Array<IMappedMessage>;
+}
+
+const ChatView: React.FC<IProps> = ({ onValueChange, onCreateMessage, value, messages, isLoading }) => {
 	return (
 		<div className="p-3 h-[calc(100vh-127px)]">
 			<div className="h-[calc(100vh-220px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2">
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
+				{isLoading && (
+					<div className="h-[calc(100vh-220px)] flex items-center justify-center">
+						<CustomLoader size="xxl" />
 					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
-				<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-					<div className="bg-amber-600 w-10 h-[40px] rounded-full shrink-0" />
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="text-white">User User</div>
-							<div className="text-muted-foreground text-[12px]">10.01.2025</div>
-						</div>
-						<div className="text-[14px]">
-							Some message Some message Some messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome messageSome messageSome messageSome messageSome
-							messageSome messageSome messageSome message
-						</div>
-					</div>
-				</div>
+				)}
+				{messages.length > 0 ? (
+					messages.map((message) => {
+						return (
+							<div
+								className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1"
+								key={message.id}
+							>
+								<div
+									className="w-10 h-[40px] rounded-full shrink-0 flex items-center justify-center text-white"
+									style={{ background: message.author.avatar.color }}
+								>
+									{message.author.avatar.initials}
+								</div>
+								<div>
+									<div className="flex items-center gap-2">
+										<div className="text-white">{message.author.name}</div>
+										<div className="text-muted-foreground text-[12px]">{message.createdAt}</div>
+									</div>
+									<div className="text-[14px]">{message.text}</div>
+								</div>
+							</div>
+						);
+					})
+				) : (
+					<div className="h-[calc(100vh-220px)] flex items-center justify-center">Сообщений пока нет</div>
+				)}
 			</div>
 			<CustomTextarea
-				value=""
-				onChange={() => {}}
+				value={value}
+				onChange={onValueChange}
 				placeholder="Текст сообщения"
 				leftIcon={
-					<Button variant="primary">
+					<Button variant="primary" type="button" onClick={onCreateMessage} disabled={!value}>
 						<Send />
 					</Button>
 				}

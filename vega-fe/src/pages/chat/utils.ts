@@ -1,7 +1,9 @@
 import type { IUser } from '@/pages/chat/types.ts';
 import { getAvatarColor } from '@/app/utils.ts';
 
-export const getChannelWithNormalizeUsers = (users: Array<IUser>) => {
+export const getChannelWithNormalizeUsers = (users?: Array<IUser>) => {
+	if (!users) return [];
+
 	return users.map((user) => {
 		return {
 			id: user.id,

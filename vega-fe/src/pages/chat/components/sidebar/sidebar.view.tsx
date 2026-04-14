@@ -1,13 +1,13 @@
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import type { IChannelsGroups, IMappedChannel, TNewChatModal } from '@/pages/chat/types.ts';
+import type { IChannelsGroups, TNewChatModal } from '@/pages/chat/types.ts';
 import React from 'react';
 import { cn } from '@/lib/utils.ts';
 import { Lock } from 'lucide-react';
 
 interface IProps {
 	onOpenModal: (modalType: TNewChatModal) => void;
-	onSetActiveChannel: (channel: IMappedChannel) => void;
+	onSetActiveChannel: (channelUuid: string) => void;
 	channels: IChannelsGroups;
 	activeChannelUuid?: string | null;
 }
@@ -39,11 +39,11 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 											'py-2.5 px-1.25 mb-2 flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer transition-bg duration-300',
 											activeChannelUuid === item.id && 'bg-accent',
 										)}
-										onClick={() => onSetActiveChannel(item)}
+										onClick={() => onSetActiveChannel(item.id)}
 									>
 										<div className="flex items-center gap-1.5">
 											{item.channelVisibility === 'private' && <Lock size={15} color="white" />}
-											<div>{`#${item.title}`}</div>
+											<div>{item.title}</div>
 										</div>
 										<div className="px-1.5 text-white bg-violet rounded-full text-[12px]">10</div>
 									</div>
@@ -69,7 +69,7 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 											'py-2.5 px-1.25 mb-2 flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer transition-bg duration-300',
 											activeChannelUuid === item.id && 'bg-accent',
 										)}
-										onClick={() => onSetActiveChannel(item)}
+										onClick={() => onSetActiveChannel(item.id)}
 									>
 										<div className="flex items-center gap-2">
 											<div className="w-6.25 h-6.25 bg-white rounded-full" />
