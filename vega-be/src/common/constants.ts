@@ -37,6 +37,7 @@ export const ROUTES = {
 	currentUserPassword: '/api/users/current/password',
 	notifications: '/api/notifications',
 	channels: '/api/channels',
+	messages: '/api/messages/:channelUuid',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

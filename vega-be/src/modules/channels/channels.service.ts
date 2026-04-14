@@ -77,10 +77,4 @@ const deleteChannel = async (channelUuid: string) => {
 	return prismaAppClient.chatChannels.findMany();
 };
 
-const joinChannel = (socket: Socket) => {
-	socket.on('channel:join', async (channelUuid: string) => {
-		socket.join(`channel:${channelUuid}`);
-	});
-};
-
-export const channelsService = { getChannels, createChannel, editChannel, deleteChannel, joinChannel };
+export const channelsService = { getChannels, createChannel, editChannel, deleteChannel };

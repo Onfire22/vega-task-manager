@@ -61,3 +61,11 @@ export const editChannel = async (socket: Socket) => {
 		});
 	}
 };
+
+export const joinChannels = (socket: Socket) => {
+	socket.on('channel:join', async (channelUuids: string | Array<string>) => {
+		const uuids = Array.isArray(channelUuids) ? channelUuids : [channelUuids];
+
+		await Promise.all(uuids.map((uuid) => socket.join(`channel:${uuid}`)));
+	});
+};

@@ -288,7 +288,7 @@ export type ChatMessagesScalarWhereWithAggregatesInput = {
 export type ChatMessagesCreateInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -301,7 +301,7 @@ export type ChatMessagesCreateInput = {
 export type ChatMessagesUncheckedCreateInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   authorUuid: string
   replyToUuid?: string | null
@@ -340,7 +340,7 @@ export type ChatMessagesUncheckedUpdateInput = {
 export type ChatMessagesCreateManyInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   authorUuid: string
   replyToUuid?: string | null
@@ -578,7 +578,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutAuthorNestedInput = {
 export type ChatMessagesCreateWithoutChannelInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -590,7 +590,7 @@ export type ChatMessagesCreateWithoutChannelInput = {
 export type ChatMessagesUncheckedCreateWithoutChannelInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   authorUuid: string
   replyToUuid?: string | null
   createdAt?: Date | string
@@ -643,7 +643,7 @@ export type ChatMessagesScalarWhereInput = {
 export type ChatMessagesCreateWithoutRepliesInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -655,7 +655,7 @@ export type ChatMessagesCreateWithoutRepliesInput = {
 export type ChatMessagesUncheckedCreateWithoutRepliesInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   authorUuid: string
   replyToUuid?: string | null
@@ -672,7 +672,7 @@ export type ChatMessagesCreateOrConnectWithoutRepliesInput = {
 export type ChatMessagesCreateWithoutReplyToInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -684,7 +684,7 @@ export type ChatMessagesCreateWithoutReplyToInput = {
 export type ChatMessagesUncheckedCreateWithoutReplyToInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   authorUuid: string
   createdAt?: Date | string
@@ -757,7 +757,7 @@ export type ChatMessagesUpdateManyWithWhereWithoutReplyToInput = {
 export type ChatMessagesCreateWithoutAuthorInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -769,7 +769,7 @@ export type ChatMessagesCreateWithoutAuthorInput = {
 export type ChatMessagesUncheckedCreateWithoutAuthorInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   replyToUuid?: string | null
   createdAt?: Date | string
@@ -807,7 +807,7 @@ export type ChatMessagesUpdateManyWithWhereWithoutAuthorInput = {
 export type ChatMessagesCreateManyChannelInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   authorUuid: string
   replyToUuid?: string | null
   createdAt?: Date | string
@@ -853,7 +853,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutChannelInput = {
 export type ChatMessagesCreateManyReplyToInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   authorUuid: string
   createdAt?: Date | string
@@ -899,7 +899,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutReplyToInput = {
 export type ChatMessagesCreateManyAuthorInput = {
   id?: string
   text: string
-  isPinned: boolean
+  isPinned?: boolean
   channelUuid: string
   replyToUuid?: string | null
   createdAt?: Date | string
