@@ -6,9 +6,9 @@ import type { ChannelsResponse } from '@/api/channels/channels.types.ts';
 
 const channelsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		getChannels: builder.query<ChannelsResponse, void>({
+		getUserChannels: builder.query<ChannelsResponse, void>({
 			query: () => ({
-				url: ROUTES.channels,
+				url: ROUTES.userChannels,
 				method: METHODS.get,
 			}),
 			extraOptions: { schema: ChannelsResponseSchema },
@@ -17,7 +17,13 @@ const channelsApi = baseApi.injectEndpoints({
 				dispatch(setChannels(data.channels));
 			},
 		}),
+		getChannels: builder.query<ChannelsResponse, void>({
+			query: () => ({
+				url: ROUTES.channels,
+				method: METHODS.get,
+			}),
+		}),
 	}),
 });
 
-export const { useGetChannelsQuery } = channelsApi;
+export const { useGetUserChannelsQuery, useGetChannelsQuery } = channelsApi;

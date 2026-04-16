@@ -4,6 +4,7 @@ import type { IChannelsGroups, TNewChatModal } from '@/pages/chat/types.ts';
 import React from 'react';
 import { cn } from '@/lib/utils.ts';
 import { Lock } from 'lucide-react';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 
 interface IProps {
 	onOpenModal: (modalType: TNewChatModal) => void;
@@ -26,9 +27,29 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 					<div className="mb-2">
 						<div className="text-muted-foreground text-[12px] uppercase flex items-center justify-between mb-2">
 							<span>Каналы</span>
-							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('channel')}>
-								+
-							</Button>
+							<CustomPopover
+								width="180px"
+								trigger={
+									<Button size="icon-xs" className="text-white">
+										+
+									</Button>
+								}
+							>
+								<ul className="flex flex-col items-start gap-[10px]">
+									<li
+										className="w-full p-[5px] hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+										onClick={() => onOpenModal('channel')}
+									>
+										<span>Создать новый канал</span>
+									</li>
+									<li
+										className="w-full p-[5px] hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+										onClick={() => onOpenModal('channel_join')}
+									>
+										<span>Вступить в канал</span>
+									</li>
+								</ul>
+							</CustomPopover>
 						</div>
 						{channels?.channel?.length ? (
 							channels.channel.map((item) => {

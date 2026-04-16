@@ -39,6 +39,7 @@ const Chat = () => {
 			value={value}
 			messages={messages}
 			isLoading={isLoading}
+			activeChannelUuid={activeChannel?.id}
 		/>
 	);
 };

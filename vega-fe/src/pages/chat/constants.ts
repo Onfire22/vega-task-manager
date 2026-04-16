@@ -20,9 +20,10 @@ export const USER_COlORS = {
 	chat_member: '#818cf8',
 };
 
-export const CHANNELS_TYPES = {
-	pm: 'Личные сообщения',
-	channel: 'Каналы',
+export const CHANNEL_MODAL_HEADER = {
+	pm: 'Открыть личный чат',
+	channel: 'Создать канал',
+	channel_join: 'Выбрать канал',
 };
 
 export const CHANNEL_HEADER_VISIBILITY = {

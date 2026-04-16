@@ -2,7 +2,7 @@ import { SidebarView } from '@/pages/chat/components/sidebar/sidebar.view.tsx';
 import type { TNewChatModal } from '@/pages/chat/types.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setActiveChannelUuid, setNewChatModal } from '@/pages/chat/slice.ts';
-import { useGetChannelsQuery } from '@/api/channels/channels.api.ts';
+import { useGetUserChannelsQuery } from '@/api/channels/channels.api.ts';
 import {
 	getActiveChannelUuidSelector,
 	getChannelsGroupsSelector,
@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { socket } from '@/api/websocket.ts';
 
 const Sidebar = () => {
-	useGetChannelsQuery();
+	useGetUserChannelsQuery();
 	const dispatch = useAppDispatch();
 
 	const channelGroups = useAppSelector(getChannelsGroupsSelector());

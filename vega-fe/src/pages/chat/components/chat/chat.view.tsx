@@ -11,10 +11,20 @@ interface IProps {
 	onCreateMessage: () => void;
 	onValueChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	messages: Array<IMappedMessage>;
+	activeChannelUuid?: string;
 }
 
-const ChatView: React.FC<IProps> = ({ onValueChange, onCreateMessage, value, messages, isLoading }) => {
-	return (
+const ChatView: React.FC<IProps> = ({
+	onValueChange,
+	onCreateMessage,
+	value,
+	messages,
+	isLoading,
+	activeChannelUuid,
+}) => {
+	return !activeChannelUuid ? (
+		<div className="h-[calc(100vh-130px)] flex items-center justify-center">Выберите канал</div>
+	) : (
 		<div className="p-3 h-[calc(100vh-127px)]">
 			<div className="h-[calc(100vh-220px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2">
 				{isLoading && (

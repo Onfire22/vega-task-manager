@@ -36,6 +36,7 @@ export const ROUTES = {
 	comments: '/api/tasks/:uuid/comments',
 	currentUserPassword: '/api/users/current/password',
 	notifications: '/api/notifications',
+	userChannels: '/api/user_channels',
 	channels: '/api/channels',
 	messages: '/api/messages/:channelUuid',
 };

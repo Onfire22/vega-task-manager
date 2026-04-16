@@ -5,6 +5,7 @@ import { getChannelsSelector, getMessagesSelector } from '@/pages/chat/selectors
 import { setActiveChannelUuid, setChannels, setMessages } from '@/pages/chat/slice.ts';
 import { toast } from 'sonner';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
+import { useGetChannelsQuery } from '@/api/channels/channels.api.ts';
 
 export const useChatSocket = () => {
 	const dispatch = useAppDispatch();
@@ -49,7 +50,7 @@ export const useChatSocket = () => {
 	}, [currentChannels, dispatch, messages]);
 };
 
-export const useUsersWithFilters = (searchValue: string) => {
+export const useUsersWithFilters = (searchValue?: string) => {
 	const meta = {
 		filters: {
 			...(searchValue ? { search: searchValue } : {}),
@@ -59,4 +60,33 @@ export const useUsersWithFilters = (searchValue: string) => {
 	const { usersListOptions } = useUsersOptions(meta);
 
 	return { usersListOptions };
+};
+
+export const useChannelsList = () => {
+	const { data, isLoading } = useGetChannelsQuery();
+
+	if (!data) return { channels: [], isLoading };
+
+	const channels = data.channels.map((channel) => {
+		const { users, ...rest } = channel;
+		const channelAdminData = users.find((user) => user.role.key === 'chat_admin');
+
+		return {
+			...rest,
+			usersLength: users.length,
+			...(channelAdminData
+				? {
+						channelAdmin: {
+							id: channelAdminData.id,
+							name: `${channelAdminData.name} ${channelAdminData.secondName}`,
+						},
+					}
+				: {}),
+		};
+	});
+
+	return {
+		channels,
+		isLoading,
+	};
 };

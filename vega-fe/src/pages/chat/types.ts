@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { CreateChannelValidationSchema } from '@/pages/chat/validation.ts';
 
-export type TChannelType = 'pm' | 'channel';
+export type TChannelType = 'pm' | 'channel' | 'channel_join';
 
 export type TChannelVisibility = 'public' | 'private';
 
@@ -96,5 +96,17 @@ export type IMappedMessage = Omit<IMessage, 'author'> & {
 		avatar: IAvatar;
 	};
 };
+
+export interface IChannelListItem {
+	channelAdmin?: {
+		id: string;
+		name: string;
+	};
+	channelType: string;
+	channelVisibility: string;
+	id: string;
+	title: string;
+	usersLength: number;
+}
 
 export type TCreateChannel = z.infer<typeof CreateChannelValidationSchema>;

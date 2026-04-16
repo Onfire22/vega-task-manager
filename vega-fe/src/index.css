@@ -56,6 +56,7 @@
     --color-danger: var(--danger);
     --color-red: var(--red);
     --color-purple: var(--purple);
+    --color-green: var(--green)
 }
 
 :root {
@@ -107,6 +108,7 @@
     --danger: #E24B4A;
     --red: #A32D2D;
     --purple: #818cf8;
+    --green: #34d399;
 }
 
 .dark {

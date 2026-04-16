@@ -31,7 +31,8 @@ export const ROUTES = {
 	currentUserPassword: '/api/users/current/password',
 	notifications: '/api/notifications',
 	channels: '/api/channels',
-	messages: '/api/messages/:channelUuid',
+	userChannels: '/api/user_channels',
+	messages: '/api/messages',
 };
 
 export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments', 'TaskLogs'];
