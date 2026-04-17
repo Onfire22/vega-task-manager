@@ -20,11 +20,16 @@ const getChannelsByUserUuid = async (userUuid: string) => {
 	return channels.map((channel) => normalizeChannel(channel));
 };
 
-export const getChannels = async () => {
+export const getChannels = async (userUuid: string) => {
 	const channels = await prismaAppClient.chatChannels.findMany({
 		where: {
 			channelType: {
 				not: 'PM',
+			},
+			chatMemberships: {
+				none: {
+					userUuid,
+				},
 			},
 		},
 		select: channelsSelect,

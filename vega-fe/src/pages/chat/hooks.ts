@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { socket } from '@/api/websocket.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { getChannelsSelector, getMessagesSelector } from '@/pages/chat/selectors.ts';
@@ -6,17 +6,32 @@ import { setActiveChannelUuid, setChannels, setMessages } from '@/pages/chat/sli
 import { toast } from 'sonner';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
 import { useGetChannelsQuery } from '@/api/channels/channels.api.ts';
+import type { IChannel, IMessage } from '@/pages/chat/types.ts';
 
 export const useChatSocket = () => {
 	const dispatch = useAppDispatch();
 	const currentChannels = useAppSelector(getChannelsSelector());
 	const messages = useAppSelector(getMessagesSelector());
 
+	const setChannelsState = useCallback(
+		(channel: IChannel) => {
+			dispatch(setChannels([channel, ...currentChannels]));
+			dispatch(setActiveChannelUuid(channel.id));
+		},
+		[currentChannels, dispatch],
+	);
+
+	const setMessagesState = useCallback(
+		(message: IMessage) => {
+			dispatch(setMessages([...messages, message]));
+		},
+		[dispatch, messages],
+	);
+
 	useEffect(() => {
 		socket.on('channel:created', (data) => {
 			if (data.success) {
-				dispatch(setChannels([data.channel, ...currentChannels]));
-				dispatch(setActiveChannelUuid(data.channel.id));
+				setChannelsState(data.channel);
 				toast.success('Канал успешно создан');
 			}
 		});
@@ -39,7 +54,7 @@ export const useChatSocket = () => {
 
 		socket.on('message:created', (data) => {
 			if (data.success) {
-				dispatch(setMessages([...messages, data.message]));
+				setMessagesState(data.message);
 			}
 		});
 
@@ -52,7 +67,7 @@ export const useChatSocket = () => {
 			socket.off('channel:error');
 			socket.off('message:error');
 		};
-	}, [currentChannels, dispatch, messages]);
+	}, [currentChannels, dispatch, messages, setMessagesState, setChannelsState]);
 };
 
 export const useUsersWithFilters = (searchValue?: string) => {

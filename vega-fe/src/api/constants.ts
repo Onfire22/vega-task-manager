@@ -35,6 +35,17 @@ export const ROUTES = {
 	messages: '/api/messages',
 };
 
-export const TAG_TYPES = ['CurrentUser', 'Tasks', 'Task', 'Users', 'Projects', 'Project', 'Comments', 'TaskLogs'];
+export const TAG_TYPES = [
+	'CurrentUser',
+	'Tasks',
+	'Task',
+	'Users',
+	'Projects',
+	'Project',
+	'Comments',
+	'TaskLogs',
+	'Channels',
+	'User_Channels',
+];
 
 export const DATE_TIME_FORMAT = 'dd.MM.yyyy HH:mm';

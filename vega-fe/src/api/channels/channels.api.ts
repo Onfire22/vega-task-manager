@@ -4,13 +4,14 @@ import { setChannels } from '@/pages/chat/slice.ts';
 import { ChannelsResponseSchema } from '@/api/channels/channels.validation.ts';
 import type { ChannelsResponse } from '@/api/channels/channels.types.ts';
 
-const channelsApi = baseApi.injectEndpoints({
+export const channelsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getUserChannels: builder.query<ChannelsResponse, void>({
 			query: () => ({
 				url: ROUTES.userChannels,
 				method: METHODS.get,
 			}),
+			providesTags: ['User_Channels'],
 			extraOptions: { schema: ChannelsResponseSchema },
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				const { data } = await queryFulfilled;
@@ -22,6 +23,7 @@ const channelsApi = baseApi.injectEndpoints({
 				url: ROUTES.channels,
 				method: METHODS.get,
 			}),
+			providesTags: ['Channels'],
 		}),
 	}),
 });

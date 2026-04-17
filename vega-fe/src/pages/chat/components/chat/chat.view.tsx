@@ -1,15 +1,18 @@
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
-import React from 'react';
+import React, { type KeyboardEvent } from 'react';
 import type { IMappedMessage } from '@/pages/chat/types.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import { Kbd, KbdGroup } from '@/components/ui/kbd.tsx';
 
 interface IProps {
 	value: string;
 	isLoading: boolean;
 	onCreateMessage: () => void;
 	onValueChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
 	messages: Array<IMappedMessage>;
 	activeChannelUuid?: string;
 }
@@ -21,6 +24,7 @@ const ChatView: React.FC<IProps> = ({
 	messages,
 	isLoading,
 	activeChannelUuid,
+	onKeyDown,
 }) => {
 	return !activeChannelUuid ? (
 		<div className="h-[calc(100vh-130px)] flex items-center justify-center">Выберите канал</div>
@@ -40,7 +44,7 @@ const ChatView: React.FC<IProps> = ({
 								key={message.id}
 							>
 								<div
-									className="w-10 h-[40px] rounded-full shrink-0 flex items-center justify-center text-white"
+									className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
 									style={{ background: message.author.avatar.color }}
 								>
 									{message.author.avatar.initials}
@@ -62,11 +66,36 @@ const ChatView: React.FC<IProps> = ({
 			<CustomTextarea
 				value={value}
 				onChange={onValueChange}
+				onKeyDown={onKeyDown}
 				placeholder="Текст сообщения"
-				leftIcon={
-					<Button variant="primary" type="button" onClick={onCreateMessage} disabled={!value}>
-						<Send />
-					</Button>
+				resize="none"
+				rightIcon={
+					<CustomTooltip
+						position="top"
+						trigger={
+							<Button variant="primary" type="button" onClick={onCreateMessage} disabled={!value.trim()}>
+								<Send />
+							</Button>
+						}
+						content={
+							<div className="flex flex-col gap-1.25">
+								<KbdGroup>
+									<Kbd data-icon="inline-end" className="translate-x-0.5">
+										⏎
+									</Kbd>
+									<span> - для отправки сообщения</span>
+								</KbdGroup>
+								<KbdGroup>
+									<Kbd>Ctrl</Kbd>
+									<span>+</span>
+									<Kbd data-icon="inline-end" className="translate-x-0.5">
+										⏎
+									</Kbd>
+									<span> - для отправки сообщения</span>
+								</KbdGroup>
+							</div>
+						}
+					/>
 				}
 			/>
 		</div>
