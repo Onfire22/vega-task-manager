@@ -1,49 +1,66 @@
 import type { IChannelListItem } from '@/pages/chat/types.ts';
 import React from 'react';
 import { Button } from '@/components/ui/button.tsx';
-import { CirclePlus, Lock } from 'lucide-react';
+import { CirclePlus, Lock, MessageCircleMore } from 'lucide-react';
 import { pluralValue } from '@/app/utils.ts';
 import { PLURAL_OPTIONS } from '@/pages/chat/constants.ts';
+import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import { Link } from 'react-router-dom';
 
 interface IProps {
 	channels: Array<IChannelListItem>;
+	onJoinChannel: (channelUuid: string) => void;
 }
 
-const ChannelJoinView: React.FC<IProps> = ({ channels }) => {
+const ChannelJoinView: React.FC<IProps> = ({ channels, onJoinChannel }) => {
 	return (
-		<div>
-			<ul>
-				{channels.map((channel) => {
-					return (
-						<li
-							key={channel.id}
-							className="p-1 rounded-[5px] hover:bg-accent p-1.25 rounded-[5px] flex items-center justify-between"
-						>
-							<div className="flex items-center gap-[10px]">
-								{channel.channelVisibility === 'private' ? (
-									<Lock size={19} />
-								) : (
-									<CirclePlus size={19} />
-								)}
-								<div className="flex flex-col text-[12px]">
-									<p className="text-white">{channel.title}</p>
-									<span>{`${channel.usersLength} ${pluralValue(channel.usersLength, PLURAL_OPTIONS)}`}</span>
-									<div>
-										<span>Администратор </span>
-										<span className="text-[var(--color-green)] underline cursor-pointer">
-											{channel?.channelAdmin?.name}
-										</span>
+		<ul className="max-h-[60vh] overflow-auto scrollbar-custom">
+			{channels.map((channel) => {
+				return (
+					<li
+						key={channel.id}
+						className="p-1 rounded-[5px] hover:bg-accent p-1.25 rounded-[5px] flex items-center justify-between"
+					>
+						<div className="flex items-center gap-[10px]">
+							{channel.channelVisibility === 'private' ? <Lock size={19} /> : <CirclePlus size={19} />}
+							<div className="flex flex-col text-[12px]">
+								<p className="text-white">{channel.title}</p>
+								<span>{`${channel.usersLength} ${pluralValue(channel.usersLength, PLURAL_OPTIONS)}`}</span>
+								{channel.channelVisibility === 'private' && (
+									<div className="flex items-center gap-[3px]">
+										<span>Администратор</span>
+										<CustomTooltip
+											position="top"
+											trigger={
+												<Link className="flex items-center gap-[3px]" to="#">
+													<span className="text-[var(--color-green)] underline cursor-pointer">
+														{channel?.channelAdmin?.name}
+													</span>
+													<MessageCircleMore
+														size={14}
+														className="inline"
+														color="var(--color-green)"
+													/>
+												</Link>
+											}
+											content="Связаться с администратором"
+										/>
 									</div>
-								</div>
+								)}
 							</div>
-							<Button size="xs" variant="primary" disabled={channel.channelVisibility === 'private'}>
-								Вступить
-							</Button>
-						</li>
-					);
-				})}
-			</ul>
-		</div>
+						</div>
+						<Button
+							size="xs"
+							variant="primary"
+							disabled={channel.channelVisibility === 'private'}
+							onClick={() => onJoinChannel(channel.id)}
+						>
+							Вступить
+						</Button>
+					</li>
+				);
+			})}
+		</ul>
 	);
 };
 

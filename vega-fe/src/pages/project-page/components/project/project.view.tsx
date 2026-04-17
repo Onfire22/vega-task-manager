@@ -146,44 +146,48 @@ const ProjectView: React.FC<IProps> = ({
 						<span className="text-[11px] uppercase text-muted-foreground tracking-wide flex items-center justify-between">
 							Участники проекта
 						</span>
-						<CustomPopover
-							align="end"
-							trigger={
-								<Button size="xs" className="p-0 w-7.5 h-5 text-white">
-									+
-								</Button>
-							}
-						>
-							<CustomInput
-								placeholder="Поиск"
-								value={searchValue}
-								onChange={onSearchChange}
-								type="text"
-							/>
-							{!usersListOptions.length ? (
-								<div className="text-center">Ничего не найдено</div>
-							) : (
-								<ul className="mt-2.5">
-									{usersListOptions.map((user) => {
-										return (
-											<li
-												className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
-												key={user.value}
-											>
-												<span>{user.label}</span>
-												<div className="flex items-center gap-1.75">
-													<Button
-														onClick={() => onUpdateUserRole(user.value, VIEWER_ROLE_UUID)}
-													>
-														+ Пригласить
-													</Button>
-												</div>
-											</li>
-										);
-									})}
-								</ul>
-							)}
-						</CustomPopover>
+						{project.canEdit && (
+							<CustomPopover
+								align="end"
+								trigger={
+									<Button size="xs" className="p-0 w-7.5 h-5 text-white">
+										+
+									</Button>
+								}
+							>
+								<CustomInput
+									placeholder="Поиск"
+									value={searchValue}
+									onChange={onSearchChange}
+									type="text"
+								/>
+								{!usersListOptions.length ? (
+									<div className="text-center">Ничего не найдено</div>
+								) : (
+									<ul className="mt-2.5">
+										{usersListOptions.map((user) => {
+											return (
+												<li
+													className="p-1.25 gap-2.5 text-sm flex items-center justify-between"
+													key={user.value}
+												>
+													<span>{user.label}</span>
+													<div className="flex items-center gap-1.75">
+														<Button
+															onClick={() =>
+																onUpdateUserRole(user.value, VIEWER_ROLE_UUID)
+															}
+														>
+															+ Пригласить
+														</Button>
+													</div>
+												</li>
+											);
+										})}
+									</ul>
+								)}
+							</CustomPopover>
+						)}
 					</div>
 					<ul className="mt-2.5">
 						{project.users.map((user) => {

@@ -25,6 +25,10 @@ export const useChatSocket = () => {
 			console.log(data);
 		});
 
+		socket.on('channel:user_joined', (data) => {
+			console.log(data);
+		});
+
 		socket.on('channel:deleted', (data) => {
 			console.log(data);
 		});
@@ -43,6 +47,7 @@ export const useChatSocket = () => {
 			socket.off('channel:created');
 			socket.off('channel:edited');
 			socket.off('channel:deleted');
+			socket.off('channel:user_joined');
 			socket.off('message:created');
 			socket.off('channel:error');
 			socket.off('message:error');

@@ -209,6 +209,7 @@ export type ChatMembershipsOrderByWithRelationInput = {
 
 export type ChatMembershipsWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  user_channel?: Prisma.ChatMembershipsUser_channelCompoundUniqueInput
   AND?: Prisma.ChatMembershipsWhereInput | Prisma.ChatMembershipsWhereInput[]
   OR?: Prisma.ChatMembershipsWhereInput[]
   NOT?: Prisma.ChatMembershipsWhereInput | Prisma.ChatMembershipsWhereInput[]
@@ -220,7 +221,7 @@ export type ChatMembershipsWhereUniqueInput = Prisma.AtLeast<{
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   channel?: Prisma.XOR<Prisma.ChatChannelsScalarRelationFilter, Prisma.ChatChannelsWhereInput>
-}, "id">
+}, "id" | "user_channel">
 
 export type ChatMembershipsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -304,6 +305,11 @@ export type ChatMembershipsUncheckedUpdateManyInput = {
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ChatMembershipsUser_channelCompoundUniqueInput = {
+  userUuid: string
+  channelUuid: string
 }
 
 export type ChatMembershipsCountOrderByAggregateInput = {

@@ -69,3 +69,22 @@ export const joinChannels = (socket: Socket) => {
 		await Promise.all(uuids.map((uuid) => socket.join(`channel:${uuid}`)));
 	});
 };
+
+export const joinChannelByUser = async (socket: Socket) => {
+	try {
+		socket.on('channel:user_join', async (channel: { channelUuid: string }) => {
+			const newChannel = await channelsService.updateChannelUserRole(channel.channelUuid, socket.user.id);
+
+			const userData = newChannel?.users.find((user) => user.id === socket.user.id);
+
+			io.to(`channel:${channel.channelUuid}`).emit('channel:user_joined', { success: true, data: userData });
+
+			io.to(`user:${socket.user.id}`).emit('channel:created', { success: true, channel: newChannel });
+		});
+	} catch (e) {
+		socket.emit('channel:error', {
+			success: false,
+			message: 'Внутренняя ошибка',
+		});
+	}
+};

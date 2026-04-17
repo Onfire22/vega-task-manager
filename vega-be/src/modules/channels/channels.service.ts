@@ -2,6 +2,8 @@ import { prismaAppClient } from '../../lib/prisma';
 import { IChannel, IChannelEdit } from './channels.types';
 import { channelsSelect } from './channels.selects';
 import { normalizeChannel } from './channels.mappers';
+import { AppError } from '../../errors/errors';
+import { RESPONSE_STATUSES } from '../../common/constants';
 
 const getChannelsByUserUuid = async (userUuid: string) => {
 	const channels = await prismaAppClient.chatChannels.findMany({
@@ -96,4 +98,41 @@ const deleteChannel = async (channelUuid: string) => {
 	return prismaAppClient.chatChannels.findMany();
 };
 
-export const channelsService = { getChannelsByUserUuid, getChannels, createChannel, editChannel, deleteChannel };
+const updateChannelUserRole = async (channelUuid: string, userUuid: string) => {
+	const userRole = await prismaAppClient.dictionary.findUnique({
+		where: { key_type: { type: 'CHAT_ROLE', key: 'chat_member' } },
+		select: { id: true },
+	});
+
+	if (!userRole) {
+		throw new AppError('Роль не найдена', RESPONSE_STATUSES.notFound);
+	}
+
+	await prismaAppClient.chatMemberships.upsert({
+		where: { user_channel: { channelUuid, userUuid } },
+		update: {
+			userRoleUuid: userRole.id,
+		},
+		create: {
+			userUuid: userUuid,
+			channelUuid: channelUuid,
+			userRoleUuid: userRole.id,
+		},
+	});
+
+	const channel = await prismaAppClient.chatChannels.findUniqueOrThrow({
+		where: { id: channelUuid, chatMemberships: { some: { userUuid } } },
+		select: channelsSelect,
+	});
+
+	return normalizeChannel(channel);
+};
+
+export const channelsService = {
+	getChannelsByUserUuid,
+	getChannels,
+	createChannel,
+	editChannel,
+	deleteChannel,
+	updateChannelUserRole,
+};
