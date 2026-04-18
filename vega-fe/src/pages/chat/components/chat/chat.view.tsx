@@ -1,5 +1,5 @@
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
-import { Send } from 'lucide-react';
+import { EllipsisVertical, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 import React, { type KeyboardEvent } from 'react';
 import type { IMappedMessage } from '@/pages/chat/types.ts';
@@ -7,6 +7,8 @@ import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { Kbd, KbdGroup } from '@/components/ui/kbd.tsx';
 import { isDatesEqual } from '@/pages/chat/utils.ts';
+import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
+import { MESSAGE_MENU } from '@/pages/chat/constants.ts';
 
 interface IProps {
 	value: string;
@@ -16,6 +18,7 @@ interface IProps {
 	onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
 	messages: Array<IMappedMessage>;
 	activeChannelUuid?: string;
+	currentUserUuid?: string;
 }
 
 const ChatView: React.FC<IProps> = ({
@@ -26,6 +29,7 @@ const ChatView: React.FC<IProps> = ({
 	isLoading,
 	activeChannelUuid,
 	onKeyDown,
+	currentUserUuid,
 }) => {
 	return !activeChannelUuid ? (
 		<div className="h-[calc(100vh-130px)] flex items-center justify-center">Выберите канал</div>
@@ -53,22 +57,54 @@ const ChatView: React.FC<IProps> = ({
 											</div>
 										</div>
 									)}
-								<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
-									<div
-										className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
-										style={{ background: message.author.avatar.color }}
-									>
-										{message.author.avatar.initials}
-									</div>
-									<div>
-										<div className="flex items-center gap-2">
-											<div className="text-white">{message.author.name}</div>
-											<div className="text-muted-foreground text-[12px]">
-												{message.createdAtTime}
-											</div>
+								<div className="flex items-center justify-between rounded-[5px] hover:bg-accent px-2 py-1">
+									<div className="flex items-start gap-2">
+										<div
+											className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
+											style={{ background: message.author.avatar.color }}
+										>
+											{message.author.avatar.initials}
 										</div>
-										<div className="text-[14px] whitespace-pre-wrap">{message.text}</div>
+										<div>
+											<div className="flex items-center gap-2">
+												<div className="text-white">{message.author.name}</div>
+												<div className="text-muted-foreground text-[12px]">
+													{message.createdAtTime}
+												</div>
+											</div>
+											<div className="text-[14px] whitespace-pre-wrap">{message.text}</div>
+										</div>
 									</div>
+									<CustomPopover
+										align="end"
+										width="130px"
+										trigger={
+											<Button size="xs">
+												<EllipsisVertical />
+											</Button>
+										}
+									>
+										<ul className="flex flex-col items-start">
+											{MESSAGE_MENU.map((item) => {
+												let isPermitted = true;
+
+												if (item.permission) {
+													isPermitted = message.author.id === currentUserUuid;
+												}
+
+												return (
+													isPermitted && (
+														<li
+															className="p-1 w-full hover:bg-accent cursor-pointer rounded-[5px]"
+															key={item.id}
+														>
+															{item.text}
+														</li>
+													)
+												);
+											})}
+										</ul>
+									</CustomPopover>
 								</div>
 							</div>
 						);

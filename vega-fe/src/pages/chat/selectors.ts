@@ -97,6 +97,7 @@ export const getMessagesByChannelSelector = () =>
 					createdAtDate: format(createdAt, DATE_FORMAT),
 					createdAtTime: format(createdAt, TIME_FORMAT),
 					author: {
+						id: message.author.id,
 						name: `${message.author.name} ${message.author.secondName}`,
 						avatar: {
 							initials: `${message.author.name[0]} ${message.author.secondName[0]}`,

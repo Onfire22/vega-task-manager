@@ -6,3 +6,9 @@ export interface ICreateMessage {
 	isPinned?: boolean;
 	isSystem?: boolean;
 }
+
+export interface IEditMessage {
+	messageUuid: string;
+	field: 'text' | 'isPinned';
+	value: string | boolean;
+}

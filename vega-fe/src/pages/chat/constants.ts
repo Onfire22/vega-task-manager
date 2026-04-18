@@ -37,8 +37,13 @@ export const PLURAL_OPTIONS = {
 	many: 'участников',
 };
 
-export const DATE_TIME_FORMAT = 'dd.MM.yyyy HH:mm';
-
 export const DATE_FORMAT = 'dd.MM.yyyy';
 
 export const TIME_FORMAT = 'HH:mm';
+
+export const MESSAGE_MENU = [
+	{ text: 'Ответить', id: 'reply', permission: false },
+	{ text: 'Закрепить', id: 'pin', permission: false },
+	{ text: 'Редактировать', id: 'edit', permission: true },
+	{ text: 'Удалить', id: 'delete', permission: true },
+];

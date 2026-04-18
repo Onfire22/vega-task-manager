@@ -1,5 +1,5 @@
 import { prismaAppClient } from '../../lib/prisma';
-import { ICreateMessage } from './messages.types';
+import { ICreateMessage, IEditMessage } from './messages.types';
 import { messagesSelect } from './messages.selects';
 
 const getMessages = (channelUuid: string) => {
@@ -16,4 +16,14 @@ const createMessage = (messageData: ICreateMessage) => {
 	});
 };
 
-export const messagesService = { getMessages, createMessage };
+const editMessage = (messageData: IEditMessage) => {
+	return prismaAppClient.chatMessages.update({
+		where: { id: messageData.messageUuid },
+		data: {
+			[messageData.field]: messageData.value,
+		},
+		select: messagesSelect,
+	});
+};
+
+export const messagesService = { getMessages, createMessage, editMessage };

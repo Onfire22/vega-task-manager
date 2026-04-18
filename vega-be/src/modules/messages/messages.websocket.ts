@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io';
-import { ICreateMessage } from './messages.types';
+import { ICreateMessage, IEditMessage } from './messages.types';
 import { messagesService } from './messages.service';
 import { io } from '../../websocket';
 
@@ -9,6 +9,24 @@ export const createMessage = async (socket: Socket) => {
 			const message = await messagesService.createMessage(messageData);
 
 			io.to(`channel:${messageData.channelUuid}`).emit('message:created', {
+				success: true,
+				message,
+			});
+		});
+	} catch (e) {
+		io.to(`user:${socket.user.id}`).emit('message:error', {
+			success: false,
+			message: 'Внутренняя ошибка',
+		});
+	}
+};
+
+export const editMessage = async (socket: Socket) => {
+	try {
+		socket.on('message:edit', async (messageData: IEditMessage) => {
+			const message = await messagesService.editMessage(messageData);
+
+			io.to(`channel:${message.channelUuid}`).emit('message:edited', {
 				success: true,
 				message,
 			});
