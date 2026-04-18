@@ -18,6 +18,21 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model ChatMemberships
+ * 
+ */
+export type ChatMemberships = Prisma.ChatMembershipsModel
+/**
+ * Model ChatChannels
+ * 
+ */
+export type ChatChannels = Prisma.ChatChannelsModel
+/**
+ * Model ChatMessages
+ * 
+ */
+export type ChatMessages = Prisma.ChatMessagesModel
+/**
  * Model Comment
  * 
  */

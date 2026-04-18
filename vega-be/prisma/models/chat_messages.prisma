@@ -1,0 +1,21 @@
+model ChatMessages {
+  id String @id @default(uuid())
+
+  text        String
+  isPinned    Boolean       @default(false)
+  isSystem    Boolean       @default(false)
+  channelUuid String
+  channel     ChatChannels  @relation(fields: [channelUuid], references: [id])
+  authorUuid  String
+  author      User          @relation(fields: [authorUuid], references: [id])
+  replyToUuid String?
+  replyTo     ChatMessages? @relation("MessageReply", fields: [replyToUuid], references: [id])
+
+  replies ChatMessages[] @relation("MessageReply")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime?
+
+  @@map("chat_messages")
+}

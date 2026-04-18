@@ -10,7 +10,7 @@ export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Respons
 		res.status(RESPONSE_STATUSES.authorised)
 			.cookie('refreshToken', tokens.refreshToken, {
 				httpOnly: true,
-				maxAge: REFRESH_TTL,
+				maxAge: REFRESH_TTL * 1000,
 			})
 			.json({ accessToken: tokens.accessToken });
 	} catch (e) {
@@ -25,7 +25,7 @@ export const signInUser = async (req: Request<{}, {}, TSignInBody>, res: Respons
 		res.status(RESPONSE_STATUSES.authorised)
 			.cookie('refreshToken', tokens.refreshToken, {
 				httpOnly: true,
-				maxAge: REFRESH_TTL,
+				maxAge: REFRESH_TTL * 1000,
 			})
 			.json({ accessToken: tokens.accessToken });
 	} catch (e) {
@@ -51,7 +51,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			sameSite: 'strict',
-			maxAge: REFRESH_TTL,
+			maxAge: REFRESH_TTL * 1000,
 		});
 
 		res.json({ accessToken: tokens?.accessToken });

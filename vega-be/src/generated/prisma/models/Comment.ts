@@ -341,14 +341,6 @@ export type CommentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type CommentCreateNestedManyWithoutTaskInput = {
   create?: Prisma.XOR<Prisma.CommentCreateWithoutTaskInput, Prisma.CommentUncheckedCreateWithoutTaskInput> | Prisma.CommentCreateWithoutTaskInput[] | Prisma.CommentUncheckedCreateWithoutTaskInput[]
   connectOrCreate?: Prisma.CommentCreateOrConnectWithoutTaskInput | Prisma.CommentCreateOrConnectWithoutTaskInput[]

@@ -1,0 +1,24 @@
+enum ChannelType {
+  PM
+  CHANNEL
+}
+
+enum ChannelVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+model ChatChannels {
+  id String @id @default(uuid())
+
+  title             String            @unique
+  channelType       ChannelType       @map("channel_type")
+  channelVisibility ChannelVisibility @map("channel_visibility")
+  chatMessages      ChatMessages[]
+  chatMemberships   ChatMemberships[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("chat_channels")
+}

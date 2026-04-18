@@ -1,7 +1,8 @@
 import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
-import { tasksHandler } from './modules/tasks/tasks.socket';
 import jwt from 'jsonwebtoken';
+import { createChannel, editChannel, joinChannelByUser, joinChannels } from './modules/channels/channels.websocket';
+import { createMessage } from './modules/messages/messages.websocket';
 
 let io: Server;
 
@@ -29,12 +30,16 @@ export const initSocket = (server: HttpServer) => {
 		}
 	});
 
-	io.on('connection', (socket) => {
+	io.on('connection', async (socket) => {
 		const userId = socket.user.id;
 
 		socket.join(`user:${userId}`);
 
-		// tasksHandler(socket);
+		await createChannel(socket);
+		await editChannel(socket);
+		await createMessage(socket);
+		joinChannelByUser(socket);
+		joinChannels(socket);
 	});
 };
 

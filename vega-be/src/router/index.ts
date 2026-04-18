@@ -7,6 +7,8 @@ import { taskLogsRouter } from '../modules/task-logs/task-logs.router';
 import { membershipsRouter } from '../modules/memberships/memberships.router';
 import { commentsRouter } from '../modules/comments/comments.router';
 import { notificationsRouter } from '../modules/notifications/notifications.router';
+import { channelsRouter } from '../modules/channels/channels.router';
+import { messagesRouter } from '../modules/messages/messages.router';
 
 const protectedRouter = Router();
 
@@ -17,5 +19,7 @@ protectedRouter.use(ROUTES.root, taskLogsRouter);
 protectedRouter.use(ROUTES.root, membershipsRouter);
 protectedRouter.use(ROUTES.root, commentsRouter);
 protectedRouter.use(ROUTES.root, notificationsRouter);
+protectedRouter.use(ROUTES.root, channelsRouter);
+protectedRouter.use(ROUTES.root, messagesRouter);
 
 export { protectedRouter };

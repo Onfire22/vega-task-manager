@@ -3,7 +3,7 @@ import React, { type ReactNode } from 'react';
 
 interface IProps {
 	trigger: ReactNode;
-	content: string;
+	content: string | ReactNode;
 	position: 'left' | 'top' | 'bottom' | 'right';
 }
 

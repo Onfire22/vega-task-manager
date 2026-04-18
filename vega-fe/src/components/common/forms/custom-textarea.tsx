@@ -1,5 +1,5 @@
 import { Textarea } from '@/components/ui/textarea.tsx';
-import React, { type ChangeEvent, type ReactNode } from 'react';
+import React, { type ChangeEvent, type ReactNode, type KeyboardEvent } from 'react';
 import { cn } from '@/lib/utils.ts';
 
 interface IProps {
@@ -11,8 +11,11 @@ interface IProps {
 	error?: string;
 	description?: string;
 	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+	onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
 	isRequired?: boolean;
 	leftIcon?: ReactNode;
+	rightIcon?: ReactNode;
+	resize?: 'none' | 'horizontal' | 'vertical';
 }
 
 const CustomTextarea: React.FC<IProps> = ({
@@ -26,6 +29,9 @@ const CustomTextarea: React.FC<IProps> = ({
 	isRequired,
 	description,
 	leftIcon,
+	rightIcon,
+	resize,
+	onKeyDown,
 }) => {
 	return (
 		<div className="w-full">
@@ -46,13 +52,16 @@ const CustomTextarea: React.FC<IProps> = ({
 			>
 				{leftIcon && <div className="p-2 flex items-center">{leftIcon}</div>}
 				<Textarea
+					style={{ resize }}
 					className="border-none shadow-none focus-visible:ring-0"
 					placeholder={placeholder}
 					value={value}
 					onChange={onChange}
+					onKeyDown={onKeyDown}
 					name={name}
 					id={id}
 				/>
+				{rightIcon && <div className="p-2 flex items-center">{rightIcon}</div>}
 			</div>
 			{error && <span className="text-(--color-danger) text-[12px]">{error}</span>}
 		</div>

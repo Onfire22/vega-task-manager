@@ -51,6 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  ChatMemberships: 'ChatMemberships',
+  ChatChannels: 'ChatChannels',
+  ChatMessages: 'ChatMessages',
   Comment: 'Comment',
   Dictionary: 'Dictionary',
   Membership: 'Membership',
@@ -75,6 +78,46 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const ChatMembershipsScalarFieldEnum = {
+  id: 'id',
+  userRoleUuid: 'userRoleUuid',
+  userUuid: 'userUuid',
+  channelUuid: 'channelUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMembershipsScalarFieldEnum = (typeof ChatMembershipsScalarFieldEnum)[keyof typeof ChatMembershipsScalarFieldEnum]
+
+
+export const ChatChannelsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  channelType: 'channelType',
+  channelVisibility: 'channelVisibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatChannelsScalarFieldEnum = (typeof ChatChannelsScalarFieldEnum)[keyof typeof ChatChannelsScalarFieldEnum]
+
+
+export const ChatMessagesScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  isPinned: 'isPinned',
+  isSystem: 'isSystem',
+  channelUuid: 'channelUuid',
+  authorUuid: 'authorUuid',
+  replyToUuid: 'replyToUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ChatMessagesScalarFieldEnum = (typeof ChatMessagesScalarFieldEnum)[keyof typeof ChatMessagesScalarFieldEnum]
 
 
 export const CommentScalarFieldEnum = {
