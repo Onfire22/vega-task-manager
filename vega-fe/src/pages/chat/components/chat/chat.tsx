@@ -34,10 +34,12 @@ const Chat = () => {
 
 	const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if (e.key === 'Enter' && e.ctrlKey) {
+			e.preventDefault();
 			setValue((prev) => prev + '\n');
 			return;
 		}
 		if (e.key === 'Enter') {
+			e.preventDefault();
 			handleCreateMessage();
 		}
 	};

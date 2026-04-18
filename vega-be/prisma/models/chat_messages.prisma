@@ -3,6 +3,7 @@ model ChatMessages {
 
   text        String
   isPinned    Boolean       @default(false)
+  isSystem    Boolean       @default(false)
   channelUuid String
   channel     ChatChannels  @relation(fields: [channelUuid], references: [id])
   authorUuid  String

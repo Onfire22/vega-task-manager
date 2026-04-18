@@ -38,7 +38,11 @@ const ChatView: React.FC<IProps> = ({
 				)}
 				{messages.length > 0 ? (
 					messages.map((message) => {
-						return (
+						return message.isSystem ? (
+							<div className="w-full" key={message.id}>
+								<span className="text-muted-foreground">{message.text}</span>
+							</div>
+						) : (
 							<div
 								className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1"
 								key={message.id}
@@ -54,7 +58,7 @@ const ChatView: React.FC<IProps> = ({
 										<div className="text-white">{message.author.name}</div>
 										<div className="text-muted-foreground text-[12px]">{message.createdAt}</div>
 									</div>
-									<div className="text-[14px]">{message.text}</div>
+									<div className="text-[14px] whitespace-pre-wrap">{message.text}</div>
 								</div>
 							</div>
 						);
@@ -91,7 +95,7 @@ const ChatView: React.FC<IProps> = ({
 									<Kbd data-icon="inline-end" className="translate-x-0.5">
 										⏎
 									</Kbd>
-									<span> - для отправки сообщения</span>
+									<span> - для переноса строки</span>
 								</KbdGroup>
 							</div>
 						}

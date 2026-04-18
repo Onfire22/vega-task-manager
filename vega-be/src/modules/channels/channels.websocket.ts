@@ -4,6 +4,7 @@ import { IChannel, IChannelEdit } from './channels.types';
 import { io } from '../../websocket';
 import { Prisma } from '../../generated/prisma/client';
 import { normalizeChannel } from './channels.mappers';
+import { messagesService } from '../messages/messages.service';
 
 export const createChannel = async (socket: Socket) => {
 	try {
@@ -77,7 +78,16 @@ export const joinChannelByUser = async (socket: Socket) => {
 
 			const userData = newChannel?.users.find((user) => user.id === socket.user.id);
 
-			io.to(`channel:${channel.channelUuid}`).emit('channel:user_joined', { success: true, data: userData });
+			const messageText = `${userData?.name} ${userData?.secondName} присоединился к каналу.`;
+
+			const message = await messagesService.createMessage({
+				channelUuid: newChannel.id,
+				authorUuid: userData?.id || '',
+				text: messageText,
+				isSystem: true,
+			});
+
+			io.to(`channel:${channel.channelUuid}`).emit('channel:user_joined', { success: true, message });
 
 			io.to(`user:${socket.user.id}`).emit('channel:created', { success: true, channel: newChannel });
 		});

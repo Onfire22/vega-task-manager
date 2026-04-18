@@ -41,7 +41,9 @@ export const useChatSocket = () => {
 		});
 
 		socket.on('channel:user_joined', (data) => {
-			console.log(data);
+			if (data.success) {
+				setMessagesState(data.message);
+			}
 		});
 
 		socket.on('channel:deleted', (data) => {

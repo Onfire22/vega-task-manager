@@ -4,4 +4,5 @@ export interface ICreateMessage {
 	authorUuid: string;
 	replyToUuid?: string;
 	isPinned?: boolean;
+	isSystem?: boolean;
 }

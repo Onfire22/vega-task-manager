@@ -6,6 +6,7 @@ export const messagesSelect = {
 	updatedAt: true,
 	createdAt: true,
 	replyToUuid: true,
+	isSystem: true,
 	author: {
 		select: {
 			id: true,

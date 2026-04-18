@@ -108,6 +108,7 @@ export const ChatMessagesScalarFieldEnum = {
   id: 'id',
   text: 'text',
   isPinned: 'isPinned',
+  isSystem: 'isSystem',
   channelUuid: 'channelUuid',
   authorUuid: 'authorUuid',
   replyToUuid: 'replyToUuid',

@@ -79,7 +79,8 @@ export interface IMessage {
 	id: string;
 	text: string;
 	channelUuid: string;
-	isPinned: false;
+	isPinned: boolean;
+	isSystem: boolean;
 	createdAt: string;
 	updatedAt?: string;
 	replyToUuid: string | null;
