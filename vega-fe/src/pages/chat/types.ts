@@ -91,7 +91,9 @@ export interface IMessage {
 	};
 }
 
-export type IMappedMessage = Omit<IMessage, 'author'> & {
+export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt'> & {
+	createdAtDate: string;
+	createdAtTime: string;
 	author: {
 		name: string;
 		avatar: IAvatar;

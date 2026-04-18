@@ -6,6 +6,7 @@ import type { IMappedMessage } from '@/pages/chat/types.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { Kbd, KbdGroup } from '@/components/ui/kbd.tsx';
+import { isDatesEqual } from '@/pages/chat/utils.ts';
 
 interface IProps {
 	value: string;
@@ -37,28 +38,37 @@ const ChatView: React.FC<IProps> = ({
 					</div>
 				)}
 				{messages.length > 0 ? (
-					messages.map((message) => {
+					messages.map((message, index) => {
 						return message.isSystem ? (
 							<div className="w-full" key={message.id}>
 								<span className="text-muted-foreground">{message.text}</span>
 							</div>
 						) : (
-							<div
-								className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1"
-								key={message.id}
-							>
-								<div
-									className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
-									style={{ background: message.author.avatar.color }}
-								>
-									{message.author.avatar.initials}
-								</div>
-								<div>
-									<div className="flex items-center gap-2">
-										<div className="text-white">{message.author.name}</div>
-										<div className="text-muted-foreground text-[12px]">{message.createdAt}</div>
+							<div key={message.id}>
+								{messages[index + 1] &&
+									!isDatesEqual(message.createdAtDate, messages[index + 1].createdAtDate) && (
+										<div className="w-full text-center p-2">
+											<div className="text-muted-foreground text-[12px]">
+												{messages[index + 1].createdAtDate}
+											</div>
+										</div>
+									)}
+								<div className="flex items-start gap-2 rounded-[5px] hover:bg-accent px-2 py-1">
+									<div
+										className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
+										style={{ background: message.author.avatar.color }}
+									>
+										{message.author.avatar.initials}
 									</div>
-									<div className="text-[14px] whitespace-pre-wrap">{message.text}</div>
+									<div>
+										<div className="flex items-center gap-2">
+											<div className="text-white">{message.author.name}</div>
+											<div className="text-muted-foreground text-[12px]">
+												{message.createdAtTime}
+											</div>
+										</div>
+										<div className="text-[14px] whitespace-pre-wrap">{message.text}</div>
+									</div>
 								</div>
 							</div>
 						);

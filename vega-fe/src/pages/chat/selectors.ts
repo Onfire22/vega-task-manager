@@ -3,7 +3,7 @@ import { initialState } from '@/pages/chat/slice.ts';
 import { createSelector } from '@reduxjs/toolkit';
 import type { IMappedMessage, TChannelsGroups } from '@/pages/chat/types.ts';
 import { getChannelWithNormalizeUsers } from '@/pages/chat/utils.ts';
-import { CHANNEL_HEADER_VISIBILITY, DATE_TIME_FORMAT } from '@/pages/chat/constants.ts';
+import { CHANNEL_HEADER_VISIBILITY, DATE_FORMAT, TIME_FORMAT } from '@/pages/chat/constants.ts';
 import { getAvatarColor } from '@/app/utils.ts';
 import { format } from 'date-fns';
 
@@ -90,9 +90,12 @@ export const getMessagesByChannelSelector = () =>
 	createSelector(getMessagesSelector(), getActiveChannelUuidSelector(), (messages, activeChannelUuid) => {
 		return messages.reduce<Array<IMappedMessage>>((acc, message) => {
 			if (message.channelUuid === activeChannelUuid) {
+				const { createdAt, ...rest } = message;
+
 				acc.push({
-					...message,
-					createdAt: format(message.createdAt, DATE_TIME_FORMAT),
+					...rest,
+					createdAtDate: format(createdAt, DATE_FORMAT),
+					createdAtTime: format(createdAt, TIME_FORMAT),
 					author: {
 						name: `${message.author.name} ${message.author.secondName}`,
 						avatar: {
