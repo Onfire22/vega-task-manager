@@ -17,7 +17,7 @@ interface IProps {
 	onValueChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
 	messages: Array<IMappedMessage>;
-	activeChannelUuid?: string;
+	activeChannelUuid: string | null;
 	currentUserUuid?: string;
 }
 

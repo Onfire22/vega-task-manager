@@ -39,8 +39,6 @@ export interface IInitialState {
 	isUsersControlsOpen: boolean;
 	activeChannelUuid: string | null;
 	newChatModal: TNewChatModal;
-	channels: Array<IChannel>;
-	messages: Array<IMessage>;
 }
 
 export interface IChannelsGroups {

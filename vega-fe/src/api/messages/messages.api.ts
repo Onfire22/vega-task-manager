@@ -1,18 +1,15 @@
 import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '@/api/constants.ts';
-import { setMessages } from '@/pages/chat/slice.ts';
+import type { GetMessagesResponse } from '@/api/messages/messages.types.ts';
 
 const messagesApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		getMessages: builder.query({
+		getMessages: builder.query<GetMessagesResponse, string>({
 			query: (channelUuid) => ({
 				url: `${ROUTES.messages}/${channelUuid}`,
 				method: METHODS.get,
 			}),
-			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				const { data } = await queryFulfilled;
-				dispatch(setMessages(data.messages));
-			},
+			providesTags: ['Messages'],
 		}),
 	}),
 });

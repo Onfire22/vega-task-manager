@@ -2,25 +2,24 @@ import { ChatView } from '@/pages/chat/components/chat/chat.view.tsx';
 import React, { type KeyboardEvent, useState } from 'react';
 import { socket } from '@/api/websocket.ts';
 import { useAppSelector } from '@/store/hooks.ts';
-import { getActiveChannelSelector, getMessagesByChannelSelector } from '@/pages/chat/selectors.ts';
+import { getActiveChannelUuidSelector } from '@/pages/chat/selectors.ts';
 import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
-import { useGetMessagesQuery } from '@/api/messages/messages.api.ts';
+import { useMessagesByChannelUuid } from '@/pages/chat/hooks.ts';
 
 const Chat = () => {
 	const [value, setValue] = useState('');
 
-	const activeChannel = useAppSelector(getActiveChannelSelector());
-	const messages = useAppSelector(getMessagesByChannelSelector());
+	const activeChannelUuid = useAppSelector(getActiveChannelUuidSelector());
 
-	const { isLoading } = useGetMessagesQuery(activeChannel?.id);
+	const { isLoading, messages } = useMessagesByChannelUuid(activeChannelUuid!);
 	const { data } = useGetCurrentUserQuery();
 
 	const handleCreateMessage = () => {
-		if (!activeChannel || !data || !value) return;
+		if (!activeChannelUuid || !data || !value) return;
 
 		socket.emit('message:create', {
 			text: value.trim(),
-			channelUuid: activeChannel.id,
+			channelUuid: activeChannelUuid,
 			authorUuid: data.currentUser.id,
 			// replyToUuid?: string;
 			// isPinned?: boolean;
@@ -44,6 +43,8 @@ const Chat = () => {
 		}
 	};
 
+	console.log(messages);
+
 	return (
 		<ChatView
 			onValueChange={handleValueChange}
@@ -52,7 +53,7 @@ const Chat = () => {
 			value={value}
 			messages={messages}
 			isLoading={isLoading}
-			activeChannelUuid={activeChannel?.id}
+			activeChannelUuid={activeChannelUuid}
 			currentUserUuid={data?.currentUser.id}
 		/>
 	);

@@ -46,6 +46,7 @@ export const TAG_TYPES = [
 	'TaskLogs',
 	'Channels',
 	'User_Channels',
+	'Messages',
 ];
 
 export const DATE_TIME_FORMAT = 'dd.MM.yyyy HH:mm';

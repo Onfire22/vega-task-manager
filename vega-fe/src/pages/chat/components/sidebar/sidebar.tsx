@@ -2,22 +2,16 @@ import { SidebarView } from '@/pages/chat/components/sidebar/sidebar.view.tsx';
 import type { TNewChatModal } from '@/pages/chat/types.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setActiveChannelUuid, setNewChatModal } from '@/pages/chat/slice.ts';
-import { useGetUserChannelsQuery } from '@/api/channels/channels.api.ts';
-import {
-	getActiveChannelUuidSelector,
-	getChannelsGroupsSelector,
-	getChannelsUuidsSelector,
-} from '@/pages/chat/selectors.ts';
+import { getActiveChannelUuidSelector } from '@/pages/chat/selectors.ts';
 import { useEffect } from 'react';
 import { socket } from '@/api/websocket.ts';
+import { useUserChannels } from '@/pages/chat/hooks.ts';
 
 const Sidebar = () => {
-	useGetUserChannelsQuery();
 	const dispatch = useAppDispatch();
 
-	const channelGroups = useAppSelector(getChannelsGroupsSelector());
 	const activeChannelUuid = useAppSelector(getActiveChannelUuidSelector());
-	const channelsUuids = useAppSelector(getChannelsUuidsSelector());
+	const { channelGroups, channelsUuids } = useUserChannels();
 
 	useEffect(() => {
 		if (channelsUuids.length > 0) {
