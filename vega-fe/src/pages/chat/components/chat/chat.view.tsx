@@ -1,4 +1,4 @@
-import { EllipsisVertical, Pin } from 'lucide-react';
+import { EllipsisVertical, Pin, X } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 import React from 'react';
 import type { IMappedMessage, IMessage } from '@/pages/chat/types.ts';
@@ -14,8 +14,10 @@ interface IProps {
 	isLoading: boolean;
 	messages: Array<IMappedMessage>;
 	pinnedMessages: Array<IMessage>;
+	replyMessage: IMappedMessage | null;
 	activeChannelUuid: string | null;
 	onEditMessage: (action: string, message: IMappedMessage) => void;
+	onReplyMessage: (message: IMappedMessage | null) => void;
 	itemRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 	onPinnedMessageClick: (id: string) => void;
 }
@@ -28,6 +30,8 @@ const ChatView: React.FC<IProps> = ({
 	pinnedMessages,
 	itemRefs,
 	onPinnedMessageClick,
+	replyMessage,
+	onReplyMessage,
 }) => {
 	return (
 		<div>
@@ -43,8 +47,13 @@ const ChatView: React.FC<IProps> = ({
 			{!activeChannelUuid ? (
 				<div className="h-[calc(100vh-130px)] flex items-center justify-center">Выберите канал</div>
 			) : (
-				<div className="p-3 h-[calc(100vh-167px)]">
-					<div className="h-[calc(100vh-260px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2">
+				<div className="p-3 h-[calc(100vh-167px)] relative">
+					<div
+						className={cn(
+							replyMessage && 'pb-[65px]',
+							'h-[calc(100vh-260px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2',
+						)}
+					>
 						{isLoading && (
 							<div className="h-[calc(100vh-220px)] flex items-center justify-center">
 								<CustomLoader size="xxl" />
@@ -129,7 +138,9 @@ const ChatView: React.FC<IProps> = ({
 																className="p-1 w-full hover:bg-accent cursor-pointer rounded-[5px]"
 																onClick={() => onEditMessage(item.id, message)}
 															>
-																{item.text}
+																{item.id === 'pin' && message.isPinned
+																	? 'Открепить'
+																	: item.text}
 															</li>
 														);
 													})}
@@ -145,6 +156,22 @@ const ChatView: React.FC<IProps> = ({
 							</div>
 						)}
 					</div>
+					{replyMessage && (
+						<div className="pl-3 pr-6 absolute bottom-[75px] left-0 w-full z-2">
+							<div className="bg-sidebar border rounded-[5px] h-[60px] p-2 flex items-top justify-between">
+								<div>
+									<div className="text-muted-foreground text-[12px]">
+										<span>Ответить </span>
+										<span>{replyMessage.author.name}</span>
+									</div>
+									<span>{replyMessage.text}</span>
+								</div>
+								<Button size="xs" onClick={() => onReplyMessage(null)}>
+									<X />
+								</Button>
+							</div>
+						</div>
+					)}
 					<ChatInput />
 				</div>
 			)}

@@ -9,3 +9,6 @@ export const getNewChatModalSelector = () => (state: RootState) =>
 
 export const getActiveChannelUuidSelector = () => (state: RootState) =>
 	state.chatReducer?.activeChannelUuid || initialState.activeChannelUuid;
+
+export const getReplyMessageSelector = () => (state: RootState) =>
+	state.chatReducer?.replyMessage || initialState.replyMessage;

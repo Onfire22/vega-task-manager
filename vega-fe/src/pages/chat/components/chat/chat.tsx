@@ -1,15 +1,18 @@
 import { ChatView } from '@/pages/chat/components/chat/chat.view.tsx';
-import { useAppSelector } from '@/store/hooks.ts';
-import { getActiveChannelUuidSelector } from '@/pages/chat/selectors.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { getActiveChannelUuidSelector, getReplyMessageSelector } from '@/pages/chat/selectors.ts';
 import { useMessagesByChannelUuid } from '@/pages/chat/hooks.ts';
 import type { IMappedMessage } from '@/pages/chat/types.ts';
 import { socket } from '@/api/websocket.ts';
 import { useRef } from 'react';
+import { setReplyMessage } from '@/pages/chat/slice.ts';
 
 const Chat = () => {
 	const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+	const dispatch = useAppDispatch();
 
 	const activeChannelUuid = useAppSelector(getActiveChannelUuidSelector());
+	const replyMessage = useAppSelector(getReplyMessageSelector());
 
 	const { isLoading, messages, pinnedMessages } = useMessagesByChannelUuid(activeChannelUuid!);
 
@@ -24,9 +27,17 @@ const Chat = () => {
 		});
 	};
 
+	const handleReplyMessage = (message: IMappedMessage | null) => {
+		dispatch(setReplyMessage(message));
+	};
+
 	const handleEditMessage = (action: string, message: IMappedMessage) => {
 		if (action === 'pin') {
 			handlePinMessage(message);
+		}
+
+		if (action === 'reply') {
+			handleReplyMessage(message);
 		}
 	};
 
@@ -39,8 +50,6 @@ const Chat = () => {
 		});
 	};
 
-	console.log(pinnedMessages);
-
 	return (
 		<ChatView
 			messages={messages}
@@ -48,8 +57,10 @@ const Chat = () => {
 			activeChannelUuid={activeChannelUuid}
 			pinnedMessages={pinnedMessages}
 			itemRefs={itemRefs}
+			replyMessage={replyMessage}
 			onEditMessage={handleEditMessage}
 			onPinnedMessageClick={handlePinnedMessageClick}
+			onReplyMessage={handleReplyMessage}
 		/>
 	);
 };

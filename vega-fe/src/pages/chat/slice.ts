@@ -1,10 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { IInitialState, TNewChatModal } from '@/pages/chat/types.ts';
+import type { IInitialState, IMappedMessage, TNewChatModal } from '@/pages/chat/types.ts';
 
 export const initialState: IInitialState = {
 	isUsersControlsOpen: false,
 	newChatModal: null,
 	activeChannelUuid: null,
+	replyMessage: null,
 };
 
 const chatSlice = createSlice({
@@ -20,8 +21,11 @@ const chatSlice = createSlice({
 		setActiveChannelUuid: (state, action: PayloadAction<string | null>) => {
 			state.activeChannelUuid = action.payload;
 		},
+		setReplyMessage: (state, action: PayloadAction<IMappedMessage | null>) => {
+			state.replyMessage = action.payload;
+		},
 	},
 });
 
-export const { setIsUsersControlsOpen, setNewChatModal, setActiveChannelUuid } = chatSlice.actions;
+export const { setIsUsersControlsOpen, setNewChatModal, setActiveChannelUuid, setReplyMessage } = chatSlice.actions;
 export default chatSlice.reducer;

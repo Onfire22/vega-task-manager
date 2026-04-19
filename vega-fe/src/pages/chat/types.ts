@@ -38,6 +38,7 @@ export type IMappedChannel = Omit<IChannel, 'users'> & {
 export interface IInitialState {
 	isUsersControlsOpen: boolean;
 	activeChannelUuid: string | null;
+	replyMessage: IMappedMessage | null;
 	newChatModal: TNewChatModal;
 }
 
@@ -110,6 +111,13 @@ export interface IChannelListItem {
 	id: string;
 	title: string;
 	usersLength: number;
+}
+
+export interface ICreateMessage {
+	text: string;
+	channelUuid: string;
+	authorUuid: string;
+	replyToUuid?: string;
 }
 
 export type TCreateChannel = z.infer<typeof CreateChannelValidationSchema>;
