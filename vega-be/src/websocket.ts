@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
 import jwt from 'jsonwebtoken';
 import { createChannel, editChannel, joinChannelByUser, joinChannels } from './modules/channels/channels.websocket';
-import { createMessage } from './modules/messages/messages.websocket';
+import { createMessage, editMessage } from './modules/messages/messages.websocket';
 
 let io: Server;
 
@@ -38,6 +38,7 @@ export const initSocket = (server: HttpServer) => {
 		await createChannel(socket);
 		await editChannel(socket);
 		await createMessage(socket);
+		editMessage(socket);
 		joinChannelByUser(socket);
 		joinChannels(socket);
 	});

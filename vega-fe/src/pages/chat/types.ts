@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { CreateChannelValidationSchema } from '@/pages/chat/validation.ts';
 
-export type TChannelType = 'pm' | 'channel' | 'channel_join';
+export type TChannelType = 'pm' | 'channel';
 
 export type TChannelVisibility = 'public' | 'private';
 
-export type TNewChatModal = TChannelType | null;
+export type TNewChatModal = (TChannelType & 'channel_join') | null;
 
 export interface IChannel {
 	id: string;
@@ -80,7 +80,8 @@ export interface IMessage {
 	isPinned: boolean;
 	isSystem: boolean;
 	createdAt: string;
-	updatedAt?: string;
+	updatedAt: string;
+	canEdit: boolean;
 	replyToUuid: string | null;
 	author: {
 		id: string;

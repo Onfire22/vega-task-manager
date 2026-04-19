@@ -71,7 +71,7 @@ export const joinChannels = (socket: Socket) => {
 	});
 };
 
-export const joinChannelByUser = async (socket: Socket) => {
+export const joinChannelByUser = (socket: Socket) => {
 	try {
 		socket.on('channel:user_join', async (channel: { channelUuid: string }) => {
 			const newChannel = await channelsService.updateChannelUserRole(channel.channelUuid, socket.user.id);

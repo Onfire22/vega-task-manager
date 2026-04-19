@@ -14,4 +14,18 @@ export const messagesSelect = {
 			secondName: true,
 		},
 	},
+	channel: {
+		select: {
+			chatMemberships: {
+				select: {
+					userRole: true,
+					user: {
+						select: {
+							id: true,
+						},
+					},
+				},
+			},
+		},
+	},
 };

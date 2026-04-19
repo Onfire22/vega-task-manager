@@ -1,60 +1,55 @@
 import { ChatView } from '@/pages/chat/components/chat/chat.view.tsx';
-import React, { type KeyboardEvent, useState } from 'react';
-import { socket } from '@/api/websocket.ts';
 import { useAppSelector } from '@/store/hooks.ts';
 import { getActiveChannelUuidSelector } from '@/pages/chat/selectors.ts';
-import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { useMessagesByChannelUuid } from '@/pages/chat/hooks.ts';
+import type { IMappedMessage } from '@/pages/chat/types.ts';
+import { socket } from '@/api/websocket.ts';
+import { useRef } from 'react';
 
 const Chat = () => {
-	const [value, setValue] = useState('');
+	const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
 	const activeChannelUuid = useAppSelector(getActiveChannelUuidSelector());
 
-	const { isLoading, messages } = useMessagesByChannelUuid(activeChannelUuid!);
-	const { data } = useGetCurrentUserQuery();
+	const { isLoading, messages, pinnedMessages } = useMessagesByChannelUuid(activeChannelUuid!);
 
-	const handleCreateMessage = () => {
-		if (!activeChannelUuid || !data || !value) return;
-
-		socket.emit('message:create', {
-			text: value.trim(),
-			channelUuid: activeChannelUuid,
-			authorUuid: data.currentUser.id,
-			// replyToUuid?: string;
-			// isPinned?: boolean;
+	const handlePinMessage = (message: IMappedMessage) => {
+		socket.emit('message:edit', {
+			authorUuid: message.author.id,
+			channelUuid: message.channelUuid,
+			messageUuid: message.id,
+			value: !message.isPinned,
+			canEdit: message.canEdit,
+			field: 'isPinned',
 		});
-		setValue('');
 	};
 
-	const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setValue(e.target.value);
-	};
-
-	const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-		if (e.key === 'Enter' && e.ctrlKey) {
-			e.preventDefault();
-			setValue((prev) => prev + '\n');
-			return;
-		}
-		if (e.key === 'Enter') {
-			e.preventDefault();
-			handleCreateMessage();
+	const handleEditMessage = (action: string, message: IMappedMessage) => {
+		if (action === 'pin') {
+			handlePinMessage(message);
 		}
 	};
 
-	console.log(messages);
+	const handlePinnedMessageClick = (id: string) => {
+		if (!itemRefs?.current[id]) return;
+
+		itemRefs.current[id].scrollIntoView({
+			behavior: 'smooth',
+			block: 'center',
+		});
+	};
+
+	console.log(pinnedMessages);
 
 	return (
 		<ChatView
-			onValueChange={handleValueChange}
-			onCreateMessage={handleCreateMessage}
-			onKeyDown={handleKeyDown}
-			value={value}
 			messages={messages}
 			isLoading={isLoading}
 			activeChannelUuid={activeChannelUuid}
-			currentUserUuid={data?.currentUser.id}
+			pinnedMessages={pinnedMessages}
+			itemRefs={itemRefs}
+			onEditMessage={handleEditMessage}
+			onPinnedMessageClick={handlePinnedMessageClick}
 		/>
 	);
 };

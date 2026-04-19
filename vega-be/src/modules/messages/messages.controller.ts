@@ -4,7 +4,7 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 
 export const getChannelMessages = async (req: Request<{ channelUuid: string }>, res: Response, next: NextFunction) => {
 	try {
-		const messages = await messagesService.getMessages(req.params.channelUuid);
+		const messages = await messagesService.getMessages(req.params.channelUuid, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ messages });
 	} catch (e) {
