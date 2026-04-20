@@ -5,7 +5,7 @@ export type TChannelType = 'pm' | 'channel';
 
 export type TChannelVisibility = 'public' | 'private';
 
-export type TNewChatModal = (TChannelType & 'channel_join') | null;
+export type TNewChatModal = TChannelType | 'channel_join' | null;
 
 export interface IChannel {
 	id: string;
@@ -91,9 +91,10 @@ export interface IMessage {
 	};
 }
 
-export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt'> & {
+export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt' | 'replyToUuid'> & {
 	createdAtDate: string;
 	createdAtTime: string;
+	replyMessage?: IMessage;
 	author: {
 		id: string;
 		name: string;

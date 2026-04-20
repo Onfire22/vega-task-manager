@@ -56,10 +56,13 @@ export const useMessagesData = (messagesData?: Array<IMessage>) => {
 		if (!messagesData) return { messages: [], pinnedMessages: [] };
 
 		const messages = messagesData.reduce<Array<IMappedMessage>>((acc, message) => {
-			const { createdAt, ...rest } = message;
+			const { createdAt, replyToUuid, ...rest } = message;
+
+			const replyMessage = replyToUuid ? messagesData.find((message) => message.id === replyToUuid) : null;
 
 			acc.push({
 				...rest,
+				...(replyMessage ? { replyMessage } : {}),
 				createdAtDate: format(createdAt, DATE_FORMAT),
 				createdAtTime: format(createdAt, TIME_FORMAT),
 				author: {

@@ -50,3 +50,5 @@ export const PERMITTED_MESSAGE_MENU = [
 	{ text: 'Редактировать', id: 'edit' },
 	{ text: 'Удалить', id: 'delete' },
 ];
+
+export const REPLY_MESSAGE_COLOR = 'rgba(52, 211, 153, 0.1)';

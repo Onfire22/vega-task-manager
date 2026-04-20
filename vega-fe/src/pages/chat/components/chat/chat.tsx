@@ -4,17 +4,32 @@ import { getActiveChannelUuidSelector, getReplyMessageSelector } from '@/pages/c
 import { useMessagesByChannelUuid } from '@/pages/chat/hooks.ts';
 import type { IMappedMessage } from '@/pages/chat/types.ts';
 import { socket } from '@/api/websocket.ts';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { setReplyMessage } from '@/pages/chat/slice.ts';
+import { REPLY_MESSAGE_COLOR } from '@/pages/chat/constants.ts';
 
 const Chat = () => {
 	const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+	const startTimeoutId = useRef<number | null>(null);
+	const endTimeoutId = useRef<number | null>(null);
+
 	const dispatch = useAppDispatch();
 
 	const activeChannelUuid = useAppSelector(getActiveChannelUuidSelector());
 	const replyMessage = useAppSelector(getReplyMessageSelector());
 
 	const { isLoading, messages, pinnedMessages } = useMessagesByChannelUuid(activeChannelUuid!);
+
+	useEffect(() => {
+		return () => {
+			if (startTimeoutId.current) {
+				clearTimeout(startTimeoutId.current);
+			}
+			if (endTimeoutId.current) {
+				clearTimeout(endTimeoutId.current);
+			}
+		};
+	}, []);
 
 	const handlePinMessage = (message: IMappedMessage) => {
 		socket.emit('message:edit', {
@@ -41,13 +56,34 @@ const Chat = () => {
 		}
 	};
 
-	const handlePinnedMessageClick = (id: string) => {
-		if (!itemRefs?.current[id]) return;
+	const handlePinnedMessageClick = (id?: string) => {
+		if (startTimeoutId.current) {
+			clearTimeout(startTimeoutId.current);
+		}
+		if (endTimeoutId?.current) {
+			clearTimeout(endTimeoutId.current);
+		}
 
-		itemRefs.current[id].scrollIntoView({
+		if (!id) return;
+
+		const element = itemRefs.current[id];
+
+		if (!element) return;
+
+		element.scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
 		});
+
+		startTimeoutId.current = setTimeout(() => {
+			element.style.borderRadius = '5px';
+			element.style.backgroundColor = REPLY_MESSAGE_COLOR;
+		}, 400);
+
+		endTimeoutId.current = setTimeout(() => {
+			element.style.backgroundColor = '';
+			element.style.borderRadius = '';
+		}, 1000);
 	};
 
 	return (

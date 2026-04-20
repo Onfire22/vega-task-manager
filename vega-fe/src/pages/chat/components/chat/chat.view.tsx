@@ -19,7 +19,7 @@ interface IProps {
 	onEditMessage: (action: string, message: IMappedMessage) => void;
 	onReplyMessage: (message: IMappedMessage | null) => void;
 	itemRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
-	onPinnedMessageClick: (id: string) => void;
+	onPinnedMessageClick: (id?: string) => void;
 }
 
 const ChatView: React.FC<IProps> = ({
@@ -50,7 +50,7 @@ const ChatView: React.FC<IProps> = ({
 				<div className="p-3 h-[calc(100vh-167px)] relative">
 					<div
 						className={cn(
-							replyMessage && 'pb-[65px]',
+							replyMessage && 'pb-16.25',
 							'h-[calc(100vh-260px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2',
 						)}
 					>
@@ -86,14 +86,25 @@ const ChatView: React.FC<IProps> = ({
 												'flex items-center justify-between rounded-[5px] hover:bg-accent px-2 py-1',
 											)}
 										>
-											<div className="flex items-start gap-2">
+											<div className="flex items-start gap-2 w-full">
 												<div
 													className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
 													style={{ background: message.author.avatar.color }}
 												>
 													{message.author.avatar.initials}
 												</div>
-												<div>
+												<div className="w-full pr-1.25">
+													{message.replyMessage && (
+														<div
+															className="pl-3.75 py-1.25 bg-primary/30 rounded-[5px] cursor-pointer w-full relative before:absolute before:content-[''] before:w-1.25 before:h-[80%] before:rounded-[5px] before:left-1.25 before:bg-primary"
+															onClick={() =>
+																onPinnedMessageClick(message.replyMessage?.id)
+															}
+														>
+															<div className="text-muted-foreground text-[12px]">{`${message.replyMessage.author.name} ${message.replyMessage.author.secondName}`}</div>
+															<div>{message.replyMessage.text}</div>
+														</div>
+													)}
 													<div className="flex items-center gap-2">
 														<div className="text-white">{message.author.name}</div>
 														<div className="text-muted-foreground text-[12px]">
@@ -157,8 +168,8 @@ const ChatView: React.FC<IProps> = ({
 						)}
 					</div>
 					{replyMessage && (
-						<div className="pl-3 pr-6 absolute bottom-[75px] left-0 w-full z-2">
-							<div className="bg-sidebar border rounded-[5px] h-[60px] p-2 flex items-top justify-between">
+						<div className="pl-3 pr-6 absolute bottom-18.75 left-0 w-full z-2">
+							<div className="bg-sidebar border rounded-[5px] h-15 p-2 flex items-top justify-between">
 								<div>
 									<div className="text-muted-foreground text-[12px]">
 										<span>Ответить </span>
