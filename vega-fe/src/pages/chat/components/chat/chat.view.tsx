@@ -47,11 +47,17 @@ const ChatView: React.FC<IProps> = ({
 			{!activeChannelUuid ? (
 				<div className="h-[calc(100vh-130px)] flex items-center justify-center">Выберите канал</div>
 			) : (
-				<div className="p-3 h-[calc(100vh-167px)] relative">
+				<div
+					className={cn(
+						pinnedMessages.length > 0 ? 'p-3 h-[calc(100vh-200px)]' : 'h-[calc(100vh-127px)]',
+						'p-3 relative',
+					)}
+				>
 					<div
 						className={cn(
 							replyMessage && 'pb-16.25',
-							'h-[calc(100vh-260px)] overflow-auto scrollbar-custom flex flex-col gap-3 px-2',
+							pinnedMessages.length > 0 ? 'h-[calc(100vh-260px)]' : 'h-[calc(100vh-220px)]',
+							'overflow-auto scrollbar-custom flex flex-col gap-3 px-2',
 						)}
 					>
 						{isLoading && (
@@ -168,7 +174,12 @@ const ChatView: React.FC<IProps> = ({
 						)}
 					</div>
 					{replyMessage && (
-						<div className="pl-3 pr-6 absolute bottom-18.75 left-0 w-full z-2">
+						<div
+							className={cn(
+								!pinnedMessages.length ? 'bottom-18.75' : 'bottom-11',
+								'pl-3 pr-6 absolute left-0 w-full z-2',
+							)}
+						>
 							<div className="bg-sidebar border rounded-[5px] h-15 p-2 flex items-top justify-between">
 								<div>
 									<div className="text-muted-foreground text-[12px]">

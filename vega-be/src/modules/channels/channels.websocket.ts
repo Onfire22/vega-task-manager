@@ -80,12 +80,15 @@ export const joinChannelByUser = (socket: Socket) => {
 
 			const messageText = `${userData?.name} ${userData?.secondName} присоединился к каналу.`;
 
-			const message = await messagesService.createMessage({
-				channelUuid: newChannel.id,
-				authorUuid: userData?.id || '',
-				text: messageText,
-				isSystem: true,
-			});
+			const message = await messagesService.createMessage(
+				{
+					channelUuid: newChannel.id,
+					authorUuid: userData?.id || '',
+					text: messageText,
+					isSystem: true,
+				},
+				socket.user.id,
+			);
 
 			io.to(`channel:${channel.channelUuid}`).emit('channel:user_joined', { success: true, message });
 

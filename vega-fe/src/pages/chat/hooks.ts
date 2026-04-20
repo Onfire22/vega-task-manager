@@ -173,8 +173,12 @@ export const useUserChannelsData = (channels?: Array<IChannel>) => {
 	}, [activeChannelUuid, channels]);
 };
 
-export const useUserChannels = () => {
-	const { data, isLoading } = useGetUserChannelsQuery();
+export const useUserChannels = (searchValue: string) => {
+	const filters = {
+		...(searchValue ? { searchValue } : {}),
+	};
+
+	const { data, isLoading } = useGetUserChannelsQuery(filters);
 
 	const { activeChannel, channelsUuids, channelGroups } = useUserChannelsData(data?.channels);
 

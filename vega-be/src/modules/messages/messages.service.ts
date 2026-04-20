@@ -7,6 +7,9 @@ const getMessages = async (channelUuid: string, currentUserUuid: string) => {
 	const messages = await prismaAppClient.chatMessages.findMany({
 		where: { channelUuid },
 		select: messagesSelect,
+		orderBy: {
+			createdAt: 'asc',
+		},
 	});
 
 	return messages.map((item) => getNormalizedMessage(item, currentUserUuid));

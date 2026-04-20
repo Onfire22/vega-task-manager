@@ -20,3 +20,7 @@ export interface IChannelEdit {
 export type TChannelDTO = ChatChannelsGetPayload<{
 	select: typeof channelsSelect;
 }>;
+
+export interface IGetChannelsBody {
+	searchValue: string;
+}

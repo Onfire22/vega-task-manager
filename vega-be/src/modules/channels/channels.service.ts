@@ -5,9 +5,13 @@ import { normalizeChannel } from './channels.mappers';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 
-const getChannelsByUserUuid = async (userUuid: string) => {
+const getChannelsByUserUuid = async (userUuid: string, searchValue?: string) => {
 	const channels = await prismaAppClient.chatChannels.findMany({
 		where: {
+			title: {
+				contains: searchValue,
+				mode: 'insensitive',
+			},
 			chatMemberships: {
 				some: {
 					userUuid,

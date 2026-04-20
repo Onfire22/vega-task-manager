@@ -1,7 +1,7 @@
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import type { IChannelsGroups, TNewChatModal } from '@/pages/chat/types.ts';
-import React from 'react';
+import React, { type ChangeEvent } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { Lock } from 'lucide-react';
 import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
@@ -9,11 +9,20 @@ import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
 interface IProps {
 	onOpenModal: (modalType: TNewChatModal) => void;
 	onSetActiveChannel: (channelUuid: string) => void;
+	onSearchChannels: (e: ChangeEvent<HTMLInputElement>) => void;
 	channels: IChannelsGroups;
 	activeChannelUuid?: string | null;
+	searchValue: string;
 }
 
-const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channels, activeChannelUuid }) => {
+const SidebarView: React.FC<IProps> = ({
+	onOpenModal,
+	onSetActiveChannel,
+	channels,
+	activeChannelUuid,
+	searchValue,
+	onSearchChannels,
+}) => {
 	return (
 		<div className="w-[23%]">
 			<div className="max-h-[calc(100vh-75px)] overflow-auto scrollbar-custom">
@@ -21,7 +30,12 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 					<span>Чат</span>
 				</div>
 				<div className="px-3 py-2 border-b">
-					<CustomInput type="text" value="" onChange={() => {}} placeholder="Поиск каналов" />
+					<CustomInput
+						type="text"
+						value={searchValue}
+						onChange={onSearchChannels}
+						placeholder="Поиск каналов"
+					/>
 				</div>
 				<div className="px-3 py-2">
 					<div className="mb-2">
@@ -35,15 +49,15 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 									</Button>
 								}
 							>
-								<ul className="flex flex-col items-start gap-[10px]">
+								<ul className="flex flex-col items-start gap-2.5">
 									<li
-										className="w-full p-[5px] hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+										className="w-full p-1.25 hover:bg-accent rounded-[5px] cursor-pointer"
 										onClick={() => onOpenModal('channel')}
 									>
 										<span>Создать новый канал</span>
 									</li>
 									<li
-										className="w-full p-[5px] hover:bg-accent p-1.25 rounded-[5px] cursor-pointer"
+										className="w-full p-1.25 hover:bg-accent rounded-[5px] cursor-pointer"
 										onClick={() => onOpenModal('channel_join')}
 									>
 										<span>Вступить в канал</span>
@@ -77,9 +91,9 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 					<div>
 						<div className="text-muted-foreground text-[12px] uppercase flex items-center justify-between mb-2">
 							<span>Личные сообщения</span>
-							<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('pm')}>
-								+
-							</Button>
+							{/*<Button size="icon-xs" className="text-white" onClick={() => onOpenModal('pm')}>*/}
+							{/*	+*/}
+							{/*</Button>*/}
 						</div>
 						{channels?.pm?.length ? (
 							channels.pm.map((item) => {
@@ -101,7 +115,9 @@ const SidebarView: React.FC<IProps> = ({ onOpenModal, onSetActiveChannel, channe
 								);
 							})
 						) : (
-							<div className="text-muted-foreground text-[14px] text-center">Каналов пока нет</div>
+							<div className="text-muted-foreground text-[14px] text-center">
+								Личных сообщений пока нет
+							</div>
 						)}
 					</div>
 				</div>
