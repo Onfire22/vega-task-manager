@@ -1,7 +1,7 @@
 import React from 'react';
 import { BLUE_COLOR, RED_COLOR, TABS, TEAL_COLOR } from '../../constants.ts';
-import { ArrowBigRight, Plus } from 'lucide-react';
-import type { IChartData, ITask, TField, TOption, TTaskFields } from '../../types.ts';
+import { ArrowBigRight, Paperclip, Plus } from 'lucide-react';
+import type { IChartData, ITask, TField, TModalType, TOption, TTaskFields } from '../../types.ts';
 import { Link } from 'react-router-dom';
 import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
@@ -26,7 +26,7 @@ interface IProps {
 	field: TField;
 	onSetFieldToEdit: (fieldName: TTaskFields, value: string | null) => void;
 	onCancelChanges: () => void;
-	onLogWorkModalShown: () => void;
+	onModalShown: (modalType: TModalType) => void;
 	onUpdateTask: (fieldName: TTaskFields | '', value: string) => void;
 	onFieldChange: {
 		(e: React.ChangeEvent<HTMLInputElement>, fieldName: TTaskFields): void;
@@ -47,7 +47,7 @@ const TaskView: React.FC<IProps> = ({
 	onFieldChange,
 	options,
 	onCancelChanges,
-	onLogWorkModalShown,
+	onModalShown,
 	usersListOptions,
 	onUpdateTask,
 	currentUserId,
@@ -136,6 +136,21 @@ const TaskView: React.FC<IProps> = ({
 						onChange={(value) => onUpdateTask('taskPriorityUuid', value)}
 						label="Приоритет"
 					/>
+				</div>
+				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
+				<div className="mb-2.5">
+					<div className="flex items-center gap-2 mb-2">
+						<div className="pl-6.25 text-muted-foreground uppercase text-[11px]">Ссылки</div>
+						<Button size="xs" onClick={() => onModalShown('links')}>
+							<Paperclip />
+						</Button>
+					</div>
+					<div>
+						<div className="text-muted-foreground uppercase text-[11px] pl-6.25">МР:</div>
+					</div>
+					<div>
+						<div className="text-muted-foreground uppercase text-[11px] pl-6.25">Сборка:</div>
+					</div>
 				</div>
 				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />
 				<div className="mb-5">
@@ -288,7 +303,7 @@ const TaskView: React.FC<IProps> = ({
 							</div>
 						)}
 						<div className="w-full flex justify-center">
-							<Button onClick={onLogWorkModalShown}>
+							<Button onClick={() => onModalShown('estimate')}>
 								<Plus size={18} />
 								{task.estimateTime ? <span>Записать время</span> : <span>Оценить задачу</span>}
 							</Button>

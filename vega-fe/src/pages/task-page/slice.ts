@@ -1,19 +1,19 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { IInitialState } from './types.ts';
+import type { IInitialState, TModalType } from './types.ts';
 
 export const initialState: IInitialState = {
-	isModalShown: false,
+	modalType: null,
 };
 
 const taskSlice = createSlice({
 	name: '@@task',
 	initialState,
 	reducers: {
-		setIsModalShown: (state, action: PayloadAction<boolean>) => {
-			state.isModalShown = action.payload;
+		setModalType: (state, action: PayloadAction<TModalType>) => {
+			state.modalType = action.payload;
 		},
 	},
 });
 
-export const { setIsModalShown } = taskSlice.actions;
+export const { setModalType } = taskSlice.actions;
 export default taskSlice.reducer;

@@ -5,11 +5,11 @@ import { useDictionariesWithColors, useTaskData, useTaskPayload, useUsersWithFil
 import { useUpdateTaskMutation } from '@/api/tasks/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '@/store/hooks.ts';
-import { setIsModalShown } from '../../slice.ts';
+import { setModalType } from '../../slice.ts';
 import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { toast } from 'sonner';
-import type { TField, TTaskFields } from '@/pages/task-page/types.ts';
+import type { TField, TModalType, TTaskFields } from '@/pages/task-page/types.ts';
 import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
 import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
 import { useDebounce } from '@/app/utils.ts';
@@ -27,10 +27,10 @@ const Task = () => {
 	const [activeTab, setActiveTab] = useState('comments');
 	const [searchValue, setSearchValue] = useState('');
 
-	const debauncedValue = useDebounce(searchValue, 1000);
+	const debouncedValue = useDebounce(searchValue, 1000);
 	const { dictionariesOptions } = useDictionariesWithColors();
 	const { isTaskLoading, task } = useTaskData(params.uuid);
-	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, debauncedValue);
+	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, debouncedValue);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 	const { chartData } = useTaskPayload(params.uuid!);
@@ -73,8 +73,8 @@ const Task = () => {
 		setEditField(INITIAL_FIELD_VALUES);
 	};
 
-	const handleLogWorkModalShown = () => {
-		dispatch(setIsModalShown(true));
+	const handleModalShown = (modalType: TModalType) => {
+		dispatch(setModalType(modalType));
 	};
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +100,7 @@ const Task = () => {
 			onSetFieldToEdit={handleSetFieldToEdit}
 			onFieldChange={handleFieldChange}
 			onCancelChanges={handleCancelChanges}
-			onLogWorkModalShown={handleLogWorkModalShown}
+			onModalShown={handleModalShown}
 			onUpdateTask={handleUpdateTask}
 			onSetActiveTab={handleSetActiveTab}
 			onSearchChange={handleSearchChange}

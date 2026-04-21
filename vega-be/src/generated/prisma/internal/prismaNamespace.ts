@@ -1382,6 +1382,8 @@ export const TaskScalarFieldEnum = {
   estimateTime: 'estimateTime',
   remainingTime: 'remainingTime',
   assigneeUuid: 'assigneeUuid',
+  mrLinks: 'mrLinks',
+  buildLink: 'buildLink',
   reporterUuid: 'reporterUuid',
   projectUuid: 'projectUuid',
   taskPriorityUuid: 'taskPriorityUuid',

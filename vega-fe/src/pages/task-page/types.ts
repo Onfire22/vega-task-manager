@@ -1,8 +1,10 @@
 import { z } from 'zod';
 import { LogTimeFormValidation } from '@/pages/task-page/validation.ts';
 
+export type TModalType = 'links' | 'estimate' | null;
+
 export interface IInitialState {
-	isModalShown: boolean;
+	modalType: TModalType;
 }
 
 export type TOption = { description: string | null; key: string; label: string; value: string; color: string };
@@ -100,4 +102,9 @@ export interface IChartData {
 	name: string;
 	fill: string;
 	custom?: string;
+}
+
+export interface ILinksForm {
+	mr: string;
+	builds: string;
 }

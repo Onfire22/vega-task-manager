@@ -4,19 +4,24 @@ import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Controller, type UseFormReturn } from 'react-hook-form';
-import type { TFormOptions } from '@/pages/task-page/types.ts';
+import type { TFormOptions, TModalType } from '@/pages/task-page/types.ts';
 
 interface IProps {
 	onLogWorkModalShown: () => void;
 	onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
-	isModalShown: boolean;
+	modalType: TModalType;
 	estimateTime?: string;
 	form: UseFormReturn<TFormOptions>;
 }
 
-const ModalWindowView: React.FC<IProps> = ({ onLogWorkModalShown, isModalShown, onSubmit, estimateTime, form }) => {
+const ModalWindowView: React.FC<IProps> = ({ onLogWorkModalShown, modalType, onSubmit, estimateTime, form }) => {
 	return (
-		<CustomModal title="Учет времени" isOpen={isModalShown} onOpenChange={onLogWorkModalShown} size="lg">
+		<CustomModal
+			title="Учет времени"
+			isOpen={modalType === 'estimate'}
+			onOpenChange={onLogWorkModalShown}
+			size="lg"
+		>
 			<form className="flex flex-col items-center gap-2.5" onSubmit={onSubmit}>
 				<div className="w-full">
 					<Controller
