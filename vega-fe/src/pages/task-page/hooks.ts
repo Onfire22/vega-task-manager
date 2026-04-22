@@ -16,10 +16,14 @@ export const useTaskData = (uuid?: string) => {
 
 	const {
 		logInfo: { remainingTime, estimateTime, totalLoggedTime },
+		mrLinks,
+		buildLinks,
 	} = task;
 
 	const taskData = {
 		...task,
+		buildLinks: buildLinks ? buildLinks.split('\n') : undefined,
+		mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
 		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
 		assigneeUuid: task.assignee ? task.assignee.id : undefined,

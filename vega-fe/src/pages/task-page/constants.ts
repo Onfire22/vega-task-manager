@@ -61,6 +61,6 @@ export const BLUE_COLOR = 'bg-indigo-brand';
 export const RED_COLOR = 'bg-danger';
 
 export const LINKS_FORM_INITIAL_VALUES = {
-	mr: '',
-	builds: '',
+	mrLinks: '',
+	buildLinks: '',
 };

@@ -145,11 +145,35 @@ const TaskView: React.FC<IProps> = ({
 							<Paperclip />
 						</Button>
 					</div>
-					<div>
-						<div className="text-muted-foreground uppercase text-[11px] pl-6.25">МР:</div>
-					</div>
-					<div>
-						<div className="text-muted-foreground uppercase text-[11px] pl-6.25">Сборка:</div>
+					<div className="flex flex-col gap-2">
+						{task.mrLinks && (
+							<div className="flex items-start gap-1">
+								<div className="text-muted-foreground uppercase text-[11px] pl-6.25 min-w-18">МР:</div>
+								<div className="flex flex-col">
+									{task.mrLinks.map((item, index) => {
+										return (
+											<a key={index} className="link-styled text-[12px]">
+												{item}
+											</a>
+										);
+									})}
+								</div>
+							</div>
+						)}
+						{task.buildLinks && (
+							<div className="flex items-start gap-1">
+								<div className="text-muted-foreground uppercase text-[11px] pl-6.25">Сборка:</div>
+								<div className="flex flex-col">
+									{task.buildLinks.map((item, index) => {
+										return (
+											<a key={index} className="link-styled text-[12px]">
+												{item}
+											</a>
+										);
+									})}
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 				<div className="border-b mb-2.5 max-w-[97%] mx-auto" />

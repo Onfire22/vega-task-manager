@@ -45,7 +45,7 @@ const Task = () => {
 		if (!params.uuid || !fieldName) return;
 
 		try {
-			await updateTask({ fieldName, value, uuid: params.uuid }).unwrap();
+			await updateTask({ fields: { [fieldName]: value }, uuid: params.uuid }).unwrap();
 			setEditField(INITIAL_FIELD_VALUES);
 		} catch (e) {
 			const error = e as { data?: { message?: string } };

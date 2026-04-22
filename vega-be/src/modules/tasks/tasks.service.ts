@@ -148,6 +148,8 @@ const getTaskByUuid = async (taskUuid: string) => {
 			remainingTime: true,
 			createdAt: true,
 			updatedAt: true,
+			mrLinks: true,
+			buildLinks: true,
 			taskPriority: {
 				select: DICTIONARY_SELECT,
 			},
@@ -198,14 +200,10 @@ const getTaskByUuid = async (taskUuid: string) => {
 };
 
 const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid: string) => {
-	const { fieldName, value } = taskBody;
-
 	return prismaAppClient.$transaction(async (tx) => {
 		const taskData = await tx.task.update({
 			where: { id: taskUuid },
-			data: {
-				[fieldName]: value,
-			},
+			data: { ...taskBody },
 			select: {
 				id: true,
 				reporterUuid: true,
@@ -225,7 +223,9 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 			},
 		});
 
-		if (WEBSOCKET_TRIGGERS.includes(fieldName) && userUuid !== taskData?.assignee?.id) {
+		const fieldName = Object.keys(taskBody).find((field) => WEBSOCKET_TRIGGERS.includes(field));
+
+		if (userUuid !== taskData?.assignee?.id) {
 			const notification = await tx.notification.create({
 				data: {
 					fromUserUuid: userUuid,

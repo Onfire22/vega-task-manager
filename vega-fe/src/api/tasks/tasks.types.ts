@@ -44,11 +44,14 @@ export type TUpdateTaskFields =
 	| 'taskPriorityUuid'
 	| 'taskStatusUuid'
 	| 'assigneeUuid'
-	| 'description';
+	| 'description'
+	| 'mrLinks'
+	| 'buildLinks';
+
+export type TUpdateTaskFieldsDTO = Partial<Record<TUpdateTaskFields, string>>;
 
 export interface TUpdateTaskRequest {
-	fieldName: TUpdateTaskFields;
-	value: string;
+	fields: TUpdateTaskFieldsDTO;
 	uuid: string;
 }
 

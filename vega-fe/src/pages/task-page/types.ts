@@ -36,6 +36,8 @@ export interface ITask {
 	title: string;
 	assignee: string | null;
 	assigneeUuid?: string | null;
+	mrLinks?: Array<string>;
+	buildLinks?: Array<string>;
 	description: string;
 	project: {
 		code: string;
@@ -105,6 +107,6 @@ export interface IChartData {
 }
 
 export interface ILinksForm {
-	mr: string;
-	builds: string;
+	mrLinks?: string;
+	buildLinks?: string;
 }

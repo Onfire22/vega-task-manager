@@ -9,19 +9,19 @@ interface IProps {
 	modalType: TModalType;
 	form: UseFormReturn<ILinksForm>;
 	onSubmit: (e: React.ChangeEvent<HTMLFormElement>) => void;
-	onLogWorkModalShown: () => void;
+	onModalClose: () => void;
 }
 
-const LinksModalView: React.FC<IProps> = ({ form, onSubmit, modalType, onLogWorkModalShown }) => {
+const LinksModalView: React.FC<IProps> = ({ form, onSubmit, modalType, onModalClose }) => {
 	return (
-		<CustomModal isOpen={modalType === 'links'} onOpenChange={onLogWorkModalShown} title="Прикрепить ссылки">
-			<form className="flex flex-col gap-[10px]" onSubmit={onSubmit}>
+		<CustomModal isOpen={modalType === 'links'} onOpenChange={onModalClose} title="Прикрепить ссылки">
+			<form className="flex flex-col gap-2.5" onSubmit={onSubmit}>
 				<Controller
-					name="mr"
+					name="mrLinks"
 					control={form.control}
 					render={({ field, fieldState }) => (
 						<CustomTextarea
-							id="mr"
+							id="mrLinks"
 							label="Мерж реквест"
 							placeholder="Можно добавить несколько"
 							value={field.value ?? ''}
@@ -31,11 +31,11 @@ const LinksModalView: React.FC<IProps> = ({ form, onSubmit, modalType, onLogWork
 					)}
 				/>
 				<Controller
-					name="builds"
+					name="buildLinks"
 					control={form.control}
 					render={({ field, fieldState }) => (
 						<CustomTextarea
-							id="builds"
+							id="buildLinks"
 							label="Сборка"
 							placeholder="Можно добавить несколько"
 							value={field.value ?? ''}
@@ -48,7 +48,7 @@ const LinksModalView: React.FC<IProps> = ({ form, onSubmit, modalType, onLogWork
 					<Button variant="primary" type="submit">
 						Сохранить
 					</Button>
-					<Button onClick={onLogWorkModalShown}>Отмена</Button>
+					<Button onClick={onModalClose}>Отмена</Button>
 				</div>
 			</form>
 		</CustomModal>

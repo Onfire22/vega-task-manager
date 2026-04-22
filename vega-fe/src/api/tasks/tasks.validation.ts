@@ -12,6 +12,8 @@ export const TaskResponseSchema = z.object({
 		description: z.string(),
 		createdAt: z.string(),
 		updatedAt: z.string(),
+		buildLinks: z.string().nullable(),
+		mrLinks: z.string().nullable(),
 		taskPriority: z.object({
 			id: z.string(),
 			label: z.string(),
@@ -128,22 +130,7 @@ export const TasksResponseSchema = z.object({
 });
 
 export const UpdateTaskResponseSchema = z.object({
-	task: z.object({
-		id: z.string(),
-		code: z.string(),
-		title: z.string(),
-		description: z.string(),
-		estimateTime: z.null().optional(),
-		remainingTime: z.null().optional(),
-		assigneeUuid: z.string(),
-		reporterUuid: z.string(),
-		projectUuid: z.string(),
-		taskPriorityUuid: z.string(),
-		taskStatusUuid: z.string(),
-		taskStackUuid: z.string(),
-		createdAt: z.string(),
-		updatedAt: z.string(),
-	}),
+	task: z.string(),
 });
 
 export const CreateTaskResponseSchema = z.object({

@@ -36,6 +36,12 @@ export const UpdateTaskEstimateSchema = z.object({
 });
 
 export const UpdateTaskBodySchema = z.object({
-	value: z.string(),
-	fieldName: z.enum(['title', 'taskStackUuid', 'taskPriorityUuid', 'taskStatusUuid', 'assigneeUuid', 'description']),
+	title: z.string().optional(),
+	taskStackUuid: z.string().optional(),
+	taskPriorityUuid: z.string().optional(),
+	taskStatusUuid: z.string().optional(),
+	assigneeUuid: z.string().optional(),
+	description: z.string().optional(),
+	mrLinks: z.string().optional(),
+	buildLinks: z.string().optional(),
 });

@@ -52,7 +52,7 @@ const tasksApi = baseApi.injectEndpoints({
 			query: ({ uuid, ...rest }) => ({
 				url: `${ROUTES.updateTask}${uuid}`,
 				method: METHODS.patch,
-				body: rest,
+				body: rest.fields,
 			}),
 			invalidatesTags: ['Task'],
 			extraOptions: { schema: UpdateTaskResponseSchema },
