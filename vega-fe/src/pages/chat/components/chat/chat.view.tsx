@@ -78,14 +78,6 @@ const ChatView: React.FC<IProps> = ({
 											itemRefs.current[message.id] = el;
 										}}
 									>
-										{messages[index + 1] &&
-											!isDatesEqual(message.createdAtDate, messages[index + 1].createdAtDate) && (
-												<div className="w-full text-center p-2">
-													<div className="text-muted-foreground text-[12px]">
-														{messages[index + 1].createdAtDate}
-													</div>
-												</div>
-											)}
 										<div
 											className={cn(
 												message.isPinned && 'bg-chart-2/15',
@@ -164,6 +156,14 @@ const ChatView: React.FC<IProps> = ({
 												</ul>
 											</CustomPopover>
 										</div>
+										{messages[index + 1] &&
+											!isDatesEqual(message.createdAtDate, messages[index + 1].createdAtDate) && (
+												<div className="w-full text-center p-2">
+													<div className="text-muted-foreground text-[12px]">
+														{messages[index + 1].createdAtDate}
+													</div>
+												</div>
+											)}
 									</div>
 								);
 							})

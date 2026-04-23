@@ -29,7 +29,7 @@ export const useChatSocket = () => {
 	const updateChannels = useCallback(
 		(channelData: IChannel) => {
 			dispatch(
-				channelsApi.util.updateQueryData('getUserChannels', undefined, (draft) => {
+				channelsApi.util.updateQueryData('getUserChannels', { searchValue: undefined }, (draft) => {
 					const index = draft.channels.findIndex((channel) => channel.id === channelData.id);
 
 					if (index !== -1) {
