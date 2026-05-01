@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
 import { useGetTaskCommentsQuery } from '@/api/comments/comments.api.ts';
-import { getAvatarColor, typedEntries } from '@/app/utils.ts';
+import { getAvatarColor, typedEntries, useDebounce } from '@/app/utils.ts';
 import type { ITask, TDictionariesWithColors, TTPayload } from '@/pages/task-page/types.ts';
 import { useGetTaskLogsQuery } from '@/api/task-logs/task-logs.api.ts';
 import { transformSecondsToTime } from '@/pages/task-page/utils.ts';
@@ -155,9 +155,11 @@ export const useTaskPayload = (uuid: string) => {
 };
 
 export const useUsersWithFilters = (task: ITask | null, searchValue: string) => {
+	const debouncedValue = useDebounce(searchValue, 1000);
+
 	const meta = {
 		filters: {
-			...(searchValue ? { search: searchValue } : {}),
+			...(debouncedValue ? { search: debouncedValue } : {}),
 			...(task?.project ? { withProject: task.project.id } : {}),
 			...(task?.assigneeUuid ? { withoutUser: task.assigneeUuid } : {}),
 		},

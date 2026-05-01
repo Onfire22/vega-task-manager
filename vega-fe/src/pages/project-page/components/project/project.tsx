@@ -4,7 +4,6 @@ import { useLocation, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useUpdateUserRoleMutation } from '@/api/projects/projects.api.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
-import { useDebounce } from '@/app/utils.ts';
 import { OWNER_ROLE_UUID } from '@/pages/project-page/constants.ts';
 import { useAppDispatch } from '@/store/hooks.ts';
 import { setModalInfo } from '@/pages/project-page/slice.ts';
@@ -23,9 +22,7 @@ const Project = () => {
 
 	const [searchValue, setSearchValue] = useState('');
 
-	const debauncedValue = useDebounce(searchValue, 1000);
-
-	const { usersListOptions } = useUsersWithFilters(debauncedValue, params.uuid);
+	const { usersListOptions } = useUsersWithFilters(searchValue, params.uuid);
 
 	const { project, isProjectLoading, projectProgress } = useProjectData(params.uuid);
 

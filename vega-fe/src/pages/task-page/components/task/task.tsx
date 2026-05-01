@@ -12,7 +12,6 @@ import { toast } from 'sonner';
 import type { TField, TModalType, TTaskFields } from '@/pages/task-page/types.ts';
 import { Comments } from '@/pages/task-page/components/comments/comments.tsx';
 import { TaskLogs } from '@/pages/task-page/components/task-logs/task-logs.tsx';
-import { useDebounce } from '@/app/utils.ts';
 
 const activityComponents = {
 	comments: Comments,
@@ -27,10 +26,9 @@ const Task = () => {
 	const [activeTab, setActiveTab] = useState('comments');
 	const [searchValue, setSearchValue] = useState('');
 
-	const debouncedValue = useDebounce(searchValue, 1000);
 	const { dictionariesOptions } = useDictionariesWithColors();
 	const { isTaskLoading, task } = useTaskData(params.uuid);
-	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, debouncedValue);
+	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, searchValue);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
 	const { chartData } = useTaskPayload(params.uuid!);
