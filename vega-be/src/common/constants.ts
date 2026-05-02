@@ -39,6 +39,7 @@ export const ROUTES = {
 	userChannels: '/api/user_channels',
 	channels: '/api/channels',
 	messages: '/api/messages/:channelUuid',
+	search: '/api/gloabl-search',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

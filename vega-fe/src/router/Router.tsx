@@ -15,6 +15,7 @@ import { ChatPage } from '@/pages/chat';
 import { useGetCurrentUserQuery } from '../api/auth/auth.api.ts';
 import { FRONT_ROUTES } from '../app/constants.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { GlobalSearch } from '@/pages/global-search';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();
@@ -37,6 +38,7 @@ const Router = () => {
 					<Route path={FRONT_ROUTES.project} element={<ProjectPage />} />
 					<Route path={FRONT_ROUTES.user} element={<UserPage />} />
 					<Route path={FRONT_ROUTES.chat} element={<ChatPage />} />
+					<Route path={FRONT_ROUTES.search} element={<GlobalSearch />} />
 				</Route>
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />

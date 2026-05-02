@@ -5,7 +5,7 @@ interface IProps {
 }
 
 const PageContentWrapper: React.FC<IProps> = ({ children }) => (
-	<main className="w-full h-[calc(100vh-53px)] flex justify-center bg-background overflow-y-auto scrollbar-custom">
+	<main className="w-full h-[calc(100vh-55px)] flex justify-center bg-background overflow-y-auto scrollbar-custom">
 		{children}
 	</main>
 );

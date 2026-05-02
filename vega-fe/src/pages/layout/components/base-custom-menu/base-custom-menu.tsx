@@ -1,24 +1,23 @@
-import { useState } from 'react';
+import { type KeyboardEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FRONT_ROUTES } from '@/app/constants.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { BaseCustomMenuView } from './base-custom-menu.view.tsx';
 import { setActiveModal } from '@/modules/modals/slice.ts';
-import { getIsSidebarOpenedSelector } from '../../selectors.ts';
-import { setIsSidebarOpened } from '../../slice.ts';
+import { getIsSidebarOpenedSelector, getSearchValueSelector } from '../../selectors.ts';
+import { setIsSidebarOpened, setSearchValue } from '../../slice.ts';
 
 const BaseCustomMenu = () => {
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const dispatch = useAppDispatch();
-
-	const [searchValue, setSearchValue] = useState('');
-
 	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
+	const searchValue = useAppSelector(getSearchValueSelector());
+
 	const handleSearchChange = (value: string) => {
-		setSearchValue(value);
+		dispatch(setSearchValue(value));
 	};
 
 	const handleProfileCLick = () => {
@@ -38,6 +37,18 @@ const BaseCustomMenu = () => {
 		dispatch(setIsSidebarOpened(!isSidebarOpened));
 	};
 
+	const handleSearchClick = () => {
+		navigate(`/search?search=${searchValue}`);
+	};
+
+	const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (!searchValue) return;
+
+		if (e.key === 'Enter') {
+			handleSearchClick();
+		}
+	};
+
 	return (
 		<BaseCustomMenuView
 			path={location.pathname}
@@ -48,6 +59,8 @@ const BaseCustomMenu = () => {
 			onModalOpen={handleModalOpen}
 			onGoBack={handleGoBack}
 			onMenuButtonClick={handleMenuButtonClick}
+			onSearchClick={handleSearchClick}
+			onEnterPress={handleEnterPress}
 		/>
 	);
 };

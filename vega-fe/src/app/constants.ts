@@ -9,6 +9,7 @@ export const FRONT_ROUTES = {
 	project: '/project/:uuid',
 	user: '/user/:uuid',
 	chat: '/chat',
+	search: '/search',
 	all: '*',
 };
 

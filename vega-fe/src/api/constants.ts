@@ -33,6 +33,7 @@ export const ROUTES = {
 	channels: '/api/channels',
 	userChannels: '/api/user_channels',
 	messages: '/api/messages',
+	search: '/api/gloabl-search?search=',
 };
 
 export const TAG_TYPES = [

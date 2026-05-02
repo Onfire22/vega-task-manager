@@ -14,7 +14,7 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 	return (
 		<nav
 			className={cn(
-				'h-[calc(100vh-53px)] w-13.5 flex flex-col justify-between border-r transition-[width] duration-300 ease-in-out',
+				'h-[calc(100vh-55px)] w-13.5 flex flex-col justify-between border-r transition-[width] duration-300 ease-in-out',
 				isSidebarOpened && 'w-75 transition-[width] duration-300 ease-in-out',
 			)}
 		>

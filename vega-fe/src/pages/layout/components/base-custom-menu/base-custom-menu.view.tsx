@@ -1,5 +1,5 @@
-import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus, X } from 'lucide-react';
-import React from 'react';
+import { Undo2, ChevronLeft, ChevronRight, Briefcase, FolderKanban, Plus, X, Search } from 'lucide-react';
+import React, { type KeyboardEvent } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
@@ -9,7 +9,9 @@ import { Notifications } from '@/modules/notifications';
 interface IProps {
 	onSearchChange: (value: string) => void;
 	onProfileCLick: () => void;
+	onSearchClick: () => void;
 	onGoBack: () => void;
+	onEnterPress: (e: KeyboardEvent<HTMLInputElement>) => void;
 	onMenuButtonClick: () => void;
 	onModalOpen: (modal: 'task' | 'project') => void;
 	searchValue: string;
@@ -25,6 +27,8 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 	path,
 	onMenuButtonClick,
 	isSidebarOpened,
+	onSearchClick,
+	onEnterPress,
 }) => {
 	return (
 		<div className="flex items-center justify-between">
@@ -38,19 +42,31 @@ const BaseCustomMenuView: React.FC<IProps> = ({
 				>
 					{isSidebarOpened ? <ChevronLeft /> : <ChevronRight />}
 				</div>
-				<CustomInput
-					type="text"
-					placeholder="Поиск..."
-					value={searchValue}
-					onChange={(e) => onSearchChange(e.target.value)}
-					rightIcon={
-						<X
-							size={15}
-							onClick={() => onSearchChange('')}
-							style={{ display: searchValue ? undefined : 'none' }}
-						/>
-					}
-				/>
+				<div className="flex items-center gap-1.5">
+					<CustomInput
+						type="text"
+						placeholder="Поиск..."
+						value={searchValue}
+						onKeyDown={onEnterPress}
+						onChange={(e) => onSearchChange(e.target.value)}
+						rightIcon={
+							<X
+								size={15}
+								onClick={() => onSearchChange('')}
+								style={{ display: searchValue ? undefined : 'none' }}
+							/>
+						}
+					/>
+					<Button
+						variant="primary"
+						size="lg"
+						className="mt-1"
+						disabled={!searchValue}
+						onClick={onSearchClick}
+					>
+						<Search />
+					</Button>
+				</div>
 			</div>
 			<div className="flex items-center gap-2.5">
 				<Notifications />

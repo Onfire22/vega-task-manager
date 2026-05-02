@@ -1,5 +1,5 @@
 import { Input } from '@/components/ui/input.tsx';
-import React, { type ChangeEvent, type ReactNode } from 'react';
+import React, { type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react';
 import { cn } from '@/lib/utils.ts';
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IProps {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;
 	disabled?: boolean;
+	onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 	ref?: React.RefObject<HTMLInputElement | null>;
 	rightIcon?: ReactNode;
 	leftIcon?: ReactNode;
@@ -33,6 +34,7 @@ const CustomInput: React.FC<IProps> = ({
 	ref,
 	disabled,
 	description,
+	onKeyDown,
 	isRequired = false,
 }) => {
 	return (
@@ -63,6 +65,7 @@ const CustomInput: React.FC<IProps> = ({
 					onChange={onChange}
 					ref={ref}
 					disabled={disabled}
+					onKeyDown={onKeyDown}
 				/>
 				{rightIcon && <div className="pr-2 flex items-center">{rightIcon}</div>}
 			</div>
