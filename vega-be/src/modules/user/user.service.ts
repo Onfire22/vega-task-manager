@@ -1,6 +1,6 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { Prisma } from '../../generated/prisma/client';
-import { TUpdateUserBody, TUpdateUserPasswordBody, TUserListBody } from './user.types';
+import { TUpdateUserData, TUpdateUserPasswordBody, TUserListBody } from './user.types';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
@@ -14,6 +14,7 @@ const getCurrentUser = async (userUuid: string) => {
 			name: true,
 			secondName: true,
 			userName: true,
+			avatarUrl: true,
 			userSpecialisation: {
 				select: {
 					id: true,
@@ -57,7 +58,7 @@ const getUserList = ({ filters }: TUserListBody) => {
 	});
 };
 
-const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
+const updateUser = (userData: Partial<TUpdateUserData>, userUuid: string) => {
 	const updateData: Prisma.UserUpdateInput = {};
 
 	if (userData.name) {
@@ -78,6 +79,10 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 		};
 	}
 
+	if ('avatarUrl' in userData) {
+		updateData.avatarUrl = userData.avatarUrl ?? null;
+	}
+
 	return prismaAppClient.user.update({
 		where: { id: userUuid },
 		data: updateData,
@@ -88,6 +93,7 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 			secondName: true,
 			userName: true,
 			userSpecialisationUuid: true,
+			avatarUrl: true,
 		},
 	});
 };

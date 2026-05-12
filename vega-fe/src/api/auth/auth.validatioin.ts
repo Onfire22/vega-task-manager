@@ -19,6 +19,7 @@ export const CurrentUserResponseSchema = z.object({
 		name: z.string(),
 		secondName: z.string(),
 		userName: z.string(),
+		avatarUrl: z.string().nullable(),
 		userSpecialisation: z.object({
 			id: z.string(),
 			label: z.string(),

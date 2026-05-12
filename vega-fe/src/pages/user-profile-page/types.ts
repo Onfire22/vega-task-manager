@@ -8,6 +8,14 @@ export interface IOption {
 	color?: string | undefined;
 }
 
+export interface IUserData {
+	userName: string;
+	name: string;
+	initials?: string;
+	avatar?: string;
+	avatarUrl?: string;
+}
+
 export type IPersonalForm = z.infer<typeof PersonalSchema>;
 
 export type IPasswordForm = z.infer<typeof PasswordSchema>;

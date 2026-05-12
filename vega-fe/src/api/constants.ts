@@ -34,6 +34,7 @@ export const ROUTES = {
 	userChannels: '/api/user_channels',
 	messages: '/api/messages',
 	search: '/api/gloabl-search?search=',
+	uploadFile: '/api/upload/single',
 };
 
 export const TAG_TYPES = [

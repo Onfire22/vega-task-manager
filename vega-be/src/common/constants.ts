@@ -40,6 +40,7 @@ export const ROUTES = {
 	channels: '/api/channels',
 	messages: '/api/messages/:channelUuid',
 	search: '/api/gloabl-search',
+	uploadFile: '/api/upload/single',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

@@ -10,10 +10,11 @@ export const UserListBodySchema = z.object({
 });
 
 export const UpdateUserBodySchema = z.object({
-	name: z.string(),
-	secondName: z.string(),
-	userSpecialisationUuid: z.string(),
-	userName: z.string(),
+	name: z.string().optional(),
+	secondName: z.string().optional(),
+	userSpecialisationUuid: z.string().optional(),
+	userName: z.string().optional(),
+	avatarUrl: z.string().nullable().optional(),
 });
 
 export const UpdateUserPasswordBodySchema = z.object({

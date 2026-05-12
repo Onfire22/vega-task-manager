@@ -16,6 +16,8 @@ export interface IGetUserListResponse {
 	usersList: Array<Partial<Pick<IUser, 'id' | 'name' | 'secondName'>>>;
 }
 
+export type TUpdateUserData = TUpdateUserBody & { avatarUrl: string };
+
 export type TUserListBody = z.infer<typeof UserListBodySchema>;
 
 export type TUpdateUserBody = z.infer<typeof UpdateUserBodySchema>;
