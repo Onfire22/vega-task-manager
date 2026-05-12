@@ -14,7 +14,7 @@ export const UpdateUserBodySchema = z.object({
 	secondName: z.string().optional(),
 	userSpecialisationUuid: z.string().optional(),
 	userName: z.string().optional(),
-	avatarUrl: z.string().nullable(),
+	avatarUrl: z.string().nullable().optional(),
 });
 
 export const UpdateUserPasswordBodySchema = z.object({

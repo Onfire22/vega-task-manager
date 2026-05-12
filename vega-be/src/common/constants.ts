@@ -20,6 +20,7 @@ export const ROUTES = {
 	refresh: '/api/refresh',
 	users: '/api/users',
 	currentUser: '/api/users/current',
+	deleteAvatar: '/api/users/current/avatar',
 	userByEmail: '/api/users/email',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',

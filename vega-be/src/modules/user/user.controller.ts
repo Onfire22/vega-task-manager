@@ -34,7 +34,7 @@ export const getUserList = async (
 	}
 };
 
-export const updateUser = async (req: Request<{}, {}, Partial<TUpdateUserBody>>, res: Response, next: NextFunction) => {
+export const updateUser = async (req: Request<{}, {}, TUpdateUserBody>, res: Response, next: NextFunction) => {
 	try {
 		const newUser = await userService.updateUser(req.body, res.locals.user.id);
 
@@ -51,6 +51,16 @@ export const updateUserPassword = async (
 ) => {
 	try {
 		await userService.updateUserPassword(req.body, res.locals.user.id);
+
+		res.status(RESPONSE_STATUSES.success).json({ success: true });
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const deleteAvatar = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		await userService.deleteUserAvatar(req.body.avatarPath, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {

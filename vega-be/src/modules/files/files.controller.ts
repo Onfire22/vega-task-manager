@@ -4,8 +4,7 @@ import { filesService } from './files.service';
 export const uploadFile = async (req: Request<{}, {}, { entity: string }>, res: Response, next: NextFunction) => {
 	try {
 		const file = req.file;
-		console.log(file?.filename);
-		const fileName = `/uploads/${file?.filename}`;
+		const fileName = `/public/uploads/${file?.filename}`;
 
 		await filesService.updateAvatar(req.body.entity, fileName, res.locals.user.id);
 

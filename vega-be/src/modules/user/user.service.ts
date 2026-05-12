@@ -1,9 +1,11 @@
 import { prismaAppClient } from '../../lib/prisma';
 import { Prisma } from '../../generated/prisma/client';
-import { TUpdateUserData, TUpdateUserPasswordBody, TUserListBody } from './user.types';
+import { TUpdateUserBody, TUpdateUserPasswordBody, TUserListBody } from './user.types';
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
+import path from 'path';
+import fs from 'node:fs/promises';
 
 const getCurrentUser = async (userUuid: string) => {
 	const user = await prismaAppClient.user.findUnique({
@@ -58,7 +60,7 @@ const getUserList = ({ filters }: TUserListBody) => {
 	});
 };
 
-const updateUser = (userData: Partial<TUpdateUserData>, userUuid: string) => {
+const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 	const updateData: Prisma.UserUpdateInput = {};
 
 	if (userData.name) {
@@ -79,8 +81,9 @@ const updateUser = (userData: Partial<TUpdateUserData>, userUuid: string) => {
 		};
 	}
 
-	if ('avatarUrl' in userData) {
-		updateData.avatarUrl = userData.avatarUrl ?? null;
+	if (userData.avatarUrl) {
+		console.log(updateData.avatarUrl);
+		updateData.avatarUrl = userData.avatarUrl;
 	}
 
 	return prismaAppClient.user.update({
@@ -126,4 +129,19 @@ const updateUserPassword = async (passwords: TUpdateUserPasswordBody, userUuid: 
 	});
 };
 
-export const userService = { getCurrentUser, getUserList, updateUser, updateUserPassword };
+export const deleteUserAvatar = async (avatarPath: string, userUuid: string) => {
+	try {
+		const pathToFile = path.join(__dirname, '..', '..', avatarPath);
+		await fs.unlink(pathToFile);
+	} catch (e) {
+		if (e instanceof Error) {
+			console.log(e.message);
+		}
+	}
+	return prismaAppClient.user.update({
+		where: { id: userUuid },
+		data: { avatarUrl: null },
+	});
+};
+
+export const userService = { getCurrentUser, getUserList, updateUser, updateUserPassword, deleteUserAvatar };
