@@ -7,7 +7,7 @@ import type { IChannel, IMappedMessage, IMessage, TChannelsGroups } from '@/page
 import { useGetMessagesQuery } from '@/api/messages/messages.api.ts';
 import { format } from 'date-fns';
 import { CHANNEL_HEADER_VISIBILITY, DATE_FORMAT, TIME_FORMAT } from '@/pages/chat/constants.ts';
-import { getAvatarColor } from '@/app/utils.ts';
+import { getAvatarColor, useDebounce } from '@/app/utils.ts';
 import { getChannelWithNormalizeUsers } from '@/pages/chat/utils.ts';
 
 export const useUsersWithFilters = (searchValue?: string) => {
@@ -176,8 +176,10 @@ export const useUserChannelsData = (channels?: Array<IChannel>) => {
 export const useUserChannels = () => {
 	const sidebarSearchValue = useAppSelector(getSidebarSearchValueSelector());
 
+	const debouncedValue = useDebounce(sidebarSearchValue, 1000);
+
 	const filters = {
-		...(sidebarSearchValue ? { searchValue: sidebarSearchValue } : {}),
+		...(debouncedValue ? { searchValue: debouncedValue } : {}),
 	};
 
 	const { data, isLoading } = useGetUserChannelsQuery(filters);
