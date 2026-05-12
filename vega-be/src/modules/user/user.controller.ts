@@ -34,7 +34,7 @@ export const getUserList = async (
 	}
 };
 
-export const updateUser = async (req: Request<{}, {}, TUpdateUserBody>, res: Response, next: NextFunction) => {
+export const updateUser = async (req: Request<{}, {}, Partial<TUpdateUserBody>>, res: Response, next: NextFunction) => {
 	try {
 		const newUser = await userService.updateUser(req.body, res.locals.user.id);
 
