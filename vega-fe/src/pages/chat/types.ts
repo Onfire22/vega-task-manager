@@ -40,6 +40,7 @@ export interface IInitialState {
 	activeChannelUuid: string | null;
 	replyMessage: IMappedMessage | null;
 	newChatModal: TNewChatModal;
+	sidebarSearchValue: string;
 }
 
 export interface IChannelsGroups {

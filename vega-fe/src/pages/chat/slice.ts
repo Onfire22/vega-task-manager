@@ -6,6 +6,7 @@ export const initialState: IInitialState = {
 	newChatModal: null,
 	activeChannelUuid: null,
 	replyMessage: null,
+	sidebarSearchValue: '',
 };
 
 const chatSlice = createSlice({
@@ -24,8 +25,12 @@ const chatSlice = createSlice({
 		setReplyMessage: (state, action: PayloadAction<IMappedMessage | null>) => {
 			state.replyMessage = action.payload;
 		},
+		setSidebarSearchValue: (state, action: PayloadAction<string>) => {
+			state.sidebarSearchValue = action.payload;
+		},
 	},
 });
 
-export const { setIsUsersControlsOpen, setNewChatModal, setActiveChannelUuid, setReplyMessage } = chatSlice.actions;
+export const { setIsUsersControlsOpen, setNewChatModal, setActiveChannelUuid, setReplyMessage, setSidebarSearchValue } =
+	chatSlice.actions;
 export default chatSlice.reducer;

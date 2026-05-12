@@ -12,3 +12,6 @@ export const getActiveChannelUuidSelector = () => (state: RootState) =>
 
 export const getReplyMessageSelector = () => (state: RootState) =>
 	state.chatReducer?.replyMessage || initialState.replyMessage;
+
+export const getSidebarSearchValueSelector = () => (state: RootState) =>
+	state.chatReducer?.sidebarSearchValue || initialState.sidebarSearchValue;

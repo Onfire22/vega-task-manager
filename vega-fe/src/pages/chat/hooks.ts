@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useAppSelector } from '@/store/hooks.ts';
-import { getActiveChannelUuidSelector } from '@/pages/chat/selectors.ts';
+import { getActiveChannelUuidSelector, getSidebarSearchValueSelector } from '@/pages/chat/selectors.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
 import { useGetChannelsQuery, useGetUserChannelsQuery } from '@/api/channels/channels.api.ts';
 import type { IChannel, IMappedMessage, IMessage, TChannelsGroups } from '@/pages/chat/types.ts';
@@ -173,9 +173,11 @@ export const useUserChannelsData = (channels?: Array<IChannel>) => {
 	}, [activeChannelUuid, channels]);
 };
 
-export const useUserChannels = (searchValue: string) => {
+export const useUserChannels = () => {
+	const sidebarSearchValue = useAppSelector(getSidebarSearchValueSelector());
+
 	const filters = {
-		...(searchValue ? { searchValue } : {}),
+		...(sidebarSearchValue ? { searchValue: sidebarSearchValue } : {}),
 	};
 
 	const { data, isLoading } = useGetUserChannelsQuery(filters);
