@@ -39,7 +39,7 @@ const UserInfoView: React.FC<IProps> = ({
 						<span>{userData.initials}</span>
 					)}
 					{isAvatarUploaderShown && (
-						<label className="absolute bg-secondary w-full bottom-0 opacity-80 rounded-b-full flex items-center justify-center cursor-pointer h-1/2">
+						<label className="absolute bg-secondary w-full bottom-0 opacity-80 rounded-full flex items-center justify-center cursor-pointer h-full">
 							<Camera />
 							<input type="file" style={{ display: 'none' }} onChange={onSetFile} />
 						</label>
@@ -55,7 +55,7 @@ const UserInfoView: React.FC<IProps> = ({
 						<Button
 							size="xs"
 							variant="default"
-							disabled={!file && !userData.avatarUrl}
+							disabled={!file && !userData.avatarUrl && !preview}
 							onClick={onDeleteAvatar}
 						>
 							Удалить фото

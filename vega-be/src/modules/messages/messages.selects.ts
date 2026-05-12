@@ -12,6 +12,7 @@ export const messagesSelect = {
 			id: true,
 			name: true,
 			secondName: true,
+			avatarUrl: true,
 		},
 	},
 	channel: {

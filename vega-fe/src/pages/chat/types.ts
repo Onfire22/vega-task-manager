@@ -89,6 +89,7 @@ export interface IMessage {
 		id: string;
 		name: string;
 		secondName: string;
+		avatarUrl: string | null;
 	};
 }
 
@@ -99,7 +100,8 @@ export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt' | 'replyToUui
 	author: {
 		id: string;
 		name: string;
-		avatar: IAvatar;
+		avatarUrl?: string;
+		avatar?: IAvatar;
 	};
 };
 

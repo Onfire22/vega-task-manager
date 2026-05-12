@@ -26,6 +26,10 @@ export interface IUpdateUserRequest {
 	avatarUrl?: string | null;
 }
 
+export interface IDeleteUserAvatar {
+	avatarUrl?: string;
+}
+
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;
 
 export type TUpdateUser = z.infer<typeof UpdateUserResponseSchema>;

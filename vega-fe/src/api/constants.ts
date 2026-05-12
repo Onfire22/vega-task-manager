@@ -22,6 +22,7 @@ export const ROUTES = {
 	updateTaskEstimate: '/api/tasks/',
 	dictionaries: '/api/dictionaries',
 	getUsers: '/api/users',
+	deleteAvatar: '/api/users/current/avatar',
 	userByEmail: '/api/users/email',
 	updateTaskStatus: '/api/tasks/status-update',
 	projects: '/api/projects',

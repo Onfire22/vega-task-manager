@@ -28,7 +28,7 @@ app.use(
 app.use(json());
 app.use(cookieParser());
 
-app.use('/public/uploads', express.static(path.join(__dirname, './public/uploads')));
+app.use('/public/uploads', express.static(path.join(process.cwd(), '/public/uploads')));
 app.use(authRouter);
 app.use(dictionaryRouter);
 

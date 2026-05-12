@@ -6,6 +6,7 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
 import path from 'path';
 import fs from 'node:fs/promises';
+import { filesService } from '../files/files.service';
 
 const getCurrentUser = async (userUuid: string) => {
 	const user = await prismaAppClient.user.findUnique({
@@ -82,7 +83,6 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 	}
 
 	if (userData.avatarUrl) {
-		console.log(updateData.avatarUrl);
 		updateData.avatarUrl = userData.avatarUrl;
 	}
 
@@ -130,14 +130,8 @@ const updateUserPassword = async (passwords: TUpdateUserPasswordBody, userUuid: 
 };
 
 export const deleteUserAvatar = async (avatarPath: string, userUuid: string) => {
-	try {
-		const pathToFile = path.join(__dirname, '..', '..', avatarPath);
-		await fs.unlink(pathToFile);
-	} catch (e) {
-		if (e instanceof Error) {
-			console.log(e.message);
-		}
-	}
+	await filesService.deleteFile(avatarPath);
+
 	return prismaAppClient.user.update({
 		where: { id: userUuid },
 		data: { avatarUrl: null },

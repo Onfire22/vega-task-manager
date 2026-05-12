@@ -10,7 +10,6 @@ export const uploadFile = async (req: Request<{}, {}, { entity: string }>, res: 
 
 		res.json({ file });
 	} catch (e) {
-		console.log(e);
 		next(e);
 	}
 };

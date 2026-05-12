@@ -2,7 +2,8 @@ import { UserInfoView } from '@/pages/user-profile-page/components/user-info/use
 import { useUserInfo } from '@/pages/user-profile-page/hooks.ts';
 import React, { useState } from 'react';
 import { useUploadFileMutation } from '@/api/files/files.api.ts';
-import { useUpdateUserMutation } from '@/api/users/users.api.ts';
+import { useDeleteUserAvatarMutation } from '@/api/users/users.api.ts';
+import { toast } from 'sonner';
 
 const UserInfo = () => {
 	const [file, setFile] = useState<File | null>(null);
@@ -12,7 +13,7 @@ const UserInfo = () => {
 	const { userData, isLoading } = useUserInfo();
 
 	const [uploadFile] = useUploadFileMutation();
-	const [updateUser] = useUpdateUserMutation();
+	const [deleteAvatar] = useDeleteUserAvatarMutation();
 
 	const handleSetFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.files) return;
@@ -28,11 +29,13 @@ const UserInfo = () => {
 		formData.append('file', file);
 		formData.append('entity', 'user');
 		uploadFile(formData);
+		setFile(null);
+		toast.success('Автар успешно обновлен');
 	};
 
 	const handleDeleteAvatar = () => {
-		if (userData?.avatarUrl) {
-			updateUser({ avatarUrl: null });
+		if (userData?.avatarUrl || file) {
+			deleteAvatar({ avatarUrl: userData.avatarUrl });
 		}
 		setPreview(null);
 		setFile(null);

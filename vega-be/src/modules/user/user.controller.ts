@@ -58,9 +58,9 @@ export const updateUserPassword = async (
 	}
 };
 
-export const deleteAvatar = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteAvatar = async (req: Request<{}, {}, { avatarUrl: string }>, res: Response, next: NextFunction) => {
 	try {
-		await userService.deleteUserAvatar(req.body.avatarPath, res.locals.user.id);
+		await userService.deleteUserAvatar(req.body.avatarUrl, res.locals.user.id);
 
 		res.status(RESPONSE_STATUSES.success).json({ success: true });
 	} catch (e) {
