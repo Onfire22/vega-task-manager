@@ -14,7 +14,6 @@ export const ROUTES = {
 	logout: '/api/logout',
 	refresh: '/api/refresh',
 	currentUser: '/api/users/current',
-	createTask: '/api/tasks/create',
 	getTask: '/api/task/',
 	getTasks: '/api/tasks',
 	updateTask: '/api/task/',

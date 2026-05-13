@@ -12,7 +12,7 @@ import {
 
 const tasksRouter = Router();
 
-tasksRouter.post(ROUTES.createTask, validateMiddleware(CreateTaskBodySchema), createTask);
+tasksRouter.post(ROUTES.task, validateMiddleware(CreateTaskBodySchema), createTask);
 tasksRouter.patch(
 	ROUTES.task,
 	[validateMiddleware(TaskParamsSchema, 'params'), validateMiddleware(UpdateTaskBodySchema)],

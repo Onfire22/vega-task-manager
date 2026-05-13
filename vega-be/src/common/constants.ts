@@ -25,7 +25,6 @@ export const ROUTES = {
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
 	task: '/api/task/:uuid',
-	createTask: '/api/tasks/create',
 	getTaskLogs: '/api/task/:uuid/logs',
 	updateTaskEstimate: '/api/tasks/:uuid/estimate',
 	createTaskLog: '/api/taskLogs/',
