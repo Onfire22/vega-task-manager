@@ -24,7 +24,7 @@ const Comments = () => {
 	const [editComment] = useEditCommentMutation();
 	const { data } = useGetCurrentUserQuery();
 
-	const { comments } = useComments(params.uuid!);
+	const { comments } = useComments();
 
 	const handleCreateComment = async () => {
 		if (params.uuid) {

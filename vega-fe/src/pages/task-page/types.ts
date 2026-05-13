@@ -110,3 +110,8 @@ export interface ILinksForm {
 	mrLinks?: string;
 	buildLinks?: string;
 }
+
+export interface IOption {
+	label: string;
+	value: string;
+}

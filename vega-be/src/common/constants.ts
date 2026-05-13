@@ -24,6 +24,7 @@ export const ROUTES = {
 	userByEmail: '/api/users/email',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
+	createTask: '/api/task',
 	task: '/api/task/:uuid',
 	getTaskLogs: '/api/task/:uuid/logs',
 	updateTaskEstimate: '/api/tasks/:uuid/estimate',

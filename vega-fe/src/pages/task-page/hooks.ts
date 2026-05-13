@@ -8,9 +8,12 @@ import { transformSecondsToTime } from '@/pages/task-page/utils.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 import { useTask } from '@/api/tasks/tasks.hooks.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
+import { useParams } from 'react-router-dom';
 
-export const useTaskData = (uuid?: string) => {
-	const { task, isTaskLoading } = useTask(uuid);
+export const useTaskData = () => {
+	const params = useParams();
+
+	const { task, isTaskLoading } = useTask(params.uuid);
 
 	if (!task) return { task: null, isTaskLoading };
 
@@ -43,8 +46,10 @@ export const useTaskData = (uuid?: string) => {
 	};
 };
 
-export const useComments = (uuid: string) => {
-	const { data, isLoading } = useGetTaskCommentsQuery(uuid);
+export const useComments = () => {
+	const params = useParams();
+
+	const { data, isLoading } = useGetTaskCommentsQuery(params.uuid!);
 
 	if (!data?.comments) {
 		return {
@@ -99,8 +104,8 @@ export const useDictionariesWithColors = () => {
 	return { dictionariesOptions: options };
 };
 
-export const useTimeLogs = (uuid: string) => {
-	const { data, isLoading } = useGetTaskLogsQuery(uuid);
+export const useTimeLogs = (uuid?: string) => {
+	const { data, isLoading } = useGetTaskLogsQuery(uuid!);
 
 	if (isLoading) return { logs: [], isLoading };
 
@@ -124,8 +129,10 @@ export const useTimeLogs = (uuid: string) => {
 	return { logs, isLoading };
 };
 
-export const useTaskPayload = (uuid: string) => {
-	const { logs, isLoading } = useTimeLogs(uuid);
+export const useTaskPayload = () => {
+	const params = useParams();
+
+	const { logs, isLoading } = useTimeLogs(params.uuid);
 
 	if (!logs.length) return { chartData: null, isLoading };
 

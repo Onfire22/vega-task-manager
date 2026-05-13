@@ -291,11 +291,11 @@ const TaskView: React.FC<IProps> = ({
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Даты</div>
 						<div className="flex items-center justify-between">
 							<div className="text-[12px]">Создано</div>
-							<div className="text-[14px]">09.03.2026</div>
+							<div className="text-[14px]">{task.createdAt}</div>
 						</div>
 						<div className="flex items-center justify-between">
 							<div className="text-[12px]">Обновлено</div>
-							<div className="text-[14px]">10.03.2026</div>
+							<div className="text-[14px]">{task.updatedAt}</div>
 						</div>
 					</div>
 				</div>

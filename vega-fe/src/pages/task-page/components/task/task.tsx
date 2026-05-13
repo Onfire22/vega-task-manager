@@ -27,11 +27,11 @@ const Task = () => {
 	const [searchValue, setSearchValue] = useState('');
 
 	const { dictionariesOptions } = useDictionariesWithColors();
-	const { isTaskLoading, task } = useTaskData(params.uuid);
+	const { isTaskLoading, task } = useTaskData();
 	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, searchValue);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
-	const { chartData } = useTaskPayload(params.uuid!);
+	const { chartData } = useTaskPayload();
 
 	const handleSetActiveTab = (value: string) => {
 		if (value) {

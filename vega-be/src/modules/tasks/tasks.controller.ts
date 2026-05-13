@@ -40,6 +40,7 @@ export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>,
 
 		res.status(200).json({ task: task.id });
 	} catch (e) {
+		console.log(e);
 		next(e);
 	}
 };
