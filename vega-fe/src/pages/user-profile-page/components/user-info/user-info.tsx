@@ -2,7 +2,7 @@ import { UserInfoView } from '@/pages/user-profile-page/components/user-info/use
 import { useUserInfo } from '@/pages/user-profile-page/hooks.ts';
 import React, { useState } from 'react';
 import { useUploadFileMutation } from '@/api/files/files.api.ts';
-import { useDeleteUserAvatarMutation } from '@/api/users/users.api.ts';
+import { useDeleteUserAvatarMutation, useUpdateUserMutation } from '@/api/users/users.api.ts';
 import { toast } from 'sonner';
 
 const UserInfo = () => {
@@ -14,6 +14,7 @@ const UserInfo = () => {
 
 	const [uploadFile] = useUploadFileMutation();
 	const [deleteAvatar] = useDeleteUserAvatarMutation();
+	const [updateUser] = useUpdateUserMutation();
 
 	const handleSetFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.files) return;
@@ -22,19 +23,26 @@ const UserInfo = () => {
 		setPreview(URL.createObjectURL(file));
 	};
 
-	const handleSaveAvatar = () => {
+	const handleSaveAvatar = async () => {
 		if (!file) return;
 
 		const formData = new FormData();
 		formData.append('file', file);
-		formData.append('entity', 'user');
-		uploadFile(formData);
+		try {
+			const result = await uploadFile(formData).unwrap();
+			if (result.filename) {
+				updateUser({ avatarUrl: result.filename });
+			}
+		} catch (e) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
 		setFile(null);
 		toast.success('Автар успешно обновлен');
 	};
 
 	const handleDeleteAvatar = () => {
-		if (userData?.avatarUrl || file) {
+		if (userData?.avatarUrl) {
 			deleteAvatar({ avatarUrl: userData.avatarUrl });
 		}
 		setPreview(null);

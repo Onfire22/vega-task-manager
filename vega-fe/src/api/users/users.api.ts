@@ -29,6 +29,7 @@ export const usersApi = baseApi.injectEndpoints({
 				body: payload,
 			}),
 			extraOptions: { schema: UpdateUserResponseSchema },
+			invalidatesTags: ['CurrentUser'],
 		}),
 		updateUserPassword: builder.mutation<TBaseResponse, IUpdatePasswordRequest>({
 			query: (payload) => ({
