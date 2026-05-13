@@ -20,6 +20,6 @@ export const TABS = [
 	{ text: 'Активность', value: 'activity' },
 ];
 
-export const VIEWER_ROLE_UUID = 'a2a334cd-a495-4849-8bcb-e5e76a4e5f26';
+export const VIEWER_ROLE_UUID = '4edf9c1d-476f-47e3-9795-239547b3dc4b';
 
-export const OWNER_ROLE_UUID = '32320ee5-a7aa-40af-8a8c-bfaec404c505';
+export const OWNER_ROLE_UUID = 'a08a3618-bac9-4a54-a19f-318cb183560f';

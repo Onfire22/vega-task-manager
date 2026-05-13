@@ -1,6 +1,7 @@
 import { baseApi } from '@/api';
 import { METHODS, ROUTES } from '../constants.ts';
 import type {
+	IDeleteUserAvatar,
 	IFiltersRequest,
 	IUpdatePasswordRequest,
 	IUpdateUserRequest,
@@ -28,6 +29,7 @@ export const usersApi = baseApi.injectEndpoints({
 				body: payload,
 			}),
 			extraOptions: { schema: UpdateUserResponseSchema },
+			invalidatesTags: ['CurrentUser'],
 		}),
 		updateUserPassword: builder.mutation<TBaseResponse, IUpdatePasswordRequest>({
 			query: (payload) => ({
@@ -37,7 +39,16 @@ export const usersApi = baseApi.injectEndpoints({
 			}),
 			extraOptions: { schema: BaseResponseSchema },
 		}),
+		deleteUserAvatar: builder.mutation<TBaseResponse, IDeleteUserAvatar>({
+			query: (url) => ({
+				url: ROUTES.deleteAvatar,
+				method: METHODS.delete,
+				body: url,
+			}),
+			invalidatesTags: ['CurrentUser'],
+		}),
 	}),
 });
 
-export const { useGetUsersQuery, useUpdateUserMutation, useUpdateUserPasswordMutation } = usersApi;
+export const { useGetUsersQuery, useUpdateUserMutation, useUpdateUserPasswordMutation, useDeleteUserAvatarMutation } =
+	usersApi;

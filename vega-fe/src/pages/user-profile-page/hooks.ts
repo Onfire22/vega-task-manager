@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { getAvatarColor } from '@/app/utils.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
+import { BASE_URL } from '@/api/constants.ts';
+import type { IUserData } from '@/pages/user-profile-page/types.ts';
 
 export const usePersonalData = () => {
 	const { currentData, isLoading } = useGetCurrentUserQuery();
@@ -31,14 +33,21 @@ export const usePersonalData = () => {
 export const useUserInfo = () => {
 	const { currentData, isLoading } = useGetCurrentUserQuery();
 
+	const userData: IUserData = {
+		userName: `@${currentData?.currentUser.userName}`,
+		name: `${currentData?.currentUser.name} ${currentData?.currentUser.secondName}`,
+	};
+
+	if (currentData?.currentUser?.avatarUrl) {
+		userData.avatarUrl = `${BASE_URL}${currentData?.currentUser?.avatarUrl}`;
+	} else {
+		userData.initials =
+			`${currentData?.currentUser.name.slice(0, 1)}. ${currentData?.currentUser.userName.slice(0, 1)}.`.toUpperCase();
+		userData.avatar = getAvatarColor(currentData?.currentUser.id);
+	}
+
 	return {
-		userData: {
-			userName: `@${currentData?.currentUser.userName}`,
-			name: `${currentData?.currentUser.name} ${currentData?.currentUser.secondName}`,
-			initials:
-				`${currentData?.currentUser.name.slice(0, 1)}. ${currentData?.currentUser.userName.slice(0, 1)}.`.toUpperCase(),
-			avatar: getAvatarColor(currentData?.currentUser.id),
-		},
+		userData,
 		isLoading,
 	};
 };

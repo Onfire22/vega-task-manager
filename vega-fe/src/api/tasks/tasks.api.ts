@@ -22,7 +22,7 @@ const tasksApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		createTask: builder.mutation<TCreateTaskResponse, ICreateTask>({
 			query: (taskData) => ({
-				url: ROUTES.createTask,
+				url: ROUTES.getTask,
 				method: METHODS.post,
 				body: taskData,
 			}),

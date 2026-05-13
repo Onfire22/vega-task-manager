@@ -13,6 +13,7 @@ export const GetMessagesValidationSchema = z.object({
 			isSystem: z.boolean(),
 			canEdit: z.boolean(),
 			author: z.object({
+				avatarUrl: z.string().nullable(),
 				id: z.string(),
 				name: z.string(),
 				secondName: z.string(),

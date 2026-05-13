@@ -23,6 +23,11 @@ export interface IUpdateUserRequest {
 	name?: string;
 	secondName?: string;
 	userSpecialisationUuid?: string;
+	avatarUrl?: string | null;
+}
+
+export interface IDeleteUserAvatar {
+	avatarUrl?: string;
 }
 
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;

@@ -10,6 +10,7 @@ import { notificationsRouter } from '../modules/notifications/notifications.rout
 import { channelsRouter } from '../modules/channels/channels.router';
 import { messagesRouter } from '../modules/messages/messages.router';
 import { globalSearchRouter } from '../modules/glogal-search/global-search.router';
+import { filesRouter } from '../modules/files/files.router';
 
 const protectedRouter = Router();
 
@@ -23,5 +24,6 @@ protectedRouter.use(ROUTES.root, notificationsRouter);
 protectedRouter.use(ROUTES.root, channelsRouter);
 protectedRouter.use(ROUTES.root, messagesRouter);
 protectedRouter.use(ROUTES.root, globalSearchRouter);
+protectedRouter.use(ROUTES.root, filesRouter);
 
 export { protectedRouter };

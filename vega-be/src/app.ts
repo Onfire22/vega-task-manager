@@ -10,6 +10,7 @@ import { dictionaryRouter } from './modules/dictionary/dictionary.router';
 import { initRedis } from './lib/redis/redis';
 import http from 'http';
 import { initSocket } from './websocket';
+import path from 'path';
 
 const port = process.env.PORT;
 
@@ -27,6 +28,7 @@ app.use(
 app.use(json());
 app.use(cookieParser());
 
+app.use('/public/uploads', express.static(path.join(process.cwd(), '/public/uploads')));
 app.use(authRouter);
 app.use(dictionaryRouter);
 

@@ -14,7 +14,6 @@ export const ROUTES = {
 	logout: '/api/logout',
 	refresh: '/api/refresh',
 	currentUser: '/api/users/current',
-	createTask: '/api/tasks/create',
 	getTask: '/api/task/',
 	getTasks: '/api/tasks',
 	updateTask: '/api/task/',
@@ -22,6 +21,7 @@ export const ROUTES = {
 	updateTaskEstimate: '/api/tasks/',
 	dictionaries: '/api/dictionaries',
 	getUsers: '/api/users',
+	deleteAvatar: '/api/users/current/avatar',
 	userByEmail: '/api/users/email',
 	updateTaskStatus: '/api/tasks/status-update',
 	projects: '/api/projects',
@@ -34,6 +34,7 @@ export const ROUTES = {
 	userChannels: '/api/user_channels',
 	messages: '/api/messages',
 	search: '/api/gloabl-search?search=',
+	uploadFile: '/api/upload/single',
 };
 
 export const TAG_TYPES = [

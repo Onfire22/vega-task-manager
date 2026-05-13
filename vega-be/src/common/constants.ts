@@ -20,11 +20,11 @@ export const ROUTES = {
 	refresh: '/api/refresh',
 	users: '/api/users',
 	currentUser: '/api/users/current',
+	deleteAvatar: '/api/users/current/avatar',
 	userByEmail: '/api/users/email',
 	dictionaries: '/api/dictionaries',
 	tasks: '/api/tasks',
 	task: '/api/task/:uuid',
-	createTask: '/api/tasks/create',
 	getTaskLogs: '/api/task/:uuid/logs',
 	updateTaskEstimate: '/api/tasks/:uuid/estimate',
 	createTaskLog: '/api/taskLogs/',
@@ -40,6 +40,7 @@ export const ROUTES = {
 	channels: '/api/channels',
 	messages: '/api/messages/:channelUuid',
 	search: '/api/gloabl-search',
+	uploadFile: '/api/upload/single',
 };
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };

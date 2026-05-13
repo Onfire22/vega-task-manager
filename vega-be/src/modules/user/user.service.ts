@@ -4,6 +4,9 @@ import { TUpdateUserBody, TUpdateUserPasswordBody, TUserListBody } from './user.
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
+import path from 'path';
+import fs from 'node:fs/promises';
+import { filesService } from '../files/files.service';
 
 const getCurrentUser = async (userUuid: string) => {
 	const user = await prismaAppClient.user.findUnique({
@@ -14,6 +17,7 @@ const getCurrentUser = async (userUuid: string) => {
 			name: true,
 			secondName: true,
 			userName: true,
+			avatarUrl: true,
 			userSpecialisation: {
 				select: {
 					id: true,
@@ -78,6 +82,10 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 		};
 	}
 
+	if (userData.avatarUrl) {
+		updateData.avatarUrl = userData.avatarUrl;
+	}
+
 	return prismaAppClient.user.update({
 		where: { id: userUuid },
 		data: updateData,
@@ -88,6 +96,7 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 			secondName: true,
 			userName: true,
 			userSpecialisationUuid: true,
+			avatarUrl: true,
 		},
 	});
 };
@@ -120,4 +129,13 @@ const updateUserPassword = async (passwords: TUpdateUserPasswordBody, userUuid: 
 	});
 };
 
-export const userService = { getCurrentUser, getUserList, updateUser, updateUserPassword };
+export const deleteUserAvatar = async (avatarPath: string, userUuid: string) => {
+	await filesService.deleteFile(avatarPath);
+
+	return prismaAppClient.user.update({
+		where: { id: userUuid },
+		data: { avatarUrl: null },
+	});
+};
+
+export const userService = { getCurrentUser, getUserList, updateUser, updateUserPassword, deleteUserAvatar };

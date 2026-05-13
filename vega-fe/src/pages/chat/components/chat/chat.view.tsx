@@ -87,9 +87,17 @@ const ChatView: React.FC<IProps> = ({
 											<div className="flex items-start gap-2 w-full">
 												<div
 													className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-white"
-													style={{ background: message.author.avatar.color }}
+													style={{
+														background: !message.author.avatarUrl
+															? message?.author?.avatar?.color
+															: message.author.avatarUrl,
+													}}
 												>
-													{message.author.avatar.initials}
+													{message.author.avatarUrl ? (
+														<img src={message.author.avatarUrl} alt="user avatar" />
+													) : (
+														<span>{message?.author?.avatar?.initials}</span>
+													)}
 												</div>
 												<div className="w-full pr-1.25">
 													{message.replyMessage && (
