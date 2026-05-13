@@ -16,10 +16,4 @@ const deleteFile = async (fileUrl: string) => {
 	}
 };
 
-const updateAvatar = (entity: string, avatar: string, userUuid: string) => {
-	if (entity === 'user') {
-		return userService.updateUser({ avatarUrl: avatar }, userUuid);
-	}
-};
-
-export const filesService = { updateAvatar, deleteFile };
+export const filesService = { deleteFile };
