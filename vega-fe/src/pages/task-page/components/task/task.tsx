@@ -1,7 +1,7 @@
 import { TaskView } from './task.view.tsx';
 import { INITIAL_FIELD_VALUES } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
-import { useDictionariesWithColors, useTaskData, useTaskPayload, useUsersWithFilters } from '../../hooks.ts';
+import { useDictionariesWithColors, useTaskData, useChartData, useUsersWithFilters } from '../../hooks.ts';
 import { useUpdateTaskMutation } from '@/api/tasks/tasks.api.ts';
 import React, { useState } from 'react';
 import { useAppDispatch } from '@/store/hooks.ts';
@@ -31,7 +31,7 @@ const Task = () => {
 	const { usersListOptions, isUsersLoading } = useUsersWithFilters(task, searchValue);
 	const { data } = useGetCurrentUserQuery();
 	const [updateTask] = useUpdateTaskMutation();
-	const { chartData } = useTaskPayload();
+	const { chartData } = useChartData();
 
 	const handleSetActiveTab = (value: string) => {
 		if (value) {

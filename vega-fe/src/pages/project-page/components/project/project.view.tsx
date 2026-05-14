@@ -41,7 +41,7 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick }) => {
 					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
-			<aside className="w-[30%] min-h-[calc(100vh-53px)] p-3.75 border flex flex-col gap-5">
+			<aside className="w-[30%] min-h-[calc(100vh-55px)] p-3.75 border flex flex-col gap-5">
 				<ProjectSettings />
 				<div className="h-px bg-border" />
 				<ProjectMembers />

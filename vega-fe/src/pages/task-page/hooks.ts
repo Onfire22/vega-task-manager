@@ -9,36 +9,39 @@ import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts
 import { useTask } from '@/api/tasks/tasks.hooks.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
 import { useParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 export const useTaskData = () => {
 	const params = useParams();
 
 	const { task, isTaskLoading } = useTask(params.uuid);
 
-	if (!task) return { task: null, isTaskLoading };
+	const taskData = useMemo(() => {
+		if (!task) return null;
 
-	const {
-		logInfo: { remainingTime, estimateTime, totalLoggedTime },
-		mrLinks,
-		buildLinks,
-	} = task;
+		const {
+			logInfo: { remainingTime, estimateTime, totalLoggedTime },
+			mrLinks,
+			buildLinks,
+		} = task;
 
-	const taskData = {
-		...task,
-		buildLinks: buildLinks ? buildLinks.split('\n') : undefined,
-		mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
-		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
-		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
-		assigneeUuid: task.assignee ? task.assignee.id : undefined,
-		remainingTime: remainingTime?.time,
-		estimateTime: estimateTime?.time,
-		totalLoggedTime: totalLoggedTime?.time,
-		estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
-		remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
-		totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
-		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
-		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
-	};
+		return {
+			...task,
+			buildLinks: buildLinks ? buildLinks.split('\n') : undefined,
+			mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
+			reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
+			assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
+			assigneeUuid: task.assignee ? task.assignee.id : undefined,
+			remainingTime: remainingTime?.time,
+			estimateTime: estimateTime?.time,
+			totalLoggedTime: totalLoggedTime?.time,
+			estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
+			remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
+			totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
+			updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
+			createdAt: format(new Date(task.createdAt), DATE_FORMAT),
+		};
+	}, [task]);
 
 	return {
 		task: taskData,
@@ -49,38 +52,35 @@ export const useTaskData = () => {
 export const useComments = () => {
 	const params = useParams();
 
-	const { data, isLoading } = useGetTaskCommentsQuery(params.uuid!);
+	const { data: { comments } = { comments: [] }, isLoading } = useGetTaskCommentsQuery(params.uuid!);
 
-	if (!data?.comments) {
-		return {
-			comments: [],
-			isLoading,
-		};
-	}
+	const commentsData = useMemo(() => {
+		if (!comments) return [];
 
-	const comments = data.comments.map((item) => {
-		return {
-			id: item.id,
-			text: item.text,
-			user: {
-				avatar: {
-					color: getAvatarColor(item.author.id),
-					initials: item.author.name.substring(0, 2),
+		return comments.map((item) => {
+			return {
+				id: item.id,
+				text: item.text,
+				user: {
+					avatar: {
+						color: getAvatarColor(item.author.id),
+						initials: item.author.name.substring(0, 2),
+					},
+					name: `${item.author.name} ${item.author.name}`,
+					userUuid: item.author.id,
 				},
-				name: `${item.author.name} ${item.author.name}`,
-				userUuid: item.author.id,
-			},
-			commentDate: `${format(item.createdAt, DATE_FORMAT)} в ${format(item.createdAt, TIME_FORMAT)}`,
-			...(item.updatedAt
-				? {
-						commentEditedTime: `Изменено ${format(item.updatedAt, DATE_FORMAT)} в ${format(item.updatedAt, TIME_FORMAT)}`,
-					}
-				: {}),
-		};
-	});
+				commentDate: `${format(item.createdAt, DATE_FORMAT)} в ${format(item.createdAt, TIME_FORMAT)}`,
+				...(item.updatedAt
+					? {
+							commentEditedTime: `Изменено ${format(item.updatedAt, DATE_FORMAT)} в ${format(item.updatedAt, TIME_FORMAT)}`,
+						}
+					: {}),
+			};
+		});
+	}, [comments]);
 
 	return {
-		comments,
+		comments: commentsData,
 		isLoading,
 	};
 };
@@ -129,7 +129,7 @@ export const useTimeLogs = (uuid?: string) => {
 	return { logs, isLoading };
 };
 
-export const useTaskPayload = () => {
+export const useChartData = () => {
 	const params = useParams();
 
 	const { logs, isLoading } = useTimeLogs(params.uuid);

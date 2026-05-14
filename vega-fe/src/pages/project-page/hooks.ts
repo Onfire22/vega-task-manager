@@ -12,22 +12,24 @@ import { useParams } from 'react-router-dom';
 export const useProjectDictionaries = () => {
 	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(['PROJECT_STATUS', 'ROLE_TYPE']);
 
-	if (!dictionariesOptions) return { projectStatusOptions: [], roleTypeOptions: [], isDictionariesLoading };
+	const options = useMemo(() => {
+		if (!dictionariesOptions) return { projectStatus: [], roleType: [] };
 
-	const options = typedEntries(dictionariesOptions).reduce(
-		(acc, [key, value]) => {
-			const color = key === 'roleType' ? ROLES_COLORS : STATUSES;
-			acc[key] = value.map((item: IDictionary) => {
-				return {
-					...item,
-					color: color[item.key as keyof typeof color],
-				};
-			});
+		return typedEntries(dictionariesOptions).reduce(
+			(acc, [key, value]) => {
+				const color = key === 'roleType' ? ROLES_COLORS : STATUSES;
+				acc[key] = value.map((item: IDictionary) => {
+					return {
+						...item,
+						color: color[item.key as keyof typeof color],
+					};
+				});
 
-			return acc;
-		},
-		{} as Record<keyof typeof dictionariesOptions, Array<IDictionaryWithColor>>,
-	);
+				return acc;
+			},
+			{} as Record<keyof typeof dictionariesOptions, Array<IDictionaryWithColor>>,
+		);
+	}, [dictionariesOptions]);
 
 	return {
 		projectStatusOptions: options.projectStatus ?? [],
