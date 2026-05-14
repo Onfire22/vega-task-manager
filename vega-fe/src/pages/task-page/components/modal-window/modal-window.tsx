@@ -18,7 +18,7 @@ const ModalWindow = () => {
 	const dispatch = useAppDispatch();
 	const params = useParams();
 
-	const { task } = useTaskData(params.uuid);
+	const { task } = useTaskData();
 	const [updateTaskEstimate] = useUpdateTaskEstimateMutation();
 	const [createTaskLog] = useCreateTaskLogMutation();
 
