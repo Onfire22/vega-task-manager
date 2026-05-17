@@ -1,28 +1,23 @@
 import React from 'react';
-import { BLUE_COLOR, RED_COLOR, TABS, TEAL_COLOR } from '../../constants.ts';
-import { ArrowBigRight, Paperclip, Plus } from 'lucide-react';
-import type { IChartData, ITask, TField, TModalType, TOption, TTaskFields } from '../../types.ts';
+import { TABS } from '../../constants.ts';
+import { ArrowBigRight, Paperclip } from 'lucide-react';
+import type { ITask, TField, TModalType, TOption, TTaskFields } from '../../types.ts';
 import { Link } from 'react-router-dom';
 import { CustomBadge } from '@/components/common/ui/custom-badge.tsx';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
-import { CustomPopover } from '@/components/common/shared/custom-popover.tsx';
-import { CustomProgress } from '@/components/common/ui/custom-progress.tsx';
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 import { MarkdownEditor } from '@/components/common/forms/markdown-editor.tsx';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
-import { CustomChart } from '@/components/common/ui/custom-chart.tsx';
-import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
+import { TaskEstimate } from '@/pages/task-page/components/task-estimate/task-estimate.tsx';
+import { TaskPersonnel } from '@/pages/task-page/components/task-personnel/task-personnel.tsx';
 
 interface IProps {
 	task: ITask | null;
-	currentUserId?: string;
 	activeTab: string;
-	searchValue: string;
-	isUsersLoading: boolean;
 	field: TField;
 	onSetFieldToEdit: (fieldName: TTaskFields, value: string | null) => void;
 	onCancelChanges: () => void;
@@ -33,11 +28,8 @@ interface IProps {
 		(e: React.ChangeEvent<HTMLTextAreaElement>, fieldName: TTaskFields): void;
 	};
 	options: { taskType: Array<TOption>; taskPriority: Array<TOption>; taskStatus: Array<TOption> };
-	usersListOptions: Array<{ label: string; value: string }>;
 	onSetActiveTab: (value: string) => void;
 	component: React.ComponentType;
-	chartData: Array<IChartData> | null;
-	onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TaskView: React.FC<IProps> = ({
@@ -48,15 +40,9 @@ const TaskView: React.FC<IProps> = ({
 	options,
 	onCancelChanges,
 	onModalShown,
-	usersListOptions,
 	onUpdateTask,
-	currentUserId,
 	onSetActiveTab,
 	activeTab,
-	chartData,
-	onSearchChange,
-	searchValue,
-	isUsersLoading,
 	component: Component,
 }) => {
 	if (!task) return null;
@@ -235,57 +221,7 @@ const TaskView: React.FC<IProps> = ({
 				</div>
 			</div>
 			<aside className="w-[40%] min-h-[calc(100vh-55px)] border-l">
-				<div className="border-b">
-					<div className="p-3.75">
-						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Описание</div>
-						<div className="flex items-center justify-between">
-							<div className="text-[12px]">Автор</div>
-							<div className="text-[14px]">{task.reporter}</div>
-						</div>
-						<div className="flex items-center justify-between">
-							<div className="text-[12px]">Исполнитель</div>
-							<div className="text-[14px]">
-								{task.assignee ? (
-									<span>{task.assignee}</span>
-								) : (
-									<a
-										className="link-styled"
-										onClick={() => onUpdateTask('assigneeUuid', currentUserId!)}
-									>
-										+ назначить меня
-									</a>
-								)}
-							</div>
-						</div>
-						<div className="flex items-center justify-between">
-							<div className="text-[12px]" />
-							<div className="text-[14px]">
-								<CustomPopover trigger={<a className="link-styled">+ назначить</a>}>
-									<CustomInput
-										placeholder="Поиск"
-										type="text"
-										value={searchValue}
-										onChange={onSearchChange}
-									/>
-									{isUsersLoading && <CustomLoader />}
-									<ul className="mt-2.5">
-										{usersListOptions.map((user) => {
-											return (
-												<li
-													className="cursor-pointer text-[14px] p-1.25 hover:bg-secondary rounded-[5px]"
-													key={user.value}
-													onClick={() => onUpdateTask('assigneeUuid', user.value)}
-												>
-													{user.label}
-												</li>
-											);
-										})}
-									</ul>
-								</CustomPopover>
-							</div>
-						</div>
-					</div>
-				</div>
+				<TaskPersonnel />
 				<div className="border-b">
 					<div className="p-3.75">
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Даты</div>
@@ -299,51 +235,7 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				</div>
-				<div className="border-b">
-					<div className="p-3.75">
-						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Учёт времени</div>
-						{(task.estimateTime || task.totalLoggedTime) && (
-							<div className="flex flex-col gap-2.5 mb-3.75">
-								<CustomProgress
-									progress={task.estimateTimePercents || 0}
-									label="Оценка"
-									percents={task.estimateTime}
-									color={BLUE_COLOR}
-									size="h-2"
-								/>
-								<CustomProgress
-									progress={task.totalLoggedTimePercents || 0}
-									label="Потрачено"
-									percents={task.totalLoggedTime}
-									size="h-2"
-								/>
-								<CustomProgress
-									progress={task.remainingTimePercents || 0}
-									label="Осталось"
-									percents={task.remainingTime}
-									color={(task?.remainingTimePercents ?? 0) >= 50 ? TEAL_COLOR : RED_COLOR}
-									size="h-2"
-								/>
-							</div>
-						)}
-						<div className="w-full flex justify-center">
-							<Button onClick={() => onModalShown('estimate')}>
-								<Plus size={18} />
-								{task.estimateTime ? <span>Записать время</span> : <span>Оценить задачу</span>}
-							</Button>
-						</div>
-					</div>
-				</div>
-				{chartData && (
-					<div className="border-b">
-						<div className="p-3.75">
-							<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Вклад в задачу</div>
-							<div className="flex items-center justify-center">
-								<CustomChart data={chartData} />
-							</div>
-						</div>
-					</div>
-				)}
+				<TaskEstimate />
 				<div className="border-b">
 					<div className="p-3.75">
 						<div className="text-muted-foreground uppercase text-[11px] mb-2.5">Проект</div>

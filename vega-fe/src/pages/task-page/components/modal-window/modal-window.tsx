@@ -3,7 +3,7 @@ import { LOG_TIME_INITIAL_VALUES } from '../../constants.ts';
 import { LogTimeFormValidation } from '../../validation.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { getModalTypeSelector } from '../../selectors.ts';
-import { useTaskData } from '../../hooks.ts';
+import { useChartData } from '../../hooks.ts';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import type { TFormOptions } from '@/pages/task-page/types.ts';
@@ -18,7 +18,7 @@ const ModalWindow = () => {
 	const dispatch = useAppDispatch();
 	const params = useParams();
 
-	const { task } = useTaskData();
+	const { chartData } = useChartData();
 	const [updateTaskEstimate] = useUpdateTaskEstimateMutation();
 	const [createTaskLog] = useCreateTaskLogMutation();
 
@@ -32,7 +32,7 @@ const ModalWindow = () => {
 	const handleSubmitForm = form.handleSubmit(async (values) => {
 		if (!values.estimate) return;
 		try {
-			if (task?.estimateTime) {
+			if (chartData?.estimateTime) {
 				await createTaskLog({ ...values, taskUuid: params.uuid! }).unwrap();
 			} else {
 				await updateTaskEstimate({ value: values.estimate, uuid: params.uuid! }).unwrap();
@@ -40,7 +40,7 @@ const ModalWindow = () => {
 			}
 
 			dispatch(setModalType(null));
-			toast.success(task?.estimateTime ? 'Время успешно записано' : 'Задача успешно оценена');
+			toast.success(chartData?.estimateTime ? 'Время успешно записано' : 'Задача успешно оценена');
 		} catch (e: unknown) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');
@@ -52,15 +52,15 @@ const ModalWindow = () => {
 	};
 
 	useEffect(() => {
-		if (task?.estimateTime) {
-			form.setValue('estimate', task?.estimateTime);
+		if (chartData?.estimateTime) {
+			form.setValue('estimate', chartData?.estimateTime);
 		}
-	}, [task?.estimateTime, form]);
+	}, [chartData?.estimateTime, form]);
 
 	return (
 		<ModalWindowView
 			form={form}
-			estimateTime={task?.estimateTime}
+			estimateTime={chartData?.estimateTime}
 			modalType={modalType}
 			onSubmit={handleSubmitForm}
 			onLogWorkModalShown={handleLogWorkModalShown}

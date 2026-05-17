@@ -1,8 +1,15 @@
 import { format } from 'date-fns';
-import { BASE_DICTIONARIES_META, COLORS, DATE_FORMAT, DATE_TIME_FORMAT, TIME_FORMAT } from './constants.ts';
+import {
+	BASE_DICTIONARIES_META,
+	COLORS,
+	DATE_FORMAT,
+	DATE_TIME_FORMAT,
+	INITIAL_FIELD_VALUES,
+	TIME_FORMAT,
+} from './constants.ts';
 import { useGetTaskCommentsQuery } from '@/api/comments/comments.api.ts';
 import { getAvatarColor, typedEntries, useDebounce } from '@/app/utils.ts';
-import type { ITask, TDictionariesWithColors, TTPayload } from '@/pages/task-page/types.ts';
+import type { ITask, TDictionariesWithColors, TTaskFields, TTPayload } from '@/pages/task-page/types.ts';
 import { useGetTaskLogsQuery } from '@/api/task-logs/task-logs.api.ts';
 import { transformSecondsToTime } from '@/pages/task-page/utils.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
@@ -10,38 +17,30 @@ import { useTask } from '@/api/tasks/tasks.hooks.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
 import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useUpdateTaskMutation } from '@/api/tasks/tasks.api.ts';
+import { setTaskField } from '@/pages/task-page/slice.ts';
+import { toast } from 'sonner';
+import { useAppDispatch } from '@/store/hooks.ts';
 
 export const useTaskData = () => {
 	const params = useParams();
 
 	const { task, isTaskLoading } = useTask(params.uuid);
 
-	const taskData = useMemo(() => {
-		if (!task) return null;
+	if (!task) return { task: null, isTaskLoading };
 
-		const {
-			logInfo: { remainingTime, estimateTime, totalLoggedTime },
-			mrLinks,
-			buildLinks,
-		} = task;
+	const { mrLinks, buildLinks } = task;
 
-		return {
-			...task,
-			buildLinks: buildLinks ? buildLinks.split('\n') : undefined,
-			mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
-			reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
-			assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
-			assigneeUuid: task.assignee ? task.assignee.id : undefined,
-			remainingTime: remainingTime?.time,
-			estimateTime: estimateTime?.time,
-			totalLoggedTime: totalLoggedTime?.time,
-			estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
-			remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
-			totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
-			updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
-			createdAt: format(new Date(task.createdAt), DATE_FORMAT),
-		};
-	}, [task]);
+	const taskData = {
+		...task,
+		buildLinks: buildLinks ? buildLinks.split('\n') : undefined,
+		mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
+		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
+		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
+		assigneeUuid: task.assignee ? task.assignee.id : undefined,
+		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
+		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
+	};
 
 	return {
 		task: taskData,
@@ -133,32 +132,52 @@ export const useChartData = () => {
 	const params = useParams();
 
 	const { logs, isLoading } = useTimeLogs(params.uuid);
+	const { task, isTaskLoading } = useTaskData();
 
-	if (!logs.length) return { chartData: null, isLoading };
+	const chartData = useMemo(() => {
+		if (!logs.length || !task) return null;
 
-	const data = logs.reduce<TTPayload>((acc, item) => {
-		if (!acc[item.user.id]) {
-			acc[item.user.id] = {
-				value: item.loggedTimeInSecs,
-				name: item.user.name,
+		const {
+			logInfo: { remainingTime, estimateTime, totalLoggedTime },
+		} = task;
+
+		const data = logs.reduce<TTPayload>((acc, item) => {
+			if (!acc[item.user.id]) {
+				acc[item.user.id] = {
+					value: item.loggedTimeInSecs,
+					name: item.user.name,
+				};
+			} else {
+				acc[item.user.id].value += item.loggedTimeInSecs;
+			}
+
+			return acc;
+		}, {});
+
+		const logData = Object.values(data).map((log, index) => {
+			return {
+				value: log.value,
+				name: log.name,
+				custom: transformSecondsToTime(log.value),
+				fill: `var(--chart-${index})`,
 			};
-		} else {
-			acc[item.user.id].value += item.loggedTimeInSecs;
-		}
+		});
 
-		return acc;
-	}, {});
-
-	const chartData = Object.values(data).map((log, index) => {
 		return {
-			value: log.value,
-			name: log.name,
-			custom: transformSecondsToTime(log.value),
-			fill: `var(--chart-${index})`,
+			logData,
+			remainingTime: remainingTime?.time,
+			estimateTime: estimateTime?.time,
+			totalLoggedTime: totalLoggedTime?.time,
+			estimateTimePercents: estimateTime ? estimateTime.timeInPercents : null,
+			remainingTimePercents: remainingTime ? remainingTime.timeInPercents : null,
+			totalLoggedTimePercents: totalLoggedTime ? totalLoggedTime.timeInPercents : null,
 		};
-	});
+	}, [logs, task]);
 
-	return { chartData, isLoading };
+	return {
+		chartData,
+		isLoading: isLoading || isTaskLoading,
+	};
 };
 
 export const useUsersWithFilters = (task: ITask | null, searchValue: string) => {
@@ -175,4 +194,23 @@ export const useUsersWithFilters = (task: ITask | null, searchValue: string) => 
 	const { usersListOptions, isUsersLoading } = useUsersOptions(meta);
 
 	return { usersListOptions, isUsersLoading };
+};
+
+export const useUpdateTask = () => {
+	const params = useParams();
+	const dispatch = useAppDispatch();
+
+	const [updateTask] = useUpdateTaskMutation();
+
+	return async (fieldName: TTaskFields | '', value: string) => {
+		if (!params.uuid || !fieldName) return;
+
+		try {
+			await updateTask({ fields: { [fieldName]: value }, uuid: params.uuid }).unwrap();
+			dispatch(setTaskField(INITIAL_FIELD_VALUES));
+		} catch (e) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
+	};
 };

@@ -11,6 +11,7 @@ const taskLogsApi = baseApi.injectEndpoints({
 				method: METHODS.get,
 			}),
 			extraOptions: { schema: GetTaskLogsResponseSchema },
+			providesTags: ['TaskLogs'],
 		}),
 		createTaskLog: builder.mutation({
 			query: (body) => ({
@@ -18,7 +19,7 @@ const taskLogsApi = baseApi.injectEndpoints({
 				method: METHODS.post,
 				body,
 			}),
-			invalidatesTags: ['Task'],
+			invalidatesTags: ['Task', 'TaskLogs'],
 		}),
 	}),
 });
