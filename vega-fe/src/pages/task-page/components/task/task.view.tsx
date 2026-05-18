@@ -221,7 +221,6 @@ const TaskView: React.FC<IProps> = ({
 					<Component />
 				</div>
 			</div>
-			{/*<aside className="w-[40%] min-h-[calc(100vh-55px)] border-l">*/}
 			<CustomSidebar>
 				<TaskPersonnel />
 				<div className="border-b">
@@ -257,7 +256,6 @@ const TaskView: React.FC<IProps> = ({
 					</div>
 				</div>
 			</CustomSidebar>
-			{/*</aside>*/}
 		</div>
 	);
 };
