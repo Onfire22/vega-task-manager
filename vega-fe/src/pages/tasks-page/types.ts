@@ -20,6 +20,18 @@ export type TFilter = 'taskPriorityUuid' | 'taskStatusUuid' | 'taskStackUuid';
 export interface IExpDictData {
 	id: string;
 	label: string;
+	key: string;
+}
+
+interface ITimeEntry {
+	time: string;
+	timeInPercents: number;
+}
+
+interface ILogInfo {
+	estimateTime?: ITimeEntry;
+	remainingTime?: ITimeEntry;
+	totalLoggedTime?: ITimeEntry;
 }
 
 export interface ITask {
@@ -27,10 +39,14 @@ export interface ITask {
 	code: string;
 	title: string;
 	description: string;
+	assignee: string | null;
+	reporter: string;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;
 	taskStatus: IExpDictData;
 	createdAt: string;
+	updatedAt: string;
+	logInfo: ILogInfo;
 }
 
 export type TTaskList = Array<ITask>;

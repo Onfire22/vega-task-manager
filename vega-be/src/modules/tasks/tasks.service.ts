@@ -106,8 +106,15 @@ const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
 						updatedAt: true,
 					},
 				},
+				reporter: {
+					select: USER_SELECT,
+				},
+				assignee: {
+					select: USER_SELECT,
+				},
 				estimateTime: true,
 				createdAt: true,
+				updatedAt: true,
 			},
 		});
 

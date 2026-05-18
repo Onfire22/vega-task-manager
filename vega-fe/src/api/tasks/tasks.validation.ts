@@ -97,6 +97,19 @@ export const TasksResponseSchema = z.object({
 				key: z.string(),
 			}),
 			createdAt: z.string(),
+			updatedAt: z.string(),
+			reporter: z.object({
+				id: z.string(),
+				name: z.string(),
+				secondName: z.string(),
+			}),
+			assignee: z
+				.object({
+					id: z.string(),
+					name: z.string(),
+					secondName: z.string(),
+				})
+				.nullable(),
 			logInfo: z.object({
 				estimateTime: z
 					.object({

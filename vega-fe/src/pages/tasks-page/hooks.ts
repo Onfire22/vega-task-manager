@@ -24,9 +24,12 @@ export const useUserTasks = () => {
 	const tasks = data.tasks.map((item) => {
 		return {
 			...item,
+			assignee: item.assignee ? `${item.assignee.name} ${item.assignee.secondName}` : null,
+			reporter: `${item.reporter?.name} ${item.reporter?.secondName}`,
 			estimatedTime: item.logInfo?.estimateTime?.time || '-',
 			loggedTime: item.logInfo?.totalLoggedTime?.time || '-',
 			createdAt: format(item.createdAt, DATE_FORMAT),
+			updatedAt: format(item.updatedAt, DATE_FORMAT),
 		};
 	});
 
@@ -55,6 +58,7 @@ export const useKanbanTasks = () => {
 						return {
 							id: item.id,
 							label: item.label,
+							key: item.key,
 							tasks: userTasks.filter((task) => task.taskStatus.id === item.id),
 						};
 					}),

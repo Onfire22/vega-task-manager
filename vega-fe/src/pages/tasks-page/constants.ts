@@ -26,3 +26,11 @@ export const TABS = [
 		value: 'kanban',
 	},
 ];
+
+export const LABELS = {
+	fe: 'text-blue',
+	be: 'text-teal',
+	fs: 'text-violet',
+	qa: 'text-amber',
+	an: 'text-danger',
+};
