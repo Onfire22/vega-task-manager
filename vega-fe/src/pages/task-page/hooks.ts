@@ -62,12 +62,9 @@ export const useComments = () => {
 				text: item.text,
 				user: {
 					avatar: {
-						...(item.author.avatarUrl
-							? { avatarUrl: item.author.avatarUrl }
-							: {
-									color: getAvatarColor(item.author.id),
-									initials: `${item.author.name.substring(0, 1)} ${item.author.secondName.substring(0, 1)}`,
-								}),
+						avatarUrl: item.author.avatarUrl,
+						color: getAvatarColor(item.author.id),
+						initials: `${item.author.name.substring(0, 1)} ${item.author.secondName.substring(0, 1)}`,
 					},
 					name: `${item.author.name} ${item.author.secondName}`,
 					userUuid: item.author.id,
