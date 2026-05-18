@@ -86,6 +86,7 @@ const getTaskLogs = async (taskUuid: string) => {
 					name: true,
 					secondName: true,
 					userName: true,
+					avatarUrl: true,
 				},
 			},
 		},

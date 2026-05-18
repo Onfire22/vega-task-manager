@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { getAvatarColor } from '@/app/utils.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
-import { BASE_URL } from '@/api/constants.ts';
 import type { IUserData } from '@/pages/user-profile-page/types.ts';
 
 export const usePersonalData = () => {
@@ -39,7 +38,7 @@ export const useUserInfo = () => {
 	};
 
 	if (currentData?.currentUser?.avatarUrl) {
-		userData.avatarUrl = `${BASE_URL}${currentData?.currentUser?.avatarUrl}`;
+		userData.avatarUrl = currentData?.currentUser?.avatarUrl;
 	} else {
 		userData.initials =
 			`${currentData?.currentUser.name.slice(0, 1)}. ${currentData?.currentUser.userName.slice(0, 1)}.`.toUpperCase();

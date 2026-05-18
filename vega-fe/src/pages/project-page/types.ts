@@ -87,5 +87,6 @@ export interface IProjectUserSelect {
 	userInitials: string;
 	userName: string;
 	userSpecialisation: string;
+	avatarUrl: string | null;
 	userRole: IUserRole;
 }

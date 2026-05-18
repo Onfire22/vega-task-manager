@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import { CHANNEL_HEADER_VISIBILITY, DATE_FORMAT, TIME_FORMAT } from '@/pages/chat/constants.ts';
 import { getAvatarColor, useDebounce } from '@/app/utils.ts';
 import { getChannelWithNormalizeUsers } from '@/pages/chat/utils.ts';
-import { BASE_URL } from '@/api/constants.ts';
 
 export const useUsersWithFilters = (searchValue?: string) => {
 	const meta = {
@@ -70,7 +69,7 @@ export const useMessagesData = (messagesData?: Array<IMessage>) => {
 					id: message.author.id,
 					name: `${message.author.name} ${message.author.secondName}`,
 					...(message.author.avatarUrl
-						? { avatarUrl: `${BASE_URL}${message.author.avatarUrl}` }
+						? { avatarUrl: message.author.avatarUrl }
 						: {
 								avatar: {
 									initials: `${message.author.name[0]} ${message.author.secondName[0]}`,

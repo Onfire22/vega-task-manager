@@ -15,6 +15,7 @@ export const CommentsResponseSchema = z.object({
 				id: z.string(),
 				name: z.string(),
 				secondName: z.string(),
+				avatarUrl: z.string().nullable(),
 			}),
 		}),
 	),

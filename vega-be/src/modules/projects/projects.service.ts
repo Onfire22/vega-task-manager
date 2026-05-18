@@ -226,6 +226,7 @@ const getProject = async (projectUuid: string, userId: string) => {
 							id: true,
 							name: true,
 							secondName: true,
+							avatarUrl: true,
 							userSpecialisation: {
 								select: { label: true },
 							},

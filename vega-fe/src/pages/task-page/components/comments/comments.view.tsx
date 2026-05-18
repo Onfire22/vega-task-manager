@@ -3,6 +3,7 @@ import React from 'react';
 import { CornerRightUp, Pencil, Trash2, XIcon } from 'lucide-react';
 import { CustomTextarea } from '@/components/common/forms/custom-textarea.tsx';
 import { Button } from '@/components/ui/button.tsx';
+import { CustomAvatar } from '@/components/common/shared/custom-avatar.tsx';
 
 interface IProps {
 	value: string;
@@ -55,9 +56,12 @@ const CommentsView: React.FC<IProps> = ({
 						<li className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary" key={item.id}>
 							<div
 								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
-								style={{ backgroundColor: item.user.avatar.color }}
+								style={{ backgroundColor: !item.user.avatar.avatarUrl ? item.user.avatar.color : '' }}
 							>
-								{item.user.avatar.initials}
+								<CustomAvatar
+									initials={item.user.avatar.initials}
+									avatarUrl={item.user.avatar.avatarUrl}
+								/>
 							</div>
 							<div>
 								<div className="flex items-center gap-2.5">

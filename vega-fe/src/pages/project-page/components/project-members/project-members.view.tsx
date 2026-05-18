@@ -5,6 +5,7 @@ import { ROLES_COLORS, VIEWER_ROLE_UUID } from '@/pages/project-page/constants.t
 import { CustomSelect } from '@/components/common/forms/custom-select.tsx';
 import React from 'react';
 import type { IDictionaryWithColor, IProjectUserSelect } from '@/pages/project-page/types.ts';
+import { CustomAvatar } from '@/components/common/shared/custom-avatar.tsx';
 
 interface IProps {
 	searchValue: string;
@@ -79,9 +80,9 @@ const ProjectMembersView: React.FC<IProps> = ({
 							<li className="p-1.25 text-sm flex items-center gap-2.5" key={user.id}>
 								<div
 									className="w-7.5 h-6.25 text-[11px] text-white flex items-center justify-center rounded-full"
-									style={{ backgroundColor: user.color }}
+									style={{ backgroundColor: user.avatarUrl ? '' : user.color }}
 								>
-									{user.userInitials}
+									<CustomAvatar initials={user.userInitials} avatarUrl={user.avatarUrl} />
 								</div>
 								<div className="w-full text-[11px] text-muted-foreground">
 									<div className="flex items-center justify-between gap-1">

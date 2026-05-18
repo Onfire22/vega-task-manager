@@ -15,6 +15,7 @@ const getComments = async (taskUuid: string) => {
 					id: true,
 					name: true,
 					secondName: true,
+					avatarUrl: true,
 				},
 			},
 		},

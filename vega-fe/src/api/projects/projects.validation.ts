@@ -58,6 +58,7 @@ export const ProjectResponseSchema = z.object({
 				id: z.string(),
 				name: z.string(),
 				secondName: z.string(),
+				avatarUrl: z.string().nullable(),
 				userSpecialisation: z.object({
 					label: z.string(),
 				}),

@@ -13,6 +13,7 @@ export const GetTaskLogsResponseSchema = z.object({
 				name: z.string(),
 				secondName: z.string(),
 				userName: z.string(),
+				avatarUrl: z.string().nullable(),
 			}),
 			loggedTimeInSecs: z.number().int(),
 		}),

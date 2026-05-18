@@ -1,5 +1,6 @@
 import type { ITimeLog } from '../../types.ts';
 import React from 'react';
+import { CustomAvatar } from '@/components/common/shared/custom-avatar.tsx';
 
 interface IProps {
 	logs: Array<ITimeLog>;
@@ -16,7 +17,10 @@ const TaskLogsView: React.FC<IProps> = ({ logs }) => {
 								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
 								style={{ backgroundColor: log.user.avatar.color }}
 							>
-								{log.user.avatar.initials}
+								<CustomAvatar
+									initials={log.user.avatar.initials}
+									avatarUrl={log.user.avatar.avatarUrl}
+								/>
 							</div>
 							<div className="flex flex-col">
 								<span>{log.user.name}</span>

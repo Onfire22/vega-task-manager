@@ -9,6 +9,7 @@ import { ChatInput } from '@/pages/chat/components/chat-input/chat-input.tsx';
 import { cn } from '@/lib/utils.ts';
 import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
 import { BASE_MESSAGE_MENU, PERMITTED_MESSAGE_MENU } from '@/pages/chat/constants.ts';
+import { CustomAvatar } from '@/components/common/shared/custom-avatar.tsx';
 
 interface IProps {
 	isLoading: boolean;
@@ -93,11 +94,10 @@ const ChatView: React.FC<IProps> = ({
 															: message.author.avatarUrl,
 													}}
 												>
-													{message.author.avatarUrl ? (
-														<img src={message.author.avatarUrl} alt="user avatar" />
-													) : (
-														<span>{message?.author?.avatar?.initials}</span>
-													)}
+													<CustomAvatar
+														avatarUrl={message.author.avatarUrl}
+														initials={message?.author?.avatar?.initials}
+													/>
 												</div>
 												<div className="w-full pr-1.25">
 													{message.replyMessage && (

@@ -78,6 +78,7 @@ export const useProjectUsers = () => {
 				userSpecialisation: user.userSpecialisation.label,
 				userInitials: `${user.name[0]} ${user.secondName[0]}`,
 				color: getAvatarColor(user.id),
+				avatarUrl: user.avatarUrl,
 				userRole: {
 					label: user.role.label,
 					key: user.role.key,

@@ -27,6 +27,7 @@ export interface ITimeLog {
 		avatar: {
 			initials: string;
 			color: string;
+			avatarUrl: string | null;
 		};
 	};
 }
@@ -62,6 +63,7 @@ export interface IComment {
 		name: string;
 		userUuid: string;
 		avatar: {
+			avatarUrl: string | null;
 			color: string;
 			initials: string;
 		};

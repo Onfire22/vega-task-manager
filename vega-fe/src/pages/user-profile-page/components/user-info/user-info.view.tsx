@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button.tsx';
 import React from 'react';
 import { Camera } from 'lucide-react';
 import type { IUserData } from '@/pages/user-profile-page/types.ts';
+import { CustomAvatar } from '@/components/common/shared/custom-avatar.tsx';
 
 interface IProps {
 	userData: IUserData;
@@ -33,11 +34,7 @@ const UserInfoView: React.FC<IProps> = ({
 					onMouseEnter={() => onSetIsAvatarUploaderShown(true)}
 					onMouseLeave={() => onSetIsAvatarUploaderShown(false)}
 				>
-					{preview || userData.avatarUrl ? (
-						<img src={preview ?? userData.avatarUrl} alt="user avatar" />
-					) : (
-						<span>{userData.initials}</span>
-					)}
+					<CustomAvatar avatarUrl={preview || userData.avatarUrl} initials={userData.initials} />
 					{isAvatarUploaderShown && (
 						<label className="absolute bg-secondary w-full bottom-0 opacity-80 rounded-full flex items-center justify-center cursor-pointer h-full">
 							<Camera />
