@@ -5,6 +5,7 @@ export type TModalType = 'links' | 'estimate' | null;
 
 export interface IInitialState {
 	modalType: TModalType;
+	taskField: TField;
 }
 
 export type TOption = { description: string | null; key: string; label: string; value: string; color: string };
@@ -47,12 +48,6 @@ export interface ITask {
 			label: string;
 		};
 	};
-	remainingTime?: string;
-	estimateTime?: string;
-	totalLoggedTime?: string;
-	estimateTimePercents: number | null;
-	remainingTimePercents: number | null;
-	totalLoggedTimePercents: number | null;
 	reporter: string;
 	taskPriority: IExpDictData;
 	taskStack: IExpDictData;
@@ -99,14 +94,29 @@ export interface TField {
 
 export type TTPayload = Record<string, { value: number; name: string }>;
 
-export interface IChartData {
+export interface ILogData {
 	value: number;
 	name: string;
 	fill: string;
 	custom?: string;
 }
 
+export interface IChartData {
+	remainingTime?: string;
+	estimateTime?: string;
+	totalLoggedTime?: string;
+	estimateTimePercents: number | null;
+	remainingTimePercents: number | null;
+	totalLoggedTimePercents: number | null;
+	logData: Array<ILogData>;
+}
+
 export interface ILinksForm {
 	mrLinks?: string;
 	buildLinks?: string;
+}
+
+export interface IOption {
+	label: string;
+	value: string;
 }

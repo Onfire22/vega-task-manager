@@ -17,7 +17,7 @@ const LinksModal = () => {
 	const modalType = useAppSelector(getModalTypeSelector());
 
 	const [updateTask] = useUpdateTaskMutation();
-	const { task } = useTaskData(params.uuid);
+	const { task } = useTaskData();
 
 	const form = useForm<ILinksForm>({
 		defaultValues: LINKS_FORM_INITIAL_VALUES,

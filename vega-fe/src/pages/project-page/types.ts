@@ -1,14 +1,17 @@
+export interface IUserRole {
+	label: string;
+	key: string;
+	id: string;
+}
+
 export interface IProjectUser {
 	id: string;
-	userName: string;
-	userSpecialisation: string;
-	userInitials: string;
-	color: string;
-	userRole: {
+	name: string;
+	secondName: string;
+	userSpecialisation: {
 		label: string;
-		key: string;
-		id: string;
 	};
+	role: IUserRole;
 }
 
 export interface ITaskDictionary {
@@ -69,4 +72,20 @@ export interface IUserModalInfo {
 
 export interface IInitialState {
 	modalInfo: IUserModalInfo | null;
+}
+
+export type TActiveFiled = 'deadlineDate' | 'projectStatusUuid';
+
+export interface IField {
+	fieldName: string;
+	value: string | null;
+}
+
+export interface IProjectUserSelect {
+	id: string;
+	color: string;
+	userInitials: string;
+	userName: string;
+	userSpecialisation: string;
+	userRole: IUserRole;
 }

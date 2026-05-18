@@ -86,8 +86,6 @@ const Chat = () => {
 		}, 1000);
 	};
 
-	console.log(messages);
-
 	return (
 		<ChatView
 			messages={messages}

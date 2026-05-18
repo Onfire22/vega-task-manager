@@ -225,7 +225,7 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 
 		const fieldName = Object.keys(taskBody).find((field) => WEBSOCKET_TRIGGERS.includes(field));
 
-		if (userUuid !== taskData?.assignee?.id) {
+		if (taskData?.assignee?.id && userUuid !== taskData?.assignee?.id) {
 			const notification = await tx.notification.create({
 				data: {
 					fromUserUuid: userUuid,

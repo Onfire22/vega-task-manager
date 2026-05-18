@@ -3,11 +3,11 @@ import {
 	useCreateCommentMutation,
 	useDeleteCommentMutation,
 	useEditCommentMutation,
-} from '../../../../api/comments/comments.api.ts';
+} from '@/api/comments/comments.api.ts';
 import { useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useComments } from '../../hooks.ts';
-import { useGetCurrentUserQuery } from '../../../../api/auth/auth.api.ts';
+import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
 import { toast } from 'sonner';
 
 const Comments = () => {
@@ -24,7 +24,7 @@ const Comments = () => {
 	const [editComment] = useEditCommentMutation();
 	const { data } = useGetCurrentUserQuery();
 
-	const { comments } = useComments(params.uuid!);
+	const { comments } = useComments();
 
 	const handleCreateComment = async () => {
 		if (params.uuid) {

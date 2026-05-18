@@ -1,12 +1,11 @@
 import { TasksTableView } from './tasks-table.view.tsx';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useProjectTasks } from '../../hooks.ts';
 
 const TasksTable = () => {
 	const navigate = useNavigate();
-	const params = useParams();
 
-	const { tasks, isProjectLoading } = useProjectTasks(params.uuid);
+	const { tasks, isProjectLoading } = useProjectTasks();
 
 	const handleRowDoubleClick = (uuid: string) => {
 		navigate(`/task/${uuid}`);

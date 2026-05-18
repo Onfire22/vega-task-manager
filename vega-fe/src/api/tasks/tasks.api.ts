@@ -63,7 +63,7 @@ const tasksApi = baseApi.injectEndpoints({
 				method: METHODS.post,
 				body: data,
 			}),
-			invalidatesTags: ['Task'],
+			invalidatesTags: ['TaskLogs'],
 		}),
 	}),
 });

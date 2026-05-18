@@ -3,30 +3,33 @@ import { DATE_FORMAT, ROLES_COLORS, STATUSES } from './constants.ts';
 import { useMemo } from 'react';
 import { useUpdateProjectMutation } from '@/api/projects/projects.api.ts';
 import { getAvatarColor, typedEntries, useDebounce } from '@/app/utils.ts';
-import type { IDictionary, IDictionaryWithColor, IProjectUser } from '@/pages/project-page/types.ts';
+import type { IDictionary, IDictionaryWithColor, IProjectUserSelect } from '@/pages/project-page/types.ts';
 import { useDictionariesOptions } from '@/api/dictionaries/dictionaries.hooks.ts';
 import { useProject } from '@/api/projects/projects.hooks.ts';
 import { useUsersOptions } from '@/api/users/users.hooks.ts';
+import { useParams } from 'react-router-dom';
 
 export const useProjectDictionaries = () => {
 	const { dictionariesOptions, isDictionariesLoading } = useDictionariesOptions(['PROJECT_STATUS', 'ROLE_TYPE']);
 
-	if (!dictionariesOptions) return { projectStatusOptions: [], roleTypeOptions: [], isDictionariesLoading };
+	const options = useMemo(() => {
+		if (!dictionariesOptions) return { projectStatus: [], roleType: [] };
 
-	const options = typedEntries(dictionariesOptions).reduce(
-		(acc, [key, value]) => {
-			const color = key === 'roleType' ? ROLES_COLORS : STATUSES;
-			acc[key] = value.map((item: IDictionary) => {
-				return {
-					...item,
-					color: color[item.key as keyof typeof color],
-				};
-			});
+		return typedEntries(dictionariesOptions).reduce(
+			(acc, [key, value]) => {
+				const color = key === 'roleType' ? ROLES_COLORS : STATUSES;
+				acc[key] = value.map((item: IDictionary) => {
+					return {
+						...item,
+						color: color[item.key as keyof typeof color],
+					};
+				});
 
-			return acc;
-		},
-		{} as Record<keyof typeof dictionariesOptions, Array<IDictionaryWithColor>>,
-	);
+				return acc;
+			},
+			{} as Record<keyof typeof dictionariesOptions, Array<IDictionaryWithColor>>,
+		);
+	}, [dictionariesOptions]);
 
 	return {
 		projectStatusOptions: options.projectStatus ?? [],
@@ -35,10 +38,38 @@ export const useProjectDictionaries = () => {
 	};
 };
 
-export const useProjectData = (uuid?: string) => {
-	const { project, isProjectLoading } = useProject(uuid);
+export const useProjectData = () => {
+	const params = useParams();
 
-	const userList = project?.users.reduce<{ owner: Array<IProjectUser>; users: Array<IProjectUser> }>(
+	const { project, isProjectLoading } = useProject(params.uuid);
+
+	const projectData = useMemo(() => {
+		if (!project) return null;
+
+		return {
+			...project,
+			avatar: {
+				letters: project.code.substring(1, 3),
+				color: getAvatarColor(project.id),
+			},
+			createdAt: project?.createdAt ? format(project.createdAt, DATE_FORMAT) : '-',
+			deadlineDate: project?.deadlineDate ? format(project.deadlineDate, DATE_FORMAT) : null,
+		};
+	}, [project]);
+
+	return {
+		projectData,
+		isProjectLoading,
+	};
+};
+
+export const useProjectUsers = () => {
+	const { projectData, isProjectLoading } = useProjectData();
+
+	const projectUsers = projectData?.users.reduce<{
+		owner: Array<IProjectUserSelect>;
+		users: Array<IProjectUserSelect>;
+	}>(
 		(acc, user) => {
 			const accKey = user.role.key === 'owner' ? 'owner' : 'users';
 			acc[accKey].push({
@@ -59,22 +90,17 @@ export const useProjectData = (uuid?: string) => {
 		{ owner: [], users: [] },
 	);
 
-	const projectData = project
-		? {
-				...project,
-				users: [...(userList?.owner ?? []), ...(userList?.users ?? [])],
-				avatar: {
-					letters: project.code.substring(1, 3),
-					color: getAvatarColor(project.id),
-				},
-				createdAt: project?.createdAt ? format(project.createdAt, DATE_FORMAT) : '-',
-				deadlineDate: project?.deadlineDate ? format(project.deadlineDate, DATE_FORMAT) : null,
-			}
-		: null;
+	const usersList = [...(projectUsers?.owner ?? []), ...(projectUsers?.users ?? [])];
 
-	const projectTasks = project?.tasks ?? null;
+	return { usersList, canEdit: projectData?.canEdit, isProjectLoading };
+};
+
+export const useProjectProgress = () => {
+	const { projectData } = useProjectData();
 
 	const projectProgress = useMemo(() => {
+		const projectTasks = projectData?.tasks ?? null;
+
 		if (!projectTasks) return 0;
 
 		const totalTasks = projectTasks.length;
@@ -82,20 +108,16 @@ export const useProjectData = (uuid?: string) => {
 		const completedTasks = projectTasks.filter((task) => task.taskStatus.key === 'done').length;
 
 		return (completedTasks / totalTasks) * 100;
-	}, [projectTasks]);
+	}, [projectData]);
 
-	return {
-		projectProgress,
-		project: projectData,
-		isProjectLoading: isProjectLoading,
-	};
+	return { projectProgress };
 };
 
-export const useProjectTasks = (uuid?: string) => {
-	const { project, isProjectLoading } = useProject(uuid);
+export const useProjectTasks = () => {
+	const { projectData, isProjectLoading } = useProjectData();
 
-	const tasks = project
-		? project.tasks.map((item) => {
+	const tasks = projectData
+		? projectData.tasks.map((item) => {
 				return {
 					...item,
 					createdAt: format(item.createdAt, DATE_FORMAT),
@@ -109,12 +131,14 @@ export const useProjectTasks = (uuid?: string) => {
 	};
 };
 
-export const useUpdateProject = (uuid?: string) => {
+export const useUpdateProject = () => {
+	const params = useParams();
+
 	const [updateProject, { isLoading, isSuccess }] = useUpdateProjectMutation();
 
 	const handleUpdateProject = (field: 'deadlineDate' | 'projectStatusUuid', value: string | Date) => {
-		if (!uuid) return;
-		updateProject({ uuid, field, value });
+		if (!params.uuid) return;
+		updateProject({ uuid: params.uuid, field, value });
 	};
 
 	return {
@@ -124,12 +148,14 @@ export const useUpdateProject = (uuid?: string) => {
 	};
 };
 
-export const useUsersWithFilters = (searchValue: string, projectUuid?: string) => {
+export const useUsersWithFilters = (searchValue: string) => {
+	const params = useParams();
+
 	const debouncedValue = useDebounce(searchValue, 1000);
 
 	const meta = {
 		filters: {
-			...(projectUuid ? { withOutProject: projectUuid } : {}),
+			...(params.uuid ? { withOutProject: params.uuid } : {}),
 			...(debouncedValue ? { search: debouncedValue } : {}),
 		},
 	};
