@@ -5,6 +5,7 @@ import { TasksTable } from '../tasks-table/tasks-table.tsx';
 import { CustomTabs } from '@/components/common/ui/custom-tabs.tsx';
 import { ProjectSettings } from '@/pages/project-page/components/project-settings/project-settings.tsx';
 import { ProjectMembers } from '@/pages/project-page/components/project-members/project-members.tsx';
+import { CustomSidebar } from '@/components/common/shared/custom-sidebar.tsx';
 
 interface IProps {
 	project: IProject | null;
@@ -41,11 +42,13 @@ const ProjectView: React.FC<IProps> = ({ project, activeTab, onTabClick }) => {
 					{activeTab === 'tasks' && <TasksTable />}
 				</div>
 			</div>
-			<aside className="w-[30%] min-h-[calc(100vh-55px)] p-3.75 border flex flex-col gap-5">
+			{/*<aside className="w-[30%] min-h-[calc(100vh-55px)] p-3.75 border flex flex-col gap-5">*/}
+			<CustomSidebar>
 				<ProjectSettings />
 				<div className="h-px bg-border" />
 				<ProjectMembers />
-			</aside>
+			</CustomSidebar>
+			{/*</aside>*/}
 		</div>
 	);
 };

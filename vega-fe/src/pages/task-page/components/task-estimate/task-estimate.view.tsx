@@ -12,7 +12,6 @@ interface IProps {
 }
 
 const TaskEstimateView: React.FC<IProps> = ({ chartData, onModalShown }) => {
-	console.log(chartData);
 	return (
 		<>
 			<div className="border-b">

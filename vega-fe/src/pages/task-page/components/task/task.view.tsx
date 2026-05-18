@@ -14,6 +14,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { TaskEstimate } from '@/pages/task-page/components/task-estimate/task-estimate.tsx';
 import { TaskPersonnel } from '@/pages/task-page/components/task-personnel/task-personnel.tsx';
+import { CustomSidebar } from '@/components/common/shared/custom-sidebar.tsx';
 
 interface IProps {
 	task: ITask | null;
@@ -220,7 +221,8 @@ const TaskView: React.FC<IProps> = ({
 					<Component />
 				</div>
 			</div>
-			<aside className="w-[40%] min-h-[calc(100vh-55px)] border-l">
+			{/*<aside className="w-[40%] min-h-[calc(100vh-55px)] border-l">*/}
+			<CustomSidebar>
 				<TaskPersonnel />
 				<div className="border-b">
 					<div className="p-3.75">
@@ -254,7 +256,8 @@ const TaskView: React.FC<IProps> = ({
 						</div>
 					</div>
 				</div>
-			</aside>
+			</CustomSidebar>
+			{/*</aside>*/}
 		</div>
 	);
 };
