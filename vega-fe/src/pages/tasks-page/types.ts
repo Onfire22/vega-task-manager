@@ -51,7 +51,7 @@ export interface ITask {
 
 export type TTaskList = Array<ITask>;
 
-export interface IKanbanTasks extends IExpDictData {
+export interface IKanbanColumns extends IExpDictData {
 	tasks: TTaskList;
 }
 

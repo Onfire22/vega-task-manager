@@ -9,20 +9,11 @@ import { useDictionaries } from '@/api/dictionaries/dictionaries.hooks.ts';
 
 export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());
-
 	const { data, isSuccess, isLoading } = useGetTasksQuery(filters);
 
-	if (!isSuccess)
-		return {
-			userTasks: [],
-			pagination: { pages: [], activePage: 1, totalPages: 0, hasNext: false, hasPrev: false },
-			isTasksLoading: isLoading,
-		};
-
-	const paginationPages = getPaginationPages(data.meta.page, data.meta.totalPages);
-
-	const tasks = data.tasks.map((item) => {
-		return {
+	const userTasks = useMemo(() => {
+		if (!isSuccess) return [];
+		return data.tasks.map((item) => ({
 			...item,
 			assignee: item.assignee ? `${item.assignee.name} ${item.assignee.secondName}` : null,
 			reporter: `${item.reporter?.name} ${item.reporter?.secondName}`,
@@ -30,18 +21,22 @@ export const useUserTasks = () => {
 			loggedTime: item.logInfo?.totalLoggedTime?.time || '-',
 			createdAt: format(item.createdAt, DATE_FORMAT),
 			updatedAt: format(item.updatedAt, DATE_FORMAT),
+		}));
+	}, [data, isSuccess]);
+
+	const pagination = useMemo(() => {
+		if (!isSuccess) return { pages: [], activePage: 1, totalPages: 0, hasNext: false, hasPrev: false };
+		const paginationPages = getPaginationPages(data.meta.page, data.meta.totalPages);
+		return {
+			pages: paginationPages,
+			activePage: data.meta.page,
+			totalPages: data.meta.totalPages,
+			hasNext: data.meta.hasNext,
+			hasPrev: data.meta.hasPrev,
 		};
-	});
+	}, [data, isSuccess]);
 
-	const pagination = {
-		pages: paginationPages,
-		activePage: data.meta.page,
-		totalPages: data.meta.totalPages,
-		hasNext: data.meta.hasNext,
-		hasPrev: data.meta.hasPrev,
-	};
-
-	return { userTasks: tasks, pagination, isTasksLoading: isLoading };
+	return { userTasks, pagination, isTasksLoading: isLoading };
 };
 
 export const useKanbanTasks = () => {

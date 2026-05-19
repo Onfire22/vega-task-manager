@@ -7,7 +7,9 @@ import type { TDictionariesRequest } from '@/api/dictionaries/dictionaries.types
 export const useDictionaries = (meta: TDictionariesRequest) => {
 	const { data, isLoading, isSuccess } = useGetDictionariesQuery(meta, CACHING_SETTINGS);
 
-	const dictionaries = isSuccess ? data.dictionaries : {};
+	const dictionaries = useMemo(() => {
+		return isSuccess ? data.dictionaries : {};
+	}, [data, isSuccess]);
 
 	return { dictionaries, isDictionariesLoading: isLoading };
 };
