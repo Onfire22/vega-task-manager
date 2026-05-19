@@ -24,14 +24,14 @@ export interface IExpDictData {
 }
 
 interface ITimeEntry {
-	time: string;
-	timeInPercents: number;
+	time?: string;
+	timeInPercents?: number;
 }
 
 interface ILogInfo {
-	estimateTime?: ITimeEntry;
-	remainingTime?: ITimeEntry;
-	totalLoggedTime?: ITimeEntry;
+	estimateTime?: ITimeEntry | null;
+	remainingTime?: ITimeEntry | null;
+	totalLoggedTime?: ITimeEntry | null;
 }
 
 export interface ITask {

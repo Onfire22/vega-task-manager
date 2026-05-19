@@ -50,20 +50,18 @@ export const useKanbanTasks = () => {
 
 	const isColumnsLoading = isDictionariesLoading || isTasksLoading;
 
-	const columns = useMemo(
-		() =>
-			isColumnsLoading
-				? []
-				: dictionaries?.taskStatus?.map((item) => {
-						return {
-							id: item.id,
-							label: item.label,
-							key: item.key,
-							tasks: userTasks.filter((task) => task.taskStatus.id === item.id),
-						};
-					}),
-		[dictionaries?.taskStatus, userTasks, isColumnsLoading],
-	);
+	const columns = useMemo(() => {
+		if (!Object.keys(dictionaries).length || !userTasks.length) return [];
+
+		return dictionaries?.taskStatus?.map((item) => {
+			return {
+				id: item.id,
+				label: item.label,
+				key: item.key,
+				tasks: userTasks.filter((task) => task.taskStatus.id === item.id),
+			};
+		});
+	}, [dictionaries, userTasks]);
 
 	return {
 		columns,
