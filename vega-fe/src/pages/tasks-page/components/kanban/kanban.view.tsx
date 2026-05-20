@@ -15,6 +15,7 @@ const KanbanView: React.FC<IProps> = ({ columns }) => {
 				return (
 					<SortableContext
 						key={column.id}
+						id={column.id}
 						items={column.tasks.map((i) => i.id)}
 						strategy={verticalListSortingStrategy}
 					>

@@ -13,11 +13,12 @@ interface IProps {
 }
 
 const KanbanTaskView: React.FC<IProps> = ({ task, onTaskDoubleClick }) => {
-	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task.id });
+	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
 
 	const style = {
 		transform: CSS.Transform.toString(transform),
 		transition,
+		opacity: isDragging ? 0.4 : 1,
 	};
 
 	return (
