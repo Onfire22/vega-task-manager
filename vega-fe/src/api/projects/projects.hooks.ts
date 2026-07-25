@@ -14,7 +14,7 @@ export const useProjectsOptions = (meta: IProjectsMeta) => {
 
 	const projectOptions = projectsList.map((project) => ({
 		label: project.title,
-		value: project.id,
+		value: project.uuid,
 	}));
 
 	return { projectOptions, isProjectsLoading };

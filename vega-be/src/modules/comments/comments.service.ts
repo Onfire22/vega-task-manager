@@ -6,13 +6,13 @@ const getComments = async (taskUuid: string) => {
 	const comments = await prismaAppClient.comment.findMany({
 		where: { taskUuid },
 		select: {
-			id: true,
+			uuid: true,
 			text: true,
 			createdAt: true,
 			updatedAt: true,
 			author: {
 				select: {
-					id: true,
+					uuid: true,
 					name: true,
 					secondName: true,
 					avatarUrl: true,
@@ -42,13 +42,13 @@ const createComment = (authorUuid: string, comment: TCreateCommentBody) => {
 
 const updateComment = (commentId: string, text: string) => {
 	return prismaAppClient.comment.update({
-		where: { id: commentId },
+		where: { uuid: commentId },
 		data: { text },
 	});
 };
 
 const deleteComment = (commentId: string) => {
-	return prismaAppClient.comment.delete({ where: { id: commentId } });
+	return prismaAppClient.comment.delete({ where: { uuid: commentId } });
 };
 
 export const commentsService = {

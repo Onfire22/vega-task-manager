@@ -1,5 +1,5 @@
 export const messagesSelect = {
-	id: true,
+	uuid: true,
 	text: true,
 	channelUuid: true,
 	isPinned: true,
@@ -9,7 +9,7 @@ export const messagesSelect = {
 	isSystem: true,
 	author: {
 		select: {
-			id: true,
+			uuid: true,
 			name: true,
 			secondName: true,
 			avatarUrl: true,
@@ -22,7 +22,7 @@ export const messagesSelect = {
 					userRole: true,
 					user: {
 						select: {
-							id: true,
+							uuid: true,
 						},
 					},
 				},

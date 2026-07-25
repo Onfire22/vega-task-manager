@@ -11,7 +11,7 @@ const TaskLogsView: React.FC<IProps> = ({ logs }) => {
 		<ul className="flex flex-col gap-2.5 text-[14px]">
 			{logs.map((log) => {
 				return (
-					<li className="p-1.25 rounded-[5px] flex flex-col gap-1.25 hover:bg-secondary" key={log.id}>
+					<li className="p-1.25 rounded-[5px] flex flex-col gap-1.25 hover:bg-secondary" key={log.uuid}>
 						<div className="flex gap-2.5 items-start">
 							<div
 								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"

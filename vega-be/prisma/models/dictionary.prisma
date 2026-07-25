@@ -9,7 +9,7 @@ enum Type {
 }
 
 model Dictionary {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   label       String
   key         String

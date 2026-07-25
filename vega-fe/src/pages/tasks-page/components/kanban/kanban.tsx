@@ -40,24 +40,24 @@ const Kanban = () => {
 	const onDragOver = ({ active, over }: DragOverEvent) => {
 		if (!over) return;
 
-		const activeColumn = localColumns?.find((column) => column.tasks.some((task) => task.id === active.id));
+		const activeColumn = localColumns?.find((column) => column.tasks.some((task) => task.uuid === active.id));
 
 		const overColumn = localColumns?.find(
-			(column) => column.tasks.some((task) => task.id === over.id) || column.id === over.id,
+			(column) => column.tasks.some((task) => task.uuid === over.id) || column.uuid === over.id,
 		);
 
-		if (!activeColumn || !overColumn || activeColumn.id === overColumn.id) return;
+		if (!activeColumn || !overColumn || activeColumn.uuid === overColumn.uuid) return;
 
 		setLocalColumns((prev) => {
-			const activeTask = activeColumn.tasks.find((task) => task.id === active.id);
+			const activeTask = activeColumn.tasks.find((task) => task.uuid === active.id);
 			if (!activeTask) return prev;
-			const overTaskIndex = overColumn.tasks.findIndex((task) => task.id === over.id);
+			const overTaskIndex = overColumn.tasks.findIndex((task) => task.uuid === over.id);
 
 			return prev.map((column) => {
-				if (column.id === activeColumn.id) {
-					return { ...column, tasks: column.tasks.filter((task) => task.id !== active.id) };
+				if (column.uuid === activeColumn.uuid) {
+					return { ...column, tasks: column.tasks.filter((task) => task.uuid !== active.id) };
 				}
-				if (column.id === overColumn.id) {
+				if (column.uuid === overColumn.uuid) {
 					const newTasks = [...column.tasks];
 					newTasks.splice(overTaskIndex >= 0 ? overTaskIndex : newTasks.length, 0, activeTask);
 					return { ...column, tasks: newTasks };
@@ -69,7 +69,7 @@ const Kanban = () => {
 
 	const onDragStart = ({ active }: DragStartEvent) => {
 		fromContainerIdRef.current = active.data.current?.sortable?.containerId;
-		const task = localColumns.flatMap((col) => col.tasks).find((t) => t.id === active.id);
+		const task = localColumns.flatMap((col) => col.tasks).find((t) => t.uuid === active.id);
 		setActiveTask(task ?? null);
 	};
 
@@ -85,17 +85,17 @@ const Kanban = () => {
 		if (fromContainerId === toContainerId) {
 			setLocalColumns((prev) =>
 				prev.map((col) => {
-					if (col.id !== fromContainerId) return col;
-					const oldIndex = col.tasks.findIndex((t) => t.id === active.id);
-					const newIndex = col.tasks.findIndex((t) => t.id === over.id);
+					if (col.uuid !== fromContainerId) return col;
+					const oldIndex = col.tasks.findIndex((t) => t.uuid === active.id);
+					const newIndex = col.tasks.findIndex((t) => t.uuid === over.id);
 					return { ...col, tasks: arrayMove(col.tasks, oldIndex, newIndex) };
 				}),
 			);
 			return;
 		}
 
-		const column = localColumns.find((col) => col.id === toContainerId);
-		updateTask({ fields: { taskStatusUuid: column?.id }, uuid: String(active.id) });
+		const column = localColumns.find((col) => col.uuid === toContainerId);
+		updateTask({ fields: { taskStatusUuid: column?.uuid }, uuid: String(active.id) });
 	};
 
 	return isColumnsLoading ? (

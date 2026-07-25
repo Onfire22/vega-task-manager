@@ -1,12 +1,12 @@
 model ChatMemberships {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   userRoleUuid String       @map("user_role_uuid")
-  userRole     Dictionary   @relation(fields: [userRoleUuid], references: [id])
+  userRole     Dictionary   @relation(fields: [userRoleUuid], references: [uuid])
   userUuid     String
-  user         User         @relation(fields: [userUuid], references: [id])
+  user         User         @relation(fields: [userUuid], references: [uuid])
   channelUuid  String       @map("channel_uuid")
-  channel      ChatChannels @relation(fields: [channelUuid], references: [id])
+  channel      ChatChannels @relation(fields: [channelUuid], references: [uuid])
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

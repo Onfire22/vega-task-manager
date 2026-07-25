@@ -5,8 +5,8 @@ import { io } from '../../websocket';
 
 const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUuid: string, fromUserUuid: string) => {
 	const memberRole = await prismaAppClient.dictionary.findUnique({
-		where: { id: userRoleUuid },
-		select: { id: true, label: true, key: true },
+		where: { uuid: userRoleUuid },
+		select: { uuid: true, label: true, key: true },
 	});
 
 	if (!memberRole) {
@@ -17,18 +17,18 @@ const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUui
 		const membership = await tx.membership.upsert({
 			where: { user_project: { projectUuid, userUuid } },
 			update: {
-				userRoleUuid: memberRole.id,
+				userRoleUuid: memberRole.uuid,
 			},
 			create: {
 				userUuid,
 				projectUuid,
-				userRoleUuid: memberRole.id,
+				userRoleUuid: memberRole.uuid,
 			},
 			select: {
-				id: true,
+				uuid: true,
 				project: {
 					select: {
-						id: true,
+						uuid: true,
 						code: true,
 					},
 				},
@@ -38,7 +38,7 @@ const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUui
 		if (memberRole.key === 'owner') {
 			const roleForOldOwner = await tx.dictionary.findUnique({
 				where: { key_type: { key: 'member', type: 'ROLE_TYPE' } },
-				select: { id: true },
+				select: { uuid: true },
 			});
 
 			if (!roleForOldOwner) {
@@ -48,7 +48,7 @@ const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUui
 			await tx.membership.update({
 				where: { user_project: { projectUuid, userUuid: fromUserUuid } },
 				data: {
-					userRoleUuid: roleForOldOwner.id,
+					userRoleUuid: roleForOldOwner.uuid,
 				},
 			});
 		}
@@ -57,16 +57,16 @@ const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUui
 			data: {
 				fromUserUuid: fromUserUuid,
 				toUserUuid: userUuid,
-				memberShipsUuid: membership.id,
+				memberShipsUuid: membership.uuid,
 				entityType: 'PROJECT',
 				extraData: memberRole.label,
 			},
 			select: {
-				id: true,
+				uuid: true,
 				createdAt: true,
 				fromUser: {
 					select: {
-						id: true,
+						uuid: true,
 						userName: true,
 					},
 				},
@@ -74,12 +74,12 @@ const changeUserRole = async (userUuid: string, userRoleUuid: string, projectUui
 		});
 
 		io.to(`user:${userUuid}`).emit('project:updated', {
-			id: notification.id,
+			id: notification.uuid,
 			createdAt: notification.createdAt,
-			entity: { uuid: membership.project.id, type: 'PROJECT', code: membership.project.code },
+			entity: { uuid: membership.project.uuid, type: 'PROJECT', code: membership.project.code },
 			extraData: memberRole.label,
 			user: {
-				uuid: notification.fromUser.id,
+				uuid: notification.fromUser.uuid,
 				userName: notification.fromUser.userName,
 			},
 			isReaded: false,

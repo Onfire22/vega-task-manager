@@ -20,27 +20,27 @@ const getProjects = async (pagination: IPagination, userUuid: string) => {
 				},
 			},
 			select: {
-				id: true,
+				uuid: true,
 				code: true,
 				title: true,
 				createdAt: true,
 				projectStatus: {
 					select: {
-						id: true,
+						uuid: true,
 						key: true,
 						label: true,
 					},
 				},
 				memberships: {
 					select: {
-						userRole: { select: { id: true, label: true, key: true } },
-						user: { select: { id: true, name: true, secondName: true } },
+						userRole: { select: { uuid: true, label: true, key: true } },
+						user: { select: { uuid: true, name: true, secondName: true } },
 					},
 				},
 				tasks: {
 					select: {
 						taskStatus: {
-							select: { id: true, label: true, key: true },
+							select: { uuid: true, label: true, key: true },
 						},
 					},
 				},
@@ -87,7 +87,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			],
 		},
 		select: {
-			id: true,
+			uuid: true,
 			label: true,
 			key: true,
 		},
@@ -98,7 +98,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			acc[item.key] = item;
 			return acc;
 		},
-		{} as Record<string, { label: string; id: string; key: string }>,
+		{} as Record<string, { label: string; uuid: string; key: string }>,
 	);
 
 	if (!owner || !member) {
@@ -107,10 +107,10 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 
 	const usersData = userUUids.map((uuid) => {
 		return {
-			user: { connect: { id: uuid } },
+			user: { connect: { uuid } },
 			userRole: {
 				connect: {
-					id: uuid === userId ? owner.id : member.id,
+					uuid: uuid === userId ? owner.uuid : member.uuid,
 				},
 			},
 		};
@@ -122,20 +122,20 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 				title,
 				description,
 				...(deadlineDate ? { deadlineDate: new Date(deadlineDate).toISOString() } : {}),
-				projectStatusUuid: p_backlog.id,
+				projectStatusUuid: p_backlog.uuid,
 				memberships: {
 					create: usersData,
 				},
 			},
 			select: {
-				id: true,
+				uuid: true,
 				code: true,
 				memberships: {
 					select: {
-						id: true,
+						uuid: true,
 						user: {
 							select: {
-								id: true,
+								uuid: true,
 							},
 						},
 					},
@@ -153,11 +153,11 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			return {
 				...notificationData,
 				toUserUuid: userUuid,
-				memberShipsUuid: project.memberships.find((membership) => membership.user.id === userUuid)?.id,
+				memberShipsUuid: project.memberships.find((membership) => membership.user.uuid === userUuid)?.uuid,
 			};
 		});
 
-		const userFrom = await tx.user.findUnique({ where: { id: userId }, select: { userName: true } });
+		const userFrom = await tx.user.findUnique({ where: { uuid: userId }, select: { userName: true } });
 
 		await tx.notification.createMany({
 			data,
@@ -167,7 +167,7 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			io.to(`user:${uuid}`).emit('project:updated', {
 				id: uuid,
 				createdAt: new Date().toISOString(),
-				entity: { uuid: project.id, type: 'PROJECT', code: project.code },
+				entity: { uuid: project.uuid, type: 'PROJECT', code: project.code },
 				extraData: 'Участник',
 				user: {
 					uuid: userId,
@@ -177,10 +177,10 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 			});
 		});
 
-		const code = `#${project.id.slice(0, 4).toUpperCase()}`;
+		const code = `#${project.uuid.slice(0, 4).toUpperCase()}`;
 
 		return tx.project.update({
-			where: { id: project.id },
+			where: { uuid: project.uuid },
 			data: { code },
 		});
 	});
@@ -189,10 +189,10 @@ const createProject = async (projectData: TCreateProjectBody, userId: string) =>
 const getProject = async (projectUuid: string, userId: string) => {
 	const project = await prismaAppClient.project.findUniqueOrThrow({
 		where: {
-			id: projectUuid,
+			uuid: projectUuid,
 		},
 		select: {
-			id: true,
+			uuid: true,
 			title: true,
 			description: true,
 			createdAt: true,
@@ -202,7 +202,7 @@ const getProject = async (projectUuid: string, userId: string) => {
 				select: {
 					label: true,
 					description: true,
-					id: true,
+					uuid: true,
 					key: true,
 				},
 			},
@@ -216,14 +216,14 @@ const getProject = async (projectUuid: string, userId: string) => {
 				select: {
 					userRole: {
 						select: {
-							id: true,
+							uuid: true,
 							label: true,
 							key: true,
 						},
 					},
 					user: {
 						select: {
-							id: true,
+							uuid: true,
 							name: true,
 							secondName: true,
 							avatarUrl: true,
@@ -236,7 +236,7 @@ const getProject = async (projectUuid: string, userId: string) => {
 			},
 			tasks: {
 				select: {
-					id: true,
+					uuid: true,
 					code: true,
 					title: true,
 					createdAt: true,
@@ -266,7 +266,7 @@ const updateProject = (projectData: TEditProjectBody, projectUuid: string) => {
 	const data = field === 'deadlineDate' ? new Date(value).toISOString() : value;
 
 	return prismaAppClient.project.update({
-		where: { id: projectUuid },
+		where: { uuid: projectUuid },
 		data: { [field]: data },
 	});
 };

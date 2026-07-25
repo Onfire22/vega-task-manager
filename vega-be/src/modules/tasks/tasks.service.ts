@@ -15,7 +15,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 
 	const baseTaskStatusUuid = await prismaAppClient.dictionary.findUnique({
 		where: { key_type: { key: 'todo', type: 'TASK_STATUS' } },
-		select: { id: true },
+		select: { uuid: true },
 	});
 
 	if (!baseTaskStatusUuid) {
@@ -24,7 +24,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 
 	return prismaAppClient.$transaction(async (tx) => {
 		const project = await tx.project.findUnique({
-			where: { id: taskProjectUuid },
+			where: { uuid: taskProjectUuid },
 			select: { code: true, _count: { select: { tasks: true } } },
 		});
 
@@ -41,7 +41,7 @@ const createTask = async (taskData: TCreateTaskBody, userId: string) => {
 				...task,
 				code: taskCode,
 				reporterUuid: userId,
-				taskStatusUuid: baseTaskStatusUuid.id,
+				taskStatusUuid: baseTaskStatusUuid.uuid,
 				projectUuid: taskProjectUuid,
 			},
 		});
@@ -82,7 +82,7 @@ const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
 			skip: (page - 1) * pageLimit,
 			take: pageLimit,
 			select: {
-				id: true,
+				uuid: true,
 				code: true,
 				title: true,
 				description: true,
@@ -98,7 +98,7 @@ const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
 				},
 				timeLogs: {
 					select: {
-						id: true,
+						uuid: true,
 						loggedTime: true,
 						description: true,
 						user: true,
@@ -147,7 +147,7 @@ const getUserTasks = async (taskData: TUserTasksBody, userId: string) => {
 const getTaskByUuid = async (taskUuid: string) => {
 	const task = await prismaAppClient.task.findUnique({
 		select: {
-			id: true,
+			uuid: true,
 			code: true,
 			title: true,
 			description: true,
@@ -174,17 +174,17 @@ const getTaskByUuid = async (taskUuid: string) => {
 			},
 			timeLogs: {
 				select: {
-					id: true,
+					uuid: true,
 					loggedTime: true,
 					description: true,
-					user: { select: { name: true, secondName: true, id: true } },
+					user: { select: { name: true, secondName: true, uuid: true } },
 					createdAt: true,
 					updatedAt: true,
 				},
 			},
 			project: {
 				select: {
-					id: true,
+					uuid: true,
 					code: true,
 					title: true,
 					projectStatus: {
@@ -196,7 +196,7 @@ const getTaskByUuid = async (taskUuid: string) => {
 				},
 			},
 		},
-		where: { id: taskUuid },
+		where: { uuid: taskUuid },
 	});
 
 	if (!task) {
@@ -209,10 +209,10 @@ const getTaskByUuid = async (taskUuid: string) => {
 const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid: string) => {
 	return prismaAppClient.$transaction(async (tx) => {
 		const taskData = await tx.task.update({
-			where: { id: taskUuid },
+			where: { uuid: taskUuid },
 			data: { ...taskBody },
 			select: {
-				id: true,
+				uuid: true,
 				reporterUuid: true,
 				code: true,
 				taskPriority: {
@@ -232,39 +232,39 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 
 		const fieldName = Object.keys(taskBody).find((field) => WEBSOCKET_TRIGGERS.includes(field));
 
-		if (taskData?.assignee?.id && userUuid !== taskData?.assignee?.id) {
+		if (taskData?.assignee?.uuid && userUuid !== taskData?.assignee?.uuid) {
 			const notification = await tx.notification.create({
 				data: {
 					fromUserUuid: userUuid,
-					toUserUuid: taskData?.assignee?.id!,
-					taskUuid: taskData.id,
+					toUserUuid: taskData?.assignee?.uuid!,
+					taskUuid: taskData.uuid,
 					entityType: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
 					extraData: taskData.taskStatus.label,
 				},
 				select: {
-					id: true,
+					uuid: true,
 					createdAt: true,
 					fromUser: {
 						select: {
-							id: true,
+							uuid: true,
 							userName: true,
 						},
 					},
 				},
 			});
 
-			io.to(`user:${taskData?.assignee?.id}`).emit('task:updated', {
-				id: notification.id,
+			io.to(`user:${taskData?.assignee?.uuid}`).emit('task:updated', {
+				uuid: notification.uuid,
 				createdAt: notification.createdAt,
 				isReaded: false,
 				...(fieldName === 'taskStatusUuid' ? { extraData: taskData.taskStatus.label } : {}),
 				entity: {
-					uuid: taskData.id,
+					uuid: taskData.uuid,
 					type: fieldName === 'assigneeUuid' ? 'TASK' : 'TASK_STATUS',
 					code: taskData.code,
 				},
 				user: {
-					uuid: notification.fromUser.id,
+					uuid: notification.fromUser.uuid,
 					userName: notification.fromUser.userName,
 				},
 			});
@@ -276,7 +276,7 @@ const updateTask = async (taskBody: TUpdateTaskBody, taskUuid: string, userUuid:
 
 const updateTaskEstimate = (value: number, taskUuid: string) => {
 	return prismaAppClient.task.update({
-		where: { id: taskUuid },
+		where: { uuid: taskUuid },
 		data: {
 			estimateTime: value,
 			remainingTime: value,

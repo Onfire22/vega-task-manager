@@ -25,7 +25,7 @@ export type AggregateComment = {
 }
 
 export type CommentMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   text: string | null
   taskUuid: string | null
   authorUuid: string | null
@@ -34,7 +34,7 @@ export type CommentMinAggregateOutputType = {
 }
 
 export type CommentMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   text: string | null
   taskUuid: string | null
   authorUuid: string | null
@@ -43,7 +43,7 @@ export type CommentMaxAggregateOutputType = {
 }
 
 export type CommentCountAggregateOutputType = {
-  id: number
+  uuid: number
   text: number
   taskUuid: number
   authorUuid: number
@@ -54,7 +54,7 @@ export type CommentCountAggregateOutputType = {
 
 
 export type CommentMinAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   taskUuid?: true
   authorUuid?: true
@@ -63,7 +63,7 @@ export type CommentMinAggregateInputType = {
 }
 
 export type CommentMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   taskUuid?: true
   authorUuid?: true
@@ -72,7 +72,7 @@ export type CommentMaxAggregateInputType = {
 }
 
 export type CommentCountAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   taskUuid?: true
   authorUuid?: true
@@ -154,7 +154,7 @@ export type CommentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type CommentGroupByOutputType = {
-  id: string
+  uuid: string
   text: string
   taskUuid: string
   authorUuid: string
@@ -184,7 +184,7 @@ export type CommentWhereInput = {
   AND?: Prisma.CommentWhereInput | Prisma.CommentWhereInput[]
   OR?: Prisma.CommentWhereInput[]
   NOT?: Prisma.CommentWhereInput | Prisma.CommentWhereInput[]
-  id?: Prisma.StringFilter<"Comment"> | string
+  uuid?: Prisma.StringFilter<"Comment"> | string
   text?: Prisma.StringFilter<"Comment"> | string
   taskUuid?: Prisma.StringFilter<"Comment"> | string
   authorUuid?: Prisma.StringFilter<"Comment"> | string
@@ -195,7 +195,7 @@ export type CommentWhereInput = {
 }
 
 export type CommentOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   taskUuid?: Prisma.SortOrder
   authorUuid?: Prisma.SortOrder
@@ -206,7 +206,7 @@ export type CommentOrderByWithRelationInput = {
 }
 
 export type CommentWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   AND?: Prisma.CommentWhereInput | Prisma.CommentWhereInput[]
   OR?: Prisma.CommentWhereInput[]
   NOT?: Prisma.CommentWhereInput | Prisma.CommentWhereInput[]
@@ -217,10 +217,10 @@ export type CommentWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Comment"> | Date | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "uuid">
 
 export type CommentOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   taskUuid?: Prisma.SortOrder
   authorUuid?: Prisma.SortOrder
@@ -235,7 +235,7 @@ export type CommentScalarWhereWithAggregatesInput = {
   AND?: Prisma.CommentScalarWhereWithAggregatesInput | Prisma.CommentScalarWhereWithAggregatesInput[]
   OR?: Prisma.CommentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CommentScalarWhereWithAggregatesInput | Prisma.CommentScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Comment"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"Comment"> | string
   text?: Prisma.StringWithAggregatesFilter<"Comment"> | string
   taskUuid?: Prisma.StringWithAggregatesFilter<"Comment"> | string
   authorUuid?: Prisma.StringWithAggregatesFilter<"Comment"> | string
@@ -244,7 +244,7 @@ export type CommentScalarWhereWithAggregatesInput = {
 }
 
 export type CommentCreateInput = {
-  id?: string
+  uuid?: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -253,7 +253,7 @@ export type CommentCreateInput = {
 }
 
 export type CommentUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   text: string
   taskUuid: string
   authorUuid: string
@@ -262,7 +262,7 @@ export type CommentUncheckedCreateInput = {
 }
 
 export type CommentUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -271,7 +271,7 @@ export type CommentUpdateInput = {
 }
 
 export type CommentUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   authorUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -280,7 +280,7 @@ export type CommentUncheckedUpdateInput = {
 }
 
 export type CommentCreateManyInput = {
-  id?: string
+  uuid?: string
   text: string
   taskUuid: string
   authorUuid: string
@@ -289,14 +289,14 @@ export type CommentCreateManyInput = {
 }
 
 export type CommentUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CommentUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   authorUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -305,7 +305,7 @@ export type CommentUncheckedUpdateManyInput = {
 }
 
 export type CommentCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   taskUuid?: Prisma.SortOrder
   authorUuid?: Prisma.SortOrder
@@ -314,7 +314,7 @@ export type CommentCountOrderByAggregateInput = {
 }
 
 export type CommentMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   taskUuid?: Prisma.SortOrder
   authorUuid?: Prisma.SortOrder
@@ -323,7 +323,7 @@ export type CommentMaxOrderByAggregateInput = {
 }
 
 export type CommentMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   taskUuid?: Prisma.SortOrder
   authorUuid?: Prisma.SortOrder
@@ -426,7 +426,7 @@ export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
 }
 
 export type CommentCreateWithoutTaskInput = {
-  id?: string
+  uuid?: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -434,7 +434,7 @@ export type CommentCreateWithoutTaskInput = {
 }
 
 export type CommentUncheckedCreateWithoutTaskInput = {
-  id?: string
+  uuid?: string
   text: string
   authorUuid: string
   createdAt?: Date | string
@@ -471,7 +471,7 @@ export type CommentScalarWhereInput = {
   AND?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
   OR?: Prisma.CommentScalarWhereInput[]
   NOT?: Prisma.CommentScalarWhereInput | Prisma.CommentScalarWhereInput[]
-  id?: Prisma.StringFilter<"Comment"> | string
+  uuid?: Prisma.StringFilter<"Comment"> | string
   text?: Prisma.StringFilter<"Comment"> | string
   taskUuid?: Prisma.StringFilter<"Comment"> | string
   authorUuid?: Prisma.StringFilter<"Comment"> | string
@@ -480,7 +480,7 @@ export type CommentScalarWhereInput = {
 }
 
 export type CommentCreateWithoutAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -488,7 +488,7 @@ export type CommentCreateWithoutAuthorInput = {
 }
 
 export type CommentUncheckedCreateWithoutAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   taskUuid: string
   createdAt?: Date | string
@@ -522,7 +522,7 @@ export type CommentUpdateManyWithWhereWithoutAuthorInput = {
 }
 
 export type CommentCreateManyTaskInput = {
-  id?: string
+  uuid?: string
   text: string
   authorUuid: string
   createdAt?: Date | string
@@ -530,7 +530,7 @@ export type CommentCreateManyTaskInput = {
 }
 
 export type CommentUpdateWithoutTaskInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,7 +538,7 @@ export type CommentUpdateWithoutTaskInput = {
 }
 
 export type CommentUncheckedUpdateWithoutTaskInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   authorUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -546,7 +546,7 @@ export type CommentUncheckedUpdateWithoutTaskInput = {
 }
 
 export type CommentUncheckedUpdateManyWithoutTaskInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   authorUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -554,7 +554,7 @@ export type CommentUncheckedUpdateManyWithoutTaskInput = {
 }
 
 export type CommentCreateManyAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   taskUuid: string
   createdAt?: Date | string
@@ -562,7 +562,7 @@ export type CommentCreateManyAuthorInput = {
 }
 
 export type CommentUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -570,7 +570,7 @@ export type CommentUpdateWithoutAuthorInput = {
 }
 
 export type CommentUncheckedUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -578,7 +578,7 @@ export type CommentUncheckedUpdateWithoutAuthorInput = {
 }
 
 export type CommentUncheckedUpdateManyWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   taskUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -588,7 +588,7 @@ export type CommentUncheckedUpdateManyWithoutAuthorInput = {
 
 
 export type CommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   taskUuid?: boolean
   authorUuid?: boolean
@@ -599,7 +599,7 @@ export type CommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   taskUuid?: boolean
   authorUuid?: boolean
@@ -610,7 +610,7 @@ export type CommentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   taskUuid?: boolean
   authorUuid?: boolean
@@ -621,7 +621,7 @@ export type CommentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   taskUuid?: boolean
   authorUuid?: boolean
@@ -629,7 +629,7 @@ export type CommentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "text" | "taskUuid" | "authorUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
+export type CommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "text" | "taskUuid" | "authorUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
 export type CommentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -650,7 +650,7 @@ export type $CommentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     author: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     text: string
     taskUuid: string
     authorUuid: string
@@ -739,8 +739,8 @@ export interface CommentDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    * // Get first 10 Comments
    * const comments = await prisma.comment.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const commentWithIdOnly = await prisma.comment.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const commentWithUuidOnly = await prisma.comment.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends CommentFindManyArgs>(args?: Prisma.SelectSubset<T, CommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -784,9 +784,9 @@ export interface CommentDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    *   ]
    * })
    * 
-   * // Create many Comments and only return the `id`
-   * const commentWithIdOnly = await prisma.comment.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Comments and only return the `uuid`
+   * const commentWithUuidOnly = await prisma.comment.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -875,9 +875,9 @@ export interface CommentDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    *   ]
    * })
    * 
-   * // Update zero or more Comments and only return the `id`
-   * const commentWithIdOnly = await prisma.comment.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Comments and only return the `uuid`
+   * const commentWithUuidOnly = await prisma.comment.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1081,7 +1081,7 @@ export interface Prisma__CommentClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Comment model
  */
 export interface CommentFieldRefs {
-  readonly id: Prisma.FieldRef<"Comment", 'String'>
+  readonly uuid: Prisma.FieldRef<"Comment", 'String'>
   readonly text: Prisma.FieldRef<"Comment", 'String'>
   readonly taskUuid: Prisma.FieldRef<"Comment", 'String'>
   readonly authorUuid: Prisma.FieldRef<"Comment", 'String'>

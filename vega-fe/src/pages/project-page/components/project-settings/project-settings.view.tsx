@@ -36,7 +36,7 @@ const ProjectSettingsView: React.FC<IProps> = ({
 							{project.canEdit ? (
 								<CustomSelect
 									options={dictionariesOptions}
-									value={project.projectStatus.id}
+									value={project.projectStatus.uuid}
 									onChange={(value) => onProjectFieldChange('projectStatusUuid', value)}
 								/>
 							) : (

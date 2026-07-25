@@ -25,7 +25,7 @@ export type AggregateChatChannels = {
 }
 
 export type ChatChannelsMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   title: string | null
   channelType: $Enums.ChannelType | null
   channelVisibility: $Enums.ChannelVisibility | null
@@ -34,7 +34,7 @@ export type ChatChannelsMinAggregateOutputType = {
 }
 
 export type ChatChannelsMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   title: string | null
   channelType: $Enums.ChannelType | null
   channelVisibility: $Enums.ChannelVisibility | null
@@ -43,7 +43,7 @@ export type ChatChannelsMaxAggregateOutputType = {
 }
 
 export type ChatChannelsCountAggregateOutputType = {
-  id: number
+  uuid: number
   title: number
   channelType: number
   channelVisibility: number
@@ -54,7 +54,7 @@ export type ChatChannelsCountAggregateOutputType = {
 
 
 export type ChatChannelsMinAggregateInputType = {
-  id?: true
+  uuid?: true
   title?: true
   channelType?: true
   channelVisibility?: true
@@ -63,7 +63,7 @@ export type ChatChannelsMinAggregateInputType = {
 }
 
 export type ChatChannelsMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   title?: true
   channelType?: true
   channelVisibility?: true
@@ -72,7 +72,7 @@ export type ChatChannelsMaxAggregateInputType = {
 }
 
 export type ChatChannelsCountAggregateInputType = {
-  id?: true
+  uuid?: true
   title?: true
   channelType?: true
   channelVisibility?: true
@@ -154,7 +154,7 @@ export type ChatChannelsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type ChatChannelsGroupByOutputType = {
-  id: string
+  uuid: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -184,7 +184,7 @@ export type ChatChannelsWhereInput = {
   AND?: Prisma.ChatChannelsWhereInput | Prisma.ChatChannelsWhereInput[]
   OR?: Prisma.ChatChannelsWhereInput[]
   NOT?: Prisma.ChatChannelsWhereInput | Prisma.ChatChannelsWhereInput[]
-  id?: Prisma.StringFilter<"ChatChannels"> | string
+  uuid?: Prisma.StringFilter<"ChatChannels"> | string
   title?: Prisma.StringFilter<"ChatChannels"> | string
   channelType?: Prisma.EnumChannelTypeFilter<"ChatChannels"> | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFilter<"ChatChannels"> | $Enums.ChannelVisibility
@@ -195,7 +195,7 @@ export type ChatChannelsWhereInput = {
 }
 
 export type ChatChannelsOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   title?: Prisma.SortOrder
   channelType?: Prisma.SortOrder
   channelVisibility?: Prisma.SortOrder
@@ -206,7 +206,7 @@ export type ChatChannelsOrderByWithRelationInput = {
 }
 
 export type ChatChannelsWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   title?: string
   AND?: Prisma.ChatChannelsWhereInput | Prisma.ChatChannelsWhereInput[]
   OR?: Prisma.ChatChannelsWhereInput[]
@@ -217,10 +217,10 @@ export type ChatChannelsWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"ChatChannels"> | Date | string
   chatMessages?: Prisma.ChatMessagesListRelationFilter
   chatMemberships?: Prisma.ChatMembershipsListRelationFilter
-}, "id" | "title">
+}, "uuid" | "title">
 
 export type ChatChannelsOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   title?: Prisma.SortOrder
   channelType?: Prisma.SortOrder
   channelVisibility?: Prisma.SortOrder
@@ -235,7 +235,7 @@ export type ChatChannelsScalarWhereWithAggregatesInput = {
   AND?: Prisma.ChatChannelsScalarWhereWithAggregatesInput | Prisma.ChatChannelsScalarWhereWithAggregatesInput[]
   OR?: Prisma.ChatChannelsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ChatChannelsScalarWhereWithAggregatesInput | Prisma.ChatChannelsScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ChatChannels"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"ChatChannels"> | string
   title?: Prisma.StringWithAggregatesFilter<"ChatChannels"> | string
   channelType?: Prisma.EnumChannelTypeWithAggregatesFilter<"ChatChannels"> | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityWithAggregatesFilter<"ChatChannels"> | $Enums.ChannelVisibility
@@ -244,7 +244,7 @@ export type ChatChannelsScalarWhereWithAggregatesInput = {
 }
 
 export type ChatChannelsCreateInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -255,7 +255,7 @@ export type ChatChannelsCreateInput = {
 }
 
 export type ChatChannelsUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -266,7 +266,7 @@ export type ChatChannelsUncheckedCreateInput = {
 }
 
 export type ChatChannelsUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -277,7 +277,7 @@ export type ChatChannelsUpdateInput = {
 }
 
 export type ChatChannelsUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -288,7 +288,7 @@ export type ChatChannelsUncheckedUpdateInput = {
 }
 
 export type ChatChannelsCreateManyInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -297,7 +297,7 @@ export type ChatChannelsCreateManyInput = {
 }
 
 export type ChatChannelsUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -306,7 +306,7 @@ export type ChatChannelsUpdateManyMutationInput = {
 }
 
 export type ChatChannelsUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -314,13 +314,8 @@ export type ChatChannelsUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ChatChannelsScalarRelationFilter = {
-  is?: Prisma.ChatChannelsWhereInput
-  isNot?: Prisma.ChatChannelsWhereInput
-}
-
 export type ChatChannelsCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   title?: Prisma.SortOrder
   channelType?: Prisma.SortOrder
   channelVisibility?: Prisma.SortOrder
@@ -329,7 +324,7 @@ export type ChatChannelsCountOrderByAggregateInput = {
 }
 
 export type ChatChannelsMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   title?: Prisma.SortOrder
   channelType?: Prisma.SortOrder
   channelVisibility?: Prisma.SortOrder
@@ -338,12 +333,33 @@ export type ChatChannelsMaxOrderByAggregateInput = {
 }
 
 export type ChatChannelsMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   title?: Prisma.SortOrder
   channelType?: Prisma.SortOrder
   channelVisibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ChatChannelsScalarRelationFilter = {
+  is?: Prisma.ChatChannelsWhereInput
+  isNot?: Prisma.ChatChannelsWhereInput
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type EnumChannelTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ChannelType
+}
+
+export type EnumChannelVisibilityFieldUpdateOperationsInput = {
+  set?: $Enums.ChannelVisibility
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type ChatChannelsCreateNestedOneWithoutChatMembershipsInput = {
@@ -358,14 +374,6 @@ export type ChatChannelsUpdateOneRequiredWithoutChatMembershipsNestedInput = {
   upsert?: Prisma.ChatChannelsUpsertWithoutChatMembershipsInput
   connect?: Prisma.ChatChannelsWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChatChannelsUpdateToOneWithWhereWithoutChatMembershipsInput, Prisma.ChatChannelsUpdateWithoutChatMembershipsInput>, Prisma.ChatChannelsUncheckedUpdateWithoutChatMembershipsInput>
-}
-
-export type EnumChannelTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ChannelType
-}
-
-export type EnumChannelVisibilityFieldUpdateOperationsInput = {
-  set?: $Enums.ChannelVisibility
 }
 
 export type ChatChannelsCreateNestedOneWithoutChatMessagesInput = {
@@ -383,7 +391,7 @@ export type ChatChannelsUpdateOneRequiredWithoutChatMessagesNestedInput = {
 }
 
 export type ChatChannelsCreateWithoutChatMembershipsInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -393,7 +401,7 @@ export type ChatChannelsCreateWithoutChatMembershipsInput = {
 }
 
 export type ChatChannelsUncheckedCreateWithoutChatMembershipsInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -419,7 +427,7 @@ export type ChatChannelsUpdateToOneWithWhereWithoutChatMembershipsInput = {
 }
 
 export type ChatChannelsUpdateWithoutChatMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -429,7 +437,7 @@ export type ChatChannelsUpdateWithoutChatMembershipsInput = {
 }
 
 export type ChatChannelsUncheckedUpdateWithoutChatMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -439,7 +447,7 @@ export type ChatChannelsUncheckedUpdateWithoutChatMembershipsInput = {
 }
 
 export type ChatChannelsCreateWithoutChatMessagesInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -449,7 +457,7 @@ export type ChatChannelsCreateWithoutChatMessagesInput = {
 }
 
 export type ChatChannelsUncheckedCreateWithoutChatMessagesInput = {
-  id?: string
+  uuid?: string
   title: string
   channelType: $Enums.ChannelType
   channelVisibility: $Enums.ChannelVisibility
@@ -475,7 +483,7 @@ export type ChatChannelsUpdateToOneWithWhereWithoutChatMessagesInput = {
 }
 
 export type ChatChannelsUpdateWithoutChatMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -485,7 +493,7 @@ export type ChatChannelsUpdateWithoutChatMessagesInput = {
 }
 
 export type ChatChannelsUncheckedUpdateWithoutChatMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   channelType?: Prisma.EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
   channelVisibility?: Prisma.EnumChannelVisibilityFieldUpdateOperationsInput | $Enums.ChannelVisibility
@@ -535,7 +543,7 @@ export type ChatChannelsCountOutputTypeCountChatMembershipsArgs<ExtArgs extends 
 
 
 export type ChatChannelsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   title?: boolean
   channelType?: boolean
   channelVisibility?: boolean
@@ -547,7 +555,7 @@ export type ChatChannelsSelect<ExtArgs extends runtime.Types.Extensions.Internal
 }, ExtArgs["result"]["chatChannels"]>
 
 export type ChatChannelsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   title?: boolean
   channelType?: boolean
   channelVisibility?: boolean
@@ -556,7 +564,7 @@ export type ChatChannelsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["chatChannels"]>
 
 export type ChatChannelsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   title?: boolean
   channelType?: boolean
   channelVisibility?: boolean
@@ -565,7 +573,7 @@ export type ChatChannelsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["chatChannels"]>
 
 export type ChatChannelsSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   title?: boolean
   channelType?: boolean
   channelVisibility?: boolean
@@ -573,7 +581,7 @@ export type ChatChannelsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ChatChannelsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "channelType" | "channelVisibility" | "createdAt" | "updatedAt", ExtArgs["result"]["chatChannels"]>
+export type ChatChannelsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "title" | "channelType" | "channelVisibility" | "createdAt" | "updatedAt", ExtArgs["result"]["chatChannels"]>
 export type ChatChannelsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chatMessages?: boolean | Prisma.ChatChannels$chatMessagesArgs<ExtArgs>
   chatMemberships?: boolean | Prisma.ChatChannels$chatMembershipsArgs<ExtArgs>
@@ -589,7 +597,7 @@ export type $ChatChannelsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     chatMemberships: Prisma.$ChatMembershipsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     title: string
     channelType: $Enums.ChannelType
     channelVisibility: $Enums.ChannelVisibility
@@ -678,8 +686,8 @@ export interface ChatChannelsDelegate<ExtArgs extends runtime.Types.Extensions.I
    * // Get first 10 ChatChannels
    * const chatChannels = await prisma.chatChannels.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const chatChannelsWithIdOnly = await prisma.chatChannels.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const chatChannelsWithUuidOnly = await prisma.chatChannels.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends ChatChannelsFindManyArgs>(args?: Prisma.SelectSubset<T, ChatChannelsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatChannelsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -723,9 +731,9 @@ export interface ChatChannelsDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Create many ChatChannels and only return the `id`
-   * const chatChannelsWithIdOnly = await prisma.chatChannels.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many ChatChannels and only return the `uuid`
+   * const chatChannelsWithUuidOnly = await prisma.chatChannels.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -814,9 +822,9 @@ export interface ChatChannelsDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Update zero or more ChatChannels and only return the `id`
-   * const chatChannelsWithIdOnly = await prisma.chatChannels.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more ChatChannels and only return the `uuid`
+   * const chatChannelsWithUuidOnly = await prisma.chatChannels.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1020,7 +1028,7 @@ export interface Prisma__ChatChannelsClient<T, Null = never, ExtArgs extends run
  * Fields of the ChatChannels model
  */
 export interface ChatChannelsFieldRefs {
-  readonly id: Prisma.FieldRef<"ChatChannels", 'String'>
+  readonly uuid: Prisma.FieldRef<"ChatChannels", 'String'>
   readonly title: Prisma.FieldRef<"ChatChannels", 'String'>
   readonly channelType: Prisma.FieldRef<"ChatChannels", 'ChannelType'>
   readonly channelVisibility: Prisma.FieldRef<"ChatChannels", 'ChannelVisibility'>

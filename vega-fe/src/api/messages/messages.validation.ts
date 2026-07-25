@@ -3,7 +3,7 @@ import z from 'zod';
 export const GetMessagesValidationSchema = z.object({
 	messages: z.array(
 		z.object({
-			id: z.string(),
+			uuid: z.string(),
 			text: z.string(),
 			channelUuid: z.string(),
 			isPinned: z.boolean(),
@@ -14,7 +14,7 @@ export const GetMessagesValidationSchema = z.object({
 			canEdit: z.boolean(),
 			author: z.object({
 				avatarUrl: z.string().nullable(),
-				id: z.string(),
+				uuid: z.string(),
 				name: z.string(),
 				secondName: z.string(),
 			}),

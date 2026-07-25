@@ -29,7 +29,7 @@ const ProjectMembers = () => {
 	const handleUpdateUserRole = (userUuid: string, userRoleUuid: string) => {
 		if (!params.uuid) return;
 		if (userRoleUuid === OWNER_ROLE_UUID) {
-			const userName = usersList.find((item) => item?.id === userUuid)?.userName;
+			const userName = usersList.find((item) => item?.uuid === userUuid)?.userName;
 			if (userName) {
 				dispatch(setModalInfo({ userUuid, userRoleUuid, userName }));
 			}

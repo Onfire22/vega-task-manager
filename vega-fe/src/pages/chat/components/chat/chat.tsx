@@ -33,9 +33,9 @@ const Chat = () => {
 
 	const handlePinMessage = (message: IMappedMessage) => {
 		socket.emit('message:edit', {
-			authorUuid: message.author.id,
+			authorUuid: message.author.uuid,
 			channelUuid: message.channelUuid,
-			messageUuid: message.id,
+			messageUuid: message.uuid,
 			value: !message.isPinned,
 			canEdit: message.canEdit,
 			field: 'isPinned',

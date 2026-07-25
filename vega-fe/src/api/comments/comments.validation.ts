@@ -7,12 +7,12 @@ export const BaseResponseSchema = z.object({
 export const CommentsResponseSchema = z.object({
 	comments: z.array(
 		z.object({
-			id: z.string(),
+			uuid: z.string(),
 			text: z.string(),
 			createdAt: z.string(),
 			updatedAt: z.string().optional(),
 			author: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				name: z.string(),
 				secondName: z.string(),
 				avatarUrl: z.string().nullable(),

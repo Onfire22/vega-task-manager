@@ -50,7 +50,7 @@ export const useProjectData = () => {
 			...project,
 			avatar: {
 				letters: project.code.substring(1, 3),
-				color: getAvatarColor(project.id),
+				color: getAvatarColor(project.uuid),
 			},
 			createdAt: project?.createdAt ? format(project.createdAt, DATE_FORMAT) : '-',
 			deadlineDate: project?.deadlineDate ? format(project.deadlineDate, DATE_FORMAT) : null,
@@ -73,16 +73,16 @@ export const useProjectUsers = () => {
 		(acc, user) => {
 			const accKey = user.role.key === 'owner' ? 'owner' : 'users';
 			acc[accKey].push({
-				id: user.id,
+				uuid: user.uuid,
 				userName: `${user.name} ${user.secondName}`,
 				userSpecialisation: user.userSpecialisation.label,
 				userInitials: `${user.name[0]} ${user.secondName[0]}`,
-				color: getAvatarColor(user.id),
+				color: getAvatarColor(user.uuid),
 				avatarUrl: user.avatarUrl,
 				userRole: {
 					label: user.role.label,
 					key: user.role.key,
-					id: user.role.id,
+					uuid: user.role.uuid,
 				},
 			});
 

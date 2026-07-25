@@ -1,5 +1,5 @@
 model Task {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   code             String?    @unique
   title            String
@@ -9,17 +9,17 @@ model Task {
   assigneeUuid     String?    @map("assignee_uuid")
   mrLinks          String?    @map("mr_links")
   buildLinks       String?    @map("build_links")
-  assignee         User?      @relation("AssignedTasks", fields: [assigneeUuid], references: [id])
+  assignee         User?      @relation("AssignedTasks", fields: [assigneeUuid], references: [uuid])
   reporterUuid     String     @map("reporter_uuid")
-  reporter         User       @relation("ReportedTasks", fields: [reporterUuid], references: [id])
+  reporter         User       @relation("ReportedTasks", fields: [reporterUuid], references: [uuid])
   projectUuid      String?    @map("project_uuid")
-  project          Project?   @relation(fields: [projectUuid], references: [id])
+  project          Project?   @relation(fields: [projectUuid], references: [uuid])
   taskPriorityUuid String     @map("task_priority_uuid")
-  taskPriority     Dictionary @relation("TaskPriority", fields: [taskPriorityUuid], references: [id])
+  taskPriority     Dictionary @relation("TaskPriority", fields: [taskPriorityUuid], references: [uuid])
   taskStatusUuid   String     @map("task_status_uuid")
-  taskStatus       Dictionary @relation("TaskStatus", fields: [taskStatusUuid], references: [id])
+  taskStatus       Dictionary @relation("TaskStatus", fields: [taskStatusUuid], references: [uuid])
   taskStackUuid    String     @map("task_stack_uuid")
-  taskStack        Dictionary @relation("TaskStack", fields: [taskStackUuid], references: [id])
+  taskStack        Dictionary @relation("TaskStack", fields: [taskStackUuid], references: [uuid])
 
   notifications Notification[]
   timeLogs      TimeLog[]

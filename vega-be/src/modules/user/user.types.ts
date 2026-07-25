@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export interface IUser {
 	email: string;
-	id: string;
+	uuid: string;
 	name: string;
 	secondName: string | null;
 }
@@ -13,7 +13,7 @@ export interface IUserResponse {
 }
 
 export interface IGetUserListResponse {
-	usersList: Array<Partial<Pick<IUser, 'id' | 'name' | 'secondName'>>>;
+	usersList: Array<Partial<Pick<IUser, 'uuid' | 'name' | 'secondName'>>>;
 }
 
 export type TUserListBody = z.infer<typeof UserListBodySchema>;

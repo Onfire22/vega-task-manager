@@ -14,7 +14,7 @@ export const usePersonalData = () => {
 			name: currentData.currentUser.name,
 			secondName: currentData.currentUser.secondName,
 			userName: currentData.currentUser.userName,
-			userSpecialisationUuid: currentData.currentUser.userSpecialisation.id,
+			userSpecialisationUuid: currentData.currentUser.userSpecialisation.uuid,
 		};
 	}, [currentData, dictionariesOptions.userSpecialisation]);
 
@@ -42,7 +42,7 @@ export const useUserInfo = () => {
 	} else {
 		userData.initials =
 			`${currentData?.currentUser.name.slice(0, 1)}. ${currentData?.currentUser.userName.slice(0, 1)}.`.toUpperCase();
-		userData.avatar = getAvatarColor(currentData?.currentUser.id);
+		userData.avatar = getAvatarColor(currentData?.currentUser.uuid);
 	}
 
 	return {

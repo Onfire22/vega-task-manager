@@ -11,7 +11,7 @@ const getDictionaries = async (filters: string) => {
 
 	const dictionaries = await prismaAppClient.dictionary.findMany({
 		where: { type: { in: validFilters } },
-		select: { id: true, label: true, type: true, key: true, description: true },
+		select: { uuid: true, label: true, type: true, key: true, description: true },
 	});
 
 	const dictionariesData = dictionaries.reduce((acc, item) => {

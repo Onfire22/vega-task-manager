@@ -12,7 +12,7 @@ export const getProjectProgress = (tasks: Array<TProjectTasks>) => {
 export const normalizeProject = (project: ProjectWithDetails, userId?: string) => {
 	const { memberships, ...rest } = project;
 
-	const canEdit = memberships.find((role) => role.user.id === userId)?.userRole?.key === 'owner';
+	const canEdit = memberships.find((role) => role.user.uuid === userId)?.userRole?.key === 'owner';
 
 	return {
 		...rest,

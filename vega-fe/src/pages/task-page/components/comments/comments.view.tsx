@@ -34,17 +34,17 @@ const CommentsView: React.FC<IProps> = ({
 		<div>
 			<ul className="flex flex-col gap-2.5 mb-2.5">
 				{comments.map((item) => {
-					return field.uuid === item.id ? (
-						<div className="flex gap-2.5 mb-2.5" key={item.id}>
+					return field.uuid === item.uuid ? (
+						<div className="flex gap-2.5 mb-2.5" key={item.uuid}>
 							<CustomTextarea
 								value={field.value}
 								placeholder="Изменить комментарий..."
 								onChange={(e) => {
-									onSetCommentValue(item.id, e);
+									onSetCommentValue(item.uuid, e);
 								}}
 							/>
 							<div>
-								<Button onClick={() => onEditComment(item.id)}>
+								<Button onClick={() => onEditComment(item.uuid)}>
 									<CornerRightUp />
 								</Button>
 								<Button onClick={() => onSetActiveField('', '')}>
@@ -53,7 +53,10 @@ const CommentsView: React.FC<IProps> = ({
 							</div>
 						</div>
 					) : (
-						<li className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary" key={item.id}>
+						<li
+							className="p-1.25 rounded-[5px] flex items-start gap-2.5 hover:bg-secondary"
+							key={item.uuid}
+						>
 							<div
 								className="w-7.5 h-7.5 rounded-full flex items-center justify-center"
 								style={{ backgroundColor: !item.user.avatar.avatarUrl ? item.user.avatar.color : '' }}
@@ -75,12 +78,12 @@ const CommentsView: React.FC<IProps> = ({
 											<Pencil
 												className="cursor-pointer hover:text-muted-foreground"
 												size={15}
-												onClick={() => onSetActiveField(item.id, item.text)}
+												onClick={() => onSetActiveField(item.uuid, item.text)}
 											/>
 											<Trash2
 												className="cursor-pointer hover:text-muted-foreground"
 												size={15}
-												onClick={() => onDeleteComment(item.id)}
+												onClick={() => onDeleteComment(item.uuid)}
 											/>
 										</div>
 									)}

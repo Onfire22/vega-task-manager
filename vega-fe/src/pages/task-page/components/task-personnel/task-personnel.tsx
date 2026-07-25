@@ -21,7 +21,7 @@ const TaskPersonnel = () => {
 			searchValue={searchValue}
 			isUsersLoading={isUsersLoading}
 			usersListOptions={usersListOptions}
-			currentUserId={data?.currentUser.id}
+			currentUserId={data?.currentUser.uuid}
 			onUpdateTask={updateTask}
 			onSearchChange={handleSearchChange}
 		/>

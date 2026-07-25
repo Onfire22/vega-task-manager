@@ -1,19 +1,19 @@
 interface Project {
-	id: string;
+	uuid: string;
 	code: string;
 	title: string;
 	link: string;
 }
 
 interface Task {
-	id: string;
+	uuid: string;
 	code: string;
 	title: string;
 	link: string;
 }
 
 interface User {
-	id: string;
+	uuid: string;
 	link: string;
 	name: string;
 	email: string;
@@ -21,14 +21,14 @@ interface User {
 }
 
 interface Comment {
-	id: string;
+	uuid: string;
 	text: string;
 	taskUuid: string;
 	link: string;
 }
 
 interface Log {
-	id: string;
+	uuid: string;
 	description: string;
 	taskUuid: string;
 	link: string;

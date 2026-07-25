@@ -69,12 +69,12 @@ const SidebarView: React.FC<IProps> = ({
 							channels.channel.map((item) => {
 								return (
 									<div
-										key={item.id}
+										key={item.uuid}
 										className={cn(
 											'py-2.5 px-1.25 mb-2 flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer transition-bg duration-300',
-											activeChannelUuid === item.id && 'bg-accent',
+											activeChannelUuid === item.uuid && 'bg-accent',
 										)}
-										onClick={() => onSetActiveChannel(item.id)}
+										onClick={() => onSetActiveChannel(item.uuid)}
 									>
 										<div className="flex items-center gap-1.5">
 											{item.channelVisibility === 'private' && <Lock size={15} color="white" />}
@@ -99,12 +99,12 @@ const SidebarView: React.FC<IProps> = ({
 							channels.pm.map((item) => {
 								return (
 									<div
-										key={item.id}
+										key={item.uuid}
 										className={cn(
 											'py-2.5 px-1.25 mb-2 flex items-center justify-between rounded-[5px] hover:bg-accent cursor-pointer transition-bg duration-300',
-											activeChannelUuid === item.id && 'bg-accent',
+											activeChannelUuid === item.uuid && 'bg-accent',
 										)}
-										onClick={() => onSetActiveChannel(item.id)}
+										onClick={() => onSetActiveChannel(item.uuid)}
 									>
 										<div className="flex items-center gap-2">
 											<div className="w-6.25 h-6.25 bg-white rounded-full" />

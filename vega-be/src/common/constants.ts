@@ -46,6 +46,6 @@ export const ROUTES = {
 
 export const TIME_COEFFICIENTS = { h: 3600, m: 60 };
 
-export const DICTIONARY_SELECT = { id: true, label: true, key: true };
+export const DICTIONARY_SELECT = { uuid: true, label: true, key: true };
 
-export const USER_SELECT = { id: true, name: true, secondName: true };
+export const USER_SELECT = { uuid: true, name: true, secondName: true };

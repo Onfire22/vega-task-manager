@@ -37,7 +37,7 @@ export const useChannelsList = () => {
 			...(channelAdminData
 				? {
 						channelAdmin: {
-							id: channelAdminData.id,
+							uuid: channelAdminData.uuid,
 							name: `${channelAdminData.name} ${channelAdminData.secondName}`,
 						},
 					}
@@ -58,7 +58,7 @@ export const useMessagesData = (messagesData?: Array<IMessage>) => {
 		const messages = messagesData.reduce<Array<IMappedMessage>>((acc, message) => {
 			const { createdAt, replyToUuid, ...rest } = message;
 
-			const replyMessage = replyToUuid ? messagesData.find((message) => message.id === replyToUuid) : null;
+			const replyMessage = replyToUuid ? messagesData.find((message) => message.uuid === replyToUuid) : null;
 
 			acc.push({
 				...rest,
@@ -66,14 +66,14 @@ export const useMessagesData = (messagesData?: Array<IMessage>) => {
 				createdAtDate: format(createdAt, DATE_FORMAT),
 				createdAtTime: format(createdAt, TIME_FORMAT),
 				author: {
-					id: message.author.id,
+					uuid: message.author.uuid,
 					name: `${message.author.name} ${message.author.secondName}`,
 					...(message.author.avatarUrl
 						? { avatarUrl: message.author.avatarUrl }
 						: {
 								avatar: {
 									initials: `${message.author.name[0]} ${message.author.secondName[0]}`,
-									color: getAvatarColor(message.author.id),
+									color: getAvatarColor(message.author.uuid),
 								},
 							}),
 				},
@@ -145,7 +145,7 @@ export const useUserChannelsData = (channels?: Array<IChannel>) => {
 			if (channelType === 'pm') {
 				const user = channel.users.find((user) => user.role.key === 'chat_member');
 				channelAvatar = {
-					color: getAvatarColor(user?.id),
+					color: getAvatarColor(user?.uuid),
 					initials: `${user?.name[0]}. ${user?.secondName[0]}.`.toUpperCase(),
 				};
 			}
@@ -165,9 +165,9 @@ export const useUserChannelsData = (channels?: Array<IChannel>) => {
 			return acc;
 		}, {} as TChannelsGroups);
 
-		const channelsUuids = channels.map((channel) => channel.id);
+		const channelsUuids = channels.map((channel) => channel.uuid);
 
-		const activeChannel = channels.find((channel) => channel.id === activeChannelUuid) || null;
+		const activeChannel = channels.find((channel) => channel.uuid === activeChannelUuid) || null;
 
 		return {
 			channelGroups,

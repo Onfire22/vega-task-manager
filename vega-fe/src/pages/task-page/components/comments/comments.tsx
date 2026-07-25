@@ -70,7 +70,7 @@ const Comments = () => {
 		<CommentsView
 			value={value}
 			comments={comments}
-			currentUserUuid={data?.currentUser.id}
+			currentUserUuid={data?.currentUser.uuid}
 			field={field}
 			onSetValue={handleSetValue}
 			onCreateComment={handleCreateComment}

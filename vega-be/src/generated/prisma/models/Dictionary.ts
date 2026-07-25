@@ -25,7 +25,7 @@ export type AggregateDictionary = {
 }
 
 export type DictionaryMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   label: string | null
   key: string | null
   type: $Enums.Type | null
@@ -35,7 +35,7 @@ export type DictionaryMinAggregateOutputType = {
 }
 
 export type DictionaryMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   label: string | null
   key: string | null
   type: $Enums.Type | null
@@ -45,7 +45,7 @@ export type DictionaryMaxAggregateOutputType = {
 }
 
 export type DictionaryCountAggregateOutputType = {
-  id: number
+  uuid: number
   label: number
   key: number
   type: number
@@ -57,7 +57,7 @@ export type DictionaryCountAggregateOutputType = {
 
 
 export type DictionaryMinAggregateInputType = {
-  id?: true
+  uuid?: true
   label?: true
   key?: true
   type?: true
@@ -67,7 +67,7 @@ export type DictionaryMinAggregateInputType = {
 }
 
 export type DictionaryMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   label?: true
   key?: true
   type?: true
@@ -77,7 +77,7 @@ export type DictionaryMaxAggregateInputType = {
 }
 
 export type DictionaryCountAggregateInputType = {
-  id?: true
+  uuid?: true
   label?: true
   key?: true
   type?: true
@@ -160,7 +160,7 @@ export type DictionaryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type DictionaryGroupByOutputType = {
-  id: string
+  uuid: string
   label: string
   key: string
   type: $Enums.Type
@@ -191,7 +191,7 @@ export type DictionaryWhereInput = {
   AND?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
   OR?: Prisma.DictionaryWhereInput[]
   NOT?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
-  id?: Prisma.StringFilter<"Dictionary"> | string
+  uuid?: Prisma.StringFilter<"Dictionary"> | string
   label?: Prisma.StringFilter<"Dictionary"> | string
   key?: Prisma.StringFilter<"Dictionary"> | string
   type?: Prisma.EnumTypeFilter<"Dictionary"> | $Enums.Type
@@ -208,7 +208,7 @@ export type DictionaryWhereInput = {
 }
 
 export type DictionaryOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   label?: Prisma.SortOrder
   key?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -225,7 +225,7 @@ export type DictionaryOrderByWithRelationInput = {
 }
 
 export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   key_type?: Prisma.DictionaryKeyTypeCompoundUniqueInput
   AND?: Prisma.DictionaryWhereInput | Prisma.DictionaryWhereInput[]
   OR?: Prisma.DictionaryWhereInput[]
@@ -243,10 +243,10 @@ export type DictionaryWhereUniqueInput = Prisma.AtLeast<{
   taskStacks?: Prisma.TaskListRelationFilter
   projectStatus?: Prisma.ProjectListRelationFilter
   chatMemberships?: Prisma.ChatMembershipsListRelationFilter
-}, "id" | "key_type">
+}, "uuid" | "key_type">
 
 export type DictionaryOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   label?: Prisma.SortOrder
   key?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -262,7 +262,7 @@ export type DictionaryScalarWhereWithAggregatesInput = {
   AND?: Prisma.DictionaryScalarWhereWithAggregatesInput | Prisma.DictionaryScalarWhereWithAggregatesInput[]
   OR?: Prisma.DictionaryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DictionaryScalarWhereWithAggregatesInput | Prisma.DictionaryScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
   label?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
   key?: Prisma.StringWithAggregatesFilter<"Dictionary"> | string
   type?: Prisma.EnumTypeWithAggregatesFilter<"Dictionary"> | $Enums.Type
@@ -272,7 +272,7 @@ export type DictionaryScalarWhereWithAggregatesInput = {
 }
 
 export type DictionaryCreateInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -289,7 +289,7 @@ export type DictionaryCreateInput = {
 }
 
 export type DictionaryUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -306,7 +306,7 @@ export type DictionaryUncheckedCreateInput = {
 }
 
 export type DictionaryUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -323,7 +323,7 @@ export type DictionaryUpdateInput = {
 }
 
 export type DictionaryUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -340,7 +340,7 @@ export type DictionaryUncheckedUpdateInput = {
 }
 
 export type DictionaryCreateManyInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -350,7 +350,7 @@ export type DictionaryCreateManyInput = {
 }
 
 export type DictionaryUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -360,7 +360,7 @@ export type DictionaryUpdateManyMutationInput = {
 }
 
 export type DictionaryUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -380,7 +380,7 @@ export type DictionaryKeyTypeCompoundUniqueInput = {
 }
 
 export type DictionaryCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   label?: Prisma.SortOrder
   key?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -390,7 +390,7 @@ export type DictionaryCountOrderByAggregateInput = {
 }
 
 export type DictionaryMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   label?: Prisma.SortOrder
   key?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -400,7 +400,7 @@ export type DictionaryMaxOrderByAggregateInput = {
 }
 
 export type DictionaryMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   label?: Prisma.SortOrder
   key?: Prisma.SortOrder
   type?: Prisma.SortOrder
@@ -512,7 +512,7 @@ export type DictionaryUpdateOneRequiredWithoutUsersNestedInput = {
 }
 
 export type DictionaryCreateWithoutChatMembershipsInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -528,7 +528,7 @@ export type DictionaryCreateWithoutChatMembershipsInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutChatMembershipsInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -560,7 +560,7 @@ export type DictionaryUpdateToOneWithWhereWithoutChatMembershipsInput = {
 }
 
 export type DictionaryUpdateWithoutChatMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -576,7 +576,7 @@ export type DictionaryUpdateWithoutChatMembershipsInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutChatMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -592,7 +592,7 @@ export type DictionaryUncheckedUpdateWithoutChatMembershipsInput = {
 }
 
 export type DictionaryCreateWithoutMembershipsInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -608,7 +608,7 @@ export type DictionaryCreateWithoutMembershipsInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutMembershipsInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -640,7 +640,7 @@ export type DictionaryUpdateToOneWithWhereWithoutMembershipsInput = {
 }
 
 export type DictionaryUpdateWithoutMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -656,7 +656,7 @@ export type DictionaryUpdateWithoutMembershipsInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -672,7 +672,7 @@ export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
 }
 
 export type DictionaryCreateWithoutProjectStatusInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -688,7 +688,7 @@ export type DictionaryCreateWithoutProjectStatusInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutProjectStatusInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -720,7 +720,7 @@ export type DictionaryUpdateToOneWithWhereWithoutProjectStatusInput = {
 }
 
 export type DictionaryUpdateWithoutProjectStatusInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -736,7 +736,7 @@ export type DictionaryUpdateWithoutProjectStatusInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -752,7 +752,7 @@ export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
 }
 
 export type DictionaryCreateWithoutTaskPrioritiesInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -768,7 +768,7 @@ export type DictionaryCreateWithoutTaskPrioritiesInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutTaskPrioritiesInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -789,7 +789,7 @@ export type DictionaryCreateOrConnectWithoutTaskPrioritiesInput = {
 }
 
 export type DictionaryCreateWithoutTaskStatusesInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -805,7 +805,7 @@ export type DictionaryCreateWithoutTaskStatusesInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStatusesInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -826,7 +826,7 @@ export type DictionaryCreateOrConnectWithoutTaskStatusesInput = {
 }
 
 export type DictionaryCreateWithoutTaskStacksInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -842,7 +842,7 @@ export type DictionaryCreateWithoutTaskStacksInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutTaskStacksInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -874,7 +874,7 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskPrioritiesInput = {
 }
 
 export type DictionaryUpdateWithoutTaskPrioritiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -890,7 +890,7 @@ export type DictionaryUpdateWithoutTaskPrioritiesInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskPrioritiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -917,7 +917,7 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskStatusesInput = {
 }
 
 export type DictionaryUpdateWithoutTaskStatusesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -933,7 +933,7 @@ export type DictionaryUpdateWithoutTaskStatusesInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStatusesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -960,7 +960,7 @@ export type DictionaryUpdateToOneWithWhereWithoutTaskStacksInput = {
 }
 
 export type DictionaryUpdateWithoutTaskStacksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -976,7 +976,7 @@ export type DictionaryUpdateWithoutTaskStacksInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -992,7 +992,7 @@ export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
 }
 
 export type DictionaryCreateWithoutUsersInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -1008,7 +1008,7 @@ export type DictionaryCreateWithoutUsersInput = {
 }
 
 export type DictionaryUncheckedCreateWithoutUsersInput = {
-  id?: string
+  uuid?: string
   label: string
   key: string
   type: $Enums.Type
@@ -1040,7 +1040,7 @@ export type DictionaryUpdateToOneWithWhereWithoutUsersInput = {
 }
 
 export type DictionaryUpdateWithoutUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -1056,7 +1056,7 @@ export type DictionaryUpdateWithoutUsersInput = {
 }
 
 export type DictionaryUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTypeFieldUpdateOperationsInput | $Enums.Type
@@ -1157,7 +1157,7 @@ export type DictionaryCountOutputTypeCountChatMembershipsArgs<ExtArgs extends ru
 
 
 export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   label?: boolean
   key?: boolean
   type?: boolean
@@ -1175,7 +1175,7 @@ export type DictionarySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   label?: boolean
   key?: boolean
   type?: boolean
@@ -1185,7 +1185,7 @@ export type DictionarySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   label?: boolean
   key?: boolean
   type?: boolean
@@ -1195,7 +1195,7 @@ export type DictionarySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 }, ExtArgs["result"]["dictionary"]>
 
 export type DictionarySelectScalar = {
-  id?: boolean
+  uuid?: boolean
   label?: boolean
   key?: boolean
   type?: boolean
@@ -1204,7 +1204,7 @@ export type DictionarySelectScalar = {
   updatedAt?: boolean
 }
 
-export type DictionaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "key" | "type" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionary"]>
+export type DictionaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "label" | "key" | "type" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionary"]>
 export type DictionaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Dictionary$usersArgs<ExtArgs>
   memberships?: boolean | Prisma.Dictionary$membershipsArgs<ExtArgs>
@@ -1230,7 +1230,7 @@ export type $DictionaryPayload<ExtArgs extends runtime.Types.Extensions.Internal
     chatMemberships: Prisma.$ChatMembershipsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     label: string
     key: string
     type: $Enums.Type
@@ -1320,8 +1320,8 @@ export interface DictionaryDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * // Get first 10 Dictionaries
    * const dictionaries = await prisma.dictionary.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const dictionaryWithIdOnly = await prisma.dictionary.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const dictionaryWithUuidOnly = await prisma.dictionary.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends DictionaryFindManyArgs>(args?: Prisma.SelectSubset<T, DictionaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1365,9 +1365,9 @@ export interface DictionaryDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Create many Dictionaries and only return the `id`
-   * const dictionaryWithIdOnly = await prisma.dictionary.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Dictionaries and only return the `uuid`
+   * const dictionaryWithUuidOnly = await prisma.dictionary.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -1456,9 +1456,9 @@ export interface DictionaryDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Update zero or more Dictionaries and only return the `id`
-   * const dictionaryWithIdOnly = await prisma.dictionary.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Dictionaries and only return the `uuid`
+   * const dictionaryWithUuidOnly = await prisma.dictionary.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1667,7 +1667,7 @@ export interface Prisma__DictionaryClient<T, Null = never, ExtArgs extends runti
  * Fields of the Dictionary model
  */
 export interface DictionaryFieldRefs {
-  readonly id: Prisma.FieldRef<"Dictionary", 'String'>
+  readonly uuid: Prisma.FieldRef<"Dictionary", 'String'>
   readonly label: Prisma.FieldRef<"Dictionary", 'String'>
   readonly key: Prisma.FieldRef<"Dictionary", 'String'>
   readonly type: Prisma.FieldRef<"Dictionary", 'Type'>

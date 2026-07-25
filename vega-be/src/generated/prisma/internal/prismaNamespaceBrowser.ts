@@ -51,15 +51,19 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  ChatMemberships: 'ChatMemberships',
   ChatChannels: 'ChatChannels',
+  ChatMemberships: 'ChatMemberships',
   ChatMessages: 'ChatMessages',
   Comment: 'Comment',
+  Company: 'Company',
   Dictionary: 'Dictionary',
   Membership: 'Membership',
   Notification: 'Notification',
   Project: 'Project',
+  ProjectsMembership: 'ProjectsMembership',
   Task: 'Task',
+  Team: 'Team',
+  TeamMembers: 'TeamMembers',
   TimeLog: 'TimeLog',
   User: 'User'
 } as const
@@ -80,20 +84,8 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ChatMembershipsScalarFieldEnum = {
-  id: 'id',
-  userRoleUuid: 'userRoleUuid',
-  userUuid: 'userUuid',
-  channelUuid: 'channelUuid',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ChatMembershipsScalarFieldEnum = (typeof ChatMembershipsScalarFieldEnum)[keyof typeof ChatMembershipsScalarFieldEnum]
-
-
 export const ChatChannelsScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   title: 'title',
   channelType: 'channelType',
   channelVisibility: 'channelVisibility',
@@ -104,8 +96,20 @@ export const ChatChannelsScalarFieldEnum = {
 export type ChatChannelsScalarFieldEnum = (typeof ChatChannelsScalarFieldEnum)[keyof typeof ChatChannelsScalarFieldEnum]
 
 
+export const ChatMembershipsScalarFieldEnum = {
+  uuid: 'uuid',
+  userRoleUuid: 'userRoleUuid',
+  userUuid: 'userUuid',
+  channelUuid: 'channelUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMembershipsScalarFieldEnum = (typeof ChatMembershipsScalarFieldEnum)[keyof typeof ChatMembershipsScalarFieldEnum]
+
+
 export const ChatMessagesScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   text: 'text',
   isPinned: 'isPinned',
   isSystem: 'isSystem',
@@ -121,7 +125,7 @@ export type ChatMessagesScalarFieldEnum = (typeof ChatMessagesScalarFieldEnum)[k
 
 
 export const CommentScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   text: 'text',
   taskUuid: 'taskUuid',
   authorUuid: 'authorUuid',
@@ -132,8 +136,19 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
+export const CompanyScalarFieldEnum = {
+  uuid: 'uuid',
+  title: 'title',
+  avatarUrl: 'avatarUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
 export const DictionaryScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   label: 'label',
   key: 'key',
   type: 'type',
@@ -146,7 +161,7 @@ export type DictionaryScalarFieldEnum = (typeof DictionaryScalarFieldEnum)[keyof
 
 
 export const MembershipScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   userUuid: 'userUuid',
   projectUuid: 'projectUuid',
   userRoleUuid: 'userRoleUuid',
@@ -158,7 +173,7 @@ export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof
 
 
 export const NotificationScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   isReaded: 'isReaded',
   extraData: 'extraData',
   entityType: 'entityType',
@@ -174,7 +189,7 @@ export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[k
 
 
 export const ProjectScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   title: 'title',
   description: 'description',
   code: 'code',
@@ -187,8 +202,20 @@ export const ProjectScalarFieldEnum = {
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
+export const ProjectsMembershipScalarFieldEnum = {
+  uuid: 'uuid',
+  teamUuid: 'teamUuid',
+  projectUuid: 'projectUuid',
+  ownerUuid: 'ownerUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectsMembershipScalarFieldEnum = (typeof ProjectsMembershipScalarFieldEnum)[keyof typeof ProjectsMembershipScalarFieldEnum]
+
+
 export const TaskScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   code: 'code',
   title: 'title',
   description: 'description',
@@ -209,8 +236,30 @@ export const TaskScalarFieldEnum = {
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
+export const TeamScalarFieldEnum = {
+  uuid: 'uuid',
+  title: 'title',
+  avatarUrl: 'avatarUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamMembersScalarFieldEnum = {
+  uuid: 'uuid',
+  userUuid: 'userUuid',
+  teamUuid: 'teamUuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TeamMembersScalarFieldEnum = (typeof TeamMembersScalarFieldEnum)[keyof typeof TeamMembersScalarFieldEnum]
+
+
 export const TimeLogScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   loggedTime: 'loggedTime',
   description: 'description',
   userUuid: 'userUuid',
@@ -223,13 +272,14 @@ export type TimeLogScalarFieldEnum = (typeof TimeLogScalarFieldEnum)[keyof typeo
 
 
 export const UserScalarFieldEnum = {
-  id: 'id',
+  uuid: 'uuid',
   name: 'name',
   secondName: 'secondName',
   email: 'email',
   password: 'password',
   userName: 'userName',
   avatarUrl: 'avatarUrl',
+  isSuperUser: 'isSuperUser',
   userSpecialisationUuid: 'userSpecialisationUuid',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

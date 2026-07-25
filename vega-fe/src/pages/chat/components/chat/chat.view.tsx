@@ -39,7 +39,7 @@ const ChatView: React.FC<IProps> = ({
 			{pinnedMessages.length > 0 && (
 				<div
 					className="py-2 px-4 border-b w-full flex items-center gap-2 cursor-pointer truncate"
-					onClick={() => onPinnedMessageClick(pinnedMessages[0].id)}
+					onClick={() => onPinnedMessageClick(pinnedMessages[0].uuid)}
 				>
 					<Pin size={15} color="#3b82f6" className="rotate-45" />
 					<span>{pinnedMessages[0].text}</span>
@@ -69,14 +69,14 @@ const ChatView: React.FC<IProps> = ({
 						{messages.length > 0 ? (
 							messages.map((message, index) => {
 								return message.isSystem ? (
-									<div className="w-full" key={message.id}>
+									<div className="w-full" key={message.uuid}>
 										<span className="text-muted-foreground">{message.text}</span>
 									</div>
 								) : (
 									<div
-										key={message.id}
+										key={message.uuid}
 										ref={(el) => {
-											itemRefs.current[message.id] = el;
+											itemRefs.current[message.uuid] = el;
 										}}
 									>
 										<div
@@ -104,7 +104,7 @@ const ChatView: React.FC<IProps> = ({
 														<div
 															className="pl-3.75 py-1.25 bg-primary/30 rounded-[5px] cursor-pointer w-full relative before:absolute before:content-[''] before:w-1.25 before:h-[80%] before:rounded-[5px] before:left-1.25 before:bg-primary"
 															onClick={() =>
-																onPinnedMessageClick(message.replyMessage?.id)
+																onPinnedMessageClick(message.replyMessage?.uuid)
 															}
 														>
 															<div className="text-muted-foreground text-[12px]">{`${message.replyMessage.author.name} ${message.replyMessage.author.secondName}`}</div>

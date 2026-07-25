@@ -1,13 +1,13 @@
 model Membership {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   userUuid    String
-  user        User    @relation(fields: [userUuid], references: [id])
+  user        User    @relation(fields: [userUuid], references: [uuid])
   projectUuid String  @map("prject_uuid")
-  project     Project @relation(fields: [projectUuid], references: [id])
+  project     Project @relation(fields: [projectUuid], references: [uuid])
 
   userRoleUuid String     @map("user_role_uuid")
-  userRole     Dictionary @relation(fields: [userRoleUuid], references: [id])
+  userRole     Dictionary @relation(fields: [userRoleUuid], references: [uuid])
 
   notifications Notification[]
 

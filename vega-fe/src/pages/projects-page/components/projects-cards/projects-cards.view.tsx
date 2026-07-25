@@ -16,17 +16,17 @@ const ProjectsCardsView: React.FC<IProps> = ({ projects, onCardClick }) => {
 			{projects.map((project) => {
 				return (
 					<article
-						key={project.id}
+						key={project.uuid}
 						className="text-[14px] p-3.75 bg--sidebar flex flex-col gap-2.5
             border border-accent rounded-[10px] cursor-pointer
             transition-colors duration-300 hover:bg-card"
-						onClick={() => onCardClick(project.id)}
+						onClick={() => onCardClick(project.uuid)}
 					>
 						<div className="flex items-center gap-2.5">
 							<div
 								className="w-7.5 h-7.5 rounded-[5px] flex items-center justify-center"
 								style={{
-									backgroundColor: getAvatarColor(project.id),
+									backgroundColor: getAvatarColor(project.uuid),
 								}}
 							>
 								{project.code.substring(1, 3)}

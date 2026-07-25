@@ -2,13 +2,9 @@ import { z } from 'zod';
 import { DictionariesQuerySchema } from './dictionary.validation';
 
 export interface IDictionary {
-	id: string;
+	uuid: string;
 	label: string;
 	description: string | null;
-}
-
-export interface IDictionaryReqQuery {
-	filters: string;
 }
 
 export type TDictionariesTypes =

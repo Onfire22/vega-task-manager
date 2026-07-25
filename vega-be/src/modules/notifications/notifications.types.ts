@@ -3,19 +3,19 @@ import { Prisma } from '../../generated/prisma/client';
 export type TNotifications = Prisma.NotificationGetPayload<{
 	select: {
 		createdAt: true;
-		id: true;
+		uuid: true;
 		entityType: true;
 		isReaded: true;
 		extraData: true;
 		fromUser: {
 			select: {
-				id: true;
+				uuid: true;
 				userName: true;
 			};
 		};
 		task: {
 			select: {
-				id: true;
+				uuid: true;
 				code: true;
 			};
 		};
@@ -23,7 +23,7 @@ export type TNotifications = Prisma.NotificationGetPayload<{
 			select: {
 				project: {
 					select: {
-						id: true;
+						uuid: true;
 						code: true;
 					};
 				};

@@ -4,7 +4,7 @@ import { getNotificationsResponseSchema } from '@/api/notifiactions/notifiaction
 export type TNotificationsResponse = z.infer<typeof getNotificationsResponseSchema>;
 
 export interface INotification {
-	id: string;
+	uuid: string;
 	isReaded: boolean;
 	createdAt: string;
 	extraData?: string;

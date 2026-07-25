@@ -53,7 +53,7 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 		const dictionaries = await tx.dictionary.findMany({
 			where: { type: 'CHAT_ROLE' },
 			select: {
-				id: true,
+				uuid: true,
 				key: true,
 				label: true,
 			},
@@ -62,7 +62,7 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 		const { chat_admin, chat_member } = dictionaries.reduce(
 			(acc, item) => {
 				const key = item.key as 'chat_admin' | 'chat_member';
-				acc[key] = item.id;
+				acc[key] = item.uuid;
 				return acc;
 			},
 			{} as { chat_admin: string; chat_member: string },
@@ -70,10 +70,10 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 
 		const userData = userUuids.map((uuid) => {
 			return {
-				user: { connect: { id: uuid } },
+				user: { connect: { uuid } },
 				userRole: {
 					connect: {
-						id: uuid === adminUuid ? chat_admin : chat_member,
+						uuid: uuid === adminUuid ? chat_admin : chat_member,
 					},
 				},
 			};
@@ -94,14 +94,14 @@ const createChannel = (channelData: IChannel, adminUuid: string) => {
 
 const editChannel = (channelData: IChannelEdit) => {
 	return prismaAppClient.chatChannels.update({
-		where: { id: channelData.uuid },
+		where: { uuid: channelData.uuid },
 		data: { title: channelData.title },
 	});
 };
 
 const deleteChannel = async (channelUuid: string) => {
 	await prismaAppClient.chatChannels.delete({
-		where: { id: channelUuid },
+		where: { uuid: channelUuid },
 	});
 
 	return prismaAppClient.chatChannels.findMany();
@@ -110,7 +110,7 @@ const deleteChannel = async (channelUuid: string) => {
 const updateChannelUserRole = async (channelUuid: string, userUuid: string) => {
 	const userRole = await prismaAppClient.dictionary.findUnique({
 		where: { key_type: { type: 'CHAT_ROLE', key: 'chat_member' } },
-		select: { id: true },
+		select: { uuid: true },
 	});
 
 	if (!userRole) {
@@ -120,17 +120,17 @@ const updateChannelUserRole = async (channelUuid: string, userUuid: string) => {
 	await prismaAppClient.chatMemberships.upsert({
 		where: { user_channel: { channelUuid, userUuid } },
 		update: {
-			userRoleUuid: userRole.id,
+			userRoleUuid: userRole.uuid,
 		},
 		create: {
 			userUuid: userUuid,
 			channelUuid: channelUuid,
-			userRoleUuid: userRole.id,
+			userRoleUuid: userRole.uuid,
 		},
 	});
 
 	const channel = await prismaAppClient.chatChannels.findUniqueOrThrow({
-		where: { id: channelUuid, chatMemberships: { some: { userUuid } } },
+		where: { uuid: channelUuid, chatMemberships: { some: { userUuid } } },
 		select: channelsSelect,
 	});
 
