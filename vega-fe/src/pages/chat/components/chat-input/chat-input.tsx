@@ -22,11 +22,11 @@ const ChatInput = () => {
 		const message: ICreateMessage = {
 			text: value.trim(),
 			channelUuid: activeChannelUuid,
-			authorUuid: data.currentUser.id,
+			authorUuid: data.currentUser.uuid,
 		};
 
 		if (replyMessage) {
-			message.replyToUuid = replyMessage.id;
+			message.replyToUuid = replyMessage.uuid;
 		}
 
 		socket.emit('message:create', message);

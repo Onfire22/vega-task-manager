@@ -35,7 +35,7 @@ const TaskModal = () => {
 			toast.success('Задача успешно создана');
 			form.reset();
 			dispatch(setActiveModal(null));
-			navigate(`task/${response.id}`);
+			navigate(`task/${response.uuid}`);
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

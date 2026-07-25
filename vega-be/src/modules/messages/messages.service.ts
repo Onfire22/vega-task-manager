@@ -26,7 +26,7 @@ const createMessage = async (messageData: ICreateMessage, currentUserUuid: strin
 
 const editMessage = async (messageData: IEditMessage, currentUserUuid: string) => {
 	const message = await prismaAppClient.chatMessages.update({
-		where: { id: messageData.messageUuid },
+		where: { uuid: messageData.messageUuid },
 		data: {
 			[messageData.field]: messageData.value,
 		},

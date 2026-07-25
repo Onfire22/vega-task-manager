@@ -1,15 +1,15 @@
 model ChatMessages {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   text        String
   isPinned    Boolean       @default(false)
   isSystem    Boolean       @default(false)
   channelUuid String
-  channel     ChatChannels  @relation(fields: [channelUuid], references: [id])
+  channel     ChatChannels  @relation(fields: [channelUuid], references: [uuid])
   authorUuid  String
-  author      User          @relation(fields: [authorUuid], references: [id])
+  author      User          @relation(fields: [authorUuid], references: [uuid])
   replyToUuid String?
-  replyTo     ChatMessages? @relation("MessageReply", fields: [replyToUuid], references: [id])
+  replyTo     ChatMessages? @relation("MessageReply", fields: [replyToUuid], references: [uuid])
 
   replies ChatMessages[] @relation("MessageReply")
 

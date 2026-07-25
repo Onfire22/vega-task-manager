@@ -1,24 +1,27 @@
 model User {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
-  name       String
-  secondName String  @map("second_name")
-  email      String  @unique
-  password   String
-  userName   String  @unique @map("user_name")
-  avatarUrl  String? @map("avatar_url")
+  name                   String
+  secondName             String  @map("second_name")
+  email                  String  @unique
+  password               String
+  userName               String  @unique @map("user_name")
+  avatarUrl              String? @map("avatar_url")
+  isSuperUser            Boolean @default(false) @map("is_super_user")
+  userSpecialisationUuid String  @map("user_specialisation_uuid")
 
-  userSpecialisationUuid String            @map("user_specialisation_uuid")
-  userSpecialisation     Dictionary        @relation(fields: [userSpecialisationUuid], references: [id])
-  assignedTasks          Task[]            @relation("AssignedTasks")
-  reportedTasks          Task[]            @relation("ReportedTasks")
-  memberships            Membership[]
-  comments               Comment[]
-  timeLogs               TimeLog[]
-  notificationsFrom      Notification[]    @relation("FromUser")
-  notificationsTo        Notification[]    @relation("ToUser")
-  chatMemberships        ChatMemberships[]
-  chatMessages           ChatMessages[]
+  userSpecialisation  Dictionary           @relation(fields: [userSpecialisationUuid], references: [uuid])
+  assignedTasks       Task[]               @relation("AssignedTasks")
+  reportedTasks       Task[]               @relation("ReportedTasks")
+  memberships         Membership[]
+  comments            Comment[]
+  timeLogs            TimeLog[]
+  notificationsFrom   Notification[]       @relation("FromUser")
+  notificationsTo     Notification[]       @relation("ToUser")
+  chatMemberships     ChatMemberships[]
+  chatMessages        ChatMessages[]
+  projectsMemberships ProjectsMembership[]
+  teamMembers         TeamMembers[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

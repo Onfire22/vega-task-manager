@@ -25,7 +25,7 @@ export type AggregateChatMessages = {
 }
 
 export type ChatMessagesMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   text: string | null
   isPinned: boolean | null
   isSystem: boolean | null
@@ -38,7 +38,7 @@ export type ChatMessagesMinAggregateOutputType = {
 }
 
 export type ChatMessagesMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   text: string | null
   isPinned: boolean | null
   isSystem: boolean | null
@@ -51,7 +51,7 @@ export type ChatMessagesMaxAggregateOutputType = {
 }
 
 export type ChatMessagesCountAggregateOutputType = {
-  id: number
+  uuid: number
   text: number
   isPinned: number
   isSystem: number
@@ -66,7 +66,7 @@ export type ChatMessagesCountAggregateOutputType = {
 
 
 export type ChatMessagesMinAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   isPinned?: true
   isSystem?: true
@@ -79,7 +79,7 @@ export type ChatMessagesMinAggregateInputType = {
 }
 
 export type ChatMessagesMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   isPinned?: true
   isSystem?: true
@@ -92,7 +92,7 @@ export type ChatMessagesMaxAggregateInputType = {
 }
 
 export type ChatMessagesCountAggregateInputType = {
-  id?: true
+  uuid?: true
   text?: true
   isPinned?: true
   isSystem?: true
@@ -178,7 +178,7 @@ export type ChatMessagesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type ChatMessagesGroupByOutputType = {
-  id: string
+  uuid: string
   text: string
   isPinned: boolean
   isSystem: boolean
@@ -212,7 +212,7 @@ export type ChatMessagesWhereInput = {
   AND?: Prisma.ChatMessagesWhereInput | Prisma.ChatMessagesWhereInput[]
   OR?: Prisma.ChatMessagesWhereInput[]
   NOT?: Prisma.ChatMessagesWhereInput | Prisma.ChatMessagesWhereInput[]
-  id?: Prisma.StringFilter<"ChatMessages"> | string
+  uuid?: Prisma.StringFilter<"ChatMessages"> | string
   text?: Prisma.StringFilter<"ChatMessages"> | string
   isPinned?: Prisma.BoolFilter<"ChatMessages"> | boolean
   isSystem?: Prisma.BoolFilter<"ChatMessages"> | boolean
@@ -229,7 +229,7 @@ export type ChatMessagesWhereInput = {
 }
 
 export type ChatMessagesOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
@@ -246,7 +246,7 @@ export type ChatMessagesOrderByWithRelationInput = {
 }
 
 export type ChatMessagesWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   AND?: Prisma.ChatMessagesWhereInput | Prisma.ChatMessagesWhereInput[]
   OR?: Prisma.ChatMessagesWhereInput[]
   NOT?: Prisma.ChatMessagesWhereInput | Prisma.ChatMessagesWhereInput[]
@@ -263,10 +263,10 @@ export type ChatMessagesWhereUniqueInput = Prisma.AtLeast<{
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   replyTo?: Prisma.XOR<Prisma.ChatMessagesNullableScalarRelationFilter, Prisma.ChatMessagesWhereInput> | null
   replies?: Prisma.ChatMessagesListRelationFilter
-}, "id">
+}, "uuid">
 
 export type ChatMessagesOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
@@ -285,7 +285,7 @@ export type ChatMessagesScalarWhereWithAggregatesInput = {
   AND?: Prisma.ChatMessagesScalarWhereWithAggregatesInput | Prisma.ChatMessagesScalarWhereWithAggregatesInput[]
   OR?: Prisma.ChatMessagesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ChatMessagesScalarWhereWithAggregatesInput | Prisma.ChatMessagesScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ChatMessages"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"ChatMessages"> | string
   text?: Prisma.StringWithAggregatesFilter<"ChatMessages"> | string
   isPinned?: Prisma.BoolWithAggregatesFilter<"ChatMessages"> | boolean
   isSystem?: Prisma.BoolWithAggregatesFilter<"ChatMessages"> | boolean
@@ -298,7 +298,7 @@ export type ChatMessagesScalarWhereWithAggregatesInput = {
 }
 
 export type ChatMessagesCreateInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -312,7 +312,7 @@ export type ChatMessagesCreateInput = {
 }
 
 export type ChatMessagesUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -326,7 +326,7 @@ export type ChatMessagesUncheckedCreateInput = {
 }
 
 export type ChatMessagesUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -340,7 +340,7 @@ export type ChatMessagesUpdateInput = {
 }
 
 export type ChatMessagesUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -354,7 +354,7 @@ export type ChatMessagesUncheckedUpdateInput = {
 }
 
 export type ChatMessagesCreateManyInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -367,7 +367,7 @@ export type ChatMessagesCreateManyInput = {
 }
 
 export type ChatMessagesUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -377,7 +377,7 @@ export type ChatMessagesUpdateManyMutationInput = {
 }
 
 export type ChatMessagesUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -405,7 +405,7 @@ export type ChatMessagesNullableScalarRelationFilter = {
 }
 
 export type ChatMessagesCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
@@ -418,7 +418,7 @@ export type ChatMessagesCountOrderByAggregateInput = {
 }
 
 export type ChatMessagesMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
@@ -431,7 +431,7 @@ export type ChatMessagesMaxOrderByAggregateInput = {
 }
 
 export type ChatMessagesMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   text?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
@@ -598,7 +598,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutAuthorNestedInput = {
 }
 
 export type ChatMessagesCreateWithoutChannelInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -611,7 +611,7 @@ export type ChatMessagesCreateWithoutChannelInput = {
 }
 
 export type ChatMessagesUncheckedCreateWithoutChannelInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -653,7 +653,7 @@ export type ChatMessagesScalarWhereInput = {
   AND?: Prisma.ChatMessagesScalarWhereInput | Prisma.ChatMessagesScalarWhereInput[]
   OR?: Prisma.ChatMessagesScalarWhereInput[]
   NOT?: Prisma.ChatMessagesScalarWhereInput | Prisma.ChatMessagesScalarWhereInput[]
-  id?: Prisma.StringFilter<"ChatMessages"> | string
+  uuid?: Prisma.StringFilter<"ChatMessages"> | string
   text?: Prisma.StringFilter<"ChatMessages"> | string
   isPinned?: Prisma.BoolFilter<"ChatMessages"> | boolean
   isSystem?: Prisma.BoolFilter<"ChatMessages"> | boolean
@@ -666,7 +666,7 @@ export type ChatMessagesScalarWhereInput = {
 }
 
 export type ChatMessagesCreateWithoutRepliesInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -679,7 +679,7 @@ export type ChatMessagesCreateWithoutRepliesInput = {
 }
 
 export type ChatMessagesUncheckedCreateWithoutRepliesInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -697,7 +697,7 @@ export type ChatMessagesCreateOrConnectWithoutRepliesInput = {
 }
 
 export type ChatMessagesCreateWithoutReplyToInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -710,7 +710,7 @@ export type ChatMessagesCreateWithoutReplyToInput = {
 }
 
 export type ChatMessagesUncheckedCreateWithoutReplyToInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -744,7 +744,7 @@ export type ChatMessagesUpdateToOneWithWhereWithoutRepliesInput = {
 }
 
 export type ChatMessagesUpdateWithoutRepliesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -757,7 +757,7 @@ export type ChatMessagesUpdateWithoutRepliesInput = {
 }
 
 export type ChatMessagesUncheckedUpdateWithoutRepliesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -786,7 +786,7 @@ export type ChatMessagesUpdateManyWithWhereWithoutReplyToInput = {
 }
 
 export type ChatMessagesCreateWithoutAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -799,7 +799,7 @@ export type ChatMessagesCreateWithoutAuthorInput = {
 }
 
 export type ChatMessagesUncheckedCreateWithoutAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -838,7 +838,7 @@ export type ChatMessagesUpdateManyWithWhereWithoutAuthorInput = {
 }
 
 export type ChatMessagesCreateManyChannelInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -850,7 +850,7 @@ export type ChatMessagesCreateManyChannelInput = {
 }
 
 export type ChatMessagesUpdateWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -863,7 +863,7 @@ export type ChatMessagesUpdateWithoutChannelInput = {
 }
 
 export type ChatMessagesUncheckedUpdateWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -876,7 +876,7 @@ export type ChatMessagesUncheckedUpdateWithoutChannelInput = {
 }
 
 export type ChatMessagesUncheckedUpdateManyWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -888,7 +888,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutChannelInput = {
 }
 
 export type ChatMessagesCreateManyReplyToInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -900,7 +900,7 @@ export type ChatMessagesCreateManyReplyToInput = {
 }
 
 export type ChatMessagesUpdateWithoutReplyToInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -913,7 +913,7 @@ export type ChatMessagesUpdateWithoutReplyToInput = {
 }
 
 export type ChatMessagesUncheckedUpdateWithoutReplyToInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -926,7 +926,7 @@ export type ChatMessagesUncheckedUpdateWithoutReplyToInput = {
 }
 
 export type ChatMessagesUncheckedUpdateManyWithoutReplyToInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -938,7 +938,7 @@ export type ChatMessagesUncheckedUpdateManyWithoutReplyToInput = {
 }
 
 export type ChatMessagesCreateManyAuthorInput = {
-  id?: string
+  uuid?: string
   text: string
   isPinned?: boolean
   isSystem?: boolean
@@ -950,7 +950,7 @@ export type ChatMessagesCreateManyAuthorInput = {
 }
 
 export type ChatMessagesUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -963,7 +963,7 @@ export type ChatMessagesUpdateWithoutAuthorInput = {
 }
 
 export type ChatMessagesUncheckedUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -976,7 +976,7 @@ export type ChatMessagesUncheckedUpdateWithoutAuthorInput = {
 }
 
 export type ChatMessagesUncheckedUpdateManyWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1019,7 +1019,7 @@ export type ChatMessagesCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.
 
 
 export type ChatMessagesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   isPinned?: boolean
   isSystem?: boolean
@@ -1037,7 +1037,7 @@ export type ChatMessagesSelect<ExtArgs extends runtime.Types.Extensions.Internal
 }, ExtArgs["result"]["chatMessages"]>
 
 export type ChatMessagesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   isPinned?: boolean
   isSystem?: boolean
@@ -1053,7 +1053,7 @@ export type ChatMessagesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["chatMessages"]>
 
 export type ChatMessagesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   isPinned?: boolean
   isSystem?: boolean
@@ -1069,7 +1069,7 @@ export type ChatMessagesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["chatMessages"]>
 
 export type ChatMessagesSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   text?: boolean
   isPinned?: boolean
   isSystem?: boolean
@@ -1081,7 +1081,7 @@ export type ChatMessagesSelectScalar = {
   deletedAt?: boolean
 }
 
-export type ChatMessagesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "text" | "isPinned" | "isSystem" | "channelUuid" | "authorUuid" | "replyToUuid" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["chatMessages"]>
+export type ChatMessagesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "text" | "isPinned" | "isSystem" | "channelUuid" | "authorUuid" | "replyToUuid" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["chatMessages"]>
 export type ChatMessagesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   channel?: boolean | Prisma.ChatChannelsDefaultArgs<ExtArgs>
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1109,7 +1109,7 @@ export type $ChatMessagesPayload<ExtArgs extends runtime.Types.Extensions.Intern
     replies: Prisma.$ChatMessagesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     text: string
     isPinned: boolean
     isSystem: boolean
@@ -1202,8 +1202,8 @@ export interface ChatMessagesDelegate<ExtArgs extends runtime.Types.Extensions.I
    * // Get first 10 ChatMessages
    * const chatMessages = await prisma.chatMessages.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const chatMessagesWithIdOnly = await prisma.chatMessages.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const chatMessagesWithUuidOnly = await prisma.chatMessages.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends ChatMessagesFindManyArgs>(args?: Prisma.SelectSubset<T, ChatMessagesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1247,9 +1247,9 @@ export interface ChatMessagesDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Create many ChatMessages and only return the `id`
-   * const chatMessagesWithIdOnly = await prisma.chatMessages.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many ChatMessages and only return the `uuid`
+   * const chatMessagesWithUuidOnly = await prisma.chatMessages.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -1338,9 +1338,9 @@ export interface ChatMessagesDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Update zero or more ChatMessages and only return the `id`
-   * const chatMessagesWithIdOnly = await prisma.chatMessages.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more ChatMessages and only return the `uuid`
+   * const chatMessagesWithUuidOnly = await prisma.chatMessages.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1546,7 +1546,7 @@ export interface Prisma__ChatMessagesClient<T, Null = never, ExtArgs extends run
  * Fields of the ChatMessages model
  */
 export interface ChatMessagesFieldRefs {
-  readonly id: Prisma.FieldRef<"ChatMessages", 'String'>
+  readonly uuid: Prisma.FieldRef<"ChatMessages", 'String'>
   readonly text: Prisma.FieldRef<"ChatMessages", 'String'>
   readonly isPinned: Prisma.FieldRef<"ChatMessages", 'Boolean'>
   readonly isSystem: Prisma.FieldRef<"ChatMessages", 'Boolean'>

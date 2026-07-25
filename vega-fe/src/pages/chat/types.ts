@@ -8,7 +8,7 @@ export type TChannelVisibility = 'public' | 'private';
 export type TNewChatModal = TChannelType | 'channel_join' | null;
 
 export interface IChannel {
-	id: string;
+	uuid: string;
 	title: string;
 	channelType: TChannelType;
 	channelVisibility: TChannelVisibility;
@@ -21,7 +21,7 @@ export interface IAvatar {
 }
 
 export interface IMappedUser {
-	id: string;
+	uuid: string;
 	name: string;
 	avatar: IAvatar;
 	role: IRole;
@@ -56,13 +56,13 @@ export interface IUserOption {
 }
 
 export interface IRole {
-	id: string;
+	uuid: string;
 	key: string;
 	label: string;
 }
 
 export interface IUser {
-	id: string;
+	uuid: string;
 	name: string;
 	secondName: string;
 	userName: string;
@@ -76,7 +76,7 @@ export interface IChannelHeaderData {
 }
 
 export interface IMessage {
-	id: string;
+	uuid: string;
 	text: string;
 	channelUuid: string;
 	isPinned: boolean;
@@ -86,7 +86,7 @@ export interface IMessage {
 	canEdit: boolean;
 	replyToUuid: string | null;
 	author: {
-		id: string;
+		uuid: string;
 		name: string;
 		secondName: string;
 		avatarUrl: string | null;
@@ -98,7 +98,7 @@ export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt' | 'replyToUui
 	createdAtTime: string;
 	replyMessage?: IMessage;
 	author: {
-		id: string;
+		uuid: string;
 		name: string;
 		avatarUrl?: string;
 		avatar?: IAvatar;
@@ -107,12 +107,12 @@ export type IMappedMessage = Omit<IMessage, 'author' | 'createdAt' | 'replyToUui
 
 export interface IChannelListItem {
 	channelAdmin?: {
-		id: string;
+		uuid: string;
 		name: string;
 	};
 	channelType: string;
 	channelVisibility: string;
-	id: string;
+	uuid: string;
 	title: string;
 	usersLength: number;
 }

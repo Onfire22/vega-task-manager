@@ -10,9 +10,9 @@ import { filesService } from '../files/files.service';
 
 const getCurrentUser = async (userUuid: string) => {
 	const user = await prismaAppClient.user.findUnique({
-		where: { id: userUuid },
+		where: { uuid: userUuid },
 		select: {
-			id: true,
+			uuid: true,
 			email: true,
 			name: true,
 			secondName: true,
@@ -20,7 +20,7 @@ const getCurrentUser = async (userUuid: string) => {
 			avatarUrl: true,
 			userSpecialisation: {
 				select: {
-					id: true,
+					uuid: true,
 					label: true,
 					key: true,
 				},
@@ -37,7 +37,7 @@ const getCurrentUser = async (userUuid: string) => {
 
 const getUserList = ({ filters }: TUserListBody) => {
 	const filterData: Prisma.UserWhereInput = {
-		...(filters?.withoutUser ? { id: { not: filters.withoutUser } } : {}),
+		...(filters?.withoutUser ? { uuid: { not: filters.withoutUser } } : {}),
 		memberships: {
 			...(filters?.withOutProject ? { none: { projectUuid: filters.withOutProject } } : {}),
 			...(filters?.withProject ? { some: { projectUuid: filters.withProject } } : {}),
@@ -54,7 +54,7 @@ const getUserList = ({ filters }: TUserListBody) => {
 	return prismaAppClient.user.findMany({
 		...(filters ? { where: filterData } : {}),
 		select: {
-			id: true,
+			uuid: true,
 			name: true,
 			secondName: true,
 		},
@@ -78,7 +78,7 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 
 	if (userData.userSpecialisationUuid) {
 		updateData.userSpecialisation = {
-			connect: { id: userData.userSpecialisationUuid },
+			connect: { uuid: userData.userSpecialisationUuid },
 		};
 	}
 
@@ -87,11 +87,11 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 	}
 
 	return prismaAppClient.user.update({
-		where: { id: userUuid },
+		where: { uuid: userUuid },
 		data: updateData,
 		select: {
 			email: true,
-			id: true,
+			uuid: true,
 			name: true,
 			secondName: true,
 			userName: true,
@@ -105,7 +105,7 @@ const updateUserPassword = async (passwords: TUpdateUserPasswordBody, userUuid: 
 	const { currentPassword, newPassword } = passwords;
 
 	const user = await prismaAppClient.user.findUnique({
-		where: { id: userUuid },
+		where: { uuid: userUuid },
 		select: { password: true },
 	});
 
@@ -124,7 +124,7 @@ const updateUserPassword = async (passwords: TUpdateUserPasswordBody, userUuid: 
 	const cryptedPassword = await bcrypt.hash(newPassword, salt);
 
 	await prismaAppClient.user.update({
-		where: { id: userUuid },
+		where: { uuid: userUuid },
 		data: { password: cryptedPassword },
 	});
 };
@@ -133,7 +133,7 @@ export const deleteUserAvatar = async (avatarPath: string, userUuid: string) => 
 	await filesService.deleteFile(avatarPath);
 
 	return prismaAppClient.user.update({
-		where: { id: userUuid },
+		where: { uuid: userUuid },
 		data: { avatarUrl: null },
 	});
 };

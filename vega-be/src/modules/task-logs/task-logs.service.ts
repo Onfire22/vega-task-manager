@@ -18,7 +18,7 @@ const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
 			}
 
 			await tx.task.update({
-				where: { id: formData.taskUuid },
+				where: { uuid: formData.taskUuid },
 				data: { estimateTime: estimate, remainingTime },
 			});
 
@@ -27,10 +27,10 @@ const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
 					loggedTime,
 					description: formData?.description,
 					user: {
-						connect: { id: userId },
+						connect: { uuid: userId },
 					},
 					task: {
-						connect: { id: formData.taskUuid },
+						connect: { uuid: formData.taskUuid },
 					},
 				},
 			});
@@ -39,7 +39,7 @@ const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
 
 	return prismaAppClient.$transaction(async (tx) => {
 		const task = await tx.task.findUnique({
-			where: { id: formData.taskUuid },
+			where: { uuid: formData.taskUuid },
 			select: { remainingTime: true, estimateTime: true },
 		});
 
@@ -54,16 +54,16 @@ const createTaskLog = async (formData: TCreateTaskTimeBody, userId: string) => {
 				loggedTime,
 				description: formData?.description,
 				user: {
-					connect: { id: userId },
+					connect: { uuid: userId },
 				},
 				task: {
-					connect: { id: formData.taskUuid },
+					connect: { uuid: formData.taskUuid },
 				},
 			},
 		});
 
 		await tx.task.update({
-			where: { id: formData.taskUuid },
+			where: { uuid: formData.taskUuid },
 			data: { remainingTime },
 		});
 	});
@@ -75,14 +75,14 @@ const getTaskLogs = async (taskUuid: string) => {
 			taskUuid,
 		},
 		select: {
-			id: true,
+			uuid: true,
 			loggedTime: true,
 			description: true,
 			createdAt: true,
 			updatedAt: true,
 			user: {
 				select: {
-					id: true,
+					uuid: true,
 					name: true,
 					secondName: true,
 					userName: true,

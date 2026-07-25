@@ -1,0 +1,13 @@
+model Team {
+  uuid      String  @id @default(uuid())
+  title     String
+  avatarUrl String? @map("avatar_url")
+
+  projectsMemberships ProjectsMembership[]
+  teamMembers         TeamMembers[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("teams")
+}

@@ -12,7 +12,7 @@ const NotificationsListView: React.FC<IProps> = ({ notificationsList }) => {
 			{notificationsList.length > 0 ? (
 				notificationsList.map((item) => {
 					return (
-						<div className="p-2 hover:bg-accent rounded-[5px]" key={item.id}>
+						<div className="p-2 hover:bg-accent rounded-[5px]" key={item.uuid}>
 							<div className="text-muted-foreground text-[12px]">{item.createdAt}</div>
 							<span>
 								Пользователь{' '}

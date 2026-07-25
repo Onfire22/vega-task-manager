@@ -9,7 +9,7 @@ enum ChannelVisibility {
 }
 
 model ChatChannels {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   title             String            @unique
   channelType       ChannelType       @map("channel_type")

@@ -12,8 +12,6 @@
 
 import * as process from 'node:process'
 import * as path from 'node:path'
-import { fileURLToPath } from 'node:url'
-globalThis['__dirname'] = path.dirname(fileURLToPath(import.meta.url))
 
 import * as runtime from "@prisma/client/runtime/client"
 import * as $Enums from "./enums.js"
@@ -29,8 +27,8 @@ export * from "./enums.js"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more ChatMemberships
- * const chatMemberships = await prisma.chatMemberships.findMany()
+ * // Fetch zero or more ChatChannels
+ * const chatChannels = await prisma.chatChannels.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,15 +38,15 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model ChatMemberships
- * 
- */
-export type ChatMemberships = Prisma.ChatMembershipsModel
-/**
  * Model ChatChannels
  * 
  */
 export type ChatChannels = Prisma.ChatChannelsModel
+/**
+ * Model ChatMemberships
+ * 
+ */
+export type ChatMemberships = Prisma.ChatMembershipsModel
 /**
  * Model ChatMessages
  * 
@@ -59,6 +57,11 @@ export type ChatMessages = Prisma.ChatMessagesModel
  * 
  */
 export type Comment = Prisma.CommentModel
+/**
+ * Model Company
+ * 
+ */
+export type Company = Prisma.CompanyModel
 /**
  * Model Dictionary
  * 
@@ -80,10 +83,25 @@ export type Notification = Prisma.NotificationModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectsMembership
+ * 
+ */
+export type ProjectsMembership = Prisma.ProjectsMembershipModel
+/**
  * Model Task
  * 
  */
 export type Task = Prisma.TaskModel
+/**
+ * Model Team
+ * 
+ */
+export type Team = Prisma.TeamModel
+/**
+ * Model TeamMembers
+ * 
+ */
+export type TeamMembers = Prisma.TeamMembersModel
 /**
  * Model TimeLog
  * 

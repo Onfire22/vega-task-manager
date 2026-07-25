@@ -46,7 +46,7 @@ const LinksModal = () => {
 			...(task?.mrLinks ? { mrLinks: task?.mrLinks.join('\n') } : {}),
 			...(task?.buildLinks ? { buildLinks: task?.buildLinks.join('\n') } : {}),
 		});
-	}, [task?.id]);
+	}, [task?.uuid]);
 
 	return (
 		<LinksModalView form={form} modalType={modalType} onSubmit={handleSubmitForm} onModalClose={handleModalClose} />

@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const KanbanTaskView: React.FC<IProps> = ({ task, onTaskDoubleClick }) => {
-	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
+	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.uuid });
 
 	const style = {
 		transform: CSS.Transform.toString(transform),
@@ -28,8 +28,8 @@ const KanbanTaskView: React.FC<IProps> = ({ task, onTaskDoubleClick }) => {
 			{...attributes}
 			{...listeners}
 			className="cursor-grab text-[14px] p-2.5 rounded-[5px] flex flex-col justify-between bg-card min-h-42.5"
-			key={task.id}
-			onDoubleClick={() => onTaskDoubleClick(task.id)}
+			key={task.uuid}
+			onDoubleClick={() => onTaskDoubleClick(task.uuid)}
 		>
 			<div className="flex items-center justify-between text-[12px] text-muted-foreground">
 				<div>{task.createdAt}</div>

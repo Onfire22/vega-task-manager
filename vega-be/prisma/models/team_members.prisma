@@ -1,0 +1,12 @@
+model TeamMembers {
+  uuid     String @id @default(uuid())
+  userUuid String
+  user     User   @relation(fields: [userUuid], references: [uuid])
+  teamUuid String
+  team     Team   @relation(fields: [teamUuid], references: [uuid])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("team_members")
+}

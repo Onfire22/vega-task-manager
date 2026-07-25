@@ -22,7 +22,7 @@ const ProjectModal = () => {
 	const { data } = useGetCurrentUserQuery();
 	const [createProject] = useCreateProjectMutation();
 	const { usersListOptions, isUsersLoading } = useUsersOptions({
-		filters: { ...(data?.currentUser ? { withoutUser: data.currentUser.id } : {}) },
+		filters: { ...(data?.currentUser ? { withoutUser: data.currentUser.uuid } : {}) },
 	});
 
 	const form = useForm<TProjectValues>({
@@ -36,7 +36,7 @@ const ProjectModal = () => {
 			toast.success('Проект успешно создана');
 			form.reset();
 			dispatch(setActiveModal(null));
-			navigate(`project/${response.id}`);
+			navigate(`project/${response.uuid}`);
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');

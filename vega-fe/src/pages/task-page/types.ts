@@ -11,14 +11,14 @@ export interface IInitialState {
 export type TOption = { description: string | null; key: string; label: string; value: string; color: string };
 
 export interface IExpDictData {
-	id: string;
+	uuid: string;
 	label: string;
 	key: string;
 }
 
 export interface ITimeLog {
 	description: string;
-	id: string;
+	uuid: string;
 	loggedTime?: string;
 	createdAt: string;
 	updatedAt?: string;
@@ -33,7 +33,7 @@ export interface ITimeLog {
 }
 
 export interface ITask {
-	id: string;
+	uuid: string;
 	code: string | null;
 	title: string;
 	assignee: string | null;
@@ -43,7 +43,7 @@ export interface ITask {
 	description: string;
 	project: {
 		code: string;
-		id: string;
+		uuid: string;
 		projectStatus: {
 			key: string;
 			label: string;
@@ -58,7 +58,7 @@ export interface ITask {
 }
 
 export interface IComment {
-	id: string;
+	uuid: string;
 	user: {
 		name: string;
 		userUuid: string;
@@ -116,9 +116,4 @@ export interface IChartData {
 export interface ILinksForm {
 	mrLinks?: string;
 	buildLinks?: string;
-}
-
-export interface IOption {
-	label: string;
-	value: string;
 }

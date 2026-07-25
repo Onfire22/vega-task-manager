@@ -26,7 +26,7 @@ const signupUser = async (userData: TSignUpBody) => {
 		data: { ...userData, userName },
 		select: {
 			email: true,
-			id: true,
+			uuid: true,
 			name: true,
 			secondName: true,
 			userSpecialisationUuid: true,
@@ -34,7 +34,7 @@ const signupUser = async (userData: TSignUpBody) => {
 		},
 	});
 
-	const tokens = await generateToken(newUser.id);
+	const tokens = await generateToken(newUser.uuid);
 
 	if (!tokens) {
 		throw new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);
@@ -48,7 +48,7 @@ const signInUser = async ({ email, password }: TSignInBody) => {
 		where: { email },
 		select: {
 			email: true,
-			id: true,
+			uuid: true,
 			name: true,
 			secondName: true,
 			password: true,
@@ -65,7 +65,7 @@ const signInUser = async ({ email, password }: TSignInBody) => {
 		throw new AppError('Неправильный пароль', RESPONSE_STATUSES.notAuthorised);
 	}
 
-	const tokens = await generateToken(user.id);
+	const tokens = await generateToken(user.uuid);
 
 	if (!tokens) {
 		throw new AppError('Failed to generate token', RESPONSE_STATUSES.notAuthorised);

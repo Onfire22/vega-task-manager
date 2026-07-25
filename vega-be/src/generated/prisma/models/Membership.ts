@@ -25,7 +25,7 @@ export type AggregateMembership = {
 }
 
 export type MembershipMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   userUuid: string | null
   projectUuid: string | null
   userRoleUuid: string | null
@@ -34,7 +34,7 @@ export type MembershipMinAggregateOutputType = {
 }
 
 export type MembershipMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   userUuid: string | null
   projectUuid: string | null
   userRoleUuid: string | null
@@ -43,7 +43,7 @@ export type MembershipMaxAggregateOutputType = {
 }
 
 export type MembershipCountAggregateOutputType = {
-  id: number
+  uuid: number
   userUuid: number
   projectUuid: number
   userRoleUuid: number
@@ -54,7 +54,7 @@ export type MembershipCountAggregateOutputType = {
 
 
 export type MembershipMinAggregateInputType = {
-  id?: true
+  uuid?: true
   userUuid?: true
   projectUuid?: true
   userRoleUuid?: true
@@ -63,7 +63,7 @@ export type MembershipMinAggregateInputType = {
 }
 
 export type MembershipMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   userUuid?: true
   projectUuid?: true
   userRoleUuid?: true
@@ -72,7 +72,7 @@ export type MembershipMaxAggregateInputType = {
 }
 
 export type MembershipCountAggregateInputType = {
-  id?: true
+  uuid?: true
   userUuid?: true
   projectUuid?: true
   userRoleUuid?: true
@@ -154,7 +154,7 @@ export type MembershipGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type MembershipGroupByOutputType = {
-  id: string
+  uuid: string
   userUuid: string
   projectUuid: string
   userRoleUuid: string
@@ -184,7 +184,7 @@ export type MembershipWhereInput = {
   AND?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
   OR?: Prisma.MembershipWhereInput[]
   NOT?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
-  id?: Prisma.StringFilter<"Membership"> | string
+  uuid?: Prisma.StringFilter<"Membership"> | string
   userUuid?: Prisma.StringFilter<"Membership"> | string
   projectUuid?: Prisma.StringFilter<"Membership"> | string
   userRoleUuid?: Prisma.StringFilter<"Membership"> | string
@@ -197,7 +197,7 @@ export type MembershipWhereInput = {
 }
 
 export type MembershipOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
@@ -210,7 +210,7 @@ export type MembershipOrderByWithRelationInput = {
 }
 
 export type MembershipWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   user_project?: Prisma.MembershipUser_projectCompoundUniqueInput
   AND?: Prisma.MembershipWhereInput | Prisma.MembershipWhereInput[]
   OR?: Prisma.MembershipWhereInput[]
@@ -224,10 +224,10 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   notifications?: Prisma.NotificationListRelationFilter
-}, "id" | "user_project">
+}, "uuid" | "user_project">
 
 export type MembershipOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
@@ -242,7 +242,7 @@ export type MembershipScalarWhereWithAggregatesInput = {
   AND?: Prisma.MembershipScalarWhereWithAggregatesInput | Prisma.MembershipScalarWhereWithAggregatesInput[]
   OR?: Prisma.MembershipScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MembershipScalarWhereWithAggregatesInput | Prisma.MembershipScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Membership"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   userUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   projectUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
   userRoleUuid?: Prisma.StringWithAggregatesFilter<"Membership"> | string
@@ -251,7 +251,7 @@ export type MembershipScalarWhereWithAggregatesInput = {
 }
 
 export type MembershipCreateInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
@@ -261,7 +261,7 @@ export type MembershipCreateInput = {
 }
 
 export type MembershipUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   projectUuid: string
   userRoleUuid: string
@@ -271,7 +271,7 @@ export type MembershipUncheckedCreateInput = {
 }
 
 export type MembershipUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
@@ -281,7 +281,7 @@ export type MembershipUpdateInput = {
 }
 
 export type MembershipUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -291,7 +291,7 @@ export type MembershipUncheckedUpdateInput = {
 }
 
 export type MembershipCreateManyInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   projectUuid: string
   userRoleUuid: string
@@ -300,13 +300,13 @@ export type MembershipCreateManyInput = {
 }
 
 export type MembershipUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MembershipUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -330,7 +330,7 @@ export type MembershipUser_projectCompoundUniqueInput = {
 }
 
 export type MembershipCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
@@ -339,7 +339,7 @@ export type MembershipCountOrderByAggregateInput = {
 }
 
 export type MembershipMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
@@ -348,7 +348,7 @@ export type MembershipMaxOrderByAggregateInput = {
 }
 
 export type MembershipMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   projectUuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
@@ -504,7 +504,7 @@ export type MembershipUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type MembershipCreateWithoutUserRoleInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
@@ -513,7 +513,7 @@ export type MembershipCreateWithoutUserRoleInput = {
 }
 
 export type MembershipUncheckedCreateWithoutUserRoleInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   projectUuid: string
   createdAt?: Date | string
@@ -551,7 +551,7 @@ export type MembershipScalarWhereInput = {
   AND?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
   OR?: Prisma.MembershipScalarWhereInput[]
   NOT?: Prisma.MembershipScalarWhereInput | Prisma.MembershipScalarWhereInput[]
-  id?: Prisma.StringFilter<"Membership"> | string
+  uuid?: Prisma.StringFilter<"Membership"> | string
   userUuid?: Prisma.StringFilter<"Membership"> | string
   projectUuid?: Prisma.StringFilter<"Membership"> | string
   userRoleUuid?: Prisma.StringFilter<"Membership"> | string
@@ -560,7 +560,7 @@ export type MembershipScalarWhereInput = {
 }
 
 export type MembershipCreateWithoutNotificationsInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
@@ -569,7 +569,7 @@ export type MembershipCreateWithoutNotificationsInput = {
 }
 
 export type MembershipUncheckedCreateWithoutNotificationsInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   projectUuid: string
   userRoleUuid: string
@@ -594,7 +594,7 @@ export type MembershipUpdateToOneWithWhereWithoutNotificationsInput = {
 }
 
 export type MembershipUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
@@ -603,7 +603,7 @@ export type MembershipUpdateWithoutNotificationsInput = {
 }
 
 export type MembershipUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -612,7 +612,7 @@ export type MembershipUncheckedUpdateWithoutNotificationsInput = {
 }
 
 export type MembershipCreateWithoutProjectInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
@@ -621,7 +621,7 @@ export type MembershipCreateWithoutProjectInput = {
 }
 
 export type MembershipUncheckedCreateWithoutProjectInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   userRoleUuid: string
   createdAt?: Date | string
@@ -656,7 +656,7 @@ export type MembershipUpdateManyWithWhereWithoutProjectInput = {
 }
 
 export type MembershipCreateWithoutUserInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutMembershipsInput
@@ -665,7 +665,7 @@ export type MembershipCreateWithoutUserInput = {
 }
 
 export type MembershipUncheckedCreateWithoutUserInput = {
-  id?: string
+  uuid?: string
   projectUuid: string
   userRoleUuid: string
   createdAt?: Date | string
@@ -700,7 +700,7 @@ export type MembershipUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type MembershipCreateManyUserRoleInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   projectUuid: string
   createdAt?: Date | string
@@ -708,7 +708,7 @@ export type MembershipCreateManyUserRoleInput = {
 }
 
 export type MembershipUpdateWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
@@ -717,7 +717,7 @@ export type MembershipUpdateWithoutUserRoleInput = {
 }
 
 export type MembershipUncheckedUpdateWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -726,7 +726,7 @@ export type MembershipUncheckedUpdateWithoutUserRoleInput = {
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -734,7 +734,7 @@ export type MembershipUncheckedUpdateManyWithoutUserRoleInput = {
 }
 
 export type MembershipCreateManyProjectInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   userRoleUuid: string
   createdAt?: Date | string
@@ -742,7 +742,7 @@ export type MembershipCreateManyProjectInput = {
 }
 
 export type MembershipUpdateWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
@@ -751,7 +751,7 @@ export type MembershipUpdateWithoutProjectInput = {
 }
 
 export type MembershipUncheckedUpdateWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -760,7 +760,7 @@ export type MembershipUncheckedUpdateWithoutProjectInput = {
 }
 
 export type MembershipUncheckedUpdateManyWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -768,7 +768,7 @@ export type MembershipUncheckedUpdateManyWithoutProjectInput = {
 }
 
 export type MembershipCreateManyUserInput = {
-  id?: string
+  uuid?: string
   projectUuid: string
   userRoleUuid: string
   createdAt?: Date | string
@@ -776,7 +776,7 @@ export type MembershipCreateManyUserInput = {
 }
 
 export type MembershipUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutMembershipsNestedInput
@@ -785,7 +785,7 @@ export type MembershipUpdateWithoutUserInput = {
 }
 
 export type MembershipUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -794,7 +794,7 @@ export type MembershipUncheckedUpdateWithoutUserInput = {
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   projectUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -833,7 +833,7 @@ export type MembershipCountOutputTypeCountNotificationsArgs<ExtArgs extends runt
 
 
 export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userUuid?: boolean
   projectUuid?: boolean
   userRoleUuid?: boolean
@@ -847,7 +847,7 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userUuid?: boolean
   projectUuid?: boolean
   userRoleUuid?: boolean
@@ -859,7 +859,7 @@ export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userUuid?: boolean
   projectUuid?: boolean
   userRoleUuid?: boolean
@@ -871,7 +871,7 @@ export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 }, ExtArgs["result"]["membership"]>
 
 export type MembershipSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   userUuid?: boolean
   projectUuid?: boolean
   userRoleUuid?: boolean
@@ -879,7 +879,7 @@ export type MembershipSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userUuid" | "projectUuid" | "userRoleUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
+export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "userUuid" | "projectUuid" | "userRoleUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
 export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -907,7 +907,7 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     userUuid: string
     projectUuid: string
     userRoleUuid: string
@@ -996,8 +996,8 @@ export interface MembershipDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * // Get first 10 Memberships
    * const memberships = await prisma.membership.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const membershipWithIdOnly = await prisma.membership.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const membershipWithUuidOnly = await prisma.membership.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends MembershipFindManyArgs>(args?: Prisma.SelectSubset<T, MembershipFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1041,9 +1041,9 @@ export interface MembershipDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Create many Memberships and only return the `id`
-   * const membershipWithIdOnly = await prisma.membership.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Memberships and only return the `uuid`
+   * const membershipWithUuidOnly = await prisma.membership.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -1132,9 +1132,9 @@ export interface MembershipDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Update zero or more Memberships and only return the `id`
-   * const membershipWithIdOnly = await prisma.membership.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Memberships and only return the `uuid`
+   * const membershipWithUuidOnly = await prisma.membership.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1340,7 +1340,7 @@ export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends runti
  * Fields of the Membership model
  */
 export interface MembershipFieldRefs {
-  readonly id: Prisma.FieldRef<"Membership", 'String'>
+  readonly uuid: Prisma.FieldRef<"Membership", 'String'>
   readonly userUuid: Prisma.FieldRef<"Membership", 'String'>
   readonly projectUuid: Prisma.FieldRef<"Membership", 'String'>
   readonly userRoleUuid: Prisma.FieldRef<"Membership", 'String'>

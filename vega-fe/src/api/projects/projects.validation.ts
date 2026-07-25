@@ -5,12 +5,12 @@ export const BaseResponseSchema = z.object({
 });
 
 export const CreateProjectResponseSchema = z.object({
-	id: z.string(),
+	uuid: z.string(),
 });
 
 export const ProjectResponseSchema = z.object({
 	project: z.object({
-		id: z.string(),
+		uuid: z.string(),
 		title: z.string(),
 		description: z.string(),
 		createdAt: z.string(),
@@ -20,33 +20,33 @@ export const ProjectResponseSchema = z.object({
 		projectStatus: z.object({
 			label: z.string(),
 			description: z.string(),
-			id: z.string(),
+			uuid: z.string(),
 			key: z.string(),
 		}),
 		tasks: z.array(
 			z.object({
-				id: z.string(),
+				uuid: z.string(),
 				code: z.string(),
 				title: z.string(),
 				createdAt: z.string(),
 				taskPriority: z.object({
-					id: z.string(),
+					uuid: z.string(),
 					label: z.string(),
 					key: z.string(),
 				}),
 				taskStatus: z.object({
-					id: z.string(),
+					uuid: z.string(),
 					label: z.string(),
 					key: z.string(),
 				}),
 				taskStack: z.object({
-					id: z.string(),
+					uuid: z.string(),
 					label: z.string(),
 					key: z.string(),
 				}),
 				assignee: z
 					.object({
-						id: z.string(),
+						uuid: z.string(),
 						name: z.string(),
 						secondName: z.string(),
 					})
@@ -55,7 +55,7 @@ export const ProjectResponseSchema = z.object({
 		),
 		users: z.array(
 			z.object({
-				id: z.string(),
+				uuid: z.string(),
 				name: z.string(),
 				secondName: z.string(),
 				avatarUrl: z.string().nullable(),
@@ -63,7 +63,7 @@ export const ProjectResponseSchema = z.object({
 					label: z.string(),
 				}),
 				role: z.object({
-					id: z.string(),
+					uuid: z.string(),
 					label: z.string(),
 					key: z.string(),
 				}),
@@ -75,22 +75,22 @@ export const ProjectResponseSchema = z.object({
 export const ProjectsResponseSchema = z.object({
 	projects: z.array(
 		z.object({
-			id: z.string(),
+			uuid: z.string(),
 			code: z.string(),
 			title: z.string(),
 			createdAt: z.string(),
 			projectStatus: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				key: z.string(),
 				label: z.string(),
 			}),
 			users: z.array(
 				z.object({
-					id: z.string(),
+					uuid: z.string(),
 					name: z.string(),
 					secondName: z.string(),
 					role: z.object({
-						id: z.string(),
+						uuid: z.string(),
 						label: z.string(),
 						key: z.string(),
 					}),

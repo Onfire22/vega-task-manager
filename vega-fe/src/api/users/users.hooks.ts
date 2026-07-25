@@ -14,7 +14,7 @@ export const useUsersOptions = (filters: IFiltersRequest, skip = false) => {
 
 	const usersListOptions = usersList.map((user) => ({
 		label: `${user.name} ${user.secondName}`,
-		value: user.id,
+		value: user.uuid,
 	}));
 
 	return { usersListOptions, isUsersLoading };

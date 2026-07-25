@@ -1,17 +1,17 @@
 export const taskSelect = {
-	id: true,
+	uuid: true,
 	code: true,
 	title: true,
 };
 
 export const projectSelect = {
-	id: true,
+	uuid: true,
 	code: true,
 	title: true,
 };
 
 export const userSelect = {
-	id: true,
+	uuid: true,
 	email: true,
 	userName: true,
 	name: true,
@@ -19,13 +19,13 @@ export const userSelect = {
 };
 
 export const commentsSelect = {
-	id: true,
+	uuid: true,
 	text: true,
 	taskUuid: true,
 };
 
 export const logsSelect = {
-	id: true,
+	uuid: true,
 	description: true,
 	taskUuid: true,
 };

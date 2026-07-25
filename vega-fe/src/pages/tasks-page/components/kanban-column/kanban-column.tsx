@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const KanbanColumn: React.FC<IProps> = ({ column, children }) => {
-	const { setNodeRef } = useDroppable({ id: column.id });
+	const { setNodeRef } = useDroppable({ id: column.uuid });
 
 	return (
 		<div>

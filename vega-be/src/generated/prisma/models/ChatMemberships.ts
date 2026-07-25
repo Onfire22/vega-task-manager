@@ -25,7 +25,7 @@ export type AggregateChatMemberships = {
 }
 
 export type ChatMembershipsMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   userRoleUuid: string | null
   userUuid: string | null
   channelUuid: string | null
@@ -34,7 +34,7 @@ export type ChatMembershipsMinAggregateOutputType = {
 }
 
 export type ChatMembershipsMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   userRoleUuid: string | null
   userUuid: string | null
   channelUuid: string | null
@@ -43,7 +43,7 @@ export type ChatMembershipsMaxAggregateOutputType = {
 }
 
 export type ChatMembershipsCountAggregateOutputType = {
-  id: number
+  uuid: number
   userRoleUuid: number
   userUuid: number
   channelUuid: number
@@ -54,7 +54,7 @@ export type ChatMembershipsCountAggregateOutputType = {
 
 
 export type ChatMembershipsMinAggregateInputType = {
-  id?: true
+  uuid?: true
   userRoleUuid?: true
   userUuid?: true
   channelUuid?: true
@@ -63,7 +63,7 @@ export type ChatMembershipsMinAggregateInputType = {
 }
 
 export type ChatMembershipsMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   userRoleUuid?: true
   userUuid?: true
   channelUuid?: true
@@ -72,7 +72,7 @@ export type ChatMembershipsMaxAggregateInputType = {
 }
 
 export type ChatMembershipsCountAggregateInputType = {
-  id?: true
+  uuid?: true
   userRoleUuid?: true
   userUuid?: true
   channelUuid?: true
@@ -154,7 +154,7 @@ export type ChatMembershipsGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type ChatMembershipsGroupByOutputType = {
-  id: string
+  uuid: string
   userRoleUuid: string
   userUuid: string
   channelUuid: string
@@ -184,7 +184,7 @@ export type ChatMembershipsWhereInput = {
   AND?: Prisma.ChatMembershipsWhereInput | Prisma.ChatMembershipsWhereInput[]
   OR?: Prisma.ChatMembershipsWhereInput[]
   NOT?: Prisma.ChatMembershipsWhereInput | Prisma.ChatMembershipsWhereInput[]
-  id?: Prisma.StringFilter<"ChatMemberships"> | string
+  uuid?: Prisma.StringFilter<"ChatMemberships"> | string
   userRoleUuid?: Prisma.StringFilter<"ChatMemberships"> | string
   userUuid?: Prisma.StringFilter<"ChatMemberships"> | string
   channelUuid?: Prisma.StringFilter<"ChatMemberships"> | string
@@ -196,7 +196,7 @@ export type ChatMembershipsWhereInput = {
 }
 
 export type ChatMembershipsOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   channelUuid?: Prisma.SortOrder
@@ -208,7 +208,7 @@ export type ChatMembershipsOrderByWithRelationInput = {
 }
 
 export type ChatMembershipsWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   user_channel?: Prisma.ChatMembershipsUser_channelCompoundUniqueInput
   AND?: Prisma.ChatMembershipsWhereInput | Prisma.ChatMembershipsWhereInput[]
   OR?: Prisma.ChatMembershipsWhereInput[]
@@ -221,10 +221,10 @@ export type ChatMembershipsWhereUniqueInput = Prisma.AtLeast<{
   userRole?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   channel?: Prisma.XOR<Prisma.ChatChannelsScalarRelationFilter, Prisma.ChatChannelsWhereInput>
-}, "id" | "user_channel">
+}, "uuid" | "user_channel">
 
 export type ChatMembershipsOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   userRoleUuid?: Prisma.SortOrder
   userUuid?: Prisma.SortOrder
   channelUuid?: Prisma.SortOrder
@@ -239,7 +239,7 @@ export type ChatMembershipsScalarWhereWithAggregatesInput = {
   AND?: Prisma.ChatMembershipsScalarWhereWithAggregatesInput | Prisma.ChatMembershipsScalarWhereWithAggregatesInput[]
   OR?: Prisma.ChatMembershipsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ChatMembershipsScalarWhereWithAggregatesInput | Prisma.ChatMembershipsScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ChatMemberships"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"ChatMemberships"> | string
   userRoleUuid?: Prisma.StringWithAggregatesFilter<"ChatMemberships"> | string
   userUuid?: Prisma.StringWithAggregatesFilter<"ChatMemberships"> | string
   channelUuid?: Prisma.StringWithAggregatesFilter<"ChatMemberships"> | string
@@ -248,7 +248,7 @@ export type ChatMembershipsScalarWhereWithAggregatesInput = {
 }
 
 export type ChatMembershipsCreateInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   userRole: Prisma.DictionaryCreateNestedOneWithoutChatMembershipsInput
@@ -257,7 +257,7 @@ export type ChatMembershipsCreateInput = {
 }
 
 export type ChatMembershipsUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   userUuid: string
   channelUuid: string
@@ -266,7 +266,7 @@ export type ChatMembershipsUncheckedCreateInput = {
 }
 
 export type ChatMembershipsUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutChatMembershipsNestedInput
@@ -275,7 +275,7 @@ export type ChatMembershipsUpdateInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
@@ -284,7 +284,7 @@ export type ChatMembershipsUncheckedUpdateInput = {
 }
 
 export type ChatMembershipsCreateManyInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   userUuid: string
   channelUuid: string
@@ -293,50 +293,18 @@ export type ChatMembershipsCreateManyInput = {
 }
 
 export type ChatMembershipsUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChatMembershipsUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ChatMembershipsUser_channelCompoundUniqueInput = {
-  userUuid: string
-  channelUuid: string
-}
-
-export type ChatMembershipsCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userRoleUuid?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  channelUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type ChatMembershipsMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userRoleUuid?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  channelUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type ChatMembershipsMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userRoleUuid?: Prisma.SortOrder
-  userUuid?: Prisma.SortOrder
-  channelUuid?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type ChatMembershipsListRelationFilter = {
@@ -349,12 +317,36 @@ export type ChatMembershipsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type ChatMembershipsUser_channelCompoundUniqueInput = {
+  userUuid: string
+  channelUuid: string
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type ChatMembershipsCountOrderByAggregateInput = {
+  uuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  channelUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type ChatMembershipsMaxOrderByAggregateInput = {
+  uuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  channelUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type ChatMembershipsMinOrderByAggregateInput = {
+  uuid?: Prisma.SortOrder
+  userRoleUuid?: Prisma.SortOrder
+  userUuid?: Prisma.SortOrder
+  channelUuid?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ChatMembershipsCreateNestedManyWithoutChannelInput = {
@@ -484,7 +476,7 @@ export type ChatMembershipsUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type ChatMembershipsCreateWithoutChannelInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   userRole: Prisma.DictionaryCreateNestedOneWithoutChatMembershipsInput
@@ -492,7 +484,7 @@ export type ChatMembershipsCreateWithoutChannelInput = {
 }
 
 export type ChatMembershipsUncheckedCreateWithoutChannelInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   userUuid: string
   createdAt?: Date | string
@@ -529,7 +521,7 @@ export type ChatMembershipsScalarWhereInput = {
   AND?: Prisma.ChatMembershipsScalarWhereInput | Prisma.ChatMembershipsScalarWhereInput[]
   OR?: Prisma.ChatMembershipsScalarWhereInput[]
   NOT?: Prisma.ChatMembershipsScalarWhereInput | Prisma.ChatMembershipsScalarWhereInput[]
-  id?: Prisma.StringFilter<"ChatMemberships"> | string
+  uuid?: Prisma.StringFilter<"ChatMemberships"> | string
   userRoleUuid?: Prisma.StringFilter<"ChatMemberships"> | string
   userUuid?: Prisma.StringFilter<"ChatMemberships"> | string
   channelUuid?: Prisma.StringFilter<"ChatMemberships"> | string
@@ -538,7 +530,7 @@ export type ChatMembershipsScalarWhereInput = {
 }
 
 export type ChatMembershipsCreateWithoutUserRoleInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutChatMembershipsInput
@@ -546,7 +538,7 @@ export type ChatMembershipsCreateWithoutUserRoleInput = {
 }
 
 export type ChatMembershipsUncheckedCreateWithoutUserRoleInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   channelUuid: string
   createdAt?: Date | string
@@ -580,7 +572,7 @@ export type ChatMembershipsUpdateManyWithWhereWithoutUserRoleInput = {
 }
 
 export type ChatMembershipsCreateWithoutUserInput = {
-  id?: string
+  uuid?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   userRole: Prisma.DictionaryCreateNestedOneWithoutChatMembershipsInput
@@ -588,7 +580,7 @@ export type ChatMembershipsCreateWithoutUserInput = {
 }
 
 export type ChatMembershipsUncheckedCreateWithoutUserInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   channelUuid: string
   createdAt?: Date | string
@@ -622,7 +614,7 @@ export type ChatMembershipsUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type ChatMembershipsCreateManyChannelInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   userUuid: string
   createdAt?: Date | string
@@ -630,7 +622,7 @@ export type ChatMembershipsCreateManyChannelInput = {
 }
 
 export type ChatMembershipsUpdateWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutChatMembershipsNestedInput
@@ -638,7 +630,7 @@ export type ChatMembershipsUpdateWithoutChannelInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -646,7 +638,7 @@ export type ChatMembershipsUncheckedUpdateWithoutChannelInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateManyWithoutChannelInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -654,7 +646,7 @@ export type ChatMembershipsUncheckedUpdateManyWithoutChannelInput = {
 }
 
 export type ChatMembershipsCreateManyUserRoleInput = {
-  id?: string
+  uuid?: string
   userUuid: string
   channelUuid: string
   createdAt?: Date | string
@@ -662,7 +654,7 @@ export type ChatMembershipsCreateManyUserRoleInput = {
 }
 
 export type ChatMembershipsUpdateWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutChatMembershipsNestedInput
@@ -670,7 +662,7 @@ export type ChatMembershipsUpdateWithoutUserRoleInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -678,7 +670,7 @@ export type ChatMembershipsUncheckedUpdateWithoutUserRoleInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateManyWithoutUserRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -686,7 +678,7 @@ export type ChatMembershipsUncheckedUpdateManyWithoutUserRoleInput = {
 }
 
 export type ChatMembershipsCreateManyUserInput = {
-  id?: string
+  uuid?: string
   userRoleUuid: string
   channelUuid: string
   createdAt?: Date | string
@@ -694,7 +686,7 @@ export type ChatMembershipsCreateManyUserInput = {
 }
 
 export type ChatMembershipsUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.DictionaryUpdateOneRequiredWithoutChatMembershipsNestedInput
@@ -702,7 +694,7 @@ export type ChatMembershipsUpdateWithoutUserInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -710,7 +702,7 @@ export type ChatMembershipsUncheckedUpdateWithoutUserInput = {
 }
 
 export type ChatMembershipsUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   userRoleUuid?: Prisma.StringFieldUpdateOperationsInput | string
   channelUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -720,7 +712,7 @@ export type ChatMembershipsUncheckedUpdateManyWithoutUserInput = {
 
 
 export type ChatMembershipsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userRoleUuid?: boolean
   userUuid?: boolean
   channelUuid?: boolean
@@ -732,7 +724,7 @@ export type ChatMembershipsSelect<ExtArgs extends runtime.Types.Extensions.Inter
 }, ExtArgs["result"]["chatMemberships"]>
 
 export type ChatMembershipsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userRoleUuid?: boolean
   userUuid?: boolean
   channelUuid?: boolean
@@ -744,7 +736,7 @@ export type ChatMembershipsSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 }, ExtArgs["result"]["chatMemberships"]>
 
 export type ChatMembershipsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   userRoleUuid?: boolean
   userUuid?: boolean
   channelUuid?: boolean
@@ -756,7 +748,7 @@ export type ChatMembershipsSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 }, ExtArgs["result"]["chatMemberships"]>
 
 export type ChatMembershipsSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   userRoleUuid?: boolean
   userUuid?: boolean
   channelUuid?: boolean
@@ -764,7 +756,7 @@ export type ChatMembershipsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ChatMembershipsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userRoleUuid" | "userUuid" | "channelUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["chatMemberships"]>
+export type ChatMembershipsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "userRoleUuid" | "userUuid" | "channelUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["chatMemberships"]>
 export type ChatMembershipsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userRole?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -789,7 +781,7 @@ export type $ChatMembershipsPayload<ExtArgs extends runtime.Types.Extensions.Int
     channel: Prisma.$ChatChannelsPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     userRoleUuid: string
     userUuid: string
     channelUuid: string
@@ -878,8 +870,8 @@ export interface ChatMembershipsDelegate<ExtArgs extends runtime.Types.Extension
    * // Get first 10 ChatMemberships
    * const chatMemberships = await prisma.chatMemberships.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const chatMembershipsWithIdOnly = await prisma.chatMemberships.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const chatMembershipsWithUuidOnly = await prisma.chatMemberships.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends ChatMembershipsFindManyArgs>(args?: Prisma.SelectSubset<T, ChatMembershipsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMembershipsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -923,9 +915,9 @@ export interface ChatMembershipsDelegate<ExtArgs extends runtime.Types.Extension
    *   ]
    * })
    * 
-   * // Create many ChatMemberships and only return the `id`
-   * const chatMembershipsWithIdOnly = await prisma.chatMemberships.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many ChatMemberships and only return the `uuid`
+   * const chatMembershipsWithUuidOnly = await prisma.chatMemberships.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -1014,9 +1006,9 @@ export interface ChatMembershipsDelegate<ExtArgs extends runtime.Types.Extension
    *   ]
    * })
    * 
-   * // Update zero or more ChatMemberships and only return the `id`
-   * const chatMembershipsWithIdOnly = await prisma.chatMemberships.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more ChatMemberships and only return the `uuid`
+   * const chatMembershipsWithUuidOnly = await prisma.chatMemberships.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1221,7 +1213,7 @@ export interface Prisma__ChatMembershipsClient<T, Null = never, ExtArgs extends 
  * Fields of the ChatMemberships model
  */
 export interface ChatMembershipsFieldRefs {
-  readonly id: Prisma.FieldRef<"ChatMemberships", 'String'>
+  readonly uuid: Prisma.FieldRef<"ChatMemberships", 'String'>
   readonly userRoleUuid: Prisma.FieldRef<"ChatMemberships", 'String'>
   readonly userUuid: Prisma.FieldRef<"ChatMemberships", 'String'>
   readonly channelUuid: Prisma.FieldRef<"ChatMemberships", 'String'>

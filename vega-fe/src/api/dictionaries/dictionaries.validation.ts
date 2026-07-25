@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const DictionarySchema = z.array(
 	z.object({
-		id: z.string(),
+		uuid: z.string(),
 		label: z.string(),
 		key: z.string(),
 		description: z.string().nullable(),

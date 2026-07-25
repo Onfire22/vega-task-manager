@@ -8,15 +8,19 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/ChatMemberships.js'
 export type * from './models/ChatChannels.js'
+export type * from './models/ChatMemberships.js'
 export type * from './models/ChatMessages.js'
 export type * from './models/Comment.js'
+export type * from './models/Company.js'
 export type * from './models/Dictionary.js'
 export type * from './models/Membership.js'
 export type * from './models/Notification.js'
 export type * from './models/Project.js'
+export type * from './models/ProjectsMembership.js'
 export type * from './models/Task.js'
+export type * from './models/Team.js'
+export type * from './models/TeamMembers.js'
 export type * from './models/TimeLog.js'
 export type * from './models/User.js'
 export type * from './commonInputTypes.js'

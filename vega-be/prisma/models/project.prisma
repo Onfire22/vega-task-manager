@@ -1,15 +1,16 @@
 model Project {
-  id String @id @default(uuid())
+  uuid String @id @default(uuid())
 
   title             String
   description       String
   code              String     @default("system_code")
   projectStatusUuid String     @map("project_status_uuid")
   deadlineDate      DateTime?  @map("deadline_date")
-  projectStatus     Dictionary @relation(fields: [projectStatusUuid], references: [id])
+  projectStatus     Dictionary @relation(fields: [projectStatusUuid], references: [uuid])
 
-  tasks       Task[]
-  memberships Membership[]
+  tasks               Task[]
+  memberships         Membership[] //todo delete
+  projectsMemberships ProjectsMembership[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

@@ -23,7 +23,7 @@ export const createProject = async (req: Request<{}, {}, TCreateProjectBody>, re
 	try {
 		const project = await projectsService.createProject(req.body, res.locals.user.id);
 
-		res.status(200).json({ id: project.id });
+		res.status(200).json({ uuid: project.uuid });
 	} catch (e) {
 		next(e);
 	}

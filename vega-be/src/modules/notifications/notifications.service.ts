@@ -9,19 +9,19 @@ const getNotifications = async (userUuid: string) => {
 		},
 		select: {
 			createdAt: true,
-			id: true,
+			uuid: true,
 			entityType: true,
 			isReaded: true,
 			extraData: true,
 			fromUser: {
 				select: {
-					id: true,
+					uuid: true,
 					userName: true,
 				},
 			},
 			task: {
 				select: {
-					id: true,
+					uuid: true,
 					code: true,
 				},
 			},
@@ -29,7 +29,7 @@ const getNotifications = async (userUuid: string) => {
 				select: {
 					project: {
 						select: {
-							id: true,
+							uuid: true,
 							code: true,
 						},
 					},
@@ -57,19 +57,19 @@ const setNotificationsRead = async (userUuid: string) => {
 			},
 			select: {
 				createdAt: true,
-				id: true,
+				uuid: true,
 				entityType: true,
 				isReaded: true,
 				extraData: true,
 				fromUser: {
 					select: {
-						id: true,
+						uuid: true,
 						userName: true,
 					},
 				},
 				task: {
 					select: {
-						id: true,
+						uuid: true,
 						code: true,
 					},
 				},
@@ -77,7 +77,7 @@ const setNotificationsRead = async (userUuid: string) => {
 					select: {
 						project: {
 							select: {
-								id: true,
+								uuid: true,
 								code: true,
 							},
 						},

@@ -53,7 +53,7 @@ const TaskView: React.FC<IProps> = ({
 				<div className="px-6.25 flex items-center gap-1.25 text-[13px] mb-1.25">
 					<Link
 						className="transition-colors duration-300 hover:text-white"
-						to={`/project/${task.project.id}`}
+						to={`/project/${task.project.uuid}`}
 					>
 						project {task.project.code}
 					</Link>
@@ -61,7 +61,7 @@ const TaskView: React.FC<IProps> = ({
 					<Link
 						className="transition-colors duration-300 hover:text-white"
 						state={{ from: location.pathname }}
-						to={`/project/${task.project.id}`}
+						to={`/project/${task.project.uuid}`}
 					>
 						задачи
 					</Link>
@@ -107,19 +107,19 @@ const TaskView: React.FC<IProps> = ({
 				<div className="px-6.25 pb-4 flex items-center gap-2.5">
 					<CustomSelect
 						options={options?.taskStatus}
-						value={task.taskStatus.id}
+						value={task.taskStatus.uuid}
 						onChange={(value) => onUpdateTask('taskStatusUuid', value)}
 						label="Статус"
 					/>
 					<CustomSelect
 						options={options.taskType}
-						value={task.taskStack.id}
+						value={task.taskStack.uuid}
 						onChange={(value) => onUpdateTask('taskStackUuid', value)}
 						label="Тип"
 					/>
 					<CustomSelect
 						options={options.taskPriority}
-						value={task.taskPriority.id}
+						value={task.taskPriority.uuid}
 						onChange={(value) => onUpdateTask('taskPriorityUuid', value)}
 						label="Приоритет"
 					/>

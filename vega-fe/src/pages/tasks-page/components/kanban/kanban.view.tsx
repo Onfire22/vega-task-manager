@@ -14,14 +14,14 @@ const KanbanView: React.FC<IProps> = ({ columns }) => {
 			{columns?.map((column) => {
 				return (
 					<SortableContext
-						key={column.id}
-						id={column.id}
-						items={column.tasks.map((i) => i.id)}
+						key={column.uuid}
+						id={column.uuid}
+						items={column.tasks.map((task) => task.uuid)}
 						strategy={verticalListSortingStrategy}
 					>
 						<KanbanColumn column={column}>
 							{column.tasks?.map((task) => {
-								return <KanbanTask task={task} key={task.id} />;
+								return <KanbanTask task={task} key={task.uuid} />;
 							})}
 						</KanbanColumn>
 					</SortableContext>

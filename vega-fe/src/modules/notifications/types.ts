@@ -1,5 +1,5 @@
 export interface INotification {
-	id: string;
+	uuid: string;
 	isReaded: boolean;
 	createdAt: string;
 	extraData?: string;

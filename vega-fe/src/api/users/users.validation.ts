@@ -6,7 +6,7 @@ export const BaseResponseSchema = z.object({
 
 export const UpdateUserResponseSchema = z.object({
 	newUser: z.object({
-		id: z.string(),
+		uuid: z.string(),
 		name: z.string(),
 		secondName: z.string(),
 		email: z.string(),
@@ -20,7 +20,7 @@ export const UpdateUserResponseSchema = z.object({
 export const UsersResponseSchema = z.object({
 	usersList: z.array(
 		z.object({
-			id: z.string(),
+			uuid: z.string(),
 			name: z.string(),
 			secondName: z.string(),
 		}),

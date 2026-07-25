@@ -1,5 +1,5 @@
 export interface IDictionary {
-	id: string;
+	uuid: string;
 	key: string;
 	label: string;
 }
@@ -7,14 +7,14 @@ export interface IDictionary {
 export interface IProject {
 	code: string;
 	createdAt: string;
-	id: string;
+	uuid: string;
 	owner: string;
 	projectProgress: number;
 	tasksCount: number;
 	title: string;
 	projectStatus: IDictionary;
 	users: Array<{
-		id: string;
+		uuid: string;
 		name: string;
 		secondName: string;
 		role: IDictionary;

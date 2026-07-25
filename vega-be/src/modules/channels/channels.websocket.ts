@@ -12,12 +12,12 @@ export const createChannel = async (socket: Socket) => {
 			const createdChannel = await channelsService.createChannel(channelData, socket.user.id);
 			const channel = normalizeChannel(createdChannel);
 
-			socket.join(`channel:${createdChannel.id}`);
+			socket.join(`channel:${createdChannel.uuid}`);
 
 			if (channelData.usersList.length > 0) {
 				const recipientSockets = await io.in(`user:${channelData.usersList}`).fetchSockets();
 
-				recipientSockets.forEach((s) => s.join(`channel:${createdChannel.id}`));
+				recipientSockets.forEach((s) => s.join(`channel:${createdChannel.uuid}`));
 
 				if (channelData.channelType === 'CHANNEL') {
 					channelData.usersList.forEach((uuid) =>
@@ -53,7 +53,7 @@ export const editChannel = async (socket: Socket) => {
 		socket.on('channel:edit', async (channelData: IChannelEdit) => {
 			const channel = await channelsService.editChannel(channelData);
 
-			io.to(`channel:${channel.id}`).emit('channel:edited', { success: true, channelData });
+			io.to(`channel:${channel.uuid}`).emit('channel:edited', { success: true, channelData });
 		});
 	} catch (e) {
 		socket.emit('channel:error', {
@@ -76,14 +76,14 @@ export const joinChannelByUser = (socket: Socket) => {
 		socket.on('channel:user_join', async (channel: { channelUuid: string }) => {
 			const newChannel = await channelsService.updateChannelUserRole(channel.channelUuid, socket.user.id);
 
-			const userData = newChannel?.users.find((user) => user.id === socket.user.id);
+			const userData = newChannel?.users.find((user) => user.uuid === socket.user.id);
 
 			const messageText = `${userData?.name} ${userData?.secondName} присоединился к каналу.`;
 
 			const message = await messagesService.createMessage(
 				{
-					channelUuid: newChannel.id,
-					authorUuid: userData?.id || '',
+					channelUuid: newChannel.uuid,
+					authorUuid: userData?.uuid || '',
 					text: messageText,
 					isSystem: true,
 				},

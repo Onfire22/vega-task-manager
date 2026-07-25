@@ -18,15 +18,15 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model ChatMemberships
- * 
- */
-export type ChatMemberships = Prisma.ChatMembershipsModel
-/**
  * Model ChatChannels
  * 
  */
 export type ChatChannels = Prisma.ChatChannelsModel
+/**
+ * Model ChatMemberships
+ * 
+ */
+export type ChatMemberships = Prisma.ChatMembershipsModel
 /**
  * Model ChatMessages
  * 
@@ -37,6 +37,11 @@ export type ChatMessages = Prisma.ChatMessagesModel
  * 
  */
 export type Comment = Prisma.CommentModel
+/**
+ * Model Company
+ * 
+ */
+export type Company = Prisma.CompanyModel
 /**
  * Model Dictionary
  * 
@@ -58,10 +63,25 @@ export type Notification = Prisma.NotificationModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectsMembership
+ * 
+ */
+export type ProjectsMembership = Prisma.ProjectsMembershipModel
+/**
  * Model Task
  * 
  */
 export type Task = Prisma.TaskModel
+/**
+ * Model Team
+ * 
+ */
+export type Team = Prisma.TeamModel
+/**
+ * Model TeamMembers
+ * 
+ */
+export type TeamMembers = Prisma.TeamMembersModel
 /**
  * Model TimeLog
  * 

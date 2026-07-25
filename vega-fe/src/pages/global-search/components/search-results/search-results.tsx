@@ -9,7 +9,7 @@ const SearchResults = () => {
 	const { searchResults } = useSearchResults();
 
 	const handleRowDoubleClick = (items: TSearchResultsValues, uuid: string) => {
-		const link = items.find((item) => item.id === uuid)?.link;
+		const link = items.find((item) => item.uuid === uuid)?.link;
 		if (link) {
 			navigate(link);
 		}

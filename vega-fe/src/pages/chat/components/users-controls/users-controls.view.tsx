@@ -28,7 +28,7 @@ const UsersControlsView: React.FC<IProps> = ({ isUsersControlsOpen, activeChanne
 					{activeChannelUsers.map((user) => {
 						return (
 							<li
-								key={user.id}
+								key={user.uuid}
 								className="flex items-start justify-between hover:bg-accent rounded-[5px] px-2 py-1"
 							>
 								<div>

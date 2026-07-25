@@ -17,7 +17,7 @@ export interface ITaskLog {
 
 export type TPrismaTask = Prisma.TaskGetPayload<{
 	select: {
-		id: true;
+		uuid: true;
 		code: true;
 		title: true;
 		description: true;
@@ -42,17 +42,17 @@ export type TPrismaTask = Prisma.TaskGetPayload<{
 		};
 		timeLogs: {
 			select: {
-				id: true;
+				uuid: true;
 				loggedTime: true;
 				description: true;
-				user: { select: { name: true; secondName: true; id: true } };
+				user: { select: { name: true; secondName: true; uuid: true } };
 				createdAt: true;
 				updatedAt: true;
 			};
 		};
 		project: {
 			select: {
-				id: true;
+				uuid: true;
 				code: true;
 				title: true;
 				projectStatus: {
@@ -68,7 +68,7 @@ export type TPrismaTask = Prisma.TaskGetPayload<{
 
 export type TaskListItem = Prisma.TaskGetPayload<{
 	select: {
-		id: true;
+		uuid: true;
 		code: true;
 		title: true;
 		description: true;
@@ -84,7 +84,7 @@ export type TaskListItem = Prisma.TaskGetPayload<{
 		};
 		timeLogs: {
 			select: {
-				id: true;
+				uuid: true;
 				loggedTime: true;
 				description: true;
 				user: true;

@@ -19,7 +19,7 @@ const ChannelJoinView: React.FC<IProps> = ({ channels, onJoinChannel }) => {
 				channels.map((channel) => {
 					return (
 						<li
-							key={channel.id}
+							key={channel.uuid}
 							className="p-1 rounded-[5px] hover:bg-accent flex items-center justify-between"
 						>
 							<div className="flex items-center gap-2.5">
@@ -58,7 +58,7 @@ const ChannelJoinView: React.FC<IProps> = ({ channels, onJoinChannel }) => {
 								size="xs"
 								variant="primary"
 								disabled={channel.channelVisibility === 'private'}
-								onClick={() => onJoinChannel(channel.id)}
+								onClick={() => onJoinChannel(channel.uuid)}
 							>
 								Вступить
 							</Button>

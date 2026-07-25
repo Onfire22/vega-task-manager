@@ -6,7 +6,7 @@ export const BaseResponseSchema = z.object({
 
 export const TaskResponseSchema = z.object({
 	task: z.object({
-		id: z.string(),
+		uuid: z.string(),
 		code: z.string(),
 		title: z.string(),
 		description: z.string(),
@@ -15,34 +15,34 @@ export const TaskResponseSchema = z.object({
 		buildLinks: z.string().nullable(),
 		mrLinks: z.string().nullable(),
 		taskPriority: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			label: z.string(),
 			key: z.string(),
 		}),
 		taskStatus: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			label: z.string(),
 			key: z.string(),
 		}),
 		taskStack: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			label: z.string(),
 			key: z.string(),
 		}),
 		reporter: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			name: z.string(),
 			secondName: z.string(),
 		}),
 		assignee: z
 			.object({
-				id: z.string(),
+				uuid: z.string(),
 				name: z.string(),
 				secondName: z.string(),
 			})
 			.nullable(),
 		project: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			code: z.string(),
 			title: z.string(),
 			projectStatus: z.object({
@@ -76,36 +76,36 @@ export const TaskResponseSchema = z.object({
 export const TasksResponseSchema = z.object({
 	tasks: z.array(
 		z.object({
-			id: z.string(),
+			uuid: z.string(),
 			code: z.string(),
 			title: z.string(),
 			description: z.string(),
 			remainingTime: z.object({}).nullable().optional(),
 			taskPriority: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				label: z.string(),
 				key: z.string(),
 			}),
 			taskStatus: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				label: z.string(),
 				key: z.string(),
 			}),
 			taskStack: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				label: z.string(),
 				key: z.string(),
 			}),
 			createdAt: z.string(),
 			updatedAt: z.string(),
 			reporter: z.object({
-				id: z.string(),
+				uuid: z.string(),
 				name: z.string(),
 				secondName: z.string(),
 			}),
 			assignee: z
 				.object({
-					id: z.string(),
+					uuid: z.string(),
 					name: z.string(),
 					secondName: z.string(),
 				})
@@ -147,5 +147,5 @@ export const UpdateTaskResponseSchema = z.object({
 });
 
 export const CreateTaskResponseSchema = z.object({
-	id: z.string(),
+	uuid: z.string(),
 });

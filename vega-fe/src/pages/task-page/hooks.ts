@@ -37,7 +37,7 @@ export const useTaskData = () => {
 		mrLinks: mrLinks ? mrLinks.split('\n') : undefined,
 		reporter: `${task.reporter?.name} ${task.reporter.secondName}`,
 		assignee: task.assignee ? `${task.assignee.name} ${task.assignee.secondName}` : null,
-		assigneeUuid: task.assignee ? task.assignee.id : undefined,
+		assigneeUuid: task.assignee ? task.assignee.uuid : undefined,
 		updatedAt: format(new Date(task.updatedAt), DATE_FORMAT),
 		createdAt: format(new Date(task.createdAt), DATE_FORMAT),
 	};
@@ -58,16 +58,16 @@ export const useComments = () => {
 
 		return comments.map((item) => {
 			return {
-				id: item.id,
+				uuid: item.uuid,
 				text: item.text,
 				user: {
 					avatar: {
 						avatarUrl: item.author.avatarUrl,
-						color: getAvatarColor(item.author.id),
+						color: getAvatarColor(item.author.uuid),
 						initials: `${item.author.name.substring(0, 1)} ${item.author.secondName.substring(0, 1)}`,
 					},
 					name: `${item.author.name} ${item.author.secondName}`,
-					userUuid: item.author.id,
+					userUuid: item.author.uuid,
 				},
 				commentDate: `${format(item.createdAt, DATE_FORMAT)} в ${format(item.createdAt, TIME_FORMAT)}`,
 				...(item.updatedAt
@@ -115,11 +115,11 @@ export const useTimeLogs = (uuid?: string) => {
 				...log,
 				description: log.description || 'No description',
 				user: {
-					id: log.user.id,
+					id: log.user.uuid,
 					name: `${log.user.name} ${log.user.secondName}`,
 					avatar: {
 						avatarUrl: log.user.avatarUrl ? log.user.avatarUrl : null,
-						color: log.user.avatarUrl ? '' : getAvatarColor(log.user.id),
+						color: log.user.avatarUrl ? '' : getAvatarColor(log.user.uuid),
 						initials: log.user.avatarUrl
 							? ''
 							: `${log.user.name.substring(0, 1)} ${log.user.secondName.substring(0, 1)}`,
@@ -190,7 +190,7 @@ export const useUsersWithFilters = (task: ITask | null, searchValue: string) => 
 	const meta = {
 		filters: {
 			...(debouncedValue ? { search: debouncedValue } : {}),
-			...(task?.project ? { withProject: task.project.id } : {}),
+			...(task?.project ? { withProject: task.project.uuid } : {}),
 			...(task?.assigneeUuid ? { withoutUser: task.assigneeUuid } : {}),
 		},
 	};

@@ -37,7 +37,7 @@ export type TaskSumAggregateOutputType = {
 }
 
 export type TaskMinAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   code: string | null
   title: string | null
   description: string | null
@@ -56,7 +56,7 @@ export type TaskMinAggregateOutputType = {
 }
 
 export type TaskMaxAggregateOutputType = {
-  id: string | null
+  uuid: string | null
   code: string | null
   title: string | null
   description: string | null
@@ -75,7 +75,7 @@ export type TaskMaxAggregateOutputType = {
 }
 
 export type TaskCountAggregateOutputType = {
-  id: number
+  uuid: number
   code: number
   title: number
   description: number
@@ -106,7 +106,7 @@ export type TaskSumAggregateInputType = {
 }
 
 export type TaskMinAggregateInputType = {
-  id?: true
+  uuid?: true
   code?: true
   title?: true
   description?: true
@@ -125,7 +125,7 @@ export type TaskMinAggregateInputType = {
 }
 
 export type TaskMaxAggregateInputType = {
-  id?: true
+  uuid?: true
   code?: true
   title?: true
   description?: true
@@ -144,7 +144,7 @@ export type TaskMaxAggregateInputType = {
 }
 
 export type TaskCountAggregateInputType = {
-  id?: true
+  uuid?: true
   code?: true
   title?: true
   description?: true
@@ -250,7 +250,7 @@ export type TaskGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 export type TaskGroupByOutputType = {
-  id: string
+  uuid: string
   code: string | null
   title: string
   description: string
@@ -292,7 +292,7 @@ export type TaskWhereInput = {
   AND?: Prisma.TaskWhereInput | Prisma.TaskWhereInput[]
   OR?: Prisma.TaskWhereInput[]
   NOT?: Prisma.TaskWhereInput | Prisma.TaskWhereInput[]
-  id?: Prisma.StringFilter<"Task"> | string
+  uuid?: Prisma.StringFilter<"Task"> | string
   code?: Prisma.StringNullableFilter<"Task"> | string | null
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringFilter<"Task"> | string
@@ -320,7 +320,7 @@ export type TaskWhereInput = {
 }
 
 export type TaskOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -348,7 +348,7 @@ export type TaskOrderByWithRelationInput = {
 }
 
 export type TaskWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  uuid?: string
   code?: string
   AND?: Prisma.TaskWhereInput | Prisma.TaskWhereInput[]
   OR?: Prisma.TaskWhereInput[]
@@ -376,10 +376,10 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   timeLogs?: Prisma.TimeLogListRelationFilter
   comments?: Prisma.CommentListRelationFilter
-}, "id" | "code">
+}, "uuid" | "code">
 
 export type TaskOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -406,7 +406,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   AND?: Prisma.TaskScalarWhereWithAggregatesInput | Prisma.TaskScalarWhereWithAggregatesInput[]
   OR?: Prisma.TaskScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TaskScalarWhereWithAggregatesInput | Prisma.TaskScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Task"> | string
+  uuid?: Prisma.StringWithAggregatesFilter<"Task"> | string
   code?: Prisma.StringNullableWithAggregatesFilter<"Task"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Task"> | string
   description?: Prisma.StringWithAggregatesFilter<"Task"> | string
@@ -425,7 +425,7 @@ export type TaskScalarWhereWithAggregatesInput = {
 }
 
 export type TaskCreateInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -447,7 +447,7 @@ export type TaskCreateInput = {
 }
 
 export type TaskUncheckedCreateInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -469,7 +469,7 @@ export type TaskUncheckedCreateInput = {
 }
 
 export type TaskUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -491,7 +491,7 @@ export type TaskUpdateInput = {
 }
 
 export type TaskUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -513,7 +513,7 @@ export type TaskUncheckedUpdateInput = {
 }
 
 export type TaskCreateManyInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -532,7 +532,7 @@ export type TaskCreateManyInput = {
 }
 
 export type TaskUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -545,7 +545,7 @@ export type TaskUpdateManyMutationInput = {
 }
 
 export type TaskUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -584,7 +584,7 @@ export type TaskNullableScalarRelationFilter = {
 }
 
 export type TaskCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -608,7 +608,7 @@ export type TaskAvgOrderByAggregateInput = {
 }
 
 export type TaskMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -627,7 +627,7 @@ export type TaskMaxOrderByAggregateInput = {
 }
 
 export type TaskMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  uuid?: Prisma.SortOrder
   code?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -955,7 +955,7 @@ export type TaskUncheckedUpdateManyWithoutReporterNestedInput = {
 }
 
 export type TaskCreateWithoutCommentsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -976,7 +976,7 @@ export type TaskCreateWithoutCommentsInput = {
 }
 
 export type TaskUncheckedCreateWithoutCommentsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1013,7 +1013,7 @@ export type TaskUpdateToOneWithWhereWithoutCommentsInput = {
 }
 
 export type TaskUpdateWithoutCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1034,7 +1034,7 @@ export type TaskUpdateWithoutCommentsInput = {
 }
 
 export type TaskUncheckedUpdateWithoutCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1055,7 +1055,7 @@ export type TaskUncheckedUpdateWithoutCommentsInput = {
 }
 
 export type TaskCreateWithoutTaskPriorityInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1076,7 +1076,7 @@ export type TaskCreateWithoutTaskPriorityInput = {
 }
 
 export type TaskUncheckedCreateWithoutTaskPriorityInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1107,7 +1107,7 @@ export type TaskCreateManyTaskPriorityInputEnvelope = {
 }
 
 export type TaskCreateWithoutTaskStatusInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1128,7 +1128,7 @@ export type TaskCreateWithoutTaskStatusInput = {
 }
 
 export type TaskUncheckedCreateWithoutTaskStatusInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1159,7 +1159,7 @@ export type TaskCreateManyTaskStatusInputEnvelope = {
 }
 
 export type TaskCreateWithoutTaskStackInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1180,7 +1180,7 @@ export type TaskCreateWithoutTaskStackInput = {
 }
 
 export type TaskUncheckedCreateWithoutTaskStackInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1230,7 +1230,7 @@ export type TaskScalarWhereInput = {
   AND?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
   OR?: Prisma.TaskScalarWhereInput[]
   NOT?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-  id?: Prisma.StringFilter<"Task"> | string
+  uuid?: Prisma.StringFilter<"Task"> | string
   code?: Prisma.StringNullableFilter<"Task"> | string | null
   title?: Prisma.StringFilter<"Task"> | string
   description?: Prisma.StringFilter<"Task"> | string
@@ -1281,7 +1281,7 @@ export type TaskUpdateManyWithWhereWithoutTaskStackInput = {
 }
 
 export type TaskCreateWithoutNotificationsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1302,7 +1302,7 @@ export type TaskCreateWithoutNotificationsInput = {
 }
 
 export type TaskUncheckedCreateWithoutNotificationsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1339,7 +1339,7 @@ export type TaskUpdateToOneWithWhereWithoutNotificationsInput = {
 }
 
 export type TaskUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1360,7 +1360,7 @@ export type TaskUpdateWithoutNotificationsInput = {
 }
 
 export type TaskUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1381,7 +1381,7 @@ export type TaskUncheckedUpdateWithoutNotificationsInput = {
 }
 
 export type TaskCreateWithoutProjectInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1402,7 +1402,7 @@ export type TaskCreateWithoutProjectInput = {
 }
 
 export type TaskUncheckedCreateWithoutProjectInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1449,7 +1449,7 @@ export type TaskUpdateManyWithWhereWithoutProjectInput = {
 }
 
 export type TaskCreateWithoutTimeLogsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1470,7 +1470,7 @@ export type TaskCreateWithoutTimeLogsInput = {
 }
 
 export type TaskUncheckedCreateWithoutTimeLogsInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1507,7 +1507,7 @@ export type TaskUpdateToOneWithWhereWithoutTimeLogsInput = {
 }
 
 export type TaskUpdateWithoutTimeLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1528,7 +1528,7 @@ export type TaskUpdateWithoutTimeLogsInput = {
 }
 
 export type TaskUncheckedUpdateWithoutTimeLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1549,7 +1549,7 @@ export type TaskUncheckedUpdateWithoutTimeLogsInput = {
 }
 
 export type TaskCreateWithoutAssigneeInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1570,7 +1570,7 @@ export type TaskCreateWithoutAssigneeInput = {
 }
 
 export type TaskUncheckedCreateWithoutAssigneeInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1601,7 +1601,7 @@ export type TaskCreateManyAssigneeInputEnvelope = {
 }
 
 export type TaskCreateWithoutReporterInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1622,7 +1622,7 @@ export type TaskCreateWithoutReporterInput = {
 }
 
 export type TaskUncheckedCreateWithoutReporterInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1685,7 +1685,7 @@ export type TaskUpdateManyWithWhereWithoutReporterInput = {
 }
 
 export type TaskCreateManyTaskPriorityInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1703,7 +1703,7 @@ export type TaskCreateManyTaskPriorityInput = {
 }
 
 export type TaskCreateManyTaskStatusInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1721,7 +1721,7 @@ export type TaskCreateManyTaskStatusInput = {
 }
 
 export type TaskCreateManyTaskStackInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1739,7 +1739,7 @@ export type TaskCreateManyTaskStackInput = {
 }
 
 export type TaskUpdateWithoutTaskPriorityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1760,7 +1760,7 @@ export type TaskUpdateWithoutTaskPriorityInput = {
 }
 
 export type TaskUncheckedUpdateWithoutTaskPriorityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1781,7 +1781,7 @@ export type TaskUncheckedUpdateWithoutTaskPriorityInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutTaskPriorityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1799,7 +1799,7 @@ export type TaskUncheckedUpdateManyWithoutTaskPriorityInput = {
 }
 
 export type TaskUpdateWithoutTaskStatusInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1820,7 +1820,7 @@ export type TaskUpdateWithoutTaskStatusInput = {
 }
 
 export type TaskUncheckedUpdateWithoutTaskStatusInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1841,7 +1841,7 @@ export type TaskUncheckedUpdateWithoutTaskStatusInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutTaskStatusInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1859,7 +1859,7 @@ export type TaskUncheckedUpdateManyWithoutTaskStatusInput = {
 }
 
 export type TaskUpdateWithoutTaskStackInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1880,7 +1880,7 @@ export type TaskUpdateWithoutTaskStackInput = {
 }
 
 export type TaskUncheckedUpdateWithoutTaskStackInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1901,7 +1901,7 @@ export type TaskUncheckedUpdateWithoutTaskStackInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutTaskStackInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1919,7 +1919,7 @@ export type TaskUncheckedUpdateManyWithoutTaskStackInput = {
 }
 
 export type TaskCreateManyProjectInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -1937,7 +1937,7 @@ export type TaskCreateManyProjectInput = {
 }
 
 export type TaskUpdateWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1958,7 +1958,7 @@ export type TaskUpdateWithoutProjectInput = {
 }
 
 export type TaskUncheckedUpdateWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1979,7 +1979,7 @@ export type TaskUncheckedUpdateWithoutProjectInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutProjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1997,7 +1997,7 @@ export type TaskUncheckedUpdateManyWithoutProjectInput = {
 }
 
 export type TaskCreateManyAssigneeInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -2015,7 +2015,7 @@ export type TaskCreateManyAssigneeInput = {
 }
 
 export type TaskCreateManyReporterInput = {
-  id?: string
+  uuid?: string
   code?: string | null
   title: string
   description: string
@@ -2033,7 +2033,7 @@ export type TaskCreateManyReporterInput = {
 }
 
 export type TaskUpdateWithoutAssigneeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2054,7 +2054,7 @@ export type TaskUpdateWithoutAssigneeInput = {
 }
 
 export type TaskUncheckedUpdateWithoutAssigneeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2075,7 +2075,7 @@ export type TaskUncheckedUpdateWithoutAssigneeInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutAssigneeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2093,7 +2093,7 @@ export type TaskUncheckedUpdateManyWithoutAssigneeInput = {
 }
 
 export type TaskUpdateWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2114,7 +2114,7 @@ export type TaskUpdateWithoutReporterInput = {
 }
 
 export type TaskUncheckedUpdateWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2135,7 +2135,7 @@ export type TaskUncheckedUpdateWithoutReporterInput = {
 }
 
 export type TaskUncheckedUpdateManyWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  uuid?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2202,7 +2202,7 @@ export type TaskCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
 
 
 export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   code?: boolean
   title?: boolean
   description?: boolean
@@ -2231,7 +2231,7 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   code?: boolean
   title?: boolean
   description?: boolean
@@ -2256,7 +2256,7 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  uuid?: boolean
   code?: boolean
   title?: boolean
   description?: boolean
@@ -2281,7 +2281,7 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["task"]>
 
 export type TaskSelectScalar = {
-  id?: boolean
+  uuid?: boolean
   code?: boolean
   title?: boolean
   description?: boolean
@@ -2299,7 +2299,7 @@ export type TaskSelectScalar = {
   updatedAt?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "title" | "description" | "estimateTime" | "remainingTime" | "assigneeUuid" | "mrLinks" | "buildLinks" | "reporterUuid" | "projectUuid" | "taskPriorityUuid" | "taskStatusUuid" | "taskStackUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "code" | "title" | "description" | "estimateTime" | "remainingTime" | "assigneeUuid" | "mrLinks" | "buildLinks" | "reporterUuid" | "projectUuid" | "taskPriorityUuid" | "taskStatusUuid" | "taskStackUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignee?: boolean | Prisma.Task$assigneeArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2343,7 +2343,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     comments: Prisma.$CommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    uuid: string
     code: string | null
     title: string
     description: string
@@ -2442,8 +2442,8 @@ export interface TaskDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * // Get first 10 Tasks
    * const tasks = await prisma.task.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const taskWithIdOnly = await prisma.task.findMany({ select: { id: true } })
+   * // Only select the `uuid`
+   * const taskWithUuidOnly = await prisma.task.findMany({ select: { uuid: true } })
    * 
    */
   findMany<T extends TaskFindManyArgs>(args?: Prisma.SelectSubset<T, TaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2487,9 +2487,9 @@ export interface TaskDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Create many Tasks and only return the `id`
-   * const taskWithIdOnly = await prisma.task.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Tasks and only return the `uuid`
+   * const taskWithUuidOnly = await prisma.task.createManyAndReturn({
+   *   select: { uuid: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -2578,9 +2578,9 @@ export interface TaskDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Update zero or more Tasks and only return the `id`
-   * const taskWithIdOnly = await prisma.task.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Tasks and only return the `uuid`
+   * const taskWithUuidOnly = await prisma.task.updateManyAndReturn({
+   *   select: { uuid: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -2791,7 +2791,7 @@ export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Task model
  */
 export interface TaskFieldRefs {
-  readonly id: Prisma.FieldRef<"Task", 'String'>
+  readonly uuid: Prisma.FieldRef<"Task", 'String'>
   readonly code: Prisma.FieldRef<"Task", 'String'>
   readonly title: Prisma.FieldRef<"Task", 'String'>
   readonly description: Prisma.FieldRef<"Task", 'String'>

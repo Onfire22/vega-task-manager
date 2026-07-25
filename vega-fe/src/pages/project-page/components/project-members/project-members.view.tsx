@@ -77,7 +77,7 @@ const ProjectMembersView: React.FC<IProps> = ({
 				<ul className="mt-2.5">
 					{usersList.map((user) => {
 						return (
-							<li className="p-1.25 text-sm flex items-center gap-2.5" key={user.id}>
+							<li className="p-1.25 text-sm flex items-center gap-2.5" key={user.uuid}>
 								<div
 									className="w-7.5 h-6.25 text-[11px] text-white flex items-center justify-center rounded-full"
 									style={{ backgroundColor: user.avatarUrl ? '' : user.color }}
@@ -94,9 +94,9 @@ const ProjectMembersView: React.FC<IProps> = ({
 											<div className="w-35 shrink-0">
 												<CustomSelect
 													options={roleTypeOptions}
-													value={user.userRole.id}
+													value={user.userRole.uuid}
 													onChange={(value) => {
-														onUpdateUserRole(user.id, value);
+														onUpdateUserRole(user.uuid, value);
 													}}
 													size="sm"
 												/>

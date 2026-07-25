@@ -1,11 +1,11 @@
 export interface IUserRole {
 	label: string;
 	key: string;
-	id: string;
+	uuid: string;
 }
 
 export interface IProjectUser {
-	id: string;
+	uuid: string;
 	name: string;
 	secondName: string;
 	userSpecialisation: {
@@ -15,19 +15,19 @@ export interface IProjectUser {
 }
 
 export interface ITaskDictionary {
-	id: string;
+	uuid: string;
 	label: string;
 }
 
 export interface IProjectTask {
 	assignee: {
-		id: string;
+		uuid: string;
 		name: string;
 		secondName: string;
 	} | null;
 	code: string | null;
 	createdAt: string;
-	id: string;
+	uuid: string;
 	taskPriority: ITaskDictionary;
 	taskStack: ITaskDictionary;
 	taskStatus: ITaskDictionary;
@@ -35,7 +35,7 @@ export interface IProjectTask {
 }
 
 export interface IProject {
-	id: string;
+	uuid: string;
 	title: string;
 	code: string;
 	canEdit: boolean;
@@ -46,7 +46,7 @@ export interface IProject {
 	users: Array<IProjectUser>;
 	projectStatus: {
 		description: string;
-		id: string;
+		uuid: string;
 		label: string;
 		key: string;
 	};
@@ -82,7 +82,7 @@ export interface IField {
 }
 
 export interface IProjectUserSelect {
-	id: string;
+	uuid: string;
 	color: string;
 	userInitials: string;
 	userName: string;

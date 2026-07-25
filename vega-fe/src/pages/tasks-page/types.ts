@@ -18,7 +18,7 @@ export interface IFilters {
 export type TFilter = 'taskPriorityUuid' | 'taskStatusUuid' | 'taskStackUuid';
 
 export interface IExpDictData {
-	id: string;
+	uuid: string;
 	label: string;
 	key: string;
 }
@@ -35,7 +35,7 @@ interface ILogInfo {
 }
 
 export interface ITask {
-	id: string;
+	uuid: string;
 	code: string;
 	title: string;
 	description: string;

@@ -1,5 +1,5 @@
 export const channelsSelect = {
-	id: true,
+	uuid: true,
 	title: true,
 	channelType: true,
 	channelVisibility: true,
@@ -7,14 +7,14 @@ export const channelsSelect = {
 		select: {
 			userRole: {
 				select: {
-					id: true,
+					uuid: true,
 					key: true,
 					label: true,
 				},
 			},
 			user: {
 				select: {
-					id: true,
+					uuid: true,
 					userName: true,
 					name: true,
 					secondName: true,

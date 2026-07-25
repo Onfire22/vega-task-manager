@@ -21,8 +21,8 @@ export const checkIsOwnerMiddleware = async (req: Request<TProjectParams>, res: 
 		}
 
 		const userRole = await prismaAppClient.dictionary.findUnique({
-			where: { type: 'ROLE_TYPE', id: memberships.userRoleUuid },
-			select: { id: true, key: true },
+			where: { type: 'ROLE_TYPE', uuid: memberships.userRoleUuid },
+			select: { uuid: true, key: true },
 		});
 
 		if (!userRole || userRole.key !== 'owner') {

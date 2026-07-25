@@ -24,10 +24,10 @@ export const useProjectsTableData = () => {
 
 	const paginationPages = getPaginationPages(paginationData.page, paginationData.totalPages);
 
-	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.key === 'owner')?.id;
+	const ownerDictionaryUuid = dictionaries?.roleType?.find((role) => role.key === 'owner')?.uuid;
 
 	const projects = projectsList.map((project) => {
-		const owner = project.users.find((user) => user.role.id === ownerDictionaryUuid);
+		const owner = project.users.find((user) => user.role.uuid === ownerDictionaryUuid);
 
 		return {
 			...project,

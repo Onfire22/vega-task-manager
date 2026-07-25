@@ -14,14 +14,14 @@ export const SigInUserResponseSchema = z.object({
 
 export const CurrentUserResponseSchema = z.object({
 	currentUser: z.object({
-		id: z.string(),
+		uuid: z.string(),
 		email: z.string(),
 		name: z.string(),
 		secondName: z.string(),
 		userName: z.string(),
 		avatarUrl: z.string().nullable(),
 		userSpecialisation: z.object({
-			id: z.string(),
+			uuid: z.string(),
 			label: z.string(),
 			key: z.string(),
 		}),

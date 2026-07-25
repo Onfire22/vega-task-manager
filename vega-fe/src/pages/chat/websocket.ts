@@ -13,7 +13,7 @@ export const useChatSocket = () => {
 		(messageData: IMessage) => {
 			dispatch(
 				messagesApi.util.updateQueryData('getMessages', messageData.channelUuid, (draft) => {
-					const index = draft.messages.findIndex((m) => m.id === messageData.id);
+					const index = draft.messages.findIndex((m) => m.uuid === messageData.uuid);
 
 					if (index !== -1) {
 						draft.messages[index] = messageData;
@@ -30,7 +30,7 @@ export const useChatSocket = () => {
 		(channelData: IChannel) => {
 			dispatch(
 				channelsApi.util.updateQueryData('getUserChannels', { searchValue: undefined }, (draft) => {
-					const index = draft.channels.findIndex((channel) => channel.id === channelData.id);
+					const index = draft.channels.findIndex((channel) => channel.uuid === channelData.uuid);
 
 					if (index !== -1) {
 						draft.channels[index] = channelData;
