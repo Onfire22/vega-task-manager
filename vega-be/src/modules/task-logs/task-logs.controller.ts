@@ -3,7 +3,11 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 import { taskLogsService } from './task-logs.service';
 import { TCreateTaskTimeBody, TGetTaskLogsPrams } from './task-logs.types';
 
-export const createTaskLog = async (req: Request<{}, {}, TCreateTaskTimeBody>, res: Response, next: NextFunction) => {
+export const createTaskLogController = async (
+	req: Request<{}, {}, TCreateTaskTimeBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		await taskLogsService.createTaskLog(req.body, res.locals.user.id);
 
@@ -13,7 +17,7 @@ export const createTaskLog = async (req: Request<{}, {}, TCreateTaskTimeBody>, r
 	}
 };
 
-export const getTaskLogs = async (req: Request<TGetTaskLogsPrams>, res: Response, next: NextFunction) => {
+export const getTaskLogsController = async (req: Request<TGetTaskLogsPrams>, res: Response, next: NextFunction) => {
 	try {
 		const timeLogs = await taskLogsService.getTaskLogs(req.params.uuid);
 

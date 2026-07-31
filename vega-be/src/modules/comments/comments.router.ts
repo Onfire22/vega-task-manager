@@ -1,6 +1,11 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { createComment, deleteComment, getTaskComments, updateComment } from './comments.controller';
+import { ROUTES } from '../../router/routes';
+import {
+	createCommentController,
+	deleteCommentController,
+	getTaskCommentsController,
+	updateCommentController,
+} from './comments.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import {
 	CreateCommentBodySchema,
@@ -12,13 +17,13 @@ import {
 
 const commentsRouter = Router();
 
-commentsRouter.get(ROUTES.comments, validateMiddleware(TaskCommentsParamsSchema, 'params'), getTaskComments);
-commentsRouter.post(ROUTES.comment, validateMiddleware(CreateCommentBodySchema), createComment);
+commentsRouter.get(ROUTES.comments, validateMiddleware(TaskCommentsParamsSchema, 'params'), getTaskCommentsController);
+commentsRouter.post(ROUTES.comment, validateMiddleware(CreateCommentBodySchema), createCommentController);
 commentsRouter.patch(
 	ROUTES.comment,
 	[validateMiddleware(UpdateCommentParamsSchema, 'params'), validateMiddleware(UpdateCommentBodySchema)],
-	updateComment,
+	updateCommentController,
 );
-commentsRouter.delete(ROUTES.comment, validateMiddleware(DeleteCommentParamsSchema, 'params'), deleteComment);
+commentsRouter.delete(ROUTES.comment, validateMiddleware(DeleteCommentParamsSchema, 'params'), deleteCommentController);
 
 export { commentsRouter };

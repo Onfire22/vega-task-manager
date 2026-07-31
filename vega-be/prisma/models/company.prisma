@@ -1,7 +1,12 @@
 model Company {
-  uuid      String  @id @default(uuid())
-  title     String
-  avatarUrl String? @map("avatar_url")
+  uuid String @id @default(uuid())
+
+  companyTitle  String  @map("company_title")
+  companyAvatar String  @map("avatar_url")
+  inn           String
+  address       String
+  mainColor     String? @map("main_color")
+  accentColor   String? @map("accent_color")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { getGlobalSearchResults } from './global-search.controller';
+import { ROUTES } from '../../router/routes';
+import { getGlobalSearchResultsController } from './global-search.controller';
 
 const globalSearchRouter = Router();
 
-globalSearchRouter.get(ROUTES.search, getGlobalSearchResults);
+globalSearchRouter.get(ROUTES.search, getGlobalSearchResultsController);
 
 export { globalSearchRouter };

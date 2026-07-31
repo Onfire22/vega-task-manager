@@ -16,17 +16,19 @@ import { useGetCurrentUserQuery } from '../api/auth/auth.api.ts';
 import { FRONT_ROUTES } from '../app/constants.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { GlobalSearch } from '@/pages/global-search';
+import { SuperAdminSettingsPage } from '@/pages/super-admin-settings-page';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();
 
-	if (isLoading) return <CustomLoader />;
+	if (isLoading) return <CustomLoader isFull />;
 
 	return (
 		<Routes>
 			<Route element={<PublicRoute isError={isError} isFetching={isFetching} />}>
 				<Route path={FRONT_ROUTES.signIn} element={<SignInPage />} />
 				<Route path={FRONT_ROUTES.signUp} element={<SignUpPage />} />
+				<Route path={FRONT_ROUTES.superAdmin} element={<SuperAdminSettingsPage />} />
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route element={<Layout />}>

@@ -1,15 +1,20 @@
 import { Router } from 'express';
-import { createProject, getProjectByUuid, getProjects, updateProject } from './projects.controller';
-import { ROUTES } from '../../common/constants';
+import {
+	createProjectController,
+	getProjectByUuidController,
+	getProjectsController,
+	updateProjectController,
+} from './projects.controller';
+import { ROUTES } from '../../router/routes';
 import { checkIsOwnerMiddleware } from './projects.middleware';
 import { validateMiddleware } from '../../common/middlewares';
 import { CreateProjectBodySchema, EditProjectBodySchema, ProjectParamsSchema } from './projects.validation';
 
 const projectsRouter = Router();
 
-projectsRouter.post(ROUTES.projects, getProjects);
-projectsRouter.post(ROUTES.projectsCreate, validateMiddleware(CreateProjectBodySchema), createProject);
-projectsRouter.get(ROUTES.project, validateMiddleware(ProjectParamsSchema, 'params'), getProjectByUuid);
+projectsRouter.post(ROUTES.projects, getProjectsController);
+projectsRouter.post(ROUTES.projectsCreate, validateMiddleware(CreateProjectBodySchema), createProjectController);
+projectsRouter.get(ROUTES.project, validateMiddleware(ProjectParamsSchema, 'params'), getProjectByUuidController);
 projectsRouter.post(
 	ROUTES.project,
 	[
@@ -17,7 +22,7 @@ projectsRouter.post(
 		validateMiddleware(EditProjectBodySchema),
 		checkIsOwnerMiddleware,
 	],
-	updateProject,
+	updateProjectController,
 );
 
 export { projectsRouter };

@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { TChangeUserMembershipBody, TChangeUserMembershipParams } from './memberships.types';
 import { membershipsService } from './memberships.service';
 
-export const changeUserMembership = async (
+export const changeUserMembershipController = async (
 	req: Request<TChangeUserMembershipParams, {}, TChangeUserMembershipBody>,
 	res: Response,
 	next: NextFunction,

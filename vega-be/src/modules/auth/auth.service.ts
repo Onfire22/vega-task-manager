@@ -31,6 +31,7 @@ const signupUser = async (userData: TSignUpBody) => {
 			secondName: true,
 			userSpecialisationUuid: true,
 			userName: true,
+			isSuperUser: users.length === 0,
 		},
 	});
 

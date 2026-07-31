@@ -3,7 +3,7 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 import { TCreateCommentBody, TUpdateCommentBody, TUuidParams } from './comments.types';
 import { commentsService } from './comments.service';
 
-export const getTaskComments = async (req: Request<TUuidParams>, res: Response, next: NextFunction) => {
+export const getTaskCommentsController = async (req: Request<TUuidParams>, res: Response, next: NextFunction) => {
 	try {
 		const comments = await commentsService.getComments(req.params.uuid);
 
@@ -13,7 +13,11 @@ export const getTaskComments = async (req: Request<TUuidParams>, res: Response, 
 	}
 };
 
-export const createComment = async (req: Request<{}, {}, TCreateCommentBody>, res: Response, next: NextFunction) => {
+export const createCommentController = async (
+	req: Request<{}, {}, TCreateCommentBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		await commentsService.createComment(res.locals.user.id, req.body);
 
@@ -23,7 +27,7 @@ export const createComment = async (req: Request<{}, {}, TCreateCommentBody>, re
 	}
 };
 
-export const updateComment = async (
+export const updateCommentController = async (
 	req: Request<TUuidParams, {}, TUpdateCommentBody>,
 	res: Response,
 	next: NextFunction,
@@ -37,7 +41,7 @@ export const updateComment = async (
 	}
 };
 
-export const deleteComment = async (req: Request<TUuidParams, {}, {}>, res: Response, next: NextFunction) => {
+export const deleteCommentController = async (req: Request<TUuidParams, {}, {}>, res: Response, next: NextFunction) => {
 	try {
 		await commentsService.deleteComment(req.params.uuid);
 

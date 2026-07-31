@@ -10,6 +10,7 @@ export const FRONT_ROUTES = {
 	user: '/user/:uuid',
 	chat: '/chat',
 	search: '/search',
+	superAdmin: '/super-admin-settings',
 	all: '*',
 };
 

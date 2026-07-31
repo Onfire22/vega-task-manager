@@ -138,8 +138,12 @@ export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeo
 
 export const CompanyScalarFieldEnum = {
   uuid: 'uuid',
-  title: 'title',
-  avatarUrl: 'avatarUrl',
+  companyTitle: 'companyTitle',
+  companyAvatar: 'companyAvatar',
+  inn: 'inn',
+  address: 'address',
+  mainColor: 'mainColor',
+  accentColor: 'accentColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -238,8 +242,8 @@ export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof Task
 
 export const TeamScalarFieldEnum = {
   uuid: 'uuid',
-  title: 'title',
-  avatarUrl: 'avatarUrl',
+  teamTitle: 'teamTitle',
+  teamAvatar: 'teamAvatar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

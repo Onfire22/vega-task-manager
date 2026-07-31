@@ -1,9 +1,23 @@
 import multer from 'multer';
 import path from 'path';
+import { UPLOADS_MAP } from './constants';
+import fs from 'node:fs/promises';
 
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, path.join(__dirname, '../..', 'public/uploads'));
+	destination: async (req, file, cb) => {
+		const folderPath = UPLOADS_MAP[file.fieldname as keyof typeof UPLOADS_MAP];
+
+		if (!folderPath) {
+			return cb(null, 'Unknown file destination');
+		}
+
+		try {
+			await fs.readdir(path.join(process.cwd(), folderPath));
+		} catch (e) {
+			await fs.mkdir(path.join(process.cwd(), folderPath));
+		}
+
+		cb(null, path.join(process.cwd(), folderPath));
 	},
 	filename: (req, file, cb) => {
 		const ext = path.extname(file.originalname);

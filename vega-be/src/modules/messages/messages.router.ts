@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { getChannelMessages } from './messages.controller';
+import { ROUTES } from '../../router/routes';
+import { getChannelMessagesController } from './messages.controller';
 
 const messagesRouter = Router();
 
-messagesRouter.get(ROUTES.messages, getChannelMessages);
+messagesRouter.get(ROUTES.messages, getChannelMessagesController);
 
 export { messagesRouter };

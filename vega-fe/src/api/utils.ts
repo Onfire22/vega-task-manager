@@ -22,3 +22,9 @@ export const transformNotifications = (notifications: TNotificationsList) => {
 		};
 	});
 };
+
+export const hasFileValues = (body: Record<string, unknown>) => {
+	if (!body) return false;
+
+	return Object.values(body).some((item) => item instanceof File);
+};

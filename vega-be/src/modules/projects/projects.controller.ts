@@ -3,7 +3,11 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 import { TCreateProjectBody, TEditProjectBody, TGetProjectsBody, TProjectParams } from './projects.types';
 import { projectsService } from './projects.service';
 
-export const getProjects = async (req: Request<{}, {}, TGetProjectsBody>, res: Response, next: NextFunction) => {
+export const getProjectsController = async (
+	req: Request<{}, {}, TGetProjectsBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const {
 			meta: { pagination },
@@ -19,7 +23,11 @@ export const getProjects = async (req: Request<{}, {}, TGetProjectsBody>, res: R
 	}
 };
 
-export const createProject = async (req: Request<{}, {}, TCreateProjectBody>, res: Response, next: NextFunction) => {
+export const createProjectController = async (
+	req: Request<{}, {}, TCreateProjectBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const project = await projectsService.createProject(req.body, res.locals.user.id);
 
@@ -29,7 +37,7 @@ export const createProject = async (req: Request<{}, {}, TCreateProjectBody>, re
 	}
 };
 
-export const getProjectByUuid = async (req: Request<TProjectParams>, res: Response, next: NextFunction) => {
+export const getProjectByUuidController = async (req: Request<TProjectParams>, res: Response, next: NextFunction) => {
 	try {
 		const project = await projectsService.getProject(req.params.uuid, res.locals.user.id);
 
@@ -39,7 +47,7 @@ export const getProjectByUuid = async (req: Request<TProjectParams>, res: Respon
 	}
 };
 
-export const updateProject = async (
+export const updateProjectController = async (
 	req: Request<TProjectParams, {}, TEditProjectBody>,
 	res: Response,
 	next: NextFunction,

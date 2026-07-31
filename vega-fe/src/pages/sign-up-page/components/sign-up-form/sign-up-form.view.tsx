@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AccountStep } from './account-step.tsx';
 import { CustomStepper } from '../stepper/stepper.tsx';
 import { ProfileStep } from './profile-step.tsx';
-import type { IFormValues, IOptions, TSignUpFormValues } from '../../types.ts';
+import type { IFormValues, TSignUpFormValues } from '../../types.ts';
 import { FRONT_ROUTES } from '@/app/constants.ts';
 import type { UseFormReturn } from 'react-hook-form';
 
@@ -13,7 +13,6 @@ interface IProps {
 	formValues: IFormValues;
 	isPopoverOpened: boolean;
 	isNextButtonDisabled: boolean;
-	stackOptions: Array<IOptions>;
 	passwordRef: React.RefObject<HTMLInputElement | null>;
 	emailRef: React.RefObject<HTMLInputElement | null>;
 	popoverData: { strength: number; color: string };
@@ -33,7 +32,6 @@ const SignUpFormView: React.FC<IProps> = ({
 	passwordRef,
 	emailRef,
 	isNextButtonDisabled,
-	stackOptions,
 	onPrevStepClick,
 	onNextStepClick,
 	form,
@@ -56,7 +54,7 @@ const SignUpFormView: React.FC<IProps> = ({
 								popoverData={popoverData}
 							/>
 						)}
-						{activeStep === 1 && <ProfileStep form={form} stackOptions={stackOptions} />}
+						{activeStep === 1 && <ProfileStep form={form} />}
 					</div>
 					<CustomStepper
 						activeStep={activeStep}
