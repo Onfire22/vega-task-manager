@@ -1,7 +1,16 @@
-// import { baseApi } from '@/api';
-//
-// const teamsApi = baseApi.injectEndpoints({
-// 	endpoints: (builder) => ({}),
-// });
+import { baseApi } from '@/api';
+import { METHODS, ROUTES } from '@/api/constants.ts';
 
-// export const {} = teamsApi;
+const teamsApi = baseApi.injectEndpoints({
+	endpoints: (builder) => ({
+		createTeams: builder.mutation({
+			query: (data) => ({
+				url: ROUTES.teams,
+				method: METHODS.post,
+				body: data,
+			}),
+		}),
+	}),
+});
+
+export const { useCreateTeamsMutation } = teamsApi;

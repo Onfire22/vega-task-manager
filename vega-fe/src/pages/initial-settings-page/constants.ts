@@ -7,7 +7,7 @@ export const INITIAL_COMPANY_SETTINGS_VALUES = {
 	accentColor: '#5046e5',
 };
 
-export const DEFAULT_FIELD_VALUE = { teamTitle: '', teamAvatar: undefined, presetId: '' };
+export const DEFAULT_FIELD_VALUE = { teamTitle: '', teamAvatar: undefined, id: '' };
 
 export const INITIAL_TEAMS_DEFAULT_VALUES = {
 	teamPresets: [],

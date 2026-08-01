@@ -1,15 +1,18 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import type { ITeamsPreset, TeamsSettingsFormValues } from '@/pages/super-admin-settings-page/types.ts';
-import { InitialTeamsFormView } from '@/pages/super-admin-settings-page/components/initial-teams-form/initial-teams-form-view.tsx';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InitialTeamsValidationSchema } from '@/pages/super-admin-settings-page/validation.ts';
-import { DEFAULT_FIELD_VALUE, INITIAL_TEAMS_DEFAULT_VALUES } from '@/pages/super-admin-settings-page/constants.ts';
-import { TEAMS_PRESETS } from '@/pages/super-admin-settings-page/teams-presets.ts';
-import { normalizeTeamsValues, transformAvatarPathRoFile } from '@/pages/super-admin-settings-page/utils.ts';
+import { useCreateTeamsMutation } from '@/api/teams/teams.api.ts';
+import { TEAMS_PRESETS } from '@/pages/initial-settings-page/teams-presets.ts';
+import type { ITeamsPreset, TeamsSettingsFormValues } from '@/pages/initial-settings-page/types.ts';
+import { DEFAULT_FIELD_VALUE, INITIAL_TEAMS_DEFAULT_VALUES } from '@/pages/initial-settings-page/constants.ts';
+import { InitialTeamsValidationSchema } from '@/pages/initial-settings-page/validation.ts';
+import { normalizeTeamsValues, transformAvatarPathRoFile } from '@/pages/initial-settings-page/utils.ts';
+import { InitialTeamsFormView } from '@/pages/initial-settings-page/components/initial-teams-form/initial-teams-form-view.tsx';
 
 const InitialTeamsForm = () => {
 	const [selectedPresets, setSelectedPresets] = useState(TEAMS_PRESETS);
+
+	const [createTeams] = useCreateTeamsMutation();
 
 	const form = useForm<TeamsSettingsFormValues>({
 		defaultValues: INITIAL_TEAMS_DEFAULT_VALUES,
@@ -32,7 +35,7 @@ const InitialTeamsForm = () => {
 			selectedPresets.map((preset) => {
 				return {
 					...preset,
-					isSelected: selectedPreset.presetId === preset.presetId ? !preset.isSelected : preset.isSelected,
+					isSelected: selectedPreset.id === preset.id ? !preset.isSelected : preset.isSelected,
 				};
 			}),
 		);
@@ -45,7 +48,7 @@ const InitialTeamsForm = () => {
 		update(targetIndex, {
 			teamTitle: selectedPreset.fullName,
 			teamAvatar: await transformAvatarPathRoFile(selectedPreset.avatarPath, selectedPreset.fullName),
-			presetId: selectedPreset.presetId,
+			id: selectedPreset.id,
 		});
 	};
 
@@ -56,7 +59,7 @@ const InitialTeamsForm = () => {
 		setSelectedPresets(
 			selectedPresets.map((preset) => ({
 				...preset,
-				isSelected: card?.presetId !== preset.presetId ? preset.isSelected : false,
+				isSelected: card?.id !== preset.id ? preset.isSelected : false,
 			})),
 		);
 	};
@@ -66,7 +69,7 @@ const InitialTeamsForm = () => {
 	};
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
-		console.log(normalizeTeamsValues(values));
+		createTeams(normalizeTeamsValues(values));
 	});
 
 	return (

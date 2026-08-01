@@ -7,7 +7,7 @@ const companiesApi = baseApi.injectEndpoints({
 			query: (data) => ({
 				method: METHODS.post,
 				body: data,
-				url: `${ROUTES.company}`,
+				url: ROUTES.company,
 			}),
 		}),
 	}),

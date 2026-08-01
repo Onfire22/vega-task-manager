@@ -12,8 +12,8 @@ export const InitialCompanySettingsValidationSchema = z.object({
 export const InitialTeamsValidationSchema = z.object({
 	items: z.array(
 		z.object({
+			id: z.string(),
 			teamTitle: z.string().min(1),
-			presetId: z.string(),
 			teamAvatar: z.instanceof(File).optional(),
 		}),
 	),

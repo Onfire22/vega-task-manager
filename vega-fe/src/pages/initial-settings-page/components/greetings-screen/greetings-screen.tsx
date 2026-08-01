@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button.tsx';
-import type { TScreenTypes } from '@/pages/super-admin-settings-page/types.ts';
 import React from 'react';
+import type { TScreenTypes } from '@/pages/initial-settings-page/types.ts';
 
 interface IProps {
 	onNextStepClick: (step: TScreenTypes) => void;

@@ -1,11 +1,11 @@
 import { Controller, type Control, type FieldArrayWithId } from 'react-hook-form';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import React from 'react';
-import type { ITeamsPreset, TeamsSettingsFormValues, TTeamsPresets } from '@/pages/super-admin-settings-page/types.ts';
 import { Button } from '@/components/ui/button.tsx';
 import { Camera, Plus, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils.ts';
-import { ScreenLayout } from '@/pages/super-admin-settings-page/components/screen-layout';
+import { ScreenLayout } from '@/pages/initial-settings-page/components/screen-layout';
+import type { ITeamsPreset, TeamsSettingsFormValues, TTeamsPresets } from '@/pages/initial-settings-page/types.ts';
 
 interface IProps {
 	control: Control<TeamsSettingsFormValues>;
@@ -35,7 +35,7 @@ const InitialTeamsFormView: React.FC<IProps> = ({
 						{selectedPresets.map((card) => (
 							<div
 								onClick={() => onPresetSelect(card)}
-								key={card.presetId}
+								key={card.id}
 								className={cn(
 									'flex flex-1 basis-0 min-w-30 max-w-30 items-center gap-2 border rounded-2xl p-0.5 px-2 cursor-pointer hover:bg-accent',
 									card.isSelected && 'border-primary',
@@ -65,7 +65,7 @@ const InitialTeamsFormView: React.FC<IProps> = ({
 												<img
 													src={URL.createObjectURL(avatarField.value)}
 													alt="team avatar"
-													className="w-[40px] h-[40px] rounded-full object-cover"
+													className="w-10 h-10 rounded-full object-cover"
 												/>
 											) : (
 												<label className="flex items-center justify-center p-2 bg-secondary rounded cursor-pointer">

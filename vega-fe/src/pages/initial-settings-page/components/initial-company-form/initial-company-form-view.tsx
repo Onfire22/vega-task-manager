@@ -1,10 +1,10 @@
 import { Controller, type UseFormReturn } from 'react-hook-form';
-import type { CompanySettingsFormValues } from '@/pages/super-admin-settings-page/types.ts';
 import React from 'react';
 import { CustomInput } from '@/components/common/forms/custom-input.tsx';
 import { MoveRight } from 'lucide-react';
-import { ScreenLayout } from '@/pages/super-admin-settings-page/components/screen-layout';
 import { CustomFileInput } from '@/components/common/forms/custom-file-input.tsx';
+import { ScreenLayout } from '../screen-layout';
+import type { CompanySettingsFormValues } from '@/pages/initial-settings-page/types.ts';
 
 interface IProps {
 	form: UseFormReturn<CompanySettingsFormValues>;

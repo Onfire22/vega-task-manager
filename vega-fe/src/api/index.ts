@@ -5,7 +5,6 @@ import { type ZodType } from 'zod';
 import type { RootState } from '@/store/reducer.ts';
 import { setToken } from '@/store/authSlice.ts';
 import { initSocket, socket } from '@/api/websocket.ts';
-import { hasFileValues } from '@/api/utils.ts';
 
 const rawBaseQuery = fetchBaseQuery({
 	baseUrl: BASE_URL,
@@ -24,20 +23,7 @@ const baseQuery: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError, {
 	api,
 	extraOptions,
 ) => {
-	const fetchArgs: FetchArgs = typeof args === 'string' ? { url: args } : args;
-	const body = typeof fetchArgs.body !== 'string' ? fetchArgs.body : {};
-
-	if (hasFileValues(body)) {
-		const formData = new FormData();
-
-		Object.keys(body).forEach((key) => {
-			formData.append(key, body[key]);
-		});
-
-		fetchArgs.body = formData;
-	}
-
-	let result = await rawBaseQuery(fetchArgs, api, extraOptions);
+	let result = await rawBaseQuery(args, api, extraOptions);
 
 	if (result.error?.status === 401) {
 		const refreshResult = await rawBaseQuery({ url: ROUTES.refresh, method: METHODS.post }, api, extraOptions);
@@ -54,7 +40,7 @@ const baseQuery: BaseQueryFn<FetchArgs | string, unknown, FetchBaseQueryError, {
 			socket.auth = { token: accessToken };
 			socket.disconnect().connect();
 
-			result = await rawBaseQuery(fetchArgs, api, extraOptions);
+			result = await rawBaseQuery(args, api, extraOptions);
 		}
 	}
 
