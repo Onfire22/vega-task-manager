@@ -17,7 +17,6 @@ const signupUser = async (userData: TSignUpBody) => {
 			userName: true,
 		},
 	});
-	console.log(users);
 
 	const userNames = users.map((user) => user.userName);
 
