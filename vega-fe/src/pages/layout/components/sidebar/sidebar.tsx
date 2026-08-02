@@ -1,7 +1,7 @@
 import { SidebarView } from './sidebar.view.tsx';
 import { useLocation } from 'react-router-dom';
-import { useLogOutUserMutation } from '../../../../api/auth/auth.api.ts';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks.ts';
+import { useGetCurrentUserQuery, useLogOutUserMutation } from '@/api/auth/auth.api.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { getIsSidebarOpenedSelector } from '../../selectors.ts';
 import { setToken } from '@/store/authSlice.ts';
 import { baseApi } from '@/api';
@@ -13,6 +13,7 @@ const Sidebar = () => {
 	const isSidebarOpened = useAppSelector(getIsSidebarOpenedSelector());
 
 	const [logOutUser] = useLogOutUserMutation();
+	const { data } = useGetCurrentUserQuery();
 
 	const handleLogOutClick = async () => {
 		await logOutUser();
@@ -25,6 +26,7 @@ const Sidebar = () => {
 			pathname={location.pathname.split('/')[1]}
 			isSidebarOpened={isSidebarOpened}
 			onLogOutClick={handleLogOutClick}
+			currentUser={data?.currentUser}
 		/>
 	);
 };

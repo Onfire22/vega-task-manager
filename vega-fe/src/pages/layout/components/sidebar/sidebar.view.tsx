@@ -2,15 +2,16 @@ import React from 'react';
 import { BOTTOM_LINKS, TOP_LINKS } from '../../contsants.ts';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils.ts';
-import { CustomTooltip } from '@/components/common/ui/custom-tooltip.tsx';
+import type { ICurrentUser } from '@/pages/layout/types.ts';
 
 interface IProps {
 	pathname: string;
 	isSidebarOpened: boolean;
 	onLogOutClick: () => void;
+	currentUser?: ICurrentUser;
 }
 
-const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpened }) => {
+const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpened, currentUser }) => {
 	return (
 		<nav
 			className={cn(
@@ -22,54 +23,40 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 				{TOP_LINKS.map((link) => {
 					const Icon = link.icon;
 
-					return isSidebarOpened ? (
-						<li
-							className={cn(
-								'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
-								link.activeRoutes.includes(pathname) &&
-									'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
-							)}
-							key={link.href}
-						>
-							<Link
-								to={link.href}
-								className={cn('h-6 text-foreground w-full flex items-center gap-2.5 no-underline')}
+					return (
+						(currentUser?.[link.permission as keyof typeof currentUser] || !link.permission) && (
+							<li
+								className={cn(
+									'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
+									link.activeRoutes.includes(pathname) &&
+										'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
+								)}
+								key={link.href}
 							>
-								<Icon />
-								<span>{link.label}</span>
-							</Link>
-						</li>
-					) : (
-						<CustomTooltip
-							content={link.label}
-							trigger={
-								<li
-									className={cn(
-										'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
-										link.activeRoutes.includes(pathname) &&
-											'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
-									)}
+								<Link
+									to={link.href}
+									className={cn('h-6 text-foreground w-full flex items-center gap-2.5 no-underline')}
 								>
-									<Link
-										to={link.href}
+									<Icon className="shrink-0" />
+									<span
 										className={cn(
-											'h-6 text-foreground w-full flex items-center gap-2.5 no-underline',
+											'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
+											isSidebarOpened ? 'max-w-40 opacity-100' : 'max-w-0 opacity-0',
 										)}
 									>
-										<Icon />
-									</Link>
-								</li>
-							}
-							key={link.href}
-							position="right"
-						/>
+										{link.label}
+									</span>
+								</Link>
+							</li>
+						)
 					);
 				})}
 			</ul>
 			<ul className="p-1.25 flex flex-col gap-2.5">
 				{BOTTOM_LINKS.map((link) => {
 					const Icon = link.icon;
-					return isSidebarOpened ? (
+
+					return (
 						<li
 							className={cn(
 								'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
@@ -80,55 +67,37 @@ const SidebarView: React.FC<IProps> = ({ pathname, onLogOutClick, isSidebarOpene
 						>
 							{link.href === 'logout' ? (
 								<button
-									className="'h-6 text-foreground w-full flex items-center gap-2.5"
+									className="h-6 text-foreground w-full flex items-center gap-2.5 cursor-pointer"
 									type="button"
 									onClick={onLogOutClick}
 								>
-									<Icon />
-									<span>{link.label}</span>
+									<Icon className="shrink-0" />
+									<span
+										className={cn(
+											'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
+											isSidebarOpened ? 'max-w-40 opacity-100' : 'max-w-0 opacity-0',
+										)}
+									>
+										{link.label}
+									</span>
 								</button>
 							) : (
 								<Link
 									to={link.href}
-									className={cn('h-6 text-foreground w-full flex items-center gap-2.5 no-underline')}
+									className="h-6 text-foreground w-full flex items-center gap-2.5 no-underline"
 								>
-									<Icon />
-									<span>{link.label}</span>
+									<Icon className="shrink-0" />
+									<span
+										className={cn(
+											'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
+											isSidebarOpened ? 'max-w-40 opacity-100' : 'max-w-0 opacity-0',
+										)}
+									>
+										{link.label}
+									</span>
 								</Link>
 							)}
 						</li>
-					) : (
-						<CustomTooltip
-							key={link.href}
-							content={link.label}
-							position="right"
-							trigger={
-								<li
-									className={cn(
-										'p-2.5 flex items-center rounded-[7px] transition-all duration-300 ease-in hover:bg-accent',
-										link.activeRoutes.includes(pathname) &&
-											'p-2.5 flex items-center rounded-[7px] bg-ring hover:bg-ring',
-									)}
-								>
-									{link.href === 'logout' ? (
-										<button
-											className="w-6 h-6 bg-transparent border-none cursor-pointer"
-											type="button"
-											onClick={onLogOutClick}
-										>
-											<Icon />
-										</button>
-									) : (
-										<Link
-											to={link.href}
-											className="h-6 text-foreground w-full flex items-center gap-2.5 no-underline"
-										>
-											<Icon />
-										</Link>
-									)}
-								</li>
-							}
-						/>
 					);
 				})}
 			</ul>
