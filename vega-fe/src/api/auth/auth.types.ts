@@ -16,7 +16,6 @@ export interface IUserData {
 	password: string;
 	name: string;
 	secondName: string;
-	userSpecialisationUuid: string;
 }
 
 export type TBaseResponse = z.infer<typeof BaseResponseSchema>;

@@ -26,24 +26,36 @@ export type AggregateCompany = {
 
 export type CompanyMinAggregateOutputType = {
   uuid: string | null
-  title: string | null
-  avatarUrl: string | null
+  companyTitle: string | null
+  companyAvatar: string | null
+  inn: string | null
+  address: string | null
+  mainColor: string | null
+  accentColor: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type CompanyMaxAggregateOutputType = {
   uuid: string | null
-  title: string | null
-  avatarUrl: string | null
+  companyTitle: string | null
+  companyAvatar: string | null
+  inn: string | null
+  address: string | null
+  mainColor: string | null
+  accentColor: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type CompanyCountAggregateOutputType = {
   uuid: number
-  title: number
-  avatarUrl: number
+  companyTitle: number
+  companyAvatar: number
+  inn: number
+  address: number
+  mainColor: number
+  accentColor: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -52,24 +64,36 @@ export type CompanyCountAggregateOutputType = {
 
 export type CompanyMinAggregateInputType = {
   uuid?: true
-  title?: true
-  avatarUrl?: true
+  companyTitle?: true
+  companyAvatar?: true
+  inn?: true
+  address?: true
+  mainColor?: true
+  accentColor?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type CompanyMaxAggregateInputType = {
   uuid?: true
-  title?: true
-  avatarUrl?: true
+  companyTitle?: true
+  companyAvatar?: true
+  inn?: true
+  address?: true
+  mainColor?: true
+  accentColor?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type CompanyCountAggregateInputType = {
   uuid?: true
-  title?: true
-  avatarUrl?: true
+  companyTitle?: true
+  companyAvatar?: true
+  inn?: true
+  address?: true
+  mainColor?: true
+  accentColor?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -149,8 +173,12 @@ export type CompanyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type CompanyGroupByOutputType = {
   uuid: string
-  title: string
-  avatarUrl: string | null
+  companyTitle: string
+  companyAvatar: string
+  inn: string
+  address: string
+  mainColor: string | null
+  accentColor: string | null
   createdAt: Date
   updatedAt: Date
   _count: CompanyCountAggregateOutputType | null
@@ -178,16 +206,24 @@ export type CompanyWhereInput = {
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   uuid?: Prisma.StringFilter<"Company"> | string
-  title?: Prisma.StringFilter<"Company"> | string
-  avatarUrl?: Prisma.StringNullableFilter<"Company"> | string | null
+  companyTitle?: Prisma.StringFilter<"Company"> | string
+  companyAvatar?: Prisma.StringFilter<"Company"> | string
+  inn?: Prisma.StringFilter<"Company"> | string
+  address?: Prisma.StringFilter<"Company"> | string
+  mainColor?: Prisma.StringNullableFilter<"Company"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Company"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
 }
 
 export type CompanyOrderByWithRelationInput = {
   uuid?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyTitle?: Prisma.SortOrder
+  companyAvatar?: Prisma.SortOrder
+  inn?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  mainColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -197,16 +233,24 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
-  title?: Prisma.StringFilter<"Company"> | string
-  avatarUrl?: Prisma.StringNullableFilter<"Company"> | string | null
+  companyTitle?: Prisma.StringFilter<"Company"> | string
+  companyAvatar?: Prisma.StringFilter<"Company"> | string
+  inn?: Prisma.StringFilter<"Company"> | string
+  address?: Prisma.StringFilter<"Company"> | string
+  mainColor?: Prisma.StringNullableFilter<"Company"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Company"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
 }, "uuid">
 
 export type CompanyOrderByWithAggregationInput = {
   uuid?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyTitle?: Prisma.SortOrder
+  companyAvatar?: Prisma.SortOrder
+  inn?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  mainColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CompanyCountOrderByAggregateInput
@@ -219,88 +263,132 @@ export type CompanyScalarWhereWithAggregatesInput = {
   OR?: Prisma.CompanyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CompanyScalarWhereWithAggregatesInput | Prisma.CompanyScalarWhereWithAggregatesInput[]
   uuid?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  companyTitle?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  companyAvatar?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  inn?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  address?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  mainColor?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  accentColor?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
 }
 
 export type CompanyCreateInput = {
   uuid?: string
-  title: string
-  avatarUrl?: string | null
+  companyTitle: string
+  companyAvatar: string
+  inn: string
+  address: string
+  mainColor?: string | null
+  accentColor?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type CompanyUncheckedCreateInput = {
   uuid?: string
-  title: string
-  avatarUrl?: string | null
+  companyTitle: string
+  companyAvatar: string
+  inn: string
+  address: string
+  mainColor?: string | null
+  accentColor?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type CompanyUpdateInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  companyAvatar?: Prisma.StringFieldUpdateOperationsInput | string
+  inn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  mainColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CompanyUncheckedUpdateInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  companyAvatar?: Prisma.StringFieldUpdateOperationsInput | string
+  inn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  mainColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CompanyCreateManyInput = {
   uuid?: string
-  title: string
-  avatarUrl?: string | null
+  companyTitle: string
+  companyAvatar: string
+  inn: string
+  address: string
+  mainColor?: string | null
+  accentColor?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type CompanyUpdateManyMutationInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  companyAvatar?: Prisma.StringFieldUpdateOperationsInput | string
+  inn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  mainColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CompanyUncheckedUpdateManyInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  companyAvatar?: Prisma.StringFieldUpdateOperationsInput | string
+  inn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  mainColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CompanyCountOrderByAggregateInput = {
   uuid?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  companyTitle?: Prisma.SortOrder
+  companyAvatar?: Prisma.SortOrder
+  inn?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  mainColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanyMaxOrderByAggregateInput = {
   uuid?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  companyTitle?: Prisma.SortOrder
+  companyAvatar?: Prisma.SortOrder
+  inn?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  mainColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanyMinOrderByAggregateInput = {
   uuid?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  companyTitle?: Prisma.SortOrder
+  companyAvatar?: Prisma.SortOrder
+  inn?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  mainColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -309,45 +397,65 @@ export type CompanyMinOrderByAggregateInput = {
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   uuid?: boolean
-  title?: boolean
-  avatarUrl?: boolean
+  companyTitle?: boolean
+  companyAvatar?: boolean
+  inn?: boolean
+  address?: boolean
+  mainColor?: boolean
+  accentColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   uuid?: boolean
-  title?: boolean
-  avatarUrl?: boolean
+  companyTitle?: boolean
+  companyAvatar?: boolean
+  inn?: boolean
+  address?: boolean
+  mainColor?: boolean
+  accentColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   uuid?: boolean
-  title?: boolean
-  avatarUrl?: boolean
+  companyTitle?: boolean
+  companyAvatar?: boolean
+  inn?: boolean
+  address?: boolean
+  mainColor?: boolean
+  accentColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectScalar = {
   uuid?: boolean
-  title?: boolean
-  avatarUrl?: boolean
+  companyTitle?: boolean
+  companyAvatar?: boolean
+  inn?: boolean
+  address?: boolean
+  mainColor?: boolean
+  accentColor?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "title" | "avatarUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "companyTitle" | "companyAvatar" | "inn" | "address" | "mainColor" | "accentColor" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
 
 export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Company"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     uuid: string
-    title: string
-    avatarUrl: string | null
+    companyTitle: string
+    companyAvatar: string
+    inn: string
+    address: string
+    mainColor: string | null
+    accentColor: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["company"]>
@@ -774,8 +882,12 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface CompanyFieldRefs {
   readonly uuid: Prisma.FieldRef<"Company", 'String'>
-  readonly title: Prisma.FieldRef<"Company", 'String'>
-  readonly avatarUrl: Prisma.FieldRef<"Company", 'String'>
+  readonly companyTitle: Prisma.FieldRef<"Company", 'String'>
+  readonly companyAvatar: Prisma.FieldRef<"Company", 'String'>
+  readonly inn: Prisma.FieldRef<"Company", 'String'>
+  readonly address: Prisma.FieldRef<"Company", 'String'>
+  readonly mainColor: Prisma.FieldRef<"Company", 'String'>
+  readonly accentColor: Prisma.FieldRef<"Company", 'String'>
   readonly createdAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Company", 'DateTime'>
 }

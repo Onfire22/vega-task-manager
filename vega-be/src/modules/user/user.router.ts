@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { deleteAvatar, getCurrentUser, getUserList, updateUser, updateUserPassword } from './user.controller';
-import { ROUTES } from '../../common/constants';
+import { ROUTES } from '../../router/routes';
 import { validateMiddleware } from '../../common/middlewares';
 import { UpdateUserBodySchema, UpdateUserPasswordBodySchema, UserListBodySchema } from './user.validation';
 

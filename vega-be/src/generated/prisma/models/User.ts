@@ -33,9 +33,9 @@ export type UserMinAggregateOutputType = {
   userName: string | null
   avatarUrl: string | null
   isSuperUser: boolean | null
-  userSpecialisationUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  dictionaryUuid: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -47,9 +47,9 @@ export type UserMaxAggregateOutputType = {
   userName: string | null
   avatarUrl: string | null
   isSuperUser: boolean | null
-  userSpecialisationUuid: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  dictionaryUuid: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -61,9 +61,9 @@ export type UserCountAggregateOutputType = {
   userName: number
   avatarUrl: number
   isSuperUser: number
-  userSpecialisationUuid: number
   createdAt: number
   updatedAt: number
+  dictionaryUuid: number
   _all: number
 }
 
@@ -77,9 +77,9 @@ export type UserMinAggregateInputType = {
   userName?: true
   avatarUrl?: true
   isSuperUser?: true
-  userSpecialisationUuid?: true
   createdAt?: true
   updatedAt?: true
+  dictionaryUuid?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -91,9 +91,9 @@ export type UserMaxAggregateInputType = {
   userName?: true
   avatarUrl?: true
   isSuperUser?: true
-  userSpecialisationUuid?: true
   createdAt?: true
   updatedAt?: true
+  dictionaryUuid?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -105,9 +105,9 @@ export type UserCountAggregateInputType = {
   userName?: true
   avatarUrl?: true
   isSuperUser?: true
-  userSpecialisationUuid?: true
   createdAt?: true
   updatedAt?: true
+  dictionaryUuid?: true
   _all?: true
 }
 
@@ -192,9 +192,9 @@ export type UserGroupByOutputType = {
   userName: string
   avatarUrl: string | null
   isSuperUser: boolean
-  userSpecialisationUuid: string
   createdAt: Date
   updatedAt: Date
+  dictionaryUuid: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -227,10 +227,9 @@ export type UserWhereInput = {
   userName?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   isSuperUser?: Prisma.BoolFilter<"User"> | boolean
-  userSpecialisationUuid?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  userSpecialisation?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  dictionaryUuid?: Prisma.StringNullableFilter<"User"> | string | null
   assignedTasks?: Prisma.TaskListRelationFilter
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
@@ -242,6 +241,7 @@ export type UserWhereInput = {
   chatMessages?: Prisma.ChatMessagesListRelationFilter
   projectsMemberships?: Prisma.ProjectsMembershipListRelationFilter
   teamMembers?: Prisma.TeamMembersListRelationFilter
+  dictionary?: Prisma.XOR<Prisma.DictionaryNullableScalarRelationFilter, Prisma.DictionaryWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -253,10 +253,9 @@ export type UserOrderByWithRelationInput = {
   userName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isSuperUser?: Prisma.SortOrder
-  userSpecialisationUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userSpecialisation?: Prisma.DictionaryOrderByWithRelationInput
+  dictionaryUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedTasks?: Prisma.TaskOrderByRelationAggregateInput
   reportedTasks?: Prisma.TaskOrderByRelationAggregateInput
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
@@ -268,6 +267,7 @@ export type UserOrderByWithRelationInput = {
   chatMessages?: Prisma.ChatMessagesOrderByRelationAggregateInput
   projectsMemberships?: Prisma.ProjectsMembershipOrderByRelationAggregateInput
   teamMembers?: Prisma.TeamMembersOrderByRelationAggregateInput
+  dictionary?: Prisma.DictionaryOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -282,10 +282,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   isSuperUser?: Prisma.BoolFilter<"User"> | boolean
-  userSpecialisationUuid?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  userSpecialisation?: Prisma.XOR<Prisma.DictionaryScalarRelationFilter, Prisma.DictionaryWhereInput>
+  dictionaryUuid?: Prisma.StringNullableFilter<"User"> | string | null
   assignedTasks?: Prisma.TaskListRelationFilter
   reportedTasks?: Prisma.TaskListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
@@ -297,6 +296,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   chatMessages?: Prisma.ChatMessagesListRelationFilter
   projectsMemberships?: Prisma.ProjectsMembershipListRelationFilter
   teamMembers?: Prisma.TeamMembersListRelationFilter
+  dictionary?: Prisma.XOR<Prisma.DictionaryNullableScalarRelationFilter, Prisma.DictionaryWhereInput> | null
 }, "uuid" | "email" | "userName">
 
 export type UserOrderByWithAggregationInput = {
@@ -308,9 +308,9 @@ export type UserOrderByWithAggregationInput = {
   userName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isSuperUser?: Prisma.SortOrder
-  userSpecialisationUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  dictionaryUuid?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -328,9 +328,9 @@ export type UserScalarWhereWithAggregatesInput = {
   userName?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isSuperUser?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  userSpecialisationUuid?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  dictionaryUuid?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -344,7 +344,6 @@ export type UserCreateInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -356,6 +355,7 @@ export type UserCreateInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -367,9 +367,9 @@ export type UserUncheckedCreateInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -394,7 +394,6 @@ export type UserUpdateInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -406,6 +405,7 @@ export type UserUpdateInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -417,9 +417,9 @@ export type UserUncheckedUpdateInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -442,9 +442,9 @@ export type UserCreateManyInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -469,9 +469,9 @@ export type UserUncheckedUpdateManyInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserScalarRelationFilter = {
@@ -503,9 +503,9 @@ export type UserCountOrderByAggregateInput = {
   userName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   isSuperUser?: Prisma.SortOrder
-  userSpecialisationUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  dictionaryUuid?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -517,9 +517,9 @@ export type UserMaxOrderByAggregateInput = {
   userName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   isSuperUser?: Prisma.SortOrder
-  userSpecialisationUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  dictionaryUuid?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -531,9 +531,9 @@ export type UserMinOrderByAggregateInput = {
   userName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   isSuperUser?: Prisma.SortOrder
-  userSpecialisationUuid?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  dictionaryUuid?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutChatMembershipsInput = {
@@ -578,45 +578,45 @@ export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentsInput, Prisma.UserUpdateWithoutCommentsInput>, Prisma.UserUncheckedUpdateWithoutCommentsInput>
 }
 
-export type UserCreateNestedManyWithoutUserSpecialisationInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput> | Prisma.UserCreateWithoutUserSpecialisationInput[] | Prisma.UserUncheckedCreateWithoutUserSpecialisationInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserSpecialisationInput | Prisma.UserCreateOrConnectWithoutUserSpecialisationInput[]
-  createMany?: Prisma.UserCreateManyUserSpecialisationInputEnvelope
+export type UserCreateNestedManyWithoutDictionaryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput> | Prisma.UserCreateWithoutDictionaryInput[] | Prisma.UserUncheckedCreateWithoutDictionaryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDictionaryInput | Prisma.UserCreateOrConnectWithoutDictionaryInput[]
+  createMany?: Prisma.UserCreateManyDictionaryInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserUncheckedCreateNestedManyWithoutUserSpecialisationInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput> | Prisma.UserCreateWithoutUserSpecialisationInput[] | Prisma.UserUncheckedCreateWithoutUserSpecialisationInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserSpecialisationInput | Prisma.UserCreateOrConnectWithoutUserSpecialisationInput[]
-  createMany?: Prisma.UserCreateManyUserSpecialisationInputEnvelope
+export type UserUncheckedCreateNestedManyWithoutDictionaryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput> | Prisma.UserCreateWithoutDictionaryInput[] | Prisma.UserUncheckedCreateWithoutDictionaryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDictionaryInput | Prisma.UserCreateOrConnectWithoutDictionaryInput[]
+  createMany?: Prisma.UserCreateManyDictionaryInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserUpdateManyWithoutUserSpecialisationNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput> | Prisma.UserCreateWithoutUserSpecialisationInput[] | Prisma.UserUncheckedCreateWithoutUserSpecialisationInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserSpecialisationInput | Prisma.UserCreateOrConnectWithoutUserSpecialisationInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutUserSpecialisationInput | Prisma.UserUpsertWithWhereUniqueWithoutUserSpecialisationInput[]
-  createMany?: Prisma.UserCreateManyUserSpecialisationInputEnvelope
+export type UserUpdateManyWithoutDictionaryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput> | Prisma.UserCreateWithoutDictionaryInput[] | Prisma.UserUncheckedCreateWithoutDictionaryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDictionaryInput | Prisma.UserCreateOrConnectWithoutDictionaryInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDictionaryInput | Prisma.UserUpsertWithWhereUniqueWithoutDictionaryInput[]
+  createMany?: Prisma.UserCreateManyDictionaryInputEnvelope
   set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutUserSpecialisationInput | Prisma.UserUpdateWithWhereUniqueWithoutUserSpecialisationInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutUserSpecialisationInput | Prisma.UserUpdateManyWithWhereWithoutUserSpecialisationInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutDictionaryInput | Prisma.UserUpdateWithWhereUniqueWithoutDictionaryInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDictionaryInput | Prisma.UserUpdateManyWithWhereWithoutDictionaryInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput> | Prisma.UserCreateWithoutUserSpecialisationInput[] | Prisma.UserUncheckedCreateWithoutUserSpecialisationInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserSpecialisationInput | Prisma.UserCreateOrConnectWithoutUserSpecialisationInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutUserSpecialisationInput | Prisma.UserUpsertWithWhereUniqueWithoutUserSpecialisationInput[]
-  createMany?: Prisma.UserCreateManyUserSpecialisationInputEnvelope
+export type UserUncheckedUpdateManyWithoutDictionaryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput> | Prisma.UserCreateWithoutDictionaryInput[] | Prisma.UserUncheckedCreateWithoutDictionaryInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDictionaryInput | Prisma.UserCreateOrConnectWithoutDictionaryInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutDictionaryInput | Prisma.UserUpsertWithWhereUniqueWithoutDictionaryInput[]
+  createMany?: Prisma.UserCreateManyDictionaryInputEnvelope
   set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutUserSpecialisationInput | Prisma.UserUpdateWithWhereUniqueWithoutUserSpecialisationInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutUserSpecialisationInput | Prisma.UserUpdateManyWithWhereWithoutUserSpecialisationInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutDictionaryInput | Prisma.UserUpdateWithWhereUniqueWithoutDictionaryInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutDictionaryInput | Prisma.UserUpdateManyWithWhereWithoutDictionaryInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
@@ -745,7 +745,6 @@ export type UserCreateWithoutChatMembershipsInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -756,6 +755,7 @@ export type UserCreateWithoutChatMembershipsInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutChatMembershipsInput = {
@@ -767,9 +767,9 @@ export type UserUncheckedCreateWithoutChatMembershipsInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -809,7 +809,6 @@ export type UserUpdateWithoutChatMembershipsInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -820,6 +819,7 @@ export type UserUpdateWithoutChatMembershipsInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatMembershipsInput = {
@@ -831,9 +831,9 @@ export type UserUncheckedUpdateWithoutChatMembershipsInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -857,7 +857,6 @@ export type UserCreateWithoutChatMessagesInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -868,6 +867,7 @@ export type UserCreateWithoutChatMessagesInput = {
   chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutChatMessagesInput = {
@@ -879,9 +879,9 @@ export type UserUncheckedCreateWithoutChatMessagesInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -921,7 +921,6 @@ export type UserUpdateWithoutChatMessagesInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -932,6 +931,7 @@ export type UserUpdateWithoutChatMessagesInput = {
   chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatMessagesInput = {
@@ -943,9 +943,9 @@ export type UserUncheckedUpdateWithoutChatMessagesInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -969,7 +969,6 @@ export type UserCreateWithoutCommentsInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -980,6 +979,7 @@ export type UserCreateWithoutCommentsInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -991,9 +991,9 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1033,7 +1033,6 @@ export type UserUpdateWithoutCommentsInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -1044,6 +1043,7 @@ export type UserUpdateWithoutCommentsInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1055,9 +1055,9 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1070,7 +1070,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   teamMembers?: Prisma.TeamMembersUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutUserSpecialisationInput = {
+export type UserCreateWithoutDictionaryInput = {
   uuid?: string
   name: string
   secondName: string
@@ -1094,7 +1094,7 @@ export type UserCreateWithoutUserSpecialisationInput = {
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutUserSpecialisationInput = {
+export type UserUncheckedCreateWithoutDictionaryInput = {
   uuid?: string
   name: string
   secondName: string
@@ -1118,30 +1118,30 @@ export type UserUncheckedCreateWithoutUserSpecialisationInput = {
   teamMembers?: Prisma.TeamMembersUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutUserSpecialisationInput = {
+export type UserCreateOrConnectWithoutDictionaryInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput>
 }
 
-export type UserCreateManyUserSpecialisationInputEnvelope = {
-  data: Prisma.UserCreateManyUserSpecialisationInput | Prisma.UserCreateManyUserSpecialisationInput[]
+export type UserCreateManyDictionaryInputEnvelope = {
+  data: Prisma.UserCreateManyDictionaryInput | Prisma.UserCreateManyDictionaryInput[]
   skipDuplicates?: boolean
 }
 
-export type UserUpsertWithWhereUniqueWithoutUserSpecialisationInput = {
+export type UserUpsertWithWhereUniqueWithoutDictionaryInput = {
   where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutUserSpecialisationInput, Prisma.UserUncheckedUpdateWithoutUserSpecialisationInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutUserSpecialisationInput, Prisma.UserUncheckedCreateWithoutUserSpecialisationInput>
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDictionaryInput, Prisma.UserUncheckedUpdateWithoutDictionaryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDictionaryInput, Prisma.UserUncheckedCreateWithoutDictionaryInput>
 }
 
-export type UserUpdateWithWhereUniqueWithoutUserSpecialisationInput = {
+export type UserUpdateWithWhereUniqueWithoutDictionaryInput = {
   where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutUserSpecialisationInput, Prisma.UserUncheckedUpdateWithoutUserSpecialisationInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDictionaryInput, Prisma.UserUncheckedUpdateWithoutDictionaryInput>
 }
 
-export type UserUpdateManyWithWhereWithoutUserSpecialisationInput = {
+export type UserUpdateManyWithWhereWithoutDictionaryInput = {
   where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationInput>
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutDictionaryInput>
 }
 
 export type UserScalarWhereInput = {
@@ -1156,9 +1156,9 @@ export type UserScalarWhereInput = {
   userName?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   isSuperUser?: Prisma.BoolFilter<"User"> | boolean
-  userSpecialisationUuid?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  dictionaryUuid?: Prisma.StringNullableFilter<"User"> | string | null
 }
 
 export type UserCreateWithoutMembershipsInput = {
@@ -1172,7 +1172,6 @@ export type UserCreateWithoutMembershipsInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -1183,6 +1182,7 @@ export type UserCreateWithoutMembershipsInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -1194,9 +1194,9 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -1236,7 +1236,6 @@ export type UserUpdateWithoutMembershipsInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -1247,6 +1246,7 @@ export type UserUpdateWithoutMembershipsInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -1258,9 +1258,9 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1284,7 +1284,6 @@ export type UserCreateWithoutNotificationsFromInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -1295,6 +1294,7 @@ export type UserCreateWithoutNotificationsFromInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsFromInput = {
@@ -1306,9 +1306,9 @@ export type UserUncheckedCreateWithoutNotificationsFromInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1337,7 +1337,6 @@ export type UserCreateWithoutNotificationsToInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -1348,6 +1347,7 @@ export type UserCreateWithoutNotificationsToInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsToInput = {
@@ -1359,9 +1359,9 @@ export type UserUncheckedCreateWithoutNotificationsToInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1401,7 +1401,6 @@ export type UserUpdateWithoutNotificationsFromInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -1412,6 +1411,7 @@ export type UserUpdateWithoutNotificationsFromInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsFromInput = {
@@ -1423,9 +1423,9 @@ export type UserUncheckedUpdateWithoutNotificationsFromInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1460,7 +1460,6 @@ export type UserUpdateWithoutNotificationsToInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -1471,6 +1470,7 @@ export type UserUpdateWithoutNotificationsToInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsToInput = {
@@ -1482,9 +1482,9 @@ export type UserUncheckedUpdateWithoutNotificationsToInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1508,7 +1508,6 @@ export type UserCreateWithoutProjectsMembershipsInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -1519,6 +1518,7 @@ export type UserCreateWithoutProjectsMembershipsInput = {
   chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutProjectsMembershipsInput = {
@@ -1530,9 +1530,9 @@ export type UserUncheckedCreateWithoutProjectsMembershipsInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1572,7 +1572,6 @@ export type UserUpdateWithoutProjectsMembershipsInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -1583,6 +1582,7 @@ export type UserUpdateWithoutProjectsMembershipsInput = {
   chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsMembershipsInput = {
@@ -1594,9 +1594,9 @@ export type UserUncheckedUpdateWithoutProjectsMembershipsInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1620,7 +1620,6 @@ export type UserCreateWithoutAssignedTasksInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -1631,6 +1630,7 @@ export type UserCreateWithoutAssignedTasksInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -1642,9 +1642,9 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -1673,7 +1673,6 @@ export type UserCreateWithoutReportedTasksInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -1684,6 +1683,7 @@ export type UserCreateWithoutReportedTasksInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReportedTasksInput = {
@@ -1695,9 +1695,9 @@ export type UserUncheckedCreateWithoutReportedTasksInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -1737,7 +1737,6 @@ export type UserUpdateWithoutAssignedTasksInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -1748,6 +1747,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -1759,9 +1759,9 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1796,7 +1796,6 @@ export type UserUpdateWithoutReportedTasksInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -1807,6 +1806,7 @@ export type UserUpdateWithoutReportedTasksInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportedTasksInput = {
@@ -1818,9 +1818,9 @@ export type UserUncheckedUpdateWithoutReportedTasksInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1844,7 +1844,6 @@ export type UserCreateWithoutTeamMembersInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -1855,6 +1854,7 @@ export type UserCreateWithoutTeamMembersInput = {
   chatMemberships?: Prisma.ChatMembershipsCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -1866,9 +1866,9 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1908,7 +1908,6 @@ export type UserUpdateWithoutTeamMembersInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -1919,6 +1918,7 @@ export type UserUpdateWithoutTeamMembersInput = {
   chatMemberships?: Prisma.ChatMembershipsUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -1930,9 +1930,9 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1956,7 +1956,6 @@ export type UserCreateWithoutTimeLogsInput = {
   isSuperUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userSpecialisation: Prisma.DictionaryCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
@@ -1967,6 +1966,7 @@ export type UserCreateWithoutTimeLogsInput = {
   chatMessages?: Prisma.ChatMessagesCreateNestedManyWithoutAuthorInput
   projectsMemberships?: Prisma.ProjectsMembershipCreateNestedManyWithoutUserInput
   teamMembers?: Prisma.TeamMembersCreateNestedManyWithoutUserInput
+  dictionary?: Prisma.DictionaryCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutTimeLogsInput = {
@@ -1978,9 +1978,9 @@ export type UserUncheckedCreateWithoutTimeLogsInput = {
   userName: string
   avatarUrl?: string | null
   isSuperUser?: boolean
-  userSpecialisationUuid: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  dictionaryUuid?: string | null
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput
   reportedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutReporterInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
@@ -2020,7 +2020,6 @@ export type UserUpdateWithoutTimeLogsInput = {
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userSpecialisation?: Prisma.DictionaryUpdateOneRequiredWithoutUsersNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
@@ -2031,6 +2030,7 @@ export type UserUpdateWithoutTimeLogsInput = {
   chatMessages?: Prisma.ChatMessagesUpdateManyWithoutAuthorNestedInput
   projectsMemberships?: Prisma.ProjectsMembershipUpdateManyWithoutUserNestedInput
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
+  dictionary?: Prisma.DictionaryUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTimeLogsInput = {
@@ -2042,9 +2042,9 @@ export type UserUncheckedUpdateWithoutTimeLogsInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSuperUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  userSpecialisationUuid?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dictionaryUuid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   reportedTasks?: Prisma.TaskUncheckedUpdateManyWithoutReporterNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -2057,7 +2057,7 @@ export type UserUncheckedUpdateWithoutTimeLogsInput = {
   teamMembers?: Prisma.TeamMembersUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateManyUserSpecialisationInput = {
+export type UserCreateManyDictionaryInput = {
   uuid?: string
   name: string
   secondName: string
@@ -2070,7 +2070,7 @@ export type UserCreateManyUserSpecialisationInput = {
   updatedAt?: Date | string
 }
 
-export type UserUpdateWithoutUserSpecialisationInput = {
+export type UserUpdateWithoutDictionaryInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   secondName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2094,7 +2094,7 @@ export type UserUpdateWithoutUserSpecialisationInput = {
   teamMembers?: Prisma.TeamMembersUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutUserSpecialisationInput = {
+export type UserUncheckedUpdateWithoutDictionaryInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   secondName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2118,7 +2118,7 @@ export type UserUncheckedUpdateWithoutUserSpecialisationInput = {
   teamMembers?: Prisma.TeamMembersUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateManyWithoutUserSpecialisationInput = {
+export type UserUncheckedUpdateManyWithoutDictionaryInput = {
   uuid?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   secondName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2261,10 +2261,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userName?: boolean
   avatarUrl?: boolean
   isSuperUser?: boolean
-  userSpecialisationUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  dictionaryUuid?: boolean
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
@@ -2276,6 +2275,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   projectsMemberships?: boolean | Prisma.User$projectsMembershipsArgs<ExtArgs>
   teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2288,10 +2288,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   userName?: boolean
   avatarUrl?: boolean
   isSuperUser?: boolean
-  userSpecialisationUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  dictionaryUuid?: boolean
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2303,10 +2303,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   userName?: boolean
   avatarUrl?: boolean
   isSuperUser?: boolean
-  userSpecialisationUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  dictionaryUuid?: boolean
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2318,14 +2318,13 @@ export type UserSelectScalar = {
   userName?: boolean
   avatarUrl?: boolean
   isSuperUser?: boolean
-  userSpecialisationUuid?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  dictionaryUuid?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "name" | "secondName" | "email" | "password" | "userName" | "avatarUrl" | "isSuperUser" | "userSpecialisationUuid" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"uuid" | "name" | "secondName" | "email" | "password" | "userName" | "avatarUrl" | "isSuperUser" | "createdAt" | "updatedAt" | "dictionaryUuid", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   reportedTasks?: boolean | Prisma.User$reportedTasksArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
@@ -2337,19 +2336,19 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   projectsMemberships?: boolean | Prisma.User$projectsMembershipsArgs<ExtArgs>
   teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  userSpecialisation?: boolean | Prisma.DictionaryDefaultArgs<ExtArgs>
+  dictionary?: boolean | Prisma.User$dictionaryArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    userSpecialisation: Prisma.$DictionaryPayload<ExtArgs>
     assignedTasks: Prisma.$TaskPayload<ExtArgs>[]
     reportedTasks: Prisma.$TaskPayload<ExtArgs>[]
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
@@ -2361,6 +2360,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     chatMessages: Prisma.$ChatMessagesPayload<ExtArgs>[]
     projectsMemberships: Prisma.$ProjectsMembershipPayload<ExtArgs>[]
     teamMembers: Prisma.$TeamMembersPayload<ExtArgs>[]
+    dictionary: Prisma.$DictionaryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     uuid: string
@@ -2371,9 +2371,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userName: string
     avatarUrl: string | null
     isSuperUser: boolean
-    userSpecialisationUuid: string
     createdAt: Date
     updatedAt: Date
+    dictionaryUuid: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2768,7 +2768,6 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  userSpecialisation<T extends Prisma.DictionaryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DictionaryDefaultArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportedTasks<T extends Prisma.User$reportedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2780,6 +2779,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   chatMessages<T extends Prisma.User$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectsMemberships<T extends Prisma.User$projectsMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectsMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teamMembers<T extends Prisma.User$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMembersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dictionary<T extends Prisma.User$dictionaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dictionaryArgs<ExtArgs>>): Prisma.Prisma__DictionaryClient<runtime.Types.Result.GetResult<Prisma.$DictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2817,9 +2817,9 @@ export interface UserFieldRefs {
   readonly userName: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly isSuperUser: Prisma.FieldRef<"User", 'Boolean'>
-  readonly userSpecialisationUuid: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly dictionaryUuid: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -3477,6 +3477,25 @@ export type User$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.TeamMembersScalarFieldEnum | Prisma.TeamMembersScalarFieldEnum[]
+}
+
+/**
+ * User.dictionary
+ */
+export type User$dictionaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Dictionary
+   */
+  select?: Prisma.DictionarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Dictionary
+   */
+  omit?: Prisma.DictionaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DictionaryInclude<ExtArgs> | null
+  where?: Prisma.DictionaryWhereInput
 }
 
 /**

@@ -5,7 +5,6 @@ export const SignUpBodySchema = z.object({
 	name: z.string(),
 	password: z.string(),
 	secondName: z.string(),
-	userSpecialisationUuid: z.string(),
 });
 
 export const SignInBodySchema = z.object({

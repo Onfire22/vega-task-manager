@@ -3,7 +3,7 @@ import { channelsService } from './channels.service';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import { IGetChannelsBody } from './channels.types';
 
-export const getChannelsByUserUuid = async (
+export const getChannelsByUserUuidController = async (
 	req: Request<{}, {}, Partial<IGetChannelsBody>>,
 	res: Response,
 	next: NextFunction,
@@ -17,7 +17,7 @@ export const getChannelsByUserUuid = async (
 	}
 };
 
-export const getChannels = async (req: Request, res: Response, next: NextFunction) => {
+export const getChannelsController = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const channels = await channelsService.getChannels(res.locals.user.id);
 

@@ -18,7 +18,6 @@ export interface IFormValues {
 	passwordRepeat: string;
 	name: string;
 	secondName: string;
-	userSpecialisationUuid: string;
 }
 
 export interface IOptions {

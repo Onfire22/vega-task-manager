@@ -10,12 +10,14 @@ interface IProps {
 	value: string;
 	name?: string;
 	error?: string;
+	className?: string;
 	description?: string;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	isRequired?: boolean;
 	disabled?: boolean;
+	isBordered?: boolean;
 	onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
-	ref?: React.RefObject<HTMLInputElement | null>;
+	ref?: React.Ref<HTMLInputElement>;
 	rightIcon?: ReactNode;
 	leftIcon?: ReactNode;
 }
@@ -35,10 +37,12 @@ const CustomInput: React.FC<IProps> = ({
 	disabled,
 	description,
 	onKeyDown,
+	className,
 	isRequired = false,
+	isBordered = true,
 }) => {
 	return (
-		<div>
+		<div className={cn(className)}>
 			<div className="flex flex-col ml-1 mb-1">
 				{label && (
 					<label htmlFor={id} className="text-[14px] block">
@@ -50,8 +54,9 @@ const CustomInput: React.FC<IProps> = ({
 			</div>
 			<div
 				className={cn(
-					'border border-input rounded-lg flex items-center justify-between focus-within:border-primary min-w-full overflow-hidden',
+					'rounded-lg flex items-center justify-between focus-within:border-primary min-w-full overflow-hidden',
 					error && 'border-(--color-danger)',
+					isBordered && 'border border-input',
 				)}
 			>
 				{leftIcon && <div className="pl-2 flex items-center">{leftIcon}</div>}

@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc",
-		"start": "tsx src/app.ts",
+		"start": "tsx watch src/app.ts",
 		"dev": "tsx watch src/app.ts",
 		"seed": "npx prisma db seed",
 		"generate": "npx prisma generate",

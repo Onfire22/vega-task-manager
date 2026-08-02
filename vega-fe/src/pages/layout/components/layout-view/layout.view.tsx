@@ -7,7 +7,7 @@ import { ProjectModal, TaskModal } from '@/modules/modals';
 import { useChatSocket } from '@/pages/chat/websocket.ts';
 
 const LayoutView = () => {
-	useChatSocket();
+	// useChatSocket();
 
 	return (
 		<div>

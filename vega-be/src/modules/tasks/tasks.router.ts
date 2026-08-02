@@ -1,6 +1,12 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { createTask, getTaskByUuid, getUserTasks, updateTask, updateTaskEstimate } from './tasks.controller';
+import { ROUTES } from '../../router/routes';
+import {
+	createTaskController,
+	getTaskByUuidController,
+	getUserTasksController,
+	updateTaskController,
+	updateTaskEstimateController,
+} from './tasks.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import {
 	CreateTaskBodySchema,
@@ -12,14 +18,14 @@ import {
 
 const tasksRouter = Router();
 
-tasksRouter.post(ROUTES.createTask, validateMiddleware(CreateTaskBodySchema), createTask);
+tasksRouter.post(ROUTES.createTask, validateMiddleware(CreateTaskBodySchema), createTaskController);
 tasksRouter.patch(
 	ROUTES.task,
 	[validateMiddleware(TaskParamsSchema, 'params'), validateMiddleware(UpdateTaskBodySchema)],
-	updateTask,
+	updateTaskController,
 );
-tasksRouter.post(ROUTES.tasks, validateMiddleware(UserTasksBodySchema), getUserTasks);
-tasksRouter.get(ROUTES.task, validateMiddleware(TaskParamsSchema, 'params'), getTaskByUuid);
-tasksRouter.post(ROUTES.updateTaskEstimate, validateMiddleware(UpdateTaskEstimateSchema), updateTaskEstimate);
+tasksRouter.post(ROUTES.tasks, validateMiddleware(UserTasksBodySchema), getUserTasksController);
+tasksRouter.get(ROUTES.task, validateMiddleware(TaskParamsSchema, 'params'), getTaskByUuidController);
+tasksRouter.post(ROUTES.updateTaskEstimate, validateMiddleware(UpdateTaskEstimateSchema), updateTaskEstimateController);
 
 export { tasksRouter };

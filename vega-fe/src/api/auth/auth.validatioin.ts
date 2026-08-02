@@ -20,10 +20,6 @@ export const CurrentUserResponseSchema = z.object({
 		secondName: z.string(),
 		userName: z.string(),
 		avatarUrl: z.string().nullable(),
-		userSpecialisation: z.object({
-			uuid: z.string(),
-			label: z.string(),
-			key: z.string(),
-		}),
+		isSuperUser: z.boolean(),
 	}),
 });

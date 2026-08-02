@@ -23,14 +23,14 @@ const signupUser = async (userData: TSignUpBody) => {
 	const userName = generateName(userData.name, userData.secondName, userNames);
 
 	const newUser = await prismaAppClient.user.create({
-		data: { ...userData, userName },
+		data: { ...userData, userName, isSuperUser: users.length === 0 },
 		select: {
 			email: true,
 			uuid: true,
 			name: true,
 			secondName: true,
-			userSpecialisationUuid: true,
 			userName: true,
+			isSuperUser: true,
 		},
 	});
 

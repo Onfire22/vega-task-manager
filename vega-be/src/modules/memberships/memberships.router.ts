@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { changeUserMembership } from './memberships.controller';
+import { ROUTES } from '../../router/routes';
+import { changeUserMembershipController } from './memberships.controller';
 import { validateMiddleware } from '../../common/middlewares';
 import { ChangeUserMembershipBodySchema, ChangeUserMembershipParamsSchema } from './memberships.validation';
 
@@ -12,7 +12,7 @@ membershipsRouter.post(
 		validateMiddleware(ChangeUserMembershipParamsSchema, 'params'),
 		validateMiddleware(ChangeUserMembershipBodySchema),
 	],
-	changeUserMembership,
+	changeUserMembershipController,
 );
 
 export { membershipsRouter };

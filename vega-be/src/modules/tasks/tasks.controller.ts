@@ -4,7 +4,11 @@ import { tasksService } from './tasks.service';
 import { transformTimeToSeconds } from '../../common/utils';
 import { RESPONSE_STATUSES } from '../../common/constants';
 
-export const createTask = async (req: Request<{}, {}, TCreateTaskBody>, res: Response, next: NextFunction) => {
+export const createTaskController = async (
+	req: Request<{}, {}, TCreateTaskBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const task = await tasksService.createTask(req.body, res.locals.user.id);
 
@@ -14,7 +18,11 @@ export const createTask = async (req: Request<{}, {}, TCreateTaskBody>, res: Res
 	}
 };
 
-export const getUserTasks = async (req: Request<{}, {}, TUserTasksBody>, res: Response, next: NextFunction) => {
+export const getUserTasksController = async (
+	req: Request<{}, {}, TUserTasksBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const tasks = await tasksService.getUserTasks(req.body, res.locals.user.id);
 
@@ -24,7 +32,7 @@ export const getUserTasks = async (req: Request<{}, {}, TUserTasksBody>, res: Re
 	}
 };
 
-export const getTaskByUuid = async (req: Request<TTaskParams>, res: Response, next: NextFunction) => {
+export const getTaskByUuidController = async (req: Request<TTaskParams>, res: Response, next: NextFunction) => {
 	try {
 		const task = await tasksService.getTaskByUuid(req.params.uuid);
 
@@ -34,7 +42,11 @@ export const getTaskByUuid = async (req: Request<TTaskParams>, res: Response, ne
 	}
 };
 
-export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>, res: Response, next: NextFunction) => {
+export const updateTaskController = async (
+	req: Request<TTaskParams, {}, TUpdateTaskBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		const task = await tasksService.updateTask(req.body, req.params.uuid, res.locals.user.id);
 
@@ -45,7 +57,7 @@ export const updateTask = async (req: Request<TTaskParams, {}, TUpdateTaskBody>,
 	}
 };
 
-export const updateTaskEstimate = async (
+export const updateTaskEstimateController = async (
 	req: Request<TTaskParams, {}, TUpdateTaskEstimate>,
 	res: Response,
 	next: NextFunction,

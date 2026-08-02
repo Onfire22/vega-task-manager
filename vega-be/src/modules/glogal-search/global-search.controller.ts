@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { globalSearchResultsService } from './global-search.service';
 import { RESPONSE_STATUSES } from '../../common/constants';
 
-export const getGlobalSearchResults = async (
+export const getGlobalSearchResultsController = async (
 	req: Request<{}, {}, {}, { search: string }>,
 	res: Response,
 	next: NextFunction,

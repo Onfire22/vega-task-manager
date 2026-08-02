@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { notificationsService } from './notifications.service';
 import { RESPONSE_STATUSES } from '../../common/constants';
 
-export const getNotifications = async (req: Request, res: Response, next: NextFunction) => {
+export const getNotificationsController = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const notifications = await notificationsService.getNotifications(res.locals.user.id);
 
@@ -12,7 +12,7 @@ export const getNotifications = async (req: Request, res: Response, next: NextFu
 	}
 };
 
-export const setNotificationsRead = async (req: Request, res: Response, next: NextFunction) => {
+export const setNotificationsReadController = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const notifications = await notificationsService.setNotificationsRead(res.locals.user.id);
 

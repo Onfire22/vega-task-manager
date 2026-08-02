@@ -35,6 +35,8 @@ export const ROUTES = {
 	messages: '/api/messages',
 	search: '/api/gloabl-search?search=',
 	uploadFile: '/api/upload/single',
+	teams: '/api/teams',
+	company: '/api/company',
 };
 
 export const TAG_TYPES = [
@@ -49,6 +51,9 @@ export const TAG_TYPES = [
 	'Channels',
 	'User_Channels',
 	'Messages',
+	'Teams',
+	'TeamsPresets',
+	'Companies',
 ];
 
 export const DATE_TIME_FORMAT = 'dd.MM.yyyy HH:mm';

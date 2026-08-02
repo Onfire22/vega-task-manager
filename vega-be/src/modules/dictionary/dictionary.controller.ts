@@ -4,7 +4,7 @@ import { RESPONSE_STATUSES } from '../../common/constants';
 import { IDictionaryResponse, TDictionaries } from './dictionary.types';
 import { dictionariesService } from './dictionary.service';
 
-export const getDictionaries = async (
+export const getDictionariesController = async (
 	req: Request<{}, {}, {}, TDictionaries>,
 	res: Response<IDictionaryResponse>,
 	next: NextFunction,

@@ -1,12 +1,12 @@
 import express, { json } from 'express';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
-import { protectedRouter } from './router';
+import { protectedRouter } from './router/protected-router';
+import { publicRouter } from './router/public-router';
 import { authRouter } from './modules/auth/auth.router';
 import { authMiddleware } from './modules/auth/auth.middleware';
 import cors from 'cors';
 import { errorMiddleware } from './errors/errors.middleware';
-import { dictionaryRouter } from './modules/dictionary/dictionary.router';
 import { initRedis } from './lib/redis/redis';
 import http from 'http';
 import { initSocket } from './websocket';
@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use('/public/uploads', express.static(path.join(process.cwd(), '/public/uploads')));
 app.use(authRouter);
-app.use(dictionaryRouter);
+app.use(publicRouter);
 
 app.use(authMiddleware);
 

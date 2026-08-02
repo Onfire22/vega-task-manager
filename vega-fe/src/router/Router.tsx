@@ -16,11 +16,12 @@ import { useGetCurrentUserQuery } from '../api/auth/auth.api.ts';
 import { FRONT_ROUTES } from '../app/constants.ts';
 import { CustomLoader } from '@/components/common/ui/custom-loader.tsx';
 import { GlobalSearch } from '@/pages/global-search';
+import { InitialSettingsPage } from '@/pages/initial-settings-page';
 
 const Router = () => {
 	const { isLoading, isError, isFetching } = useGetCurrentUserQuery();
 
-	if (isLoading) return <CustomLoader />;
+	if (isLoading) return <CustomLoader isFull />;
 
 	return (
 		<Routes>
@@ -40,6 +41,7 @@ const Router = () => {
 					<Route path={FRONT_ROUTES.chat} element={<ChatPage />} />
 					<Route path={FRONT_ROUTES.search} element={<GlobalSearch />} />
 				</Route>
+				<Route path={FRONT_ROUTES.initialSettings} element={<InitialSettingsPage />} />
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />
 		</Routes>

@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { ROUTES } from '../../common/constants';
-import { getNotifications, setNotificationsRead } from './notifications.controller';
+import { ROUTES } from '../../router/routes';
+import { getNotificationsController, setNotificationsReadController } from './notifications.controller';
 
 const notificationsRouter = Router();
 
-notificationsRouter.get(ROUTES.notifications, getNotifications);
+notificationsRouter.get(ROUTES.notifications, getNotificationsController);
 
-notificationsRouter.post(ROUTES.notifications, setNotificationsRead);
+notificationsRouter.post(ROUTES.notifications, setNotificationsReadController);
 
 export { notificationsRouter };

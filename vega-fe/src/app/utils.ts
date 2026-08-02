@@ -68,3 +68,17 @@ export const pluralValue = (value: number, variants: PluralOptions, locale = 'ru
 	const key = new Intl.PluralRules(locale).select(value);
 	return variants[key as keyof typeof variants] || '';
 };
+
+export const prepareSingleFileFormData = (values: Record<string, unknown>) => {
+	const formData = new FormData();
+
+	Object.entries(values).forEach(([key, value]) => {
+		if (value instanceof Blob) {
+			formData.append(key, value);
+		} else {
+			formData.append(key, String(value));
+		}
+	});
+
+	return formData;
+};

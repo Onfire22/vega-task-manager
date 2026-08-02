@@ -26,7 +26,6 @@ export const ProfileStepValidationSchema = z.object({
 		.string()
 		.min(1, 'Это обязательное поле')
 		.regex(/^[A-Za-zА-Яа-яЁё]+$/, 'Только русские или английские буквы'),
-	userSpecialisationUuid: z.string().min(1),
 });
 
 export const SignUpSchema = z.object({

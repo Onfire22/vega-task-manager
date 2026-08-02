@@ -3,7 +3,11 @@ import { IAuthRes, TSignUpBody, TSignInBody, TUserByEmailBody } from './auth.typ
 import { REFRESH_TTL, RESPONSE_STATUSES } from '../../common/constants';
 import { authService } from './auth.service';
 
-export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Response<IAuthRes>, next: NextFunction) => {
+export const signupUserController = async (
+	req: Request<{}, {}, TSignUpBody>,
+	res: Response<IAuthRes>,
+	next: NextFunction,
+) => {
 	try {
 		const tokens = await authService.signupUser(req.body);
 
@@ -18,7 +22,11 @@ export const signupUser = async (req: Request<{}, {}, TSignUpBody>, res: Respons
 	}
 };
 
-export const signInUser = async (req: Request<{}, {}, TSignInBody>, res: Response<IAuthRes>, next: NextFunction) => {
+export const signInUserController = async (
+	req: Request<{}, {}, TSignInBody>,
+	res: Response<IAuthRes>,
+	next: NextFunction,
+) => {
 	try {
 		const tokens = await authService.signInUser(req.body);
 
@@ -33,7 +41,11 @@ export const signInUser = async (req: Request<{}, {}, TSignInBody>, res: Respons
 	}
 };
 
-export const getUserByEmail = async (req: Request<{}, {}, TUserByEmailBody>, res: Response, next: NextFunction) => {
+export const getUserByEmailController = async (
+	req: Request<{}, {}, TUserByEmailBody>,
+	res: Response,
+	next: NextFunction,
+) => {
 	try {
 		await authService.getUserByEmail(req.body.email);
 
@@ -43,7 +55,7 @@ export const getUserByEmail = async (req: Request<{}, {}, TUserByEmailBody>, res
 	}
 };
 
-export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
+export const refreshTokenController = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const tokens = await authService.refreshUserToken(req.cookies.refreshToken);
 
@@ -60,7 +72,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
 	}
 };
 
-export const logOutUser = async (req: Request, res: Response) => {
+export const logOutUserController = async (req: Request, res: Response) => {
 	await authService.logOutUser(req.cookies.refreshToken);
 
 	res.clearCookie('refreshToken').json({ success: true });
