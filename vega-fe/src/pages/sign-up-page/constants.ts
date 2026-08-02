@@ -4,7 +4,6 @@ export const SIGNUP_DEFAULT_VALUES = {
 	passwordRepeat: '',
 	name: '',
 	secondName: '',
-	userSpecialisationUuid: '',
 };
 
 export const PASSWORD_REQUIREMENTS = [

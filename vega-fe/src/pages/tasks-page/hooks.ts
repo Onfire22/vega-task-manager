@@ -3,9 +3,12 @@ import { getFiltersSelector } from './selectors.ts';
 import { useAppSelector } from '@/store/hooks.ts';
 import { format } from 'date-fns';
 import { DATE_FORMAT } from './constants.ts';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { getPaginationPages } from '@/app/utils.ts';
 import { useDictionaries } from '@/api/dictionaries/dictionaries.hooks.ts';
+import { useGetCurrentUserQuery } from '@/api/auth/auth.api.ts';
+import { useNavigate } from 'react-router-dom';
+import { FRONT_ROUTES } from '@/app/constants.ts';
 
 export const useUserTasks = () => {
 	const filters = useAppSelector(getFiltersSelector());
@@ -62,4 +65,18 @@ export const useKanbanTasks = () => {
 		columns,
 		isColumnsLoading,
 	};
+};
+
+export const useChangePage = () => {
+	const navigate = useNavigate();
+
+	const { data } = useGetCurrentUserQuery();
+
+	const isFirstLogin = localStorage.getItem('isFirstLogin');
+
+	useEffect(() => {
+		if (data?.currentUser.isSuperUser && isFirstLogin === 'true') {
+			navigate(FRONT_ROUTES.initialSettings);
+		}
+	}, [isFirstLogin, data?.currentUser.isSuperUser, navigate]);
 };

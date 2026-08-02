@@ -279,7 +279,7 @@ export type DictionaryCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
@@ -296,7 +296,7 @@ export type DictionaryUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
@@ -313,7 +313,7 @@ export type DictionaryUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
@@ -330,7 +330,7 @@ export type DictionaryUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
@@ -407,6 +407,11 @@ export type DictionaryMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type DictionaryNullableScalarRelationFilter = {
+  is?: Prisma.DictionaryWhereInput | null
+  isNot?: Prisma.DictionaryWhereInput | null
 }
 
 export type DictionaryCreateNestedOneWithoutChatMembershipsInput = {
@@ -503,10 +508,12 @@ export type DictionaryCreateNestedOneWithoutUsersInput = {
   connect?: Prisma.DictionaryWhereUniqueInput
 }
 
-export type DictionaryUpdateOneRequiredWithoutUsersNestedInput = {
+export type DictionaryUpdateOneWithoutUsersNestedInput = {
   create?: Prisma.XOR<Prisma.DictionaryCreateWithoutUsersInput, Prisma.DictionaryUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.DictionaryCreateOrConnectWithoutUsersInput
   upsert?: Prisma.DictionaryUpsertWithoutUsersInput
+  disconnect?: Prisma.DictionaryWhereInput | boolean
+  delete?: Prisma.DictionaryWhereInput | boolean
   connect?: Prisma.DictionaryWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DictionaryUpdateToOneWithWhereWithoutUsersInput, Prisma.DictionaryUpdateWithoutUsersInput>, Prisma.DictionaryUncheckedUpdateWithoutUsersInput>
 }
@@ -519,7 +526,7 @@ export type DictionaryCreateWithoutChatMembershipsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
@@ -535,7 +542,7 @@ export type DictionaryUncheckedCreateWithoutChatMembershipsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
@@ -567,7 +574,7 @@ export type DictionaryUpdateWithoutChatMembershipsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
@@ -583,7 +590,7 @@ export type DictionaryUncheckedUpdateWithoutChatMembershipsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
@@ -599,7 +606,7 @@ export type DictionaryCreateWithoutMembershipsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
@@ -615,7 +622,7 @@ export type DictionaryUncheckedCreateWithoutMembershipsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
@@ -647,7 +654,7 @@ export type DictionaryUpdateWithoutMembershipsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
@@ -663,7 +670,7 @@ export type DictionaryUncheckedUpdateWithoutMembershipsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
@@ -679,7 +686,7 @@ export type DictionaryCreateWithoutProjectStatusInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
@@ -695,7 +702,7 @@ export type DictionaryUncheckedCreateWithoutProjectStatusInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
@@ -727,7 +734,7 @@ export type DictionaryUpdateWithoutProjectStatusInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
@@ -743,7 +750,7 @@ export type DictionaryUncheckedUpdateWithoutProjectStatusInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
@@ -759,7 +766,7 @@ export type DictionaryCreateWithoutTaskPrioritiesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
@@ -775,7 +782,7 @@ export type DictionaryUncheckedCreateWithoutTaskPrioritiesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
@@ -796,7 +803,7 @@ export type DictionaryCreateWithoutTaskStatusesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskCreateNestedManyWithoutTaskStackInput
@@ -812,7 +819,7 @@ export type DictionaryUncheckedCreateWithoutTaskStatusesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStacks?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStackInput
@@ -833,7 +840,7 @@ export type DictionaryCreateWithoutTaskStacksInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskCreateNestedManyWithoutTaskStatusInput
@@ -849,7 +856,7 @@ export type DictionaryUncheckedCreateWithoutTaskStacksInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutUserSpecialisationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDictionaryInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserRoleInput
   taskPriorities?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskPriorityInput
   taskStatuses?: Prisma.TaskUncheckedCreateNestedManyWithoutTaskStatusInput
@@ -881,7 +888,7 @@ export type DictionaryUpdateWithoutTaskPrioritiesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
@@ -897,7 +904,7 @@ export type DictionaryUncheckedUpdateWithoutTaskPrioritiesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
@@ -924,7 +931,7 @@ export type DictionaryUpdateWithoutTaskStatusesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUpdateManyWithoutTaskStackNestedInput
@@ -940,7 +947,7 @@ export type DictionaryUncheckedUpdateWithoutTaskStatusesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStacks?: Prisma.TaskUncheckedUpdateManyWithoutTaskStackNestedInput
@@ -967,7 +974,7 @@ export type DictionaryUpdateWithoutTaskStacksInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUpdateManyWithoutTaskStatusNestedInput
@@ -983,7 +990,7 @@ export type DictionaryUncheckedUpdateWithoutTaskStacksInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutUserSpecialisationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutDictionaryNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserRoleNestedInput
   taskPriorities?: Prisma.TaskUncheckedUpdateManyWithoutTaskPriorityNestedInput
   taskStatuses?: Prisma.TaskUncheckedUpdateManyWithoutTaskStatusNestedInput

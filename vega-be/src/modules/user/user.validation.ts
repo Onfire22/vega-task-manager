@@ -12,7 +12,6 @@ export const UserListBodySchema = z.object({
 export const UpdateUserBodySchema = z.object({
 	name: z.string().optional(),
 	secondName: z.string().optional(),
-	userSpecialisationUuid: z.string().optional(),
 	userName: z.string().optional(),
 	avatarUrl: z.string().nullable().optional(),
 });

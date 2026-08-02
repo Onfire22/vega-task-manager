@@ -52,7 +52,7 @@ const SignUpForm = () => {
 		}
 
 		if (activeStep === 1) {
-			return !(formValues.name && formValues.secondName && formValues.userSpecialisationUuid);
+			return !(formValues.name && formValues.secondName);
 		}
 
 		return false;
@@ -63,7 +63,6 @@ const SignUpForm = () => {
 		formValues.passwordRepeat,
 		formValues.name,
 		formValues.secondName,
-		formValues.userSpecialisationUuid,
 	]);
 
 	return (

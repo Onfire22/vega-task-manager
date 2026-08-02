@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button.tsx';
 interface IProps {
 	title: string;
 	buttonText: string;
+	disabled?: boolean;
 	children: ReactNode;
 	icon?: ReactNode;
 	onButtonClick: () => void;
 }
 
-const ScreenLayout: React.FC<IProps> = ({ title, children, buttonText, icon, onButtonClick }) => {
+const ScreenLayout: React.FC<IProps> = ({ title, children, buttonText, icon, onButtonClick, disabled }) => {
 	return (
 		<div className="h-screen flex flex-col justify-between p-5">
 			<h1 className="text-4xl text-center animate-in fade-in fill-mode-both duration-700 delay-200">{title}</h1>
@@ -19,6 +20,7 @@ const ScreenLayout: React.FC<IProps> = ({ title, children, buttonText, icon, onB
 				variant="primary"
 				type="button"
 				onClick={onButtonClick}
+				disabled={disabled}
 			>
 				<span>{buttonText}</span>
 				{icon}

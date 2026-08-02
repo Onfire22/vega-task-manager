@@ -27,7 +27,12 @@ const InitialTeamsFormView: React.FC<IProps> = ({
 	onSubmitForm,
 }) => {
 	return (
-		<ScreenLayout title="Создание команд" buttonText="Завершить настройку" onButtonClick={onSubmitForm}>
+		<ScreenLayout
+			title="Создание команд"
+			buttonText="Завершить настройку"
+			onButtonClick={onSubmitForm}
+			disabled={!fields.length}
+		>
 			<div className="grid grid-cols-2 w-full">
 				<div className="flex flex-col gap-3">
 					<h2 className="animate-in fade-in fill-mode-both duration-700 delay-300">Создать из пресета</h2>

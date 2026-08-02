@@ -51,6 +51,7 @@ export const useSignUpForm = () => {
 			const token = await signUpUser(values).unwrap();
 			dispatch(setToken(token.accessToken));
 			dispatch(baseApi.util.invalidateTags(['CurrentUser']));
+			localStorage.setItem('isFirstLogin', 'true');
 		} catch (e) {
 			const error = e as { data?: { message?: string } };
 			toast.error(error.data?.message ?? 'Something went wrong');
@@ -96,9 +97,9 @@ export const useSignUpForm = () => {
 		dispatch(setActiveStep(activeStep > 0 ? activeStep - 1 : activeStep));
 	};
 
-	const [email, password, passwordRepeat, name, secondName, userSpecialisationUuid] = useWatch({
+	const [email, password, passwordRepeat, name, secondName] = useWatch({
 		control: form.control,
-		name: ['email', 'password', 'passwordRepeat', 'name', 'secondName', 'userSpecialisationUuid'],
+		name: ['email', 'password', 'passwordRepeat', 'name', 'secondName'],
 		defaultValue: SIGNUP_DEFAULT_VALUES,
 	});
 
@@ -106,7 +107,7 @@ export const useSignUpForm = () => {
 		form,
 		activeStep,
 		isError,
-		formValues: { email, password, passwordRepeat, name, secondName, userSpecialisationUuid },
+		formValues: { email, password, passwordRepeat, name, secondName },
 		isSignUpLoading: isLoading,
 		handleNextStepClick,
 		handlePrevStepClick,

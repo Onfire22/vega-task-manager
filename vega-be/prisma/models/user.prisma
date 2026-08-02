@@ -1,16 +1,14 @@
 model User {
   uuid String @id @default(uuid())
 
-  name                   String
-  secondName             String  @map("second_name")
-  email                  String  @unique
-  password               String
-  userName               String  @unique @map("user_name")
-  avatarUrl              String? @map("avatar_url")
-  isSuperUser            Boolean @default(false) @map("is_super_user")
-  userSpecialisationUuid String  @map("user_specialisation_uuid")
+  name        String
+  secondName  String  @map("second_name")
+  email       String  @unique
+  password    String
+  userName    String  @unique @map("user_name")
+  avatarUrl   String? @map("avatar_url")
+  isSuperUser Boolean @default(false) @map("is_super_user")
 
-  userSpecialisation  Dictionary           @relation(fields: [userSpecialisationUuid], references: [uuid])
   assignedTasks       Task[]               @relation("AssignedTasks")
   reportedTasks       Task[]               @relation("ReportedTasks")
   memberships         Membership[]
@@ -23,8 +21,10 @@ model User {
   projectsMemberships ProjectsMembership[]
   teamMembers         TeamMembers[]
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+  dictionary     Dictionary? @relation(fields: [dictionaryUuid], references: [uuid])
+  dictionaryUuid String?
 
   @@map("users")
 }

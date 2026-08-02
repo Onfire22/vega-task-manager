@@ -11,6 +11,8 @@ import { channelsRouter } from '../modules/channels/channels.router';
 import { messagesRouter } from '../modules/messages/messages.router';
 import { globalSearchRouter } from '../modules/glogal-search/global-search.router';
 import { filesRouter } from '../modules/files/files.router';
+import { teamsRouter } from '../modules/teams/teams.router';
+import { companiesRouter } from '../modules/companies/companies.router';
 
 const protectedRouter = Router();
 
@@ -25,5 +27,7 @@ protectedRouter.use(ROUTES.root, channelsRouter);
 protectedRouter.use(ROUTES.root, messagesRouter);
 protectedRouter.use(ROUTES.root, globalSearchRouter);
 protectedRouter.use(ROUTES.root, filesRouter);
+protectedRouter.use(ROUTES.root, companiesRouter);
+protectedRouter.use(ROUTES.root, teamsRouter);
 
 export { protectedRouter };

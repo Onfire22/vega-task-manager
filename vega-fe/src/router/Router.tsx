@@ -28,7 +28,6 @@ const Router = () => {
 			<Route element={<PublicRoute isError={isError} isFetching={isFetching} />}>
 				<Route path={FRONT_ROUTES.signIn} element={<SignInPage />} />
 				<Route path={FRONT_ROUTES.signUp} element={<SignUpPage />} />
-				<Route path={FRONT_ROUTES.superAdmin} element={<InitialSettingsPage />} />
 			</Route>
 			<Route element={<ProtectedRoute isError={isError} isFetching={isFetching} />}>
 				<Route element={<Layout />}>
@@ -42,6 +41,7 @@ const Router = () => {
 					<Route path={FRONT_ROUTES.chat} element={<ChatPage />} />
 					<Route path={FRONT_ROUTES.search} element={<GlobalSearch />} />
 				</Route>
+				<Route path={FRONT_ROUTES.initialSettings} element={<InitialSettingsPage />} />
 			</Route>
 			<Route path={FRONT_ROUTES.all} element={<NotFoundPage />} />
 		</Routes>

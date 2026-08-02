@@ -18,13 +18,12 @@ import {
 const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		signUpUser: builder.mutation<TSignUpResponse, IUserData>({
-			query: ({ email, name, password, secondName, userSpecialisationUuid }) => {
+			query: ({ email, name, password, secondName }) => {
 				const fieldsForRequest = {
 					email,
 					name,
 					password,
 					secondName,
-					userSpecialisationUuid,
 				};
 
 				return {

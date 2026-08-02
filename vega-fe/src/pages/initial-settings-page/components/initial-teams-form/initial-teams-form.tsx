@@ -8,8 +8,12 @@ import { DEFAULT_FIELD_VALUE, INITIAL_TEAMS_DEFAULT_VALUES } from '@/pages/initi
 import { InitialTeamsValidationSchema } from '@/pages/initial-settings-page/validation.ts';
 import { normalizeTeamsValues, transformAvatarPathRoFile } from '@/pages/initial-settings-page/utils.ts';
 import { InitialTeamsFormView } from '@/pages/initial-settings-page/components/initial-teams-form/initial-teams-form-view.tsx';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const InitialTeamsForm = () => {
+	const navigate = useNavigate();
+
 	const [selectedPresets, setSelectedPresets] = useState(TEAMS_PRESETS);
 
 	const [createTeams] = useCreateTeamsMutation();
@@ -59,7 +63,7 @@ const InitialTeamsForm = () => {
 		setSelectedPresets(
 			selectedPresets.map((preset) => ({
 				...preset,
-				isSelected: card?.id !== preset.id ? preset.isSelected : false,
+				isSelected: card?.teamTitle !== preset.fullName ? preset.isSelected : false,
 			})),
 		);
 	};
@@ -69,7 +73,17 @@ const InitialTeamsForm = () => {
 	};
 
 	const handleSubmitForm = form.handleSubmit(async (values) => {
-		createTeams(normalizeTeamsValues(values));
+		try {
+			const response = await createTeams(normalizeTeamsValues(values)).unwrap();
+			if (response?.success) {
+				toast.success('Настройка успешно завершена');
+				localStorage.removeItem('isFirstLogin');
+				navigate('/');
+			}
+		} catch (e) {
+			const error = e as { data?: { message?: string } };
+			toast.error(error.data?.message ?? 'Something went wrong');
+		}
 	});
 
 	return (

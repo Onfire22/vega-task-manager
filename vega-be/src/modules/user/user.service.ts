@@ -4,8 +4,6 @@ import { TUpdateUserBody, TUpdateUserPasswordBody, TUserListBody } from './user.
 import { AppError } from '../../errors/errors';
 import { RESPONSE_STATUSES } from '../../common/constants';
 import bcrypt from 'bcryptjs';
-import path from 'path';
-import fs from 'node:fs/promises';
 import { filesService } from '../files/files.service';
 
 const getCurrentUser = async (userUuid: string) => {
@@ -18,13 +16,7 @@ const getCurrentUser = async (userUuid: string) => {
 			secondName: true,
 			userName: true,
 			avatarUrl: true,
-			userSpecialisation: {
-				select: {
-					uuid: true,
-					label: true,
-					key: true,
-				},
-			},
+			isSuperUser: true,
 		},
 	});
 
@@ -76,12 +68,6 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 		updateData.userName = userData.userName;
 	}
 
-	if (userData.userSpecialisationUuid) {
-		updateData.userSpecialisation = {
-			connect: { uuid: userData.userSpecialisationUuid },
-		};
-	}
-
 	if (userData.avatarUrl) {
 		updateData.avatarUrl = userData.avatarUrl;
 	}
@@ -95,7 +81,6 @@ const updateUser = (userData: TUpdateUserBody, userUuid: string) => {
 			name: true,
 			secondName: true,
 			userName: true,
-			userSpecialisationUuid: true,
 			avatarUrl: true,
 		},
 	});

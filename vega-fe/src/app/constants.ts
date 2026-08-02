@@ -11,6 +11,7 @@ export const FRONT_ROUTES = {
 	chat: '/chat',
 	search: '/search',
 	superAdmin: '/super-admin-settings',
+	initialSettings: '/initial-settings',
 	all: '*',
 };
 
